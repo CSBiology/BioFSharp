@@ -68,6 +68,7 @@
     <Compile Include="IBioItem.fs" />
     <Compile Include="AminoAcids.fs" />
     <Compile Include="Nucleotides.fs" />
+    <Compile Include="IBioSequence.fs" />
     <Compile Include="BioArray.fs" />
     <Compile Include="BioList.fs" />
     <Compile Include="BioSeq.fs" />
