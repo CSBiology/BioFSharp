@@ -1,6 +1,7 @@
 source https://nuget.org/api/v2
 
 nuget FSharp.Core redirects: force
+nuget System.Data.SQLite
 
 group Build
   source https://nuget.org/api/v2

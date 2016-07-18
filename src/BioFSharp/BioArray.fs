@@ -10,7 +10,7 @@ module BioArray =
 
 
     /// Generates amino acid sequence of one-letter-code string using given OptionConverter
-    let ofAminoAcidStringWithOptionConverter (converter:OptionConverter.AminoAcidOptionConverter) (s:string) : BioArray<_> =
+    let ofAminoAcidStringWithOptionConverter (converter:OptionConverter.AminoAcidOptionConverter) (s:#seq<char>) : BioArray<_> =
         IBioSequence.ofAminoAcidStringWithOptionConverter converter s 
         |> Seq.toArray
 

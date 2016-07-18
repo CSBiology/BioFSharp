@@ -18,3 +18,4 @@ Formula.toString CO2
 
 let c = Formula.add CO2 CO2
 Formula.toString c
+

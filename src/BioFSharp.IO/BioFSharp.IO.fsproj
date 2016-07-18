@@ -1,38 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2a955278-f002-4ebd-ae86-8b548ebf1209</ProjectGuid>
+    <ProjectGuid>5e3592d6-ebe7-409d-acf5-541dbe44e891</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>BioFSharp</RootNamespace>
-    <AssemblyName>BioFSharp</AssemblyName>
+    <RootNamespace>BioFSharp.IO</RootNamespace>
+    <AssemblyName>BioFSharp.IO</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
-    <Name>BioFSharp</Name>
-    <TargetFrameworkProfile />
+    <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
+    <Name>BioFSharp.IO</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
-    <OutputPath>.\bin\Debug</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <OtherFlags>--warnon:1182</OtherFlags>
+    <DocumentationFile>bin\Debug\BioFSharp.IO.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <Tailcalls>true</Tailcalls>
-    <OutputPath>.\bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>.\bin\Release\BioFSharp.xml</DocumentationFile>
-    <OtherFlags>--warnon:1182</OtherFlags>
+    <DocumentationFile>bin\Release\BioFSharp.IO.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -49,45 +47,32 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <Import Project="..\..\.paket\paket.targets" />
+  <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="PhysicalConstants.fs" />
-    <Compile Include="BioID.fs" />
-    <Compile Include="Isotopes.fs" />
-    <Compile Include="Elements.fs" />
-    <Compile Include="Formula.fs" />
-    <Compile Include="ModificationInfo.fs" />
-    <Compile Include="IBioItem.fs" />
-    <Compile Include="AminoAcids.fs" />
-    <Compile Include="Nucleotides.fs" />
-    <Compile Include="IBioSequence.fs" />
-    <Compile Include="BioArray.fs" />
-    <Compile Include="BioList.fs" />
-    <Compile Include="BioSeq.fs" />
-    <Compile Include="Digestion.fs" />
-    <None Include="BioFSharp.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
-    <Content Include="App.config" />
+    <Compile Include="AgilentRaw.fs" />
+    <Compile Include="BlastWrapper.fs" />
+    <Compile Include="FastA.fs" />
+    <Compile Include="Mgf.fs" />
+    <Compile Include="Obo.fs" />
+    <Compile Include="OrthoMCL.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
+    <Reference Include="FSharp.Core">
+      <HintPath>..\..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care.IO\FSharp.Care.IO.fsproj">
+      <Name>FSharp.Care.IO</Name>
+      <Project>{2bd8f01a-03ce-4907-9449-b35b73eec916}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care\FSharp.Care.fsproj">
       <Name>FSharp.Care</Name>
       <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
@@ -98,4 +83,11 @@
     <PostBuildEvent>xcopy /Y "$(TargetDir)*.dll"  "$(SolutionDir)bin\"
 xcopy /Y "$(TargetDir)*.xml" "$(SolutionDir)bin\"</PostBuildEvent>
   </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

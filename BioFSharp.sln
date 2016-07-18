@@ -40,6 +40,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.Care", "..\FSharp.Ca
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.Care.IO", "..\FSharp.Care\src\FSharp.Care.IO\FSharp.Care.IO.fsproj", "{2BD8F01A-03CE-4907-9449-B35B73EEC916}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Mz", "src\BioFSharp.Mz\BioFSharp.Mz.fsproj", "{5846FCAC-F2D4-4D83-9BE2-C3994CBDAE5C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.IO", "src\BioFSharp.IO\BioFSharp.IO.fsproj", "{5E3592D6-EBE7-409D-ACF5-541DBE44E891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,14 @@ Global
 		{2BD8F01A-03CE-4907-9449-B35B73EEC916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BD8F01A-03CE-4907-9449-B35B73EEC916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD8F01A-03CE-4907-9449-B35B73EEC916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5846FCAC-F2D4-4D83-9BE2-C3994CBDAE5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5846FCAC-F2D4-4D83-9BE2-C3994CBDAE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5846FCAC-F2D4-4D83-9BE2-C3994CBDAE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5846FCAC-F2D4-4D83-9BE2-C3994CBDAE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3592D6-EBE7-409D-ACF5-541DBE44E891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3592D6-EBE7-409D-ACF5-541DBE44E891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3592D6-EBE7-409D-ACF5-541DBE44E891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3592D6-EBE7-409D-ACF5-541DBE44E891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
