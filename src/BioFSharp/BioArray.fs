@@ -80,15 +80,15 @@ module BioArray =
         bs |> Array.fold (fun acc item -> Formula.add acc  (BioItem.formula item)) Formula.emptyFormula
 
     /// Returns monoisotopic mass of the given sequence !memoization
-    let toMonoisotopicMass<'a when 'a :> IBioItem> : (seq<'a> -> float) =        
+    let toMonoisotopicMass<'a when 'a :> IBioItem> : (BioArray<'a> -> float) =        
         let memMonoisoMass =
             Memoization.memoizeP (BioItem.formula >> Formula.monoisoMass)
         (fun bs -> 
             bs 
-            |> Seq.sumBy memMonoisoMass)        
+            |> Array.sumBy memMonoisoMass)        
 
     /// Returns average mass of the given sequence !memoization
-    let toAverageMass<'a when 'a :> IBioItem> : (BioArray<_> -> float) =
+    let toAverageMass<'a when 'a :> IBioItem> : (BioArray<'a> -> float) =
         let memAverageMass =
             Memoization.memoizeP (BioItem.formula >> Formula.averageMass)
         (fun bs -> 
@@ -97,7 +97,7 @@ module BioArray =
 
 
     /// Returns monoisotopic mass of the given sequence including water (+H20)
-    let toMonoisotopicMassWithWater<'a when 'a :> IBioItem> : (BioArray<_> -> float) =
+    let toMonoisotopicMassWithWater<'a when 'a :> IBioItem> : (BioArray<'a> -> float) =
         let water = Formula.Table.H2O |> Formula.averageMass
         let memMonoisoMass =
             Memoization.memoizeP (BioItem.formula >> Formula.monoisoMass)
@@ -108,7 +108,7 @@ module BioArray =
 
 
     /// Returns average mass of the given sequence including water (+H20)
-    let toAverageMassWithWater<'a when 'a :> IBioItem> : (BioArray<_> -> float) =
+    let toAverageMassWithWater<'a when 'a :> IBioItem> : (BioArray<'a> -> float) =
         let water = Formula.Table.H2O |> Formula.averageMass
         let memAverageMass =
             Memoization.memoizeP (BioItem.formula >> Formula.averageMass)
@@ -125,3 +125,4 @@ module BioArray =
                             let index = (int (BioItem.symbol a)) - 65
                             compVec.[index] <- compVec.[index] + 1)
         compVec    
+

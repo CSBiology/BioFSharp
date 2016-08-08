@@ -7,8 +7,12 @@ module BioList =
     
     type BioList<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> = list<'a>
 
+    /// Returns string of one-letter-code
+    let toString (bs:BioList<_>) =
+        new string (bs |> List.map BioItem.symbol |> List.toArray) 
+
     /// Returns monoisotopic mass of the given sequence including water (+H20)
-    let toMonoisotopicMassWithWater<'a when 'a :> IBioItem> : (BioList<_> -> float) =
+    let toMonoisotopicMassWithWater<'a when 'a :> IBioItem> : (BioList<'a> -> float) =
         let water = Formula.Table.H2O |> Formula.averageMass
         let memMonoisoMass =
             Memoization.memoizeP (BioItem.formula >> Formula.monoisoMass)
@@ -19,7 +23,7 @@ module BioList =
 
 
     /// Returns average mass of the given sequence including water (+H20)
-    let toAverageMassWithWater<'a when 'a :> IBioItem> : (BioList<_> -> float) =
+    let toAverageMassWithWater<'a when 'a :> IBioItem> : (BioList<'a> -> float) =
         let water = Formula.Table.H2O |> Formula.averageMass
         let memAverageMass =
             Memoization.memoizeP (BioItem.formula >> Formula.averageMass)

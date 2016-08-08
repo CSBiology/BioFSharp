@@ -340,7 +340,7 @@ module SearchDB =
         // Insert Protein-, Peptide-, Modified Peptide-Sequences and the CleavageIndices
         let insertProtPepCleavIdxModPepToDB  (proteinID: int32) (protein: FastA.FastaItem<AminoAcid []>) = 
             //printfn "ProtID %i" proteinID
-            match insertProtein proteinID protein.Header (toString protein.Sequence) with
+            match insertProtein proteinID protein.Header (BioArray.toString protein.Sequence) with
             | 1 ->
                 Digestion.digest Digestion.trypsin proteinID (protein.Sequence |> Seq.toArray)
                 |> Digestion.concernMissCleavages 1 3  
@@ -351,7 +351,7 @@ module SearchDB =
                                     x.MissCleavageEnd - x.MissCleavageStart < 63
                                 )
                 |> Array.mapi (fun pepId pep ->
-                                            match insertPepSequence (proteinID*10000+pepId) (toString pep.PepSequence) with 
+                                            match insertPepSequence (proteinID*10000+pepId) (BioList.toString pep.PepSequence) with 
                                             | 1 ->
                                                 insertCleavageIndex proteinID (proteinID*10000+pepId) pep.MissCleavageStart
                                                     pep.MissCleavageEnd pep.MissCleavages 
@@ -365,7 +365,7 @@ module SearchDB =
                                                               )  
 
                                             | 0  -> 
-                                                insertCleavageIndex proteinID (selectPepSequenceBySequence (toString pep.PepSequence)) 
+                                                insertCleavageIndex proteinID (selectPepSequenceBySequence (BioList.toString pep.PepSequence)) 
                                                     pep.MissCleavageStart pep.MissCleavageEnd pep.MissCleavages 
                                                 |>ignore 
                                         
@@ -421,3 +421,4 @@ module SearchDB =
         let mass1 = Convert.ToInt64((msMeasuredMass - toleranceWidth)*1000000.)
         let mass2 = Convert.ToInt64((msMeasuredMass + toleranceWidth)*1000000.)
         prepareSelectModsequenceByMassRange cn mass1 mass2
+
