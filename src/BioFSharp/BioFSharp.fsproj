@@ -59,20 +59,24 @@
   -->
   <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
+    <!-- Core -->
     <Compile Include="PhysicalConstants.fs" />
     <Compile Include="BioID.fs" />
     <Compile Include="Isotopes.fs" />
     <Compile Include="Elements.fs" />
     <Compile Include="Formula.fs" />
-    <Compile Include="ModificationInfo.fs" />
     <Compile Include="IBioItem.fs" />
+    <Compile Include="ModificationInfo.fs" />
+    <Compile Include="AminoAcidSymbols.fs" />
     <Compile Include="AminoAcids.fs" />
     <Compile Include="Nucleotides.fs" />
-    <Compile Include="IBioSequence.fs" />
+    <Compile Include="BioItemsConverter.fs" />
+    <Compile Include="BioSeq.fs" />
     <Compile Include="BioArray.fs" />
     <Compile Include="BioList.fs" />
-    <Compile Include="BioSeq.fs" />
     <Compile Include="Digestion.fs" />
+    <!-- Algorithm -->
+    <Compile Include="Algorithm\PatternQuery.fs" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />

@@ -29,6 +29,13 @@ module ModificationInfo =
                                 | :? Modification as y -> compare x.Name y.Name
                                 | _ -> invalidArg "yobj" "cannot compare values of different types"
 
+                        interface IBioItem with
+                            member this.Name = this.Name
+                            member this.Symbol = '#'             
+                            member this.isTerminator = false
+                            member this.isGap        = false
+                            
+                            member this.Formula  = this.Modify Formula.emptyFormula
 
     let createModification name location modifier =
         { Name = name; Location = location; Modify = modifier}            
@@ -45,3 +52,28 @@ module ModificationInfo =
         md.Name
 
                                                     
+    /// Returns then display name of a modification
+    let name (md:Modification) =
+        BioItem.name md
+    
+    /// Returns then symbol of a modification
+    let symbol (md:Modification) =
+        BioItem.symbol md
+
+
+    /// Returns then byteCode of a modification
+    let formula (md:Modification) =
+        BioItem.formula md
+
+    /// Returns true if the modification represents a sequence terminator
+    let isTerminator (md:Modification) =
+        BioItem.isTerminator md
+
+    /// Returns true if the modification represents a sequence gap
+    let isGap (md:Modification) =
+        BioItem.isGap md
+
+
+
+
+

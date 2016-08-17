@@ -2,6 +2,7 @@
 
 module Nucleotides =
     
+    open FSharp.Care
     open AminoAcids
 
     /// Nucleotide Codes
@@ -53,6 +54,8 @@ module Nucleotides =
     | N
 
         interface IBioItem with            
+                
+                //Nucleotide symbol (One letter code)
                 member this.Symbol   = 
                     let rec symbol (nuc:Nucleotide) =
                             match nuc with
@@ -103,6 +106,7 @@ module Nucleotides =
                             | N   -> 'N' 
                     symbol this
                 
+                /// Nucleotide formula
                 member this.Formula  = 
                     //Amino acid formulas minus H20   
                     let rec formula (nuc:Nucleotide) =
@@ -110,17 +114,17 @@ module Nucleotides =
                         match nuc with
                         // ´Standard Nucleotide Codes
                         /// A : Adenine
-                        | A   -> (Formula.parseFormulaString "C10H13N5O4")
+                        | A   -> Formula.Table.A
                         /// T : Thymidine (only DNA)
-                        | T   -> (Formula.parseFormulaString "C10H14N2O5")
+                        | T   -> Formula.Table.T
                         /// G : Guanine
-                        | G   -> (Formula.parseFormulaString "C10H13N5O5")
+                        | G   -> Formula.Table.G
                         /// C : Cytosine
-                        | C   -> (Formula.parseFormulaString "C9H13N3O5") 
+                        | C   -> Formula.Table.C
                         /// U : Uracil    (only RNA)
-                        | U   -> (Formula.parseFormulaString "C4H4N2O2")
+                        | U   -> Formula.Table.U
                         /// I : Inosine   (only RNA)
-                        | I   -> (Formula.parseFormulaString "C10H12N4O5")
+                        | I   -> Formula.Table.I
                         /// - : Gap
                         | Gap -> (Formula.emptyFormula)
                         /// * : Terminator
@@ -162,6 +166,63 @@ module Nucleotides =
                 member this.isGap        = match this with
                                            | Nucleotide.Gap -> true
                                            | _             -> false
+
+
+                member this.Name = 
+                    // Nucleotide names
+                    let name (nuc:Nucleotide) =
+                        match nuc with
+                        // ´Standard Nucleotide Codes
+                        /// A : Adenine
+                        | A   -> "Adenine"
+                        /// T : Thymidine (only DNA)
+                        | T   -> "Thymidine"
+                        /// G : Guanine
+                        | G   -> "Guanine"
+                        /// C : Cytosine
+                        | C   -> "Cytosine"
+                        /// U : Uracil    (only RNA)
+                        | U   -> "Uracil"
+                        /// I : Inosine   (only RNA)
+                        | I   -> "Inosine"
+                        /// - : Gap
+                        | Gap -> "Gap"
+                        /// * : Terminator
+                        | Ter -> "Ter"
+        
+                        // 'Ambiguous Nucleotide Codes: double base codes
+                        /// R : G or A = puRine
+                        | R   ->  "puRine"
+                        /// Y : U/T or C = pYrimidine
+                        | Y   ->  "pYrimidine"
+                        /// K : G or U = Keto
+                        | K   ->  "Keto"
+                        /// M : A or C = aMino
+                        | M   -> "aMino"
+                        /// S : G or C = Strong base pair
+                        | S   ->  "Strong base pair"
+                        /// W : A or U = Weak base pair 
+                        | W   ->  "Weak base pair"
+        
+                        // 'Ambiguous Nucleotide Codes: triple base codes
+                        /// B : G or U or C = not A
+                        | B   ->  "not A"
+                        /// D : G or A or U = not C
+                        | D   ->  "not C"
+                        /// H : A or C or U = not G
+                        | H   ->  "not G"
+                        /// V : G or V or A = not T/U
+                        | V   ->  "not T/U"
+
+                        // 'Ambiguous Nucleotide Codes
+                        /// N : A or G or U or C.
+                        | N   ->  "Unspecified"  
+                        
+                    name this               
+
+
+
+
 
 
     type ParsedNucleotideChar = 
@@ -396,156 +457,54 @@ module Nucleotides =
         CodonMap.Item(codon)
 
 
+
+
+    /// Returns the name of nucleotide
+    let name (nuc:Nucleotide) =
+        BioItem.name nuc
+
+    //Returns nucleotide formulas minus H20            
+    let formula (nuc:Nucleotide) =
+        BioItem.formula nuc
+    
+    /// Returns the symbol of AminoAcid       
+    let symbol (nuc:Nucleotide) =
+        BioItem.symbol nuc
+
+    /// Returns true if nucleotide represents a sequence terminator
+    let isTerminator (nuc:Nucleotide) =
+        BioItem.isTerminator nuc
+
+    /// Returns true if nucleotide represents a sequence gap
+    let isGap (nuc:Nucleotide) =
+        BioItem.isGap nuc
+
+    /// Returns the monoisotopic mass of nucleotide (without H20)
+    let monoisoMass (nuc:Nucleotide) =
+        BioItem.monoisoMass nuc
+
+    /// Returns the average mass of nucleotide (without H20)
+    let averageMass (nuc:Nucleotide) =
+        BioItem.averageMass nuc
+
+    /// Returns a function to calculate the monoisotopic mass of a nucleotide with memoization
+    let initMonoisoMassWithMemP =
+        Memoization.memoizeP (fun a -> monoisoMass a)          
+
+    /// Returns a function to calculate the average mass of a nucleotide with memoization
+    let initAverageMassWithMemP = 
+        Memoization.memoizeP (fun a -> averageMass a)
+        
+
+
+
+
     /// Properties of a nucleatide like formula, name, symbole, but also Physicochemical features
     module Properties = 
         
-        //Nucleotide formulas minus H20   
-        let formula (nuc:Nucleotide) =
-            match nuc with
-            // ´Standard Nucleotide Codes
-            /// A : Adenine
-            | A   -> (Formula.parseFormulaString "C10H13N5O4")
-            /// T : Thymidine (only DNA)
-            | T   -> (Formula.parseFormulaString "C10H14N2O5")
-            /// G : Guanine
-            | G   -> (Formula.parseFormulaString "C10H13N5O5")
-            /// C : Cytosine
-            | C   -> (Formula.parseFormulaString "C9H13N3O5") 
-            /// U : Uracil    (only RNA)
-            | U   -> (Formula.parseFormulaString "C4H4N2O2")
-            /// I : Inosine   (only RNA)
-            | I   -> (Formula.parseFormulaString "C10H12N4O5")
-            /// - : Gap
-            | Gap -> (Formula.emptyFormula)
-            /// * : Terminator
-            | Ter -> (Formula.emptyFormula)
-        
-            // 'Ambiguous Nucleotide Codes: double base codes
-            /// R : G or A = puRine
-            | R   -> (Formula.emptyFormula)
-            /// Y : U/T or C = pYrimidine
-            | Y   -> (Formula.emptyFormula)
-            /// K : G or U = Keto
-            | K   -> (Formula.emptyFormula)
-            /// M : A or C = aMino
-            | M   -> (Formula.emptyFormula)
-            /// S : G or C = Strong base pair
-            | S   -> (Formula.emptyFormula)
-            /// W : A or U = Weak base pair 
-            | W   -> (Formula.emptyFormula)
-        
-            // 'Ambiguous Nucleotide Codes: triple base codes
-            /// B : G or U or C = not A
-            | B   -> (Formula.emptyFormula)
-            /// D : G or A or U = not C
-            | D   -> (Formula.emptyFormula)
-            /// H : A or C or U = not G
-            | H   -> (Formula.emptyFormula)
-            /// V : G or V or A = not T/U
-            | V   -> (Formula.emptyFormula)
-
-            // 'Ambiguous Nucleotide Codes
-            /// N : A or G or U or C.
-            | N   -> (Formula.emptyFormula)
+        let a = 42
             
 
-        // Nucleotide names
-        let name (nuc:Nucleotide) =
-            match nuc with
-            // ´Standard Nucleotide Codes
-            /// A : Adenine
-            | A   -> "Adenine"
-            /// T : Thymidine (only DNA)
-            | T   -> "Thymidine"
-            /// G : Guanine
-            | G   -> "Guanine"
-            /// C : Cytosine
-            | C   -> "Cytosine"
-            /// U : Uracil    (only RNA)
-            | U   -> "Uracil"
-            /// I : Inosine   (only RNA)
-            | I   -> "Inosine"
-            /// - : Gap
-            | Gap -> "Gap"
-            /// * : Terminator
-            | Ter -> "Ter"
-        
-            // 'Ambiguous Nucleotide Codes: double base codes
-            /// R : G or A = puRine
-            | R   ->  "puRine"
-            /// Y : U/T or C = pYrimidine
-            | Y   ->  "pYrimidine"
-            /// K : G or U = Keto
-            | K   ->  "Keto"
-            /// M : A or C = aMino
-            | M   -> "aMino"
-            /// S : G or C = Strong base pair
-            | S   ->  "Strong base pair"
-            /// W : A or U = Weak base pair 
-            | W   ->  "Weak base pair"
-        
-            // 'Ambiguous Nucleotide Codes: triple base codes
-            /// B : G or U or C = not A
-            | B   ->  "not A"
-            /// D : G or A or U = not C
-            | D   ->  "not C"
-            /// H : A or C or U = not G
-            | H   ->  "not G"
-            /// V : G or V or A = not T/U
-            | V   ->  "not T/U"
-
-            // 'Ambiguous Nucleotide Codes
-            /// N : A or G or U or C.
-            | N   ->  "Unspecified"
 
 
 
-        //Nucleotide symbol (One letter code)
-        let symbol (nuc:Nucleotide) =
-            match nuc with
-            // ´Standard Nucleotide Codes
-            /// A : Adenine
-            | A   -> 'A'
-            /// T : Thymidine (only DNA)
-            | T   -> 'T'
-            /// G : Guanine
-            | G   -> 'G'
-            /// C : Cytosine
-            | C   -> 'C'
-            /// U : Uracil    (only RNA)
-            | U   -> 'U'
-            /// I : Inosine   (only RNA)
-            | I   -> 'I'
-            /// - : Gap
-            | Gap -> '-'
-            /// * : Terminator
-            | Ter -> '*'
-        
-            // 'Ambiguous Nucleotide Codes: double base codes
-            /// R : G or A = puRine
-            | R   -> 'R'
-            /// Y : U/T or C = pYrimidine
-            | Y   -> 'Y'
-            /// K : G or U = Keto
-            | K   -> 'K'
-            /// M : A or C = aMino
-            | M   -> 'M'
-            /// S : G or C = Strong base pair
-            | S   -> 'S'
-            /// W : A or U = Weak base pair 
-            | W   -> 'W'
-        
-            // 'Ambiguous Nucleotide Codes: triple base codes
-            /// B : G or U or C = not A
-            | B   -> 'B'
-            /// D : G or A or U = not C
-            | D   -> 'D'
-            /// H : A or C or U = not G
-            | H   -> 'H'
-            /// V : G or V or A = not T/U
-            | V   -> 'V'
-
-            // 'Ambiguous Nucleotide Codes
-            /// N : A or G or U or C.
-            | N   -> 'N'
-        

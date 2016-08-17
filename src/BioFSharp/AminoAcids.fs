@@ -106,37 +106,36 @@ module AminoAcids =
                             | AminoAcid.Mod (aa,_) -> (symbol aa) |> System.Char.ToLower
                     symbol this
                 
-                member this.Formula  = 
-                    //Amino acid formulas minus H20   
+                member this.Formula  =                                                         
                     let rec formula (aa:AminoAcid) =
                             match aa with
-                            | AminoAcid.Ala -> (Formula.parseFormulaString "C3H5ON"    )
-                            | AminoAcid.Cys -> (Formula.parseFormulaString "C3H5ONS"   )
-                            | AminoAcid.Asp -> (Formula.parseFormulaString "C4H5O3N"   )
-                            | AminoAcid.Glu -> (Formula.parseFormulaString "C5H7O3N"   )
-                            | AminoAcid.Phe -> (Formula.parseFormulaString "C9H9ON"    )
-                            | AminoAcid.Gly -> (Formula.parseFormulaString "C2H3ON"    )
-                            | AminoAcid.His -> (Formula.parseFormulaString "C6H7ON3"   )
-                            | AminoAcid.Ile -> (Formula.parseFormulaString "C6H11ON"   )
-                            | AminoAcid.Lys -> (Formula.parseFormulaString "C6H12ON2"  )
-                            | AminoAcid.Leu -> (Formula.parseFormulaString "C6H11ON"   )
-                            | AminoAcid.Met -> (Formula.parseFormulaString "C5H9ONS"   )
-                            | AminoAcid.Asn -> (Formula.parseFormulaString "C4H6O2N2"  )
-                            | AminoAcid.Pyl -> (Formula.parseFormulaString "C12H19N3O2") // Pyrrolysine
-                            | AminoAcid.Pro -> (Formula.parseFormulaString "C5H7ON"    )
-                            | AminoAcid.Gln -> (Formula.parseFormulaString "C5H8O2N2"  )
-                            | AminoAcid.Arg -> (Formula.parseFormulaString "C6H12ON4"  )
-                            | AminoAcid.Ser -> (Formula.parseFormulaString "C3H5O2N"   )
-                            | AminoAcid.Thr -> (Formula.parseFormulaString "C4H7O2N"   )
-                            | AminoAcid.Sel -> (Formula.parseFormulaString "C3H5NOSe"  ) // Selenocysteine
-                            | AminoAcid.Val -> (Formula.parseFormulaString "C5H9ON"    )
-                            | AminoAcid.Trp -> (Formula.parseFormulaString "C11H10ON2" )
-                            | AminoAcid.Tyr -> (Formula.parseFormulaString "C9H9O2N"   )
-           
-                            | AminoAcid.Xaa -> (Formula.parseFormulaString "C2H3N1O1"  )  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
-                            | AminoAcid.Xle -> (Formula.parseFormulaString "C6H11N1O1" )
-                            | AminoAcid.Glx -> (Formula.parseFormulaString "C5H7N1O3"  )
-                            | AminoAcid.Asx -> (Formula.parseFormulaString "C4H5N1O3"  )
+                            | AminoAcid.Ala -> Formula.Table.Ala 
+                            | AminoAcid.Cys -> Formula.Table.Cys 
+                            | AminoAcid.Asp -> Formula.Table.Asp 
+                            | AminoAcid.Glu -> Formula.Table.Glu 
+                            | AminoAcid.Phe -> Formula.Table.Phe 
+                            | AminoAcid.Gly -> Formula.Table.Gly 
+                            | AminoAcid.His -> Formula.Table.His 
+                            | AminoAcid.Ile -> Formula.Table.Ile 
+                            | AminoAcid.Lys -> Formula.Table.Lys 
+                            | AminoAcid.Leu -> Formula.Table.Leu 
+                            | AminoAcid.Met -> Formula.Table.Met 
+                            | AminoAcid.Asn -> Formula.Table.Asn 
+                            | AminoAcid.Pyl -> Formula.Table.Pyl // Pyrrolysine
+                            | AminoAcid.Pro -> Formula.Table.Pro 
+                            | AminoAcid.Gln -> Formula.Table.Gln 
+                            | AminoAcid.Arg -> Formula.Table.Arg 
+                            | AminoAcid.Ser -> Formula.Table.Ser 
+                            | AminoAcid.Thr -> Formula.Table.Thr 
+                            | AminoAcid.Sel -> Formula.Table.Sel // Selenocysteine
+                            | AminoAcid.Val -> Formula.Table.Val 
+                            | AminoAcid.Trp -> Formula.Table.Trp 
+                            | AminoAcid.Tyr -> Formula.Table.Tyr 
+                                                                
+                            | AminoAcid.Xaa -> Formula.Table.Xaa  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
+                            | AminoAcid.Xle -> Formula.Table.Xle 
+                            | AminoAcid.Glx -> Formula.Table.Glx 
+                            | AminoAcid.Asx -> Formula.Table.Asx 
            
                             | AminoAcid.Gap -> (Formula.emptyFormula)
                             | AminoAcid.Ter -> (Formula.emptyFormula)
@@ -152,11 +151,64 @@ module AminoAcids =
                                            | AminoAcid.Gap -> true
                                            | _             -> false
 
+
+                member this.Name = 
+
+                    /// Returns the name of AminoAcid
+                    let rec name (aa:AminoAcid) =
+                            match aa with
+                            | AminoAcid.Ala -> "Alanin"          
+                            | AminoAcid.Cys -> "Cysteine"       
+                            | AminoAcid.Asp -> "Aspartic Acid"  
+                            | AminoAcid.Glu -> "Glutamic Acid"  
+                            | AminoAcid.Phe -> "Phenylalanin"   
+                            | AminoAcid.Gly -> "Glycine"        
+                            | AminoAcid.His -> "Histidine"      
+                            | AminoAcid.Ile -> "Isoleucine"     
+                            | AminoAcid.Lys -> "Lysine"         
+                            | AminoAcid.Leu -> "Leucine"        
+                            | AminoAcid.Met -> "Methionine"     
+                            | AminoAcid.Asn -> "Asparagine"     
+                            | AminoAcid.Pyl -> "Pyrrolysine"    
+                            | AminoAcid.Pro -> "Proline"        
+                            | AminoAcid.Gln -> "Glutamine"      
+                            | AminoAcid.Arg -> "Arginine"       
+                            | AminoAcid.Ser -> "Serine"         
+                            | AminoAcid.Thr -> "Threonine"      
+                            | AminoAcid.Sel -> "Selenocysteine" 
+                            | AminoAcid.Val -> "Valine"         
+                            | AminoAcid.Trp -> "Tryptophan"     
+                            | AminoAcid.Tyr -> "Tyrosine"       
+             
+                            | AminoAcid.Xaa -> "Unspecified"             
+                            | AminoAcid.Xle -> "Leucine/Isoleucine"      
+                            | AminoAcid.Glx -> "Glutamine/glutamic acid" 
+                            | AminoAcid.Asx -> "Asparagine/aspartic acid"
+             
+                            | AminoAcid.Gap -> "Gap"
+                            | AminoAcid.Ter -> "Ter"
+
+                            | AminoAcid.Mod (aa,mds) -> sprintf "%s[%s]" (name aa) (mds |> Seq.map (fun md -> md.Name) |> String.concat ";")
+                    
+                    name this
+
+
+
+
+
+
+
     // Sets amino acid modification 
     let setModification (md:ModificationInfo.Modification) (aa:AminoAcid) =
         match aa with
         | Mod (a,mds) -> Mod ( a ,  md::mds )
         | _           -> Mod ( aa, [md] )
+
+    // Sets a multiple amino acid modifications 
+    let setModifications (md:ModificationInfo.Modification list) (aa:AminoAcid) =
+        match aa with
+        | Mod (a,mds) -> Mod ( a ,  md@mds )
+        | _           -> Mod ( aa, md )
 
     // Gets amino acid modification 
     let getModifications (aa:AminoAcid) =
@@ -230,68 +282,41 @@ module AminoAcids =
 
 
 
-//  ###############------------------------------------------------------------
 
-           
+ 
     /// Returns the name of AminoAcid
-    let rec name (aa:AminoAcid) =
-            match aa with
-            | AminoAcid.Ala -> "Alanin"          
-            | AminoAcid.Cys -> "Cysteine"       
-            | AminoAcid.Asp -> "Aspartic Acid"  
-            | AminoAcid.Glu -> "Glutamic Acid"  
-            | AminoAcid.Phe -> "Phenylalanin"   
-            | AminoAcid.Gly -> "Glycine"        
-            | AminoAcid.His -> "Histidine"      
-            | AminoAcid.Ile -> "Isoleucine"     
-            | AminoAcid.Lys -> "Lysine"         
-            | AminoAcid.Leu -> "Leucine"        
-            | AminoAcid.Met -> "Methionine"     
-            | AminoAcid.Asn -> "Asparagine"     
-            | AminoAcid.Pyl -> "Pyrrolysine"    
-            | AminoAcid.Pro -> "Proline"        
-            | AminoAcid.Gln -> "Glutamine"      
-            | AminoAcid.Arg -> "Arginine"       
-            | AminoAcid.Ser -> "Serine"         
-            | AminoAcid.Thr -> "Threonine"      
-            | AminoAcid.Sel -> "Selenocysteine" 
-            | AminoAcid.Val -> "Valine"         
-            | AminoAcid.Trp -> "Tryptophan"     
-            | AminoAcid.Tyr -> "Tyrosine"       
-             
-            | AminoAcid.Xaa -> "Unspecified"             
-            | AminoAcid.Xle -> "Leucine/Isoleucine"      
-            | AminoAcid.Glx -> "Glutamine/glutamic acid" 
-            | AminoAcid.Asx -> "Asparagine/aspartic acid"
-             
-            | AminoAcid.Gap -> "Gap"
-            | AminoAcid.Ter -> "Ter"
-
-            | AminoAcid.Mod (aa,mds) -> sprintf "%s[%s]" (name aa) (mds |> Seq.map (fun md -> md.Name) |> String.concat ";")
+    let name (aa:AminoAcid) =
+        BioItem.name aa
 
     //Returns amino acid formulas minus H20            
     let formula (aa:AminoAcid) =
         BioItem.formula aa
-
-//    //Returns amino acid formulas minus H20            
-//    let formulaOfModificationOnly (aa:AminoAcid) =
-//        match aa with
-//        | AminoAcid.Mod (aa,mds) -> 
-//        | _ -> Formula.emptyFormula
     
     /// Returns the symbol of AminoAcid       
     let symbol (aa:AminoAcid) =
         BioItem.symbol aa
-    
-    
+
+    /// Returns true if AminoAcid represents a sequence terminator
+    let isTerminator (aa:AminoAcid) =
+        BioItem.isTerminator aa
+
+    /// Returns true if AminoAcid represents a sequence gap
+    let isGap (aa:AminoAcid) =
+        BioItem.isGap aa
+
     /// Returns the monoisotopic mass of AminoAcid (without H20)
-    let monoisoMass =
-        let monoisoMass' = formula >> Formula.monoisoMass
-        Memoization.memoizeP (fun a -> monoisoMass' a)
-            
+    let monoisoMass (aa:AminoAcid) =
+        BioItem.monoisoMass aa
 
     /// Returns the average mass of AminoAcid (without H20)
-    let averageMass = 
-        let averageMass' = formula >> Formula.averageMass
-        Memoization.memoizeP (fun a -> averageMass' a)
+    let averageMass (aa:AminoAcid) =
+        BioItem.averageMass aa
 
+    /// Returns a function to calculate the monoisotopic mass of a AminoAcid with memoization
+    let initMonoisoMassWithMemP =
+        Memoization.memoizeP (fun a -> monoisoMass a)          
+
+    /// Returns a function to calculate the average mass of a AminoAcid with memoization
+    let initAverageMassWithMemP = 
+        Memoization.memoizeP (fun a -> averageMass a)
+        

@@ -94,3 +94,47 @@ module Formula =
         let NH2 = parseFormulaString "NH2"
         let NH3 = parseFormulaString "NH3"
 
+
+        //Amino acid formulas minus H20   
+        let Ala = parseFormulaString "C3H5ON"    
+        let Cys = parseFormulaString "C3H5ONS"   
+        let Asp = parseFormulaString "C4H5O3N"   
+        let Glu = parseFormulaString "C5H7O3N"   
+        let Phe = parseFormulaString "C9H9ON"    
+        let Gly = parseFormulaString "C2H3ON"    
+        let His = parseFormulaString "C6H7ON3"   
+        let Ile = parseFormulaString "C6H11ON"   
+        let Lys = parseFormulaString "C6H12ON2"  
+        let Leu = parseFormulaString "C6H11ON"   
+        let Met = parseFormulaString "C5H9ONS"   
+        let Asn = parseFormulaString "C4H6O2N2"  
+        let Pyl = parseFormulaString "C12H19N3O2"
+        let Pro = parseFormulaString "C5H7ON"    
+        let Gln = parseFormulaString "C5H8O2N2"  
+        let Arg = parseFormulaString "C6H12ON4"  
+        let Ser = parseFormulaString "C3H5O2N"   
+        let Thr = parseFormulaString "C4H7O2N"   
+        let Sel = parseFormulaString "C3H5NOSe"  
+        let Val = parseFormulaString "C5H9ON"    
+        let Trp = parseFormulaString "C11H10ON2" 
+        let Tyr = parseFormulaString "C9H9O2N"                      
+                                                 
+        let Xaa = parseFormulaString "C2H3N1O1"  
+        let Xle = parseFormulaString "C6H11N1O1" 
+        let Glx = parseFormulaString "C5H7N1O3"  
+        let Asx = parseFormulaString "C4H5N1O3"  
+
+
+        //Nucleotide formulas minus H20   
+        /// A : Adenine
+        let A = parseFormulaString "C10H13N5O4"
+        /// T : Thymidine (only DNA)
+        let T = parseFormulaString "C10H14N2O5"
+        /// G : Guanine
+        let G = parseFormulaString "C10H13N5O5"
+        /// C : Cytosine
+        let C = parseFormulaString "C9H13N3O5"
+        /// U : Uracil    (only RNA)
+        let U = parseFormulaString "C4H4N2O2"
+        /// I : Inosine   (only RNA)
+        let I = parseFormulaString "C10H12N4O5"
