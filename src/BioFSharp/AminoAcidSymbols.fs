@@ -251,10 +251,8 @@ module AminoAcidSymbols =
 
     let AminoSymbolSetGapTer =
         set [
-            AminoAcidSymbol.Xaa
-            AminoAcidSymbol.Xle
-            AminoAcidSymbol.Glx
-            AminoAcidSymbol.Asx ] 
+            AminoAcidSymbol.Gap
+            AminoAcidSymbol.Ter ] 
 
 
     /// Returns the name of AminoAcid

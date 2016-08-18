@@ -1156,6 +1156,7 @@ module SearchDB =
             let massOfPeptide = 
                 aal
                 |> List.fold (fun s x -> s + massfunction x) 0.0 //TODO: add water
+            // if global mod = true then add to mass ofPeptide
             loop 0 massOfPeptide state (aal |> List.rev)
 
 

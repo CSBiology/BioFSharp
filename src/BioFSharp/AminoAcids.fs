@@ -216,6 +216,12 @@ module AminoAcids =
         | Mod (_,mds) -> mds
         | _           -> []
 
+    // Gets amino acid without the modification 
+    let getAminoAcidWithoutMod (aa:AminoAcid) =
+        match aa with
+        | Mod (_,mds) -> mds
+        | _           -> []
+
 
     // Gets amino acid modification 
     let tryGetModifications (aa:AminoAcid) =
@@ -280,7 +286,44 @@ module AminoAcids =
         // no amino acid character
         | ch -> NoAAChar ch
 
+    let AminoAcidSetStandard =
+        set [
+            AminoAcid.Ala
+            AminoAcid.Cys
+            AminoAcid.Asp
+            AminoAcid.Glu
+            AminoAcid.Phe
+            AminoAcid.Gly
+            AminoAcid.His
+            AminoAcid.Ile
+            AminoAcid.Lys
+            AminoAcid.Leu
+            AminoAcid.Met
+            AminoAcid.Ala
+            AminoAcid.Asn
+            AminoAcid.Pyl
+            AminoAcid.Pro
+            AminoAcid.Gln
+            AminoAcid.Arg
+            AminoAcid.Ser
+            AminoAcid.Thr
+            AminoAcid.Sel
+            AminoAcid.Val
+            AminoAcid.Trp
+            AminoAcid.Tyr ]  
+    
+    let AminoAcidSetAmbiguity =
+        set [
+            AminoAcid.Xaa
+            AminoAcid.Xle
+            AminoAcid.Glx
+            AminoAcid.Asx ]  
+    
 
+    let AminoAcidSetGapTer =
+        set [
+            AminoAcid.Gap
+            AminoAcid.Ter ]
 
 
  

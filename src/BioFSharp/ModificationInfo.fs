@@ -1,11 +1,13 @@
 ﻿namespace BioFSharp
 
-open Microsoft.FSharp.Reflection 
-open System.Reflection 
-open System.Runtime.Serialization 
+//open Microsoft.FSharp.Reflection 
+//open System.Reflection 
+//open System.Runtime.Serialization 
 
 module ModificationInfo =
     
+    open FSharp.Care.Collections
+        
     type ModLocation = | Residual = 0 | Cterm = 1 | Nterm = 2 | ProteinCterm = 3 | ProteinNterm = 4 | Isotopic = 5 
 
     [<CustomEquality; CustomComparison>]
@@ -74,6 +76,41 @@ module ModificationInfo =
         BioItem.isGap md
 
 
+    module Table = 
+        
+        let N15 = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
 
 
 
+    type GlobalModification<'a when 'a :> IBioItem>(name,modList:seq<'a*float>,defaultValue) =
+        let dict = 
+            modList
+            |> Seq.map (fun (k,v) -> BioItem.symbol k,v)
+            |> Dict.ofSeq
+            
+
+        member x.Name = name
+        member this.DefaultValue = defaultValue
+        member this.Modifiy (bItem:IBioItem) =
+            let symbol = BioItem.symbol bItem
+            if dict.ContainsKey(symbol) then
+                dict.[symbol]
+            else
+                defaultValue
+
+        override x.Equals(yobj) =
+            match yobj with
+            | :? GlobalModification<IBioItem> as y -> (x.Name = x.Name)
+            | _ -> false
+ 
+        override x.GetHashCode() = hash x.Name
+                        
+        interface System.IComparable with
+            member x.CompareTo yobj =
+                match yobj with
+                | :? GlobalModification<IBioItem> as y -> compare x.Name y.Name
+                | _ -> invalidArg "yobj" "cannot compare values of different types"
+
+  
+
+        
