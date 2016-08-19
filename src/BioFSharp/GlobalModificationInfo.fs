@@ -68,7 +68,7 @@ module GlobalModificationInfo =
 
 
 
-    let ofString (parse:char->#IBioItem) (str:string) =
+    let ofString (parse:char->'a) (str:string) =
         let splitStr = str.Split('|')
         let name = splitStr.[0]
         let matches = REGEX_GLMOD_SYM.Matches (splitStr.[1])
@@ -81,7 +81,7 @@ module GlobalModificationInfo =
                 let mass = float (g.Groups.["mass"].Value)
                 (item,mass)
                 )
-        GlobalModification(name,modList,0.0)
+        GlobalModification<'a>(name,modList,0.0)
     
 
     module Table =     

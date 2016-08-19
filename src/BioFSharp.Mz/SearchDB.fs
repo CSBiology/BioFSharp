@@ -53,7 +53,8 @@ module SearchDB =
         MissedCleavages : int
         MaxMass         : float
         // valid symbol name of isotopic label in label table i.e. #N15
-        IsotopicLabel   : string
+        
+        IsotopicLabel   : string // Change to global modification and make optional
         MassMode        : MassMode
 
         FixedMods       : SearchModification list            
@@ -995,6 +996,7 @@ module SearchDB =
             NTermAndResidualVariable : ModLookUpFunc
             CTermAndResidualVariable : ModLookUpFunc
             Total: string -> string option
+            Global : GlobalModificationInfo.GlobalModification<AminoAcid> option
             }
 
         /// Flag indicates if potential modification is fixed
@@ -1048,6 +1050,13 @@ module SearchDB =
                 |> List.filter (logexp: _*Modification -> bool)
                 |> Map.compose
 
+            let aminoParser (c:char) : AminoAcid =
+                match AminoAcids.charToParsedAminoAcidChar c with
+                | AminoAcids.ParsedAminoAcidChar.StandardCodes code -> code
+                | AminoAcids.ParsedAminoAcidChar.AmbiguityCodes code -> code
+                | _ -> failwithf "Wrong Format in global mod string."
+
+
             ///Logexp that returns true if ModLocation of modified AminoAcid equals Residual 
             let residual (_,modi) =  ModLocation.Residual.Equals(modi.Location)
             ///Logexp that returns true if ModLocation of modified AminoAcid equals Residual, Nterm or ProteinNterm 
@@ -1081,6 +1090,7 @@ module SearchDB =
                         |> List.map (fun searchmod -> searchmod.Name, searchmod.XModCode)  
                         |> Map.ofList
                     fun aa -> Map.tryFind aa lookupT
+                Global = Some (GlobalModificationInfo.ofString aminoParser dbParams.IsotopicLabel)
              }
 
         ///Returns modified or unmodified AminoAcid depending on the matching expression in a AminoAcidWithFlag struct
@@ -1153,10 +1163,13 @@ module SearchDB =
                                                    
                     | [] ->  [createPeptideWithMass acc massAcc]   
 
-            let massOfPeptide = 
-                aal
-                |> List.fold (fun s x -> s + massfunction x) 0.0 //TODO: add water
-            // if global mod = true then add to mass ofPeptide
+            let massOfPeptide =  
+                if modLookUp.Global.IsSome then
+                     aal
+                    |> List.fold (fun s x -> s + (massfunction x) + (modLookUp.Global.Value.Modifiy x)) 0.0 //TODO: add water
+                else 
+                    aal
+                    |> List.fold (fun s x -> s + massfunction x) 0.0 //TODO: add water
             loop 0 massOfPeptide state (aal |> List.rev)
 
 
@@ -1218,6 +1231,8 @@ module SearchDB =
             | Success _ ->
                 // prepares LookUpMaps of modLookUp based on the dbParams
                 let modLookUp = ModCombinator.modLookUpOf sdbParams
+                // Set name of global modification
+                let globalMod = if modLookUp.Global.IsNone then "" else modLookUp.Global.Value.Name
                 let connectionString = sprintf "Data Source=%s;Version=3" dbFileName
                 let cn = new SQLiteConnection(connectionString)
                 cn.Open()
@@ -1225,13 +1240,12 @@ module SearchDB =
                 cn.Close()
                 // Read Fasta
                 let fasta = 
-                    BioFSharp.IO.FastA.fromFile (BioArray.ofAminoAcidString) sdbParams.FastaPath
+                    BioFSharp.IO.FastA.fromFile (BioArray.ofAminoAcidString) sdbParams.FastaPath                
                 // Digest
                 fasta
                 |> Seq.mapi 
                     (fun i fastaItem ->
-                        let proteinId = i // TODO
-                        let globalMod = "" // TODO
+                        let proteinId = i // TODO                        
                         let peptideContainer =
                             Digestion.BioArray.digest Digestion.trypsin proteinId fastaItem.Sequence
                             |> Digestion.BioArray.concernMissCleavages 1 3 // TODO 
