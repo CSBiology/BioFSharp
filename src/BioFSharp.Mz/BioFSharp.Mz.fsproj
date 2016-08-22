@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="SearchDB.fs" />
+    <Compile Include="Fragmentation.fs" />
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />

@@ -1166,10 +1166,10 @@ module SearchDB =
             let massOfPeptide =  
                 if modLookUp.Global.IsSome then
                      aal
-                    |> List.fold (fun s x -> s + (massfunction x) + (modLookUp.Global.Value.Modifiy x)) 0.0 //TODO: add water
+                    |> List.fold (fun s x -> s + (massfunction x) + (modLookUp.Global.Value.Modifiy x)) (massfunction ModificationInfo.Table.H2O)//add water
                 else 
                     aal
-                    |> List.fold (fun s x -> s + massfunction x) 0.0 //TODO: add water
+                    |> List.fold (fun s x -> s + massfunction x) (massfunction ModificationInfo.Table.H2O) //add water
             loop 0 massOfPeptide state (aal |> List.rev)
 
 

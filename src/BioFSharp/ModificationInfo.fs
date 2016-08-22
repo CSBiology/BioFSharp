@@ -79,7 +79,7 @@ module ModificationInfo =
     module Table = 
         
         let N15 = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-
+        let H2O = createModificationWithAdd "H20" ModLocation.Nterm Formula.Table.H2O
  
 
         
