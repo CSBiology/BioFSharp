@@ -10,7 +10,7 @@ open BioFSharp.Algorithm
 
 
 let pattern = "lol" |> Array.ofSeq
-let text = "ololllllllllllllllllllllllllllllllllllllllolllllllllllllllllllllllllllllolollllllo" |> Array.ofSeq
+let text = "ololllllllllllllllllllllllllllllllllllllllolllllllllllllllllllllllllllllolollllllol" |> Array.ofSeq
 
 let rabinKarpSearch = BioFSharp.Algorithm.RabinKarp.SearchAll
 let kMpSearch = BioFSharp.Algorithm.KnuthMorrisPratt.initFindAllMatches pattern
