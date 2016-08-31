@@ -79,6 +79,7 @@
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
+    <None Include="Algorithm\Script1.fsx" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
