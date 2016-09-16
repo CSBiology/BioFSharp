@@ -14,8 +14,8 @@ C:\Users\david\Source\Repos\BioFSharp\packages\MathNet.Numerics\lib\net40\MathNe
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../bin/MathNet.Numerics.dll"
 #r "../../bin/MathNet.Numerics.FSharp.dll"
-#r @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Threading.Tasks.dll"
-open System.Threading.Tasks
+
+
 open BioFSharp
 open BioFSharp.Mz
 open BioFSharp.IO
@@ -58,19 +58,19 @@ let rnd = Random.MersenneTwister()
 let initGen = ChargeState.initGenerateMzSpecDevWithMem rnd chargeDetParamTest 0.015//peakPosStdDev
 
 
-/// 
-let determinedCharge = 
-    ///
-    let (mzdata,intensityData) = 
-        SignalDetection.Wavelet.windowToCentroidBy rawMZData rawIntensityData 3. ms2PrecursorMZ  
-    ///
-    let putchargeList = 
-        ChargeState.putativePrecursorChargeStatesBy chargeDetParamTest mzdata intensityData ms2PrecursorMZ
-    putchargeList
-    ///
-    let testedItems = 
-        putchargeList 
-        |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.NrOfPeaksInSubSet ,float assCh.Charge) assCh.MZChargeDev ))
-        |> ChargeState.removeSubSetsOfBestHit
-        |> List.map (fun testedI -> testedI.TestedObject)
-    testedItems
+///// 
+//let determinedCharge = 
+//    ///
+//    let (mzdata,intensityData) = 
+//        SignalDetection.Wavelet.windowToCentroidBy rawMZData rawIntensityData 3. ms2PrecursorMZ  
+//    ///
+//    let putchargeList = 
+//        ChargeState.putativePrecursorChargeStatesBy chargeDetParamTest mzdata intensityData ms2PrecursorMZ
+//    putchargeList
+//    ///
+//    let testedItems = 
+//        putchargeList 
+//        |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.NrOfPeaksInSubSet ,float assCh.Charge) assCh.MZChargeDev ))
+//        |> ChargeState.removeSubSetsOfBestHit
+//        |> List.map (fun testedI -> testedI.TestedObject)
+//    testedItems

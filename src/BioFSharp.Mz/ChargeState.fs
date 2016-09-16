@@ -158,7 +158,7 @@ module ChargeState =
         ldaVec.[0] * deviationPeakDistanceToTheoDistance + ldaVec.[1] * (float elementsInSubSet/ float elementsInSourceSet)  
 
     /// Returns a random integer between a lower and a upper Value
-    let rndIntBetween (rnd: MathNet.Numerics.Random.MersenneTwister) lowerBorder upperBorder  = rnd.Next(lowerBorder, upperBorder)
+    let rndIntBetween (rnd:System.Random) lowerBorder upperBorder  = rnd.Next(lowerBorder, upperBorder)
 
     /// Returns a possible InterPeakDistance by a given charge state. The retrieved distance follows a normaldistribution
     /// centered around the theoretical interPeakDistance. The standardDeviation is dependent on the used mass spectrometer
@@ -168,7 +168,7 @@ module ChargeState =
         calcRndPosition assignedCharge stdDev
 
     /// Creates a random MzIntensityEntityCollection  
-    let rndMzIntensityEntityCollectionBy (rnd:MathNet.Numerics.Random.MersenneTwister) (stdDev: float) (maxCharge: int) maxDistance minChainLength =
+    let rndMzIntensityEntityCollectionBy (rnd:System.Random) (stdDev: float) (maxCharge: int) maxDistance minChainLength =
         let rec innerF count (accFloat:float) (accList:PeakList<_>) minChainLength  =
             let rndCharge = 
                 rndIntBetween rnd 1 maxCharge
@@ -183,9 +183,9 @@ module ChargeState =
 
         
     /// Creates a user defined amount of random spectra of defined length. Returns the mzChargeDeviation of each simulated Spectrum
-    let generateMzSpecDev (rnd: MathNet.Numerics.Random.MersenneTwister) chargeStateDetermParams peakPosStdDev (chainLength,charge)  = 
+    let generateMzSpecDev (rnd:System.Random) chargeStateDetermParams peakPosStdDev (chainLength,charge)  = 
         [1.. chargeStateDetermParams.NrOfRndSpectra] 
-        |> List.map (fun i -> rndMzIntensityEntityCollectionBy (rnd: MathNet.Numerics.Random.MersenneTwister) peakPosStdDev chargeStateDetermParams.ExpectedMaximumCharge chargeStateDetermParams.Width chainLength)           
+        |> List.map (fun i -> rndMzIntensityEntityCollectionBy (rnd:System.Random) peakPosStdDev chargeStateDetermParams.ExpectedMaximumCharge chargeStateDetermParams.Width chainLength)           
         |> List.map (fun subSet -> 
                         let interPeakDistances = mzDistancesOf subSet.Peaks                    
                         let mzChargeDeviation = mzChargeDeviationBy interPeakDistances (1./charge)  
@@ -195,7 +195,7 @@ module ChargeState =
         |> Array.ofList
     
     /// Returns Function to generate random spectra and to calculate their mzChargeDeviations.   
-    let initGenerateMzSpecDevWithMem (rnd:MathNet.Numerics.Random.MersenneTwister) (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev =
+    let initGenerateMzSpecDevWithMem (rnd:System.Random) (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev =
         Memoization.memoize (generateMzSpecDev rnd (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev) ///stdv 0.01516580549
         
     /// Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
