@@ -26,7 +26,6 @@ let info =
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below
 // --------------------------------------------------------------------------------------
-#load "formatters.fsx"
 
 #load "../../packages/build/FSharp.Formatting/FSharp.Formatting.fsx"
 #I "../../packages/build/FAKE/tools/"
@@ -108,13 +107,11 @@ let buildReference () =
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
-  // Create evaluator and parse script
-  let fsi = Formatters.createFsiEvaluator root output
 
   // First, process files which are placed in the content root directory.
 
   Literate.ProcessDirectory
-    ( content, docTemplate, output, fsiEvaluator = fsi, replacements = ("root", root)::info,
+    ( content, docTemplate, output, replacements = ("root", root)::info,
       layoutRoots = layoutRootsAll.["en"],
       generateAnchors = true,
       processRecursive = false)
@@ -134,8 +131,8 @@ let buildDocumentation () =
         | None -> layoutRootsAll.["en"] // "en" is the default language
 
     Literate.ProcessDirectory
-      ( dir, docTemplate, output @@ dirname, fsiEvaluator = fsi, replacements = ("root", root)::info,
-        layoutRoots = layoutRoots,        
+      ( dir, docTemplate, output @@ dirname, replacements = ("root", root)::info,
+        layoutRoots = layoutRoots,
         generateAnchors = true )
 
 // Generate
