@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Mgf - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Mgf</h1>
+<p>
+  <span>Namespace: BioFSharp.IO</span><br />
+</p>
+<div class="xmldoc">
+<p>Mgf <a href="http://www.matrixscience.com/help/data_file_help.html">http://www.matrixscience.com/help/data_file_help.html</a>`_ is a simple
+human-readable format for MS/MS data. It allows storing MS/MS peak lists and
+exprimental parameters.</p>
+
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-mgf-mgfentry.html">MgfEntry</a>
+          </td>
+          <td class="xmldoc"><p>Represents</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
+            createMgfEntry parameters mass intensity
+          </code>
+          <div class="tip" id="286">
+            <strong>Signature:</strong> parameters:Map&lt;string,string&gt; -&gt; mass:float list -&gt; intensity:float list -&gt; MgfEntry<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L19-19" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
+            mgfToString mgf
+          </code>
+          <div class="tip" id="287">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; seq&lt;string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L118-118" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Converts a MgfEntry to string.
+Use Seq.write to write to file.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+            readMgf path
+          </code>
+          <div class="tip" id="288">
+            <strong>Signature:</strong> path:string -&gt; MgfEntry list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Reads an mgf file into a collection of MgfEntries</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
+            tryGetPrecursorCharges mgf
+          </code>
+          <div class="tip" id="289">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; int list option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L43-43" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the precursor mass. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
+            tryGetPrecursorMass mgf
+          </code>
+          <div class="tip" id="290">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; float option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L23-23" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the precursor mass. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
+            tryGetTitle mgf
+          </code>
+          <div class="tip" id="291">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; string option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the title string of a 'mgf-entry'. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
+            tryParseCharge str
+          </code>
+          <div class="tip" id="292">
+            <strong>Signature:</strong> str:string -&gt; int list option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the posible charge/charges in a list. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
+            tryParseTitle title
+          </code>
+          <div class="tip" id="293">
+            <strong>Signature:</strong> title:string -&gt; (float * float) option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L58-58" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the retention time and precursor intensity from 'mgf-title' string. Returns None if title does not contain the information</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

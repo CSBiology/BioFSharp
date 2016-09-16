@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>BioArray - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>BioArray</h1>
+<p>
+  <span>Namespace: BioFSharp</span><br />
+</p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-bioarray-bioarray-1.html">BioArray<'a></a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '34', 34)" onmouseover="showTip(event, '34', 34)">
+            initAverageMass 
+          </code>
+          <div class="tip" id="34">
+            <strong>Signature:</strong> BioArray&lt;IBioItem&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L113-113" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a function to calculate the average mass of the given sequence !memoization</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
+            initAverageMassWith state
+          </code>
+          <div class="tip" id="35">
+            <strong>Signature:</strong> state:float -&gt; BioArray&lt;IBioItem&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L130-130" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a function to calculate the average mass of the given sequence and initial value (e.g. H2O) !memoization</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
+            initMonoisoMass 
+          </code>
+          <div class="tip" id="36">
+            <strong>Signature:</strong> BioArray&lt;IBioItem&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L104-104" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a function to calculate the monoisotopic mass of the given sequence !memoization</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
+            initMonoisoMassWith state
+          </code>
+          <div class="tip" id="37">
+            <strong>Signature:</strong> state:float -&gt; BioArray&lt;IBioItem&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L122-122" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a function to calculate the monoisotopic mass of the given sequence and initial value (e.g. H2O) !memoization</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '38', 38)" onmouseover="showTip(event, '38', 38)">
+            isEqual a b
+          </code>
+          <div class="tip" id="38">
+            <strong>Signature:</strong> a:&#39;?7659 [] -&gt; b:&#39;?7659 [] -&gt; int<br />
+                          <strong>Type parameters:</strong> '?7659          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Compares the elemens of two biosequence</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '39', 39)" onmouseover="showTip(event, '39', 39)">
+            mapInTriplets f input
+          </code>
+          <div class="tip" id="39">
+            <strong>Signature:</strong> f:(&#39;a * &#39;a * &#39;a -&gt; &#39;?7654) -&gt; input:BioArray&lt;&#39;a&gt; -&gt; &#39;?7654 []<br />
+                          <strong>Type parameters:</strong> 'a, '?7654          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L41-41" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Builts a new collection whose elements are the result of applying
+the given function to each triplet of the collection.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '40', 40)" onmouseover="showTip(event, '40', 40)">
+            ofAminoAcidString s
+          </code>
+          <div class="tip" id="40">
+            <strong>Signature:</strong> s:&#39;?7647 -&gt; BioArray&lt;AminoAcid&gt;<br />
+                          <strong>Type parameters:</strong> '?7647          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L18-18" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Generates amino acid sequence of one-letter-code raw string</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '41', 41)" onmouseover="showTip(event, '41', 41)">
+            ofAminoAcidStringWithOptionConverter (...)
+          </code>
+          <div class="tip" id="41">
+            <strong>Signature:</strong> converter:AminoAcidOptionConverter -&gt; s:&#39;?7645 -&gt; BioArray&lt;AminoAcid&gt;<br />
+                          <strong>Type parameters:</strong> '?7645          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L12-12" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Generates amino acid sequence of one-letter-code string using given OptionConverter</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '42', 42)" onmouseover="showTip(event, '42', 42)">
+            ofNucleotideString s
+          </code>
+          <div class="tip" id="42">
+            <strong>Signature:</strong> s:&#39;?7651 -&gt; BioArray&lt;Nucleotide&gt;<br />
+                          <strong>Type parameters:</strong> '?7651          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L30-30" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Generates nucleotide sequence of one-letter-code raw string</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '43', 43)" onmouseover="showTip(event, '43', 43)">
+            ofNucleotideStringWithOptionConverter (...)
+          </code>
+          <div class="tip" id="43">
+            <strong>Signature:</strong> converter:NucleotideOptionConverter -&gt; s:&#39;?7649 -&gt; BioArray&lt;Nucleotide&gt;<br />
+                          <strong>Type parameters:</strong> '?7649          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L24-24" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Generates nucleotide sequence of one-letter-code string using given OptionConverter</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '44', 44)" onmouseover="showTip(event, '44', 44)">
+            toAverageMass bs
+          </code>
+          <div class="tip" id="44">
+            <strong>Signature:</strong> bs:BioArray&lt;&#39;?7665&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> '?7665          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L89-89" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns average mass of the given sequence</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '45', 45)" onmouseover="showTip(event, '45', 45)">
+            toAverageMassWith state bs
+          </code>
+          <div class="tip" id="45">
+            <strong>Signature:</strong> state:float -&gt; bs:BioArray&lt;&#39;?7669&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> '?7669          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L99-99" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns average mass of the given sequence and initial value (e.g. H2O)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '46', 46)" onmouseover="showTip(event, '46', 46)">
+            toCompositionVector input
+          </code>
+          <div class="tip" id="46">
+            <strong>Signature:</strong> input:BioArray&lt;&#39;?7679&gt; -&gt; int []<br />
+                          <strong>Type parameters:</strong> '?7679          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L137-137" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
+            toMonoisotopicMass bs
+          </code>
+          <div class="tip" id="47">
+            <strong>Signature:</strong> bs:BioArray&lt;&#39;?7663&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> '?7663          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L84-84" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns monoisotopic mass of the given sequence</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
+            toMonoisotopicMassWith state bs
+          </code>
+          <div class="tip" id="48">
+            <strong>Signature:</strong> state:float -&gt; bs:BioArray&lt;&#39;?7667&gt; -&gt; float<br />
+                          <strong>Type parameters:</strong> '?7667          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L94-94" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns monoisotopic mass of the given sequence and initial value (e.g. H2O)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
+            toString bs
+          </code>
+          <div class="tip" id="49">
+            <strong>Signature:</strong> bs:BioArray&lt;&#39;?7661&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?7661          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L78-78" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns string of one-letter-code</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '50', 50)" onmouseover="showTip(event, '50', 50)">
+            transcribeCodeingStrand nucs
+          </code>
+          <div class="tip" id="50">
+            <strong>Signature:</strong> nucs:BioArray&lt;Nucleotide&gt; -&gt; BioArray&lt;Nucleotide&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L47-47" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Transcribe a given DNA coding strand (5'-----3')</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '51', 51)" onmouseover="showTip(event, '51', 51)">
+            transcribeTemplateStrand nucs
+          </code>
+          <div class="tip" id="51">
+            <strong>Signature:</strong> nucs:BioArray&lt;Nucleotide&gt; -&gt; BioArray&lt;Nucleotide&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L54-54" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Transcribe a given DNA template strand (3'-----5')</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
+            translate nucleotideOffset rnaSeq
+          </code>
+          <div class="tip" id="52">
+            <strong>Signature:</strong> nucleotideOffset:int -&gt; rnaSeq:BioArray&lt;Nucleotide&gt; -&gt; BioArray&lt;AminoAcid&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/BioArray.fs#L59-59" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>translates nucleotide sequence to aminoacid sequence</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
