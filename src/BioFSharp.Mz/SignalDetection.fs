@@ -12,60 +12,30 @@ open ModificationInfo
 
 
 module SignalDetection =
-
-
-    type MzIntensityArray = 
-        {
-        MzData:float []
-        IntensityData:float []
-        }
-
-    let createMzIntensityArray mzData intensityData = {
-        MzData=mzData; IntensityData=intensityData } 
-
-    type MzIntensityPeak =
-            {
-            MzData        :float 
-            IntensityData :float
-            // can optionally be added to refer to the position of the Peak in the dataset. 
-            Position : int option
-            } 
-
-    let createMzIntensityPeak mzData intensityData position =
-        {MzData=mzData; IntensityData=intensityData; Position=position} 
-
-    type MzIntensityPeakCollection = {   
-        MzIntensityPeaks: MzIntensityPeak list
-        PeaksInSubSet: int
-        PeaksInSourceSet: int
-        }
-
-    let createMzIntensityPeakCollection mzIntensityPeaks peaksInSubSet peaksInSourceSet  = {
-        MzIntensityPeaks=mzIntensityPeaks; PeaksInSubSet=peaksInSubSet; 
-            PeaksInSourceSet=peaksInSourceSet}
-
-    type peakDetermParameter = {
-        MZTol        : float
-        SNRThreshold : float
-        }
     
-    let createPeakDetermParameter mzTol snrThreshold = {
-        MZTol=mzTol; SNRThreshold=snrThreshold
-        }
-
-
+    open PeakArray
 
     module Wavelet =
+
         type RidgeLine = {
             Col: int
             Row: int
+            }
+
+        type peakDetermParameter = {
+            MZTol        : float
+            SNRThreshold : float
+            }
+    
+        let createPeakDetermParameter mzTol snrThreshold = {
+            MZTol=mzTol; SNRThreshold=snrThreshold
             }
 
         /// Returns a MzIntensityArray that containing the spectral centroids of the input spectra. 
         let toCentroid (mzData: float []) (intensityData: float [])  = 
 
             if mzData.Length < 3 then
-                createMzIntensityArray [||] [||]
+                [||], [||]
             else  
                 
                 let nScales = 10;
@@ -385,7 +355,7 @@ module SignalDetection =
                         let finalX = xPeakValues |> Seq.toArray 
                         let finalY = yPeakValues |> Seq.toArray
                         //let finalSNRS = refinedSNRS |> Seq.toArray
-                        createMzIntensityArray finalX finalY
+                        finalX, finalY
                     else
                         // Helperfunction to get mz back of Columnnumber
                         let convertColToMz (mzData: float []) (col: int) =
@@ -437,7 +407,7 @@ module SignalDetection =
                         let finalX = xPeakValues |> Seq.toArray 
                         let finalY = yPeakValues |> Seq.toArray
                         //let finalSNRS = refinedSNRS |> Seq.toArray
-                        createMzIntensityArray finalX finalY
+                        finalX, finalY
 
         
                 let xspacing = createXspacing mzData
@@ -452,8 +422,8 @@ module SignalDetection =
         /// Returns mzIntensityArray consisting of centroided Peaks. 
         let windowToCentroid (mzData:float[]) (intensityData:float[]) lowerIdx upperIdx =
             if mzData.Length > 2  && lowerIdx>=0 && mzData.Length-2 >=upperIdx then 
-                centroidedPeaksBy mzData.[lowerIdx.. upperIdx] intensityData.[lowerIdx.. upperIdx]  
-            else createMzIntensityArray [|float lowerIdx |] [|float upperIdx |]
+                toCentroid mzData.[lowerIdx.. upperIdx] intensityData.[lowerIdx.. upperIdx]  
+            else [|float lowerIdx |], [|float upperIdx |]
 
         /// Returns a Index that accesses the mzData Array at a position determined by a precursorMz at the lower end of a given windowwidth 
         let lowerIdxBy (mzData:float []) windowWidth preCursorMZ =
@@ -472,7 +442,7 @@ module SignalDetection =
             if mzData.Length > 2 then
                 let lowerIdx = lowerIdxBy mzData windowWidth centerMass
                 let upperIdx = upperIdxBy mzData windowWidth centerMass
-                centroidedPeaksFromTo mzData intensityData lowerIdx upperIdx
-            else createMzIntensityArray [||] [||]
+                windowToCentroid mzData intensityData lowerIdx upperIdx
+            else [||], [||]
 
 

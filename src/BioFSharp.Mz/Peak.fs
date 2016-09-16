@@ -14,3 +14,9 @@ type Peak(mz:float,intensity:float) =
         interface IPeak with
             member this.Mz = mz
             member this.Intensity = intensity
+
+module Peaks =
+ 
+    let createPeak mzData intensityData = 
+        let pk = new Peak(mzData, intensityData)
+        pk
