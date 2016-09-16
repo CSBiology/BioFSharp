@@ -20,5 +20,25 @@ module PeakArray =
         mz,intens
     
         
+    /// Bins peaks to their next upper 1 Da bin
+    let binToUpperIntergerMass (pkarr:PeakArray<_>) (minMassBoarder:int) (maxMassBoarder:int) = 
+        let maxIndex = maxMassBoarder - minMassBoarder + 1
+        let array = Array.zeroCreate (maxIndex)
+        pkarr 
+        |> Array.iter (fun p ->
+            let index = int(ceil p.Mz) - minMassBoarder
+            if index < maxIndex && index > -1 then
+                array.[index] <- max array.[index] p.Intensity)
+        array
 
+    /// Bins peaks to their nearest 1 Da bin
+    let peaksToNearestUnitDaltonBin (pkarr:PeakArray<_>) (minMassBoarder:int) (maxMassBoarder:int) = 
+        let maxIndex = maxMassBoarder - minMassBoarder + 1        
+        let array = Array.zeroCreate (maxIndex)
+        pkarr 
+        |> Array.iter (fun p ->  
+            let index = int(round p.Mz) - minMassBoarder
+            if index < maxIndex && index > -1 then
+                array.[index] <- max array.[index] p.Intensity)
+        array
          

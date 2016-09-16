@@ -53,6 +53,7 @@
     <Compile Include="PeakList.fs" />
     <Compile Include="SearchDB.fs" />
     <Compile Include="Fragmentation.fs" />
+    <Compile Include="SequestLike.fs" />
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
