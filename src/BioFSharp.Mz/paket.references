@@ -1,2 +1,3 @@
 FSharp.Core
 System.Data.SQLite
+MathNet.Numerics.FSharp
