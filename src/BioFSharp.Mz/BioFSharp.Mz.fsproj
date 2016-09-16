@@ -48,8 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Peak.fs" />
+    <Compile Include="PeakArray.fs" />
+    <Compile Include="PeakList.fs" />
     <Compile Include="SearchDB.fs" />
     <Compile Include="Fragmentation.fs" />
+    <Compile Include="SequestLike.fs" />
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
