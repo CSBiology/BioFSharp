@@ -12,8 +12,8 @@ module Mgf =
     /// Represents 
     type MgfEntry = {   
         Parameters : Map<string,string>
-        Mass       : float list
-        Intensity  : float list
+        Mass       : float []
+        Intensity  : float []
     }
 
     let createMgfEntry parameters mass intensity =
@@ -84,7 +84,7 @@ module Mgf =
 
         let mgfFrom ml (p:Map<string,string>) =
             let m,i = ml  |> List.rev |> List.unzip
-            createMgfEntry p m i    
+            createMgfEntry p (m|> List.toArray) (i |> List.toArray)    
     
     
         let tmp =

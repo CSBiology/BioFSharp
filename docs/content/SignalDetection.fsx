@@ -25,8 +25,8 @@ let ms1DataTest =
     |> List.head
 
 /// Converts the mzData and intensityData into Arrays 
-let rawMZData        = ms1DataTest.Mass |> List.toArray 
-let rawIntensityData = ms1DataTest.Intensity |> List.toArray 
+let rawMZData        = ms1DataTest.Mass //|> List.toArray 
+let rawIntensityData = ms1DataTest.Intensity// |> List.toArray 
 
 /// Returns a mzIntensityArray containing the processed data.
 let centroidedSpectra = 
