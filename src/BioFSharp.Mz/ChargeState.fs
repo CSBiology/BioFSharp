@@ -183,7 +183,7 @@ module ChargeState =
 
         
     /// Creates a user defined amount of random spectra of defined length. Returns the mzChargeDeviation of each simulated Spectrum
-    let generateMzSpecDev (rnd:System.Random) chargeStateDetermParams peakPosStdDev (chainLength,charge)  = 
+    let mzDevOfRndSpec (rnd:System.Random) chargeStateDetermParams peakPosStdDev (chainLength,charge)  = 
         [1.. chargeStateDetermParams.NrOfRndSpectra] 
         |> List.map (fun i -> rndMzIntensityEntityCollectionBy (rnd:System.Random) peakPosStdDev chargeStateDetermParams.ExpectedMaximumCharge chargeStateDetermParams.Width chainLength)           
         |> List.map (fun subSet -> 
@@ -195,8 +195,8 @@ module ChargeState =
         |> Array.ofList
     
     /// Returns Function to generate random spectra and to calculate their mzChargeDeviations.   
-    let initGenerateMzSpecDevWithMem (rnd:System.Random) (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev =
-        Memoization.memoize (generateMzSpecDev rnd (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev) ///stdv 0.01516580549
+    let initMzDevOfRndSpec (rnd:System.Random) (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev =
+        Memoization.memoize (mzDevOfRndSpec rnd (chargeStateDetermParams: ChargeDetermParams) peakPosStdDev) ///stdv 0.01516580549
         
     /// Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
     /// observed divided by their total number

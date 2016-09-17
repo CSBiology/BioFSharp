@@ -12,41 +12,53 @@ BioFSharp
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
-//#r "../../bin/Plotly.dll"
+#r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 
 open BioFSharp
 open BioFSharp.Mz
 open BioFSharp.IO
-//open Plotly
+open FSharp.Plotly
 
-/// Reads first entry out of a example mgf File
+/// Returns the first entry of a examplary mgf File
 let ms1DataTest = 
     Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
     |> List.head
 
-/// Converts the mzData and intensityData into Arrays 
-let rawMZData        = ms1DataTest.Mass //|> List.toArray 
-let rawIntensityData = ms1DataTest.Intensity// |> List.toArray 
-
-/// Returns a mzIntensityArray containing the processed data.
+/// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidedSpectra = 
-    SignalDetection.Wavelet.toCentroid rawMZData rawIntensityData
+    SignalDetection.Wavelet.toCentroid ms1DataTest.Mass ms1DataTest.Intensity
 
-///// Creates pointCharts of the raw and the processed data.
-//let rawDataChart        = Chart.Point(mzData, intensityData)
-//let centroidedDataChart = Chart.Point(centroidedSpectra.MzData, centroidedSpectra.IntensityData)
-//let combChart           = Chart.Combine [rawDataChart;processedDataChart]
-//
-//combChart
-//|> Chart.Show
+/// Creates pointCharts of the raw and the processed data
+let rawDataChart = 
+    Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity)
+let centroidedDataChart =   
+    Chart.Point(fst centroidedSpectra, snd centroidedSpectra)
 
-/// Returns a mzIntensityArray containing the processed data. 
-let centroidedSpectraInWindow = 
-     SignalDetection.Wavelet.windowToCentroidBy rawMZData rawIntensityData 1.5 450.
+/// Creates a combined chart 
+let combChart = 
+    Chart.Combine [rawDataChart;centroidedDataChart]
+
+/// Shows the chart in a browser
+combChart
+|> Chart.Show
+
+// If only a window of the input data shall be processed the following functions can be used.
+// This can be a favourable approach if only a subgroup of the data is of interest to the user 
+// and computation time is a limiting factor.
+
+/// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
+/// window of a user given width centered around a user given m/z value.
+let centroidsInWindow = 
+     SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. 750.3157086
 
 ///// Creates pointCharts of the processed data.
-//let centroidedSpectraInWindow = Chart.Point(centroidedSpectraInWindow.MzData, centroidedSpectraInWindow.IntensityData)
-//let combChart                 = Chart.Combine [rawDataChart;centroidedSpectraInWindow]
-//
-//combChart
-//|> Chart.Show
+let centroidsInWindowChart = 
+    Chart.Point(fst centroidsInWindow, snd centroidsInWindow )
+
+/// Creates a another combined chart of the unprocessed data and the cent
+let anotherCombChart = 
+    Chart.Combine [rawDataChart;centroidsInWindowChart]
+
+/// Shows the chart in a browser
+anotherCombChart
+|> Chart.Show
