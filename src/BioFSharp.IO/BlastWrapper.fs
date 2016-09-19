@@ -9,10 +9,12 @@ module BlastNCBI =
 
         type DbType =
         | Protein 
+        | Nucleotide
 
         let private stringOfDbType (param:DbType) =
             match param with
             | Protein -> "prot"
+            | Nucleotide -> "nucl"
 
         type MakeDbParams =
             | Input  of string
@@ -209,6 +211,7 @@ module BlastNCBI =
 
     let ncbiPath = "../../lib/ncbi-blast/bin"
 
+    ///A Wrapper to perform different BLAST tasks
     type BlastWrapper (rootPath:string) =
         let createArguments (f : 'a -> string) (ps:seq<'a>) =
             ps |> Seq.map f
@@ -228,21 +231,26 @@ module BlastNCBI =
             printfn "%s done." name
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
 
-        ///
+        ///Create a BLAST database from given source
         member this.makeblastdb searchDB (ps:seq<Parameters.MakeDbParams>) = 
             let arg = [Parameters.MakeDbParams.Input searchDB;]
             createProcess "Makeblastdb" "/makeblastdb.exe" Parameters.stringOfMakeDbParams (Seq.append arg ps)       
         
-        ///
+        ///Perform a protein BLAST
         member this.blastP searchDB query output  (ps:seq<Parameters.BlastParams>) = 
             let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
             createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
 
+        ///Perform a nucleotide BLAST
+        member this.blastN searchDB query output (ps:seq<Parameters.BlastParams>) = 
+            let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
+            createProcess "BlastN" "/blastn.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
 
 
 
 
 
+    
     type CBlastResult = {
 
        [<FieldAttribute("qseqid")>]      Query_SeqId               : string
