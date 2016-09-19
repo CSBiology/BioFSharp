@@ -20,10 +20,10 @@ open BioFSharp.Mz
 
 let paramTest = 
     SearchDB.createSearchDbParams 
-        "Creinhardtii"
+        "Creinhardtii_Cp"
         // path of db storage folder
-        "C:\\Test\\Creinhardtii\\"
-        "C:\\Test\\Creinhardtii_281_v5.5.protein.fa"
+        (__SOURCE_DIRECTORY__ + "/data/")
+        (__SOURCE_DIRECTORY__ + "/data/Chlamy_Cp.fastA")
         Digestion.trypsin
         3
         15000.

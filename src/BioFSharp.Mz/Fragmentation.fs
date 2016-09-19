@@ -12,6 +12,12 @@ module Fragmentation =
     let waterLossSet = set [AminoAcids.Ser;AminoAcids.Thr;AminoAcids.Glu;AminoAcids.Asp;]
     let aminoLossSet = set [AminoAcids.Arg;AminoAcids.Lys;AminoAcids.Gln;AminoAcids.Asn;]
 
+    let isWaterLoss a =
+        waterLossSet.Contains(a)
+
+    let isAminoLoss a =
+        aminoLossSet.Contains(a)
+
     module BioList =
         
        /// <summary>
@@ -124,13 +130,13 @@ module Fragmentation =
         
 
     
-        let isAminoLoss (a:AminoAcids.AminoAcid) =
-            aminoLossSet.Contains(a)
-            
-        
-
-        let isWaterLoss (a:AminoAcids.AminoAcid) =
-            waterLossSet.Contains(a)
+//        let isAminoLoss (a:AminoAcids.AminoAcid) =
+//            aminoLossSet.Contains(a)
+//            
+//        
+//
+//        let isWaterLoss (a:AminoAcids.AminoAcid) =
+//            waterLossSet.Contains(a)
             
 
 
