@@ -18,7 +18,7 @@ module BlastNCBI =
 
         type MakeDbParams =
             | Input  of string
-            //| Output of String
+            | Output of String
             | DbType of DbType
             | MaskData of string
             | ParseSeqIds    
@@ -26,8 +26,8 @@ module BlastNCBI =
 
         let stringOfMakeDbParams (param:MakeDbParams) =
             match param with
-            | Input  (path)   -> sprintf "-in %s -out %s"  path path
-            //| Output (path) -> sprintf "-out %s" path
+            | Input  (path)   -> sprintf "-in %s"  path 
+            | Output (path) -> sprintf "-out %s" path
             | DbType (dbt)    -> sprintf "-dbtype %s" (stringOfDbType dbt)
             | MaskData (path) -> sprintf "-mask_data %s.asnb" path 
             | ParseSeqIds     -> sprintf "-parse_seqids" 
@@ -231,20 +231,20 @@ module BlastNCBI =
             printfn "%s done." name
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
 
-        ///Create a BLAST database from given source
+        ///Creates a BLAST databse from given source/s
         member this.makeblastdb searchDB (ps:seq<Parameters.MakeDbParams>) = 
             let arg = [Parameters.MakeDbParams.Input searchDB;]
             createProcess "Makeblastdb" "/makeblastdb.exe" Parameters.stringOfMakeDbParams (Seq.append arg ps)       
         
-        ///Perform a protein BLAST
+        ///Compares a protein query to a protein database
         member this.blastP searchDB query output  (ps:seq<Parameters.BlastParams>) = 
             let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
             createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
-
-        ///Perform a nucleotide BLAST
-        member this.blastN searchDB query output (ps:seq<Parameters.BlastParams>) = 
+        
+        ///Compares a nucleotide query to a nucleotide database
+        member this.blastN searchDB query output  (ps:seq<Parameters.BlastParams>) = 
             let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
-            createProcess "BlastN" "/blastn.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
+            createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
 
 
 
