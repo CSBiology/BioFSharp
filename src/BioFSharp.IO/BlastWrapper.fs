@@ -211,6 +211,7 @@ module BlastNCBI =
 
     let ncbiPath = "../../lib/ncbi-blast/bin"
 
+    ///A Wrapper to perform different BLAST tasks
     type BlastWrapper (rootPath:string) =
         let createArguments (f : 'a -> string) (ps:seq<'a>) =
             ps |> Seq.map f
@@ -249,7 +250,7 @@ module BlastNCBI =
 
 
 
-
+    
     type CBlastResult = {
 
        [<FieldAttribute("qseqid")>]      Query_SeqId               : string
