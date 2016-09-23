@@ -31,7 +31,7 @@ module BioItem =
         bItem.Symbol
 
 
-    /// Returns then byteCode of the bio item
+    /// Returns then formula of the bio item
     let inline formula  (bItem:#IBioItem) =
         bItem.Formula
 

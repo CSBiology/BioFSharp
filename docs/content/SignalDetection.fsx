@@ -4,7 +4,7 @@
 //#I "../../bin"
 
 (**
-BioFSharp
+SignalDetection
 ======================
 
 
@@ -21,7 +21,7 @@ open FSharp.Plotly
 
 /// Returns the first entry of a examplary mgf File
 let ms1DataTest = 
-    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
+    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms2Example.mgf")  
     |> List.head
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data

@@ -29,12 +29,35 @@ module SearchDB =
         Name        : string
         Accession   : string
         Description : string
-        Composition : Formula.Formula
+        Composition : string
         Site        : SearchModSite list 
         MType       : SearchModType
         XModCode    : string
         }
+    
+    let createSearchModification name accession description composition site mType xModCode = {
+        Name=name; Accession=accession; Description=description; Composition=composition; Site=site; MType=mType; XModCode=xModCode }
+    
+    type SearchInfoIsotopic = {
+        Name        : string
+        SourceEl    : Elements.Element
+        TargetEl    : Elements.Element}
 
+    let createSearchInfoIsotopic name sourceEl targetEl  = {
+        Name=name; SourceEl=sourceEl; TargetEl=targetEl  }
+                      
+    let createIsotopicMod (infoIsotopic: SearchInfoIsotopic) = 
+        createModification infoIsotopic.Name ModLocation.Isotopic (fun f -> Formula.lableElement f infoIsotopic.SourceEl infoIsotopic.TargetEl)
+        
+    let getModBy (smodi:SearchModification) = 
+        let modLoc = 
+              match smodi.Site.Head with
+              | Any modLoc'           -> modLoc'
+              | Specific (aa,modLoc') -> modLoc' 
+        match smodi.MType with
+        | SearchModType.Plus  -> createModificationWithAdd smodi.Name modLoc smodi.Composition
+        | SearchModType.Minus -> createModificationWithSubstract smodi.Name modLoc smodi.Composition                             
+    
     type MassMode = 
         | Average
         | Monoisotopic
@@ -42,37 +65,64 @@ module SearchDB =
             match this with
             | Average -> "Average"
             | Monoisotopic -> "Monoisotopic"
-
+    
+    // fastaHeaderToName
+    // Digestion filter params 
     type SearchDbParams = {
         // name of database i.e. Creinhardtii_236_protein_full_labeled
         Name            : string
         // path of db storage folder
-        DbFolder        : string
-        FastaPath       : string
-        Protease        : Digestion.Protease
-        MissedCleavages : int
-        MaxMass         : float
+        DbFolder            : string
+        FastaPath           : string
+        FastaHeaderToName   : string -> string
+        Protease            : Digestion.Protease
+        MinMissedCleavages  : int
+        MaxMissedCleavages  : int
+        MaxMass             : float
+        MinPepLength        : int
+        MaxPepLength        : int
         // valid symbol name of isotopic label in label table i.e. #N15
-        
-        IsotopicLabel   : string // Change to global modification and make optional
-        MassMode        : MassMode
-
-        FixedMods       : SearchModification list            
-        VariableMods    : SearchModification list
+        IsotopicMod         : SearchInfoIsotopic list 
+        MassMode            : MassMode
+        MassFunction        : IBioItem -> float  
+        FixedMods           : SearchModification list            
+        VariableMods        : SearchModification list
+        VarModThreshold     : int
         }
 
-    let createSearchDbParams name dbPath fastapath protease missedCleavages maxmass isotopicLabel massMode fixedMods variableMods = {
+
+    
+    let createSearchDbParams name dbPath fastapath fastaHeaderToName protease minMissedCleavages maxMissedCleavages 
+        maxmass minPepLength maxPepLength globalMod massMode massFunction fixedMods variableMods varModThreshold = {
          Name=name; 
          DbFolder=dbPath; 
-         FastaPath=fastapath; 
+         FastaPath=fastapath;
+         FastaHeaderToName=fastaHeaderToName;  
          Protease=protease; 
-         MissedCleavages=missedCleavages; 
-         MaxMass=maxmass; 
-         IsotopicLabel=isotopicLabel; 
+         MinMissedCleavages=minMissedCleavages; 
+         MaxMissedCleavages=maxMissedCleavages;
+         MaxMass=maxmass;
+         MinPepLength=minPepLength
+         MaxPepLength=maxPepLength
+         IsotopicMod=globalMod; 
          MassMode=massMode; 
+         MassFunction=massFunction;
          FixedMods=List.sort fixedMods; 
          VariableMods=List.sort variableMods
+         VarModThreshold=varModThreshold
          }
+
+    let pepLengthLimitsBy maxExpCharge (mzAquisitionWindow: float*float) =
+        let lowerborder = 4 
+        let upperborder = ((float maxExpCharge / 2.)*(snd mzAquisitionWindow)) / 111. //TODO: (AminoAcids.monoisoMass AminoAcids.AminoAcid.Xaa)
+        int lowerborder, int upperborder 
+
+    let massFBy massMode = 
+        match massMode with
+            |Monoisotopic -> BioFSharp.BioItem.initMonoisoMassWithMemP
+            |Average      -> BioFSharp.BioItem.initAverageMassWithMemP;
+      
+       
 
     ///needed as input if element of SearchModSite is of UnionCase | Any
     let private listOfAA = [
@@ -115,7 +165,7 @@ module SearchDB =
     type PeptideContainer = {
         PeptideId    : int    
         Sequence     : string
-        GlobalMod    : string
+        GlobalMod    : int
 
         MissCleavageStart : int
         MissCleavageEnd   : int
@@ -136,18 +186,20 @@ module SearchDB =
         Container    : PeptideContainer list
     }
 
-    let createProteinContainer proteinId displayID sequence container = 
-        {ProteinId=proteinId;DisplayID=displayID;Sequence=sequence;Container=container}
+    let createProteinContainer proteinId displayID sequence container = {
+        ProteinId=proteinId;DisplayID=displayID;Sequence=sequence;Container=container }
 
 
-    type LookUpResult = {
-        PepSequenceID : int
-        RealMass      : int 
-        RoundedMass   : float 
-        Sequence      : string 
-        GlobalMod     : string                
+    type LookUpResult<'a when 'a :> IBioItem> = {
+        PepSequenceID : int        
+        Mass          : float 
+        Sequence      : seq<'a>
+        GlobalMod     : int                
     }
 
+    let createLookUpResult pepSequenceId mass sequence globalMod =
+        {PepSequenceID = pepSequenceId; Mass = mass; Sequence=sequence; GlobalMod=globalMod }
+    
 
     module Db =
         
@@ -202,8 +254,8 @@ module SearchDB =
     
             open System.Data
             open System.Data.SQLite
-
-
+            open Newtonsoft
+            open Newtonsoft.Json
             //Create DB table statements
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /// Creates Table SearchDbParams
@@ -214,12 +266,16 @@ module SearchDB =
                                                  DbFolder TEXT NOT NULL, 
                                                  FastaPath  TEXT NOT NULL, 
                                                  Protease  TEXT NOT NULL, 
-                                                 MissedCleavages  INTEGER NOT NULL,
-                                                 MaxMass  INTEGER NOT NULL, 
+                                                 MinMissedCleavages INTEGER NOT NULL,
+                                                 MaxMissedCleavages  INTEGER NOT NULL,
+                                                 MaxMass  REAL NOT NULL, 
+                                                 MinPepLength INTEGER NOT NULL,
+                                                 MaxPepLength INTEGER NOT NULL,
                                                  IsotopicLabel  TEXT NOT NULL, 
                                                  MassMode  TEXT NOT NULL, 
                                                  FixedMods TEXT NOT NULL,   
                                                  VariableMods TEXT NOT NULL,   
+                                                 VarModThreshold INTEGER NOT NULL, 
                                                  PRIMARY KEY (ID ASC)
                                                  )"
                 let cmd  = new SQLiteCommand(querystring, cn)
@@ -234,7 +290,6 @@ module SearchDB =
                 | _ as ex -> 
                         PeptideLookUpError.DbInitialisation (SqlAction.Create,sqlErrorCodeFromException ex) 
                         |> Either.fail
-
 
             /// Creates Table Protein
             let createTableProtein  (cn:SQLiteConnection) =
@@ -315,7 +370,7 @@ module SearchDB =
 	                                           RealMass REAL NOT NULL,
 	                                           RoundedMass INTEGER NOT NULL,
 	                                           Sequence TEXT NOT NULL,
-	                                           GlobalMod TEXT NOT NULL,
+	                                           GlobalMod INT NOT NULL,
 	                                           PRIMARY KEY (ID),
 	                                           FOREIGN KEY (PepSequenceID) REFERENCES PepSequence (ID) 
                                                )"
@@ -471,15 +526,15 @@ module SearchDB =
                 cmd.Parameters.Add("@realmass", Data.DbType.Double) |> ignore
                 cmd.Parameters.Add("@roundedmass", Data.DbType.Int64) |> ignore        
                 cmd.Parameters.Add("@sequence", Data.DbType.String) |> ignore
-                cmd.Parameters.Add("@globalMod", Data.DbType.String) |> ignore
+                cmd.Parameters.Add("@globalMod", Data.DbType.Int32) |> ignore
     
-                (fun  (pepSequenceID:int32) (realmass: float) (roundedmass: int64) (sequence: string) (globalMod:string)  -> //(id:uint64)
+                (fun  (pepSequenceID:int32) (realmass: float) (roundedmass: int64) (sequence: string) (globalMod:int)  -> //(id:uint64)
                         // cmd.Parameters.["@id"].Value            <- id            
-                        cmd.Parameters.["@pepSequenceID"].Value <- pepSequenceID
-                        cmd.Parameters.["@realmass"].Value     <- realmass
-                        cmd.Parameters.["@roundedmass"].Value     <- roundedmass
-                        cmd.Parameters.["@sequence"].Value      <- sequence
-                        cmd.Parameters.["@globalMod"].Value          <- globalMod
+                        cmd.Parameters.["@pepSequenceID"].Value     <- pepSequenceID
+                        cmd.Parameters.["@realmass"].Value          <- realmass
+                        cmd.Parameters.["@roundedmass"].Value       <- roundedmass
+                        cmd.Parameters.["@sequence"].Value          <- sequence
+                        cmd.Parameters.["@globalMod"].Value         <- globalMod
                         // result equals number of affected rows
                         cmd.ExecuteNonQuery()
                         )
@@ -488,92 +543,191 @@ module SearchDB =
             let prepareInsertSearchDbParams (cn:SQLiteConnection) =
                 let querystring = "INSERT INTO SearchDbParams (Name,
                                                                DbFolder, 
-                                                               FastaPath, 
+                                                               FastaPath,
                                                                Protease, 
-                                                               MissedCleavages, 
-                                                               MaxMass, 
+                                                               MinMissedCleavages, 
+                                                               MaxMissedCleavages,
+                                                               MaxMass,
+                                                               MinPepLength,
+                                                               MaxPepLength, 
                                                                IsotopicLabel, 
                                                                MassMode, 
                                                                FixedMods, 
-                                                               VariableMods) 
+                                                               VariableMods,
+                                                               VarModThreshold) 
                                                                VALUES (@name, 
                                                                        @dbFolder, 
-                                                                       @fastaPath, 
-                                                                       @protease, 
-                                                                       @missedCleavages, 
+                                                                       @fastaPath,
+                                                                       @protease,
+                                                                       @minMissedCleavages,
+                                                                       @maxMissedCleavages, 
                                                                        @maxMass, 
+                                                                       @minPepLength,
+                                                                       @maxPepLength, 
                                                                        @isotopicLabel, 
                                                                        @massMode, 
                                                                        @fixedMods, 
-                                                                       @variableMods)"
+                                                                       @variableMods,
+                                                                       @varModThreshold)"
                 let cmd = new SQLiteCommand(querystring, cn)
                 cmd.Parameters.Add("@name", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@dbFolder", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@fastaPath", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@protease", Data.DbType.String) |> ignore
-                cmd.Parameters.Add("@missedCleavages", Data.DbType.Int32) |> ignore
+                cmd.Parameters.Add("@minMissedCleavages", Data.DbType.Int32) |> ignore
+                cmd.Parameters.Add("@maxMissedCleavages", Data.DbType.Int32) |> ignore
                 cmd.Parameters.Add("@maxMass", Data.DbType.Double) |> ignore
+                cmd.Parameters.Add("@minPepLength", Data.DbType.Int32) |> ignore
+                cmd.Parameters.Add("@maxPepLength", Data.DbType.Int32) |> ignore
                 cmd.Parameters.Add("@isotopicLabel", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@massMode", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@fixedMods", Data.DbType.String) |> ignore
                 cmd.Parameters.Add("@variableMods", Data.DbType.String) |> ignore 
-                (fun (name:string) (dbFolder:string) (fastaPath:string) (protease:string) (missedCleavages:int32) (maxMass:float) 
-                    (isotopicLabel:string) (massMode:string) (fixedMods:string) (variableMods:string)  ->  
-                        cmd.Parameters.["@name"].Value             <- name
-                        cmd.Parameters.["@dbFolder"].Value         <- dbFolder
-                        cmd.Parameters.["@fastaPath"].Value        <- fastaPath
-                        cmd.Parameters.["@protease"].Value         <- protease
-                        cmd.Parameters.["@missedCleavages"].Value  <- missedCleavages
-                        cmd.Parameters.["@maxMass"].Value          <- maxMass
-                        cmd.Parameters.["@isotopicLabel"].Value    <- isotopicLabel
-                        cmd.Parameters.["@massMode"].Value         <- massMode
-                        cmd.Parameters.["@fixedMods"].Value        <- fixedMods
-                        cmd.Parameters.["@variableMods"].Value     <- variableMods
+                cmd.Parameters.Add("@varModThreshold", Data.DbType.Int32) |> ignore 
+                (fun (name:string) (dbFolder:string) (fastaPath:string) (protease:string) (minMissedCleavages:int32) (maxMissedCleavages:int32) (maxMass:double) (minPepLength:int32) (maxPepLength:int32) 
+                    (isotopicLabel:string) (massMode:string) (fixedMods:string) (variableMods:string) (varModThreshold:int32)  ->  
+                        cmd.Parameters.["@name"].Value                   <- name
+                        cmd.Parameters.["@dbFolder"].Value               <- dbFolder
+                        cmd.Parameters.["@fastaPath"].Value              <- fastaPath
+                        cmd.Parameters.["@protease"].Value               <- protease
+                        cmd.Parameters.["@minMissedCleavages"].Value     <- minMissedCleavages
+                        cmd.Parameters.["@maxMissedCleavages"].Value     <- maxMissedCleavages
+                        cmd.Parameters.["@maxMass"].Value                <- maxMass
+                        cmd.Parameters.["@minPepLength"].Value           <- minPepLength
+                        cmd.Parameters.["@maxPepLength"].Value           <- maxPepLength
+                        cmd.Parameters.["@isotopicLabel"].Value          <- isotopicLabel
+                        cmd.Parameters.["@massMode"].Value               <- massMode
+                        cmd.Parameters.["@fixedMods"].Value              <- fixedMods
+                        cmd.Parameters.["@variableMods"].Value           <- variableMods
+                        cmd.Parameters.["@varModThreshold"].Value        <- varModThreshold
                         // result equals number of affected rows
                         cmd.ExecuteNonQuery()
                         )
                     
             //Select Statements
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /// Prepares statement to select all SearchDbParams entries by FastaPath, Protease MissedCleavages, MaxMass, IsotopicLabel, MassMode, FixedMods, VariableMods
+            /// Prepares statement to select all SearchDbParams 
+            let selectSearchDbParams (cn:SQLiteConnection) =
+                let querystring = "SELECT * FROM SearchDbParams"
+                let cmd = new SQLiteCommand(querystring, cn)    
+                try         
+                    use reader = cmd.ExecuteReader()            
+                    match reader.Read() with
+                    | true -> (reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), 
+                                reader.GetInt32(5), reader.GetInt32(6), reader.GetDouble(7),reader.GetInt32(8), reader.GetInt32(9), reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13),reader.GetInt32(14))
+                                |> Either.succeed
+                    | false -> PeptideLookUpError.DbSearchParamsItemNotFound
+                                |> Either.fail             
+                with            
+                | _ as ex -> 
+                    PeptideLookUpError.DbSearchParams (SqlAction.Select,sqlErrorCodeFromException ex) 
+                    |> Either.fail
+                
+            /// Prepares statement to select all SearchDbParams entries by FastaPath, Protease, MinmissedCleavages, MaxmissedCleavages, MaxMass, MinPepLength, MaxPepLength, IsotopicLabel, MassMode, FixedMods, VariableMods, VarModsThreshold
             let prepareSelectSearchDbParamsbyParams (cn:SQLiteConnection) =
                 let querystring = "SELECT * FROM SearchDbParams WHERE FastaPath=@fastaPath 
                                                                 AND Protease=@protease 
-                                                                AND MissedCleavages=@missedCleavages 
-                                                                AND MaxMass=@maxMass 
+                                                                AND MinMissedCleavages=@minMissedCleavages 
+                                                                AND MaxMissedCleavages=@maxMissedCleavages
+                                                                AND MaxMass=@maxMass
+                                                                AND MinPepLength=@minPepLength
+                                                                AND MaxPepLength=@maxPepLength
                                                                 AND IsotopicLabel=@isotopicLabel 
                                                                 AND MassMode=@massMode 
                                                                 AND FixedMods=@fixedMods 
-                                                                AND VariableMods=@variableMods"
+                                                                AND VariableMods=@variableMods
+                                                                AND VarModThreshold=@varModThreshold"
                 let cmd = new SQLiteCommand(querystring, cn) 
-                cmd.Parameters.Add("@fastaPath", Data.DbType.String) |> ignore
-                cmd.Parameters.Add("@protease", Data.DbType.String) |> ignore  
-                cmd.Parameters.Add("@missedCleavages", Data.DbType.Int32) |> ignore  
-                cmd.Parameters.Add("@maxMass", Data.DbType.Double) |> ignore  
-                cmd.Parameters.Add("@isotopicLabel", Data.DbType.String) |> ignore  
-                cmd.Parameters.Add("@massMode", Data.DbType.String) |> ignore  
-                cmd.Parameters.Add("@fixedMods", Data.DbType.String) |> ignore  
-                cmd.Parameters.Add("@variableMods", Data.DbType.String) |> ignore       
-                (fun (fastaPath:string) (protease:string) (missedCleavages:int32) (maxMass:float) 
-                    (isotopicLabel:string) (massMode:string) (fixedMods:string) (variableMods:string) ->         
-                    cmd.Parameters.["@fastaPath"].Value <- fastaPath
-                    cmd.Parameters.["@protease"].Value <- protease
-                    cmd.Parameters.["@missedCleavages"].Value <- missedCleavages
-                    cmd.Parameters.["@maxMass"].Value <- maxMass
-                    cmd.Parameters.["@isotopicLabel"].Value <- isotopicLabel
-                    cmd.Parameters.["@massMode"].Value <- massMode
-                    cmd.Parameters.["@fixedMods"].Value <- fixedMods
-                    cmd.Parameters.["@variableMods"].Value <- variableMods
+                cmd.Parameters.Add("@fastaPath", Data.DbType.String)         |> ignore
+                cmd.Parameters.Add("@protease", Data.DbType.String)          |> ignore  
+                cmd.Parameters.Add("@minMissedCleavages", Data.DbType.Int32) |> ignore  
+                cmd.Parameters.Add("@maxMissedCleavages", Data.DbType.Int32) |> ignore  
+                cmd.Parameters.Add("@maxMass", Data.DbType.Double)           |> ignore  
+                cmd.Parameters.Add("@minPepLength", Data.DbType.Int32)       |> ignore  
+                cmd.Parameters.Add("@maxPepLength", Data.DbType.Int32)       |> ignore  
+                cmd.Parameters.Add("@isotopicLabel", Data.DbType.String)     |> ignore  
+                cmd.Parameters.Add("@massMode", Data.DbType.String)          |> ignore  
+                cmd.Parameters.Add("@fixedMods", Data.DbType.String)         |> ignore  
+                cmd.Parameters.Add("@variableMods", Data.DbType.String)      |> ignore
+                cmd.Parameters.Add("@varModThreshold", Data.DbType.Int32)    |> ignore       
+                (fun (fastaPath:string) (protease:string) (minMissedCleavages:int32) (maxMissedCleavages:int32) (maxMass:float) 
+                     (minPepLength:int32) (maxPepLength:int32) (isotopicLabel:string) (massMode:string) (fixedMods:string) (variableMods:string) (varModThreshold:int32) ->         
+                    cmd.Parameters.["@fastaPath"].Value             <- fastaPath
+                    cmd.Parameters.["@protease"].Value              <- protease
+                    cmd.Parameters.["@minMissedCleavages"].Value    <- minMissedCleavages
+                    cmd.Parameters.["@maxMissedCleavages"].Value    <- maxMissedCleavages
+                    cmd.Parameters.["@maxMass"].Value               <- maxMass
+                    cmd.Parameters.["@minPepLength"].Value          <- minPepLength
+                    cmd.Parameters.["@maxPepLength"].Value          <- maxPepLength
+                    cmd.Parameters.["@isotopicLabel"].Value         <- isotopicLabel
+                    cmd.Parameters.["@massMode"].Value              <- massMode
+                    cmd.Parameters.["@fixedMods"].Value             <- fixedMods
+                    cmd.Parameters.["@variableMods"].Value          <- variableMods
+                    cmd.Parameters.["@varModThreshold"].Value       <- varModThreshold
                     try         
                         use reader = cmd.ExecuteReader()            
                         match reader.Read() with
                         | true -> (reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), 
-                                    reader.GetInt32(5), reader.GetDouble(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10))
+                                    reader.GetInt32(5), reader.GetInt32(6), reader.GetDouble(7),reader.GetInt32(8), reader.GetInt32(9), reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13),reader.GetInt32(14))
                                    |> Either.succeed
                         | false -> PeptideLookUpError.DbSearchParamsItemNotFound
-                                    |> Either.fail
+                                    |> Either.fail             
+                    with            
+                    | _ as ex -> 
+                        PeptideLookUpError.DbSearchParams (SqlAction.Select,sqlErrorCodeFromException ex) 
+                        |> Either.fail
+                )
 
-             
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// Prepares statement to select all SearchModifications by SearchDbParams
+            let prepareSelectSearchModsbyParams (cn:SQLiteConnection) =
+                let querystring = "SELECT * FROM SearchDbParams WHERE FastaPath=@fastaPath 
+                                                                AND Protease=@protease 
+                                                                AND MinMissedCleavages=@minMissedCleavages 
+                                                                AND MaxMissedCleavages=@maxMissedCleavages
+                                                                AND MaxMass=@maxMass
+                                                                AND MinPepLength=@minPepLength
+                                                                AND MaxPepLength=@maxPepLength
+                                                                AND IsotopicLabel=@isotopicLabel 
+                                                                AND MassMode=@massMode 
+                                                                AND FixedMods=@fixedMods 
+                                                                AND VariableMods=@variableMods
+                                                                AND VarModThreshold=@varModThreshold"
+                let cmd = new SQLiteCommand(querystring, cn) 
+                cmd.Parameters.Add("@fastaPath", Data.DbType.String)         |> ignore
+                cmd.Parameters.Add("@protease", Data.DbType.String)          |> ignore  
+                cmd.Parameters.Add("@minMissedCleavages", Data.DbType.Int32) |> ignore  
+                cmd.Parameters.Add("@maxMissedCleavages", Data.DbType.Int32) |> ignore  
+                cmd.Parameters.Add("@maxMass", Data.DbType.Double)           |> ignore  
+                cmd.Parameters.Add("@minPepLength", Data.DbType.Int32)       |> ignore  
+                cmd.Parameters.Add("@maxPepLength", Data.DbType.Int32)       |> ignore  
+                cmd.Parameters.Add("@isotopicLabel", Data.DbType.String)     |> ignore  
+                cmd.Parameters.Add("@massMode", Data.DbType.String)          |> ignore  
+                cmd.Parameters.Add("@fixedMods", Data.DbType.String)         |> ignore  
+                cmd.Parameters.Add("@variableMods", Data.DbType.String)      |> ignore
+                cmd.Parameters.Add("@varModThreshold", Data.DbType.Int32)    |> ignore          
+                (fun (fastaPath:string) (protease:string) (minMissedCleavages:int32) (maxMissedCleavages:int32) (maxMass:float) 
+                     (minPepLength:int32) (maxPepLength:int32) (isotopicLabel:string) (massMode:string) (fixedMods:string) (variableMods:string) (varModThreshold:int32) ->         
+                    cmd.Parameters.["@fastaPath"].Value             <- fastaPath
+                    cmd.Parameters.["@protease"].Value              <- protease
+                    cmd.Parameters.["@minMissedCleavages"].Value    <- minMissedCleavages
+                    cmd.Parameters.["@maxMissedCleavages"].Value    <- maxMissedCleavages
+                    cmd.Parameters.["@maxMass"].Value               <- maxMass
+                    cmd.Parameters.["@minPepLength"].Value          <- minPepLength
+                    cmd.Parameters.["@maxPepLength"].Value          <- maxPepLength
+                    cmd.Parameters.["@isotopicLabel"].Value         <- isotopicLabel
+                    cmd.Parameters.["@massMode"].Value              <- massMode
+                    cmd.Parameters.["@fixedMods"].Value             <- fixedMods
+                    cmd.Parameters.["@variableMods"].Value          <- variableMods
+                    cmd.Parameters.["@varModThreshold"].Value       <- varModThreshold
+                    try         
+                        use reader = cmd.ExecuteReader()            
+                        match reader.Read() with
+                        | true -> (reader.GetInt32(0), reader.GetString(12), reader.GetString(13))
+                                   |> fun (id,fixMods,varMods) -> Newtonsoft.Json.JsonConvert.DeserializeObject<SearchModification list>(fixMods)@Newtonsoft.Json.JsonConvert.DeserializeObject<SearchModification list>(varMods) 
+                                   |> Either.succeed
+                        | false -> PeptideLookUpError.DbSearchParamsItemNotFound
+                                   |> Either.fail             
                     with            
                     | _ as ex -> 
                         PeptideLookUpError.DbSearchParams (SqlAction.Select,sqlErrorCodeFromException ex) 
@@ -782,9 +936,9 @@ module SearchDB =
                 let cmd = new SQLiteCommand(querystring, cn) 
                 cmd.Parameters.Add("@mass1", Data.DbType.Int64) |> ignore
                 cmd.Parameters.Add("@mass2", Data.DbType.Int64) |> ignore
-                let rec readerloop (reader:SQLiteDataReader) (acc:(int*int*float*int64*string*string) list) =
+                let rec readerloop (reader:SQLiteDataReader) (acc:(int*int*float*int64*string*int) list) =
                         match reader.Read() with 
-                        | true  -> readerloop reader (( reader.GetInt32(0), reader.GetInt32(1),reader.GetDouble(2), reader.GetInt64(3), reader.GetString(4), reader.GetString(5) ) :: acc)
+                        | true  -> readerloop reader (( reader.GetInt32(0), reader.GetInt32(1),reader.GetDouble(2), reader.GetInt64(3), reader.GetString(4), reader.GetInt32(5) ) :: acc)
                         | false ->  acc 
 
                 cmd.Parameters.["@mass1"].Value <- mass1
@@ -815,31 +969,6 @@ module SearchDB =
                         PeptideLookUpError.DbModSequence (SqlAction.Select,sqlErrorCodeFromException ex) 
                         |> Either.fail
                 )
-
-                /// Prepares statement to select all SearchDbParams entries by ID
-            let prepareSelectSearchDbParams (cn:SQLiteConnection) =
-                let querystring = "SELECT * FROM SearchDbParams"
-                let cmd = new SQLiteCommand(querystring, cn) 
-                cmd.Parameters.Add("@id", Data.DbType.Int32) |> ignore       
-                (fun (id:int32)  ->         
-                    cmd.Parameters.["@id"].Value <- id
-                    try         
-                        use reader = cmd.ExecuteReader()            
-                        match reader.Read() with
-                        | true -> (reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), 
-                                    reader.GetInt32(5), reader.GetDouble(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10))
-                                    |> Either.succeed
-                        | false -> PeptideLookUpError.DbProteinItemNotFound
-                                    |> Either.fail
-
-             
-                    with            
-                    | _ as ex -> 
-                        PeptideLookUpError.DbSearchParams (SqlAction.Select,sqlErrorCodeFromException ex) 
-                        |> Either.fail
-                )
-
-
                 //#define SQLITE_ERROR        1   /* SQL error or missing database */
                 //#define SQLITE_INTERNAL     2   /* Internal logic error in SQLite */
                 //#define SQLITE_PERM         3   /* Access permission denied */
@@ -880,25 +1009,36 @@ module SearchDB =
             sprintf "%s\\%s.db" 
                 (sdbParams.DbFolder |> FSharp.Care.IO.PathFileName.normalizeFileName)
                 (sdbParams.Name |> FSharp.Care.IO.PathFileName.fileNameWithoutExtension )
-    
-        /// Returns a comma seperated string of given search modification list
-        let getModStringOf (searchMods:SearchModification list) =
-            searchMods
-            |> List.map (fun a -> a.Name)
-            |> String.concat ", "        
 
+        /// Returns a comma seperated string of given search modification list
+        let getJsonStringOf item =
+            Newtonsoft.Json.JsonConvert.SerializeObject(item)
+                           
         /// Inserts SearchDbParams into DB
         let insertSdbParams cn (sdbParams:SearchDbParams) =         
             SQLiteQuery.prepareInsertSearchDbParams cn sdbParams.Name sdbParams.DbFolder sdbParams.FastaPath sdbParams.Protease.Name
-                sdbParams.MissedCleavages sdbParams.MaxMass sdbParams.IsotopicLabel (sdbParams.MassMode.ToString())
-                (getModStringOf sdbParams.FixedMods) (getModStringOf sdbParams.VariableMods)
-
+                 sdbParams.MinMissedCleavages sdbParams.MaxMissedCleavages sdbParams.MaxMass sdbParams.MinPepLength sdbParams.MaxPepLength (getJsonStringOf sdbParams.IsotopicMod) (getJsonStringOf sdbParams.MassMode)
+                (getJsonStringOf sdbParams.FixedMods) (getJsonStringOf sdbParams.VariableMods) sdbParams.VarModThreshold
+        
         /// Select SearchDbParams entry from DB by given SearchDbParams
         let selectSdbParamsby cn (sdbParams:SearchDbParams) = 
-            SQLiteQuery.prepareSelectSearchDbParamsbyParams cn sdbParams.FastaPath sdbParams.Protease.Name sdbParams.MissedCleavages 
-                sdbParams.MaxMass sdbParams.IsotopicLabel (sdbParams.MassMode.ToString()) 
-                    (getModStringOf sdbParams.FixedMods) (getModStringOf sdbParams.VariableMods)  
-    
+            SQLiteQuery.prepareSelectSearchDbParamsbyParams cn sdbParams.FastaPath sdbParams.Protease.Name
+             sdbParams.MinMissedCleavages sdbParams.MaxMissedCleavages sdbParams.MaxMass sdbParams.MinPepLength sdbParams.MaxPepLength (getJsonStringOf sdbParams.IsotopicMod) (getJsonStringOf sdbParams.MassMode)
+                    (getJsonStringOf sdbParams.FixedMods) (getJsonStringOf sdbParams.VariableMods) sdbParams.VarModThreshold  
+        
+        /// Builds xModToSearchMod Map from DB by given SearchDbParams
+        let xModToSearchMod cn (sdbParams:SearchDbParams) =       
+            let allSMods =
+                SQLiteQuery.prepareSelectSearchModsbyParams cn sdbParams.FastaPath sdbParams.Protease.Name sdbParams.MinMissedCleavages 
+                    sdbParams.MaxMissedCleavages sdbParams.MaxMass sdbParams.MinPepLength sdbParams.MaxPepLength (getJsonStringOf sdbParams.IsotopicMod) (getJsonStringOf sdbParams.MassMode)
+                    (getJsonStringOf sdbParams.FixedMods) (getJsonStringOf sdbParams.VariableMods) sdbParams.VarModThreshold 
+            match allSMods with
+            | Success allSMods -> 
+                allSMods 
+                |> List.map (fun x -> x.XModCode , x)
+                |> Map.ofList 
+            | _                -> Map.empty
+            
         /// Returns true if a db exists with the same parameter content
         let isExistsBy (sdbParams:SearchDbParams) =       
             let fileName = getNameOf sdbParams
@@ -996,7 +1136,7 @@ module SearchDB =
             NTermAndResidualVariable : ModLookUpFunc
             CTermAndResidualVariable : ModLookUpFunc
             Total: string -> string option
-            Global : GlobalModificationInfo.GlobalModification<AminoAcid> option
+            Isotopic : GlobalModificationInfo.GlobalModificator option
             }
 
         /// Flag indicates if potential modification is fixed
@@ -1084,13 +1224,19 @@ module SearchDB =
                 CTermAndResidualVariable =
                     let lookUpCR = createAndFilterBy cTermAndResidual dbParams.VariableMods
                     fun aa -> Map.tryFind aa lookUpCR   
-                Total=
+                Total =
                     let lookupT = 
                         (dbParams.FixedMods@dbParams.VariableMods)
                         |> List.map (fun searchmod -> searchmod.Name, searchmod.XModCode)  
                         |> Map.ofList
                     fun aa -> Map.tryFind aa lookupT
-                Global = Some (GlobalModificationInfo.ofString aminoParser dbParams.IsotopicLabel)
+                Isotopic = 
+                    if dbParams.IsotopicMod <> [] then
+                        let modiL = 
+                            dbParams.IsotopicMod 
+                            |> List.map createIsotopicMod 
+                        Some (GlobalModificationInfo.initGlobalModification dbParams.MassFunction modiL)
+                    else None
              }
 
         ///Returns modified or unmodified AminoAcid depending on the matching expression in a AminoAcidWithFlag struct
@@ -1164,9 +1310,9 @@ module SearchDB =
                     | [] ->  [createPeptideWithMass acc massAcc]   
 
             let massOfPeptide =  
-                if modLookUp.Global.IsSome then
-                     aal
-                    |> List.fold (fun s x -> s + (massfunction x) + (modLookUp.Global.Value.Modifiy x)) (massfunction ModificationInfo.Table.H2O)//add water
+                if modLookUp.Isotopic.IsSome then
+                    aal
+                    |> List.fold (fun s x -> s + (massfunction x) + (modLookUp.Isotopic.Value x)) (massfunction ModificationInfo.Table.H2O)//add water
                 else 
                     aal
                     |> List.fold (fun s x -> s + massfunction x) (massfunction ModificationInfo.Table.H2O) //add water
@@ -1202,37 +1348,50 @@ module SearchDB =
    
     // --------------------------------------------------------------------------------
     // PeptideLookUp continues
-
-    let getPeptideLookUpFromFile dbFileName = 
+    
+    /// Creates a LookUpResult out of a entry in the ModSequence table
+    let private createLookUpResultBy xModLookUp (sdbParams:SearchDbParams) (id,pepID,realMass,roundMass,seqs,gMod)  =
+        if gMod = 1 then
+            let globMod = sdbParams.IsotopicMod 
+                          |> List.map createIsotopicMod    
+            let bSeq = 
+                BioList.ofRevModAminoAcidStringWithIsoMod BioItemsConverter.OptionConverter.charToOptionAminoAcid getModBy (Some globMod) xModLookUp seqs  
+            createLookUpResult pepID realMass bSeq gMod   
+        else 
+            let bSeq = 
+                BioList.ofRevModAminoAcidString BioItemsConverter.OptionConverter.charToOptionAminoAcid getModBy xModLookUp seqs  
+            createLookUpResult pepID realMass bSeq gMod   
+    
+    /// Returns a LookUpResult list
+    let getPeptideLookUpFromFileBy sdbParams = 
+        let dbFileName = Db.getNameOf sdbParams
         let connectionString = sprintf "Data Source=%s;Version=3" dbFileName
         let cn = new SQLiteConnection(connectionString)
         cn.Open()
+        let xModLookUp = Db.xModToSearchMod cn sdbParams
         let selectModsequenceByMassRange = Db.SQLiteQuery.prepareSelectModsequenceByMassRange cn
         (fun lowerMass upperMass  -> 
                 let lowerMass' = Convert.ToInt64(lowerMass*1000000.)
                 let upperMass' = Convert.ToInt64(upperMass*1000000.)
-                selectModsequenceByMassRange lowerMass' upperMass') 
+                selectModsequenceByMassRange lowerMass' upperMass'
+                |> List.map (createLookUpResultBy xModLookUp sdbParams)
+        ) 
     
-    
-    // TODO: place into SearchDbParams record
-    // fastaHeaderToName
-    // threshold
-    // massfunction
-    // Digestion filter params 
-    let getPeptideLookUpBy (sdbParams:SearchDbParams) (fastaHeaderToName:string->string) threshold massfunction =
+    /// Returns a LookUpResult list 
+    let getPeptideLookUpBy (sdbParams:SearchDbParams) =
         // Check existens by param
-        let dbFileName = Db.getNameOf sdbParams
         if Db.isExistsBy sdbParams then            
-            getPeptideLookUpFromFile dbFileName        
+            getPeptideLookUpFromFileBy sdbParams        
         else
             // Create db file
+            let dbFileName = Db.getNameOf sdbParams
             match Db.initDB dbFileName with
             | Failure _ -> failwith "Error"
             | Success _ ->
                 // prepares LookUpMaps of modLookUp based on the dbParams
                 let modLookUp = ModCombinator.modLookUpOf sdbParams
                 // Set name of global modification
-                let globalMod = if modLookUp.Global.IsNone then "" else modLookUp.Global.Value.Name
+                let globalMod = if modLookUp.Isotopic.IsNone then 0 else 1
                 let connectionString = sprintf "Data Source=%s;Version=3" dbFileName
                 let cn = new SQLiteConnection(connectionString)
                 cn.Open()
@@ -1247,27 +1406,44 @@ module SearchDB =
                     (fun i fastaItem ->
                         let proteinId = i // TODO                        
                         let peptideContainer =
-                            Digestion.BioArray.digest Digestion.trypsin proteinId fastaItem.Sequence
-                            |> Digestion.BioArray.concernMissCleavages 1 3 // TODO 
+                            Digestion.BioArray.digest sdbParams.Protease proteinId fastaItem.Sequence
+                            |> Digestion.BioArray.concernMissCleavages sdbParams.MinMissedCleavages sdbParams.MaxMissedCleavages
                             |> Array.filter (fun x -> 
                                                 let cleavageRange = x.MissCleavageEnd - x.MissCleavageStart
-                                                cleavageRange > 4 && cleavageRange < 63 // TODO
+                                                cleavageRange > sdbParams.MinPepLength && cleavageRange < sdbParams.MaxPepLength 
                                             )
                             |> Array.mapi (fun peptideId pep ->
                                                 let container = 
-                                                    ModCombinator.combineToModString modLookUp threshold massfunction pep.PepSequence
+                                                    ModCombinator.combineToModString modLookUp sdbParams.VarModThreshold sdbParams.MassFunction pep.PepSequence
                                                 createPeptideContainer (proteinId*10000+peptideId) (BioList.toString pep.PepSequence) globalMod pep.MissCleavageStart pep.MissCleavageEnd pep.MissCleavages container
                                             )
                         
                         createProteinContainer 
                             proteinId 
-                                (fastaHeaderToName fastaItem.Header) 
+                                (sdbParams.FastaHeaderToName fastaItem.Header) 
                                     (BioArray.toString fastaItem.Sequence) 
                                         (peptideContainer |> List.ofArray)
                     ) 
                 |> Db.bulkInsert cn
                 |> ignore                
                 
-                getPeptideLookUpFromFile dbFileName
-
-
+                getPeptideLookUpFromFileBy sdbParams
+    
+    /// Returns SearchDbParams of a existing database by filePath
+    let getSDBParamsBy filePath = 
+        let connectionString = sprintf "Data Source=%s;Version=3" filePath
+        let cn = new SQLiteConnection(connectionString)
+        cn.Open()
+        match Db.SQLiteQuery.selectSearchDbParams cn with 
+        | Success (iD,name,fo,fp,pr,minmscl,maxmscl,mass,minpL,maxpL,isoL,mMode,fMods,vMods,vThr) -> 
+//            let getSearchInfo isoL =
+//                match isoL with 
+//                | isoL when isoL.Length > 1    -> None  
+//                | _                      -> Some (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchInfoIsotopic>(isoL))
+            createSearchDbParams 
+                name fo fp id (Digestion.Table.getProteaseBy pr) minmscl maxmscl mass minpL maxpL 
+                    (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchInfoIsotopic list>(isoL)) (Newtonsoft.Json.JsonConvert.DeserializeObject<MassMode>(mMode)) (massFBy (Newtonsoft.Json.JsonConvert.DeserializeObject<MassMode>(mMode))) 
+                        (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchModification list>(fMods)) (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchModification list>(vMods)) vThr
+        | Failure (_) ->
+            failwith "This database does not contain any SearchParameters. It is not recommended to work with this file."
+                    

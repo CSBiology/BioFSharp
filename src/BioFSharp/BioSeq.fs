@@ -29,8 +29,6 @@ module BioSeq =
         s
         |> Seq.choose OptionConverter.charToOptionNucleotid           
 
-
-    
     ///Active pattern which returns a base triplet
     let private (|Triplet|_|) (en:System.Collections.Generic.IEnumerator<_>) = 
         if en.MoveNext () then                

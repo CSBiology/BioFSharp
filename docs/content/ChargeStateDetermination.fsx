@@ -2,35 +2,40 @@
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 //#I "../../bin"
-
-(**
-BioFSharp
-======================
-
-C:\Users\david\Source\Repos\BioFSharp\packages\MathNet.Numerics\lib\net40\MathNet.Numerics.dll
-*)
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../bin/MathNet.Numerics.dll"
 #r "../../bin/MathNet.Numerics.FSharp.dll"
+(**
+BioFSharp
+======================
 
-
+*)
+open System
 open BioFSharp
 open BioFSharp.Mz
 open BioFSharp.IO
-open System
 open MathNet.Numerics
+(**
+The chargestate determination algorithm implemented in ChargeState.fs analyzes the spacing in between 
+single peaks of a isotope Cluster. 
+*)
 
-// The chargestate determination algorithm implemented in ChargeState.fs analyzes the spacing in between 
-// single peaks of a isotope Cluster. 
+(**
+Returns the first entry of a examplary mgf File
+*)
 
-/// Returns the first entry of a examplary mgf File
+///Returns the first entry of a examplary mgf File
 let ms1DataTest = 
-    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
+    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms2Example.mgf")  
     |> List.head
 
-/// TestParameters used for chargestate determination
+(**
+TestParameters used for chargestate determination
+*)
+
+///TestParameters used for chargestate determination
 let chargeDetParamTest  = 
     ChargeState.createChargeDetermParams
         // minimum expected chargestate
@@ -46,26 +51,53 @@ let chargeDetParamTest  =
         // number of theoretical spectra computed used to determine the pValue
         10000
 
+(**
+PrecursorMZ that was picked in the MS1 full scan to generate a MS2
+*)
+
 /// PrecursorMZ that was picked in the MS1 full scan to generate a MS2
-let ms2PrecursorMZ = 750.3157086
+let ms2PrecursorMZ =  643.8029052
+
+(**
+Instance of a Mersenne Twister, a random number generator used to compute the position of a peak in a 
+random spectrum
+*)
 
 /// Instance of a Mersenne Twister, a random number generator used to compute the position of a peak in a 
 /// random spectrum
 let rnd = Random.MersenneTwister() 
 
+(**
+Returns a function that generates random spectra of a given length and calculates the mzDeviation assuming
+a given chargestate
+*)
+
 /// Returns a function that generates random spectra of a given length and calculates the mzDeviation assuming
 /// a given chargestate
 let initGen = ChargeState.initMzDevOfRndSpec rnd chargeDetParamTest 0.015//peakPosStdDev
+
+(**
+Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
+window of a user given width centered around a user given m/z value.
+*)
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
     SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. ms2PrecursorMZ  
 
+(**
+Returns a list of assigned chargestates sorted by their score.
+*)
+
 /// Returns a list of assigned chargestates sorted by their score.
 let putativeCharges = 
     ChargeState.putativePrecursorChargeStatesBy chargeDetParamTest (fst centroidsInWindow) (snd centroidsInWindow) ms2PrecursorMZ
- 
+
+(**
+Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the 
+significance level
+*)
 /// Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the 
 /// significance level
 let testedItems = 
@@ -73,3 +105,4 @@ let testedItems =
     |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.SubSetLength ,float assCh.Charge) assCh.MZChargeDev ))
     |> ChargeState.removeSubSetsOfBestHit
     |> List.map (fun testedI -> testedI.TestedObject)
+

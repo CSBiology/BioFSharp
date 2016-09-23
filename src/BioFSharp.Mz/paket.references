@@ -2,3 +2,4 @@ FSharp.Core
 MathNet.Numerics.FSharp
 MathNet.Numerics
 System.Data.SQLite
+Newtonsoft.Json
