@@ -1436,10 +1436,6 @@ module SearchDB =
         cn.Open()
         match Db.SQLiteQuery.selectSearchDbParams cn with 
         | Success (iD,name,fo,fp,pr,minmscl,maxmscl,mass,minpL,maxpL,isoL,mMode,fMods,vMods,vThr) -> 
-//            let getSearchInfo isoL =
-//                match isoL with 
-//                | isoL when isoL.Length > 1    -> None  
-//                | _                      -> Some (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchInfoIsotopic>(isoL))
             createSearchDbParams 
                 name fo fp id (Digestion.Table.getProteaseBy pr) minmscl maxmscl mass minpL maxpL 
                     (Newtonsoft.Json.JsonConvert.DeserializeObject<SearchInfoIsotopic list>(isoL)) (Newtonsoft.Json.JsonConvert.DeserializeObject<MassMode>(mMode)) (massFBy (Newtonsoft.Json.JsonConvert.DeserializeObject<MassMode>(mMode))) 
