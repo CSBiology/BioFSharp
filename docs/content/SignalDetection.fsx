@@ -34,9 +34,12 @@ let rawDataChart =
 let centroidedDataChart =   
     Chart.Point(fst centroidedSpectra, snd centroidedSpectra)
 
+
+(*** define-output:spectrum1 ***)
 /// Creates a combined chart 
 let combChart = 
     Chart.Combine [rawDataChart;centroidedDataChart]
+(*** include-it:spectrum1 ***)
 
 /// Shows the chart in a browser
 combChart
@@ -55,10 +58,12 @@ let centroidsInWindow =
 let centroidsInWindowChart = 
     Chart.Point(fst centroidsInWindow, snd centroidsInWindow )
 
-/// Creates a another combined chart of the unprocessed data and the cent
+(*** define-output:spectrum2 ***)
+/// Creates a another combined chart of the unprocessed data and the centroided data
 let anotherCombChart = 
     Chart.Combine [rawDataChart;centroidsInWindowChart]
-
+(*** include-it:spectrum2 ***)
 /// Shows the chart in a browser
 anotherCombChart
 |> Chart.Show
+

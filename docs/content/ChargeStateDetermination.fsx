@@ -12,11 +12,7 @@ BioFSharp
 ======================
 
 *)
-open System
-open BioFSharp
-open BioFSharp.Mz
-open BioFSharp.IO
-open MathNet.Numerics
+
 (**
 The chargestate determination algorithm implemented in ChargeState.fs analyzes the spacing in between 
 single peaks of a isotope Cluster. 
@@ -25,6 +21,12 @@ single peaks of a isotope Cluster.
 (**
 Returns the first entry of a examplary mgf File
 *)
+
+open System
+open BioFSharp
+open BioFSharp.Mz
+open BioFSharp.IO
+open MathNet.Numerics
 
 ///Returns the first entry of a examplary mgf File
 let ms1DataTest = 

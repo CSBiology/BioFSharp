@@ -10,16 +10,11 @@ PeptideLookUp
 =============
 
 *)
-open BioFSharp
-open BioFSharp.Mz
-open ModificationInfo
-open AminoAcids
-open SearchDB
-#time
+
 
 (**
 This part of the documentation aims to give you a brief overview of the functionality of SearchDB.fs. This Module contains functions  
-to initialize a user configured peptide database and to subsequently perform common database operations suchas inserts or lookUps.
+to initialize a user configured peptide database and to subsequently perform common database operations such as inserts or lookUps.
 
 
 Creating a peptide database
@@ -28,31 +23,35 @@ Creating a peptide database
 Prior to database creation the user has to specify the database parameters. The following examples will show this process in detail. 
 Some complex parameters will be discussed more specifically.
 
-The concept of Peptide Modifications
+The concept of peptide modifications
 ------------------------------------
-In library the term "Modification" is understood as literally any change to a aminoacid formula. These changes can vary 
-from the exchange of a isotope (e.g. a N14 gets replaced with a N15) to a addition/deletion of chemical groups e.g. a phosphorylation.
-
+In the library the term "Modification" is understood as literally any change to an amino acid formula. These changes can vary 
+from the exchange of an isotope (e.g. a N14 gets replaced with a N15) to an addition/deletion of chemical groups e.g. a phosphorylation.
 
 Differentiation of fixed, variable and isotopic modifications
 -----------------------------------------------------------
-When creating a peptide database the user not only has to specify modification itself but also its persistance. This is due to the fact 
-that the abundance of a modification can vary from sample to sample. This thought lead to a distinction between fixed, variable and 
+Creating a peptide database the user not only has to specify the modification itself but also its persistance. This is due to the fact 
+that the abundance of a modification can vary from one sample to another. This thought lead to a distinction between fixed, variable and 
 isotopic modifications during the construction of this library. 
 
-In a natural sample it is very unlikely for a modification like a phosphorylation to be present at every matching aminoacid of every
-peptide. The result of this finding is that a database has to contain both, a modified and a unmodified version of the peptide simulating a 
+In a natural sample it is very unlikely for a modification like a phosphorylation to be present at every matching amino acid of every
+peptide. The conclusion of this finding is that a database has to contain both, a modified and a unmodified version of the peptide simulating a 
 **variable** occurency of the modification coining the term **"VariableModification"**.   
 
-Contrary, further manipulations to the sample e.g. a selection of only of N-terminally phosphorylated peptides can result in a sample
+Contrary, further manipulations to the sample e.g. a selection of only N-terminally phosphorylated peptides can result in a sample
 for which it can be assumed that roughly every peptide contains this modification. This would justify a creation of a peptide database with a 
-**fixed** N-terminal phosphorylation at every matching aminoacid of every peptide. Hereby coining the term **"FixedModification"**.
+**fixed** N-terminal phosphorylation at every matching amino acid of every peptide. Hereby coining the term **"FixedModification"**.
 
 -----------------------------------------------------------
 This expression constructs a new instance of the type SearchModification, which is needed to define Fixed- and VariableModifications
 This type is inferred of the XMod ontology and the information stored in this type is needed to build instances of the type Modification.     
 *)
 
+open BioFSharp
+open BioFSharp.Mz
+open ModificationInfo
+open AminoAcids
+open SearchDB
 /// Returns a instance of the type SearchModification
 let phosphorylation = {
     // Name of this SearchModification 
@@ -76,7 +75,7 @@ let phosphorylation = {
 
 As mentioned before, there is a need to model modifications that affect the peptide sequences on a **isotopic** level. This could be understood 
 as a special kind of FixedModification with the additional constrain that there is no addition or deletion of a chemical group but a isotopic 
-modification affecting every aminoacid. e.g. a exchange of every N14 to a N15. As one could expect, these features coined the term "IsotopicModification".   
+modification affecting every amino acid. e.g. a exchange of every N14 to a N15. As one could expect, these features coined the term "IsotopicModification".   
 
 This expression returns a instance of the type SearchInfoIsotopic, which is needed to define IsotopicModifications. This type is needed if the user 
 plans to introduce a IsotopicModifications e.g a replacement of the N14 isotopes with heavier N15 isotopes.
@@ -91,7 +90,7 @@ Selecting and initializing a mass function
 The following expression returns a instance of a massfunction. The user can choose between functions that either return 
 the monoisotopic or the average mass of types that inherit the IBioItem interface (e.g. AminoAcids).  
 Moreover, each function exists in a "WhitMemP" version that uses a dictionary to "remember" (store) already computed masses. 
-This approach is especially useful when the user plans to do many mass computations subsequently, as it is the case when
+This approach is especially useful when the user aims to do many mass computations subsequently, as it is the case when
 building a new database. The usage of a dictionary is the reason for this function to be initialized prior to database
 creation.      
 *)
@@ -149,7 +148,7 @@ parameters.
 
 SearchDB.getPeptideLookUpBy first checks if a database with the given parameters already exists before it starts the 
 database creation process. If there is a database matching the user given SearchParameters the process will be finished 
-nearly immediatly. if a new database has to be created the computation time will depend on the complexity of the given 
+nearly immediatly. If a new database has to be created the computation time will depend on the complexity of the given 
 parameters such as the size of the FASTA file, the number of given Modifications, the maxPepLength et cetera. 
    
 *)
@@ -170,7 +169,7 @@ let n15LookUpPeptideBy inputMass =
         n15DBLookUpBy lowerBorder upperBorder
 
 (**
-This function can now be used as shown in the code snippet below. As a inputMass the monoisotopic mass of the peptide *ANLGMEVMHER* can be used as a input. 
+This function can be used as shown in the code snippet below. As a inputMass the monoisotopic mass of the peptide *ANLGMEVMHER* can be used as a input. 
 This peptide is encoded by a protein which can be found in the FASTA used for the database creation. Surprisingly the list you obtain will be empty because 
 the database does not contain any peptides in the given massRange.   
 *)
@@ -209,7 +208,6 @@ let paramTestN14 = {
         VariableMods        = []
         VarModThreshold     = 5
         }
-
 /// Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)
 let n14DBLookUpBy =  
         SearchDB.getPeptideLookUpBy paramTestN14   
