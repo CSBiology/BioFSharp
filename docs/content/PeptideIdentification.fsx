@@ -10,12 +10,12 @@
 open FSharp.Plotly
 //TODO: Add FILES and LINKS to other tutorials 
 (**
-Peptide Identification using SequestLike.fs
-===========================================
-This part of the documentation aims to give a brief overview of the functionality of SequestLike.fs. This Module implements a peptide identification
-algorithm that is based on the mass spectrometry data analysis program SEQUEST. More specifically this algorithm matches a aquired MS2 spectrum against 
-a hypothetical fragment spectrum of a amino acid sequence with a matching peptide mass. This process is based on the computation of cross- 
-and autocorrelation of the spectra. 
+PeptideIdentification
+===========
+This part of the documentation aims to give a brief introduction of a peptide identification workflow using a algorithm implemented in SequestLike.fs. 
+This Module implements a peptide identification algorithm that is based on the mass spectrometry data analysis program SEQUEST. More specifically this 
+algorithm matches a aquired MS2 spectrum against a hypothetical fragment spectrum of a amino acid sequence with a matching peptide mass. This process 
+is based on the computation of cross- and autocorrelation of the spectra. 
 
 The following code will return the first entry of a examplary mgf File. In this case this will return a aquired MS2 spectrum.
 *)
