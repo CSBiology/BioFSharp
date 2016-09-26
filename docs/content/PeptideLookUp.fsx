@@ -6,8 +6,8 @@
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 (**
-PeptideLookUp
-=============
+Peptide retrieval by mass
+=========================
 
 *)
 

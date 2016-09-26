@@ -7,8 +7,8 @@
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 (**
-CentroidSpectra
-===============
+Spectrum centroidization
+========================
 *)
 
 (**
@@ -26,25 +26,20 @@ let ms1DataTest =
     |> List.head
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
-let centroidedSpectra = 
+let centroidSpectrum = 
     SignalDetection.Wavelet.toCentroid ms1DataTest.Mass ms1DataTest.Intensity
 
-/// Creates pointCharts of the raw and the processed data
-let rawDataChart = 
-    Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity)
-let centroidedDataChart =   
-    Chart.Point(fst centroidedSpectra, snd centroidedSpectra)
 
 
 (*** define-output:spectrum1 ***)
-/// Creates a combined chart 
-let combChart = 
-    Chart.Combine [rawDataChart;centroidedDataChart]
+/// Creates point charts of the raw and the processed data
+[
+    Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity,Name="raw data");
+    Chart.Point(fst centroidSpectrum, snd centroidSpectrum,Name="centroid")
+]
+|> Chart.Combine
 (*** include-it:spectrum1 ***)
 
-/// Shows the chart in a browser
-combChart
-|> Chart.Show
 
 // If only a window of the input data shall be processed the following functions can be used.
 // This can be a favourable approach if only a subgroup of the data is of interest to the user 
@@ -55,16 +50,12 @@ combChart
 let centroidsInWindow = 
      SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. 750.3157086
 
-///// Creates pointCharts of the processed data.
-let centroidsInWindowChart = 
-    Chart.Point(fst centroidsInWindow, snd centroidsInWindow )
-
+ 
 (*** define-output:spectrum2 ***)
 /// Creates a another combined chart of the unprocessed data and the centroided data
-let anotherCombChart = 
-    Chart.Combine [rawDataChart;centroidsInWindowChart]
+[
+    Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity,Name="raw data");
+    Chart.Point(fst centroidsInWindow, snd centroidsInWindow,Name="processed data");
+]
+|> Chart.Combine
 (*** include-it:spectrum2 ***)
-/// Shows the chart in a browser
-anotherCombChart
-|> Chart.Show
-
