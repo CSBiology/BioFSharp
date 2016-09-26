@@ -27,7 +27,7 @@ open MathNet.Numerics
 
 ///Returns the first entry of a examplary mgf File
 let ms1DataTest = 
-    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms2Example.mgf")  
+    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
     |> List.head
 
 (**
