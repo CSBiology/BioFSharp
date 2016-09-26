@@ -22,13 +22,12 @@ open FSharp.Plotly
 
 /// Returns the first entry of a examplary mgf File
 let ms1DataTest = 
-    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms2Example.mgf")  
+    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
     |> List.head
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidSpectrum = 
     SignalDetection.Wavelet.toCentroid ms1DataTest.Mass ms1DataTest.Intensity
-
 
 
 (*** define-output:spectrum1 ***)
