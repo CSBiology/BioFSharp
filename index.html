@@ -27,7 +27,7 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
         </ul>
         <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
       </div>
@@ -36,35 +36,22 @@
         <div class="span9" id="main">
           
 <h1><a name="BioFSharp" class="anchor" href="#BioFSharp">BioFSharp</a></h1>
-<p>Documentation</p>
-<div class="row">
-  <div class="span1"></div>
-  <div class="span6">
-    <div class="well well-small" id="nuget">
-      The BioFSharp library can be <a href="https://nuget.org/packages/BioFSharp">installed from NuGet</a>:
-      <pre>PM> Install-Package BioFSharp</pre>
-    </div>
-  </div>
-  <div class="span1"></div>
-</div>
+<p>BioFSharp aims to be a user-friendly library for Bioinformatics written in F#. It contains the basic data
+structures for common biological objects like amino acids and nucleotides based on chemical formulas and chemical elements.
+It facilitates some basic machine learning task as well as statistical analysis of biological data set.</p>
 <h2><a name="Example" class="anchor" href="#Example">Example</a></h2>
-<p>This example demonstrates using a function defined in this sample library.</p>
+<p>This example demonstrates using a function defined in BioFSharp library.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span>
-
-<span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="f">printfn</span> <span class="s">&quot;hello = </span><span class="pf">%i</span><span class="s">&quot;</span> <span class="o">&lt;|</span> <span class="i">Library</span><span class="o">.</span><span class="i">hello</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;BioFSharp.Stats.dll&quot;</span>
+<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">Stats</span>
 </code></pre></td>
 </tr>
 </table>
-<p>Some more info</p>
 <h2><a name="Samples-amp-documentation" class="anchor" href="#Samples-amp-documentation">Samples &amp; documentation</a></h2>
 <p>The library comes with comprehensible documentation.
-It can include tutorials automatically generated from <code>*.fsx</code> files in <a href="https://github.com/fsprojects/BioFSharp/tree/master/docs/content">the content folder</a>.
+It can include tutorials automatically generated from <code>*.fsx</code> files in [the content folder][content].
 The API reference is automatically generated from Markdown comments in the library implementation.</p>
 <ul>
 <li><p><a href="tutorial.html">Tutorial</a> contains a further explanation of this sample library.</p></li>
@@ -74,17 +61,7 @@ and functions in the library. This includes additional brief samples on using mo
 functions.</p>
 </li>
 </ul>
-<h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
-<p>The project is hosted on <a href="https://github.com/fsprojects/BioFSharp">GitHub</a> where you can <a href="https://github.com/fsprojects/BioFSharp/issues">report issues</a>, fork
-the project and submit pull requests. If you're adding a new public API, please also
-consider adding <a href="https://github.com/fsprojects/BioFSharp/tree/master/docs/content">samples</a> that can be turned into a documentation. You might
-also want to read the <a href="https://github.com/fsprojects/BioFSharp/blob/master/README.md">library design notes</a> to understand how it works.</p>
-<p>The library is available under Public Domain license, which allows modification and
-redistribution for both commercial and non-commercial purposes. For more information see the
-<a href="https://github.com/fsprojects/BioFSharp/blob/master/LICENSE.txt">License file</a> in the GitHub repository.</p>
 
-<div class="tip" id="fs1">namespace BioFSharp</div>
-<div class="tip" id="fs2">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
 
         </div>
         <div class="span3">
@@ -94,12 +71,17 @@ redistribution for both commercial and non-commercial purposes. For more informa
             <li><a href="/BioFSharp/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
             <li><a href="/BioFSharp/license.html">License</a></li>
             <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
             
             <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li><a href="/BioFSharp/SignalDetection.html">Signal detection</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/SequestLike.html">Scoring</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
@@ -107,6 +89,6 @@ redistribution for both commercial and non-commercial purposes. For more informa
         </div>
       </div>
     </div>
-    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>

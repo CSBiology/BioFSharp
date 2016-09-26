@@ -26,7 +26,7 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
         </ul>
         <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
       </div>
@@ -54,7 +54,7 @@
     <tbody>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-mz-searchdb-lookupresult.html">LookUpResult</a>
+            <a href="biofsharp-mz-searchdb-lookupresult-1.html">LookUpResult<'a></a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -85,6 +85,12 @@
         <tr>
           <td class="type-name">
             <a href="biofsharp-mz-searchdb-searchdbparams.html">SearchDbParams</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-mz-searchdb-searchinfoisotopic.html">SearchInfoIsotopic</a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -139,15 +145,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '307', 307)" onmouseover="showTip(event, '307', 307)">
-            createPeptideContainer (...)
+          <code onmouseout="hideTip(event, '335', 335)" onmouseover="showTip(event, '335', 335)">
+            createIsotopicMod infoIsotopic
           </code>
-          <div class="tip" id="307">
-            <strong>Signature:</strong> peptideId:int -&gt; sequence:string -&gt; globalMod:string -&gt; missCleavageStart:int -&gt; missCleavageEnd:&#39;?8123 -&gt; missCleavageCount:int -&gt; container:PeptideWithMass&lt;string&gt; list -&gt; PeptideContainer<br />
-                          <strong>Type parameters:</strong> '?8123          </div>
+          <div class="tip" id="335">
+            <strong>Signature:</strong> infoIsotopic:SearchInfoIsotopic -&gt; Modification<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L127-127" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L49-49" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -157,15 +163,51 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '308', 308)" onmouseover="showTip(event, '308', 308)">
-            createPeptideWithMass sequence mass
+          <code onmouseout="hideTip(event, '336', 336)" onmouseover="showTip(event, '336', 336)">
+            createLookUpResult (...)
           </code>
-          <div class="tip" id="308">
-            <strong>Signature:</strong> sequence:&#39;?8111 -&gt; mass:float -&gt; PeptideWithMass&lt;&#39;?8111&gt;<br />
-                          <strong>Type parameters:</strong> '?8111          </div>
+          <div class="tip" id="336">
+            <strong>Signature:</strong> pepSequenceId:int -&gt; mass:float -&gt; sequence:seq&lt;&#39;?8254&gt; -&gt; globalMod:int -&gt; LookUpResult&lt;&#39;?8254&gt;<br />
+                          <strong>Type parameters:</strong> '?8254          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L111-111" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L200-200" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '337', 337)" onmouseover="showTip(event, '337', 337)">
+            createPeptideContainer (...)
+          </code>
+          <div class="tip" id="337">
+            <strong>Signature:</strong> peptideId:int -&gt; sequence:string -&gt; globalMod:int -&gt; missCleavageStart:int -&gt; missCleavageEnd:&#39;?8230 -&gt; missCleavageCount:int -&gt; container:PeptideWithMass&lt;string&gt; list -&gt; PeptideContainer<br />
+                          <strong>Type parameters:</strong> '?8230          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L177-177" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '338', 338)" onmouseover="showTip(event, '338', 338)">
+            createPeptideWithMass sequence mass
+          </code>
+          <div class="tip" id="338">
+            <strong>Signature:</strong> sequence:&#39;?8218 -&gt; mass:float -&gt; PeptideWithMass&lt;&#39;?8218&gt;<br />
+                          <strong>Type parameters:</strong> '?8218          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L161-161" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -177,15 +219,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '309', 309)" onmouseover="showTip(event, '309', 309)">
+          <code onmouseout="hideTip(event, '339', 339)" onmouseover="showTip(event, '339', 339)">
             createProteinContainer (...)
           </code>
-          <div class="tip" id="309">
+          <div class="tip" id="339">
             <strong>Signature:</strong> proteinId:int -&gt; displayID:string -&gt; sequence:string -&gt; container:PeptideContainer list -&gt; ProteinContainer<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L139-139" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L189-189" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -195,15 +237,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '310', 310)" onmouseover="showTip(event, '310', 310)">
+          <code onmouseout="hideTip(event, '340', 340)" onmouseover="showTip(event, '340', 340)">
             createSearchDbParams (...)
           </code>
-          <div class="tip" id="310">
-            <strong>Signature:</strong> name:string -&gt; dbPath:string -&gt; fastapath:string -&gt; protease:Protease -&gt; missedCleavages:int -&gt; maxmass:float -&gt; isotopicLabel:string -&gt; massMode:MassMode -&gt; fixedMods:SearchModification list -&gt; variableMods:SearchModification list -&gt; SearchDbParams<br />
+          <div class="tip" id="340">
+            <strong>Signature:</strong> name:string -&gt; dbPath:string -&gt; fastapath:string -&gt; fastaHeaderToName:(string -&gt; string) -&gt; protease:Protease -&gt; minMissedCleavages:int -&gt; maxMissedCleavages:int -&gt; maxmass:float -&gt; minPepLength:int -&gt; maxPepLength:int -&gt; globalMod:SearchInfoIsotopic list -&gt; massMode:MassMode -&gt; massFunction:(IBioItem -&gt; float) -&gt; fixedMods:SearchModification list -&gt; variableMods:SearchModification list -&gt; varModThreshold:int -&gt; SearchDbParams<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L64-64" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L95-95" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -213,15 +255,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '311', 311)" onmouseover="showTip(event, '311', 311)">
-            getPeptideLookUpBy (...)
+          <code onmouseout="hideTip(event, '341', 341)" onmouseover="showTip(event, '341', 341)">
+            createSearchInfoIsotopic (...)
           </code>
-          <div class="tip" id="311">
-            <strong>Signature:</strong> sdbParams:SearchDbParams -&gt; fastaHeaderToName:(string -&gt; string) -&gt; threshold:int -&gt; massfunction:(IBioItem -&gt; float) -&gt; float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt; -&gt; (int * int * float * int64 * string * string) list<br />
+          <div class="tip" id="341">
+            <strong>Signature:</strong> name:string -&gt; sourceEl:Element -&gt; targetEl:Element -&gt; SearchInfoIsotopic<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L1222-1222" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L46-46" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -231,15 +273,129 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '312', 312)" onmouseover="showTip(event, '312', 312)">
-            getPeptideLookUpFromFile dbFileName
+          <code onmouseout="hideTip(event, '342', 342)" onmouseover="showTip(event, '342', 342)">
+            createSearchModification (...)
           </code>
-          <div class="tip" id="312">
-            <strong>Signature:</strong> dbFileName:string -&gt; float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt; -&gt; (int * int * float * int64 * string * string) list<br />
+          <div class="tip" id="342">
+            <strong>Signature:</strong> name:string -&gt; accession:string -&gt; description:string -&gt; composition:string -&gt; site:SearchModSite list -&gt; mType:SearchModType -&gt; xModCode:string -&gt; SearchModification<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L1206-1206" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L38-38" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '343', 343)" onmouseover="showTip(event, '343', 343)">
+            getModBy smodi
+          </code>
+          <div class="tip" id="343">
+            <strong>Signature:</strong> smodi:SearchModification -&gt; Modification<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L52-52" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '344', 344)" onmouseover="showTip(event, '344', 344)">
+            getPeptideLookUpBy sdbParams
+          </code>
+          <div class="tip" id="344">
+            <strong>Signature:</strong> sdbParams:SearchDbParams -&gt; float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt; -&gt; LookUpResult&lt;AminoAcid&gt; list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L1381-1381" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a LookUpResult list</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '345', 345)" onmouseover="showTip(event, '345', 345)">
+            getPeptideLookUpFromFileBy sdbParams
+          </code>
+          <div class="tip" id="345">
+            <strong>Signature:</strong> sdbParams:SearchDbParams -&gt; float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt; -&gt; LookUpResult&lt;AminoAcid&gt; list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L1366-1366" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns a LookUpResult list</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '346', 346)" onmouseover="showTip(event, '346', 346)">
+            getSDBParamsBy filePath
+          </code>
+          <div class="tip" id="346">
+            <strong>Signature:</strong> filePath:string -&gt; SearchDbParams<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L1433-1433" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns SearchDbParams of a existing database by filePath</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '347', 347)" onmouseover="showTip(event, '347', 347)">
+            massFBy massMode
+          </code>
+          <div class="tip" id="347">
+            <strong>Signature:</strong> massMode:MassMode -&gt; IBioItem -&gt; float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L120-120" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '348', 348)" onmouseover="showTip(event, '348', 348)">
+            pepLengthLimitsBy (...)
+          </code>
+          <div class="tip" id="348">
+            <strong>Signature:</strong> maxExpCharge:int -&gt; (float * float) -&gt; int * int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SearchDB.fs#L115-115" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -257,12 +413,17 @@
             <li><a href="/BioFSharp/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
             <li><a href="/BioFSharp/license.html">License</a></li>
             <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
             
             <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li><a href="/BioFSharp/SignalDetection.html">Signal detection</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/SequestLike.html">Scoring</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
@@ -270,6 +431,6 @@
         </div>
       </div>
     </div>
-    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>

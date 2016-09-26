@@ -26,7 +26,7 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
         </ul>
         <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
       </div>
@@ -54,20 +54,7 @@
     <tbody>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-globalmodificationinfo-globalmodification-1.html">GlobalModification<'a></a>
-          </td>
-          <td class="xmldoc"></td>
-        </tr>
-    </tbody>
-  </table>
-  <table class="table table-bordered module-list">
-    <thead>
-      <tr><td>Module</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-globalmodificationinfo-table.html">Table</a>
+            <a href="biofsharp-globalmodificationinfo-globalmodificator.html">GlobalModificator</a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -85,69 +72,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '184', 184)" onmouseover="showTip(event, '184', 184)">
-            ofModAminoAcids (...)
-          </code>
-          <div class="tip" id="184">
-            <strong>Signature:</strong> name:string -&gt; massFunction:(AminoAcid -&gt; float) -&gt; modAminos:seq&lt;AminoAcid&gt; -&gt; GlobalModification&lt;AminoAcid&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/GlobalModificationInfo.fs#L53-53" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '185', 185)" onmouseover="showTip(event, '185', 185)">
-            ofString parse str
-          </code>
-          <div class="tip" id="185">
-            <strong>Signature:</strong> parse:(char -&gt; &#39;a) -&gt; str:string -&gt; GlobalModification&lt;&#39;a&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/GlobalModificationInfo.fs#L71-71" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
           <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
-            REGEX_GLMOD_SYM 
+            initGlobalModification (...)
           </code>
           <div class="tip" id="186">
-            <strong>Signature:</strong> Regex<br />
+            <strong>Signature:</strong> massfunction:(IBioItem -&gt; float) -&gt; isotopModification:Modification list -&gt; GlobalModificator<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/GlobalModificationInfo.fs#L10-10" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
-            toString gm
-          </code>
-          <div class="tip" id="187">
-            <strong>Signature:</strong> gm:GlobalModification&lt;&#39;?7321&gt; -&gt; string<br />
-                          <strong>Type parameters:</strong> '?7321          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp/GlobalModificationInfo.fs#L66-66" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/GlobalModificationInfo.fs#L11-11" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -165,12 +98,17 @@
             <li><a href="/BioFSharp/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
             <li><a href="/BioFSharp/license.html">License</a></li>
             <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
             
             <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li><a href="/BioFSharp/SignalDetection.html">Signal detection</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/SequestLike.html">Scoring</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
@@ -178,6 +116,6 @@
         </div>
       </div>
     </div>
-    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>

@@ -26,7 +26,7 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/muehlhaus/BioFSharp">github page</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
         </ul>
         <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
       </div>
@@ -78,15 +78,15 @@ exprimental parameters.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
+          <code onmouseout="hideTip(event, '284', 284)" onmouseover="showTip(event, '284', 284)">
             createMgfEntry parameters mass intensity
           </code>
-          <div class="tip" id="286">
-            <strong>Signature:</strong> parameters:Map&lt;string,string&gt; -&gt; mass:float list -&gt; intensity:float list -&gt; MgfEntry<br />
+          <div class="tip" id="284">
+            <strong>Signature:</strong> parameters:Map&lt;string,string&gt; -&gt; mass:float [] -&gt; intensity:float [] -&gt; MgfEntry<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L19-19" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L19-19" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -96,15 +96,15 @@ exprimental parameters.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
+          <code onmouseout="hideTip(event, '285', 285)" onmouseover="showTip(event, '285', 285)">
             mgfToString mgf
           </code>
-          <div class="tip" id="287">
+          <div class="tip" id="285">
             <strong>Signature:</strong> mgf:MgfEntry -&gt; seq&lt;string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L118-118" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L124-124" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -117,15 +117,15 @@ Use Seq.write to write to file.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
             readMgf path
           </code>
-          <div class="tip" id="288">
+          <div class="tip" id="286">
             <strong>Signature:</strong> path:string -&gt; MgfEntry list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L66-66" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L72-72" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -137,19 +137,59 @@ Use Seq.write to write to file.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
+          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
             tryGetPrecursorCharges mgf
           </code>
-          <div class="tip" id="289">
+          <div class="tip" id="287">
             <strong>Signature:</strong> mgf:MgfEntry -&gt; int list option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L43-43" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L49-49" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Returns the precursor mass. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+            tryGetPrecursorMass mgf
+          </code>
+          <div class="tip" id="288">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; float option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L23-23" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the precursor mass. Returns None if the information can't be optained</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
+            tryGetPrecursorMZ mgf
+          </code>
+          <div class="tip" id="289">
+            <strong>Signature:</strong> mgf:MgfEntry -&gt; float option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L30-30" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the precursor mz. Returns None if the information can't be optained</p>
 
 
         </td>
@@ -158,34 +198,14 @@ Use Seq.write to write to file.</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
-            tryGetPrecursorMass mgf
-          </code>
-          <div class="tip" id="290">
-            <strong>Signature:</strong> mgf:MgfEntry -&gt; float option<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L23-23" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Returns the precursor mass. Returns None if the information can't be optained</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
             tryGetTitle mgf
           </code>
-          <div class="tip" id="291">
+          <div class="tip" id="290">
             <strong>Signature:</strong> mgf:MgfEntry -&gt; string option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L50-50" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L56-56" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -197,15 +217,15 @@ Use Seq.write to write to file.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
+          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
             tryParseCharge str
           </code>
-          <div class="tip" id="292">
+          <div class="tip" id="291">
             <strong>Signature:</strong> str:string -&gt; int list option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L31-31" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L37-37" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -217,15 +237,15 @@ Use Seq.write to write to file.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
+          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
             tryParseTitle title
           </code>
-          <div class="tip" id="293">
+          <div class="tip" id="292">
             <strong>Signature:</strong> title:string -&gt; (float * float) option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/muehlhaus/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L58-58" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Mgf.fs#L64-64" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -245,12 +265,17 @@ Use Seq.write to write to file.</p>
             <li><a href="/BioFSharp/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/muehlhaus/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
             <li><a href="/BioFSharp/license.html">License</a></li>
             <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
             
             <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li><a href="/BioFSharp/SignalDetection.html">Signal detection</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/SequestLike.html">Scoring</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
@@ -258,6 +283,6 @@ Use Seq.write to write to file.</p>
         </div>
       </div>
     </div>
-    <a href="http://github.com/muehlhaus/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>
