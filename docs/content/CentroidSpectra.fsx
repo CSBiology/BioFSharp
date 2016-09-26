@@ -2,17 +2,18 @@
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 //#I "../../bin"
-
-(**
-SignalDetection
-======================
-
-
-*)
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
+(**
+CentroidSpectra
+===============
+*)
+
+(**
+This part of the documentation aims to give a brief overview of the workflow used to detect the spectral centroids of MS Spectra.
+*)
 
 open BioFSharp
 open BioFSharp.Mz

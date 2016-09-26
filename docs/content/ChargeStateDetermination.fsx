@@ -8,12 +8,9 @@
 #r "../../bin/MathNet.Numerics.dll"
 #r "../../bin/MathNet.Numerics.FSharp.dll"
 (**
-BioFSharp
-======================
+ChargeState
+===========
 
-*)
-
-(**
 The chargestate determination algorithm implemented in ChargeState.fs analyzes the spacing in between 
 single peaks of a isotope Cluster. 
 *)
@@ -107,4 +104,6 @@ let testedItems =
     |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.SubSetLength ,float assCh.Charge) assCh.MZChargeDev ))
     |> ChargeState.removeSubSetsOfBestHit
     |> List.map (fun testedI -> testedI.TestedObject)
+
+
 
