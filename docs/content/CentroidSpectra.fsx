@@ -14,7 +14,6 @@ Spectrum centroidization
 (**
 This part of the documentation aims to give a brief overview of the workflow used to detect the spectral centroids of MS Spectra.
 *)
-
 open BioFSharp
 open BioFSharp.Mz
 open BioFSharp.IO
@@ -39,15 +38,16 @@ let centroidSpectrum =
 |> Chart.Combine
 (*** include-it:spectrum1 ***)
 
-
-// If only a window of the input data shall be processed the following functions can be used.
-// This can be a favourable approach if only a subgroup of the data is of interest to the user 
-// and computation time is a limiting factor.
+(**
+If only a window of the input data shall be processed the following functions can be used.
+This can be a favourable approach if only a subgroup of the data is of interest to the user 
+and computation time is a limiting factor.
+*)
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
-     SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. 750.3157086
+     SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. 643.8029052
 
  
 (*** define-output:spectrum2 ***)
