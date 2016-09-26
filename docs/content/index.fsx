@@ -9,7 +9,6 @@ BioFSharp
 
 BioFSharp aims to be a user-friendly library for Bioinformatics written in F#. It contains the basic data 
 structures for common biological objects like amino acids and nucleotides based on chemical formulas and chemical elements. 
-It facilitates some basic machine learning task as well as statistical analysis of biological data set.
 
 
 Example
@@ -18,9 +17,17 @@ Example
 This example demonstrates using a function defined in BioFSharp library.
 
 *)
-#r "BioFSharp.Stats.dll"
-open BioFSharp.Stats
+#r "BioFSharp.dll"
+open BioFSharp
 
+/// Creates a BioSeq of the given peptide string
+BioSeq.ofAminoAcidString   "REYAHMIGMEYDTVQK"
+
+/// Creates a BioArray of the given peptide string
+BioArray.ofAminoAcidString "REYAHMIGMEYDTVQK"
+
+/// Creates a BioList of the given peptide string
+BioList.ofAminoAcidString  "REYAHMIGMEYDTVQK"
 
 (**
 

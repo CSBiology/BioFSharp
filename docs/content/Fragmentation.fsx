@@ -15,7 +15,6 @@ Say more
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
-#r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 
 open BioFSharp
 open BioFSharp.Mz
