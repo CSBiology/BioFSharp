@@ -30,20 +30,10 @@ module Digestion =
          PepSequence=pepSequence
          }
    
-    let trypsin = createProtease "Trypsin" 
-                        (let _p1 = [AminoAcid.Lys;AminoAcid.Arg] |> Set.ofList 
-                         fun p4 p3 p2 p1 p1' p2' -> 
-                            match p1,p1' with
-                            | Some a1,Some a1' -> _p1.Contains(a1) && not (a1' = AminoAcid.Pro)
-                            | _   -> false                     
-                         )
-
-
     let isCutingSite (protease:Protease) (arr:AminoAcid option[]) =
         match arr with
         | [|p4; p3; p2; p1; p1'; p2';|] -> protease.Expression p4 p3 p2 p1 p1' p2'
         | _ -> false
-
 
     [<AutoOpen>]
     module BioSeq =
@@ -160,5 +150,16 @@ module Digestion =
 
 
 
-
-
+    module Table = 
+        
+        let getProteaseBy name = 
+            match name with
+            | "Trypsin" ->
+                createProtease "Trypsin" (let _p1 = [AminoAcid.Lys;AminoAcid.Arg] |> Set.ofList 
+                                          fun p4 p3 p2 p1 p1' p2' -> 
+                                          match p1,p1' with
+                                          | Some a1,Some a1' -> _p1.Contains(a1) && not (a1' = AminoAcid.Pro)
+                                          | _   -> false                     
+                                         )       
+                 
+                   

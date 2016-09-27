@@ -40,14 +40,13 @@ module ModificationInfo =
                             member this.Formula  = this.Modify Formula.emptyFormula
 
     let createModification name location modifier =
-        { Name = name; Location = location; Modify = modifier}            
-
+        { Name = name; Location = location; Modify = modifier}           
 
     let createModificationWithAdd name location formula =
-        createModification name location (Formula.add formula)            
+        createModification name location (Formula.add (Formula.parseFormulaString formula))            
 
     let createModificationWithSubstract name location formula =
-        createModification name location (Formula.substract formula)  
+        createModification name location (Formula.substract (Formula.parseFormulaString formula))    
 
     /// Returns modification name as string
     let toString (md:Modification) =
@@ -75,11 +74,9 @@ module ModificationInfo =
     let isGap (md:Modification) =
         BioItem.isGap md
 
-
+ 
     module Table = 
         
         let N15 = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let H2O = createModificationWithAdd "H20" ModLocation.Nterm Formula.Table.H2O
- 
-
-        
+        let H2O = createModificationWithAdd "H2O" ModLocation.Nterm "H2O"
+       

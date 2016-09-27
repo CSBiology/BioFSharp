@@ -38,7 +38,9 @@ module ChargeState =
         }
 
     type AssignedCharge = { 
+        PrecMZ                      : float
         Charge                      : int
+        PutMass                     : float
         MZChargeDev                 : float
         Score                       : float
         DistanceRealTheoPeakSpacing : float list
@@ -47,8 +49,8 @@ module ChargeState =
         PeakSourcePositions         : Set<float>
         } 
 
-    let createAssignedCharge charge mZChargeDev score distanceRealTheoPeakSpacing subSetLength startPeakIntensity peakSourcePositions= {
-        Charge=charge; MZChargeDev=mZChargeDev; Score=score;DistanceRealTheoPeakSpacing=distanceRealTheoPeakSpacing; 
+    let createAssignedCharge precMZ charge putMass mZChargeDev score distanceRealTheoPeakSpacing subSetLength startPeakIntensity peakSourcePositions= {
+        PrecMZ=precMZ; Charge=charge; PutMass=putMass; MZChargeDev=mZChargeDev; Score=score;DistanceRealTheoPeakSpacing=distanceRealTheoPeakSpacing; 
             SubSetLength=subSetLength; StartPeakIntensity=startPeakIntensity; PeakSourcePositions=peakSourcePositions }
    
     type TestedItem<'a> = {
@@ -226,7 +228,8 @@ module ChargeState =
                             |> List.map (fun distance -> distance - theoInterPeakDistances ) 
                         let mzChargeDeviation = mzChargeDeviationBy interPeakDistances theoInterPeakDistances
                         let score = getScore subSet.SubSetLength subSet.SourceSetLength mzChargeDeviation
-                        createAssignedCharge assignedCharge mzChargeDeviation score distanceRealTheoPeakSpacing subSet.SubSetLength startPeakIntensity peakPos  
+                        let putMass = (precursorMZ * float assignedCharge) - float assignedCharge
+                        createAssignedCharge precursorMZ assignedCharge putMass mzChargeDeviation score distanceRealTheoPeakSpacing subSet.SubSetLength startPeakIntensity peakPos  
                      )
         |> List.sortBy (fun assignedCharge ->  assignedCharge.Score)
         |> List.distinctBy (fun assignedCharge ->  assignedCharge.Charge)

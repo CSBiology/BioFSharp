@@ -25,7 +25,13 @@ module Mgf =
                 Some (String.tryParseFloatDefault nan mgf.Parameters.["PEPMASS"])
             else
                 None
-        
+    
+    /// Returns the precursor mz. Returns None if the information can't be optained
+    let tryGetPrecursorMZ (mgf:MgfEntry) =
+            if mgf.Parameters.ContainsKey("PRECURSORMZ") then
+                Some (String.tryParseFloatDefault nan mgf.Parameters.["PRECURSORMZ"])
+            else
+                None        
 
     /// Returns the posible charge/charges in a list. Returns None if the information can't be optained
     let tryParseCharge str =
