@@ -21,8 +21,45 @@ let c = Formula.add CO2 CO2
 Formula.toString c
 
 
-(*** define-output:pie1 ***)
-Chart.Point([1;2;3],[1;2;3],Name="scattern")
-(*** include-it:pie1 ***)
+(**
+
+Converting a peptide string to a biosequence
+
+*)
+
+let peptide1 = 
+    "REYAHMIGMEYDTVQK"
+    |> BioSeq.ofAminoAcidString
+
+let peptide2 = 
+    "REYAHMIGMEYDTVQK"
+    |> BioSeq.ofAminoAcidString
+
+
+
+let fAlanin = 
+    Formula.parseFormulaString "C3H5ON" 
+
+fAlanin |> Formula.monoisoMass
+
+fAlanin |> Formula.averageMass
+
+Formula.add fAlanin Formula.Table.H2O  |> Formula.monoisoMass
+
+
+
+let carboxyAmidoMethylation =
+    ModificationInfo.createModificationWithAdd "CarboxyAmidoMethylation"
+                                                ModificationInfo.ModLocation.Residual
+                                                "CH3"
+ 
+//Carboxyamidomethylated Cysteine
+
+AminoAcids.Cys
+|> AminoAcids.setModification carboxyAmidoMethylation
+|> AminoAcids.formula
+
+
+
 
 

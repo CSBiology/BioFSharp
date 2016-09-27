@@ -1,16 +1,20 @@
 ﻿namespace BioFSharp.Mz
 
 open BioFSharp
+open SearchDB
 open Fragmentation
+
 
 open MathNet.Numerics
 open MathNet.Numerics.LinearAlgebra.Double
 
 module SequestLike =
-
+//TODO ADD AssignedCharge & precursorMZ
     type SequestLikeScore =
         { SpectrumID      : string;
           PrecursorCharge : int;
+          PepSequenceID   : int;
+          GlobalMod       : int;
           IsTarget        : bool;
           Peptide         : seq<AminoAcids.AminoAcid>;
           TheoMass        : float;      
@@ -19,8 +23,8 @@ module SequestLike =
           XCORR           : float;
           DeltaCN         : float; }
 
-    let createSequestLikeScore spectrumID precursorCharge isTarget peptide theoMass measuredMass peptideLength xcorr deltaCN = 
-        { SpectrumID = spectrumID; PrecursorCharge = precursorCharge; IsTarget = isTarget; Peptide = peptide; 
+    let createSequestLikeScore spectrumID precursorCharge pepSequenceID  globalMod isTarget peptide theoMass measuredMass peptideLength xcorr deltaCN = 
+        { SpectrumID = spectrumID; PrecursorCharge = precursorCharge;PepSequenceID = pepSequenceID; GlobalMod = globalMod; IsTarget = isTarget; Peptide = peptide; 
           TheoMass = theoMass; MeasuredMass = measuredMass; PeptideLength = peptideLength; XCORR = xcorr; DeltaCN = deltaCN; }
 
 
@@ -216,10 +220,8 @@ module SequestLike =
 
 
 
-
-
     //scanNumber precursorCharge isTarget peptide theoMass measuredMass peptideLength xcorr deltaCN = 
-    let calcSequestLikeScoresRevDecoy (massfunction:Formula.Formula -> float) (scanlimits) (spectrum:PeakArray<_>) chargeState isolationWindowTargetMz (possiblePeptideInfos:seq<float*BioArray.BioArray<_>>) spectrumID = // (scan:Spectra.Scan) (possiblePeptidesInfoGroups:list<Mz.PeptideLookUp.PeptideInfoGroup>) =
+    let calcSequestLikeScoresRevDecoy (massfunction:Formula.Formula -> float) (scanlimits) (spectrum:PeakArray<_>) chargeState isolationWindowTargetMz (possiblePeptideInfos:seq<LookUpResult<AminoAcids.AminoAcid>>) spectrumID = // (scan:Spectra.Scan) (possiblePeptidesInfoGroups:list<Mz.PeptideLookUp.PeptideInfoGroup>) =
         // measured normailzed intensity array (spectrum) minus auto-correlation
         let ms_nis =  spectrumToIntensityArrayMinusAutoCorrelation scanlimits spectrum
         // float charge
@@ -228,20 +230,50 @@ module SequestLike =
         let ms_mass = Mass.ofMZ isolationWindowTargetMz fCharge
 
 
-        let ides = [ for mass,sequence in possiblePeptideInfos do         
+        let ides = [ for lookUpResult in possiblePeptideInfos do 
+                        let sequence = lookUpResult.Sequence |> Array.ofSeq         
                         //predicted  normailzed intensity array (spectrum) 
                         let p_nis = peptideToNormalizedIntensityArray massfunction scanlimits fCharge sequence |> DenseVector.OfArray
                         let xcorr = p_nis * ms_nis
-                        yield createSequestLikeScore spectrumID chargeState true sequence mass ms_mass (Array.length sequence) xcorr nan
+                        yield createSequestLikeScore spectrumID chargeState lookUpResult.PepSequenceID lookUpResult.GlobalMod true sequence lookUpResult.Mass ms_mass (Array.length sequence) xcorr nan
                         
                         let revPeptide_decoy = sequence |> Array.rev
                         let p_nis_decoy      = peptideToNormalizedIntensityArray massfunction scanlimits fCharge revPeptide_decoy |> DenseVector.OfArray
                         let xcorr_decoy      = p_nis_decoy * ms_nis
-                        yield createSequestLikeScore spectrumID chargeState false revPeptide_decoy mass ms_mass revPeptide_decoy.Length xcorr_decoy nan ]
+                        yield createSequestLikeScore spectrumID chargeState lookUpResult.PepSequenceID lookUpResult.GlobalMod false revPeptide_decoy lookUpResult.Mass ms_mass revPeptide_decoy.Length xcorr_decoy nan ]
                     
         calcDeltaCN (ides  |> List.sortBy (fun sls -> - sls.XCORR))
         
 
-
-
-
+//
+//
+//
+//
+//
+//    //scanNumber precursorCharge isTarget peptide theoMass measuredMass peptideLength xcorr deltaCN = 
+//    let calcSequestLikeScoresRevDecoy' (massfunction:Formula.Formula -> float) (scanlimits) (spectrum:PeakArray<_>) chargeState isolationWindowTargetMz (possiblePeptideInfos:seq<float*BioArray.BioArray<_>>) spectrumID = // (scan:Spectra.Scan) (possiblePeptidesInfoGroups:list<Mz.PeptideLookUp.PeptideInfoGroup>) =
+//        // measured normailzed intensity array (spectrum) minus auto-correlation
+//        let ms_nis =  spectrumToIntensityArrayMinusAutoCorrelation scanlimits spectrum
+//        // float charge
+//        let fCharge = float chargeState
+//        // measured mass
+//        let ms_mass = Mass.ofMZ isolationWindowTargetMz fCharge
+//
+//
+//        let ides = [ for mass,sequence in possiblePeptideInfos do         
+//                        //predicted  normailzed intensity array (spectrum) 
+//                        let p_nis = peptideToNormalizedIntensityArray massfunction scanlimits fCharge sequence |> DenseVector.OfArray
+//                        let xcorr = p_nis * ms_nis
+//                        yield createSequestLikeScore spectrumID chargeState true sequence mass ms_mass (Array.length sequence) xcorr nan
+//                        
+//                        let revPeptide_decoy = sequence |> Array.rev
+//                        let p_nis_decoy      = peptideToNormalizedIntensityArray massfunction scanlimits fCharge revPeptide_decoy |> DenseVector.OfArray
+//                        let xcorr_decoy      = p_nis_decoy * ms_nis
+//                        yield createSequestLikeScore spectrumID chargeState false revPeptide_decoy mass ms_mass revPeptide_decoy.Length xcorr_decoy nan ]
+//                    
+//        calcDeltaCN (ides  |> List.sortBy (fun sls -> - sls.XCORR))
+//        
+//
+//
+//
+//

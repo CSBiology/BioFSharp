@@ -194,10 +194,6 @@ module AminoAcids =
 
 
 
-
-
-
-
     // Sets amino acid modification 
     let setModification (md:ModificationInfo.Modification) (aa:AminoAcid) =
         match aa with
@@ -233,12 +229,17 @@ module AminoAcids =
 
     let isotopicLabelFunc (aa:AminoAcid) (f:Formula.Formula)  = 
         match aa with
-        | Mod (_,mds) -> let fn =
-                            mds
-                            |> List.filter (fun a -> a.Location = ModificationInfo.ModLocation.Isotopic)
-                            |> List.map (fun a -> a.Modify)
-                            |> List.reduce (>>)
-                         fn f
+        | Mod (_,mds) -> 
+            let tmpFn =
+                 List.filter (fun (a:ModificationInfo.Modification) -> a.Location = ModificationInfo.ModLocation.Isotopic) mds                                
+            match tmpFn with
+            | [] -> f
+            | l  -> 
+                let fn = 
+                    l
+                    |> List.map (fun a -> a.Modify) 
+                    |> List.reduce (>>) 
+                fn f
         | _           -> f
                 
 
