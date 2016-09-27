@@ -190,8 +190,8 @@ module BlastNCBI =
             | OutputTypeCustom(t,p) -> let tmp = p |> Seq.map stringOfOutputCustom |> String.concat " "
                                        match t with
                                        | OutputType.Tabular             -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
-                                       | OutputType.TabularWithComments -> sprintf "-outfmt %i %s" (t |> int) tmp
-                                       | OutputType.CSV                 -> sprintf "-outfmt %i %s" (t |> int) tmp
+                                       | OutputType.TabularWithComments -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
+                                       | OutputType.CSV                 -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
                                        | _ -> failwithf "Output format %A does not support custom columns." t                                
             | Num_threads(i)        -> sprintf "-num_threads %i" i
             | Max_Hits (i)          -> sprintf "-max_target_seqs %i" i
