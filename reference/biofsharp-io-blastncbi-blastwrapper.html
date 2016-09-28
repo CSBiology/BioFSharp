@@ -43,6 +43,8 @@
   <span>Parent Module: <a href="biofsharp-io-blastncbi.html">BlastNCBI</a></span>
 </p>
 <div class="xmldoc">
+<p>A Wrapper to perform different BLAST tasks</p>
+
 </div>
   <h3>Constructors</h3>
   <table class="table table-bordered member-list">
@@ -53,15 +55,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '599', 599)" onmouseover="showTip(event, '599', 599)">
+          <code onmouseout="hideTip(event, '616', 616)" onmouseover="showTip(event, '616', 616)">
             new(rootPath)
           </code>
-          <div class="tip" id="599">
+          <div class="tip" id="616">
             <strong>Signature:</strong> rootPath:string -&gt; BlastWrapper<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L212-212" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L215-215" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -80,37 +82,61 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '600', 600)" onmouseover="showTip(event, '600', 600)">
-            blastP(searchDB query output ps)
+          <code onmouseout="hideTip(event, '617', 617)" onmouseover="showTip(event, '617', 617)">
+            blastN(searchDB query output ps)
           </code>
-          <div class="tip" id="600">
+          <div class="tip" id="617">
             <strong>Signature:</strong> searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L237-237" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L245-245" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Compares a nucleotide query to a nucleotide database</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '601', 601)" onmouseover="showTip(event, '601', 601)">
+          <code onmouseout="hideTip(event, '618', 618)" onmouseover="showTip(event, '618', 618)">
+            blastP(searchDB query output ps)
+          </code>
+          <div class="tip" id="618">
+            <strong>Signature:</strong> searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L240-240" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Compares a protein query to a protein database</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '619', 619)" onmouseover="showTip(event, '619', 619)">
             makeblastdb(searchDB ps)
           </code>
-          <div class="tip" id="601">
+          <div class="tip" id="619">
             <strong>Signature:</strong> searchDB:string -&gt; ps:seq&lt;MakeDbParams&gt; -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L232-232" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L235-235" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Creates a BLAST databse from given source/s</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -131,11 +157,13 @@
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
               <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
               <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
-
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
           </ul>

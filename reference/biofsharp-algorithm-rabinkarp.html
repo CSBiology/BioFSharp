@@ -54,7 +54,25 @@
     <tbody>
         <tr>
           <td class="module-name">
-            <a href="biofsharp-algorithm-rabinkarp-rabinkarphash.html">RabinKarpHash</a>
+            <a href="biofsharp-algorithm-rabinkarp-buzz.html">Buzz</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-algorithm-rabinkarp-buzzsearch.html">BuzzSearch</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-algorithm-rabinkarp-rkstandard.html">RKStandard</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-algorithm-rabinkarp-rabinkarpsearch.html">RabinKarpSearch</a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -72,51 +90,51 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
+          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
+            findAllGeneric (...)
+          </code>
+          <div class="tip" id="270">
+            <strong>Signature:</strong> updateHash:(int -&gt; &#39;a -&gt; &#39;a -&gt; int) -&gt; blockHash:(&#39;a array -&gt; int) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L73-73" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
+            findFirstFromGeneric (...)
+          </code>
+          <div class="tip" id="271">
+            <strong>Signature:</strong> startPos:int -&gt; updateHash:(int -&gt; &#39;a -&gt; &#39;a -&gt; int) -&gt; blockHash:(&#39;a array -&gt; int) -&gt; pattern:&#39;a array -&gt; text:&#39;a array -&gt; int<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L98-98" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
             isMatchAt pattern s startPos
           </code>
-          <div class="tip" id="262">
+          <div class="tip" id="272">
             <strong>Signature:</strong> pattern:&#39;a array -&gt; s:&#39;a array -&gt; startPos:int -&gt; bool<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L20-20" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
-            Search pattern s
-          </code>
-          <div class="tip" id="263">
-            <strong>Signature:</strong> pattern:&#39;a array -&gt; s:&#39;a array -&gt; int<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L51-51" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
-            SearchAt pattern s startPos
-          </code>
-          <div class="tip" id="264">
-            <strong>Signature:</strong> pattern:&#39;a array -&gt; s:&#39;a array -&gt; startPos:int -&gt; int<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L31-31" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L62-62" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -141,11 +159,13 @@
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+              <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
               <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
               <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
-
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
             <li class="nav-header">Documentation</li>
             <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
           </ul>

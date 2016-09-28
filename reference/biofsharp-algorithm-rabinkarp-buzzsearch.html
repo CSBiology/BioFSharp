@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Tag<'t, 'v> - BioFSharp</title>
+    <title>BuzzSearch - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,30 +37,34 @@
 
 
 
-<h1>Tag<'t, 'v></h1>
+<h1>BuzzSearch</h1>
 <p>
-  <span>Namespace: BioFSharp.Mz</span><br />
+  <span>Namespace: BioFSharp.Algorithm</span><br />
+  <span>Parent Module: <a href="biofsharp-algorithm-rabinkarp.html">RabinKarp</a></span>
 </p>
 <div class="xmldoc">
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '929', 929)" onmouseover="showTip(event, '929', 929)">
-            Data
+          <code onmouseout="hideTip(event, '275', 275)" onmouseover="showTip(event, '275', 275)">
+            findAll pattern s
           </code>
-          <div class="tip" id="929">
-            <strong>Signature:</strong> &#39;v<br />
+          <div class="tip" id="275">
+            <strong>Signature:</strong> pattern:int array -&gt; s:int array -&gt; int list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/Peak.fs#L43-43" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L170-170" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -70,15 +74,33 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '930', 930)" onmouseover="showTip(event, '930', 930)">
-            Meta
+          <code onmouseout="hideTip(event, '276', 276)" onmouseover="showTip(event, '276', 276)">
+            findFirst pattern s
           </code>
-          <div class="tip" id="930">
-            <strong>Signature:</strong> &#39;t<br />
+          <div class="tip" id="276">
+            <strong>Signature:</strong> pattern:int array -&gt; s:int array -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/Peak.fs#L42-42" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L176-176" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '277', 277)" onmouseover="showTip(event, '277', 277)">
+            findFirstFrom startPos pattern s
+          </code>
+          <div class="tip" id="277">
+            <strong>Signature:</strong> startPos:int -&gt; pattern:int array -&gt; s:int array -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L173-173" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
