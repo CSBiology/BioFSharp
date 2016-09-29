@@ -9,14 +9,16 @@ module BlastNCBI =
 
         type DbType =
         | Protein 
+        | Nucleotide
 
         let private stringOfDbType (param:DbType) =
             match param with
             | Protein -> "prot"
+            | Nucleotide -> "nucl"
 
         type MakeDbParams =
             | Input  of string
-            //| Output of String
+            | Output of String
             | DbType of DbType
             | MaskData of string
             | ParseSeqIds    
@@ -24,8 +26,8 @@ module BlastNCBI =
 
         let stringOfMakeDbParams (param:MakeDbParams) =
             match param with
-            | Input  (path)   -> sprintf "-in %s -out %s"  path path
-            //| Output (path) -> sprintf "-out %s" path
+            | Input  (path)   -> sprintf "-in %s"  path 
+            | Output (path) -> sprintf "-out %s" path
             | DbType (dbt)    -> sprintf "-dbtype %s" (stringOfDbType dbt)
             | MaskData (path) -> sprintf "-mask_data %s.asnb" path 
             | ParseSeqIds     -> sprintf "-parse_seqids" 
@@ -188,8 +190,8 @@ module BlastNCBI =
             | OutputTypeCustom(t,p) -> let tmp = p |> Seq.map stringOfOutputCustom |> String.concat " "
                                        match t with
                                        | OutputType.Tabular             -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
-                                       | OutputType.TabularWithComments -> sprintf "-outfmt %i %s" (t |> int) tmp
-                                       | OutputType.CSV                 -> sprintf "-outfmt %i %s" (t |> int) tmp
+                                       | OutputType.TabularWithComments -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
+                                       | OutputType.CSV                 -> sprintf "-outfmt \"%i %s\"" (t |> int) tmp
                                        | _ -> failwithf "Output format %A does not support custom columns." t                                
             | Num_threads(i)        -> sprintf "-num_threads %i" i
             | Max_Hits (i)          -> sprintf "-max_target_seqs %i" i
@@ -209,6 +211,7 @@ module BlastNCBI =
 
     let ncbiPath = "../../lib/ncbi-blast/bin"
 
+    ///A Wrapper to perform different BLAST tasks
     type BlastWrapper (rootPath:string) =
         let createArguments (f : 'a -> string) (ps:seq<'a>) =
             ps |> Seq.map f
@@ -228,13 +231,18 @@ module BlastNCBI =
             printfn "%s done." name
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
 
-        ///
+        ///Creates a BLAST databse from given source/s
         member this.makeblastdb searchDB (ps:seq<Parameters.MakeDbParams>) = 
             let arg = [Parameters.MakeDbParams.Input searchDB;]
             createProcess "Makeblastdb" "/makeblastdb.exe" Parameters.stringOfMakeDbParams (Seq.append arg ps)       
         
-        ///
+        ///Compares a protein query to a protein database
         member this.blastP searchDB query output  (ps:seq<Parameters.BlastParams>) = 
+            let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
+            createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
+        
+        ///Compares a nucleotide query to a nucleotide database
+        member this.blastN searchDB query output  (ps:seq<Parameters.BlastParams>) = 
             let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
             createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
 
@@ -242,7 +250,7 @@ module BlastNCBI =
 
 
 
-
+    
     type CBlastResult = {
 
        [<FieldAttribute("qseqid")>]      Query_SeqId               : string
