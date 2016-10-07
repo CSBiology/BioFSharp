@@ -11,11 +11,12 @@ module Elements =
     
     //  #####
     /// Mono-isotopic elements consist of one isotope
-    type MonoIsotopic  = { Symbol : string;
-                           X      : Isotopes.Isotope;
-                           Xcomp  : float;
-                           Root   : float;
-                         }
+    type MonoIsotopic  = { 
+        Symbol : string;
+        X      : Isotopes.Isotope;
+        Xcomp  : float;
+        Root   : float   
+        }
     
     /// Create a mono-isotopic element
     let createMono symbol (x,xcomp) =
@@ -24,13 +25,14 @@ module Elements =
 
     //  #####
     /// Di-isotopic elements consist of two isotopes
-    type DiIsotopic    = { Symbol : string;
-                           X      : Isotopes.Isotope;
-                           Xcomp  : float;
-                           X1     : Isotopes.Isotope;
-                           X1comp : float;
-                           Root   : float;
-                         }
+    type DiIsotopic    = { 
+        Symbol : string;
+        X      : Isotopes.Isotope;
+        Xcomp  : float;
+        X1     : Isotopes.Isotope;
+        X1comp : float;
+        Root   : float
+        }
     
     /// Create a di-isotopic element
     let createDi symbol (x,xcomp) (x1,x1comp) =
@@ -40,28 +42,30 @@ module Elements =
     //  #####
     /// Tri-isotopic elements consist of three isotopes
     [<CustomEquality; CustomComparison>]
-    type TriIsotopic   = { Symbol : string;
-                           X      : Isotopes.Isotope;
-                           Xcomp  : float;
-                           X1     : Isotopes.Isotope;
-                           X1comp : float;
-                           X2     : Isotopes.Isotope;
-                           X2comp : float;                           
-                           Root   : System.Numerics.Complex*System.Numerics.Complex
-                         }
+    type TriIsotopic   = { 
+        Symbol : string;
+        X      : Isotopes.Isotope;
+        Xcomp  : float;
+        X1     : Isotopes.Isotope;
+        X1comp : float;
+        X2     : Isotopes.Isotope;
+        X2comp : float;                           
+        Root   : System.Numerics.Complex*System.Numerics.Complex 
+        }
                         
-                            override x.Equals(yobj) =
-                                match yobj with
-                                | :? TriIsotopic as y -> (x.Symbol = y.Symbol)
-                                | _ -> false
+        with 
+            override x.Equals(yobj) =
+                match yobj with
+                | :? TriIsotopic as y -> (x.Symbol = y.Symbol)
+                | _ -> false
  
-                            override x.GetHashCode() = hash x.Symbol
+            override x.GetHashCode() = hash x.Symbol
                         
-                            interface System.IComparable with
-                              member x.CompareTo yobj =
-                                  match yobj with
-                                  | :? TriIsotopic as y -> compare x.Symbol y.Symbol
-                                  | _ -> invalidArg "yobj" "cannot compare values of different types"
+            interface System.IComparable with
+                member x.CompareTo yobj =
+                    match yobj with
+                    | :? TriIsotopic as y -> compare x.Symbol y.Symbol
+                    | _ -> invalidArg "yobj" "cannot compare values of different types"
 
     
     /// Calculates roots of tri-isotopic elements
@@ -71,6 +75,7 @@ module Elements =
         let r1 = ((Complex.toComplex (- x2Abundance) 0.) - d) / (Complex.toComplex (2. * x3Abundance) 0.)
         (r0,r1)
 
+
     /// Create a three-isotopic element
     let createTri symbol (x,xcomp) (x1,x1comp) (x2,x2comp) =
         { Symbol = symbol; X = x; Xcomp = xcomp; X1 = x1; X1comp = x1comp; X2 = x2; X2comp = x2comp; Root = calcRootsTri xcomp x1comp x2comp; }
@@ -78,15 +83,16 @@ module Elements =
 
     //  #####
     /// Multi-isotopic elements consist of more than three isotopes
-    type MultiIsotopic = { Symbol : string;
-                           X      : Isotopes.Isotope;
-                           Xcomp  : float;
-                           X1     : Isotopes.Isotope;
-                           X1comp  : float;
-                           X2     : Isotopes.Isotope;
-                           X2comp  : float;
-                           XL     : Isotopes.Isotope[];
-                          } 
+    type MultiIsotopic = { 
+        Symbol : string;
+        X      : Isotopes.Isotope;
+        Xcomp  : float;
+        X1     : Isotopes.Isotope;
+        X1comp  : float;
+        X2     : Isotopes.Isotope;
+        X2comp  : float;
+        XL     : Isotopes.Isotope[];
+        } 
 
     /// Create a multi-isotopic element
     let createMulti symbol (x,xcomp) (x1,x1comp) (x2,x2comp) xl =
@@ -109,6 +115,7 @@ module Elements =
         | Di    {X = x} -> x
         | Tri   {X = x} -> x
         | Multi {X = x} -> x
+
 
     // Single term of equation. (10)
     let getSinglePhiL (elem:Element) (v:float) (l:float) =
