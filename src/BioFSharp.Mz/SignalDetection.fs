@@ -328,7 +328,7 @@ module SignalDetection =
             findLocalMaximaLoop 2 corrMatrix  
 
         ///
-        let getSNRSFilteredPeakLines nScales mzData (allLines:Collections.Generic.List<RidgeLine>) (snrs:Collections.Generic.List<float>) (corrMatrix: float[,]) =                                            
+        let getSNRFilteredPeakLines nScales mzData (allLines:Collections.Generic.List<RidgeLine>) (snrs:Collections.Generic.List<float>) (corrMatrix: float[,]) =                                            
             let minSnr = 1.
             let corrMatrixLength = corrMatrix.[0,*].Length
             // step 1: find maxima in each column (row = scales, columns = m/z)
@@ -551,8 +551,8 @@ module SignalDetection =
             toCentroidWith getPeakLines mzData intensityData
         
         /// Returns a MzIntensityArray that containing the spectral centroids of the input spectra. 
-        let toSNRSFilteredCentroid (mzData: float []) (intensityData: float [])  =
-            toCentroidWith getSNRSFilteredPeakLines mzData intensityData    
+        let toSNRFilteredCentroid (mzData: float []) (intensityData: float [])  =
+            toCentroidWith getSNRFilteredPeakLines mzData intensityData    
 
     /// Returns mzIntensityArray consisting of centroided Peaks. 
     let windowToCentroid centroidF (mzData:float[]) (intensityData:float[]) lowerIdx upperIdx =
