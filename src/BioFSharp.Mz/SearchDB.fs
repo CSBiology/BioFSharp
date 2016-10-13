@@ -125,7 +125,7 @@ module SearchDB =
        
 
     ///needed as input if element of SearchModSite is of UnionCase | Any
-    let private listOfAA = [
+    let listOfAA = [
         AminoAcid.Ala; 
         AminoAcid.Cys; 
         AminoAcid.Asp; 
@@ -250,7 +250,7 @@ module SearchDB =
 
 
         ///  Prepared statements via Closure
-        module internal SQLiteQuery =
+        module  SQLiteQuery =
     
             open System.Data
             open System.Data.SQLite
@@ -1154,8 +1154,6 @@ module SearchDB =
 
         let setFixedModifiedFlagOf (a:AminoAcid)  =
             AminoAcidWithFlag(false,a)
-
-    
         
         /// Returns a list of all possible modified AminoAcids given the particular Searchmodification
         // param: aminoAcids is a list of all possible aminoacids
