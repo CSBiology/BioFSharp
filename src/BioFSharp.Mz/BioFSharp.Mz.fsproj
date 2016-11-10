@@ -47,7 +47,6 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Peak.fs" />
     <Compile Include="PeakArray.fs" />
     <Compile Include="PeakList.fs" />

@@ -108,6 +108,8 @@ module Digestion =
         /// Takes Proteinsequence as input and returns Array of resulting DigestedPeptides
         let digest (protease: Protease) (proteinID: int) (aas: AminoAcid []) =
             let aasLength = aas.Length
+            if aasLength = 0 then [||]
+            else
             let rec groupAfter f acc lowercounter counter (aasWithOption: (AminoAcid*'a []) []) =
                 if counter = aasLength-1 then (createDigestedPeptide proteinID 0 (lowercounter+1) (counter+1) (aas.[lowercounter.. counter]|> Array.toList))::acc |> List.rev 
                 else 
@@ -121,12 +123,13 @@ module Digestion =
 
 
 
-
         /// Takes Array of DigestedPeptides and and returns Array of DigestedPeptides including those resulting of one or more Misscleavage events
-        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptidesA:DigestedPeptide []) =
+        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptidesA:(DigestedPeptide) []) =
+            if digestedPeptidesA = [||] then [||]
+            else
             let lengthOfPeptideL = digestedPeptidesA.Length
             let minToMaxMissCleavagesL = [minMissCleavages.. maxMisscleavages]
-            let rec connectDigestedPeptides acc (digestedPeptidesA: DigestedPeptide []) (fstPepIdx:int) currentMissCleavages (lastPepIdx:int) =
+            let rec connectDigestedPeptides acc (digestedPeptidesA: DigestedPeptide []) (fstPepIdx:int)  (lastPepIdx:int) currentMissCleavages =
                 if lengthOfPeptideL < lastPepIdx then acc
                 else
                 match lastPepIdx with
@@ -137,17 +140,15 @@ module Digestion =
                         |> Array.map (fun digpep -> digpep.PepSequence) 
                         |> List.concat
                     let currentPeptide = 
-                        createDigestedPeptide digestedPeptidesA.[1].ProteinID (currentMissCleavages+1) digestedPeptidesA.[fstPepIdx].MissCleavageStart 
+                        createDigestedPeptide digestedPeptidesA.[0].ProteinID (currentMissCleavages) digestedPeptidesA.[fstPepIdx].MissCleavageStart 
                             digestedPeptidesA.[lastPepIdx].MissCleavageEnd currentPeptideSeq
                     
-                    connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) currentMissCleavages (lastPepIdx+1) 
+                    connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) (lastPepIdx+1) currentMissCleavages
         
             minToMaxMissCleavagesL
-            |> List.mapi (connectDigestedPeptides [] (digestedPeptidesA) 0) 
+            |> List.map (fun x ->  (connectDigestedPeptides [] (digestedPeptidesA) 0 x x)) 
             |> List.concat
             |> Array.ofList
-            |> Array.append digestedPeptidesA
-
 
 
     module Table = 
@@ -163,3 +164,10 @@ module Digestion =
                                          )       
                  
                    
+            | "Lys-C"  ->
+                createProtease "Lys-C" (let _p1 = [AminoAcid.Lys] |> Set.ofList
+                                        fun p4 p3 p2 p1 p1' p2' -> 
+                                        match p1 with
+                                        | Some a1 -> _p1.Contains(a1)
+                                        | _ -> false
+                                       )    

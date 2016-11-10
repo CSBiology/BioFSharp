@@ -26,7 +26,7 @@ let ms1DataTest =
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidSpectrum = 
-    SignalDetection.Wavelet.toCentroid ms1DataTest.Mass ms1DataTest.Intensity
+    SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity
 
 
 (*** define-output:spectrum1 ***)
@@ -47,7 +47,7 @@ and computation time is a limiting factor.
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
-     SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. 643.8029052
+     SignalDetection.windowToCentroidBy SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity 3. 643.8029052
 
  
 (*** define-output:spectrum2 ***)
