@@ -1,6 +1,6 @@
 namespace BioFSharp.Algorithm
 
-///A collections of naive string matching algorithms
+///A collection of naive string matching algorithms
 module Naive =
 
 
@@ -43,7 +43,7 @@ module Naive =
 ///A collection of Rabin-Karp string matching algorithms and hash functions
 module RabinKarp =
     
-    ///control function to check if content of pattern and source substring match
+    ///checks if content of pattern and source substring match
     let isMatchAt (pattern:array<'a>) (s:array<'a>) (startPos:int) =    
         let rec loop i = 
             if i < pattern.Length then
