@@ -1,9 +1,10 @@
 namespace BioFSharp.Algorithm
 
-///The naive search algorithm.
+///A collections of naive string matching algorithms
 module Naive =
 
-    ///find
+
+    ///finds all matches of a query pattern in a source
     let findAll (pattern : array<'a>) (s : array<'a>) =
         let rec loop (sPos:int) (patternPos:int) (matchCount:int) (resultList : int list) =
             if sPos < s.Length then
@@ -19,6 +20,7 @@ module Naive =
         if s.Length > 0 then loop 0 0 0 [] else []
 
 
+    ///finds the first match of a query pattern in a source starting from a specific position in the source
     let findFrom (startPos : int) (pattern : array<'a>) (s : array<'a>) =
         let rec loop (sPos:int) (patternPos:int) (matchCount:int) =
             if sPos < s.Length then
@@ -34,12 +36,14 @@ module Naive =
         if s.Length > 0 then loop startPos 0 0 else -1
 
 
+    ///finds the first match of a query pattern in a source
     let find (pattern : array<'a>) (s : array<'a>) = findFrom 0 pattern s
         
 
-
+///A collection of Rabin-Karp string matching algorithms and hash functions
 module RabinKarp =
     
+    ///control function to check if content of pattern and source substring match
     let isMatchAt (pattern:array<'a>) (s:array<'a>) (startPos:int) =    
         let rec loop i = 
             if i < pattern.Length then
@@ -50,8 +54,9 @@ module RabinKarp =
             else 
                 true
         if startPos+pattern.Length > s.Length then false else loop 0
-    
 
+    
+    ///takes an updateHash and blockHash function to find all matches of a query pattern in a source
     let inline findAllGeneric (updateHash : 'c -> 'a -> 'a -> 'c when 'c : unmanaged) (blockHash : 'a array -> 'c when 'c: unmanaged) (pattern : array<'a>) (s : array<'a>) = 
         let m,n = pattern.Length,s.Length
         if m < n && n > 0 then 
@@ -76,6 +81,7 @@ module RabinKarp =
         else []
 
 
+    ///takes an updateHash and blockHash function to find the first match of a query pattern in a source starting from a specific position in the source
     let findFromGeneric (startPos:int) (updateHash : 'c -> 'a -> 'a -> 'c when 'c : unmanaged) (blockHash : 'a array -> 'c when 'c: unmanaged) (pattern : array<'a>) (text : array<'a>) = 
         let m,n = pattern.Length,text.Length
         if m < n && n > 0 then 
@@ -100,7 +106,9 @@ module RabinKarp =
             loop startPos initHs
         else -1
 
+
     // https://github.com/lemire/rollinghashjava/blob/master/src/rollinghash/RabinKarpHash.java
+    ///A collection of Rabin-Karp string matching algorithms using the built-in hash function of f#
     module RKStandard =
 
         // b = 31
@@ -109,40 +117,44 @@ module RabinKarp =
         let initBaseEndFromLength b k = 
             [0..k-1] |> List.fold (fun state i -> state*b) 1
             
-
+        ///adds a hashvalue to an existing hashvalue
         let addToHash b cHashvalue c =
             b*cHashvalue + hash c
 
-
+        ///hashes a pattern
         let blockHash b (pattern:array<'a>) =
             pattern |> Array.fold (fun state c -> addToHash b state c) 0
 
-
+        ///updates an existing hashvalue 
         let updateHash b bK cHashvalue inchar outchar =
             b*cHashvalue + (hash inchar) - bK * (hash outchar)
 
-
+        ///finds all matches of a query pattern in a source
         let findAll (pattern : array<'a>) (s : array<'a>) = 
             findAllGeneric (updateHash 31 (initBaseEndFromLength 31 pattern.Length)) (blockHash 31) pattern s 
         
-
+        ///finds the first match of a query pattern in a source starting from a specific position in the source
         let findFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
             findFromGeneric startPos (updateHash 31 (initBaseEndFromLength 31 pattern.Length)) (blockHash 31) pattern s 
 
-
+        ///finds the first match of a query pattern in a source
         let find (pattern : array<'a>) (s : array<'a>) =
             findFrom 0 pattern s
 
 
+    ///A collection of Rabin-Karp string matching algorithms using the cyclic polynomial (CP) hash
     module CP = 
-        
+
+        ///bitwise cyclic rotation of a 64 bit pattern
         let inline rotateLeft r x  = (x <<< r) ||| (x >>> (64 - r))
 
 
+        ///adds a hashvalue to an existing hashvalue
         let inline addToHashValue hs inchar =
             (rotateLeft 1 hs) ^^^ (uint64 inchar)
 
 
+        ///hashes a pattern
         let inline blockHash (pattern : array<'a>) =
             let m = pattern.Length
             let rec loop i hs =
@@ -153,25 +165,30 @@ module RabinKarp =
             loop 0 0UL
 
 
+        ///updates an existing hashvalue 
         let inline updateHash pLength hs inchar outchar =
             let z = (rotateLeft pLength (uint64 outchar)) 
             (rotateLeft 1 hs) ^^^ z ^^^ (uint64 inchar)
 
-        
+
+        ///find all matches of a query pattern in a source   
         let inline findAll (pattern : array<'a>) (s : array<'a>) = 
             findAllGeneric (updateHash pattern.Length) (blockHash) pattern s 
         
 
+        ///find the first match of a query pattern in a source starting from a specific position in the source
         let inline findFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
             findFromGeneric startPos (updateHash pattern.Length) (blockHash) pattern s 
 
 
+        ///find the first match of a query pattern in a source
         let inline find (pattern : array<'a>) (s : array<'a>) =
             findFrom 0 pattern s
     
-
+///A collection of Knuth-Morris-Pratt string matching algorithms
 module KnuthMorrisPratt = 
 
+    ///creates a prefix table for a query pattern
     let createPrefixTable (pattern : array<'a>) =
         let prefixTable = Array.zeroCreate pattern.Length
 
@@ -190,6 +207,7 @@ module KnuthMorrisPratt =
         prefixTable
     
 
+    ///finds all matches of a query pattern in a source using a given prefix table
     let findAll (prefixTable : int []) (pattern : array<'a>) (s : array<'a>) =
         let rec loop matchStart patternPosition resultList =
             if (matchStart + patternPosition) < s.Length then
@@ -207,12 +225,14 @@ module KnuthMorrisPratt =
                 List.rev resultList
         if s.Length > 0 then loop 0 0 [] else []   
     
-    
+
+    ///returns a findAll function with a set prefix table created from the input
     let initFindAll (pattern : array<'a>) = 
         let prefixTable = createPrefixTable pattern
         findAll prefixTable pattern
 
 
+    ///finds the first match of a query pattern in a source starting from a specific position in the source using a given prefix table
     let findFrom (prefixTable : int []) (pattern : array<'a>) (startPos : int) (s : array<'a>) =
         let rec loop matchStart patternPosition =
             if (matchStart + patternPosition) < s.Length then
@@ -231,15 +251,18 @@ module KnuthMorrisPratt =
         loop startPos 0 
     
 
-    let initFindFirstMatch (pattern : array<'a>) = 
+    ///returns a findFrom function with a set prefix table created from the input
+    let initFindFrom (pattern : array<'a>) = 
         let prefixTable = createPrefixTable pattern
         findFrom prefixTable pattern 
 
 
+    ///finds the first match of a query pattern in a source using a given prefix table
     let find (prefixTable : int []) (pattern : array<'a>) (s : array<'a>) =
         findFrom prefixTable pattern 0 s
 
 
+    ///returns a find function with a set prefix table created from the input
     let initFind (pattern: array<'a>) =
         let prefixTable = createPrefixTable pattern
         findFrom prefixTable pattern 0
