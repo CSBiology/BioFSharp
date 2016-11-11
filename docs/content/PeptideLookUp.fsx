@@ -116,7 +116,7 @@ let paramTestN15 = {
         // Protease that is used during in silico digestion of the proteins
         Protease            = Digestion.Table.getProteaseBy "Trypsin"
         // Minimum number of missed cleavages
-        MinMissedCleavages  = 1
+        MinMissedCleavages  = 0
         // Maximum number of missed cleavages
         MaxMissedCleavages  = 3
         // Maximum peptide mass inserted in the database
@@ -196,7 +196,7 @@ let paramTestN14 = {
         FastaPath           = (__SOURCE_DIRECTORY__ + "/data/Chlamy_Cp.fastA")
         FastaHeaderToName   = id
         Protease            = Digestion.Table.getProteaseBy "Trypsin"
-        MinMissedCleavages  = 1
+        MinMissedCleavages  = 0
         MaxMissedCleavages  = 3
         MaxMass             = 15000.
         MinPepLength        = 4

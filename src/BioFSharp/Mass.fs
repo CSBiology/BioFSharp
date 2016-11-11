@@ -11,7 +11,13 @@ module Mass =
         /// Proton Mass. Units u 
         /// </summary>
         [<Literal>]
-        let PMassInU =  1.00727646677 // Wiki: 1,007 276 466 812(90) u
+        let PMassInU =  1.00727646681 // Wiki: 1.007 276 466 812(90) u
+                        
+        /// <summary>
+        /// Neutron Mass. Units u 
+        /// </summary>
+        [<Literal>]
+        let NMassInU =  1.00866491588 // Wiki: 1.008 664 915 88(49) u
         
     /// <summary>
     ///   Converts mass to m/z

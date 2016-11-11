@@ -27,7 +27,7 @@ module PeakArray =
         pkarr 
         |> Array.iter (fun p ->
             let index = int(ceil p.Mz) - minMassBoarder
-            if index < maxIndex && index > -1 then
+            if index < maxIndex-1 && index > -1 then
                 array.[index] <- max array.[index] p.Intensity)
         array
 
@@ -38,7 +38,7 @@ module PeakArray =
         pkarr 
         |> Array.iter (fun p ->  
             let index = int(round p.Mz) - minMassBoarder
-            if index < maxIndex && index > -1 then
+            if index < maxIndex-1 && index > -1 then
                 array.[index] <- max array.[index] p.Intensity)
         array
          
