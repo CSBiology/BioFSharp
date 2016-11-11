@@ -1,64 +1,49 @@
 namespace BioFSharp.Algorithm
 
-///The naive search algorithm.
+///A collections of naive string matching algorithms
 module Naive =
 
-    ///find
+
+    ///finds all matches of a query pattern in a source
     let findAll (pattern : array<'a>) (s : array<'a>) =
-
         let rec loop (sPos:int) (patternPos:int) (matchCount:int) (resultList : int list) =
-
             if sPos < s.Length then
-           
                 if pattern.[patternPos] = s.[sPos] then
-                    
                     if patternPos = (pattern.Length-1) then
-
                         loop (sPos - matchCount + 1) 0 0 ((sPos - matchCount)::resultList)
-            
                     else 
-
                         loop (sPos+1) (patternPos+1) (matchCount+1) resultList
                 else
                     loop (sPos - matchCount + 1) 0 0 resultList
-
             else
-                
                 List.rev resultList
-        loop 0 0 0 []
+        if s.Length > 0 then loop 0 0 0 [] else []
 
 
-    let findFirstFrom (startPos : int) (pattern : array<'a>) (s : array<'a>) =
-        
+    ///finds the first match of a query pattern in a source starting from a specific position in the source
+    let findFrom (startPos : int) (pattern : array<'a>) (s : array<'a>) =
         let rec loop (sPos:int) (patternPos:int) (matchCount:int) =
-            
             if sPos < s.Length then
-
                 if pattern.[patternPos] = s.[sPos] then
-                    
                     if patternPos = (pattern.Length-1) then
-                        
-                        (sPos - pattern.Length)
-
+                        (sPos - pattern.Length + 1)
                     else
-                        
                         loop (sPos+1) (patternPos+1) (matchCount+1)
                 else
-                    
                     loop (sPos - matchCount + 1) 0 0
             else
-
                 -1
+        if s.Length > 0 then loop startPos 0 0 else -1
 
-        loop 0 0 startPos
 
-
-    let findFirst (pattern : array<'a>) (s : array<'a>) = findFirstFrom 0 pattern s
+    ///finds the first match of a query pattern in a source
+    let find (pattern : array<'a>) (s : array<'a>) = findFrom 0 pattern s
         
 
-
+///A collection of Rabin-Karp string matching algorithms and hash functions
 module RabinKarp =
     
+    ///control function to check if content of pattern and source substring match
     let isMatchAt (pattern:array<'a>) (s:array<'a>) (startPos:int) =    
         let rec loop i = 
             if i < pattern.Length then
@@ -69,59 +54,61 @@ module RabinKarp =
             else 
                 true
         if startPos+pattern.Length > s.Length then false else loop 0
+
     
-    let findAllGeneric (updateHash : int -> 'a -> 'a -> int) (blockHash : 'a array -> int ) (pattern : array<'a>) (s : array<'a>) = 
+    ///takes an updateHash and blockHash function to find all matches of a query pattern in a source
+    let inline findAllGeneric (updateHash : 'c -> 'a -> 'a -> 'c when 'c : unmanaged) (blockHash : 'a array -> 'c when 'c: unmanaged) (pattern : array<'a>) (s : array<'a>) = 
         let m,n = pattern.Length,s.Length
-        let hpattern = pattern |> blockHash
-        let initHs   = s.[0..m-1] |> blockHash
+        if m < n && n > 0 then 
+            let hpattern = pattern |> blockHash
+            let initHs   = s.[0..m-1] |> blockHash
 
-        let rec loop i hs resultList =
-            if i < (n-m) then 
-                if hpattern = hs then
-                    if (isMatchAt pattern s i)then
-                        loop (i+1) (updateHash hs s.[i+m] s.[i]) (i::resultList)
-
+            let rec loop i hs resultList =
+                if i < (n-m) then 
+                    if hpattern = hs then
+                        if (isMatchAt pattern s i)then
+                            loop (i+1) (updateHash hs s.[i+m] s.[i]) (i::resultList)
+                        else 
+                            loop (i+1) (updateHash hs s.[i+m] s.[i]) resultList
                     else 
-                        loop (i+1) hs resultList
-
-                else 
-                    loop (i+1) (updateHash hs s.[i+m] s.[i]) resultList
-            else
-                if (isMatchAt pattern s (n-m)) then
-                    ((n-m)::resultList) |> List.rev
-
+                        loop (i+1) (updateHash hs s.[i+m] s.[i]) resultList
                 else
-                    List.rev resultList
-        
-        loop 0 initHs []
+                    if (isMatchAt pattern s (n-m)) then
+                        ((n-m)::resultList) |> List.rev
+                    else
+                        List.rev resultList
+            loop 0 initHs []
+        else []
 
-    let findFirstFromGeneric (startPos:int) (updateHash : int -> 'a -> 'a -> int) (blockHash : 'a array -> int ) (pattern : array<'a>) (text : array<'a>) = 
+
+    ///takes an updateHash and blockHash function to find the first match of a query pattern in a source starting from a specific position in the source
+    let findFromGeneric (startPos:int) (updateHash : 'c -> 'a -> 'a -> 'c when 'c : unmanaged) (blockHash : 'a array -> 'c when 'c: unmanaged) (pattern : array<'a>) (text : array<'a>) = 
         let m,n = pattern.Length,text.Length
-        let hpattern = pattern |> blockHash
-        let initHs   = text.[0..m-1] |> blockHash
+        if m < n && n > 0 then 
+            let hpattern = pattern |> blockHash
+            let initHs   = text.[0..m-1] |> blockHash
 
-        let rec loop i hs =
-            if i < (n-m) then 
-                if hpattern = hs then
-                    if (isMatchAt pattern text i)then
-                        i
-        
+            let rec loop i hs =
+                if i < (n-m) then 
+                    if hpattern = hs then
+                        if (isMatchAt pattern text i)then
+                            i
+                        else 
+                            loop (i+1) hs 
                     else 
-                        loop (i+1) hs 
-
-                else 
-                    loop (i+1) (updateHash hs text.[i+m] text.[i]) 
-
-            else
-                if (isMatchAt pattern text (n-m)) then
-                    (n-m)
-        
+                        loop (i+1) (updateHash hs text.[i+m] text.[i]) 
                 else
-                    -1
-        
-        loop startPos initHs
+                    if (isMatchAt pattern text (n-m)) then
+                        (n-m)
+                    else
+                        -1
+            
+            loop startPos initHs
+        else -1
+
 
     // https://github.com/lemire/rollinghashjava/blob/master/src/rollinghash/RabinKarpHash.java
+    ///A collection of Rabin-Karp string matching algorithms using the built-in hash function of f#
     module RKStandard =
 
         // b = 31
@@ -130,349 +117,154 @@ module RabinKarp =
         let initBaseEndFromLength b k = 
             [0..k-1] |> List.fold (fun state i -> state*b) 1
             
+        ///adds a hashvalue to an existing hashvalue
         let addToHash b cHashvalue c =
             b*cHashvalue + hash c
 
+        ///hashes a pattern
         let blockHash b (pattern:array<'a>) =
             pattern |> Array.fold (fun state c -> addToHash b state c) 0
 
+        ///updates an existing hashvalue 
         let updateHash b bK cHashvalue inchar outchar =
             b*cHashvalue + (hash inchar) - bK * (hash outchar)
-    
-    module RabinKarpSearch =
 
+        ///finds all matches of a query pattern in a source
         let findAll (pattern : array<'a>) (s : array<'a>) = 
-            findAllGeneric (RKStandard.updateHash 31 (RKStandard.initBaseEndFromLength 31 pattern.Length)) (RKStandard.blockHash 31) pattern s 
+            findAllGeneric (updateHash 31 (initBaseEndFromLength 31 pattern.Length)) (blockHash 31) pattern s 
         
-        let findFirstFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
-            findFirstFromGeneric startPos (RKStandard.updateHash 31 (RKStandard.initBaseEndFromLength 31 pattern.Length)) (RKStandard.blockHash 31) pattern s 
+        ///finds the first match of a query pattern in a source starting from a specific position in the source
+        let findFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
+            findFromGeneric startPos (updateHash 31 (initBaseEndFromLength 31 pattern.Length)) (blockHash 31) pattern s 
 
-        let findFirst (pattern : array<'a>) (s : array<'a>) =
-            findFirstFrom 0 pattern s
+        ///finds the first match of a query pattern in a source
+        let find (pattern : array<'a>) (s : array<'a>) =
+            findFrom 0 pattern s
 
-    module Buzz = 
 
-        let blockHash (pattern:array<'a>) =
-            let n = pattern.Length
-            let rec loop index pow acc =
-                if index < pattern.Length then
-                    loop (index+1) (pow-1) (acc ^^^ ((int <| pattern.[index]) <<< pow))
+    ///A collection of Rabin-Karp string matching algorithms using the cyclic polynomial (CP) hash
+    module CP = 
+
+        ///bitwise cyclic rotation of a 64 bit pattern
+        let inline rotateLeft r x  = (x <<< r) ||| (x >>> (64 - r))
+
+
+        ///adds a hashvalue to an existing hashvalue
+        let inline addToHashValue hs inchar =
+            (rotateLeft 1 hs) ^^^ (uint64 inchar)
+
+
+        ///hashes a pattern
+        let inline blockHash (pattern : array<'a>) =
+            let m = pattern.Length
+            let rec loop i hs =
+                if i < m then
+                    loop (i+1) (addToHashValue hs pattern.[i])
                 else
-                    acc
-            loop 0 (n-1) 0
+                    hs
+            loop 0 0UL
 
-        let inline updateHash patternLength cHashvalue inchar outchar =
-            
-            (cHashvalue <<< 1) ^^^ ((int outchar) <<< patternLength) ^^^ (int inchar)
-    
-    module BuzzSearch =
-        
-        let findAll (pattern : array<'a>) (s : array<'a>) = 
-            findAllGeneric (Buzz.updateHash pattern.Length) (Buzz.blockHash) pattern s 
-        
-        let findFirstFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
-            findFirstFromGeneric startPos (Buzz.updateHash pattern.Length) (Buzz.blockHash) pattern s 
 
-        let findFirst (pattern : array<'a>) (s : array<'a>) =
-            findFirstFrom 0 pattern s
-    
-    
+        ///updates an existing hashvalue 
+        let inline updateHash pLength hs inchar outchar =
+            let z = (rotateLeft pLength (uint64 outchar)) 
+            (rotateLeft 1 hs) ^^^ z ^^^ (uint64 inchar)
 
-//    let SearchAtFindFirstFrom (pattern:array<'a>) (s:array<'a>) (startPos:int) =    
-//        let m,n = pattern.Length,s.Length 
-//        let b = 31
-//        
-//        if startPos > n-m then 
-//            -1
-//        else
-//        
-//            let hpattern = pattern |> Array.fold (fun state c -> RKStandard.add b state c) 0
-//            let initHs   = s.[startPos..startPos+m-1] |> Array.fold (fun state c ->RabinKarpHash.add b state c) 0   
-//            let rkhUpdate = RabinKarpHash.update b (RabinKarpHash.initBaseEndFromLength b m )
-//    
-//            let rec loop i hs =
-//                if i <= n-m then 
-//                    if hpattern = hs then
-//                        //printfn"1 -"
-//                        if (isMatchAt pattern s i)then
-//                            //printfn"match"
-//                            i
-//                        else 
-//                            //printfn"incr"
-//
-//                            loop (i+1) hs
-//                    else 
-//                        //printfn"kp"
-//                        loop (i+1) (rkhUpdate hs s.[i+m] s.[i])
-//                else
-//                    -1
-//            loop startPos initHs
-    
-//    let Search (pattern:array<'a>) (s:array<'a>) =    
-//        SearchAt pattern s 0
-//
-//    let SearchAll (pattern:array<'a>) (s:array<'a>)=    
-//        let m,n = pattern.Length,s.Length 
-//        let b = 31
-//        let hpattern = pattern |> Array.fold (fun state c -> RabinKarpHash.add b state c) 0
-//        let initHs   = s.[0..m-1] |> Array.fold (fun state c ->RabinKarpHash.add b state c) 0   
-//        let rkhUpdate = RabinKarpHash.update b (RabinKarpHash.initBaseEndFromLength b m )
-//
-//        let rec loop i hs resultList =
-//            if i < n-m then 
-//                if hpattern = hs then
-//                    if (isMatchAt pattern s i)then
-//                        //printfn"match"
-//                        loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) (i::resultList)
-//                    else 
-//                        //printfn"incr"
-//                        loop (i+1) hs resultList
-//                else 
-//                    //printfn"kp"
-//                    loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) resultList
-//            else
-//
-//                if (isMatchAt pattern s (n-m)) then
-//
-//                    ((n-m)::resultList) |> List.rev
-//
-//                else
-//
-//                    List.rev resultList
-//        loop 0 initHs []
-            
-//    let inline SearchAllBuzz (pattern:array<'a>) (s:array<'a>) =   
-// 
-//        let m,n = pattern.Length,s.Length 
-//        let hpattern = BuzzHash.blockHash pattern
-//        let initHs   = s.[0..m-1] |> BuzzHash.blockHash 
-//        let rkhUpdate = BuzzHash.update m 
-//        
-//        let rec loop i hs resultList =
-//            if i < (n-m) then 
-//                if hpattern = hs then
-//                    //printfn"1 -"
-//                    if (isMatchAt pattern s i)then
-//
-//                        loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) (i::resultList)
-//
-//                    else 
-//                        //printfn"incr"
-//                        loop (i+1) hs resultList
-//                else 
-//                    //printfn"kp"
-//                    loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) resultList
-//            else
-//
-//                if (isMatchAt pattern s (n-m)) then
-//
-//                    ((n-m)::resultList) |> List.rev
-//
-//                else
-//
-//                    List.rev resultList
-//
-//        loop 0 initHs []  
+
+        ///find all matches of a query pattern in a source   
+        let inline findAll (pattern : array<'a>) (s : array<'a>) = 
+            findAllGeneric (updateHash pattern.Length) (blockHash) pattern s 
         
+
+        ///find the first match of a query pattern in a source starting from a specific position in the source
+        let inline findFrom (startPos:int) (pattern : array<'a>) (s : array<'a>) =
+            findFromGeneric startPos (updateHash pattern.Length) (blockHash) pattern s 
+
+
+        ///find the first match of a query pattern in a source
+        let inline find (pattern : array<'a>) (s : array<'a>) =
+            findFrom 0 pattern s
     
-//    let inline SearchAllBuzzCont (pattern:array<'a>) (s:array<'a>) =    
-//        let m,n = pattern.Length,s.Length 
-//        let hpattern = BuzzHash.createBuzhash pattern
-//        let initHs   = s.[0..m-1] |> BuzzHash.createBuzhash
-//        let rkhUpdate = BuzzHash.update m
-//        
-//        let rec loop i hs cont =
-//            if i < (n-m+1) then 
-//                if hpattern = hs then
-//                    
-//                    if (isMatchAt pattern s i) then
-//
-//                        if i + m = n then
-//                            cont []
-//
-//                        else
-//                            loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) (fun acc -> cont(i::acc))
-//                    else 
-//                        //printfn"incr"
-//                        loop (i+1) hs (fun acc -> cont (acc))
-//                else 
-//                    //printfn"kp"
-//                    loop (i+1) (rkhUpdate hs s.[i+m] s.[i]) (fun acc -> cont (acc))
-//            else
-//                
-//                cont []
-//                
-//        loop 0 initHs id 
-    
-    
-    
+///A collection of Knuth-Morris-Pratt string matching algorithms
 module KnuthMorrisPratt = 
 
+    ///creates a prefix table for a query pattern
     let createPrefixTable (pattern : array<'a>) =
         let prefixTable = Array.zeroCreate pattern.Length
-    
-        let rec prefixSet startIndex matchCount =
-            
-            
+
+        let rec loop startIndex matchCount =
             let writeIndex = startIndex + matchCount
+            
             if writeIndex < pattern.Length then
-    
-    
                 if pattern.[writeIndex] = pattern.[matchCount] then
-                    
-    
                     prefixTable.[writeIndex] <- matchCount
-    
-                    prefixSet startIndex (matchCount + 1)
-    
-    
+                    loop startIndex (matchCount + 1)
                 else
-    
                     prefixTable.[writeIndex] <- matchCount
-    
-                    prefixSet (writeIndex + 1) 0
-    
-        prefixSet 1 0
-    
+                    loop (writeIndex + 1) 0
+        loop 1 0
         if pattern.Length > 0 then prefixTable.[0] <- -1
         prefixTable
     
-    
-    
-    
-    //Algorithms to find all matches of a pattern in a text
-    
-    
-    
-    //without currying
-    //needs a precomputed prefixTable, done by the createPrefixTable function
-    
-    let findAllMatches (pattern : array<'a>) (s : array<'a>) (prefixTable : int [])=
-    
-        let rec matcher matchStart patternPosition resultList =
-    
+
+    ///finds all matches of a query pattern in a source using a given prefix table
+    let findAll (prefixTable : int []) (pattern : array<'a>) (s : array<'a>) =
+        let rec loop matchStart patternPosition resultList =
             if (matchStart + patternPosition) < s.Length then
-    
                 if pattern.[patternPosition] = s.[(matchStart + patternPosition)] then
-    
                     if patternPosition = (pattern.Length - 1)  then
-    
-                        
-                        matcher (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] (matchStart::resultList)
-                    
+                        loop (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] (matchStart::resultList)
                     else
-                        matcher matchStart (patternPosition + 1) resultList
-    
+                        loop matchStart (patternPosition + 1) resultList
                 else
-    
                     if prefixTable.[patternPosition] > -1 then
-    
-                        matcher (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] resultList
+                        loop (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] resultList
                     else
-                        
-                         
-                        matcher (matchStart + 1) 0 resultList
+                        loop (matchStart + 1) 0 resultList
             else
-                
                 List.rev resultList
+        if s.Length > 0 then loop 0 0 [] else []   
     
-        matcher 0 0 []    
-    
-    
-    let initFindAllMatches (pattern : array<'a>) = 
-        //makes sure that the pattern will only be used with its respective prefixTable
-        //initializing: let yourFunctionName = initFindAllMatches yourPattern 
-        //!! dont use the name of any of the already existing functions as the name of "yourFunction"!! 
-        //to find matches: yourFunctionName yourText
-    
-    
+
+    ///returns a findAll function with a set prefix table created from the input
+    let initFindAll (pattern : array<'a>) = 
         let prefixTable = createPrefixTable pattern
-    
-        let findAllMatches (pattern : array<'a>) (prefixTable : int []) (s : array<'a>)=
-    
-        //matchStart: start of the current match in the text.
-        //patternPosition: index of the current character in the pattern
-    
-            let rec matcher matchStart patternPosition resultList =
-    
-                if (matchStart + patternPosition) < s.Length then
-    
-                    if pattern.[patternPosition] = s.[(matchStart + patternPosition)] then
-    
-                        if patternPosition = (pattern.Length - 1)  then
-    
-                            //printfn "Match found! starting at position %i" matchStart
-                            matcher (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] (matchStart::resultList)
-    
-                        else
-                            matcher matchStart (patternPosition + 1) resultList
-    
-                    else
-    
-                    //printfn "5"
-    
-                        if prefixTable.[patternPosition] > -1 then
-    
-                            matcher (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] resultList
-    
-                        else
-    
-                            matcher (matchStart + 1) 0 resultList
-                else
-                    //printfn "Matches found starting on the following indices of the text:" 
-                    List.rev resultList
-    
-            matcher 0 0 [] 
-    
-        findAllMatches pattern prefixTable
-    
-    
-    
-    //first Match finders
-    //Algorithms for finding the first match of a pattern in a text. Terminates after the first match is found  
-    let findFirstMatch (prefixTable : int []) (pattern : array<'a>) (s : array<'a>) =
-    
-        let rec matcher matchStart patternPosition =
-    
-            if (matchStart + patternPosition + 1) <= s.Length then
-    
+        findAll prefixTable pattern
+
+
+    ///finds the first match of a query pattern in a source starting from a specific position in the source using a given prefix table
+    let findFrom (prefixTable : int []) (pattern : array<'a>) (startPos : int) (s : array<'a>) =
+        let rec loop matchStart patternPosition =
+            if (matchStart + patternPosition) < s.Length then
                 if pattern.[patternPosition] = s.[(matchStart + patternPosition)] then
-    
                     if patternPosition = (pattern.Length - 1)  then
-    
-                        //printfn "Match found! starting at position %i" matchStart
                         matchStart
-                    
                     else
-                        matcher matchStart (patternPosition + 1) 
-    
+                        loop matchStart (patternPosition + 1) 
                 else
-    
                     if prefixTable.[patternPosition] > -1 then
-    
-                        matcher (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] 
+                        loop (matchStart + patternPosition - prefixTable.[patternPosition]) prefixTable.[patternPosition] 
                     else
-                        
-                         
-                        matcher (matchStart + 1) 0 
+                        loop (matchStart + 1) 0 
             else
-                //printfn "no matches found"
                 -1    
-                
+        loop startPos 0 
     
-        matcher 0 0 
-    
-    
-    
-    
-    let initFindFirstMatch (pattern : array<'a>) = 
-        //makes sure that the pattern will only be used with its respective prefixTable
-        //initializing: let yourFunctionName = initFindFirstMatch yourPattern 
-        //!! dont use the name of any of the already existing functions as the name of "yourFunction"!! 
-        //to find matches: yourFunctionName yourText
-    
-    
+
+    ///returns a findFrom function with a set prefix table created from the input
+    let initFindFrom (pattern : array<'a>) = 
         let prefixTable = createPrefixTable pattern
-        findFirstMatch  prefixTable pattern
+        findFrom prefixTable pattern 
+
+
+    ///finds the first match of a query pattern in a source using a given prefix table
+    let find (prefixTable : int []) (pattern : array<'a>) (s : array<'a>) =
+        findFrom prefixTable pattern 0 s
+
+
+    ///returns a find function with a set prefix table created from the input
+    let initFind (pattern: array<'a>) =
+        let prefixTable = createPrefixTable pattern
+        findFrom prefixTable pattern 0
 
 
