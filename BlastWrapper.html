@@ -42,19 +42,12 @@ any output parameter for creating a custom output format.
 Official documentation for all BLAST applications can be found [here] (<a href="http://www.ncbi.nlm.nih.gov/books/NBK279690).">http://www.ncbi.nlm.nih.gov/books/NBK279690).</a></p>
 <p>For the purpose of this tutorial, we will build a protein database using a <code>.fastA</code> file containing chloroplast proteins
 of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data.</p>
-<p>Our query protein for the subsequent BLAST search will be the [photosystem II protein D1][linkToFasta] from Arabidopsis thaliana chloroplast.
-[linkToFasta]: <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta">http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta</a></p>
+<p>Our query protein for the subsequent BLAST search will be the <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta">photosystem II protein D1</a> from Arabidopsis thaliana chloroplast.</p>
 <h1><a name="How-to-use-BlastWrapper" class="anchor" href="#How-to-use-BlastWrapper">How to use BlastWrapper</a></h1>
-<ol>
-<li>
-Creation of a BLAST database
--------------------------------
-We will use the minimal amount of parameters needed to create a BLAST database from an input file.
+<h2><a name="Creation-of-a-BLAST-database" class="anchor" href="#Creation-of-a-BLAST-database">Creation of a BLAST database</a></h2>
+<p>We will use the minimal amount of parameters needed to create a BLAST database from an input file.
 The created database files will have the same name as the input file and will be located in the same folder.
-However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual][manual] for more information.
-[manual]: <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">http://www.ncbi.nlm.nih.gov/books/NBK279675/</a>
-</li>
-</ol>
+However, there are many parameters you can use to specify your database. Please refer to the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">NCBI user manual</a> for more information.</p>
 <p>First, lets specify the path of our input and the type of our database. Use a string for the input path and the provided <code>MakeDbParams</code> type
 for every other parameter.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
@@ -100,15 +93,10 @@ for every other parameter.</p>
 <p>This creates 3 new files in our directory:
 <code>Chlamy_Cp.fastA.phr</code>,<code>Chlamy_Cp.fastA.pin</code> and <code>Chlamy_Cp.fastA.psq</code>.
 We have sucesssfully created our search database.</p>
-<ol>
-<li>
-Creating a <code>.fastA</code> file from an aminoacid string
--------------------------------------------------------------
-<em>Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3.</em>
-</li>
-</ol>
+<h2><a name="Creating-a-file-from-an-aminoacid-string" class="anchor" href="#Creating-a-file-from-an-aminoacid-string">Creating a <code>.fastA</code> file from an aminoacid string</a></h2>
+<p><em>Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3.</em></p>
 <p>First, lets specify a string with our aminoacid sequence and convert it to a <code>BioSeq</code>.
-For more information about <code>BioSeq</code>, please refer to this [documentation] (<a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html)">https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html)</a></p>
+For more information about <code>BioSeq</code>, please refer to this <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html">documentation</a></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -129,15 +117,15 @@ For more information about <code>BioSeq</code>, please refer to this [documentat
 <span class="s">FSAMHGSLVTSSLIRETTENESANEGYRFGQEEETYNIVAAHGYFGRLIFQYASFNNSRSLHFFLAAWPV</span>
 <span class="s">VGIWFTALGISTMAFNLNGFNFNQSVVDSQGRVINTWADIINRANLGMEVMHERNAHNFPLDLAAVEAPS</span>
 <span class="s">TNG&quot;</span>
-<span class="c">///header for the ``` file</span>
+<span class="c">///header for the `.fastA` file</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="i">header</span> <span class="o">=</span> <span class="s">&quot;&gt;gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]&quot;</span>
 
-<span class="c">///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp`s `BioItems`</span>
+<span class="c">///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp&#39;s `BioItems`</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="i">querySequence</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 25)" onmouseover="showTip(event, 'fs17', 25)" class="f">ofAminoAcidString</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">aminoacidString</span>
 </code></pre></td>
 </tr>
 </table>
-<p>We will now use BioFSharp<code>s</code>FastA<code>library to create a</code>FASTA` item and write it to a file.</p>
+<p>We will now use BioFSharp's <code>FastA</code> library to create a <code>FASTA</code> item and write it to a file.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -160,15 +148,10 @@ to the one letter symbol (eg. Met -&gt; M)</p>
 </code></pre></td>
 </tr>
 </table>
-<ol>
-<li>
-Performing the BLAST search
-------------------------------
-We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
+<h2><a name="Performing-the-BLAST-search" class="anchor" href="#Performing-the-BLAST-search">Performing the BLAST search</a></h2>
+<p>We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
 <em>Note: custom output formats can only be specified for output types <code>CSV</code>, <code>tabular</code> and <code>tabular with comments</code>. For more information, check
-the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">options for the command-line applicaions</a></em>
-</li>
-</ol>
+the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">options for the command-line applicaions</a></em></p>
 <p>First, lets specify the overall output type. This will define the outline of our output. We want our output to be in tabular form, with added information
 in the form of comments.
 <em>Note: when not specified, the output type will be <code>pairwise</code></em></p>
@@ -246,8 +229,8 @@ done otherwise</em></p>
 <div class="tip" id="fs11">Multiple items<br />type BlastWrapper =<br />&#160;&#160;new : rootPath:string -&gt; BlastWrapper<br />&#160;&#160;member blastN : searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />&#160;&#160;member blastP : searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />&#160;&#160;member makeblastdb : searchDB:string -&gt; ps:seq&lt;MakeDbParams&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.BlastNCBI.BlastWrapper<br /><br />--------------------<br />new : rootPath:string -&gt; BlastWrapper</div>
 <div class="tip" id="fs12">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
 <div class="tip" id="fs13">val aminoacidString : string<br /><br />Full name: BlastWrapper.aminoacidString<br /><em><br /><br />Raw string of the aminoacid sequence of our query protein</em></div>
-<div class="tip" id="fs14">val header : string<br /><br />Full name: BlastWrapper.header<br /><em><br /><br />header for the ``` file</em></div>
-<div class="tip" id="fs15">val querySequence : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BlastWrapper.querySequence<br /><em><br /><br />Query sequency represented as a sequence of `AminoAcid` one of BioFSharp`s `BioItems`</em></div>
+<div class="tip" id="fs14">val header : string<br /><br />Full name: BlastWrapper.header<br /><em><br /><br />header for the `.fastA` file</em></div>
+<div class="tip" id="fs15">val querySequence : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BlastWrapper.querySequence<br /><em><br /><br />Query sequency represented as a sequence of `AminoAcid` one of BioFSharp&#39;s `BioItems`</em></div>
 <div class="tip" id="fs16">module BioSeq<br /><br />from BioFSharp</div>
 <div class="tip" id="fs17">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.ofAminoAcidString</div>
 <div class="tip" id="fs18">val queryFastaPath : string<br /><br />Full name: BlastWrapper.queryFastaPath<br /><em><br /><br />path and name of the query file</em></div>

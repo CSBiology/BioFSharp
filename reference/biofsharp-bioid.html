@@ -62,9 +62,23 @@
         </tr>
         <tr>
           <td class="type-name">
+            <a href="biofsharp-bioid-mouseid.html">MouseId</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
             <a href="biofsharp-bioid-obo.html">Obo</a>
           </td>
           <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-bioid-proteinexistence.html">ProteinExistence</a>
+          </td>
+          <td class="xmldoc"><p>Indicates the type of evidence that supports the existence of the protein</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
@@ -76,7 +90,28 @@
         </tr>
         <tr>
           <td class="type-name">
+            <a href="biofsharp-bioid-uniprotid.html">UniProtId</a>
+          </td>
+          <td class="xmldoc"><p>UniProt sequence identifier</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
             <a href="biofsharp-bioid-yeastid.html">YeastId</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-bioid-fasta.html">FastA</a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -102,7 +137,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L29-29" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L72-72" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -123,7 +158,7 @@ Returns Failure string in case of no match.</p>
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L30-30" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L73-73" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -134,14 +169,32 @@ Returns Failure string in case of no match.</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '55', 55)" onmouseover="showTip(event, '55', 55)">
-            parseRefSeqId 
+            parseMgiId 
           </code>
           <div class="tip" id="55">
+            <strong>Signature:</strong> string -&gt; Either&lt;MouseId,string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L122-122" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
+            parseRefSeqId 
+          </code>
+          <div class="tip" id="56">
             <strong>Signature:</strong> string -&gt; Either&lt;RefSeqId,string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L17-17" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L60-60" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -154,33 +207,15 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
-            parseSgdId 
-          </code>
-          <div class="tip" id="56">
-            <strong>Signature:</strong> string -&gt; Either&lt;YeastId,string&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L56-56" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
           <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
-            parseYeastSN 
+            parseSgdId 
           </code>
           <div class="tip" id="57">
             <strong>Signature:</strong> string -&gt; Either&lt;YeastId,string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L57-57" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L99-99" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -191,14 +226,92 @@ Returns Failure string in case of no match.</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
-            stringFromYeastId yid
+            parseUniParc 
           </code>
           <div class="tip" id="58">
-            <strong>Signature:</strong> yid:YeastId -&gt; string<br />
+            <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L49-49" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parse UniParc sequence identifier. Returns Failure string in case of no match.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
+            parseUniProtKB 
+          </code>
+          <div class="tip" id="59">
+            <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L47-47" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parse UniProt sequence identifier. Returns Failure string in case of no match.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
+            parseUniRef 
+          </code>
+          <div class="tip" id="60">
+            <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L51-51" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parse UniRef sequence identifier. Returns Failure string in case of no match.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
+            parseYeastSN 
+          </code>
+          <div class="tip" id="61">
+            <strong>Signature:</strong> string -&gt; Either&lt;YeastId,string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L100-100" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '62', 62)" onmouseover="showTip(event, '62', 62)">
+            stringFromYeastId yid
+          </code>
+          <div class="tip" id="62">
+            <strong>Signature:</strong> yid:YeastId -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L94-94" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

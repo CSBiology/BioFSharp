@@ -42,6 +42,8 @@
   <span>Namespace: BioFSharp.Algorithm</span><br />
 </p>
 <div class="xmldoc">
+<p>A collection of Rabin-Karp string matching algorithms and hash functions</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -54,27 +56,19 @@
     <tbody>
         <tr>
           <td class="module-name">
-            <a href="biofsharp-algorithm-rabinkarp-buzz.html">Buzz</a>
+            <a href="biofsharp-algorithm-rabinkarp-cp.html">CP</a>
           </td>
-          <td class="xmldoc"></td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-algorithm-rabinkarp-buzzsearch.html">BuzzSearch</a>
-          </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>A collection of Rabin-Karp string matching algorithms using the cyclic polynomial (CP) hash</p>
+
+</td>
         </tr>
         <tr>
           <td class="module-name">
             <a href="biofsharp-algorithm-rabinkarp-rkstandard.html">RKStandard</a>
           </td>
-          <td class="xmldoc"></td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-algorithm-rabinkarp-rabinkarpsearch.html">RabinKarpSearch</a>
-          </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>A collection of Rabin-Karp string matching algorithms using the built-in hash function of f#</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -90,55 +84,61 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
+          <code onmouseout="hideTip(event, '299', 299)" onmouseover="showTip(event, '299', 299)">
             findAllGeneric (...)
           </code>
-          <div class="tip" id="270">
-            <strong>Signature:</strong> updateHash:(int -&gt; &#39;a -&gt; &#39;a -&gt; int) -&gt; blockHash:(&#39;a array -&gt; int) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list<br />
-                          <strong>Type parameters:</strong> 'a          </div>
+          <div class="tip" id="299">
+            <strong>Signature:</strong> updateHash:(&#39;c -&gt; &#39;a -&gt; &#39;a -&gt; &#39;c) -&gt; blockHash:(&#39;a array -&gt; &#39;c) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list<br />
+                          <strong>Type parameters:</strong> 'c, 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L73-73" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L60-60" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>takes an updateHash and blockHash function to find all matches of a query pattern in a source</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
-            findFirstFromGeneric (...)
+          <code onmouseout="hideTip(event, '300', 300)" onmouseover="showTip(event, '300', 300)">
+            findFromGeneric (...)
           </code>
-          <div class="tip" id="271">
-            <strong>Signature:</strong> startPos:int -&gt; updateHash:(int -&gt; &#39;a -&gt; &#39;a -&gt; int) -&gt; blockHash:(&#39;a array -&gt; int) -&gt; pattern:&#39;a array -&gt; text:&#39;a array -&gt; int<br />
-                          <strong>Type parameters:</strong> 'a          </div>
+          <div class="tip" id="300">
+            <strong>Signature:</strong> startPos:int -&gt; updateHash:(&#39;c -&gt; &#39;a -&gt; &#39;a -&gt; &#39;c) -&gt; blockHash:(&#39;a array -&gt; &#39;c) -&gt; pattern:&#39;a array -&gt; text:&#39;a array -&gt; int<br />
+                          <strong>Type parameters:</strong> 'c, 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L98-98" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L85-85" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>takes an updateHash and blockHash function to find the first match of a query pattern in a source starting from a specific position in the source</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
+          <code onmouseout="hideTip(event, '301', 301)" onmouseover="showTip(event, '301', 301)">
             isMatchAt pattern s startPos
           </code>
-          <div class="tip" id="272">
+          <div class="tip" id="301">
             <strong>Signature:</strong> pattern:&#39;a array -&gt; s:&#39;a array -&gt; startPos:int -&gt; bool<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L62-62" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L47-47" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>checks if content of pattern and source substring match</p>
+
+
         </td>
       </tr>
     </tbody>

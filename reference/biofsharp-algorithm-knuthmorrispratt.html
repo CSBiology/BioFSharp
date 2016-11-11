@@ -42,6 +42,8 @@
   <span>Namespace: BioFSharp.Algorithm</span><br />
 </p>
 <div class="xmldoc">
+<p>A collection of Knuth-Morris-Pratt string matching algorithms</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -55,91 +57,141 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
+          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
             createPrefixTable pattern
           </code>
-          <div class="tip" id="262">
+          <div class="tip" id="289">
             <strong>Signature:</strong> pattern:&#39;a array -&gt; int []<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L311-311" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L192-192" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>creates a prefix table for a query pattern</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
-            findAllMatches pattern s prefixTable
+          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
+            find prefixTable pattern s
           </code>
-          <div class="tip" id="263">
-            <strong>Signature:</strong> pattern:&#39;a array -&gt; s:&#39;a array -&gt; prefixTable:int [] -&gt; int list<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L350-350" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
-            findFirstMatch prefixTable pattern s
-          </code>
-          <div class="tip" id="264">
+          <div class="tip" id="290">
             <strong>Signature:</strong> prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L433-433" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L261-261" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>finds the first match of a query pattern in a source using a given prefix table</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
-            initFindAllMatches pattern
+          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
+            findAll prefixTable pattern s
           </code>
-          <div class="tip" id="265">
-            <strong>Signature:</strong> pattern:&#39;a array -&gt; &#39;a array -&gt; int list<br />
+          <div class="tip" id="291">
+            <strong>Signature:</strong> prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L382-382" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L211-211" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>finds all matches of a query pattern in a source using a given prefix table</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '266', 266)" onmouseover="showTip(event, '266', 266)">
-            initFindFirstMatch pattern
+          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
+            findFrom prefixTable pattern startPos s
           </code>
-          <div class="tip" id="266">
+          <div class="tip" id="292">
+            <strong>Signature:</strong> prefixTable:int [] -&gt; pattern:&#39;a array -&gt; startPos:int -&gt; s:&#39;a array -&gt; int<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L236-236" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>finds the first match of a query pattern in a source starting from a specific position in the source using a given prefix table</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
+            initFind pattern
+          </code>
+          <div class="tip" id="293">
             <strong>Signature:</strong> pattern:&#39;a array -&gt; &#39;a array -&gt; int<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L468-468" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L266-266" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>returns a find function with a set prefix table created from the input</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '294', 294)" onmouseover="showTip(event, '294', 294)">
+            initFindAll pattern
+          </code>
+          <div class="tip" id="294">
+            <strong>Signature:</strong> pattern:&#39;a array -&gt; &#39;a array -&gt; int list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L230-230" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns a findAll function with a set prefix table created from the input</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '295', 295)" onmouseover="showTip(event, '295', 295)">
+            initFindFrom pattern
+          </code>
+          <div class="tip" id="295">
+            <strong>Signature:</strong> pattern:&#39;a array -&gt; int -&gt; &#39;a array -&gt; int<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L255-255" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns a findFrom function with a set prefix table created from the input</p>
+
+
         </td>
       </tr>
     </tbody>
