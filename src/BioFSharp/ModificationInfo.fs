@@ -77,6 +77,8 @@ module ModificationInfo =
  
     module Table = 
         
-        let N15 = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let H2O = createModificationWithAdd "H2O" ModLocation.Nterm "H2O"
-       
+        let N15    = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15NH3 = createModification "#N15 NH3" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let NH3    = createModificationWithAdd "NH3" ModLocation.Nterm "NH3"
+        let H2O    = createModificationWithAdd "H2O" ModLocation.Nterm "H2O"
+        

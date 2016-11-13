@@ -2,11 +2,13 @@
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 //#I "../../bin"
+#r "../../bin/Fsharp.Care.dll"
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../bin/MathNet.Numerics.dll"
 #r "../../bin/MathNet.Numerics.FSharp.dll"
+
 (**
 Charge state determination
 ==========================
@@ -24,6 +26,7 @@ open BioFSharp
 open BioFSharp.Mz
 open BioFSharp.IO
 open MathNet.Numerics
+open FSharp.Care
 
 ///Returns the first entry of a examplary mgf File
 let ms1DataTest = 
@@ -83,7 +86,7 @@ window of a user given width centered around a user given m/z value.
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
-    SignalDetection.Wavelet.windowToCentroidBy ms1DataTest.Mass ms1DataTest.Intensity 3. ms2PrecursorMZ  
+    SignalDetection.windowToCentroidBy SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity 7.5 ms2PrecursorMZ  
 
 (**
 Returns a list of assigned chargestates sorted by their score.

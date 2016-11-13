@@ -58,7 +58,12 @@ module BioItem =
         let monoisoMass' = formula >> Formula.monoisoMass
         Memoization.memoizeP (fun a ->
              monoisoMass' a)
-            
+
+    /// Returns a function to calculate the monoisotopic mass of a bio item with memoization !Attention! Not thread safe!
+    let initMonoisoMassWithMem<'a when 'a :> IBioItem> =
+        let monoisoMass' = formula >> Formula.monoisoMass
+        Memoization.memoize (fun a ->
+             monoisoMass' a)
 
     /// Returns a function to calculate the average mass of a bio item with memoization
     let initAverageMassWithMemP<'a when 'a :> IBioItem> = 

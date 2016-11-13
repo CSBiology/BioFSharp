@@ -228,7 +228,7 @@ module ChargeState =
                             |> List.map (fun distance -> distance - theoInterPeakDistances ) 
                         let mzChargeDeviation = mzChargeDeviationBy interPeakDistances theoInterPeakDistances
                         let score = getScore subSet.SubSetLength subSet.SourceSetLength mzChargeDeviation
-                        let putMass = (precursorMZ * float assignedCharge) - float assignedCharge
+                        let putMass = BioFSharp.Mass.ofMZ precursorMZ (float assignedCharge)
                         createAssignedCharge precursorMZ assignedCharge putMass mzChargeDeviation score distanceRealTheoPeakSpacing subSet.SubSetLength startPeakIntensity peakPos  
                      )
         |> List.sortBy (fun assignedCharge ->  assignedCharge.Score)

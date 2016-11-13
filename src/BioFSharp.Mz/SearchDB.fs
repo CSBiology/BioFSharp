@@ -193,7 +193,7 @@ module SearchDB =
     type LookUpResult<'a when 'a :> IBioItem> = {
         PepSequenceID : int        
         Mass          : float 
-        Sequence      : seq<'a>
+        Sequence      : 'a list
         GlobalMod     : int                
     }
 
@@ -1347,7 +1347,7 @@ module SearchDB =
     // PeptideLookUp continues
     
     /// Creates a LookUpResult out of a entry in the ModSequence table
-    let private createLookUpResultBy xModLookUp (sdbParams:SearchDbParams) (id,pepID,realMass,roundMass,seqs,gMod)  =
+    let createLookUpResultBy xModLookUp (sdbParams:SearchDbParams) (id,pepID,realMass,roundMass,seqs,gMod)  =
         if gMod = 1 then
             let globMod = sdbParams.IsotopicMod 
                           |> List.map createIsotopicMod    
@@ -1371,8 +1371,8 @@ module SearchDB =
         (fun lowerMass upperMass  -> 
                 let lowerMass' = Convert.ToInt64(lowerMass*1000000.)
                 let upperMass' = Convert.ToInt64(upperMass*1000000.)
-                selectModsequenceByMassRange lowerMass' upperMass'
-                |> List.map (createLookUpResultBy xModLookUp sdbParams)
+                selectModsequenceByMassRange lowerMass' upperMass', xModLookUp
+                //|> List.map (createLookUpResultBy xModLookUp sdbParams)
         )
             
     /// Returns a LookUpResult list 

@@ -99,7 +99,6 @@ module SignalDetection =
                 let windowHigh' = if mzi >= mzData.Length - windowMaxHigh then mzData.Length - 1 else mzi + windowMaxHigh
                 let nTot = windowHigh' - windowLow' |> float
                 xSpacingAvg.[mzi] <- ((accumulate windowLow' windowHigh' 0. (+) xspaced) / nTot)
-
             // calculating noise threshold in bins
             let noise_perc = 50. 
             let mutable windowSize = 300
@@ -107,9 +106,8 @@ module SignalDetection =
                 windowSize <- (xSpacingAvg.Length-1) / 2
             let hf_window = windowSize / 2
             windowSize <- 2 * hf_window
-            let nSpacingBins = ((xSpacingAvg.Length-1) / (windowSize + 1)) //number of NoiseBins
-            let spacings = Array.create nSpacingBins 0.0
-
+            let nSpacingBins = ((xSpacingAvg.Length-1) / (windowSize + 1))
+            let spacings = Array.create (nSpacingBins+1) 0.0
             for i = 0 to nSpacingBins-1 do
                 let windowLow = i * windowSize
                 let mutable windowHigh = windowLow + windowSize //not inclusive
@@ -120,28 +118,26 @@ module SignalDetection =
                 for j = windowLow to windowHigh-1 do
                     unsortedData.[j-windowLow] <- xSpacingAvg.[j] 
                 let sortedData = unsortedData |> Array.sort 
-                let mutable spacing = scoreAtPercentile noise_perc sortedData nTot //calcs Noisethreshold in bin i 
-                
+                let mutable spacing = scoreAtPercentile noise_perc sortedData nTot //calcs Noisethreshold in bin i                 
                 spacings.[i] <- spacing
-
             for mzi = 1 to mzData.Length-2 do
-                
                 let mutable scalesToInclude = nScales    
                 if intensityData.[mzi] < (0.75*intensityData.[mzi-1]) || intensityData.[mzi] < 0.75*intensityData.[mzi+1] then 
                      scalesToInclude <- 1
                 let spacingBin = 
-                    let tmp = mzi/windowSize
-                    match tmp with
-                    | tmp when tmp > nSpacingBins-1 -> nSpacingBins-1 
-                    | _ -> tmp
-                let spacingToAvgSpacing = xSpacingAvg.[mzi] / spacings.[spacingBin]                  
+                    if  nSpacingBins = 0 then 0
+                    else
+                        let tmp = mzi/windowSize
+                        match tmp with
+                        | tmp when tmp > nSpacingBins-1 -> nSpacingBins-1 
+                        | _ -> tmp
+                let spacingToAvgSpacing = xSpacingAvg.[0] / spacings.[0]                
                 if spacingToAvgSpacing > maxSpacingToAvgSpacing then
                         scalesToInclude <- 1    
                 // figure out the number of wavelet points you'll need to sample for each m/z point
                 for i = 0 to scalesToInclude-1 do 
                     let maxMZwindow = xSpacingAvg.[mzi] * scalings.[i] * 1.5 //3.0
                     getNpointsX mzi i maxMZwindow nPoints mzData
-            
 
         ///
         let createPadding paddingPoints (mzDataPadded:float[]) (intensityDataPadded:float[]) (mzData:float[]) (intensityData: float[]) = 
@@ -553,6 +549,18 @@ module SignalDetection =
         /// Returns a MzIntensityArray that containing the spectral centroids of the input spectra. 
         let toSNRFilteredCentroid (mzData: float []) (intensityData: float [])  =
             toCentroidWith getSNRFilteredPeakLines mzData intensityData    
+    
+    /// Returns mzIntensityArray after noise reduction 
+    let filterByIntensitySNR perc minSnr (mzData: float []) intensityData  = 
+        let noise = Wavelet.scoreAtPercentile perc intensityData (intensityData.Length-1)
+        let filteredMz             = new ResizeArray<float>() 
+        let filteredIntensityArray = new ResizeArray<float>()
+        for i=0 to intensityData.Length-1 do
+            let snr = intensityData.[i]/noise
+            if snr > minSnr then
+                filteredMz.Add mzData.[i]
+                filteredIntensityArray.Add intensityData.[i]
+        filteredMz |> Seq.toArray, filteredIntensityArray |> Seq.toArray
 
     /// Returns mzIntensityArray consisting of centroided Peaks. 
     let windowToCentroid centroidF (mzData:float[]) (intensityData:float[]) lowerIdx upperIdx =
