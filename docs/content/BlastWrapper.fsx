@@ -14,18 +14,16 @@ Official documentation for all BLAST applications can be found [here] (http://ww
 For the purpose of this tutorial, we will build a protein database using a `.fastA` file containing chloroplast proteins
 of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data. 
 
-Our query protein for the subsequent BLAST search will be the [photosystem II protein D1][linkToFasta] from Arabidopsis thaliana chloroplast.
-    [linkToFasta]: http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta
+Our query protein for the subsequent BLAST search will be the [photosystem II protein D1](http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta) from Arabidopsis thaliana chloroplast.
 
 How to use BlastWrapper
 =======================
 
-1. Creation of a BLAST database
--------------------------------
+Creation of a BLAST database
+----------------------------
 We will use the minimal amount of parameters needed to create a BLAST database from an input file. 
 The created database files will have the same name as the input file and will be located in the same folder. 
-However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual][manual] for more information.
-    [manual]: http://www.ncbi.nlm.nih.gov/books/NBK279675/ 
+However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual](http://www.ncbi.nlm.nih.gov/books/NBK279675/) for more information.
 
 First, lets specify the path of our input and the type of our database. Use a string for the input path and the provided `MakeDbParams` type
 for every other parameter.
@@ -61,12 +59,13 @@ This creates 3 new files in our directory:
 We have sucesssfully created our search database.
 
 
-2. Creating a `.fastA` file from an aminoacid string
--------------------------------------------------------------
+Creating a `.fastA` file from an aminoacid string
+-------------------------------------------------
+
 _Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3._
 
 First, lets specify a string with our aminoacid sequence and convert it to a `BioSeq`.
-For more information about `BioSeq`, please refer to this [documentation] (https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html)
+For more information about `BioSeq`, please refer to this [documentation](https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html)
 *)
 
 ///Raw string of the aminoacid sequence of our query protein
@@ -76,14 +75,14 @@ PWIAVAYSAPVAAATAVFLIYPIGQGSFSDGMPLGISGTFNFMIVFQAEHNILMHPFHMLGVAGVFGGSL
 FSAMHGSLVTSSLIRETTENESANEGYRFGQEEETYNIVAAHGYFGRLIFQYASFNNSRSLHFFLAAWPV
 VGIWFTALGISTMAFNLNGFNFNQSVVDSQGRVINTWADIINRANLGMEVMHERNAHNFPLDLAAVEAPS
 TNG"
-///header for the ``` file
+///header for the `.fastA` file
 let header = ">gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]"
 
-///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp`s `BioItems`
+///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp's `BioItems`
 let querySequence = BioSeq.ofAminoAcidString aminoacidString
 
 (**
-We will now use BioFSharp`s `FastA` library to create a `FASTA` item and write it to a file.
+We will now use BioFSharp's `FastA` library to create a `FASTA` item and write it to a file.
 *)
 
 ///path and name of the query file
@@ -100,8 +99,9 @@ to the one letter symbol (eg. Met -> M)
 FastA.write BioItem.symbol queryFastaPath [queryFastaItem;] 
 
 (**
-3. Performing the BLAST search
-------------------------------
+Performing the BLAST search
+---------------------------
+
 We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
 _Note: custom output formats can only be specified for output types `CSV`, `tabular` and `tabular with comments`. For more information, check 
 the [options for the command-line applicaions](http://www.ncbi.nlm.nih.gov/books/NBK279675/)_
