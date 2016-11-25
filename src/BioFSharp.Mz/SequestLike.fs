@@ -29,8 +29,6 @@ module SequestLike =
         { SpectrumID = spectrumID; PepSequenceID = pepSequenceID; GlobalMod = globalMod; IsTarget = isTarget; Peptide = peptide; 
           PrecursorCharge = precursorCharge; PrecursorMZ=precursorMZ;  MeasuredMass = measuredMass; TheoMass = theoMass; PeptideLength = peptideLength; XCORR = xcorr; DeltaCN = deltaCN; }
 
-
-
     /// normalize the intensities within a window to maximum of the window
     /// Attention shortens the array  (cuts)
     let windowNormalizeIntensities (intensities:LinearAlgebra.Vector<float>) (numberOfWindows:int) =
