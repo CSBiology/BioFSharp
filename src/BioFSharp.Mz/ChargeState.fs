@@ -46,7 +46,7 @@ module ChargeState =
         DistanceRealTheoPeakSpacing : float list
         SubSetLength                : int 
         StartPeakIntensity          : float
-        PeakSourcePositions         : Set<float>
+        PeakSourcePositions         : Set<Peak>
         } 
 
     let createAssignedCharge precMZ charge putMass mZChargeDev score distanceRealTheoPeakSpacing subSetLength startPeakIntensity peakSourcePositions= {
@@ -83,14 +83,14 @@ module ChargeState =
     /// Returns a Collection of MZIntensityPeaks, The Collection starts with the first Element on the right side of the startIdx. 
     /// and ends either with the last element of the mzIntensityArray or when the MzDistance to the highest Peak exceeds 
     /// the given windowwidth.   
-    let getRelPeakPosInWindowBy (mzData: float []) (intensityData: float []) width minIntensity deltaMinIntensity  mzValue startIdx =
+    let getRelPeakPosInWindowBy (mzData: float []) (intensityData: float []) width minIntensity deltaMinIntensity startIdx =
         let mzDataLength = mzData.Length
         if mzDataLength > 0 then
             let startPkMZ = mzData.[startIdx]
             let startPkInt = intensityData.[startIdx]
             let hasValidIntensity count =
                 intensityData.[count] > minIntensity * startPkInt &&
-                intensityData.[count] > deltaMinIntensity *  intensityData.[count-1]   
+                intensityData.[count] > deltaMinIntensity * intensityData.[count-1]   
             let rec loop count accmz (mzData: float []) (intensityData: float []) =            
                 if count = mzDataLength then 
                      accmz
@@ -211,13 +211,13 @@ module ChargeState =
 
     /// Returns list of putative precursorChargeStates along with Properties used for evaluation.
     let putativePrecursorChargeStatesBy (chargeDeterminationParams: ChargeDetermParams) (mzData: float []) (intensityData: float []) (precursorMZ:float) =
-        let (startPeakIntensity,originSet) = getRelPeakPosInWindowBy (mzData: float []) (intensityData: float [])  chargeDeterminationParams.Width chargeDeterminationParams.MinIntensity chargeDeterminationParams.DeltaMinIntensity precursorMZ (idxOfHighestPeakBy  (mzData: float []) (intensityData: float [])  precursorMZ)
+        let (startPeakIntensity,originSet) = getRelPeakPosInWindowBy (mzData: float []) (intensityData: float [])  chargeDeterminationParams.Width chargeDeterminationParams.MinIntensity chargeDeterminationParams.DeltaMinIntensity (idxOfHighestPeakBy  (mzData: float []) (intensityData: float [])  precursorMZ)
         originSet
         |> powerSetOf 
         |> List.filter (fun subSet -> subSet.SubSetLength > 1)
         |> List.map (fun subSet -> 
                         let peakPos = subSet.Peaks
-                                      |> List.map (fun pk -> pk.Mz) 
+                                     
                                       |> Set.ofList
                         let interPeakDistances = mzDistancesOf subSet.Peaks 
                         let meanInterPeakDistances = MathNet.Numerics.Statistics.Statistics.Mean interPeakDistances
@@ -254,5 +254,3 @@ module ChargeState =
         else
             let bestSet = assignedCharges.Head
             loop bestSet [] assignedCharges
-
-    /// Returns list of TestedItems of a Pvalue that meet the significance criteria

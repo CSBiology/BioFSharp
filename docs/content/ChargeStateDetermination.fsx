@@ -86,7 +86,7 @@ window of a user given width centered around a user given m/z value.
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
-    SignalDetection.windowToCentroidBy SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity 7.5 ms2PrecursorMZ  
+    SignalDetection.windowToCentroidBy (SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 30.) ms1DataTest.Mass ms1DataTest.Intensity 7.5 ms2PrecursorMZ  
 
 (**
 Returns a list of assigned chargestates sorted by their score.
@@ -106,6 +106,7 @@ let testedItems =
     putativeCharges 
     |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.SubSetLength ,float assCh.Charge) assCh.MZChargeDev ))
     |> ChargeState.removeSubSetsOfBestHit
+    |> List.filter (fun item -> item.PValue < 0.05)
     |> List.map (fun testedI -> testedI.TestedObject)
 
 

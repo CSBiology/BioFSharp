@@ -26,7 +26,7 @@ let ms1DataTest =
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidMS1Spectrum = 
-    SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity
+    SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 50. ms1DataTest.Mass ms1DataTest.Intensity
 
 (*** define-output:spectrum1 ***)
 /// Creates point charts of the raw and the processed data
@@ -47,7 +47,7 @@ and computation time is a limiting factor.
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let ms1CentroidsInWindow = 
-     SignalDetection.windowToCentroidBy SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity 7.5 643.8029052
+     SignalDetection.windowToCentroidBy (SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 50.) ms1DataTest.Mass ms1DataTest.Intensity 7.5 643.8029052
 
  
 (*** define-output:spectrum2 ***)
@@ -67,7 +67,7 @@ let ms2DataTest =
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidMS2Spectrum = 
-    SignalDetection.Wavelet.toCentroid ms2DataTest.Mass ms2DataTest.Intensity
+    SignalDetection.Wavelet.toCentroid 0.1 ms2DataTest.Mass ms2DataTest.Intensity
 
 //
 let snrFilteredCentroidMS2Spectrum = SignalDetection.filterByIntensitySNR  55. 1.1 (fst centroidMS2Spectrum) (snd centroidMS2Spectrum)     
