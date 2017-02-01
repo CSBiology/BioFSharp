@@ -254,3 +254,20 @@ module ChargeState =
         else
             let bestSet = assignedCharges.Head
             loop bestSet [] assignedCharges
+
+    ///
+    let n14MassToLambda mass =  mass * 0.0005671631116 - 0.02288968462
+
+    ///
+    let n15MassToLambda mass =  mass * 0.000509870824 - 0.01740245183
+
+    ///
+    let poissonProb lambda xValue =
+        (( lambda ** xValue) / MathNet.Numerics.SpecialFunctions.Factorial (int xValue) ) * exp(-lambda) 
+
+    ///
+    let poissonEstofMass (massToLambda: float -> float) (limit:int) mass = 
+        [|0. .. (float limit)|]
+        |> Array.map (poissonProb (massToLambda mass))
+
+

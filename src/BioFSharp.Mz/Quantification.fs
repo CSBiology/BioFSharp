@@ -235,10 +235,10 @@ module Quantification =
                 let jacobian       = new DenseMatrix(dataPointCount, paramCount)
                 let residualVector = new DenseVector(dataPointCount)
                 /// 
-                getJacobianOf model dataPointCount xData currentParamGuess jacobian |> ignore
+                getJacobianOf model dataPointCount xData currentParamGuess jacobian 
             
                 ///
-                getResidualVector model dataPointCount xData yData currentParamGuess residualVector |> ignore  
+                getResidualVector model dataPointCount xData yData currentParamGuess residualVector 
 
                 /// 
                 let hessian  = jacobian.Transpose().Multiply(jacobian)
@@ -256,7 +256,7 @@ module Quantification =
                 newValueRSS <- getRSS model dataPointCount xData yData newParamGuess
 
                 ///
-                paramsAtIteration.Add(newParamGuess) |> ignore
+                paramsAtIteration.Add(newParamGuess)
         
                 /// 
                 anotherIteration <- shouldTerminate currentValueRSS newValueRSS paramsAtIteration.Count currentParamGuess newParamGuess solverOptions
@@ -325,7 +325,16 @@ module Quantification =
 //                currentValueRSS <- newValueRSS
 
 //            paramsAtIteration.[paramsAtIteration.Count-1]
-       
+        
+        let standardErrorOfPrediction dOF (model:float []) (data:float [])  =
+            let n = data.Length-1 |> float 
+            match n with
+            | x when x > dOF -> 
+                let sumOfResSq = Array.fold2 (fun acc yReal yPred  -> acc + ((yPred-yReal)**2.) ) 0.0  data model
+                sqrt( (sumOfResSq / (n - dOF)))
+            | _             -> -1.
+        
+
         module Table = 
         
         /////////////////////////

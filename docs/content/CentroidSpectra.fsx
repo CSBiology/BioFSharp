@@ -26,7 +26,7 @@ let ms1DataTest =
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
 let centroidMS1Spectrum = 
-    SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 50. ms1DataTest.Mass ms1DataTest.Intensity
+    SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 99. ms1DataTest.Mass.[0.. 20000] ms1DataTest.Intensity.[0.. 20000]
 
 (*** define-output:spectrum1 ***)
 /// Creates point charts of the raw and the processed data
@@ -35,7 +35,6 @@ let centroidMS1Spectrum =
     Chart.Point(fst centroidMS1Spectrum, snd centroidMS1Spectrum,Name="centroid")
 ]
 |> Chart.Combine
-|> Chart.Show
 (*** include-it:spectrum1 ***)
 
 (**
@@ -70,7 +69,7 @@ let centroidMS2Spectrum =
     SignalDetection.Wavelet.toCentroid 0.1 ms2DataTest.Mass ms2DataTest.Intensity
 
 //
-let snrFilteredCentroidMS2Spectrum = SignalDetection.filterByIntensitySNR  55. 1.1 (fst centroidMS2Spectrum) (snd centroidMS2Spectrum)     
+let snrFilteredCentroidMS2Spectrum = (SignalDetection.Wavelet.toSNRFilteredCentroid 0.01 30.)   (fst centroidMS2Spectrum) (snd centroidMS2Spectrum)     
         
 (*** define-output:spectrum3 ***)
 /// Creates a another combined chart of the unprocessed data and the centroided MS2 data
