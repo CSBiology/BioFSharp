@@ -8,7 +8,7 @@
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../bin/MathNet.Numerics.dll"
 #r "../../bin/MathNet.Numerics.FSharp.dll"
-
+#r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 (**
 Charge state determination
 ==========================
@@ -27,7 +27,7 @@ open BioFSharp.Mz
 open BioFSharp.IO
 open MathNet.Numerics
 open FSharp.Care
-
+open FSharp.Plotly
 ///Returns the first entry of a examplary mgf File
 let ms1DataTest = 
     Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
@@ -86,7 +86,7 @@ window of a user given width centered around a user given m/z value.
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
 let centroidsInWindow = 
-    SignalDetection.windowToCentroidBy (SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 30.) ms1DataTest.Mass ms1DataTest.Intensity 7.5 ms2PrecursorMZ  
+    SignalDetection.windowToCentroidBy (SignalDetection.Wavelet.toCentroid 0.1 50. 30.) ms1DataTest.Mass ms1DataTest.Intensity 7.5 ms2PrecursorMZ  
 
 (**
 Returns a list of assigned chargestates sorted by their score.
@@ -104,10 +104,17 @@ significance level
 /// significance level
 let testedItems = 
     putativeCharges 
-    |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOf initGen (assCh.SubSetLength ,float assCh.Charge) assCh.MZChargeDev ))
+    |> List.map (fun assCh -> ChargeState.createTestedItem assCh (ChargeState.empiricalPValueOfSim initGen (assCh.SubSetLength ,float assCh.Charge) assCh.MZChargeDev ))
     |> ChargeState.removeSubSetsOfBestHit
     |> List.filter (fun item -> item.PValue < 0.05)
     |> List.map (fun testedI -> testedI.TestedObject)
-
-
+    |> List.map (fun testedI -> 
+                    let normPeaks = 
+                        ChargeState.normalizePeaksByIntensitySum testedI.Peaks 
+                    let poissEst = 
+                        let tmp = 
+                            ChargeState.poissonEstofMassTrunc ChargeState.n15MassToLambda normPeaks.Length testedI.PutMass
+                        tmp
+                    ChargeState.kullbackLeiblerDivergenceOf  normPeaks poissEst
+                )
 

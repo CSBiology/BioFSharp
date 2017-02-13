@@ -93,7 +93,16 @@ module Quantification =
             createGausParams amplitude meanX std fwhm
 
     module Fitting = 
-        
+
+        ///
+        let standardErrorOfPrediction dOF (model:float []) (data:float [])  =
+            let n = data.Length-1 |> float 
+            match n with
+            | x when x > dOF -> 
+                let sumOfResSq = Array.fold2 (fun acc yReal yPred  -> acc + ((yPred-yReal)**2.) ) 0.0  data model
+                sqrt( (sumOfResSq / (n - dOF)))
+            | _             -> -1.
+
         ///
         type Model = 
             {
@@ -275,65 +284,6 @@ module Quantification =
 
             paramsAtIteration.[paramsAtIteration.Count-1]
 
-        /// Returns a parameter vector as a possible solution for linear least square based nonlinear fitting of a given dataset (xData, yData) with a given 
-        /// model function. 
-        let gaussNewtonSolver' (model: Model) (solverOptions: SolverOptions) (xData: float[]) (yData: float []) (paramsAtIteration: ResizeArray<_>)  = 
-
-            let mutable anotherIteration = true
-            /// Number of Parameters of modelFunction
-            let paramCount = solverOptions.InitialParamGuess.Length
-            let dataPointCount = xData.Length
-
-            let currentParamGuess = new DenseVector(solverOptions.InitialParamGuess)
-            let newParamGuess     = new DenseVector(paramCount)
-
-            let mutable currentValueRSS = 0.0
-            let mutable newValueRSS = 0.0
-            ///
-            currentValueRSS <- getRSS model dataPointCount xData yData currentParamGuess
-
-//            while (anotherIteration = true) do 
-
-            let jacobian       = new DenseMatrix(dataPointCount, paramCount)
-            let residualVector = new DenseVector(dataPointCount)
-            
-            /// 
-            getJacobianOf model dataPointCount xData currentParamGuess jacobian |> ignore
-            
-            ///
-            getResidualVector model dataPointCount xData yData currentParamGuess residualVector |> ignore  
-            jacobian,residualVector
-                /// 
-//                let step = jacobian.Transpose().Multiply(jacobian).Cholesky().Solve(jacobian.Transpose().Multiply(residualVector))
-//        
-//                ///
-//                currentParamGuess.Subtract(step, newParamGuess)
-//
-//                /// 
-//                newValueRSS <- getRSS model dataPointCount xData yData newParamGuess
-//
-//                ///
-//                paramsAtIteration.Add(newParamGuess) |> ignore
-//        
-//                /// 
-//                anotherIteration <- shouldTerminate currentValueRSS newValueRSS paramsAtIteration.Count currentParamGuess newParamGuess solverOptions
-//
-//                /// 
-//                newParamGuess.CopyTo currentParamGuess
-//
-//                /// 
-//                currentValueRSS <- newValueRSS
-
-//            paramsAtIteration.[paramsAtIteration.Count-1]
-        
-        let standardErrorOfPrediction dOF (model:float []) (data:float [])  =
-            let n = data.Length-1 |> float 
-            match n with
-            | x when x > dOF -> 
-                let sumOfResSq = Array.fold2 (fun acc yReal yPred  -> acc + ((yPred-yReal)**2.) ) 0.0  data model
-                sqrt( (sumOfResSq / (n - dOF)))
-            | _             -> -1.
-        
 
         module Table = 
         
