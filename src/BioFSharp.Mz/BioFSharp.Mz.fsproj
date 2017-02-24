@@ -55,6 +55,7 @@
     <Compile Include="ChargeState.fs" />
     <Compile Include="Fragmentation.fs" />
     <Compile Include="SequestLike.fs" />
+    <Compile Include="Quantification.fs" />
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />

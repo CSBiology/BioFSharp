@@ -1,6 +1,7 @@
 ﻿namespace BioFSharp
 
 open System.Text.RegularExpressions
+open FSharp.Care
 
 module Formula =
         
@@ -48,7 +49,6 @@ module Formula =
     let monoisoMass (f:Formula) =
         f |> Seq.sumBy (fun elem -> (Elements.getMainIsotope elem.Key).Mass * elem.Value)
     
-    
     /// Lables all elements of a certain kind within a formula
     let lableElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
         let result : Formula = 
@@ -79,10 +79,7 @@ module Formula =
             msItems 
             |> Seq.fold (fun acc (key,value) -> if acc.ContainsKey(key) then acc.Add(key,(value + acc.[key])) else acc.Add(key,value) ) Map.empty
         result
-
-
-
-                                    
+                   
 
     module Table =
 

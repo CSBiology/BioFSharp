@@ -116,6 +116,13 @@ module Elements =
         | Tri   {X = x} -> x
         | Multi {X = x} -> x
 
+    /// Returns the main isotop of an Element
+    let getMainXComp (elem:Element) =
+        match elem with
+        | Mono  { Xcomp = xcomp} -> xcomp
+        | Di    { Xcomp = xcomp} -> xcomp
+        | Tri   { Xcomp = xcomp} -> xcomp
+        | Multi { Xcomp = xcomp} -> xcomp
 
     // Single term of equation. (10)
     let getSinglePhiL (elem:Element) (v:float) (l:float) =
@@ -182,6 +189,7 @@ module Elements =
         module Heavy =
 
             let N15 = Di  (createDi "N15" (Isotopes.Table.N15,Isotopes.Table.N14.NatAbundance) (Isotopes.Table.N14,Isotopes.Table.N15.NatAbundance) )
-
+            
+            let N15full = Mono (createMono "N15" (Isotopes.Table.N15,Isotopes.Table.N14.NatAbundance))
 
 

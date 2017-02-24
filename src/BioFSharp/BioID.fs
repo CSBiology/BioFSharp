@@ -197,57 +197,57 @@ module BioID =
             {header with Info=header.Info.Add("PN",pn)}
 
 
-        /// Returns FastaHeader from string
-        let fromString (str:string) =    
-            let rec loop (input:(string*(string->Either<(string*string),string>)) list) acc (s:string) =
-                match input with
-                | h::t ->   let key,parser = h 
-                            match parser s with
-                            | Success (s,r) -> loop t ((key,s)::acc) r
-                            | Failure f -> loop t acc f
-                | [] -> (s,acc)
-
-            
-            /// Parse DisplayId (DID=) from string
-            let parseDisplayId = tryEitherMatchReplace (fun s r -> s.[4..],r) "DID=[^\s_]+" ""
-            /// Parse Aliases (ALS=)
-            let parseAliases = tryEitherMatchReplace (fun s r -> s.[4..],r) "ALS=[^\s_]+" ""
-            /// Parse DataBaseVersion (DBV=)
-            let parseDataBaseVersion = tryEitherMatchReplace (fun s r -> s.[4..],r) "DBV=[^\s_]+" ""
-            /// Parse Type of UniqueIdentifier (TOU=)
-            let parseTypeOfUniqueIdentifier = tryEitherMatchReplace (fun s r -> s.[4..],r) "TOU=[a-zA-Z]+" ""
-            /// Parse SequenceVersion (SV=)
-            let parseSequenceVersion = tryEitherMatchReplace (fun s r -> s.[3..],r) "SV=\d+" ""
-            /// Parse OrganismName (OS=)
-            let parseOrganismName = tryEitherMatchReplace (fun s r -> s.[3..],r) "OS=[a-zA-Z]+ ?[a-z]+" ""
-            /// Parse ProteinExistence (PE=)
-            let parseProteinExistence = tryEitherMatchReplace (fun s r -> s.[3..],r)  "PE=\d+" ""
-            /// Parse GeneName (GN=)
-            let parseGeneName = tryEitherMatchReplace (fun s r -> s.[3..],r)  "GN=\S+" ""
-            /// Parse ProteinName (PN=)
-            let parseProteinName = tryEitherMatchReplace (fun s r -> s.[3..],r) "PN=\S+" ""            
-            
-            let splitStr = str.Split([|' '|],2)
-            let descr,info =
-                if splitStr.Length > 1 then 
-                    let tmp =
-                        [
-                            "DID",parseDisplayId;
-                            "ALS",parseAliases;
-                            "DBV",parseDataBaseVersion;
-                            "TOU",parseTypeOfUniqueIdentifier;
-                            "SV",parseSequenceVersion;
-                            "OS",parseOrganismName;
-                            "PE",parseProteinExistence;
-                            "GN",parseGeneName;
-                            "PN",parseProteinName;
-
-                        ]
-                    loop tmp [] splitStr.[1]
-                else
-                    ("",[])
-   
-            createFastaHeader splitStr.[0] (descr.Trim()) (info|> Map.ofList)
+//        /// Returns FastaHeader from string
+//        let fromString (str:string) =    
+//            let rec loop (input:(string*(string->Either<(string*string),string>)) list) acc (s:string) =
+//                match input with
+//                | h::t ->   let key,parser = h 
+//                            match parser s with
+//                            | Success (s,r) -> loop t ((key,s)::acc) r
+//                            | Failure f -> loop t acc f
+//                | [] -> (s,acc)
+//
+//            
+//            /// Parse DisplayId (DID=) from string
+//            let parseDisplayId = tryEitherMatchReplace (fun s r -> s.[4..],r) "DID=[^\s_]+" ""
+//            /// Parse Aliases (ALS=)
+//            let parseAliases = tryEitherMatchReplace (fun s r -> s.[4..],r) "ALS=[^\s_]+" ""
+//            /// Parse DataBaseVersion (DBV=)
+//            let parseDataBaseVersion = tryEitherMatchReplace (fun s r -> s.[4..],r) "DBV=[^\s_]+" ""
+//            /// Parse Type of UniqueIdentifier (TOU=)
+//            let parseTypeOfUniqueIdentifier = tryEitherMatchReplace (fun s r -> s.[4..],r) "TOU=[a-zA-Z]+" ""
+//            /// Parse SequenceVersion (SV=)
+//            let parseSequenceVersion = tryEitherMatchReplace (fun s r -> s.[3..],r) "SV=\d+" ""
+//            /// Parse OrganismName (OS=)
+//            let parseOrganismName = tryEitherMatchReplace (fun s r -> s.[3..],r) "OS=[a-zA-Z]+ ?[a-z]+" ""
+//            /// Parse ProteinExistence (PE=)
+//            let parseProteinExistence = tryEitherMatchReplace (fun s r -> s.[3..],r)  "PE=\d+" ""
+//            /// Parse GeneName (GN=)
+//            let parseGeneName = tryEitherMatchReplace (fun s r -> s.[3..],r)  "GN=\S+" ""
+//            /// Parse ProteinName (PN=)
+//            let parseProteinName = tryEitherMatchReplace (fun s r -> s.[3..],r) "PN=\S+" ""            
+//            
+//            let splitStr = str.Split([|' '|],2)
+//            let descr,info =
+//                if splitStr.Length > 1 then 
+//                    let tmp =
+//                        [
+//                            "DID",parseDisplayId;
+//                            "ALS",parseAliases;
+//                            "DBV",parseDataBaseVersion;
+//                            "TOU",parseTypeOfUniqueIdentifier;
+//                            "SV",parseSequenceVersion;
+//                            "OS",parseOrganismName;
+//                            "PE",parseProteinExistence;
+//                            "GN",parseGeneName;
+//                            "PN",parseProteinName;
+//
+//                        ]
+//                    loop tmp [] splitStr.[1]
+//                else
+//                    ("",[])
+//   
+//            createFastaHeader splitStr.[0] (descr.Trim()) (info|> Map.ofList)
 
 
 

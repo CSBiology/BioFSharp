@@ -6,7 +6,7 @@ module BlastNCBI =
     open System.Diagnostics
     
     module Parameters =
-
+        
         type DbType =
         | Protein 
         | Nucleotide

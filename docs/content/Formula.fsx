@@ -13,9 +13,11 @@ BioFSharp
 open BioFSharp
 
 
-let CO2 = Formula.parseFormulaString "CO2.2"
+let CO2 = Formula.parseFormulaString "CO2"
 Formula.toString CO2
 
 let c = Formula.add CO2 CO2
 Formula.toString c
 
+
+Modific

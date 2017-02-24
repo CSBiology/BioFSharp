@@ -189,16 +189,17 @@ module SearchDB =
     let createProteinContainer proteinId displayID sequence container = {
         ProteinId=proteinId;DisplayID=displayID;Sequence=sequence;Container=container }
 
-
     type LookUpResult<'a when 'a :> IBioItem> = {
-        PepSequenceID : int        
-        Mass          : float 
-        Sequence      : seq<'a>
-        GlobalMod     : int                
+        ModSequenceID    : int
+        PepSequenceID    : int        
+        Mass             : float 
+        StringSequence   : string
+        BioSequence      : 'a list
+        GlobalMod        : int                
     }
 
-    let createLookUpResult pepSequenceId mass sequence globalMod =
-        {PepSequenceID = pepSequenceId; Mass = mass; Sequence=sequence; GlobalMod=globalMod }
+    let createLookUpResult modSequenceId pepSequenceId mass stringSequence bioSequence globalMod =
+        {ModSequenceID=modSequenceId ;PepSequenceID = pepSequenceId; Mass = mass; StringSequence=stringSequence; BioSequence=bioSequence; GlobalMod=globalMod }
     
 
     module Db =
@@ -884,6 +885,28 @@ module SearchDB =
                     )
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// Prepares statement to select a ModSequence entry by ModSequenceID
+            let prepareSelectModsequenceByModSequenceID (cn:SQLiteConnection) tr =
+                let querystring = "SELECT * FROM ModSequence WHERE ID=@id"
+                let cmd = new SQLiteCommand(querystring, cn, tr) 
+                cmd.Parameters.Add("@id", Data.DbType.Int32) |> ignore       
+                (fun (id:int32)  ->        
+                    cmd.Parameters.["@id"].Value <- id
+                    try
+                        
+                        use reader = cmd.ExecuteReader()            
+                        match reader.Read() with
+                        | true ->  (reader.GetInt32(0), reader.GetInt32(1),reader.GetDouble(2), reader.GetInt64(3), reader.GetString(4), reader.GetInt32(5)) 
+                                   |> Either.succeed
+                        | false -> PeptideLookUpError.DbModSequenceItemNotFound
+                                   |> Either.fail
+
+             
+                    with            
+                    | _ as ex -> 
+                        PeptideLookUpError.DbModSequence (SqlAction.Select,sqlErrorCodeFromException ex) 
+                        |> Either.fail
+                )
             /// Prepares statement to select a ModSequence entry by PepSequenceID
             let prepareSelectModsequenceByPepSequenceID (cn:SQLiteConnection) (tr) =
                 let querystring = "SELECT * FROM ModSequence WHERE PepSequenceID=@pepSequenceID"
@@ -1096,7 +1119,7 @@ module SearchDB =
                                                 pepContainer.MissCleavageEnd pepContainer.MissCleavageCount|>ignore
                                             pepContainer.Container
                                             |> List.iter (fun modPep -> 
-                                                            insertModSequence (protContainer.ProteinId*10000+pepContainer.PeptideId) modPep.Mass ((Convert.ToInt64(modPep.Mass*1000000.)))
+                                                            insertModSequence (pepContainer.PeptideId) modPep.Mass ((Convert.ToInt64(modPep.Mass*1000000.)))
                                                                 modPep.Sequence pepContainer.GlobalMod |> ignore
                                                             )  
 
@@ -1347,17 +1370,18 @@ module SearchDB =
     // PeptideLookUp continues
     
     /// Creates a LookUpResult out of a entry in the ModSequence table
-    let private createLookUpResultBy xModLookUp (sdbParams:SearchDbParams) (id,pepID,realMass,roundMass,seqs,gMod)  =
+    let createLookUpResultBy xModLookUp (sdbParams:SearchDbParams) (modSID,pepID,realMass,roundMass,seqs,gMod)  =
         if gMod = 1 then
             let globMod = sdbParams.IsotopicMod 
                           |> List.map createIsotopicMod    
             let bSeq = 
                 BioList.ofRevModAminoAcidStringWithIsoMod BioItemsConverter.OptionConverter.charToOptionAminoAcid getModBy (Some globMod) xModLookUp seqs  
-            createLookUpResult pepID realMass bSeq gMod   
+            createLookUpResult modSID pepID realMass seqs bSeq gMod   
         else 
             let bSeq = 
                 BioList.ofRevModAminoAcidString BioItemsConverter.OptionConverter.charToOptionAminoAcid getModBy xModLookUp seqs  
-            createLookUpResult pepID realMass bSeq gMod   
+            createLookUpResult modSID pepID realMass seqs bSeq gMod   
+    
     
 
      /// Returns a LookUpResult list
@@ -1371,8 +1395,8 @@ module SearchDB =
         (fun lowerMass upperMass  -> 
                 let lowerMass' = Convert.ToInt64(lowerMass*1000000.)
                 let upperMass' = Convert.ToInt64(upperMass*1000000.)
-                selectModsequenceByMassRange lowerMass' upperMass'
-                |> List.map (createLookUpResultBy xModLookUp sdbParams)
+                selectModsequenceByMassRange lowerMass' upperMass', xModLookUp
+                //|> List.map (createLookUpResultBy xModLookUp sdbParams)
         )
             
     /// Returns a LookUpResult list 

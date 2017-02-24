@@ -46,12 +46,12 @@ module ChargeState =
         DistanceRealTheoPeakSpacing : float list
         SubSetLength                : int 
         StartPeakIntensity          : float
-        PeakSourcePositions         : Set<float>
+        Peaks        : Set<Peak>
         } 
 
-    let createAssignedCharge precMZ charge putMass mZChargeDev score distanceRealTheoPeakSpacing subSetLength startPeakIntensity peakSourcePositions= {
+    let createAssignedCharge precMZ charge putMass mZChargeDev score distanceRealTheoPeakSpacing subSetLength startPeakIntensity peaks= {
         PrecMZ=precMZ; Charge=charge; PutMass=putMass; MZChargeDev=mZChargeDev; Score=score;DistanceRealTheoPeakSpacing=distanceRealTheoPeakSpacing; 
-            SubSetLength=subSetLength; StartPeakIntensity=startPeakIntensity; PeakSourcePositions=peakSourcePositions }
+            SubSetLength=subSetLength; StartPeakIntensity=startPeakIntensity; Peaks=peaks }
    
     type TestedItem<'a> = {
         TestedObject: 'a
@@ -64,7 +64,7 @@ module ChargeState =
     /// Returns Index of the highestPeak flanking a given mzValue
     let idxOfHighestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
         let idxHigh = 
-            mzData            |> Array.tryFindIndex (fun x -> x > mzValue) // faster as binary search
+            mzData |> Array.tryFindIndex (fun x -> x > mzValue) // faster as binary search
         let idxLow = 
             match idxHigh with 
             | None   -> Some (mzData.Length-1) 
@@ -78,19 +78,26 @@ module ChargeState =
         else
             if intensityData.[idxLow.Value] > intensityData.[idxHigh.Value] then 
                  idxLow.Value
-            else idxHigh.Value    
-    
+            else idxHigh.Value
+                
+    /// Returns Index of the highestPeak flanking a given mzValue
+    let idxOfClosestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
+        mzData 
+        |> Array.mapi (fun i x -> abs (x - mzValue), i) // faster as binary search
+        |> Array.minBy (fun (value,idx) -> value)
+        |> fun (value,idx) -> idx
+
     /// Returns a Collection of MZIntensityPeaks, The Collection starts with the first Element on the right side of the startIdx. 
     /// and ends either with the last element of the mzIntensityArray or when the MzDistance to the highest Peak exceeds 
     /// the given windowwidth.   
-    let getRelPeakPosInWindowBy (mzData: float []) (intensityData: float []) width minIntensity deltaMinIntensity  mzValue startIdx =
+    let getRelPeakPosInWindowBy (mzData: float []) (intensityData: float []) width minIntensity deltaMinIntensity startIdx =
         let mzDataLength = mzData.Length
         if mzDataLength > 0 then
             let startPkMZ = mzData.[startIdx]
             let startPkInt = intensityData.[startIdx]
             let hasValidIntensity count =
                 intensityData.[count] > minIntensity * startPkInt &&
-                intensityData.[count] > deltaMinIntensity *  intensityData.[count-1]   
+                intensityData.[count] > deltaMinIntensity * intensityData.[count-1]   
             let rec loop count accmz (mzData: float []) (intensityData: float []) =            
                 if count = mzDataLength then 
                      accmz
@@ -102,7 +109,7 @@ module ChargeState =
                      loop (count+1) ((createPeak (mzData.[count]-startPkMZ) (intensityData.[count] / startPkInt) )::accmz) mzData intensityData
                 else loop (count+1) accmz mzData intensityData
             loop (startIdx+1) [] mzData intensityData
-            |> fun sourceSet -> startPkInt , createPutativeIsotopeCluster sourceSet  (sourceSet.Length+1) (sourceSet.Length+1) //the length must be raised by 1 because the first element (0.,1.) is left out from the collection 
+            |> fun sourceSet -> startPkInt , createPutativeIsotopeCluster sourceSet (sourceSet.Length+1) (sourceSet.Length+1) //the length must be raised by 1 because the first element (0.,1.) is left out from the collection 
         else 0., createPutativeIsotopeCluster [] 0 0
     
     /// Creates the PowerSet of a given Collection of MZIntensityPeaks. Adds a StartPeak with the relative Position 0 and the 
@@ -119,7 +126,7 @@ module ChargeState =
         |> List.map (fun subSet -> createPutativeIsotopeCluster subSet putCluster.SourceSetLength subSet.Length)
    
     /// Calculates the mzDistances of a List of MzIntensityPeaks
-    let mzDistancesOf  (mzIntensityPeaks: PeakList<_>) = //TODO: calc Slope; times Slope changed: Timo fragen ob gewollt. 
+    let mzDistancesOf  (mzIntensityPeaks: PeakList<_>) = //TODO: calc Slope; times Slope changed
         let rec innerF acc (mzIntensityPeaks: PeakList<_>) =
             match mzIntensityPeaks with 
             | []      -> acc
@@ -202,23 +209,31 @@ module ChargeState =
         
     /// Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
     /// observed divided by their total number
-    let empiricalPValueOf initGenerateMzSpecDevWithMemF (nrOfPeaksInSubSet,charge) score  = //TODO nrOfPeaks,charge score in parameter
+    let empiricalPValueOfSim initGenerateMzSpecDevWithMemF (nrOfPeaksInSubSet,charge) score  = //TODO nrOfPeaks,charge score in parameter
         let generateMzSpecDev = initGenerateMzSpecDevWithMemF (nrOfPeaksInSubSet,charge)
         let numerator =  (generateMzSpecDev |> Array.tryFindIndex (fun x -> x > score)) 
         match numerator with
         | Some x -> (float x) / float generateMzSpecDev.Length
         | None -> 1.
 
+    /// Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
+    /// observed divided by their total number
+    let empiricalPValueOf distribution (nrOfPeaksInSubSet,charge) score  = //TODO nrOfPeaks,charge score in parameter
+        let numerator =  (distribution |> Array.tryFindIndex (fun x -> x > score)) 
+        match numerator with
+        | Some x -> (float x) / float distribution.Length
+        | None -> 1.
+
     /// Returns list of putative precursorChargeStates along with Properties used for evaluation.
     let putativePrecursorChargeStatesBy (chargeDeterminationParams: ChargeDetermParams) (mzData: float []) (intensityData: float []) (precursorMZ:float) =
-        let (startPeakIntensity,originSet) = getRelPeakPosInWindowBy (mzData: float []) (intensityData: float [])  chargeDeterminationParams.Width chargeDeterminationParams.MinIntensity chargeDeterminationParams.DeltaMinIntensity precursorMZ (idxOfHighestPeakBy  (mzData: float []) (intensityData: float [])  precursorMZ)
+        let (startPeakIntensity,originSet) = getRelPeakPosInWindowBy (mzData: float []) (intensityData: float [])  chargeDeterminationParams.Width chargeDeterminationParams.MinIntensity chargeDeterminationParams.DeltaMinIntensity (idxOfClosestPeakBy  (mzData: float []) (intensityData: float [])  precursorMZ)
         originSet
         |> powerSetOf 
         |> List.filter (fun subSet -> subSet.SubSetLength > 1)
         |> List.map (fun subSet -> 
-                        let peakPos = subSet.Peaks
-                                      |> List.map (fun pk -> pk.Mz) 
-                                      |> Set.ofList
+                        let peakPos = 
+                            subSet.Peaks
+                            |> Set.ofList
                         let interPeakDistances = mzDistancesOf subSet.Peaks 
                         let meanInterPeakDistances = MathNet.Numerics.Statistics.Statistics.Mean interPeakDistances
                         let assignedCharge = getChargeBy chargeDeterminationParams meanInterPeakDistances
@@ -228,12 +243,12 @@ module ChargeState =
                             |> List.map (fun distance -> distance - theoInterPeakDistances ) 
                         let mzChargeDeviation = mzChargeDeviationBy interPeakDistances theoInterPeakDistances
                         let score = getScore subSet.SubSetLength subSet.SourceSetLength mzChargeDeviation
-                        let putMass = (precursorMZ * float assignedCharge) - float assignedCharge
+                        let putMass = BioFSharp.Mass.ofMZ precursorMZ (float assignedCharge)
                         createAssignedCharge precursorMZ assignedCharge putMass mzChargeDeviation score distanceRealTheoPeakSpacing subSet.SubSetLength startPeakIntensity peakPos  
                      )
         |> List.sortBy (fun assignedCharge ->  assignedCharge.Score)
         |> List.distinctBy (fun assignedCharge ->  assignedCharge.Charge)
-        
+                                     
     /// Returns the StandardDeviation of the PeakDistances
     let peakPosStdDevBy (putativeChargeStates: AssignedCharge list) = 
         putativeChargeStates
@@ -246,7 +261,7 @@ module ChargeState =
         let rec loop bestSet acc (assignedCharges: TestedItem<AssignedCharge> list) =
             match assignedCharges with 
             | [] -> (bestSet::acc) |> List.sortBy (fun x -> x.TestedObject.Score) 
-            | h::tail -> match Set.isSuperset bestSet.TestedObject.PeakSourcePositions h.TestedObject.PeakSourcePositions with
+            | h::tail -> match Set.isSuperset bestSet.TestedObject.Peaks h.TestedObject.Peaks with
                          | false  -> loop bestSet (h::acc) tail 
                          | true -> loop bestSet acc tail
         if assignedCharges = [] then 
@@ -255,4 +270,45 @@ module ChargeState =
             let bestSet = assignedCharges.Head
             loop bestSet [] assignedCharges
 
-    /// Returns list of TestedItems of a Pvalue that meet the significance criteria
+    ///
+    let normalizePeaksByIntensitySum (peaks: Set<BioFSharp.Mz.Peak>) =
+        let tmp = peaks |> Set.toArray
+        let sumOfIntensities = 
+            tmp |> Array.sumBy (fun x -> x.Intensity)        
+        tmp
+        |> Array.map (fun x -> x.Intensity / sumOfIntensities)
+
+    ///
+    let n14MassToLambda mass =  mass * 0.0005903277935 - 0.03542317929
+
+    ///
+    let n15MassToLambda mass =  mass * 0.0005306674223 - 0.03184171518
+    
+    ///
+    let poissonProb lambda xValue =
+        ( ( lambda ** xValue) / MathNet.Numerics.SpecialFunctions.Factorial (int xValue) ) * exp(-lambda) 
+
+    ///
+    let poissonEstofMassTrunc (massToLambda: float -> float) (limit:int) mass = 
+        let tmp = 
+            [|for i=0. to float limit-1. do 
+                 yield poissonProb (massToLambda mass) i
+            |]
+        let SumOfProb = 
+            tmp |> Array.sum
+        tmp 
+        |> Array.map (fun x -> x / SumOfProb)
+         
+    ///
+    let kullbackLeiblerDivergenceOf (qTo:float []) (p:float []) = 
+        if qTo.Length <> p.Length then None
+        else
+        let divergence =
+            Array.fold2 (fun acc qY pY -> 
+                            qY
+                            |> (/) pY
+                            |> log
+                            |> (*) pY
+                            |> (+) acc
+                        ) 0. qTo p 
+        Some divergence

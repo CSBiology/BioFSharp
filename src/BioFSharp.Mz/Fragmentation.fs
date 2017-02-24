@@ -18,6 +18,11 @@ module Fragmentation =
     let isAminoLoss a =
         aminoLossSet.Contains(a)
 
+    let isNeutralLoss a = 
+        match a with 
+        | AminoAcids.Mod (aa,_) -> true
+        | _                     -> false
+
     module BioList =
         
        /// <summary>
