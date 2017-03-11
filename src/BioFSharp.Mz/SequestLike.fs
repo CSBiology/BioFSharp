@@ -93,7 +93,7 @@ module SequestLike =
         | Unknown       -> 1.   / charge
         | Precursor     -> 1.   / charge
         | Main A        -> 0.2  / charge
-        | Main B        -> 0.1  / charge
+        | Main B        -> 1.  / charge
         | Main C        -> 0.2  / charge
         | Main X        -> 0.2  / charge
         | Main Y        -> 1.   / charge
