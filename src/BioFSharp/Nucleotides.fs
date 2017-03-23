@@ -221,6 +221,8 @@ module Nucleotides =
                     name this               
 
 
+        static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol
+        static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 
 
 

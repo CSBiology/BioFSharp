@@ -21,6 +21,7 @@ let c = Formula.add CO2 CO2
 Formula.toString c
 
 
+AminoAcidSymbols.AminoAcidSymbol.Ala |> int
 (**
 
 Converting a peptide string to a biosequence

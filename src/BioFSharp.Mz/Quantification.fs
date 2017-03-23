@@ -192,7 +192,6 @@ module Quantification =
             
                 ///
                 getResidualVector model dataPointCount xData yData currentParamGuess residualVector |> ignore  
-//            jacobian,residualVector
                 /// 
                 let step = jacobian.Transpose().Multiply(jacobian).Cholesky().Solve(jacobian.Transpose().Multiply(residualVector))
         
