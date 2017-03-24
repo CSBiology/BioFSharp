@@ -61,6 +61,7 @@ module ChargeState =
     let createTestedItem testedObject pValue = {
         TestedObject=testedObject; PValue=pValue }
     
+    //TODO add to SignalDetection
     /// Returns Index of the highestPeak flanking a given mzValue
     let idxOfHighestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
         let idxHigh = 
@@ -80,6 +81,7 @@ module ChargeState =
                  idxLow.Value
             else idxHigh.Value
                 
+    /// TODO refactor to SignalDetection 
     /// Returns Index of the highestPeak flanking a given mzValue
     let idxOfClosestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
         if mzData |> Array.isEmpty then 0

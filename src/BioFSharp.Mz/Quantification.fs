@@ -1,6 +1,5 @@
 ﻿namespace BioFSharp.Mz
 
-
 module Quantification =
     
     open System
@@ -77,7 +76,9 @@ module Quantification =
         /// Estimates the Parameters of a Gaussian function
         /// Warning: This method is sensitive to noisy data. If the noise level of the input parameters is high, smoothing of 
         /// the data is strongly recommended. 
-        let caruanaAlgorithm mzData intensityData =
+        let caruanaAlgorithm (mzData:float []) (intensityData:float []) =
+            if mzData.Length < 3 || intensityData.Length < 3 then None 
+            else 
             let logTransIntensityData = 
                 intensityData
                 |> Array.map log
@@ -90,7 +91,7 @@ module Quantification =
             let meanX = -b/(2.*c) 
             let fwhm  = sqrt(-1./(2.*c)) * sqrt(2.*log(2.))*2.
             let std   = toSTD fwhm
-            createGausParams amplitude meanX std fwhm
+            Some (createGausParams amplitude meanX std fwhm)
 
     module Fitting = 
 
@@ -384,3 +385,379 @@ module Quantification =
                 //[|"amp";"meanX";"std";"tau"|]
                 InitialParamGuess       = [|3.;9.;1.;0.3|]
                 }
+    
+        
+    module MyQuant = 
+
+        //
+        let idxOfClosestLabeledPeak (labeledData: Tag<Care.Extrema,(float*float)>[]) (labelV:Care.Extrema) xValue = 
+            if labeledData |> Array.isEmpty then None
+            else
+            labeledData  
+            |> Array.mapi (fun i x -> i, x) 
+            |> Array.filter (fun (i,x) -> x.Meta = labelV)
+            |> fun farr -> 
+                match farr with
+                | farr when farr |> Array.isEmpty -> 
+                    None     
+                | _ ->  
+                    farr 
+                    |> Array.minBy (fun (idx,value) -> abs (fst value.Data - xValue) ) 
+                    |> Some
+            
+
+        //
+        let iterateTo step xData startIdx (test: 'a -> bool) =
+            let rec loop  (xData: 'a []) currentIdx =
+                if currentIdx <= 0 then None
+                elif currentIdx >= xData.Length-1 then None
+                else                                              
+                    match test xData.[currentIdx] with 
+                    | x when x = true -> Some currentIdx   
+                    | _               -> loop xData (currentIdx+step) 
+            loop xData (startIdx+step) 
+
+        //
+        type FitBothModels = 
+            | True  
+            | False  
+
+        //
+        type QuantificationResult = {
+            FitBothModels               : FitBothModels
+            SelectedModel               : Fitting.Model
+            Area                        : float
+            StandardErrorOfPrediction   : float
+            //If negative: MS2 recorded prior to selected peak apex, if positive: MS2 recorded after selected peak
+            DeltaScanTimePeakApex       : float
+            PeakApexIntensity           : float
+            MaxIntensityInXIC           : float 
+            }
+
+        //
+        let createQuantificationResult fitBothModels selectedModel area standardErrorOfPrediction deltaScanTimePeakApex peakApexIntensity maxIntensityInXIC = {
+            FitBothModels = fitBothModels; SelectedModel = selectedModel ;Area = area ; StandardErrorOfPrediction = standardErrorOfPrediction;
+                DeltaScanTimePeakApex =deltaScanTimePeakApex; PeakApexIntensity=peakApexIntensity; MaxIntensityInXIC=maxIntensityInXIC}
+
+        ///
+        let createEMGSolverOption = Fitting.createSolverOption 0.001 0.001 10000
+    
+        ///
+        let createGaussSolverOption = Fitting.createSolverOption 0.0001 0.0001 10000
+
+        ///
+        let private findRightFittingIdx (xAndYData: (float*float) []) (labeledSndDevData: Tag<Care.Extrema,(float*float)> []) (closestPeakIdx: int) (closestRightLiftOffIdx: int option) =
+            let rec loopF (labeledSndDevData: Tag<Care.Extrema,(float*float)> []) (currentIdx: int) (kLiftOffs: int) (hasRightPeak:bool) = 
+                if currentIdx = labeledSndDevData.Length-1 then 
+                    currentIdx, kLiftOffs, hasRightPeak
+                else
+                    match labeledSndDevData.[currentIdx] with
+                    | x when x.Meta = Care.Extrema.Positive ->  
+                        currentIdx, kLiftOffs, true
+                    | x when x.Meta = Care.Extrema.Negative ->
+                        loopF labeledSndDevData (currentIdx+1) (kLiftOffs+1) hasRightPeak
+                    |_ -> 
+                        loopF labeledSndDevData (currentIdx+1) (kLiftOffs) hasRightPeak
+            match closestRightLiftOffIdx with 
+            | Some x -> 
+                let (currentIdx, kLiftOffs, hasRightPeak) = loopF labeledSndDevData closestRightLiftOffIdx.Value 0 false 
+                    // only one Liftoff and no flanking peak indicates a isolated peak and both models can be tested. 
+                if kLiftOffs = 1 && hasRightPeak = false then
+                    FitBothModels.True, 
+                    match iterateTo (+1) xAndYData (closestRightLiftOffIdx.Value) (fun (x:float*float) -> snd x < snd xAndYData.[closestRightLiftOffIdx.Value] || snd x > snd xAndYData.[closestRightLiftOffIdx.Value]) with 
+                    | None -> xAndYData.Length-1
+                    | Some x -> x            
+                // only one Liftoff indicates a convoluted peak, use only Gaussian model            
+                elif kLiftOffs = 1 then
+                    FitBothModels.False, 
+                        match iterateTo (-1) xAndYData (closestRightLiftOffIdx.Value) (fun (x:float*float) -> snd x > snd xAndYData.[closestRightLiftOffIdx.Value]) with
+                        | None ->  (closestPeakIdx)+1
+                        | Some x -> x
+                // if more than one Liftoff between two peaks is detected, the peaks are well separated and both Models can be tested
+                elif kLiftOffs > 1 then 
+                    FitBothModels.True,  
+                    match iterateTo (+1) xAndYData (closestRightLiftOffIdx.Value) (fun (x:float*float) -> snd x < snd xAndYData.[closestRightLiftOffIdx.Value] || snd x > snd xAndYData.[closestRightLiftOffIdx.Value]) with 
+                    | None -> xAndYData.Length-1
+                    | Some x -> x        
+                else
+                    FitBothModels.False,  
+                    match iterateTo (+1) xAndYData (closestPeakIdx) (fun (x:float*float) ->  snd x < 0.5 * snd xAndYData.[closestPeakIdx]) with 
+                    | None -> xAndYData.Length-1
+                    | Some x -> x
+            | None   -> 
+                FitBothModels.False, 
+                    match iterateTo (+1) xAndYData (closestPeakIdx) (fun (x:float*float) -> snd x < 0.5 * snd xAndYData.[closestPeakIdx]) with
+                    | None   -> xAndYData.Length-1 
+                    | Some x -> x
+            
+    
+        /// 
+        let quantify windowSizeSGfilter negYThreshold posYThreshold (scanTime: float) (xData :float []) (yData: float [])= 
+            if xData.Length < 6 || yData.Length < 6 then None, 0
+            else
+            // Step 0: zip xData and yData
+            let xAndYData = 
+                Array.zip xData yData
+            // Step 1: Calculate negative snd derivative of the intensity Data
+            let negSndDev = 
+                SignalDetection.Filtering.savitzky_golay windowSizeSGfilter 3 2 3 yData 
+                |> Array.ofSeq
+                |> Array.map (fun x -> x * -1.)    
+            // Step 2: label data points to be local Minima or maxima
+            let labeledSndDevData = 
+                let labeledDataTmp = SignalDetection.Care.labelPeaks negYThreshold posYThreshold xData negSndDev
+                let maxPeakIntensity = 
+                    labeledDataTmp 
+                    |> Array.maxBy (fun x -> x.Meta = Care.Extrema.Positive)
+                labeledDataTmp 
+                |> Array.map (fun x -> if x.Meta = Care.Extrema.Positive then
+                                         match snd x.Data with
+                                         | validIntensity when validIntensity > 0.05 * (snd maxPeakIntensity.Data) -> x                             
+                                         | _                                                                       -> 
+                                            {Meta=Care.Extrema.None; Data= x.Data}
+                                       else x
+                             )
+            // Step 3: find closest Peak to MS2 scantime
+            let closestPeakIdx = 
+                idxOfClosestLabeledPeak labeledSndDevData SignalDetection.Care.Extrema.Positive scanTime
+            // TODO with F# 4.1 replace with OK, Error Pattern
+            if closestPeakIdx.IsNone then None, 1
+            else
+            // Step 4I: find leftLiftOffIdx
+            let closestLeftLiftOffIdx =
+                iterateTo (-1) labeledSndDevData (fst closestPeakIdx.Value) (fun (x:Tag<Care.Extrema,(float*float)>) -> x.Meta = Care.Extrema.Negative)
+            // Step4II: find leftFittingStartIdx
+            let leftfittingBorderIdx = 
+                match closestLeftLiftOffIdx with 
+                | None   -> 0 
+                | Some x -> x+1
+            // Step 5: find rightLiftOff
+            let closestRightLiftOffIdx = 
+                iterateTo (+1) labeledSndDevData (fst closestPeakIdx.Value) (fun (x:Tag<Care.Extrema,(float*float)>) -> x.Meta = Care.Extrema.Negative)
+            // Step 6: check if another peak is present to the right side of the chosen peak, count Liftoffs points, determine Model selection     
+            let mutable kLiftoffs = 0 
+            let mutable hasRightPeak = false
+            let (modelStatus,rightFittingBorderIdx) =
+                findRightFittingIdx xAndYData labeledSndDevData (fst closestPeakIdx.Value) closestRightLiftOffIdx
+            //Step 7: Create sub-array of xData and yData that is considered for subsequent fitting procedures    
+            let xDataForFit = xData.[leftfittingBorderIdx.. rightFittingBorderIdx] 
+            let yDataForFit = yData.[leftfittingBorderIdx.. rightFittingBorderIdx]
+            //Step 8: Use Caruanas algorithm to estimate parameters height, position and Full width at half maximum of 
+            //        the selected peak
+            let gausParamEstCaruana = 
+                GaussEstimation.caruanaAlgorithm xDataForFit yDataForFit
+            // TODO with F# 4.1 replace with OK, Error Pattern
+            if gausParamEstCaruana.IsNone then None,2
+            else 
+            let gausParamEstCaruana = gausParamEstCaruana.Value
+            //Step 9: Case A: if FitBithModels = True, the peak ending can be used to estimate a possible tailing    if FitBothModels = False then the first peak of a convoluted peak pair was chosen and is subsequently used to estimate the area
+            //        Case B: if FitBothModels = False then the first peak of a convoluted peak pair was chosen and is subsequently used to estimate the area
+            // Case A:
+            if modelStatus = FitBothModels.True then
+                let modelFunction = 
+                    ///
+                    let gausParamA = 
+                        let tmpGauss = Array.create 3 0.
+                        tmpGauss.[0] <- gausParamEstCaruana.Amplitude 
+                        tmpGauss.[1] <- (gausParamEstCaruana.MeanX ) 
+                        tmpGauss.[2] <- gausParamEstCaruana.STD 
+                        tmpGauss
+            
+                    ///
+                    let exponentialDecayEst = 
+                        let startTime = xData.[closestRightLiftOffIdx.Value]
+                        let startIntensity = yData.[closestRightLiftOffIdx.Value]
+                        let idxHalfIntensity = iterateTo (+1) yData closestRightLiftOffIdx.Value (fun x -> x < 0.5*startIntensity)    
+                        let endTime = 
+                            match idxHalfIntensity with
+                            | Some x -> xData.[x]
+                            | None   -> xData.[xData.Length-1]
+                            
+                        let decayEst = (endTime-startTime) / (log 2.)
+                        decayEst
+                    printfn "%f decay" exponentialDecayEst
+                    ///
+                    let gausParamEMG = 
+                        let tmpEmg = Array.create 4 0.
+                        tmpEmg.[0] <- gausParamEstCaruana.Amplitude 
+                        tmpEmg.[1] <- (gausParamEstCaruana.MeanX )
+                        tmpEmg.[2] <- gausParamEstCaruana.STD 
+                        tmpEmg.[3] <- exponentialDecayEst
+                        tmpEmg
+                    ///
+                    let gaussPrediction =
+                        let paramConti = new ResizeArray<DenseVector>()
+                        let gaussSolOptions = createGaussSolverOption gausParamA
+                        ///
+                        let testgauss() = 
+                            try
+                                let gaussParamA = Fitting.levenbergMarquardtSolver Fitting.Table.gaussModel gaussSolOptions xDataForFit yDataForFit paramConti                                   
+                                let gaussYPredicted = Array.map (fun xValue -> Fitting.Table.gaussModel.GetFunctionValue gaussParamA xValue) xDataForFit
+                                Some (gaussParamA, gaussYPredicted)
+                            with 
+                            | :? System.ArgumentException as ex  -> 
+                                                                None
+                        testgauss()       
+                    ///
+                    let emgPrediction =
+                        [|exponentialDecayEst/10. .. (exponentialDecayEst/10.)+0.1 ..  exponentialDecayEst|]
+                        |> Array.map (fun x -> 
+                                        let paramConti = new ResizeArray<DenseVector>()
+                                        let startexponentialDecayEst = exponentialDecayEst
+                                        gausParamEMG.[3] <- x
+                
+                                        let emgSolOptions = createEMGSolverOption gausParamEMG
+                                        ///
+                                        let testEmg() = 
+                                            try 
+                                                let emgParamA = Fitting.levenbergMarquardtSolver Fitting.Table.emgModel emgSolOptions xDataForFit yDataForFit paramConti
+                                                let emgYPredicted = Array.map (fun xValue -> Fitting.Table.emgModel.GetFunctionValue emgParamA xValue) xDataForFit
+                                                Some (emgParamA, emgYPredicted)
+                                            with 
+                                            | :? System.ArgumentException as ex  -> 
+                                                                                None
+                                        testEmg()  
+                                        )
+                        |> Array.filter (fun x -> x.IsSome)
+                        |> fun possibleEMGFits -> 
+                            match possibleEMGFits with
+                            | pEmgF when Array.isEmpty pEmgF -> None
+                            | _                      ->
+                                possibleEMGFits  
+                                |> Array.map (fun x ->
+                                                let sEoE = Fitting.standardErrorOfPrediction 4. (snd x.Value) yDataForFit  
+                                                printfn "%f" sEoE
+                                                x, sEoE
+                                            )
+                                |> Array.minBy (fun x -> snd x)
+                                |> fun x -> fst x
+            
+                    // If both models are fittable, choose the model with smaller standard error of the estimate
+                    if gaussPrediction.IsSome && emgPrediction.IsSome then
+                        ///
+                        let yGauss = snd gaussPrediction.Value
+                        let sEoE_Gauss = Fitting.standardErrorOfPrediction 3. yGauss yDataForFit
+                        ///
+                        let yEMG   = snd emgPrediction.Value
+                        let sEoE_EMG   = Fitting.standardErrorOfPrediction 4. yEMG yDataForFit 
+                        if sEoE_Gauss > -1. && sEoE_EMG > -1. && sEoE_Gauss > sEoE_EMG then
+                            Some (Fitting.Table.emgModel, emgPrediction.Value, sEoE_EMG)
+                        else        
+                            Some (Fitting.Table.gaussModel, gaussPrediction.Value, sEoE_Gauss)
+                    elif emgPrediction.IsSome then
+                        let yEMG   = snd emgPrediction.Value
+                        let sEoE_EMG   = Fitting.standardErrorOfPrediction 4. yEMG yDataForFit      
+                        Some (Fitting.Table.emgModel , emgPrediction.Value, sEoE_EMG)
+                    elif gaussPrediction.IsSome then
+                        let yGauss = snd gaussPrediction.Value
+                        let sEoE_Gauss = Fitting.standardErrorOfPrediction 3. yGauss yDataForFit
+                        Some (Fitting.Table.gaussModel, gaussPrediction.Value, sEoE_Gauss)
+                    else
+                        None
+                // compute area beneath curve
+                match modelFunction with
+                // TODO with F# 4.1 replace with OK, Error Pattern
+                | None -> 
+                    None, 3
+            
+                | Some (modelF,(paramV, yData), sEoE) ->
+                    let medianX = paramV.[1]
+                    let xData = [|0. .. 0.05 .. medianX+300.|]
+                    let yData = 
+                        xData
+                        |> Array.map (modelF.GetFunctionValue paramV)
+                    if xData |> Array.isEmpty || yData |> Array.isEmpty then
+                        None, 5
+                    else
+                    let yMaxModel = 
+                        if yData |> Array.isEmpty then 0.
+                        else
+                        yData |> Array.max
+                    // Maybe this is reduntant and one can also choose 0 and 10000 as intervalStarts.
+                    let intervalBegin = 
+                        match iterateTo (+1) yData 1 (fun (x:float) -> x > 0.01*yMaxModel) with 
+                        | Some idx -> idx
+                        | None     -> 0 
+                    let intervalEnd   =
+                        match iterateTo (-1) yData (yData.Length-2)  (fun (x:float) -> x > 0.01*yMaxModel) with
+                        | Some idx -> idx
+                        | None     -> yData.Length-1
+                    let area = 
+                        MathNet.Numerics.Integrate.OnClosedInterval((fun x -> (modelF.GetFunctionValue paramV x)),xData.[intervalBegin], xData.[intervalEnd]) 
+                    let deltaScanTimePeakApex =  (scanTime - gausParamEstCaruana.MeanX)
+                     //
+                    let (xMax,yMaxXic) = xAndYData |> Array.maxBy (fun x -> snd x)
+                    //
+                    Some (createQuantificationResult FitBothModels.True modelF area sEoE deltaScanTimePeakApex yMaxModel yMaxXic), 10
+            // Case B:
+            else
+                let modelFunction = 
+                    ///
+                    let gausParamA = 
+                        let tmpGauss = Array.create 3 0.
+                        tmpGauss.[0] <- gausParamEstCaruana.Amplitude 
+                        tmpGauss.[1] <- (gausParamEstCaruana.MeanX ) 
+                        tmpGauss.[2] <- gausParamEstCaruana.STD 
+                        tmpGauss
+                    ///
+                    let gaussPrediction =
+                        let paramConti = new ResizeArray<DenseVector>()
+                        let gaussSolOptions = createGaussSolverOption gausParamA
+                        ///
+                        let testgauss() = 
+                            try
+                                let gaussParamA = Fitting.levenbergMarquardtSolver Fitting.Table.gaussModel gaussSolOptions xDataForFit yDataForFit paramConti
+                                                    
+                                let gaussYPredicted = Array.map (fun xValue -> Fitting.Table.gaussModel.GetFunctionValue gaussParamA xValue) xDataForFit
+                                Some (gaussParamA, gaussYPredicted)
+                            with 
+                            | :? System.ArgumentException as ex  -> 
+                                                                None
+                        testgauss()
+
+                    if gaussPrediction.IsSome then
+                        let yGauss = snd gaussPrediction.Value
+                        let sEoE_Gauss = Fitting.standardErrorOfPrediction 3. yGauss yDataForFit
+                        Some (Fitting.Table.gaussModel, gaussPrediction.Value, sEoE_Gauss)
+                    else
+                        None
+                // compute area beneath curve
+                match modelFunction with
+                // TODO with F# 4.1 replace with OK, Error Pattern
+                | None -> 
+                    None, 4
+            
+                | Some (modelF,(paramV, yData), sEoE) ->
+                    let medianX = paramV.[1]
+                    let xData = [|-300. .. 0.05 .. medianX+300.|]
+                    if Array.isEmpty xData then None,5 
+                    else
+                    let yData = 
+                        xData
+                        |> Array.map (modelF.GetFunctionValue paramV)
+                    if xData |> Array.isEmpty || yData |> Array.isEmpty then
+                        None, 5
+                        else
+                    let yMaxModel = 
+                        if yData |> Array.isEmpty then 0.
+                        else
+                        yData |> Array.max
+                    // Maybe this is reduntant and one can also choose 0 and 10000 as intervalStarts.
+                    let intervalBegin = 
+                        match iterateTo (+1) yData 1 (fun (x:float) -> x > 0.01*yMaxModel) with 
+                        | Some idx -> idx
+                        | None     -> 0 
+                    let intervalEnd   =
+                        match iterateTo (-1) yData (yData.Length-2)  (fun (x:float) -> x > 0.01*yMaxModel) with
+                        | Some idx -> idx
+                        | None     -> yData.Length-1
+                    //
+                    let area = 
+                        MathNet.Numerics.Integrate.OnClosedInterval((fun x -> (modelF.GetFunctionValue paramV x)),xData.[intervalBegin], xData.[intervalEnd]) 
+                    //
+                    let deltaScanTimePeakApex = abs (scanTime - gausParamEstCaruana.MeanX)
+                    //
+                    let (xMax,yMaxXic) = xAndYData |> Array.maxBy (fun x -> snd x)
+                    //
+                    Some (createQuantificationResult FitBothModels.True modelF area sEoE deltaScanTimePeakApex yMaxModel yMaxXic), 11
+    

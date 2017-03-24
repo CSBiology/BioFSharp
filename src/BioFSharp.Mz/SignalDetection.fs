@@ -179,16 +179,17 @@ module SignalDetection =
         let labelPeaks negYThreshold posYThreshold (xData:float[]) (smoothYData:float[]) =
             if xData.Length <= 5 then [||]
             else
-            [|for i = 3 to xData.Length-3 do
-                if (smoothYData.[i] > posYThreshold && smoothYData.[i] > smoothYData.[i - 1] && smoothYData.[i] > smoothYData.[i + 1] 
+            [|for i = 0 to xData.Length-1 do 
+                if i < 3 || i > xData.Length-3 then
+                    yield {Meta=Extrema.None; Data= xData.[i],smoothYData.[i]}
+                                    
+                elif (smoothYData.[i] > posYThreshold && smoothYData.[i] > smoothYData.[i - 1] && smoothYData.[i] > smoothYData.[i + 1] 
                     && smoothYData.[i - 1] >= smoothYData.[i - 2] && smoothYData.[i + 1] >= smoothYData.[i + 2]) then
                     yield {Meta=Extrema.Positive; Data= xData.[i],smoothYData.[i]} //TODO: Typ is tin Peak.fs definiert, creatorFunktion verwenden
 
                 // Peak must be concave in the interval [i-2 .. i+2] and exheat a min hight (min_dh)
                 elif (smoothYData.[i] < negYThreshold && smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] < smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
-                    && smoothYData.[i - 1] <= smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
-
-                    // take the intensity at the apex of the profile peak
+                    && smoothYData.[i] < smoothYData.[i - 2] && smoothYData.[i] < smoothYData.[i + 2]) then
                     yield {Meta=Extrema.Negative; Data= xData.[i],smoothYData.[i]}
                 else
                     yield {Meta=Extrema.None; Data= xData.[i],smoothYData.[i]}
@@ -294,21 +295,27 @@ module SignalDetection =
 
     module Wavelet =
 
-        // use struct.
+        // TODO use struct.
         type RidgeLine = {
             Row: int
             Col: int
             }
-
+        
+        ///
         let createRidgeLine row col = {Row=row;Col=col; }
 
-        type peakDetermParameter = {
-            MZTol        : float
-            SNRThreshold : float
+        ///
+        type waveletParameters = {
+            NumberOfScales        : int
+            YThreshold            : float
+            MzTolerance           : float
+            Spacing_Percentile    : float
+            SNRS_Percentile       : float
             }
-    
-        let createPeakDetermParameter mzTol snrThreshold = {
-            MZTol=mzTol; SNRThreshold=snrThreshold
+        
+        ///
+        let createWaveletParameters numberOfScales yThreshold mzTolerance spacing_Percentile sNRS_Percentile = {
+            NumberOfScales=numberOfScales; YThreshold=yThreshold ;MzTolerance=mzTolerance ;Spacing_Percentile=spacing_Percentile ;SNRS_Percentile=sNRS_Percentile
             }
 
         /// Helperfunction to calculate the mz values left and right from the target value which will be included in the computation of 
@@ -340,10 +347,6 @@ module SignalDetection =
             for i = paddingPoints to mzData.Length - 1 + paddingPoints do 
                 mzDataPadded.[i] <- mzData.[i-paddingPoints]
                 intensityDataPadded.[i] <- intensityData.[i-paddingPoints]
-
-
-
-
 
         /// Helperfunction to get mz back of Columnnumber
         let convertColToMz (mzData: float []) (col: int) =
@@ -420,22 +423,22 @@ module SignalDetection =
             ricker 0 (centerIdx-nPointsLeft)
             waveletData
         
-//        let ricker2D' (mzDataPadded:float []) (waveletData:float []) (centerIdx:int) (nPointsLeft:int) (nPointsRight:int) (focusedPaddedMzValue:float) (width:float) =  //(PadMz, paddedCol, nPointsLeft, nPointsRight, param1, param2, PadMz[paddedCol], waveletData)
-//            let computation cnt i =
-//                let vec = mzDataPadded.[i]-focusedPaddedMzValue
-//                let tsq = vec*vec
-//                let modi = 1. - tsq / (width * width)
-//                let gauss = exp(-1. * tsq / (2.0 *(width * width)) )
-//                waveletData.[cnt] <- (  2.0 / ( sqrt(3.0 * width) * (sqrt(sqrt(3.141519))) ) ) * modi * gauss
-//            let rec ricker cnt i = 
-//                if i = centerIdx+nPointsRight then 
-//                     computation cnt i
-//                else computation cnt i
-//                     ricker (cnt+1) (i+1)
-//            if nPointsLeft - nPointsRight >= waveletData.Length 
-//                then printfn "invalid input Parameters for ricker2d"
-//            ricker 0 (centerIdx-nPointsLeft)
-//            waveletData         
+        let ricker2DWithMem (mzDataPadded:float []) (waveletData:float []) (centerIdx:int) (nPointsLeft:int) (nPointsRight:int) (focusedPaddedMzValue:float) (width:float) =  //(PadMz, paddedCol, nPointsLeft, nPointsRight, param1, param2, PadMz[paddedCol], waveletData)
+            let computation cnt i =
+                let vec = mzDataPadded.[i]-focusedPaddedMzValue
+                let tsq = vec*vec
+                let modi = 1. - tsq / (width * width)
+                let gauss = exp(-1. * tsq / (2.0 *(width * width)) )
+                waveletData.[cnt] <- (  2.0 / ( sqrt(3.0 * width) * (sqrt(sqrt(3.141519))) ) ) * modi * gauss
+            let rec ricker cnt i = 
+                if i = centerIdx+nPointsRight then 
+                     computation cnt i
+                else computation cnt i
+                     ricker (cnt+1) (i+1)
+            if nPointsLeft - nPointsRight >= waveletData.Length 
+                then printfn "invalid input Parameters for ricker2d"
+            ricker 0 (centerIdx-nPointsLeft)
+            waveletData         
         
         let inline calcCorrWaveletAndDataMatrix (waveletF: float [] -> float [] -> int -> int -> int -> float -> float -> float [])  nScales paddingPoints (mzDataPadded:float[]) (intensityDataPadded:float[]) (mzData:float[]) (intensityData: float[]) (waveletData:float[]) (nPoints: int[,,]) (xSpacingAvg: float []) (scalings: float []) (corrMatrix: float [,]) = 
             for i = 0 to nScales-1 do 
@@ -641,12 +644,12 @@ module SignalDetection =
                 finalX, finalY                
                 
         /// Returns a MzIntensityArray that containing the spectral centroids of the input spectra. 
-        let inline toCentroid waveletF yThreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  =
+        let inline toCentroid waveletF nScales yThreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  =
             if mzData.Length < 3 then
                 [||], [||] 
             else
             //FixedParameters
-            let nScales = 10;
+//            let nScales = 10;
             let windowMaxLow = 5
             let windowMaxHigh = 5
             let initialWidthScaling = 1.; 
@@ -688,8 +691,8 @@ module SignalDetection =
 
             refinePeaks yThreshold mzTol scalings mzData intensityData allLines xSpacingAvg 
 
-        let inline toCentroidWithRicker2D yYhreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  = 
-            toCentroid ricker2d yYhreshold mzTol spacing_perc snrs_perc mzData intensityData
+        let inline toCentroidWithRicker2D nScales yYhreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  = 
+            toCentroid ricker2d nScales yYhreshold mzTol spacing_perc snrs_perc mzData intensityData
 
     module SecondDerivative =
     
