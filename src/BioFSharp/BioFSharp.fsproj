@@ -80,6 +80,8 @@
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
+    <!-- Resources -->
+    <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
