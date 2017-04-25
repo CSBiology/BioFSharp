@@ -176,7 +176,7 @@ module AminoAcidSymbols =
                 
                 name this
     // Conversion operators
-    let aminoAcidSymbol (a:int) = AminoAcidSymbol.op_Explicit(a)
+    let inline aminoAcidSymbol a = AminoAcidSymbol.op_Explicit(int a)
 
     let inline parseChar (c:char) =
         match System.Char.ToUpper c with                                    
