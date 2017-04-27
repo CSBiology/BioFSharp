@@ -389,7 +389,24 @@ module Quantification =
         
     module MyQuant = 
 
-        //
+
+        //TODO add to SignalDetection
+        let idxOfHighestLabeledPeakBy (labeledData: Tag<Care.Extrema,(float*float)>[]) (labelV:Care.Extrema) xValue = 
+            if labeledData |> Array.isEmpty then None
+            else
+            labeledData  
+            |> Array.mapi (fun i x -> i, x) 
+            |> Array.filter (fun (i,x) -> x.Meta = labelV)
+            |> fun farr -> 
+                match farr with
+                | farr when farr |> Array.isEmpty -> 
+                    None     
+                | _ ->  
+                    farr 
+                    |> Array.maxBy (fun (idx,value) -> snd value.Data ) 
+                    |> Some
+                
+        //TODO add to SignalDetection
         let idxOfClosestLabeledPeak (labeledData: Tag<Care.Extrema,(float*float)>[]) (labelV:Care.Extrema) xValue = 
             if labeledData |> Array.isEmpty then None
             else
@@ -492,7 +509,7 @@ module Quantification =
             
     
         /// 
-        let quantify windowSizeSGfilter negYThreshold posYThreshold (scanTime: float) (xData :float []) (yData: float [])= 
+        let quantify (peakByF:Tag<Care.Extrema,(float*float)> [] -> Care.Extrema -> 'a -> ((int * Tag<Care.Extrema,(float*float)>) option)) windowSizeSGfilter negYThreshold posYThreshold (scanTime: float) (xData :float []) (yData: float [])= 
             if xData.Length < 6 || yData.Length < 6 then None, 0
             else
             // Step 0: zip xData and yData
@@ -519,7 +536,7 @@ module Quantification =
                              )
             // Step 3: find closest Peak to MS2 scantime
             let closestPeakIdx = 
-                idxOfClosestLabeledPeak labeledSndDevData SignalDetection.Care.Extrema.Positive scanTime
+                peakByF labeledSndDevData SignalDetection.Care.Extrema.Positive scanTime
             // TODO with F# 4.1 replace with OK, Error Pattern
             if closestPeakIdx.IsNone then None, 1
             else
@@ -761,3 +778,5 @@ module Quantification =
                     //
                     Some (createQuantificationResult FitBothModels.True modelF area sEoE deltaScanTimePeakApex yMaxModel yMaxXic), 11
     
+
+
