@@ -61,6 +61,24 @@ AminoAcids.Cys
 |> AminoAcids.formula
 
 
+open AminoProperties
 
+let getHydrophobicityIndex  = initGetAminoProperty AminoProperty.HydrophobicityIndex
+
+getHydrophobicityIndex AminoAcidSymbols.AminoAcidSymbol.Ala 
+
+let getHydrophobicityIndexZ  = initGetAminoPropertyZnorm AminoProperty.HydrophobicityIndex
+
+getHydrophobicityIndexZ AminoAcidSymbols.AminoAcidSymbol.Ala 
+
+
+let peptide2' = 
+    "REYAHMIGMEYDTVQK"
+    |> BioArray .ofAminoAcidString
+    |> Array.map AminoAcidSymbols.aminoAcidSymbol
+
+
+peptide2' |> Array.map getHydrophobicityIndex
+peptide2' |> AminoProperties.ofWindowedBioArray 3 getHydrophobicityIndex
 
 

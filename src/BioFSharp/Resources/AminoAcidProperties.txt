@@ -1,0 +1,12 @@
+Hydrophobicity index (Argos et al., 1982)
+A:0.61 R:0.6 N:0.06 D:0.46 C:1.07 Q:0 E:0.47 G:0.07 H:0.61 I:2.22 L:1.53 K:1.15 M:1.18 F:2.02 P:1.95 S:0.05 T:0.05 W:2.65 Y:1.88 V:1.32
+Normalized frequency of beta-sheet (Crawford et al., 1973)
+A:1 R:0.74 N:0.75 D:0.89 C:0.99 Q:0.87 E:0.37 G:0.56 H:0.36 I:1.75 L:1.53 K:1.18 M:1.4 F:1.26 P:0.36 S:0.65 T:1.15 W:0.84 Y:1.41 V:1.61
+Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
+A:1.1 R:0.95 N:0.8 D:0.65 C:0.95 Q:1 E:1 G:0.6 H:0.85 I:1.1 L:1.25 K:1 M:1.15 F:1.1 P:0.1 S:0.75 T:0.75 W:1.1 Y:1.1 V:0.95
+Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)
+A:-0.04 R:-0.3 N:0.25 D:0.27 C:0.57 Q:-0.02 E:-0.33 G:1.24 H:-0.11 I:-0.26 L:-0.38 K:-0.18 M:-0.09 F:-0.01 P:0 S:0.15 T:0.39 W:0.21 Y:0.05 V:-0.06
+PRIFT index (Cornette et al., 1987)
+A:-0.96 R:0.75 N:-1.94 D:-5.68 C:4.54 Q:-5.3 E:-3.86 G:-1.28 H:-0.62 I:5.54 L:6.81 K:-5.62 M:4.76 F:5.06 P:-4.47 S:-1.92 T:-3.99 W:0.21 Y:3.34 V:5.39
+Hydrophobicity index (Fasman, 1989)
+A:-0.21 R:2.11 N:0.96 D:1.36 C:-6.04 Q:1.52 E:2.3 G:0 H:-1.23 I:-4.81 L:-4.68 K:3.88 M:-3.66 F:-4.65 P:0.75 S:1.74 T:0.78 W:-3.32 Y:-1.01 V:-3.5
