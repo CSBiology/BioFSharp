@@ -9,9 +9,19 @@ module AminoProperties =
 
     type AminoProperty =
         | HydrophobicityIndex
-        
+        | HydrophobicityFasman
+        | BetaSheet           
+        | Coil                
+        | Helicity            
+        | Amphiphilicity      
+
         static member toString = function
-            | HydrophobicityIndex -> "Hydrophobicity index (Argos et al., 1982)"
+            | HydrophobicityIndex  -> "Hydrophobicity index (Argos et al., 1982)"
+            | HydrophobicityFasman -> "Hydrophobicity index (Fasman, 1989)"
+            | BetaSheet            -> "Normalized frequency of beta-sheet (Crawford et al., 1973)"
+            | Coil                 -> "Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)"
+            | Helicity             -> "Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)"
+            | Amphiphilicity       -> "PRIFT index (Cornette et al., 1987)"
 
 
     let private ofPropteryString propertyName (str:string) = 
@@ -68,7 +78,7 @@ module AminoProperties =
         (fun  (amino:AminoAcidSymbol) -> av.[int amino - 65])
 
 
-    /// Returns an array of sliding windows of data drawn from the source array.
+    /// Returns an array of sliding windows based property averages.
     /// Each window contains the n elements surrounding the current element
     let ofWindowedBioArray n (pf:'a->float) (source:BioArray.BioArray<'a>) =
         if n < 0 then invalidArg "n" "n must be a positive integer"
@@ -88,7 +98,42 @@ module AminoProperties =
                 | _ -> 
                     Array.foldSub (+) 0.0 pfArr (i-n) (i+n) / arrSize
             )
-               
 
+    /// Returns an array of sliding windows based property averages.
+    /// Each window contains the n elements surrounding the current element
+    //                
+    let ofBioArrayRndNorm (sampler:unit->'a) n sampleSize (pf:'a->float) (source:BioArray.BioArray<'a>) =
+        let proSeqSampler size =
+            if source.Length <= (n+n) then failwithf "Error: "
+            Array.init size (fun _ -> sampler () )
+            |> ofWindowedBioArray n pf
+            // TODO: Check length!!
+            |> fun arr -> arr.[n-1 .. arr.Length-n-1]   
+            //Array.init n (fun _ -> samples length)    
+    
+        let rndData =
+            //if source.Length < windowSize then failwith "Warning! Length of source must equal windowSize or greater." else
+            Array.init sampleSize (fun _ -> proSeqSampler source.Length)
+            |> JaggedArray.transpose
+
+        let rndMean =
+            rndData
+            |> Array.map (fun arr -> Array.average arr)
+            |> Array.average
+
+        let rndStd =
+            rndData
+            |> Array.mapi 
+                (fun i arr -> 
+                    arr 
+                    |> Array.fold (fun acc x -> acc + (x-rndMean) * (x-rndMean) ) 0.0
+                    |> fun x -> x / float arr.Length
+                    |> sqrt 
+                ) 
+            |> Array.average
+
+        source
+        |> ofWindowedBioArray n pf
+        |> Array.map (fun item -> (item-rndMean) / rndStd)
         
 
