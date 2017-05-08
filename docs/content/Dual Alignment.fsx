@@ -44,7 +44,7 @@ Input
 The function uses <b>Arrays</b> as input. The Elements can be of any type, but require equality.
 *)
 let firstSequence = [|1;2;3;3;4;4;5|]
-let secondSequence = [|1;2;3;4;5|] 
+let secondSequence = [|1;2;3;4|] 
 (**
 </div>*)
 

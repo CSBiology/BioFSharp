@@ -1,10 +1,9 @@
 namespace BioFSharp.Algorithms
 
-open FSharpAux
+
 
 module DualAlignment =
-
-    
+    open FSharp.Care.Collections   
      //Introduction!
      //This page contains functions for evaluating the best possible Allignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
 
@@ -15,6 +14,7 @@ module DualAlignment =
 
     /// Holds all types and helper-functions. Also includes the function for the matrix creation and the backtrace-function
     module RunGeneric =
+
         type TraceScore =     
             | Diagonal   of float
             | Horizontal of float
@@ -104,9 +104,9 @@ module DualAlignment =
         /// Creates the alignment out of the matrix and the 2 sequences
         let rec traceBack (fstSeq : 'a[]) (sndSeq : 'a[])  i j acc (array:Cell[,])=         
             match array.[i,j].M with
-            |Diagonal x   -> traceBack fstSeq sndSeq (i-1) (j-1) ((Some (fstSeq.[i-1]),Some (sndSeq.[j-1]))::acc) array
-            |Horizontal x -> traceBack fstSeq sndSeq  i    (j-1) ((None               ,Some (sndSeq.[j-1]))::acc) array
-            |Vertical x   -> traceBack fstSeq sndSeq (i-1)  j    ((Some (fstSeq.[i-1]),None              )::acc) array
+            |Diagonal _   -> traceBack fstSeq sndSeq (i-1) (j-1) ((Some (fstSeq.[i-1]),Some (sndSeq.[j-1]))::acc) array
+            |Horizontal _ -> traceBack fstSeq sndSeq  i    (j-1) ((None               ,Some (sndSeq.[j-1]))::acc) array
+            |Vertical _   -> traceBack fstSeq sndSeq (i-1)  j    ((Some (fstSeq.[i-1]),None              )::acc) array
             |NoTrace      -> acc //<- NoTrace returns list
 
 
@@ -202,21 +202,9 @@ module DualAlignment =
                     (fstSeq : 'a[]) (sndSeq : 'a[]) 
                         opcs                            
         
-            let i, j, _= Array2D.maxBy (fun c -> getTraceScoreValue c.M) array
+            let i, j= Array2D.indexMaxBy (fun c -> getTraceScoreValue c.M) array
 
             //Afterwards, the backtrace creates the allignment out of the array and the 2 sequences and combined with its score
             createAlignment
                 (array.[len1,len2].M |> getTraceScoreValue)
                     (traceBack fstSeq sndSeq i j list.Empty array)
-
-    open NeedlemanWunsch
-    open RunGeneric
-
-    let scoring a b = 
-        if a = b then 2.
-        else -2.
-
-    let costs = {
-        Open = -2.
-        Continuation = -1.
-        Similarity = scoring}
