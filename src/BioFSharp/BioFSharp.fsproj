@@ -81,6 +81,7 @@
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
+    <Compile Include="Algorithm\DualAlignment.fs" />
     <!-- Resources -->
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <None Include="BioFSharp.fsx" />
