@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>AndromedaLike - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>AndromedaLike</h1>
+<p>
+  <span>Namespace: BioFSharp.Mz</span><br />
+</p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-mz-andromedalike-andromedalikescore.html">AndromedaLikeScore</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-mz-andromedalike-peakfamily-1.html">PeakFamily<'a></a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '364', 364)" onmouseover="showTip(event, '364', 364)">
+            calcAndromedaLikeScoresRevDecoy (...)
+          </code>
+          <div class="tip" id="364">
+            <strong>Signature:</strong> massfunction:(Formula -&gt; float) -&gt; (int * int) -&gt; (float * float) -&gt; matchingTolPPM:float -&gt; spectrum:PeakArray&lt;&#39;?8975&gt; -&gt; chargeState:int -&gt; isolationWindowTargetMz:float -&gt; possiblePeptideInfos:LookUpResult&lt;AminoAcid&gt; list -&gt; spectrumID:string -&gt; AndromedaLikeScore list<br />
+                          <strong>Type parameters:</strong> '?8975          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L371-371" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '365', 365)" onmouseover="showTip(event, '365', 365)">
+            calcDeltaAndorScore sourceList
+          </code>
+          <div class="tip" id="365">
+            <strong>Signature:</strong> sourceList:AndromedaLikeScore list -&gt; AndromedaLikeScore list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L360-360" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '366', 366)" onmouseover="showTip(event, '366', 366)">
+            countMatches (...)
+          </code>
+          <div class="tip" id="366">
+            <strong>Signature:</strong> (float * float) -&gt; mzMatchingTolerance:float -&gt; theoSpect:PeakFamily&lt;PeakAnnotation&gt; [] -&gt; (int * (float * float) list list) -&gt; int * int * int * int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L257-257" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '367', 367)" onmouseover="showTip(event, '367', 367)">
+            createAndromedaScore (...)
+          </code>
+          <div class="tip" id="367">
+            <strong>Signature:</strong> spectrumID:string -&gt; modSequenceID:int -&gt; pepSequenceID:int -&gt; globalMod:int -&gt; isTarget:bool -&gt; stringSequence:string -&gt; precursorCharge:int -&gt; precursorMZ:float -&gt; measuredMass:float -&gt; theoMass:float -&gt; peptideLength:int -&gt; androScore:float -&gt; deltaAndroScore:float -&gt; AndromedaLikeScore<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L44-44" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '368', 368)" onmouseover="showTip(event, '368', 368)">
+            createPeakFamily mainPeak dependentPeaks
+          </code>
+          <div class="tip" id="368">
+            <strong>Signature:</strong> mainPeak:&#39;?8949 -&gt; dependentPeaks:&#39;?8949 list -&gt; PeakFamily&lt;&#39;?8949&gt;<br />
+                          <strong>Type parameters:</strong> '?8949          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L22-22" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '369', 369)" onmouseover="showTip(event, '369', 369)">
+            findBinIdx mz
+          </code>
+          <div class="tip" id="369">
+            <strong>Signature:</strong> mz:float&lt;MeasureOne&gt; -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L235-235" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '370', 370)" onmouseover="showTip(event, '370', 370)">
+            gammLn x
+          </code>
+          <div class="tip" id="370">
+            <strong>Signature:</strong> x:float -&gt; float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L328-328" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '371', 371)" onmouseover="showTip(event, '371', 371)">
+            hasMatchingPeakMZTol (...)
+          </code>
+          <div class="tip" id="371">
+            <strong>Signature:</strong> mzMatchingTolerance:float -&gt; tarmz:float -&gt; observBinnedSpect:(float * float) list list -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L238-238" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '372', 372)" onmouseover="showTip(event, '372', 372)">
+            hasMatchingPeakPPM (...)
+          </code>
+          <div class="tip" id="372">
+            <strong>Signature:</strong> mzMatchingTolerancePPM:float -&gt; tarmz:float -&gt; observBinnedSpect:(float * float) list list -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L246-246" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '373', 373)" onmouseover="showTip(event, '373', 373)">
+            ions massfunction ionSeries aal
+          </code>
+          <div class="tip" id="373">
+            <strong>Signature:</strong> massfunction:(Formula -&gt; float) -&gt; ionSeries:IonSeries -&gt; aal:AminoAcid list -&gt; PeakFamily&lt;Tag&lt;(bool * IonTypes),float&gt;&gt; list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L110-110" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '374', 374)" onmouseover="showTip(event, '374', 374)">
+            lnProb n k lnp lnq
+          </code>
+          <div class="tip" id="374">
+            <strong>Signature:</strong> n:float -&gt; k:float -&gt; lnp:float -&gt; lnq:float -&gt; float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L331-331" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '375', 375)" onmouseover="showTip(event, '375', 375)">
+            nrOfBins (arg1, arg2)
+          </code>
+          <div class="tip" id="375">
+            <strong>Signature:</strong> (float * float) -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '376', 376)" onmouseover="showTip(event, '376', 376)">
+            predictOf (...)
+          </code>
+          <div class="tip" id="376">
+            <strong>Signature:</strong> massfunction:(Formula -&gt; float) -&gt; (float * float) -&gt; aal:AminoAcid list -&gt; maxcharge:float -&gt; PeakFamily&lt;PeakAnnotation&gt; []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L167-167" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '377', 377)" onmouseover="showTip(event, '377', 377)">
+            scoreFuncImpl n k topx
+          </code>
+          <div class="tip" id="377">
+            <strong>Signature:</strong> n:int -&gt; k:int -&gt; topx:int -&gt; float&lt;MeasureOne&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L337-337" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '378', 378)" onmouseover="showTip(event, '378', 378)">
+            scoreTheoVsRecordedSpec (...)
+          </code>
+          <div class="tip" id="378">
+            <strong>Signature:</strong> (float * float) -&gt; matchingTolPPM:float -&gt; theoSpec:PeakFamily&lt;PeakAnnotation&gt; [] -&gt; binnedRecSpec:(int * (float * float) list list) [] -&gt; float&lt;MeasureOne&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L350-350" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '379', 379)" onmouseover="showTip(event, '379', 379)">
+            spectrumToBinnedArray (...)
+          </code>
+          <div class="tip" id="379">
+            <strong>Signature:</strong> qMostAbundandPepsMin:int -&gt; qMostAbundandPepsMax:int -&gt; (float * float) -&gt; spectrumData:(float * float) [] -&gt; (int * (float * float) list list) []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/AndromedaLike.fs#L58-58" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

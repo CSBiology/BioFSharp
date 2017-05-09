@@ -237,7 +237,7 @@ done otherwise</em></p>
 <div class="tip" id="fs19">val queryFastaItem : FastA.FastaItem&lt;BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;&gt;<br /><br />Full name: BlastWrapper.queryFastaItem<br /><em><br /><br />FastaItem containing header string and query sequence</em></div>
 <div class="tip" id="fs20">module FastA<br /><br />from BioFSharp.IO</div>
 <div class="tip" id="fs21">val createFastaItem : header:string -&gt; sequence:&#39;a -&gt; FastA.FastaItem&lt;&#39;a&gt;<br /><br />Full name: BioFSharp.IO.FastA.createFastaItem</div>
-<div class="tip" id="fs22">val write : toString:(&#39;T -&gt; char) -&gt; filePath:string -&gt; data:seq&lt;FastA.FastaItem&lt;seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.FastA.write</div>
+<div class="tip" id="fs22">val write : toString:(&#39;T -&gt; char) -&gt; filePath:string -&gt; data:seq&lt;FastA.FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.FastA.write</div>
 <div class="tip" id="fs23">module BioItem<br /><br />from BioFSharp</div>
 <div class="tip" id="fs24">val symbol : bItem:#IBioItem -&gt; char<br /><br />Full name: BioFSharp.BioItem.symbol</div>
 <div class="tip" id="fs25">val outputType : OutputType<br /><br />Full name: BlastWrapper.outputType<br /><em><br /><br />overall outline of the output </em></div>
@@ -277,6 +277,7 @@ done otherwise</em></p>
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>

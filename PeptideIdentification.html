@@ -96,7 +96,7 @@ As demonstrated in the SignalProcessing tutorial the spectral centroids of the M
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="i">centroidedSpectrum</span> <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs22', 32)" onmouseover="showTip(event, 'fs22', 32)" class="t">SignalDetection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 33)" onmouseover="showTip(event, 'fs23', 33)" class="t">Wavelet</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="f">toCentroid</span> <span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="i">ms2rawMzData</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="i">ms2rawIntensityData</span>
-    <span class="o">|&gt;</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="i">m</span>,<span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="i">i</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="t">PeakArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 40)" onmouseover="showTip(event, 'fs28', 40)" class="f">zipMzInt</span> <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="i">m</span> <span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="i">i</span>)
+    <span class="o">|&gt;</span> (<span class="k">fun</span> (<span class="i">m</span>,<span class="i">i</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="i">PeakArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="i">zipMzInt</span> <span class="i">m</span> <span class="i">i</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -123,19 +123,19 @@ database fits the lookUp criteria. Furthermore these parameters can be used to a
 <span class="l">14: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns the filepath to a demo database </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="i">dbPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Creinhardtii_CpN14Seq.db&quot;</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="i">dbPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Creinhardtii_CpN14Seq.db&quot;</span>)
 <span class="c">/// Returns a instance of the type SearchDbParams</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="i">sdbParams</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs31', 45)" onmouseover="showTip(event, 'fs31', 45)" class="t">SearchDB</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="f">getSDBParamsBy</span> <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="i">dbPath</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 40)" onmouseover="showTip(event, 'fs28', 40)" class="i">sdbParams</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 41)" onmouseover="showTip(event, 'fs29', 41)" class="t">SearchDB</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 42)" onmouseover="showTip(event, 'fs30', 42)" class="f">getSDBParamsBy</span> <span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="i">dbPath</span>
 <span class="c">/// Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 48)" onmouseover="showTip(event, 'fs33', 48)" class="f">n14DBLookUpBy</span> <span class="o">=</span>  
-        <span onmouseout="hideTip(event, 'fs31', 49)" onmouseover="showTip(event, 'fs31', 49)" class="t">SearchDB</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 50)" onmouseover="showTip(event, 'fs34', 50)" class="f">getPeptideLookUpBy</span> <span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="i">sdbParams</span>           
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 44)" onmouseover="showTip(event, 'fs31', 44)" class="f">n14DBLookUpBy</span> <span class="o">=</span>  
+        <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">SearchDB</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="f">getPeptideLookUpBy</span> <span onmouseout="hideTip(event, 'fs28', 47)" onmouseover="showTip(event, 'fs28', 47)" class="i">sdbParams</span>           
 <span class="c">/// Returns the result of the peptide lookup</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 52)" onmouseover="showTip(event, 'fs35', 52)" class="f">n14PeptideLookUp</span> <span onmouseout="hideTip(event, 'fs36', 53)" onmouseover="showTip(event, 'fs36', 53)" class="i">mass</span> <span class="o">=</span>
-        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 54)" onmouseover="showTip(event, 'fs37', 54)" class="i">lowerBorder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 55)" onmouseover="showTip(event, 'fs36', 55)" class="i">mass</span><span class="o">-</span><span class="n">0.5</span>
-        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 56)" onmouseover="showTip(event, 'fs38', 56)" class="i">upperBorder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 57)" onmouseover="showTip(event, 'fs36', 57)" class="i">mass</span><span class="o">+</span><span class="n">0.5</span> 
-        <span onmouseout="hideTip(event, 'fs33', 58)" onmouseover="showTip(event, 'fs33', 58)" class="f">n14DBLookUpBy</span> <span onmouseout="hideTip(event, 'fs37', 59)" onmouseover="showTip(event, 'fs37', 59)" class="i">lowerBorder</span> <span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="i">upperBorder</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 48)" onmouseover="showTip(event, 'fs33', 48)" class="f">n14PeptideLookUp</span> <span onmouseout="hideTip(event, 'fs34', 49)" onmouseover="showTip(event, 'fs34', 49)" class="i">mass</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 50)" onmouseover="showTip(event, 'fs35', 50)" class="i">lowerBorder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 51)" onmouseover="showTip(event, 'fs34', 51)" class="i">mass</span><span class="o">-</span><span class="n">0.5</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 52)" onmouseover="showTip(event, 'fs36', 52)" class="i">upperBorder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 53)" onmouseover="showTip(event, 'fs34', 53)" class="i">mass</span><span class="o">+</span><span class="n">0.5</span> 
+        <span onmouseout="hideTip(event, 'fs31', 54)" onmouseover="showTip(event, 'fs31', 54)" class="f">n14DBLookUpBy</span> <span onmouseout="hideTip(event, 'fs35', 55)" onmouseover="showTip(event, 'fs35', 55)" class="i">lowerBorder</span> <span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="i">upperBorder</span>
 <span class="c">/// Returns a list of candidate peptide sequences </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 61)" onmouseover="showTip(event, 'fs39', 61)" class="i">candidatePeps</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs35', 62)" onmouseover="showTip(event, 'fs35', 62)" class="f">n14PeptideLookUp</span> <span onmouseout="hideTip(event, 'fs15', 63)" onmouseover="showTip(event, 'fs15', 63)" class="i">ms2pepMass</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 64)" onmouseover="showTip(event, 'fs40', 64)" class="i">Value</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="i">candidatePeps</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 58)" onmouseover="showTip(event, 'fs33', 58)" class="f">n14PeptideLookUp</span> <span onmouseout="hideTip(event, 'fs15', 59)" onmouseover="showTip(event, 'fs15', 59)" class="i">ms2pepMass</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="i">Value</span>
 </code></pre></td>
 </tr>
 </table>
@@ -148,10 +148,10 @@ input parameters of the function SequestLike.calcSequestLikeScoresRevDecoy. The 
 <span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 65)" onmouseover="showTip(event, 'fs41', 65)" class="i">scoreList</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs42', 66)" onmouseover="showTip(event, 'fs42', 66)" class="t">SequestLike</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 67)" onmouseover="showTip(event, 'fs43', 67)" class="f">calcSequestLikeScoresRevDecoy</span> 
-        <span onmouseout="hideTip(event, 'fs44', 68)" onmouseover="showTip(event, 'fs44', 68)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 69)" onmouseover="showTip(event, 'fs45', 69)" class="f">monoisoMass</span> (<span class="n">300</span>, <span class="n">1200</span>) <span onmouseout="hideTip(event, 'fs21', 70)" onmouseover="showTip(event, 'fs21', 70)" class="i">centroidedSpectrum</span> <span class="n">2</span> <span onmouseout="hideTip(event, 'fs13', 71)" onmouseover="showTip(event, 'fs13', 71)" class="i">precursorMZ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 72)" onmouseover="showTip(event, 'fs40', 72)" class="i">Value</span> <span onmouseout="hideTip(event, 'fs39', 73)" onmouseover="showTip(event, 'fs39', 73)" class="i">candidatePeps</span> <span class="s">&quot;1&quot;</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs46', 74)" onmouseover="showTip(event, 'fs46', 74)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 75)" onmouseover="showTip(event, 'fs47', 75)" class="f">sortBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs48', 76)" onmouseover="showTip(event, 'fs48', 76)" class="i">s</span> <span class="k">-&gt;</span> <span class="o">-</span><span onmouseout="hideTip(event, 'fs48', 77)" onmouseover="showTip(event, 'fs48', 77)" class="i">s</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 78)" onmouseover="showTip(event, 'fs49', 78)" class="i">XCORR</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 61)" onmouseover="showTip(event, 'fs39', 61)" class="i">scoreList</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs40', 62)" onmouseover="showTip(event, 'fs40', 62)" class="t">SequestLike</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 63)" onmouseover="showTip(event, 'fs41', 63)" class="f">calcSequestLikeScoresRevDecoy</span> 
+        <span onmouseout="hideTip(event, 'fs42', 64)" onmouseover="showTip(event, 'fs42', 64)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 65)" onmouseover="showTip(event, 'fs43', 65)" class="f">monoisoMass</span> (<span class="n">300</span>, <span class="n">1200</span>) <span onmouseout="hideTip(event, 'fs21', 66)" onmouseover="showTip(event, 'fs21', 66)" class="i">centroidedSpectrum</span> <span class="n">2</span> <span onmouseout="hideTip(event, 'fs13', 67)" onmouseover="showTip(event, 'fs13', 67)" class="i">precursorMZ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 68)" onmouseover="showTip(event, 'fs38', 68)" class="i">Value</span> <span onmouseout="hideTip(event, 'fs37', 69)" onmouseover="showTip(event, 'fs37', 69)" class="i">candidatePeps</span> <span class="s">&quot;1&quot;</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 70)" onmouseover="showTip(event, 'fs44', 70)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 71)" onmouseover="showTip(event, 'fs45', 71)" class="f">sortBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs46', 72)" onmouseover="showTip(event, 'fs46', 72)" class="i">s</span> <span class="k">-&gt;</span> <span class="o">-</span><span onmouseout="hideTip(event, 'fs46', 73)" onmouseover="showTip(event, 'fs46', 73)" class="i">s</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 74)" onmouseover="showTip(event, 'fs47', 74)" class="i">XCORR</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -181,35 +181,33 @@ reveals that its sequence corresponds to the actual sequence assigned to the mgf
 <div class="tip" id="fs18">Mgf.MgfEntry.Mass: float []</div>
 <div class="tip" id="fs19">val ms2rawIntensityData : float []<br /><br />Full name: PeptideIdentification.ms2rawIntensityData<br /><em><br /><br />Returns intensity array of the mgf entry</em></div>
 <div class="tip" id="fs20">Mgf.MgfEntry.Intensity: float []</div>
-<div class="tip" id="fs21">val centroidedSpectrum : PeakArray&lt;Peak&gt;<br /><br />Full name: PeptideIdentification.centroidedSpectrum<br /><em><br /><br />&#160;Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data</em></div>
+<div class="tip" id="fs21">val centroidedSpectrum : PeakArray&lt;IPeak&gt;<br /><br />Full name: PeptideIdentification.centroidedSpectrum<br /><em><br /><br />&#160;Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data</em></div>
 <div class="tip" id="fs22">module SignalDetection<br /><br />from BioFSharp.Mz</div>
 <div class="tip" id="fs23">module Wavelet<br /><br />from BioFSharp.Mz.SignalDetection</div>
-<div class="tip" id="fs24">val toCentroid : mzData:float [] -&gt; intensityData:float [] -&gt; float [] * float []<br /><br />Full name: BioFSharp.Mz.SignalDetection.Wavelet.toCentroid</div>
-<div class="tip" id="fs25">val m : float []</div>
-<div class="tip" id="fs26">val i : float []</div>
-<div class="tip" id="fs27">Multiple items<br />module PeakArray<br /><br />from BioFSharp.Mz<br /><br />--------------------<br />type PeakArray&lt;&#39;a (requires &#39;a :&gt; IPeak)&gt; = &#39;a array<br /><br />Full name: BioFSharp.Mz.PeakArray&lt;_&gt;</div>
-<div class="tip" id="fs28">val zipMzInt : mz:float array -&gt; intensity:float array -&gt; PeakArray&lt;Peak&gt;<br /><br />Full name: BioFSharp.Mz.PeakArray.zipMzInt</div>
-<div class="tip" id="fs29">val dbPath : string<br /><br />Full name: PeptideIdentification.dbPath<br /><em><br /><br />&#160;Returns the filepath to a demo database </em></div>
-<div class="tip" id="fs30">val sdbParams : SearchDB.SearchDbParams<br /><br />Full name: PeptideIdentification.sdbParams<br /><em><br /><br />&#160;Returns a instance of the type SearchDbParams</em></div>
-<div class="tip" id="fs31">module SearchDB<br /><br />from BioFSharp.Mz</div>
-<div class="tip" id="fs32">val getSDBParamsBy : filePath:string -&gt; SearchDB.SearchDbParams<br /><br />Full name: BioFSharp.Mz.SearchDB.getSDBParamsBy</div>
-<div class="tip" id="fs33">val n14DBLookUpBy : (float -&gt; float -&gt; SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt; list)<br /><br />Full name: PeptideIdentification.n14DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
-<div class="tip" id="fs34">val getPeptideLookUpBy : sdbParams:SearchDB.SearchDbParams -&gt; (float -&gt; float -&gt; SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt; list)<br /><br />Full name: BioFSharp.Mz.SearchDB.getPeptideLookUpBy</div>
-<div class="tip" id="fs35">val n14PeptideLookUp : mass:float -&gt; SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt; list<br /><br />Full name: PeptideIdentification.n14PeptideLookUp<br /><em><br /><br />&#160;Returns the result of the peptide lookup</em></div>
-<div class="tip" id="fs36">val mass : float</div>
-<div class="tip" id="fs37">val lowerBorder : float</div>
-<div class="tip" id="fs38">val upperBorder : float</div>
-<div class="tip" id="fs39">val candidatePeps : SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt; list<br /><br />Full name: PeptideIdentification.candidatePeps<br /><em><br /><br />&#160;Returns a list of candidate peptide sequences </em></div>
-<div class="tip" id="fs40">property Option.Value: float</div>
-<div class="tip" id="fs41">val scoreList : seq&lt;SequestLike.SequestLikeScore&gt;<br /><br />Full name: PeptideIdentification.scoreList<br /><em><br /><br />&#160;Returns </em></div>
-<div class="tip" id="fs42">module SequestLike<br /><br />from BioFSharp.Mz</div>
-<div class="tip" id="fs43">val calcSequestLikeScoresRevDecoy : massfunction:(Formula.Formula -&gt; float) -&gt; int * int -&gt; spectrum:PeakArray&lt;#IPeak&gt; -&gt; chargeState:int -&gt; isolationWindowTargetMz:float -&gt; possiblePeptideInfos:seq&lt;SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt;&gt; -&gt; spectrumID:string -&gt; SequestLike.SequestLikeScore list<br /><br />Full name: BioFSharp.Mz.SequestLike.calcSequestLikeScoresRevDecoy</div>
-<div class="tip" id="fs44">module Formula<br /><br />from BioFSharp</div>
-<div class="tip" id="fs45">val monoisoMass : f:Formula.Formula -&gt; float<br /><br />Full name: BioFSharp.Formula.monoisoMass</div>
-<div class="tip" id="fs46">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs47">val sortBy : projection:(&#39;T -&gt; &#39;Key) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt; (requires comparison)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.sortBy</div>
-<div class="tip" id="fs48">val s : SequestLike.SequestLikeScore</div>
-<div class="tip" id="fs49">SequestLike.SequestLikeScore.XCORR: float</div>
+<div class="tip" id="fs24">val toCentroid : waveletF:(float [] -&gt; float [] -&gt; int -&gt; int -&gt; int -&gt; float -&gt; float -&gt; float []) -&gt; nScales:int -&gt; yThreshold:float -&gt; mzTol:float -&gt; spacing_perc:float -&gt; snrs_perc:float -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; float [] * float []<br /><br />Full name: BioFSharp.Mz.SignalDetection.Wavelet.toCentroid</div>
+<div class="tip" id="fs25">Multiple items<br />module PeakArray<br /><br />from BioFSharp.Mz<br /><br />--------------------<br />type PeakArray&lt;&#39;a (requires &#39;a :&gt; IPeak)&gt; = &#39;a array<br /><br />Full name: BioFSharp.Mz.PeakArray&lt;_&gt;</div>
+<div class="tip" id="fs26">val zipMzInt : mz:float array -&gt; intensity:float array -&gt; PeakArray&lt;Peak&gt;<br /><br />Full name: BioFSharp.Mz.PeakArray.zipMzInt</div>
+<div class="tip" id="fs27">val dbPath : string<br /><br />Full name: PeptideIdentification.dbPath<br /><em><br /><br />&#160;Returns the filepath to a demo database </em></div>
+<div class="tip" id="fs28">val sdbParams : SearchDB.SearchDbParams<br /><br />Full name: PeptideIdentification.sdbParams<br /><em><br /><br />&#160;Returns a instance of the type SearchDbParams</em></div>
+<div class="tip" id="fs29">module SearchDB<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs30">val getSDBParamsBy : filePath:string -&gt; SearchDB.SearchDbParams<br /><br />Full name: BioFSharp.Mz.SearchDB.getSDBParamsBy</div>
+<div class="tip" id="fs31">val n14DBLookUpBy : (float -&gt; float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchDB.SearchModification&gt;)<br /><br />Full name: PeptideIdentification.n14DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
+<div class="tip" id="fs32">val getPeptideLookUpBy : sdbParams:SearchDB.SearchDbParams -&gt; (float -&gt; float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchDB.SearchModification&gt;)<br /><br />Full name: BioFSharp.Mz.SearchDB.getPeptideLookUpBy</div>
+<div class="tip" id="fs33">val n14PeptideLookUp : mass:float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchDB.SearchModification&gt;<br /><br />Full name: PeptideIdentification.n14PeptideLookUp<br /><em><br /><br />&#160;Returns the result of the peptide lookup</em></div>
+<div class="tip" id="fs34">val mass : float</div>
+<div class="tip" id="fs35">val lowerBorder : float</div>
+<div class="tip" id="fs36">val upperBorder : float</div>
+<div class="tip" id="fs37">val candidatePeps : (int * int * float * int64 * string * int) list * Map&lt;string,SearchDB.SearchModification&gt;<br /><br />Full name: PeptideIdentification.candidatePeps<br /><em><br /><br />&#160;Returns a list of candidate peptide sequences </em></div>
+<div class="tip" id="fs38">property Option.Value: float</div>
+<div class="tip" id="fs39">val scoreList : seq&lt;SequestLike.SequestLikeScore&gt;<br /><br />Full name: PeptideIdentification.scoreList<br /><em><br /><br />&#160;Returns </em></div>
+<div class="tip" id="fs40">module SequestLike<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs41">val calcSequestLikeScoresRevDecoy : massfunction:(Formula.Formula -&gt; float) -&gt; int * int -&gt; spectrum:PeakArray&lt;#IPeak&gt; -&gt; chargeState:int -&gt; isolationWindowTargetMz:float -&gt; possiblePeptideInfos:SearchDB.LookUpResult&lt;AminoAcids.AminoAcid&gt; list -&gt; spectrumID:string -&gt; SequestLike.SequestLikeScore list<br /><br />Full name: BioFSharp.Mz.SequestLike.calcSequestLikeScoresRevDecoy</div>
+<div class="tip" id="fs42">module Formula<br /><br />from BioFSharp</div>
+<div class="tip" id="fs43">val monoisoMass : f:Formula.Formula -&gt; float<br /><br />Full name: BioFSharp.Formula.monoisoMass</div>
+<div class="tip" id="fs44">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs45">val sortBy : projection:(&#39;T -&gt; &#39;Key) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt; (requires comparison)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.sortBy</div>
+<div class="tip" id="fs46">val s : SequestLike.SequestLikeScore</div>
+<div class="tip" id="fs47">SequestLike.SequestLikeScore.XCORR: float</div>
 
         </div>
         <div class="span3">
@@ -226,6 +224,7 @@ reveals that its sequence corresponds to the actual sequence assigned to the mgf
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>

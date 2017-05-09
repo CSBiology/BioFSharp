@@ -372,18 +372,18 @@ modification, a second lookUp in a database lacking IsotopicModification might r
 <div class="tip" id="fs31">val getProteaseBy : name:string -&gt; Digestion.Protease<br /><br />Full name: BioFSharp.Digestion.Table.getProteaseBy</div>
 <div class="tip" id="fs32">type MassMode =<br />&#160;&#160;| Average<br />&#160;&#160;| Monoisotopic<br />&#160;&#160;override ToString : unit -&gt; string<br /><br />Full name: BioFSharp.Mz.SearchDB.MassMode</div>
 <div class="tip" id="fs33">union case MassMode.Monoisotopic: MassMode</div>
-<div class="tip" id="fs34">val n15DBLookUpBy : (float -&gt; float -&gt; LookUpResult&lt;AminoAcid&gt; list)<br /><br />Full name: PeptideLookUp.n15DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
-<div class="tip" id="fs35">val getPeptideLookUpBy : sdbParams:SearchDbParams -&gt; (float -&gt; float -&gt; LookUpResult&lt;AminoAcid&gt; list)<br /><br />Full name: BioFSharp.Mz.SearchDB.getPeptideLookUpBy</div>
-<div class="tip" id="fs36">val n15LookUpPeptideBy : inputMass:float -&gt; LookUpResult&lt;AminoAcid&gt; list<br /><br />Full name: PeptideLookUp.n15LookUpPeptideBy<br /><em><br /><br />&#160;Returns a function that takes one inputMass and returns a list of peptides (wrapped in the type LookUpResult) in the range <br />&#160;of the inputMass-0.5 to inputMass+0.5 </em></div>
+<div class="tip" id="fs34">val n15DBLookUpBy : (float -&gt; float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;)<br /><br />Full name: PeptideLookUp.n15DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
+<div class="tip" id="fs35">val getPeptideLookUpBy : sdbParams:SearchDbParams -&gt; (float -&gt; float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;)<br /><br />Full name: BioFSharp.Mz.SearchDB.getPeptideLookUpBy</div>
+<div class="tip" id="fs36">val n15LookUpPeptideBy : inputMass:float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;<br /><br />Full name: PeptideLookUp.n15LookUpPeptideBy<br /><em><br /><br />&#160;Returns a function that takes one inputMass and returns a list of peptides (wrapped in the type LookUpResult) in the range <br />&#160;of the inputMass-0.5 to inputMass+0.5 </em></div>
 <div class="tip" id="fs37">val inputMass : float</div>
 <div class="tip" id="fs38">val lowerBorder : float</div>
 <div class="tip" id="fs39">val upperBorder : float</div>
 <div class="tip" id="fs40">val peptideMass : float<br /><br />Full name: PeptideLookUp.peptideMass<br /><em><br /><br />&#160;PeptideMass of the peptide known from the peptide *ANLGMEVMHER*. </em></div>
-<div class="tip" id="fs41">val n15LookUpResult : LookUpResult&lt;AminoAcid&gt; list<br /><br />Full name: PeptideLookUp.n15LookUpResult<br /><em><br /><br />&#160;Returns the result of the peptide lookup </em></div>
+<div class="tip" id="fs41">val n15LookUpResult : (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;<br /><br />Full name: PeptideLookUp.n15LookUpResult<br /><em><br /><br />&#160;Returns the result of the peptide lookup </em></div>
 <div class="tip" id="fs42">val paramTestN14 : SearchDbParams<br /><br />Full name: PeptideLookUp.paramTestN14<br /><em><br /><br />&#160;Returns a instance of the type SearchDbParams</em></div>
-<div class="tip" id="fs43">val n14DBLookUpBy : (float -&gt; float -&gt; LookUpResult&lt;AminoAcid&gt; list)<br /><br />Full name: PeptideLookUp.n14DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
-<div class="tip" id="fs44">val n14LookUpPeptideBy : inputMass:float -&gt; LookUpResult&lt;AminoAcid&gt; list<br /><br />Full name: PeptideLookUp.n14LookUpPeptideBy<br /><em><br /><br />&#160;Returns a function that takes one inputMass and returns a list of peptides (wrapped in the type LookUpResult) in the range <br />&#160;of the inputMass-0.5 to inputMass+0.5 </em></div>
-<div class="tip" id="fs45">val n14LookUpResult : LookUpResult&lt;AminoAcid&gt; list<br /><br />Full name: PeptideLookUp.n14LookUpResult<br /><em><br /><br />&#160;Returns the result of the peptide lookup</em></div>
+<div class="tip" id="fs43">val n14DBLookUpBy : (float -&gt; float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;)<br /><br />Full name: PeptideLookUp.n14DBLookUpBy<br /><em><br /><br />&#160;Returns a function that takes two masses as input parameters and returns a list of peptides (wrapped in the type LookUpResult)</em></div>
+<div class="tip" id="fs44">val n14LookUpPeptideBy : inputMass:float -&gt; (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;<br /><br />Full name: PeptideLookUp.n14LookUpPeptideBy<br /><em><br /><br />&#160;Returns a function that takes one inputMass and returns a list of peptides (wrapped in the type LookUpResult) in the range <br />&#160;of the inputMass-0.5 to inputMass+0.5 </em></div>
+<div class="tip" id="fs45">val n14LookUpResult : (int * int * float * int64 * string * int) list * Map&lt;string,SearchModification&gt;<br /><br />Full name: PeptideLookUp.n14LookUpResult<br /><em><br /><br />&#160;Returns the result of the peptide lookup</em></div>
 
         </div>
         <div class="span3">
@@ -400,6 +400,7 @@ modification, a second lookUp in a database lacking IsotopicModification might r
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>

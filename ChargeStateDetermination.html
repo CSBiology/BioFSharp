@@ -49,17 +49,19 @@ single peaks of a isotope Cluster.</p>
 <span class="l"> 8: </span>
 <span class="l"> 9: </span>
 <span class="l">10: </span>
+<span class="l">11: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">BioFSharp</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">Mz</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="i">IO</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="i">MathNet</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="i">Numerics</span>
-
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">Care</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">Plotly</span>
 <span class="c">///Returns the first entry of a examplary mgf File</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">ms1DataTest</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">Mgf</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="f">readMgf</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/ms1Example.mgf&quot;</span>)  
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="f">head</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">ms1DataTest</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="t">Mgf</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="f">readMgf</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/ms1Example.mgf&quot;</span>)  
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="f">head</span>
 </code></pre></td>
 </tr>
 </table>
@@ -81,8 +83,8 @@ single peaks of a isotope Cluster.</p>
 <span class="l">15: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///TestParameters used for chargestate determination</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="i">chargeDetParamTest</span>  <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="f">createChargeDetermParams</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="i">chargeDetParamTest</span>  <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="f">createChargeDetermParams</span>
         <span class="c">// minimum expected chargestate</span>
         <span class="n">1</span>
         <span class="c">// maximum expected chargestate</span>
@@ -103,7 +105,7 @@ single peaks of a isotope Cluster.</p>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// PrecursorMZ that was picked in the MS1 full scan to generate a MS2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="i">ms2PrecursorMZ</span> <span class="o">=</span>  <span class="n">643.8029052</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 21)" onmouseover="showTip(event, 'fs18', 21)" class="i">ms2PrecursorMZ</span> <span class="o">=</span>  <span class="n">643.8029052</span>
 </code></pre></td>
 </tr>
 </table>
@@ -115,7 +117,7 @@ random spectrum</p>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Instance of a Mersenne Twister, a random number generator used to compute the position of a peak in a </span>
 <span class="c">/// random spectrum</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="i">rnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="i">Random</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 20)" onmouseover="showTip(event, 'fs18', 20)" class="t">MersenneTwister</span>() 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="i">rnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="i">Random</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 24)" onmouseover="showTip(event, 'fs21', 24)" class="t">MersenneTwister</span>() 
 </code></pre></td>
 </tr>
 </table>
@@ -127,7 +129,7 @@ a given chargestate</p>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns a function that generates random spectra of a given length and calculates the mzDeviation assuming</span>
 <span class="c">/// a given chargestate</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 21)" onmouseover="showTip(event, 'fs19', 21)" class="f">initGen</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="f">initMzDevOfRndSpec</span> <span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="i">rnd</span> <span onmouseout="hideTip(event, 'fs12', 25)" onmouseover="showTip(event, 'fs12', 25)" class="i">chargeDetParamTest</span> <span class="n">0.015</span><span class="c">//peakPosStdDev</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="f">initGen</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="f">initMzDevOfRndSpec</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="i">rnd</span> <span onmouseout="hideTip(event, 'fs15', 29)" onmouseover="showTip(event, 'fs15', 29)" class="i">chargeDetParamTest</span> <span class="n">0.015</span><span class="c">//peakPosStdDev</span>
 </code></pre></td>
 </tr>
 </table>
@@ -140,8 +142,8 @@ window of a user given width centered around a user given m/z value.</p>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a</span>
 <span class="c">/// window of a user given width centered around a user given m/z value.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="i">centroidsInWindow</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs22', 27)" onmouseover="showTip(event, 'fs22', 27)" class="i">SignalDetection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 28)" onmouseover="showTip(event, 'fs23', 28)" class="i">Wavelet</span><span class="o">.</span><span class="i">windowToCentroidBy</span> <span onmouseout="hideTip(event, 'fs7', 29)" onmouseover="showTip(event, 'fs7', 29)" class="i">ms1DataTest</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 30)" onmouseover="showTip(event, 'fs24', 30)" class="i">Mass</span> <span onmouseout="hideTip(event, 'fs7', 31)" onmouseover="showTip(event, 'fs7', 31)" class="i">ms1DataTest</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 32)" onmouseover="showTip(event, 'fs25', 32)" class="i">Intensity</span> <span class="n">3.</span> <span onmouseout="hideTip(event, 'fs15', 33)" onmouseover="showTip(event, 'fs15', 33)" class="i">ms2PrecursorMZ</span>  
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 30)" onmouseover="showTip(event, 'fs24', 30)" class="i">centroidsInWindow</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs25', 31)" onmouseover="showTip(event, 'fs25', 31)" class="t">SignalDetection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 32)" onmouseover="showTip(event, 'fs26', 32)" class="f">windowToCentroidBy</span> (<span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="t">SignalDetection</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 34)" onmouseover="showTip(event, 'fs27', 34)" class="t">Wavelet</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 35)" onmouseover="showTip(event, 'fs28', 35)" class="f">toCentroid</span> <span class="n">0.1</span> <span class="n">50.</span> <span class="n">30.</span>) <span onmouseout="hideTip(event, 'fs10', 36)" onmouseover="showTip(event, 'fs10', 36)" class="i">ms1DataTest</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 37)" onmouseover="showTip(event, 'fs29', 37)" class="i">Mass</span> <span onmouseout="hideTip(event, 'fs10', 38)" onmouseover="showTip(event, 'fs10', 38)" class="i">ms1DataTest</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 39)" onmouseover="showTip(event, 'fs30', 39)" class="i">Intensity</span> <span class="n">7.5</span> <span onmouseout="hideTip(event, 'fs18', 40)" onmouseover="showTip(event, 'fs18', 40)" class="i">ms2PrecursorMZ</span>  
 </code></pre></td>
 </tr>
 </table>
@@ -151,28 +153,48 @@ window of a user given width centered around a user given m/z value.</p>
 <span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns a list of assigned chargestates sorted by their score.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 34)" onmouseover="showTip(event, 'fs26', 34)" class="i">putativeCharges</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs13', 35)" onmouseover="showTip(event, 'fs13', 35)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 36)" onmouseover="showTip(event, 'fs27', 36)" class="f">putativePrecursorChargeStatesBy</span> <span onmouseout="hideTip(event, 'fs12', 37)" onmouseover="showTip(event, 'fs12', 37)" class="i">chargeDetParamTest</span> (<span onmouseout="hideTip(event, 'fs28', 38)" onmouseover="showTip(event, 'fs28', 38)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="i">centroidsInWindow</span>) (<span onmouseout="hideTip(event, 'fs29', 40)" onmouseover="showTip(event, 'fs29', 40)" class="f">snd</span> <span onmouseout="hideTip(event, 'fs21', 41)" onmouseover="showTip(event, 'fs21', 41)" class="i">centroidsInWindow</span>) <span onmouseout="hideTip(event, 'fs15', 42)" onmouseover="showTip(event, 'fs15', 42)" class="i">ms2PrecursorMZ</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 41)" onmouseover="showTip(event, 'fs31', 41)" class="i">putativeCharges</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs16', 42)" onmouseover="showTip(event, 'fs16', 42)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 43)" onmouseover="showTip(event, 'fs32', 43)" class="f">putativePrecursorChargeStatesBy</span> <span onmouseout="hideTip(event, 'fs15', 44)" onmouseover="showTip(event, 'fs15', 44)" class="i">chargeDetParamTest</span> (<span onmouseout="hideTip(event, 'fs33', 45)" onmouseover="showTip(event, 'fs33', 45)" class="f">fst</span> <span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="i">centroidsInWindow</span>) (<span onmouseout="hideTip(event, 'fs34', 47)" onmouseover="showTip(event, 'fs34', 47)" class="f">snd</span> <span onmouseout="hideTip(event, 'fs24', 48)" onmouseover="showTip(event, 'fs24', 48)" class="i">centroidsInWindow</span>) <span onmouseout="hideTip(event, 'fs18', 49)" onmouseover="showTip(event, 'fs18', 49)" class="i">ms2PrecursorMZ</span>
 </code></pre></td>
 </tr>
 </table>
 <p>Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the
 significance level</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the </span>
 <span class="c">/// significance level</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 43)" onmouseover="showTip(event, 'fs30', 43)" class="i">testedItems</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="i">putativeCharges</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 45)" onmouseover="showTip(event, 'fs10', 45)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 47)" onmouseover="showTip(event, 'fs32', 47)" class="i">assCh</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs13', 48)" onmouseover="showTip(event, 'fs13', 48)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 49)" onmouseover="showTip(event, 'fs33', 49)" class="f">createTestedItem</span> <span onmouseout="hideTip(event, 'fs32', 50)" onmouseover="showTip(event, 'fs32', 50)" class="i">assCh</span> (<span onmouseout="hideTip(event, 'fs13', 51)" onmouseover="showTip(event, 'fs13', 51)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="f">empiricalPValueOf</span> <span onmouseout="hideTip(event, 'fs19', 53)" onmouseover="showTip(event, 'fs19', 53)" class="f">initGen</span> (<span onmouseout="hideTip(event, 'fs32', 54)" onmouseover="showTip(event, 'fs32', 54)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 55)" onmouseover="showTip(event, 'fs35', 55)" class="i">SubSetLength</span> ,<span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="f">float</span> <span onmouseout="hideTip(event, 'fs32', 57)" onmouseover="showTip(event, 'fs32', 57)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="i">Charge</span>) <span onmouseout="hideTip(event, 'fs32', 59)" onmouseover="showTip(event, 'fs32', 59)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="i">MZChargeDev</span> ))
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 61)" onmouseover="showTip(event, 'fs13', 61)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 62)" onmouseover="showTip(event, 'fs39', 62)" class="f">removeSubSetsOfBestHit</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 63)" onmouseover="showTip(event, 'fs10', 63)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 64)" onmouseover="showTip(event, 'fs31', 64)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 65)" onmouseover="showTip(event, 'fs40', 65)" class="i">testedI</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 66)" onmouseover="showTip(event, 'fs40', 66)" class="i">testedI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 67)" onmouseover="showTip(event, 'fs41', 67)" class="i">TestedObject</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 50)" onmouseover="showTip(event, 'fs35', 50)" class="i">testedItems</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs31', 51)" onmouseover="showTip(event, 'fs31', 51)" class="i">putativeCharges</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 52)" onmouseover="showTip(event, 'fs13', 52)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 53)" onmouseover="showTip(event, 'fs36', 53)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs37', 54)" onmouseover="showTip(event, 'fs37', 54)" class="i">assCh</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs16', 55)" onmouseover="showTip(event, 'fs16', 55)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 56)" onmouseover="showTip(event, 'fs38', 56)" class="f">createTestedItem</span> <span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="i">assCh</span> (<span onmouseout="hideTip(event, 'fs16', 58)" onmouseover="showTip(event, 'fs16', 58)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 59)" onmouseover="showTip(event, 'fs39', 59)" class="f">empiricalPValueOfSim</span> <span onmouseout="hideTip(event, 'fs22', 60)" onmouseover="showTip(event, 'fs22', 60)" class="f">initGen</span> (<span onmouseout="hideTip(event, 'fs37', 61)" onmouseover="showTip(event, 'fs37', 61)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 62)" onmouseover="showTip(event, 'fs40', 62)" class="i">SubSetLength</span> ,<span onmouseout="hideTip(event, 'fs41', 63)" onmouseover="showTip(event, 'fs41', 63)" class="f">float</span> <span onmouseout="hideTip(event, 'fs37', 64)" onmouseover="showTip(event, 'fs37', 64)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs42', 65)" onmouseover="showTip(event, 'fs42', 65)" class="i">Charge</span>) <span onmouseout="hideTip(event, 'fs37', 66)" onmouseover="showTip(event, 'fs37', 66)" class="i">assCh</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 67)" onmouseover="showTip(event, 'fs43', 67)" class="i">MZChargeDev</span> ))
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 68)" onmouseover="showTip(event, 'fs16', 68)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="f">removeSubSetsOfBestHit</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 70)" onmouseover="showTip(event, 'fs13', 70)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 71)" onmouseover="showTip(event, 'fs45', 71)" class="f">filter</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs46', 72)" onmouseover="showTip(event, 'fs46', 72)" class="i">item</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs46', 73)" onmouseover="showTip(event, 'fs46', 73)" class="i">item</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 74)" onmouseover="showTip(event, 'fs47', 74)" class="i">PValue</span> <span class="o">&lt;</span> <span class="n">0.05</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 75)" onmouseover="showTip(event, 'fs13', 75)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 76)" onmouseover="showTip(event, 'fs36', 76)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs48', 77)" onmouseover="showTip(event, 'fs48', 77)" class="i">testedI</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs48', 78)" onmouseover="showTip(event, 'fs48', 78)" class="i">testedI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 79)" onmouseover="showTip(event, 'fs49', 79)" class="i">TestedObject</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 80)" onmouseover="showTip(event, 'fs13', 80)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 81)" onmouseover="showTip(event, 'fs36', 81)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 82)" onmouseover="showTip(event, 'fs50', 82)" class="i">testedI</span> <span class="k">-&gt;</span> 
+                    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 83)" onmouseover="showTip(event, 'fs51', 83)" class="i">normPeaks</span> <span class="o">=</span> 
+                        <span onmouseout="hideTip(event, 'fs16', 84)" onmouseover="showTip(event, 'fs16', 84)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs52', 85)" onmouseover="showTip(event, 'fs52', 85)" class="f">normalizePeaksByIntensitySum</span> <span onmouseout="hideTip(event, 'fs50', 86)" onmouseover="showTip(event, 'fs50', 86)" class="i">testedI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 87)" onmouseover="showTip(event, 'fs53', 87)" class="i">Peaks</span> 
+                    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 88)" onmouseover="showTip(event, 'fs54', 88)" class="i">poissEst</span> <span class="o">=</span> 
+                        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 89)" onmouseover="showTip(event, 'fs55', 89)" class="i">tmp</span> <span class="o">=</span> 
+                            <span onmouseout="hideTip(event, 'fs16', 90)" onmouseover="showTip(event, 'fs16', 90)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 91)" onmouseover="showTip(event, 'fs56', 91)" class="f">poissonEstofMassTrunc</span> <span onmouseout="hideTip(event, 'fs16', 92)" onmouseover="showTip(event, 'fs16', 92)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs57', 93)" onmouseover="showTip(event, 'fs57', 93)" class="f">n15MassToLambda</span> <span onmouseout="hideTip(event, 'fs51', 94)" onmouseover="showTip(event, 'fs51', 94)" class="i">normPeaks</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs58', 95)" onmouseover="showTip(event, 'fs58', 95)" class="i">Length</span> <span onmouseout="hideTip(event, 'fs50', 96)" onmouseover="showTip(event, 'fs50', 96)" class="i">testedI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs59', 97)" onmouseover="showTip(event, 'fs59', 97)" class="i">PutMass</span>
+                        <span onmouseout="hideTip(event, 'fs55', 98)" onmouseover="showTip(event, 'fs55', 98)" class="i">tmp</span>
+                    <span onmouseout="hideTip(event, 'fs16', 99)" onmouseover="showTip(event, 'fs16', 99)" class="t">ChargeState</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs60', 100)" onmouseover="showTip(event, 'fs60', 100)" class="f">kullbackLeiblerDivergenceOf</span>  <span onmouseout="hideTip(event, 'fs51', 101)" onmouseover="showTip(event, 'fs51', 101)" class="i">normPeaks</span> <span onmouseout="hideTip(event, 'fs54', 102)" onmouseover="showTip(event, 'fs54', 102)" class="i">poissEst</span>
+                )
 </code></pre></td>
 </tr>
 </table>
@@ -183,41 +205,60 @@ significance level</p>
 <div class="tip" id="fs4">namespace BioFSharp.IO</div>
 <div class="tip" id="fs5">namespace MathNet</div>
 <div class="tip" id="fs6">namespace MathNet.Numerics</div>
-<div class="tip" id="fs7">val ms1DataTest : Mgf.MgfEntry<br /><br />Full name: ChargeStateDetermination.ms1DataTest<br /><em><br /><br />Returns the first entry of a examplary mgf File</em></div>
-<div class="tip" id="fs8">module Mgf<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs9">val readMgf : path:string -&gt; Mgf.MgfEntry list<br /><br />Full name: BioFSharp.IO.Mgf.readMgf</div>
-<div class="tip" id="fs10">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs11">val head : list:&#39;T list -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Collections.List.head</div>
-<div class="tip" id="fs12">val chargeDetParamTest : ChargeState.ChargeDetermParams<br /><br />Full name: ChargeStateDetermination.chargeDetParamTest<br /><em><br /><br />TestParameters used for chargestate determination</em></div>
-<div class="tip" id="fs13">module ChargeState<br /><br />from BioFSharp.Mz</div>
-<div class="tip" id="fs14">val createChargeDetermParams : expectedMinimalCharge:int -&gt; expectedMaximumCharge:int -&gt; width:float -&gt; minIntensity:float -&gt; deltaMinIntensity:float -&gt; nrOfRndSpectra:int -&gt; ChargeState.ChargeDetermParams<br /><br />Full name: BioFSharp.Mz.ChargeState.createChargeDetermParams</div>
-<div class="tip" id="fs15">val ms2PrecursorMZ : float<br /><br />Full name: ChargeStateDetermination.ms2PrecursorMZ<br /><em><br /><br />&#160;PrecursorMZ that was picked in the MS1 full scan to generate a MS2</em></div>
-<div class="tip" id="fs16">val rnd : Random.MersenneTwister<br /><br />Full name: ChargeStateDetermination.rnd<br /><em><br /><br />&#160;Instance of a Mersenne Twister, a random number generator used to compute the position of a peak in a <br />&#160;random spectrum</em></div>
-<div class="tip" id="fs17">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />Full name: System.Random<br /><br />--------------------<br />Random() : unit<br />Random(Seed: int) : unit</div>
-<div class="tip" id="fs18">Multiple items<br />type MersenneTwister =<br />&#160;&#160;inherit RandomSource<br />&#160;&#160;new : unit -&gt; MersenneTwister + 3 overloads<br />&#160;&#160;static member Default : MersenneTwister<br />&#160;&#160;static member DoubleSequence : seed:int -&gt; IEnumerable&lt;float&gt;<br />&#160;&#160;static member Doubles : values:float[] * seed:int -&gt; unit + 1 overload<br /><br />Full name: MathNet.Numerics.Random.MersenneTwister<br /><br />--------------------<br />Random.MersenneTwister() : unit<br />Random.MersenneTwister(threadSafe: bool) : unit<br />Random.MersenneTwister(seed: int) : unit<br />Random.MersenneTwister(seed: int, threadSafe: bool) : unit</div>
-<div class="tip" id="fs19">val initGen : (int * float -&gt; float [])<br /><br />Full name: ChargeStateDetermination.initGen<br /><em><br /><br />&#160;Returns a function that generates random spectra of a given length and calculates the mzDeviation assuming<br />&#160;a given chargestate</em></div>
-<div class="tip" id="fs20">val initMzDevOfRndSpec : rnd:Random -&gt; chargeStateDetermParams:ChargeState.ChargeDetermParams -&gt; peakPosStdDev:float -&gt; (int * float -&gt; float [])<br /><br />Full name: BioFSharp.Mz.ChargeState.initMzDevOfRndSpec</div>
-<div class="tip" id="fs21">val centroidsInWindow : float [] * float []<br /><br />Full name: ChargeStateDetermination.centroidsInWindow<br /><em><br /><br />&#160;Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a<br />&#160;window of a user given width centered around a user given m/z value.</em></div>
-<div class="tip" id="fs22">module SignalDetection<br /><br />from BioFSharp.Mz</div>
-<div class="tip" id="fs23">module Wavelet<br /><br />from BioFSharp.Mz.SignalDetection</div>
-<div class="tip" id="fs24">Mgf.MgfEntry.Mass: float []</div>
-<div class="tip" id="fs25">Mgf.MgfEntry.Intensity: float []</div>
-<div class="tip" id="fs26">val putativeCharges : ChargeState.AssignedCharge list<br /><br />Full name: ChargeStateDetermination.putativeCharges<br /><em><br /><br />&#160;Returns a list of assigned chargestates sorted by their score.</em></div>
-<div class="tip" id="fs27">val putativePrecursorChargeStatesBy : chargeDeterminationParams:ChargeState.ChargeDetermParams -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; precursorMZ:float -&gt; ChargeState.AssignedCharge list<br /><br />Full name: BioFSharp.Mz.ChargeState.putativePrecursorChargeStatesBy</div>
-<div class="tip" id="fs28">val fst : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T1<br /><br />Full name: Microsoft.FSharp.Core.Operators.fst</div>
-<div class="tip" id="fs29">val snd : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T2<br /><br />Full name: Microsoft.FSharp.Core.Operators.snd</div>
-<div class="tip" id="fs30">val testedItems : ChargeState.AssignedCharge list<br /><br />Full name: ChargeStateDetermination.testedItems<br /><em><br /><br />&#160;Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the <br />&#160;significance level</em></div>
-<div class="tip" id="fs31">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
-<div class="tip" id="fs32">val assCh : ChargeState.AssignedCharge</div>
-<div class="tip" id="fs33">val createTestedItem : testedObject:&#39;a -&gt; pValue:float -&gt; ChargeState.TestedItem&lt;&#39;a&gt;<br /><br />Full name: BioFSharp.Mz.ChargeState.createTestedItem</div>
-<div class="tip" id="fs34">val empiricalPValueOf : initGenerateMzSpecDevWithMemF:(&#39;a * &#39;b -&gt; &#39;c []) -&gt; nrOfPeaksInSubSet:&#39;a * charge:&#39;b -&gt; score:&#39;c -&gt; float (requires comparison)<br /><br />Full name: BioFSharp.Mz.ChargeState.empiricalPValueOf</div>
-<div class="tip" id="fs35">ChargeState.AssignedCharge.SubSetLength: int</div>
-<div class="tip" id="fs36">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
-<div class="tip" id="fs37">ChargeState.AssignedCharge.Charge: int</div>
-<div class="tip" id="fs38">ChargeState.AssignedCharge.MZChargeDev: float</div>
-<div class="tip" id="fs39">val removeSubSetsOfBestHit : assignedCharges:ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt; list -&gt; ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt; list<br /><br />Full name: BioFSharp.Mz.ChargeState.removeSubSetsOfBestHit</div>
-<div class="tip" id="fs40">val testedI : ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt;</div>
-<div class="tip" id="fs41">ChargeState.TestedItem.TestedObject: ChargeState.AssignedCharge</div>
+<div class="tip" id="fs7">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs8">namespace FSharp.Care</div>
+<div class="tip" id="fs9">namespace FSharp.Plotly</div>
+<div class="tip" id="fs10">val ms1DataTest : Mgf.MgfEntry<br /><br />Full name: ChargeStateDetermination.ms1DataTest<br /><em><br /><br />Returns the first entry of a examplary mgf File</em></div>
+<div class="tip" id="fs11">module Mgf<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs12">val readMgf : path:string -&gt; Mgf.MgfEntry list<br /><br />Full name: BioFSharp.IO.Mgf.readMgf</div>
+<div class="tip" id="fs13">Multiple items<br />module List<br /><br />from FSharp.Care<br /><br />--------------------<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs14">val head : list:&#39;T list -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Collections.List.head</div>
+<div class="tip" id="fs15">val chargeDetParamTest : ChargeState.ChargeDetermParams<br /><br />Full name: ChargeStateDetermination.chargeDetParamTest<br /><em><br /><br />TestParameters used for chargestate determination</em></div>
+<div class="tip" id="fs16">module ChargeState<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs17">val createChargeDetermParams : expectedMinimalCharge:int -&gt; expectedMaximumCharge:int -&gt; width:float -&gt; minIntensity:float -&gt; deltaMinIntensity:float -&gt; nrOfRndSpectra:int -&gt; ChargeState.ChargeDetermParams<br /><br />Full name: BioFSharp.Mz.ChargeState.createChargeDetermParams</div>
+<div class="tip" id="fs18">val ms2PrecursorMZ : float<br /><br />Full name: ChargeStateDetermination.ms2PrecursorMZ<br /><em><br /><br />&#160;PrecursorMZ that was picked in the MS1 full scan to generate a MS2</em></div>
+<div class="tip" id="fs19">val rnd : Random.MersenneTwister<br /><br />Full name: ChargeStateDetermination.rnd<br /><em><br /><br />&#160;Instance of a Mersenne Twister, a random number generator used to compute the position of a peak in a <br />&#160;random spectrum</em></div>
+<div class="tip" id="fs20">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />Full name: System.Random<br /><br />--------------------<br />Random() : unit<br />Random(Seed: int) : unit</div>
+<div class="tip" id="fs21">Multiple items<br />type MersenneTwister =<br />&#160;&#160;inherit RandomSource<br />&#160;&#160;new : unit -&gt; MersenneTwister + 3 overloads<br />&#160;&#160;static member Default : MersenneTwister<br />&#160;&#160;static member DoubleSequence : seed:int -&gt; IEnumerable&lt;float&gt;<br />&#160;&#160;static member Doubles : values:float[] * seed:int -&gt; unit + 1 overload<br /><br />Full name: MathNet.Numerics.Random.MersenneTwister<br /><br />--------------------<br />Random.MersenneTwister() : unit<br />Random.MersenneTwister(threadSafe: bool) : unit<br />Random.MersenneTwister(seed: int) : unit<br />Random.MersenneTwister(seed: int, threadSafe: bool) : unit</div>
+<div class="tip" id="fs22">val initGen : (int * float -&gt; float [])<br /><br />Full name: ChargeStateDetermination.initGen<br /><em><br /><br />&#160;Returns a function that generates random spectra of a given length and calculates the mzDeviation assuming<br />&#160;a given chargestate</em></div>
+<div class="tip" id="fs23">val initMzDevOfRndSpec : rnd:Random -&gt; chargeStateDetermParams:ChargeState.ChargeDetermParams -&gt; peakPosStdDev:float -&gt; (int * float -&gt; float [])<br /><br />Full name: BioFSharp.Mz.ChargeState.initMzDevOfRndSpec</div>
+<div class="tip" id="fs24">val centroidsInWindow : float [] * float []<br /><br />Full name: ChargeStateDetermination.centroidsInWindow<br /><em><br /><br />&#160;Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a<br />&#160;window of a user given width centered around a user given m/z value.</em></div>
+<div class="tip" id="fs25">module SignalDetection<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs26">val windowToCentroidBy : centroidF:(float [] -&gt; float [] -&gt; float [] * float []) -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; windowWidth:float -&gt; centerMass:float -&gt; float [] * float []<br /><br />Full name: BioFSharp.Mz.SignalDetection.windowToCentroidBy</div>
+<div class="tip" id="fs27">module Wavelet<br /><br />from BioFSharp.Mz.SignalDetection</div>
+<div class="tip" id="fs28">val toCentroid : waveletF:(float [] -&gt; float [] -&gt; int -&gt; int -&gt; int -&gt; float -&gt; float -&gt; float []) -&gt; nScales:int -&gt; yThreshold:float -&gt; mzTol:float -&gt; spacing_perc:float -&gt; snrs_perc:float -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; float [] * float []<br /><br />Full name: BioFSharp.Mz.SignalDetection.Wavelet.toCentroid</div>
+<div class="tip" id="fs29">Mgf.MgfEntry.Mass: float []</div>
+<div class="tip" id="fs30">Mgf.MgfEntry.Intensity: float []</div>
+<div class="tip" id="fs31">val putativeCharges : ChargeState.AssignedCharge list<br /><br />Full name: ChargeStateDetermination.putativeCharges<br /><em><br /><br />&#160;Returns a list of assigned chargestates sorted by their score.</em></div>
+<div class="tip" id="fs32">val putativePrecursorChargeStatesBy : chargeDeterminationParams:ChargeState.ChargeDetermParams -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; precursorMZ:float -&gt; ChargeState.AssignedCharge list<br /><br />Full name: BioFSharp.Mz.ChargeState.putativePrecursorChargeStatesBy</div>
+<div class="tip" id="fs33">val fst : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T1<br /><br />Full name: Microsoft.FSharp.Core.Operators.fst</div>
+<div class="tip" id="fs34">val snd : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T2<br /><br />Full name: Microsoft.FSharp.Core.Operators.snd</div>
+<div class="tip" id="fs35">val testedItems : float option list<br /><br />Full name: ChargeStateDetermination.testedItems<br /><em><br /><br />&#160;Returns a list of assigned chargestates after hypothesis testing. This list is filtered for items that meet the <br />&#160;significance level</em></div>
+<div class="tip" id="fs36">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fs37">val assCh : ChargeState.AssignedCharge</div>
+<div class="tip" id="fs38">val createTestedItem : testedObject:&#39;a -&gt; pValue:float -&gt; ChargeState.TestedItem&lt;&#39;a&gt;<br /><br />Full name: BioFSharp.Mz.ChargeState.createTestedItem</div>
+<div class="tip" id="fs39">val empiricalPValueOfSim : initGenerateMzSpecDevWithMemF:(&#39;a * &#39;b -&gt; &#39;c []) -&gt; nrOfPeaksInSubSet:&#39;a * charge:&#39;b -&gt; score:&#39;c -&gt; float (requires comparison)<br /><br />Full name: BioFSharp.Mz.ChargeState.empiricalPValueOfSim</div>
+<div class="tip" id="fs40">ChargeState.AssignedCharge.SubSetLength: int</div>
+<div class="tip" id="fs41">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs42">ChargeState.AssignedCharge.Charge: int</div>
+<div class="tip" id="fs43">ChargeState.AssignedCharge.MZChargeDev: float</div>
+<div class="tip" id="fs44">val removeSubSetsOfBestHit : assignedCharges:ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt; list -&gt; ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt; list<br /><br />Full name: BioFSharp.Mz.ChargeState.removeSubSetsOfBestHit</div>
+<div class="tip" id="fs45">val filter : predicate:(&#39;T -&gt; bool) -&gt; list:&#39;T list -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.filter</div>
+<div class="tip" id="fs46">val item : ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt;</div>
+<div class="tip" id="fs47">ChargeState.TestedItem.PValue: float</div>
+<div class="tip" id="fs48">val testedI : ChargeState.TestedItem&lt;ChargeState.AssignedCharge&gt;</div>
+<div class="tip" id="fs49">ChargeState.TestedItem.TestedObject: ChargeState.AssignedCharge</div>
+<div class="tip" id="fs50">val testedI : ChargeState.AssignedCharge</div>
+<div class="tip" id="fs51">val normPeaks : float []</div>
+<div class="tip" id="fs52">val normalizePeaksByIntensitySum : peaks:Set&lt;Peak&gt; -&gt; float []<br /><br />Full name: BioFSharp.Mz.ChargeState.normalizePeaksByIntensitySum</div>
+<div class="tip" id="fs53">ChargeState.AssignedCharge.Peaks: Set&lt;Peak&gt;</div>
+<div class="tip" id="fs54">val poissEst : float []</div>
+<div class="tip" id="fs55">val tmp : float []</div>
+<div class="tip" id="fs56">val poissonEstofMassTrunc : massToLambda:(float -&gt; float) -&gt; limit:int -&gt; mass:float -&gt; float []<br /><br />Full name: BioFSharp.Mz.ChargeState.poissonEstofMassTrunc</div>
+<div class="tip" id="fs57">val n15MassToLambda : mass:float -&gt; float<br /><br />Full name: BioFSharp.Mz.ChargeState.n15MassToLambda</div>
+<div class="tip" id="fs58">property Array.Length: int</div>
+<div class="tip" id="fs59">ChargeState.AssignedCharge.PutMass: float</div>
+<div class="tip" id="fs60">val kullbackLeiblerDivergenceOf : qTo:float [] -&gt; p:float [] -&gt; float option<br /><br />Full name: BioFSharp.Mz.ChargeState.kullbackLeiblerDivergenceOf</div>
 
         </div>
         <div class="span3">
@@ -234,6 +275,7 @@ significance level</p>
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>

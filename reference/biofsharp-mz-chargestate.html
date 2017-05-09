@@ -90,11 +90,11 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '346', 346)" onmouseover="showTip(event, '346', 346)">
+          <code onmouseout="hideTip(event, '380', 380)" onmouseover="showTip(event, '380', 380)">
             createAssignedCharge (...)
           </code>
-          <div class="tip" id="346">
-            <strong>Signature:</strong> precMZ:float -&gt; charge:int -&gt; putMass:float -&gt; mZChargeDev:float -&gt; score:float -&gt; distanceRealTheoPeakSpacing:float list -&gt; subSetLength:int -&gt; startPeakIntensity:float -&gt; peakSourcePositions:Set&lt;float&gt; -&gt; AssignedCharge<br />
+          <div class="tip" id="380">
+            <strong>Signature:</strong> precMZ:float -&gt; charge:int -&gt; putMass:float -&gt; mZChargeDev:float -&gt; score:float -&gt; distanceRealTheoPeakSpacing:float list -&gt; subSetLength:int -&gt; startPeakIntensity:float -&gt; peaks:Set&lt;Peak&gt; -&gt; AssignedCharge<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -108,10 +108,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '347', 347)" onmouseover="showTip(event, '347', 347)">
+          <code onmouseout="hideTip(event, '381', 381)" onmouseover="showTip(event, '381', 381)">
             createChargeDetermParams (...)
           </code>
-          <div class="tip" id="347">
+          <div class="tip" id="381">
             <strong>Signature:</strong> expectedMinimalCharge:int -&gt; expectedMaximumCharge:int -&gt; width:float -&gt; minIntensity:float -&gt; deltaMinIntensity:float -&gt; nrOfRndSpectra:int -&gt; ChargeDetermParams<br />
                       </div>
         </td>
@@ -126,10 +126,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '348', 348)" onmouseover="showTip(event, '348', 348)">
+          <code onmouseout="hideTip(event, '382', 382)" onmouseover="showTip(event, '382', 382)">
             createPutativeIsotopeCluster (...)
           </code>
-          <div class="tip" id="348">
+          <div class="tip" id="382">
             <strong>Signature:</strong> peaks:PeakList&lt;Peak&gt; -&gt; sourceSetLength:int -&gt; subSetLength:int -&gt; PutativeIsotopeCluster<br />
                       </div>
         </td>
@@ -144,12 +144,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '349', 349)" onmouseover="showTip(event, '349', 349)">
+          <code onmouseout="hideTip(event, '383', 383)" onmouseover="showTip(event, '383', 383)">
             createTestedItem testedObject pValue
           </code>
-          <div class="tip" id="349">
-            <strong>Signature:</strong> testedObject:&#39;?8634 -&gt; pValue:float -&gt; TestedItem&lt;&#39;?8634&gt;<br />
-                          <strong>Type parameters:</strong> '?8634          </div>
+          <div class="tip" id="383">
+            <strong>Signature:</strong> testedObject:&#39;?8886 -&gt; pValue:float -&gt; TestedItem&lt;&#39;?8886&gt;<br />
+                          <strong>Type parameters:</strong> '?8886          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L61-61" class="github-link">
@@ -162,15 +162,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '350', 350)" onmouseover="showTip(event, '350', 350)">
-            empiricalPValueOf (...)
+          <code onmouseout="hideTip(event, '384', 384)" onmouseover="showTip(event, '384', 384)">
+            empiricalPValueOfSim (...)
           </code>
-          <div class="tip" id="350">
-            <strong>Signature:</strong> initGenerateMzSpecDevWithMemF:(&#39;?8650 * &#39;?8651 -&gt; &#39;?8652 []) -&gt; (nrOfPeaksInSubSet:&#39;?8650 * charge:&#39;?8651) -&gt; score:&#39;?8652 -&gt; float<br />
-                          <strong>Type parameters:</strong> '?8650, '?8651, '?8652          </div>
+          <div class="tip" id="384">
+            <strong>Signature:</strong> initGenerateMzSpecDevWithMemF:(&#39;?8902 * &#39;?8903 -&gt; &#39;?8904 []) -&gt; (nrOfPeaksInSubSet:&#39;?8902 * charge:&#39;?8903) -&gt; score:&#39;?8904 -&gt; float<br />
+                          <strong>Type parameters:</strong> '?8902, '?8903, '?8904          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L205-205" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L216-216" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -184,15 +184,36 @@ observed divided by their total number</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '351', 351)" onmouseover="showTip(event, '351', 351)">
+          <code onmouseout="hideTip(event, '385', 385)" onmouseover="showTip(event, '385', 385)">
+            empiricalRightPValueOf (...)
+          </code>
+          <div class="tip" id="385">
+            <strong>Signature:</strong> distribution:&#39;?8906 [] -&gt; score:&#39;?8906 -&gt; float<br />
+                          <strong>Type parameters:</strong> '?8906          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L225-225" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
+observed divided by their total number</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '386', 386)" onmouseover="showTip(event, '386', 386)">
             getChargeBy (...)
           </code>
-          <div class="tip" id="351">
+          <div class="tip" id="386">
             <strong>Signature:</strong> chargeDeterminationParams:ChargeDetermParams -&gt; meanOfInterPeakDistances:float -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L132-132" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L143-143" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -205,15 +226,15 @@ the user.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '352', 352)" onmouseover="showTip(event, '352', 352)">
+          <code onmouseout="hideTip(event, '387', 387)" onmouseover="showTip(event, '387', 387)">
             getRelPeakPosInWindowBy (...)
           </code>
-          <div class="tip" id="352">
-            <strong>Signature:</strong> mzData:float [] -&gt; intensityData:float [] -&gt; width:float -&gt; minIntensity:float -&gt; deltaMinIntensity:float -&gt; mzValue:&#39;?8637 -&gt; startIdx:int -&gt; float * PutativeIsotopeCluster<br />
-                          <strong>Type parameters:</strong> '?8637          </div>
+          <div class="tip" id="387">
+            <strong>Signature:</strong> mzData:float [] -&gt; intensityData:float [] -&gt; width:float -&gt; minIntensity:float -&gt; deltaMinIntensity:float -&gt; startIdx:int -&gt; float * PutativeIsotopeCluster<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L86-86" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L97-97" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -227,15 +248,15 @@ the given windowwidth.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '353', 353)" onmouseover="showTip(event, '353', 353)">
+          <code onmouseout="hideTip(event, '388', 388)" onmouseover="showTip(event, '388', 388)">
             getScore (...)
           </code>
-          <div class="tip" id="353">
+          <div class="tip" id="388">
             <strong>Signature:</strong> elementsInSubSet:int -&gt; elementsInSourceSet:int -&gt; deviationPeakDistanceToTheoDistance:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L158-158" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L169-169" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -248,15 +269,36 @@ determined via Linear Discriminant Analysis.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '354', 354)" onmouseover="showTip(event, '354', 354)">
-            idxOfHighestPeakBy (...)
+          <code onmouseout="hideTip(event, '389', 389)" onmouseover="showTip(event, '389', 389)">
+            idxOfClosestPeakBy (...)
           </code>
-          <div class="tip" id="354">
+          <div class="tip" id="389">
             <strong>Signature:</strong> mzData:float [] -&gt; intensityData:float [] -&gt; mzValue:float -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L65-65" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>TODO refactor to SignalDetection
+Returns Index of the highestPeak flanking a given mzValue</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '390', 390)" onmouseover="showTip(event, '390', 390)">
+            idxOfHighestPeakBy (...)
+          </code>
+          <div class="tip" id="390">
+            <strong>Signature:</strong> mzData:float [] -&gt; intensityData:float [] -&gt; mzValue:float -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L66-66" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -268,15 +310,15 @@ determined via Linear Discriminant Analysis.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '355', 355)" onmouseover="showTip(event, '355', 355)">
+          <code onmouseout="hideTip(event, '391', 391)" onmouseover="showTip(event, '391', 391)">
             initMzDevOfRndSpec (...)
           </code>
-          <div class="tip" id="355">
+          <div class="tip" id="391">
             <strong>Signature:</strong> rnd:Random -&gt; chargeStateDetermParams:ChargeDetermParams -&gt; peakPosStdDev:float -&gt; int * float&lt;MeasureOne&gt; -&gt; float []<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L200-200" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L211-211" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -288,15 +330,15 @@ determined via Linear Discriminant Analysis.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '356', 356)" onmouseover="showTip(event, '356', 356)">
+          <code onmouseout="hideTip(event, '392', 392)" onmouseover="showTip(event, '392', 392)">
             interPeakDistanceBy (...)
           </code>
-          <div class="tip" id="356">
+          <div class="tip" id="392">
             <strong>Signature:</strong> stdDev:float -&gt; assignedCharge:float -&gt; float&lt;MeasureOne&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L167-167" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L178-178" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -309,15 +351,33 @@ centered around the theoretical interPeakDistance. The standardDeviation is depe
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '357', 357)" onmouseover="showTip(event, '357', 357)">
+          <code onmouseout="hideTip(event, '393', 393)" onmouseover="showTip(event, '393', 393)">
+            kullbackLeiblerDivergenceOf qTo p
+          </code>
+          <div class="tip" id="393">
+            <strong>Signature:</strong> qTo:float [] -&gt; p:float [] -&gt; float&lt;MeasureOne&gt; option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L309-309" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '394', 394)" onmouseover="showTip(event, '394', 394)">
             mzChargeDeviationBy (...)
           </code>
-          <div class="tip" id="357">
+          <div class="tip" id="394">
             <strong>Signature:</strong> interPeakDistances:seq&lt;float&gt; -&gt; theoreticalInterIsotopeDistance:float -&gt; float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L148-148" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L159-159" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -330,15 +390,15 @@ at a given ChargeState.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '358', 358)" onmouseover="showTip(event, '358', 358)">
+          <code onmouseout="hideTip(event, '395', 395)" onmouseover="showTip(event, '395', 395)">
             mzDevOfRndSpec (...)
           </code>
-          <div class="tip" id="358">
+          <div class="tip" id="395">
             <strong>Signature:</strong> rnd:Random -&gt; chargeStateDetermParams:ChargeDetermParams -&gt; peakPosStdDev:float -&gt; (chainLength:int * charge:float&lt;MeasureOne&gt;) -&gt; float []<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L188-188" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L199-199" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -350,15 +410,15 @@ at a given ChargeState.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '359', 359)" onmouseover="showTip(event, '359', 359)">
+          <code onmouseout="hideTip(event, '396', 396)" onmouseover="showTip(event, '396', 396)">
             mzDistancesOf mzIntensityPeaks
           </code>
-          <div class="tip" id="359">
-            <strong>Signature:</strong> mzIntensityPeaks:PeakList&lt;&#39;?8640&gt; -&gt; float list<br />
-                          <strong>Type parameters:</strong> '?8640          </div>
+          <div class="tip" id="396">
+            <strong>Signature:</strong> mzIntensityPeaks:PeakList&lt;&#39;?8892&gt; -&gt; float list<br />
+                          <strong>Type parameters:</strong> '?8892          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L122-122" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L133-133" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -370,15 +430,69 @@ at a given ChargeState.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '360', 360)" onmouseover="showTip(event, '360', 360)">
+          <code onmouseout="hideTip(event, '397', 397)" onmouseover="showTip(event, '397', 397)">
+            n14MassToLambda mass
+          </code>
+          <div class="tip" id="397">
+            <strong>Signature:</strong> mass:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L288-288" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '398', 398)" onmouseover="showTip(event, '398', 398)">
+            n15MassToLambda mass
+          </code>
+          <div class="tip" id="398">
+            <strong>Signature:</strong> mass:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L291-291" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '399', 399)" onmouseover="showTip(event, '399', 399)">
+            normalizePeaksByIntensitySum peaks
+          </code>
+          <div class="tip" id="399">
+            <strong>Signature:</strong> peaks:Set&lt;Peak&gt; -&gt; float []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L280-280" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '400', 400)" onmouseover="showTip(event, '400', 400)">
             peakPosStdDevBy putativeChargeStates
           </code>
-          <div class="tip" id="360">
+          <div class="tip" id="400">
             <strong>Signature:</strong> putativeChargeStates:AssignedCharge list -&gt; float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L238-238" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L259-259" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -390,15 +504,51 @@ at a given ChargeState.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '361', 361)" onmouseover="showTip(event, '361', 361)">
+          <code onmouseout="hideTip(event, '401', 401)" onmouseover="showTip(event, '401', 401)">
+            poissonEstofMassTrunc (...)
+          </code>
+          <div class="tip" id="401">
+            <strong>Signature:</strong> massToLambda:(float -&gt; float) -&gt; limit:int -&gt; mass:float -&gt; float []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L298-298" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '402', 402)" onmouseover="showTip(event, '402', 402)">
+            poissonProb lambda xValue
+          </code>
+          <div class="tip" id="402">
+            <strong>Signature:</strong> lambda:float -&gt; xValue:float -&gt; float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L294-294" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '403', 403)" onmouseover="showTip(event, '403', 403)">
             powerSetOf putCluster
           </code>
-          <div class="tip" id="361">
+          <div class="tip" id="403">
             <strong>Signature:</strong> putCluster:PutativeIsotopeCluster -&gt; PutativeIsotopeCluster list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L110-110" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L121-121" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -411,15 +561,15 @@ relative Intensity 1 to each subSet.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '362', 362)" onmouseover="showTip(event, '362', 362)">
+          <code onmouseout="hideTip(event, '404', 404)" onmouseover="showTip(event, '404', 404)">
             putativePrecursorChargeStatesBy (...)
           </code>
-          <div class="tip" id="362">
+          <div class="tip" id="404">
             <strong>Signature:</strong> chargeDeterminationParams:ChargeDetermParams -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; precursorMZ:float -&gt; AssignedCharge list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L213-213" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L232-232" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -431,15 +581,15 @@ relative Intensity 1 to each subSet.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '363', 363)" onmouseover="showTip(event, '363', 363)">
+          <code onmouseout="hideTip(event, '405', 405)" onmouseover="showTip(event, '405', 405)">
             removeSubSetsOfBestHit assignedCharges
           </code>
-          <div class="tip" id="363">
+          <div class="tip" id="405">
             <strong>Signature:</strong> assignedCharges:TestedItem&lt;AssignedCharge&gt; list -&gt; TestedItem&lt;AssignedCharge&gt; list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L245-245" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L266-266" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -451,15 +601,15 @@ relative Intensity 1 to each subSet.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '364', 364)" onmouseover="showTip(event, '364', 364)">
+          <code onmouseout="hideTip(event, '406', 406)" onmouseover="showTip(event, '406', 406)">
             rndIntBetween (...)
           </code>
-          <div class="tip" id="364">
+          <div class="tip" id="406">
             <strong>Signature:</strong> rnd:Random -&gt; lowerBorder:int -&gt; upperBorder:int -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L163-163" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L174-174" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -471,15 +621,15 @@ relative Intensity 1 to each subSet.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '365', 365)" onmouseover="showTip(event, '365', 365)">
+          <code onmouseout="hideTip(event, '407', 407)" onmouseover="showTip(event, '407', 407)">
             rndMzIntensityEntityCollectionBy (...)
           </code>
-          <div class="tip" id="365">
+          <div class="tip" id="407">
             <strong>Signature:</strong> rnd:Random -&gt; stdDev:float -&gt; maxCharge:int -&gt; maxDistance:float -&gt; minChainLength:int -&gt; PutativeIsotopeCluster<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L173-173" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/ChargeState.fs#L184-184" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -506,6 +656,7 @@ relative Intensity 1 to each subSet.</p>
             <li class="nav-header">Getting started</li>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
