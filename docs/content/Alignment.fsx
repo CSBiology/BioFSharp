@@ -10,6 +10,7 @@ For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local a
 For both implementations, the gapvalues are evaluated using the <b>affine</b> gapscoremodel. 
 *)
 #r "BioFSharp.dll"
+open BioFSharp
 open BioFSharp.Algorithms
 open DualAlignment
 open NeedlemanWunsch
@@ -26,8 +27,9 @@ The scoring function gets included into the <b>costs</b>-variable. It also carri
 *)
 
 
-let scmF =
-    
+let scm = ScoringMatrix.getScoringMatrixAminoAcid ScoringMatrix.ScoringMatrixAminoAcid.BLOSUM62
+scm AminoAcidSymbols.AminoAcidSymbol.Ala AminoAcidSymbols.AminoAcidSymbol.Arg
+
 
 let scoring a b = 
     if a = b then 2.
