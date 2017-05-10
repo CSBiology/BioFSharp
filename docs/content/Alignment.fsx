@@ -1,5 +1,5 @@
 ﻿(*** hide ***)
-#I @"E:\Users\Lukas\Source\Repos\BioFSharp\bin"
+#I "../../bin"
 (**
 
 BioFSharp: DualAlignment
@@ -9,7 +9,7 @@ In this short tutorial, the usage of the DualAlignment-algorithm is demonstrated
 For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local alignments, the <b>SmithWaterman</b>-algorithm is used.
 For both implementations, the gapvalues are evaluated using the <b>affine</b> gapscoremodel. 
 *)
-#r @"BioFSharp.dll"
+#r "BioFSharp.dll"
 open BioFSharp.Algorithms
 open DualAlignment
 open NeedlemanWunsch
@@ -24,6 +24,10 @@ For defining the scores of matching and missmatching characters, the <b>scoring<
 The scoring function gets included into the <b>costs</b>-variable. It also carries the <b>gap-penaltys</b>.
 
 *)
+
+
+let scmF =
+    
 
 let scoring a b = 
     if a = b then 2.
