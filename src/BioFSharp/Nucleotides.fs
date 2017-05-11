@@ -46,7 +46,7 @@ module Nucleotides =
     | D
     /// H : A or C or U = not G
     | H
-    /// V : G or V or A = not T/U
+    /// V : G or C or A = not T/U
     | V
 
     // 'Ambiguous Nucleotide Codes

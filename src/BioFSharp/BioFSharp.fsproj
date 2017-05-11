@@ -86,6 +86,14 @@
     <!-- Resources -->
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />
+    <EmbeddedResource Include="Resources\PAM30.txt" />
+    <EmbeddedResource Include="Resources\PAM70.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM80.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM45.txt" />
+    <Content Include="Resources\BLOSUM50.txt" />
+    <Content Include="Resources\PAM250.txt" />
+    <Content Include="Resources\EDNA.txt" />
+    <Content Include="Resources\UnnamedMatrix.txt" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
