@@ -13,9 +13,10 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 open BioFSharp
 open BioFSharp.Algorithms
 open DualAlignment
-open runGeneric
+open RunGeneric
 open NeedlemanWunsch
 open SmithWaterman
+
 (**
 <div class="box">
 Aligning aminoacid- and nucleotide-sequences
@@ -27,6 +28,8 @@ For defining the scores of matching and missmatching characters, the <b>scoring<
 //For aminoacids
 let aaScoring = ScoringMatrix.getScoringAminoAcid ScoringMatrix.ScoringMatrixAminoAcid.BLOSUM62
 
+//>For nucleotides
+let nucScoring = ScoringMatrix.getScoringNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
 
 (**
 
@@ -42,6 +45,12 @@ let aaCosts = {
     Similarity = aaScoring 
     }
 
+//>For nucleotides
+let nucCosts = {
+    Open = -2
+    Continuation = -1
+    Similarity = nucScoring 
+    }
 
 (**
 <div class="box">
@@ -57,6 +66,12 @@ let aaSeq2 = [|'M';'A';'A';'B';'E';'D';'M'|] |> Array.map AminoAcidSymbols.amino
 let globalAAAlignment = needlemanWunsch aaCosts aaSeq1 aaSeq2
 let localAAAlignment = smithWaterman aaCosts aaSeq1 aaSeq2
 
+//>For nucleotides
+let nucSeq1 = [|'A';'T';'G';'A'|] |> BioArray.ofNucleotideString
+let nucSeq2 = [|'B';'A';'T';'V';'A';'W';'G'|] |> BioArray.ofNucleotideString
+
+let globalNucAlignment = needlemanWunsch nucCosts nucSeq1 nucSeq2
+let localNucAlignment = smithWaterman nucCosts nucSeq1 nucSeq2
 
 (**
 </div>*)
@@ -68,21 +83,29 @@ Aligning anything else
 
 This implementation was aimed to be as generic as possible. To achieve this, the scoring function can be designed at will, the only constraints being the need for two input variables and the type equality.
 
-For example, one could use a simple "if else" equality function to match nucleotides.
+For example, one could use a simple "if else" equality function to match nucleotides or Integers.
 *)
 
 let scoring a b = 
     if a = b then 2
     else -2
 
-let Costs = {
+let costs = {
     Open = -2
     Continuation = -1
     Similarity = scoring
     }
 
-let globalAlignment = needlemanWunsch costs nucSeq1 nucSeq2
-let localAlignment = smithWaterman costs nucSeq1 nucSeq2
+
+let globalAlignmentNuc = needlemanWunsch costs nucSeq1 nucSeq2
+let localAlignmentNuc = smithWaterman costs nucSeq1 nucSeq2
+
+
+let intSeq1 = [|1;2;3;4;5|]
+let intSeq2 = [|1;1;2;4;6;7;|]
+
+let globalAlignmentInt = needlemanWunsch costs intSeq1 intSeq2
+let localAlignmentNuc = smithWaterman costs intSeq1 intSeq2
 
 (**
 </div>*)

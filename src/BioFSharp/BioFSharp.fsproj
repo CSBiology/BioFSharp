@@ -90,10 +90,10 @@
     <EmbeddedResource Include="Resources\PAM70.txt" />
     <EmbeddedResource Include="Resources\BLOSUM80.txt" />
     <EmbeddedResource Include="Resources\BLOSUM45.txt" />
-    <Content Include="Resources\BLOSUM50.txt" />
-    <Content Include="Resources\PAM250.txt" />
-    <Content Include="Resources\EDNA.txt" />
-    <Content Include="Resources\UnnamedMatrix.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM50.txt" />
+    <EmbeddedResource Include="Resources\PAM250.txt" />
+    <EmbeddedResource Include="Resources\EDNA.txt" />
+    <EmbeddedResource Include="Resources\UnnamedMatrix.txt" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
