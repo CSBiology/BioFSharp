@@ -1,5 +1,6 @@
 (*** hide ***)
-#r "../../bin/BioFSharp.dll"
+#r @"C:/Users/Krissi/Source/Repos/BioFSharp/bin/BioFSharp.dll"
+#r @"C:/Users/Krissi/Source/Repos/BioFSharp/packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll"
 
 (**
 Molecule Finding Algorithm
@@ -25,6 +26,7 @@ open System
 open BioFSharp
 open Isotopes.Table
 open AminoAcids
+open FSharp.Plotly
 
 type atom = {
     symbol : string
@@ -134,6 +136,13 @@ time: Real: 00:00:00.004, CPU: 00:00:00.000, GC Gen0: 0, Gen1: 0, Gen2: 0
 Time complexity
 ---------------
 O(n*g)^g
-
-![html](./img/moleculefindingtimecomplexity.html)
 *)
+
+(***hide***)
+let values = [0.004; 0.07; 0.185; 0.543; 7.47] 
+let keys = ["Guanidination: 42u, found";"Malonyl: 86u, found";"Hypusine: 88u, not found"; "Ethylphosphate: 108u, found";"DTT_ST: 136u, found"]
+let labels = ["60 potential molecules"; "13755 potential molecules"; "16979 potential molecules"; "80529 potential molecules"; "995704 potential molecules"]
+(*** define-output:bar1 ***)
+Chart.Column(keys,values,Labels=labels,Opacity=1.0,Marker=Options.Marker(Color="rgba(10,100,100,1.0)"))
+(*** include-it:bar1 ***)
+|> Chart.Show
