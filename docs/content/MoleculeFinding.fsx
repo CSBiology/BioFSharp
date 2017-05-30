@@ -1,6 +1,6 @@
 (*** hide ***)
-#r @"C:/Users/Krissi/Source/Repos/BioFSharp/bin/BioFSharp.dll"
-#r @"C:/Users/Krissi/Source/Repos/BioFSharp/packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll"
+#r "../../bin/BioFSharp.dll"
+#r "../../packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll"
 
 (**
 Molecule Finding Algorithm
