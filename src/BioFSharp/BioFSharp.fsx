@@ -1,66 +1,10 @@
 #light
 
-#r "../../bin/FSharp.Care.dll"
-
-#load "PhysicalConstants.fs"
-#load "Isotopes.fs"
-#load "Elements.fs"
-#load "Formula.fs"
-#load "ModificationInfo.fs"
-#load "IBioItem.fs"
-#load "AminoAcids.fs"
-#load "Nucleotides.fs"
-#load "IBioSequence.fs"
-#load "BioArray.fs"
-#load "BioList.fs"
-
-#load "Digestion.fs"
-//#load "Mass.fs"
-
-open FSharp.Care
-open BioFSharp
-
-//open BioArray
-
-
-open IBioSequence
-
-//type IBioSequence<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> =  seq<'a>
-type BioArray<'a when 'a :> IBioItem> = array<'a>
-
-
-let ofAminoAcidString (s:#seq<char>) : BioArray<AminoAcids.AminoAcid> =
-    IBioSequence.ofAminoAcidString s 
-    |> Seq.toArray
-
-let t' = ofAminoAcidString "ACAS"
-
-
-let t : array<AminoAcids.AminoAcid> = 
-    BioArray.ofAminoAcidString "ACAS"
-    
-//let t' : array<IBioItem> = upcast t
- 
-
-/// Returns formula
-let toFormula (bs:BioArray<_>) =
-    bs |> Array.fold (fun acc item -> Formula.add acc  (BioItem.formula item)) Formula.emptyFormula
-
-/// Returns average mass of the given sequence !memoization
-let toAverageMass<'a when 'a :> IBioItem> : (BioArray<'a> -> float) =
-    let memAverageMass =
-        Memoization.memoizeP (BioItem.formula >> Formula.averageMass)
-    (fun bs -> 
-        bs 
-        |> Array.sumBy memAverageMass)
-
-toAverageMass t'//[|Nucleotides.A|]// [|AminoAcids.Ala|]
-
-BioArray.toFormula [|Nucleotides.A|]// [|AminoAcids.Ala|]
-
-
-//
-//toAverageMass t
+// TODO:
+// Int to Nucleotides
+// Nucleotides as Struct?
+// Composite Vector
+// Isotopic distribution
 
 
 //#if INTERACTIVE

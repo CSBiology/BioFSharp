@@ -9,10 +9,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>BioFSharp.Mz</RootNamespace>
     <AssemblyName>BioFSharp.Mz</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFSharpCoreVersion>4.4.1.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>BioFSharp.Mz</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,8 @@
     <Compile Include="ChargeState.fs" />
     <Compile Include="Fragmentation.fs" />
     <Compile Include="SequestLike.fs" />
+    <Compile Include="AndromedaLike.fs" />
+    <Compile Include="Quantification.fs" />
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />

@@ -68,6 +68,7 @@ module AminoAcids =
 
         | Mod of AminoAcid * ModificationInfo.Modification list
         
+
         interface IBioItem with            
                 member this.Symbol   = 
                     let rec symbol (aa:AminoAcid) =
@@ -192,6 +193,8 @@ module AminoAcids =
                     
                     name this
 
+        static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol
+        static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 
 
     // Sets amino acid modification 

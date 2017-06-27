@@ -6,6 +6,49 @@ module BioID =
     open System
     open FSharp.Care
 
+    // http://www.uniprot.org/help/protein_existence
+    /// Indicates the type of evidence that supports the existence of the protein
+    type ProteinExistence =
+        | Unknown = 0 // evidence code not set
+        | ExperimentalProtein = 1
+        | ExperimentalTranscript = 2
+        | Homology = 3
+        | Predicted = 4
+        | Uncertain = 5
+
+
+    // http://www.uniprot.org/help/fasta-headers
+    /// UniProt sequence identifier
+    type UniProtId = 
+        /// UniProtKB entry: P00750
+        | UniProtKB of string 
+        /// UniProtKB entry name: A4_HUMAN
+        | EntryName of string 
+        ///UniProtKB entry isoform sequence: P00750-2
+        | Isoform of string*int
+        ///	UniProtKB sequence range: P00750[39-81]
+        | SequenceRange of string*int*int
+        /// UniParc entry: UPI0000000001
+        | UniParc of string
+        /// UniRef entry: UniRef100_P00750
+        | UniRef of string 
+    
+        override this.ToString() =
+            match this with
+            | UniProtKB s -> s
+            | EntryName s -> s
+            | Isoform (s,i) -> sprintf "%s-%i" s i
+            | SequenceRange (s,f,t) -> sprintf "%s[%i-%i]" s f t
+            | UniParc s -> s
+            | UniRef s -> s 
+
+
+    /// Parse UniProt sequence identifier. Returns Failure string in case of no match.
+    let parseUniProtKB = Regex.tryEitherParse UniProtKB "[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}"    
+    /// Parse UniParc sequence identifier. Returns Failure string in case of no match.
+    let parseUniParc   = Regex.tryEitherParse UniParc "UPI[A-F0-9]{10}"    
+    /// Parse UniRef sequence identifier. Returns Failure string in case of no match.
+    let parseUniRef    = Regex.tryEitherParse UniRef "UniRef[0-9]{2,3}_[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}"  
 
     /// NCBI Reference Sequence Database
     type RefSeqId = RefSeqId of string
@@ -68,4 +111,147 @@ module BioID =
 
     //let parseOboId  = Regex.tryEitherParse Obo.Id @"[\w]+:(?<goId>[\d]+)"
 
+  
+
+
+
+    type MouseId =
+        /// MGI:1915571
+        | MgiId of string
+
+    let parseMgiId  = Regex.tryEitherParse MgiId "MGI:[0-9]*"
+
+
+    module FastA =
+                
+        open FSharp.Care.Regex
+        open FSharp.Care.Monads
+        open FSharp.Care.Collections
+
+        type FastaHeader<'IdType> = {
+            ID          : 'IdType
+            Description : string
+            Info     : Map<string,string>    
+            }
+
+        let createFastaHeader id description info =
+            {ID=id;Description=description;Info=info}
     
+
+        /// Returns DisplayId of FastA header. None if none present.
+        let displayIdOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "DID"
+        /// Returns Aliases of FastA header. None if none present.
+        let aliasesOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "ALS"
+        /// Returns DataBaseVersion of FastA header. None if none present.
+        let dataBaseVersionOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "DBV"
+        /// Returns Type of UniqueIdentifier of FastA header. None if none present.
+        let touOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "TOU"
+        /// Returns SequenceVersion of FastA header. None if none present.
+        let sequenceVersionOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "SV"
+        /// Returns OrganismName of FastA header. None if none present.
+        let organismNameOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "OS"
+        /// Returns ProteinExistence of FastA header. None if none present.
+        let proteinExistenceOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "PE"
+        /// Returns GeneName of FastA header. None if none present.
+        let geneNameOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "GN"
+        /// Returns ProteinName of FastA header. None if none present.
+        let proteinNameOf (header:FastaHeader<_>) =
+            header.Info.TryFindDefault "None" "PN"
+
+
+
+        /// Sets DisplayId in FastA header.
+        let setDisplayId displayId (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("DID",displayId)}
+        /// Sets Aliases in FastA header.
+        let setAliases alias (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("ALS",alias)}
+        /// Sets DataBaseVersion in FastA header.
+        let setDataBaseVersion dbv (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("DBV",dbv)}
+        /// Sets Type of UniqueIdentifier in FastA header.
+        let setIdType idType (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("TOU",idType)}
+        /// Sets SequenceVersion in FastA header.
+        let setSequenceVersion sv (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("SV",sv)}
+        /// Sets OrganismName in FastA header.
+        let setOrganismName os (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("OS",os)}
+        /// Sets ProteinExistence in FastA header.
+        let setProteinExistence pe (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("PE",pe)}
+        /// Sets GeneName in FastA header.
+        let setGeneName gn (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("GN",gn)}    
+        /// Sets ProteinName in FastA header.
+        let setProteinName pn (header:FastaHeader<_>) =
+            {header with Info=header.Info.Add("PN",pn)}
+
+
+//        /// Returns FastaHeader from string
+//        let fromString (str:string) =    
+//            let rec loop (input:(string*(string->Either<(string*string),string>)) list) acc (s:string) =
+//                match input with
+//                | h::t ->   let key,parser = h 
+//                            match parser s with
+//                            | Success (s,r) -> loop t ((key,s)::acc) r
+//                            | Failure f -> loop t acc f
+//                | [] -> (s,acc)
+//
+//            
+//            /// Parse DisplayId (DID=) from string
+//            let parseDisplayId = tryEitherMatchReplace (fun s r -> s.[4..],r) "DID=[^\s_]+" ""
+//            /// Parse Aliases (ALS=)
+//            let parseAliases = tryEitherMatchReplace (fun s r -> s.[4..],r) "ALS=[^\s_]+" ""
+//            /// Parse DataBaseVersion (DBV=)
+//            let parseDataBaseVersion = tryEitherMatchReplace (fun s r -> s.[4..],r) "DBV=[^\s_]+" ""
+//            /// Parse Type of UniqueIdentifier (TOU=)
+//            let parseTypeOfUniqueIdentifier = tryEitherMatchReplace (fun s r -> s.[4..],r) "TOU=[a-zA-Z]+" ""
+//            /// Parse SequenceVersion (SV=)
+//            let parseSequenceVersion = tryEitherMatchReplace (fun s r -> s.[3..],r) "SV=\d+" ""
+//            /// Parse OrganismName (OS=)
+//            let parseOrganismName = tryEitherMatchReplace (fun s r -> s.[3..],r) "OS=[a-zA-Z]+ ?[a-z]+" ""
+//            /// Parse ProteinExistence (PE=)
+//            let parseProteinExistence = tryEitherMatchReplace (fun s r -> s.[3..],r)  "PE=\d+" ""
+//            /// Parse GeneName (GN=)
+//            let parseGeneName = tryEitherMatchReplace (fun s r -> s.[3..],r)  "GN=\S+" ""
+//            /// Parse ProteinName (PN=)
+//            let parseProteinName = tryEitherMatchReplace (fun s r -> s.[3..],r) "PN=\S+" ""            
+//            
+//            let splitStr = str.Split([|' '|],2)
+//            let descr,info =
+//                if splitStr.Length > 1 then 
+//                    let tmp =
+//                        [
+//                            "DID",parseDisplayId;
+//                            "ALS",parseAliases;
+//                            "DBV",parseDataBaseVersion;
+//                            "TOU",parseTypeOfUniqueIdentifier;
+//                            "SV",parseSequenceVersion;
+//                            "OS",parseOrganismName;
+//                            "PE",parseProteinExistence;
+//                            "GN",parseGeneName;
+//                            "PN",parseProteinName;
+//
+//                        ]
+//                    loop tmp [] splitStr.[1]
+//                else
+//                    ("",[])
+//   
+//            createFastaHeader splitStr.[0] (descr.Trim()) (info|> Map.ofList)
+
+
+
+        /// Returns FastaHeader as string
+        let toString (header:FastaHeader<_>) =
+            let infoStr = header.Info |> Seq.map (fun kv -> sprintf "%s=%s" kv.Key kv.Value) |> String.concat " "
+            sprintf "%s %s %s" (header.ID.ToString()) header.Description infoStr     

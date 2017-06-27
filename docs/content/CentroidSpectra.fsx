@@ -3,8 +3,8 @@
 // it to define helpers that you do not want to show in the documentation.
 //#I "../../bin"
 #r "../../bin/BioFSharp.dll"
-#r "../../bin/BioFSharp.Mz.dll"
 #r "../../bin/BioFSharp.IO.dll"
+#r "../../bin/BioFSharp.Mz.dll"
 #r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 (**
 Spectrum centroidization
@@ -23,19 +23,26 @@ open FSharp.Plotly
 let ms1DataTest = 
     Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
     |> List.head
-
+#time
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
-let centroidSpectrum = 
-    SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity
+for i = 1 to 10 do
+    let centroidMS1Spectrum = 
+        SignalDetection.Wavelet.toCentroidWithRicker2D 3 1. 0.1 50. 95. ms1DataTest.Mass ms1DataTest.Intensity
+    centroidMS1Spectrum |> ignore
 
-
+fst centroidMS1Spectrum 
+|> Array.length
+let centroidMS1Spectrum2 = 
+    SignalDetection.Wavelet.toCentroidWithRicker2D 10 1. 0.1 50. 95. ms1DataTest.Mass ms1DataTest.Intensity
 (*** define-output:spectrum1 ***)
 /// Creates point charts of the raw and the processed data
 [
     Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity,Name="raw data");
-    Chart.Point(fst centroidSpectrum, snd centroidSpectrum,Name="centroid")
+    Chart.Point(fst centroidMS1Spectrum2, snd centroidMS1Spectrum2,Name="centroid")
+    Chart.Point(fst centroidMS1Spectrum, snd centroidMS1Spectrum,Name="centroid")
 ]
 |> Chart.Combine
+|> Chart.Show
 (*** include-it:spectrum1 ***)
 
 (**
@@ -46,15 +53,38 @@ and computation time is a limiting factor.
 
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) containing only the centroids in a
 /// window of a user given width centered around a user given m/z value.
-let centroidsInWindow = 
-     SignalDetection.windowToCentroidBy SignalDetection.Wavelet.toSNRFilteredCentroid ms1DataTest.Mass ms1DataTest.Intensity 3. 643.8029052
+let ms1CentroidsInWindow = 
+     SignalDetection.windowToCentroidBy (SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 50.) ms1DataTest.Mass ms1DataTest.Intensity 7.5 643.8029052
 
  
 (*** define-output:spectrum2 ***)
 /// Creates a another combined chart of the unprocessed data and the centroided data
 [
     Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity,Name="raw data");
-    Chart.Point(fst centroidsInWindow, snd centroidsInWindow,Name="processed data");
+    Chart.Point(fst ms1CentroidsInWindow, snd ms1CentroidsInWindow,Name="processed data");
 ]
 |> Chart.Combine
+
 (*** include-it:spectrum2 ***)
+
+/// Returns the first entry of a examplary mgf File
+let ms2DataTest = 
+    Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms2Example.mgf")  
+    |> List.head
+
+/// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
+let centroidMS2Spectrum = 
+    SignalDetection.Wavelet.toCentroid 0.1 ms2DataTest.Mass ms2DataTest.Intensity
+
+//
+let snrFilteredCentroidMS2Spectrum = (SignalDetection.Wavelet.toSNRFilteredCentroid 0.01 30.)   (fst centroidMS2Spectrum) (snd centroidMS2Spectrum)     
+        
+(*** define-output:spectrum3 ***)
+/// Creates a another combined chart of the unprocessed data and the centroided MS2 data
+[
+    Chart.Point(ms2DataTest.Mass, ms2DataTest.Intensity,Name="raw data");
+    Chart.Point(fst centroidMS2Spectrum, snd centroidMS2Spectrum,Name="centroided data");
+    Chart.Point(fst snrFilteredCentroidMS2Spectrum, snd snrFilteredCentroidMS2Spectrum,Name="centroided & filtered");
+]
+|> Chart.Combine
+(*** include-it:spectrum3 ***)

@@ -1,5 +1,8 @@
 ﻿namespace BioFSharp.Mz
 
+open MathNet.Numerics
+open MathNet.Numerics.LinearAlgebra.Double
+
 type PeakArray<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IPeak> = array<'a>
 
 module PeakArray =
@@ -41,4 +44,16 @@ module PeakArray =
             if index < maxIndex-1 && index > -1 then
                 array.[index] <- max array.[index] p.Intensity)
         array
+
+    /// Bins peaks to their nearest 1 Da bin
+    let peaksToNearestUnitDaltonBinVector (pkarr:PeakArray<_>) (minMassBoarder:int) (maxMassBoarder:int) = 
+        let maxIndex = maxMassBoarder - minMassBoarder + 1        
+        let vector = LinearAlgebra.DenseVector.create (maxIndex-1) 0.
+        pkarr 
+        |> Array.iter (fun p ->  
+            let index = int(round p.Mz) - minMassBoarder
+            if index < maxIndex-1 && index > -1 then
+                vector.[index] <- max vector.[index] p.Intensity)
+        vector
          
+       
