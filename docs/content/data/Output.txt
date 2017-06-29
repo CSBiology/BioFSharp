@@ -1,6 +1,6 @@
 # BLASTP 2.2.31+
 # Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
-# Database: D:\Source\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Database: E:\Users\Lukas\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
 # Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
 # 8 hits found
 >gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645

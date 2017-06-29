@@ -82,7 +82,15 @@
     <!-- Algorithm -->
     <Compile Include="Algorithm\ScoringMatrix.fs" />
     <Compile Include="Algorithm\PatternQuery.fs" />
-    <Compile Include="Algorithm\DualAlignment.fs" />
+    <Compile Include="Algorithm\PairwiseAlignment.fs" />
+    <Resource Include="Resources\BLOSUM45.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM50.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM80.txt" />
+    <EmbeddedResource Include="Resources\Default.txt" />
+    <EmbeddedResource Include="Resources\EDNA.txt" />
+    <EmbeddedResource Include="Resources\PAM250.txt" />
+    <EmbeddedResource Include="Resources\PAM30.txt" />
+    <EmbeddedResource Include="Resources\PAM70.txt" />
     <!-- Resources -->
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />

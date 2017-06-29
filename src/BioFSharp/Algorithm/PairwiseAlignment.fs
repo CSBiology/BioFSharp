@@ -2,7 +2,7 @@ namespace BioFSharp.Algorithms
 
 
 
-module DualAlignment =
+module PairwiseAlignment =
     open FSharp.Care.Collections   
      //Introduction!
      //This page contains functions for evaluating the best possible Allignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
@@ -16,19 +16,19 @@ module DualAlignment =
     module RunGeneric =
 
         type TraceScore =     
-            | Diagonal   of float
-            | Horizontal of float
-            | Vertical   of float
+            | Diagonal   of int
+            | Horizontal of int
+            | Vertical   of int
             | NoTrace
 
         let getTraceScoreValue = function
             | Diagonal   x -> x
             | Horizontal x -> x
             | Vertical   x -> x
-            | NoTrace      -> 0.
+            | NoTrace      -> 0
 
         
-        let addFloatToTrace (ts:TraceScore) (opc:float) =
+        let addFloatToTrace (ts:TraceScore) (opc:int) =
             getTraceScoreValue ts + opc
 
         //3 seperate matrices are used for evaluating the affine gap penalty
@@ -44,7 +44,7 @@ module DualAlignment =
 
         //The Type of the returned list + its score
         type Alignment<'a> = {
-            Score    : float
+            Score    : int
             Sequence : list<'a option * 'a option>
             }
     
@@ -54,16 +54,16 @@ module DualAlignment =
     
         //Carries the costs for gaps and the scoring matrix (Similarity)
         type Costs<'a> = {
-            Open : float
-            Continuation : float
-            Similarity : 'a -> 'a -> float
+            Open : int
+            Continuation : int
+            Similarity : 'a -> 'a -> int
             }
     
         //Carries the functions for evaluating the Tracescores
         type OperationCosts<'a> = {
-            DiagonalCost   : Cell -> 'a -> 'a -> float
-            HorizontalCost : Cell -> float
-            VerticalCost   : Cell -> float
+            DiagonalCost   : Cell -> 'a -> 'a -> int
+            HorizontalCost : Cell -> int
+            VerticalCost   : Cell -> int
             }
     
         //Evaluates the bigger of two values (x y) after converting them with a function f
@@ -126,12 +126,12 @@ module DualAlignment =
                     let mX = addFloatToTrace cCell.X sim'             
                     max mX mY |> max mM 
             //Evaluates biggest score for horizontal move
-            let horizontalCost (cCell:Cell) : float =
+            let horizontalCost (cCell:Cell) : int =
                 let xM = addFloatToTrace cCell.M costs.Open
                 let xX = addFloatToTrace cCell.X costs.Continuation
                 max xX xM
             //Evaluates biggest score for vertical move
-            let verticalCost (cCell:Cell) : float =
+            let verticalCost (cCell:Cell) : int =
                 let yM = addFloatToTrace cCell.M costs.Open
                 let yY = addFloatToTrace cCell.Y costs.Continuation
                 max yY yM
@@ -145,11 +145,11 @@ module DualAlignment =
                 let len2 = Array2D.length2 array
                 // init first col (only vertical trace)
                 for i=1 to len1-1 do 
-                    let currentTrace = Vertical (costs.Open + (costs.Continuation * float (i-1)))
+                    let currentTrace = Vertical (costs.Open + (costs.Continuation * int (i-1)))
                     array.[i,0] <- createCell currentTrace currentTrace currentTrace
                 // init first row (only horizontal trace)
                 for j=1 to len2-1 do 
-                    let currentTrace = Horizontal (costs.Open + (costs.Continuation * float (j-1)))
+                    let currentTrace = Horizontal (costs.Open + (costs.Continuation * int (j-1)))
                     array.[0,j] <- createCell currentTrace currentTrace currentTrace    
                 array
                         
@@ -181,17 +181,17 @@ module DualAlignment =
                     let mM = addFloatToTrace cCell.M sim' 
                     let mY = addFloatToTrace cCell.Y sim' 
                     let mX = addFloatToTrace cCell.X sim'             
-                    max mM mY |> max mX |> max 0.
+                    max mM mY |> max mX |> max 0
             //Evaluates biggest score for horizontal move
-            let horizontalCost (cCell:Cell) : float =
+            let horizontalCost (cCell:Cell) : int =
                 let xM = addFloatToTrace cCell.M costs.Open
                 let xX = addFloatToTrace cCell.X costs.Continuation
-                max xM xX |> max 0.
+                max xM xX |> max 0
             //Evaluates biggest score for vertical move
-            let verticalCost (cCell:Cell) : float =
+            let verticalCost (cCell:Cell) : int =
                 let yM = addFloatToTrace cCell.M costs.Open
                 let yY = addFloatToTrace cCell.Y costs.Continuation
-                max yM yY |> max 0.
+                max yM yY |> max 0
 
             ///Contains the 3 Cost-functions which are used by the "runGeneric" function to build the Matrix
             let opcs =  {DiagonalCost=diagonalCost;HorizontalCost=horizontalCost;VerticalCost=verticalCost}
