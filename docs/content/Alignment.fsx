@@ -11,7 +11,7 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 *)
 #r "BioFSharp.dll"
 open BioFSharp
-open BioFSharp.Algorithms
+open BioFSharp.Algorithm
 open PairwiseAlignment
 open RunGeneric
 open NeedlemanWunsch

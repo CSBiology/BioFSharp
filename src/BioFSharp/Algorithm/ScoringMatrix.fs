@@ -1,4 +1,4 @@
-﻿namespace BioFSharp.Algorithms
+﻿namespace BioFSharp.Algorithm
 
 open FSharp.Care.Collections
 
