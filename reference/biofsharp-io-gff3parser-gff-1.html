@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>GseaResult - BioFSharp</title>
+    <title>GFF<'a> - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,69 +37,31 @@
 
 
 
-<h1>GseaResult</h1>
+<h1>GFF<'a></h1>
 <p>
-  <span>Namespace: BioFSharp.Stats</span><br />
-  <span>Parent Module: <a href="biofsharp-stats-ontologyenrichment.html">OntologyEnrichment</a></span>
+  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-gff3parser.html">GFF3Parser</a></span>
 </p>
 <div class="xmldoc">
-<p>Represents a gene set enrichment result</p>
-
 </div>
-  <h3>Record Fields</h3>
+  <h3>Union Cases</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Union Case</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1238', 1238)" onmouseover="showTip(event, '1238', 1238)">
-            NumberInBin
+          <code onmouseout="hideTip(event, '993', 993)" onmouseover="showTip(event, '993', 993)">
+            Comment(string)
           </code>
-          <div class="tip" id="1238">
-            <strong>Signature:</strong> int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L27-27" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '1239', 1239)" onmouseover="showTip(event, '1239', 1239)">
-            NumberOfDEsInBin
-          </code>
-          <div class="tip" id="1239">
-            <strong>Signature:</strong> int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L26-26" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '1240', 1240)" onmouseover="showTip(event, '1240', 1240)">
-            OntologyTerm
-          </code>
-          <div class="tip" id="1240">
+          <div class="tip" id="993">
             <strong>Signature:</strong> string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L25-25" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L25-25" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -109,15 +71,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1241', 1241)" onmouseover="showTip(event, '1241', 1241)">
-            PValue
+          <code onmouseout="hideTip(event, '994', 994)" onmouseover="showTip(event, '994', 994)">
+            Directive(string)
           </code>
-          <div class="tip" id="1241">
-            <strong>Signature:</strong> float<br />
+          <div class="tip" id="994">
+            <strong>Signature:</strong> string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L30-30" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L26-26" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -127,15 +89,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1242', 1242)" onmouseover="showTip(event, '1242', 1242)">
-            TotalNumberOfDE
+          <code onmouseout="hideTip(event, '995', 995)" onmouseover="showTip(event, '995', 995)">
+            Fasta(seq&lt;FastaItem&lt;&#39;a&gt;&gt;)
           </code>
-          <div class="tip" id="1242">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="995">
+            <strong>Signature:</strong> seq&lt;FastaItem&lt;&#39;a&gt;&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L28-28" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -145,15 +107,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1243', 1243)" onmouseover="showTip(event, '1243', 1243)">
-            TotalUnivers
+          <code onmouseout="hideTip(event, '996', 996)" onmouseover="showTip(event, '996', 996)">
+            GFFLine(GFFEntry)
           </code>
-          <div class="tip" id="1243">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="996">
+            <strong>Signature:</strong> GFFEntry<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L29-29" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L24-24" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

@@ -52,11 +52,107 @@
 <h2><a name="FastA" class="anchor" href="#FastA">FastA</a></h2>
 <p>This documentation is not yet here. Hopefully it will be soon =)</p>
 <a name="GFF3"></a>
-<h2><a name="GFF3" class="anchor" href="#GFF3">GFF3</a></h2>
-<p>Just put the stuff below here fenni&amp;bella</p>
+<h1><a name="Introducing-GFF3Parser" class="anchor" href="#Introducing-GFF3Parser">Introducing GFF3Parser</a></h1>
+<p>The GFF3Parser is a tool to validate, read and write <strong>GFF3</strong> <em>(Generic Feature Format Version 3)</em>-Files.</p>
+<p>All examples are executed on <a href="http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff">saccharomyces_cerevisiae.gff</a>.</p>
+<h2><a name="Introducing-Generic-Feature-Format-Version-3" class="anchor" href="#Introducing-Generic-Feature-Format-Version-3">Introducing Generic Feature Format Version 3</a></h2>
+<p>In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9 (<strong>attributes</strong>).
+The nine fields are: [<strong>seqID</strong>] [**source**] [<strong>type,feature or method</strong>] [**start**] [<strong>end</strong>] [**score**] [<strong>strand</strong>] [**phase**] [<strong>attributes</strong>].</p>
+<p>Directives (marked with <strong>##</strong><em>[...]</em> ) provide additional information like the gff-version which has to be the first line of each file (<em>"##gff-version 3[...]"</em>).
+Comments lines have to start with a single <strong>#</strong><em>[...]</em>. It is possible to have FastA sequences at the end of the file. This has to be announced by a <em>"##FASTA"</em> directive line.</p>
+<p>For further information visit <a href="https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md">GFF3-Specifications</a>.</p>
+<h1><a name="How-to-use-GFF3Parser" class="anchor" href="#How-to-use-GFF3Parser">How to use GFF3Parser</a></h1>
+<p>To read in a gff you have to insert a filepath and optional a FastA converter. For further information about FastA visit [API Reference - FastA]<a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html.">https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html.</a></p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">IO</span>
+
+<span class="c">///path and name of the input file</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">filepathGFF</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/gff3Example.gff&quot;</span>)
+
+<span class="c">///converter for FastA.FastaItem</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">fastaConverter</span> (<span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">x</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="t">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="t">char</span><span class="o">&gt;</span>) <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="f">id</span> <span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="i">x</span>
+
+<span class="c">///to read in gff file insert converter and filepath. You also directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">gffExampleRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="t">Reader</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="f">GFF3reader</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="f">id</span> <span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="i">filepathGFF</span> 
+</code></pre></td>
+</tr>
+</table>
+<h1><a name="How-to-use-GFF3Validator" class="anchor" href="#How-to-use-GFF3Validator">How to use GFF3Validator</a></h1>
+<p>The GFF3Validator prints wheter your GFF3 file is valid or not. If not, then it also returns the specified error and the line in which the error occured.
+In contrast to GFF2 the field 3 (<strong>type</strong>) is restricted to terms defined by the sequence ontology (SO) so this validator checks if the entry is a valid SO<em>Term.
+New versions of the SO you can find [here](<a href="https://sourceforge.net/projects/song/files/SO">https://sourceforge.net/projects/song/files/SO</a></em>Feature_Annotation/).</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///path, name and version of the &#39;Sequence Ontology terms&#39;-file</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="i">filepathSO_Terms</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Sequence_Ontology_Terms_2_5_3.txt&quot;</span>)
+
+<span class="c">///to validate the gff file insert filepath</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="i">gffExampleValidate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="t">Validator</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="f">GFF3validator</span> <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="i">filepathSO_Terms</span> <span onmouseout="hideTip(event, 'fs5', 25)" onmouseover="showTip(event, 'fs5', 25)" class="i">filepathGFF</span>
+</code></pre></td>
+</tr>
+</table>
+<h1><a name="How-to-use-GFF3RelationshipSearch" class="anchor" href="#How-to-use-GFF3RelationshipSearch">How to use GFF3RelationshipSearch</a></h1>
+<p>You also can do a simple search for <em>Parent</em> - <em>child</em>of<em> relationships giving back all genomic features which contain the </em>searchterm_ in <strong>ID</strong> or <strong>Parent</strong> field.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Term to search for:</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="i">searchterm</span> <span class="o">=</span> <span class="s">&quot;YAL069W&quot;</span>
+
+<span class="c">///with this function you can search for a searchterm and you will get features which are related</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="i">gffExampleSearch</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 28)" onmouseover="showTip(event, 'fs12', 28)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="t">Relationship</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="f">relationshipSearch</span> <span onmouseout="hideTip(event, 'fs11', 31)" onmouseover="showTip(event, 'fs11', 31)" class="i">gffExampleRead</span> <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="i">searchterm</span>
+</code></pre></td>
+</tr>
+</table>
+<h1><a name="How-to-use-GFF3Writer" class="anchor" href="#How-to-use-GFF3Writer">How to use GFF3Writer</a></h1>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///coming soon</span>
+</code></pre></td>
+</tr>
+</table>
 
 <div class="tip" id="fs1">val a : int<br /><br />Full name: Readers.a</div>
 <div class="tip" id="fs2">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<div class="tip" id="fs3">namespace BioFSharp</div>
+<div class="tip" id="fs4">namespace BioFSharp.IO</div>
+<div class="tip" id="fs5">val filepathGFF : string<br /><br />Full name: Readers.filepathGFF<br /><em><br /><br />path and name of the input file</em></div>
+<div class="tip" id="fs6">val fastaConverter : x:seq&lt;char&gt; -&gt; seq&lt;char&gt;<br /><br />Full name: Readers.fastaConverter<br /><em><br /><br />converter for FastA.FastaItem</em></div>
+<div class="tip" id="fs7">val x : seq&lt;char&gt;</div>
+<div class="tip" id="fs8">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
+<div class="tip" id="fs9">Multiple items<br />val char : value:&#39;T -&gt; char (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.char<br /><br />--------------------<br />type char = System.Char<br /><br />Full name: Microsoft.FSharp.Core.char</div>
+<div class="tip" id="fs10">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
+<div class="tip" id="fs11">val gffExampleRead : seq&lt;GFF3Parser.GFF&lt;seq&lt;char&gt;&gt;&gt;<br /><br />Full name: Readers.gffExampleRead<br /><em><br /><br />to read in gff file insert converter and filepath. You also directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF</em></div>
+<div class="tip" id="fs12">module GFF3Parser<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs13">module Reader<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs14">val GFF3reader : fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Reader.GFF3reader</div>
+<div class="tip" id="fs15">val filepathSO_Terms : string<br /><br />Full name: Readers.filepathSO_Terms<br /><em><br /><br />path, name and version of the &#39;Sequence Ontology terms&#39;-file</em></div>
+<div class="tip" id="fs16">val gffExampleValidate : unit<br /><br />Full name: Readers.gffExampleValidate<br /><em><br /><br />to validate the gff file insert filepath</em></div>
+<div class="tip" id="fs17">module Validator<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs18">val GFF3validator : so_TermsPath:string -&gt; filepath:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.Validator.GFF3validator</div>
+<div class="tip" id="fs19">val searchterm : string<br /><br />Full name: Readers.searchterm<br /><em><br /><br />Term to search for:</em></div>
+<div class="tip" id="fs20">val gffExampleSearch : seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: Readers.gffExampleSearch<br /><em><br /><br />with this function you can search for a searchterm and you will get features which are related</em></div>
+<div class="tip" id="fs21">module Relationship<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs22">val relationshipSearch : gffList:seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Relationship.relationshipSearch</div>
 
         </div>
         <div class="span3">

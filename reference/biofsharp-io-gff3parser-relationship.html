@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Modification - BioFSharp</title>
+    <title>Relationship - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,71 +37,40 @@
 
 
 
-<h1>Modification</h1>
+<h1>Relationship</h1>
 <p>
-  <span>Namespace: BioFSharp</span><br />
-  <span>Parent Module: <a href="biofsharp-modificationinfo.html">ModificationInfo</a></span>
+  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-gff3parser.html">GFF3Parser</a></span>
 </p>
 <div class="xmldoc">
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '750', 750)" onmouseover="showTip(event, '750', 750)">
-            Location
+          <code onmouseout="hideTip(event, '369', 369)" onmouseover="showTip(event, '369', 369)">
+            relationshipSearch gffList searchterm
           </code>
-          <div class="tip" id="750">
-            <strong>Signature:</strong> ModLocation<br />
-                      </div>
+          <div class="tip" id="369">
+            <strong>Signature:</strong> gffList:seq&lt;GFF&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFFEntry&gt;<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/ModificationInfo.fs#L16-16" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L225-225" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>Searches for an term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent) (shows all features which are linked to searchterm)</p>
 
-          <code onmouseout="hideTip(event, '751', 751)" onmouseover="showTip(event, '751', 751)">
-            Modify
-          </code>
-          <div class="tip" id="751">
-            <strong>Signature:</strong> Formula -&gt; Formula<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/ModificationInfo.fs#L18-18" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
 
-          <code onmouseout="hideTip(event, '752', 752)" onmouseover="showTip(event, '752', 752)">
-            Name
-          </code>
-          <div class="tip" id="752">
-            <strong>Signature:</strong> string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/ModificationInfo.fs#L15-15" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
         </td>
       </tr>
     </tbody>

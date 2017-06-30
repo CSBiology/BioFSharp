@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>GseaResult - BioFSharp</title>
+    <title>Reader - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,127 +37,140 @@
 
 
 
-<h1>GseaResult</h1>
+<h1>Reader</h1>
 <p>
-  <span>Namespace: BioFSharp.Stats</span><br />
-  <span>Parent Module: <a href="biofsharp-stats-ontologyenrichment.html">OntologyEnrichment</a></span>
+  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-gff3parser.html">GFF3Parser</a></span>
 </p>
 <div class="xmldoc">
-<p>Represents a gene set enrichment result</p>
-
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1238', 1238)" onmouseover="showTip(event, '1238', 1238)">
-            NumberInBin
+          <code onmouseout="hideTip(event, '363', 363)" onmouseover="showTip(event, '363', 363)">
+            addFastaSequence en acc converter
           </code>
-          <div class="tip" id="1238">
-            <strong>Signature:</strong> int<br />
-                      </div>
+          <div class="tip" id="363">
+            <strong>Signature:</strong> en:IEnumerator&lt;string&gt; -&gt; acc:GFF&lt;&#39;a&gt; list -&gt; converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; seq&lt;&#39;?8188&gt;<br />
+                          <strong>Type parameters:</strong> 'a, '?8188          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L27-27" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L105-105" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>If there is a ##FASTA directive, all subsequent lines are taken by this function, transformed to seq<FastA.FastaItem<'a>&gt; and added to the previous parsed GFF<'a> list.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1239', 1239)" onmouseover="showTip(event, '1239', 1239)">
-            NumberOfDEsInBin
+          <code onmouseout="hideTip(event, '364', 364)" onmouseover="showTip(event, '364', 364)">
+            createGFFEntry (...)
           </code>
-          <div class="tip" id="1239">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="364">
+            <strong>Signature:</strong> seqid:string -&gt; source:string -&gt; feature:string -&gt; startPos:string -&gt; endPos:string -&gt; score:string -&gt; strand:string -&gt; phase:string -&gt; attributes:string -&gt; supplement:string -&gt; GFFEntry<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L26-26" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L47-47" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Gets strings of each field and creates a GFFEntry type thereby converting the strings into desired types.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1240', 1240)" onmouseover="showTip(event, '1240', 1240)">
-            OntologyTerm
+          <code onmouseout="hideTip(event, '365', 365)" onmouseover="showTip(event, '365', 365)">
+            GFF3reader fastAconverter filepath
           </code>
-          <div class="tip" id="1240">
-            <strong>Signature:</strong> string<br />
-                      </div>
+          <div class="tip" id="365">
+            <strong>Signature:</strong> fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFF&lt;&#39;a&gt;&gt;<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L25-25" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L119-119" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>reads in a file and gives a GFF<'a> list. If file contains a FastA sequence it is converted to FastA.FastaItem with given converter. (Use 'id' as converter if no FastA is required).</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1241', 1241)" onmouseover="showTip(event, '1241', 1241)">
-            PValue
+          <code onmouseout="hideTip(event, '366', 366)" onmouseover="showTip(event, '366', 366)">
+            GFF3readerWithoutFasta filepath
           </code>
-          <div class="tip" id="1241">
-            <strong>Signature:</strong> float<br />
+          <div class="tip" id="366">
+            <strong>Signature:</strong> filepath:string -&gt; seq&lt;GFF&lt;seq&lt;char&gt;&gt;&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L30-30" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L150-150" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>If no information about Sequence is required or no Fasta is included you can use this function</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1242', 1242)" onmouseover="showTip(event, '1242', 1242)">
-            TotalNumberOfDE
+          <code onmouseout="hideTip(event, '367', 367)" onmouseover="showTip(event, '367', 367)">
+            innerTokenizer attributes
           </code>
-          <div class="tip" id="1242">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="367">
+            <strong>Signature:</strong> attributes:string -&gt; Map&lt;string,string list&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L28-28" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L32-32" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Separates every key-value pair of field 'attributes' at ';'. Seperates key from value at '=' and separates values at ','.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1243', 1243)" onmouseover="showTip(event, '1243', 1243)">
-            TotalUnivers
+          <code onmouseout="hideTip(event, '368', 368)" onmouseover="showTip(event, '368', 368)">
+            parseStrToGFFEntry str
           </code>
-          <div class="tip" id="1243">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="368">
+            <strong>Signature:</strong> str:string -&gt; GFFEntry<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L29-29" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L91-91" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Converts a string into a GFFEntry type. If there are more than 9 fields an additional "supplement" field gets filled. If there are less than 9 only the supplement field gets filled with the string.</p>
+
+
         </td>
       </tr>
     </tbody>
