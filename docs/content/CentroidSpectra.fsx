@@ -23,18 +23,26 @@ open FSharp.Plotly
 let ms1DataTest = 
     Mgf.readMgf (__SOURCE_DIRECTORY__ + "/data/ms1Example.mgf")  
     |> List.head
-
+#time
 /// Returns a tuple of float arrays (mzData[]*intensityData[]) each containing the processed data
-let centroidMS1Spectrum = 
-    SignalDetection.Wavelet.toSNRFilteredCentroid 0.1 99. ms1DataTest.Mass.[0.. 20000] ms1DataTest.Intensity.[0.. 20000]
+for i = 1 to 10 do
+    let centroidMS1Spectrum = 
+        SignalDetection.Wavelet.toCentroidWithRicker2D 3 1. 0.1 50. 95. ms1DataTest.Mass ms1DataTest.Intensity
+    centroidMS1Spectrum |> ignore
 
+fst centroidMS1Spectrum 
+|> Array.length
+let centroidMS1Spectrum2 = 
+    SignalDetection.Wavelet.toCentroidWithRicker2D 10 1. 0.1 50. 95. ms1DataTest.Mass ms1DataTest.Intensity
 (*** define-output:spectrum1 ***)
 /// Creates point charts of the raw and the processed data
 [
     Chart.Point(ms1DataTest.Mass, ms1DataTest.Intensity,Name="raw data");
+    Chart.Point(fst centroidMS1Spectrum2, snd centroidMS1Spectrum2,Name="centroid")
     Chart.Point(fst centroidMS1Spectrum, snd centroidMS1Spectrum,Name="centroid")
 ]
 |> Chart.Combine
+|> Chart.Show
 (*** include-it:spectrum1 ***)
 
 (**

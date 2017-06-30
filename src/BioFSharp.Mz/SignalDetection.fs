@@ -155,8 +155,8 @@ module SignalDetection =
             else
             [|for i = 3 to xData.Length-3 do
                 // Peak must be concave in the interval [i-2 .. i+2] and exheat a min hight (min_dh)
-                if (smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] <= smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
-                    && smoothYData.[i - 1] < smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
+                if (smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] < smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
+                    && smoothYData.[i - 1] <= smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
 
                     // take the intensity at the apex of the profile peak
                     yield (xData.[i], smoothYData.[i])
@@ -168,8 +168,8 @@ module SignalDetection =
             else
             [|for i = 3 to xData.Length-3 do
                 // Peak must be concave in the interval [i-2 .. i+2] and exheat a min hight (min_dh)
-                if (smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] <= smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
-                    && smoothYData.[i - 1] < smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
+                if (smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] < smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
+                    && smoothYData.[i - 1] <= smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
 
                     // take the intensity at the apex of the profile peak
                     yield i
@@ -179,16 +179,17 @@ module SignalDetection =
         let labelPeaks negYThreshold posYThreshold (xData:float[]) (smoothYData:float[]) =
             if xData.Length <= 5 then [||]
             else
-            [|for i = 3 to xData.Length-3 do
-                if (smoothYData.[i] > posYThreshold && smoothYData.[i] > smoothYData.[i - 1] && smoothYData.[i] > smoothYData.[i + 1] 
+            [|for i = 0 to xData.Length-1 do 
+                if i < 3 || i > xData.Length-3 then
+                    yield {Meta=Extrema.None; Data= xData.[i],smoothYData.[i]}
+                                    
+                elif (smoothYData.[i] > posYThreshold && smoothYData.[i] > smoothYData.[i - 1] && smoothYData.[i] > smoothYData.[i + 1] 
                     && smoothYData.[i - 1] >= smoothYData.[i - 2] && smoothYData.[i + 1] >= smoothYData.[i + 2]) then
                     yield {Meta=Extrema.Positive; Data= xData.[i],smoothYData.[i]} //TODO: Typ is tin Peak.fs definiert, creatorFunktion verwenden
 
                 // Peak must be concave in the interval [i-2 .. i+2] and exheat a min hight (min_dh)
-                elif (smoothYData.[i] < negYThreshold && smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] <= smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
-                    && smoothYData.[i - 1] < smoothYData.[i - 2] && smoothYData.[i + 1] <= smoothYData.[i + 2]) then
-
-                    // take the intensity at the apex of the profile peak
+                elif (smoothYData.[i] < negYThreshold && smoothYData.[i] < smoothYData.[i - 1] && smoothYData.[i] < smoothYData.[i + 1]  //smoothYData.[i] > yThreshold
+                    && smoothYData.[i] < smoothYData.[i - 2] && smoothYData.[i] < smoothYData.[i + 2]) then
                     yield {Meta=Extrema.Negative; Data= xData.[i],smoothYData.[i]}
                 else
                     yield {Meta=Extrema.None; Data= xData.[i],smoothYData.[i]}
@@ -232,7 +233,7 @@ module SignalDetection =
     
     module Padding = 
 
-        let paddDataWithZeros (windowSize: int) (mzTol: float) (spacing_perc:float)  (xData: float []) (yData: float []) = 
+        let paddDataWith paddValue (windowSize: int) (mzTol: float) (spacing_perc:float)  (xData: float []) (yData: float []) = 
             //////////////////////////////////////////////////////////////////////////
             //Step 1. Estimate the spacing between adjacent mzPoints (mz- (mz-1))
             let xSpacing = Care.createXspacing xData
@@ -277,7 +278,7 @@ module SignalDetection =
                     if xSpacing.[mzi+1] > mzTol then 
                         paddedData.Add xyData.[mzi]
                         for i = 1 to (int ( xSpacing.[mzi+1] / mzTol ) - 1 )  do
-                            paddedData.Add (xData.[mzi] + ((float i)*mzTol) ,1.)
+                            paddedData.Add (xData.[mzi] + ((float i)*mzTol) ,paddValue)
                     else
                         paddedData.Add xyData.[mzi]
                 else
@@ -294,21 +295,27 @@ module SignalDetection =
 
     module Wavelet =
 
-        // use struct.
+        // TODO use struct.
         type RidgeLine = {
-            Col: int
             Row: int
+            Col: int
             }
+        
+        ///
+        let createRidgeLine row col = {Row=row;Col=col; }
 
-        let createRidgeLine col row = {Col=col; Row=row}
-
-        type peakDetermParameter = {
-            MZTol        : float
-            SNRThreshold : float
+        ///
+        type waveletParameters = {
+            NumberOfScales        : int
+            YThreshold            : float
+            MzTolerance           : float
+            Spacing_Percentile    : float
+            SNRS_Percentile       : float
             }
-    
-        let createPeakDetermParameter mzTol snrThreshold = {
-            MZTol=mzTol; SNRThreshold=snrThreshold
+        
+        ///
+        let createWaveletParameters numberOfScales yThreshold mzTolerance spacing_Percentile sNRS_Percentile = {
+            NumberOfScales=numberOfScales; YThreshold=yThreshold ;MzTolerance=mzTolerance ;Spacing_Percentile=spacing_Percentile ;SNRS_Percentile=sNRS_Percentile
             }
 
         /// Helperfunction to calculate the mz values left and right from the target value which will be included in the computation of 
@@ -341,23 +348,6 @@ module SignalDetection =
                 mzDataPadded.[i] <- mzData.[i-paddingPoints]
                 intensityDataPadded.[i] <- intensityData.[i-paddingPoints]
 
-        ///
-        let ricker2d (mzDataPadded:float []) focusedPaddedMzColIndex nPointsLeft nPointsRight waveletParam1 waveletParam2 focusedPaddedMzValue (waveletData:float []) =  //(PadMz, paddedCol, nPointsLeft, nPointsRight, param1, param2, PadMz[paddedCol], waveletData)
-            let computation cnt i =
-                let vec = mzDataPadded.[i]-focusedPaddedMzValue
-                let tsq = vec*vec
-                let modi = 1. - tsq / waveletParam2
-                let gauss = exp(-1. * tsq / (2.0 *waveletParam2) )
-                waveletData.[cnt] <- waveletParam1 * modi * gauss
-            let rec ricker cnt i = 
-                if i = focusedPaddedMzColIndex+nPointsRight then 
-                     computation cnt i
-                else computation cnt i
-                     ricker (cnt+1) (i+1)
-            if nPointsLeft - nPointsRight >= waveletData.Length 
-                then printfn "invalid input Parameters for ricker2d"
-            ricker 0 (focusedPaddedMzColIndex-nPointsLeft)
-
         /// Helperfunction to get mz back of Columnnumber
         let convertColToMz (mzData: float []) (col: int) =
             let mapIndex = col / 2
@@ -374,7 +364,7 @@ module SignalDetection =
                 let nTot = windowHigh' - windowLow' |> float
                 xSpacingAvg.[mzi] <- ((Care.accumulate windowLow' windowHigh' 0. (+) xspaced) / nTot)
             //////////////////////////////////////////////////////////////////////////
-            //Step 2. Estimate the spacing threshold in bins
+//            Step 2. Estimate the spacing threshold in bins
             let mutable windowSize = 150
             if (windowSize > xSpacingAvg.Length-1) then
                 windowSize <- (xSpacingAvg.Length-1) / 2
@@ -416,7 +406,41 @@ module SignalDetection =
                     getNpointsX mzi i maxMZwindow nPoints mzData
 
         ///
-        let calcCorrWaveletAndDataMatrix nScales paddingPoints (mzDataPadded:float[]) (intensityDataPadded:float[]) (mzData:float[]) (intensityData: float[]) (waveletData:float[]) (nPoints: int[,,]) (xSpacingAvg: float []) (scalings: float []) (corrMatrix: float [,]) = 
+        let ricker2d (mzDataPadded:float []) (waveletData:float []) (centerIdx:int) (nPointsLeft:int) (nPointsRight:int) (focusedPaddedMzValue:float) (width:float) =  //(PadMz, paddedCol, nPointsLeft, nPointsRight, param1, param2, PadMz[paddedCol], waveletData)
+            let computation cnt i =
+                let vec = mzDataPadded.[i]-focusedPaddedMzValue
+                let tsq = vec*vec
+                let modi = 1. - tsq / (width * width)
+                let gauss = exp(-1. * tsq / (2.0 *(width * width)) )
+                waveletData.[cnt] <- (  2.0 / ( sqrt(3.0 * width) * (sqrt(sqrt(3.141519))) ) ) * modi * gauss
+            let rec ricker cnt i = 
+                if i = centerIdx+nPointsRight then 
+                     computation cnt i
+                else computation cnt i
+                     ricker (cnt+1) (i+1)
+            if nPointsLeft - nPointsRight >= waveletData.Length 
+                then printfn "invalid input Parameters for ricker2d"
+            ricker 0 (centerIdx-nPointsLeft)
+            waveletData
+        
+        let ricker2DWithMem (mzDataPadded:float []) (waveletData:float []) (centerIdx:int) (nPointsLeft:int) (nPointsRight:int) (focusedPaddedMzValue:float) (width:float) =  //(PadMz, paddedCol, nPointsLeft, nPointsRight, param1, param2, PadMz[paddedCol], waveletData)
+            let computation cnt i =
+                let vec = mzDataPadded.[i]-focusedPaddedMzValue
+                let tsq = vec*vec
+                let modi = 1. - tsq / (width * width)
+                let gauss = exp(-1. * tsq / (2.0 *(width * width)) )
+                waveletData.[cnt] <- (  2.0 / ( sqrt(3.0 * width) * (sqrt(sqrt(3.141519))) ) ) * modi * gauss
+            let rec ricker cnt i = 
+                if i = centerIdx+nPointsRight then 
+                     computation cnt i
+                else computation cnt i
+                     ricker (cnt+1) (i+1)
+            if nPointsLeft - nPointsRight >= waveletData.Length 
+                then printfn "invalid input Parameters for ricker2d"
+            ricker 0 (centerIdx-nPointsLeft)
+            waveletData         
+        
+        let inline calcCorrWaveletAndDataMatrix (waveletF: float [] -> float [] -> int -> int -> int -> float -> float -> float [])  nScales paddingPoints (mzDataPadded:float[]) (intensityDataPadded:float[]) (mzData:float[]) (intensityData: float[]) (waveletData:float[]) (nPoints: int[,,]) (xSpacingAvg: float []) (scalings: float []) (corrMatrix: float [,]) = 
             for i = 0 to nScales-1 do 
                 let currentscaling = scalings.[i]
                 let mutable matrixIndex = 2 
@@ -426,29 +450,27 @@ module SignalDetection =
                     if nPointsLeft = 0 && nPointsRight = 0 then 
                         matrixIndex <- (matrixIndex+2)
                     else
-                        let targetPaddedCol = targetCol + paddingPoints 
+                        let centerPaddedColIdx = targetCol + paddingPoints 
                         let width = xSpacingAvg.[targetCol]*currentscaling
-                        let waveletParam1 =  2.0 / ( sqrt(3.0 * width) * (sqrt( sqrt(3.141519) ) ) )
-                        let waveletParam2 = width * width
                         // ricker, schreibt in "waveletdata", ein Array dem die Abstände zwischen den punkten zugrunde liegen. 
                         // und gibt die Werte der Waveletfunktion in Abhängigkeit des fokussierten m/z values wieder 
-                        ricker2d mzDataPadded targetPaddedCol nPointsLeft nPointsRight waveletParam1 waveletParam2 mzDataPadded.[targetPaddedCol] waveletData
+                        let correlation = waveletF mzDataPadded waveletData centerPaddedColIdx nPointsLeft nPointsRight mzDataPadded.[centerPaddedColIdx]  width
                         //daraufhin wird die Korrelationsmatrix gefüllt unzwar an der Spalte des aktuellen scalings gepaart mit einem aufsteigenden Index welcher der Nr des m/z values
                         //im Urpsprungs m/z Array entspricht. Dafür wird der "waveletData" Array durchlaufen und mit der Intensität an der entsprechenden Stelle multipliziert, die Summe der Ergebnisse wird in 
                         //die Korrelationsmatrix eingetragen. Es handelt sich um den CWT Koeffizienten
-                        let startpoint = targetPaddedCol - nPointsLeft
+                        let startpoint = centerPaddedColIdx - nPointsLeft
                        
                         for k = 0 to nPointsLeft+nPointsRight do
-                            corrMatrix.[i, matrixIndex] <- (corrMatrix.[i, matrixIndex] +  (waveletData.[k] * intensityDataPadded.[k+startpoint] ) )          
+                            corrMatrix.[i, matrixIndex] <- (corrMatrix.[i, matrixIndex] +  (correlation.[k] * intensityDataPadded.[k+startpoint] ) )          
                         
                         matrixIndex <- matrixIndex+1
 
                         if targetCol < mzData.Length-1 then //falls j = mzData.Length.1 dann ist man am ende des m/z Arrays angekommen und die corrMatrix ist fertig            // falls nicht : Dieser Vorgang wird wiederholt unzwar wird dazu ein waveletdataarray erzeugt, der auf den Punkten zwischen den m/z werden basiert.
-                            let moverzShift =  ( (mzDataPadded.[targetPaddedCol] + mzDataPadded.[targetPaddedCol+1]) / 2.0 )
-                            ricker2d mzDataPadded targetPaddedCol nPointsLeft nPointsRight waveletParam1 waveletParam2 moverzShift waveletData
+                            let moverzShift =  ( (mzDataPadded.[centerPaddedColIdx] + mzDataPadded.[centerPaddedColIdx+1]) / 2.0 )
+                            let correlation = waveletF mzDataPadded waveletData centerPaddedColIdx nPointsLeft nPointsRight moverzShift width
                             
                             for k = 0 to nPointsLeft+nPointsRight do                
-                                corrMatrix.[i, matrixIndex] <- (corrMatrix.[i, matrixIndex] + (waveletData.[k] * intensityDataPadded.[k + startpoint] ) )
+                                corrMatrix.[i, matrixIndex] <- (corrMatrix.[i, matrixIndex] + (correlation.[k] * intensityDataPadded.[k + startpoint] ) )
                             matrixIndex <- matrixIndex+1                           
                 
                 for j = 1 to mzData.Length-2 do 
@@ -467,7 +489,7 @@ module SignalDetection =
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // step 1: find maxima in each column (row = scales, columns = m/z)
             /// contains scaling with the highest correlationvalue for each Column
-            let colMaxes = Array.create (corrMatrixLength) 0 
+            let maxRowofCol = Array.create (corrMatrixLength) 0 
             for i = 0 to corrMatrixLength-1 do 
                 
                 let mutable corrMax = 0.0
@@ -476,7 +498,7 @@ module SignalDetection =
                 
                     if corrMatrix.[j,i] > corrMax then
                         corrMax <- corrMatrix.[j,i]
-                        colMaxes.[i] <- j //Eintrag des scalings mit der höchsten correlation
+                        maxRowofCol.[i] <- j //Eintrag des scalings mit der höchsten correlation
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // step 2, setup bins of 300 points and calculate noise threshold within each bin
@@ -514,18 +536,19 @@ module SignalDetection =
             let findLocalMaxima i = 
                 let mzCol = convertColToMz mzData i //mz Value of Column
                 // get the indices for the lower and upper bounds   
-                let lowBound  = Care.getColLowBound interpolatedXpoints i mzTol
-                let highBound = Care.getColHighBound interpolatedXpoints i mzTol
+                let lowBound  = Care.getColLowBound interpolatedXpoints i (mzTol/2.)
+                let highBound = Care.getColHighBound interpolatedXpoints i (mzTol/2.)
                 // Now all m/z Values in the space between lowBound and highBound get analyzed and 
                 // the Column of the m/z with the  maxCorr is identified
                 let mutable maxCorr = 0.0
                 let mutable maxCol = 0
                 for j = lowBound to highBound do 
-                    let row = colMaxes.[j]
+                    let row = maxRowofCol.[j]
                     if corrMatrix.[row,j] > maxCorr
                         then
                                 maxCorr <- corrMatrix.[row,j]
                                 maxCol <- j
+               
                 let noiseBin = 
                     let tmp = maxCol/windowSize
                     match tmp with
@@ -533,7 +556,8 @@ module SignalDetection =
                     | _ -> tmp    
  
                 let snr = maxCorr / noises.[noiseBin]
-                if snr > minSnr then 
+                let row = maxRowofCol.[maxCol]
+                if snr > minSnr   then // && row > 0
                     let nLines = allLines.Count
                     if ( nLines > 0) then
                         let mzNewLine = convertColToMz mzData maxCol 
@@ -542,12 +566,14 @@ module SignalDetection =
                         let corrPrev = corrMatrix.[allLines.[nLines-1].Row, allLines.[nLines-1].Col]
      
                         if mzDiff > mzTol then 
-                            let newLine = createRidgeLine maxCol colMaxes.[maxCol]
+                            let newLine = createRidgeLine maxRowofCol.[maxCol] maxCol
                             allLines.Add newLine
+
                         elif maxCorr > corrPrev then 
-                            allLines.[allLines.Count-1] <- createRidgeLine maxCol colMaxes.[maxCol]
+                            let newLine = createRidgeLine maxRowofCol.[maxCol] maxCol
+                            allLines.[allLines.Count-1] <- newLine
                     else 
-                        let newLine = createRidgeLine maxCol colMaxes.[maxCol]
+                        let newLine = createRidgeLine maxRowofCol.[maxCol] maxCol
                         allLines.Add newLine
 
             let rec findLocalMaximaLoop i (corrMatrix: float [,]) = 
@@ -555,11 +581,11 @@ module SignalDetection =
                     findLocalMaxima i
                 else                  
                         findLocalMaxima i
-                        let correlationVal = corrMatrix.[colMaxes.[i],i]
-                        if  correlationVal < corrMatrix.[colMaxes.[i-1],i-1] ||
-                            correlationVal < corrMatrix.[colMaxes.[i-2],i-2] ||
-                            correlationVal < corrMatrix.[colMaxes.[i+1],i+1] ||
-                            correlationVal < corrMatrix.[colMaxes.[i+2],i+2] then 
+                        let correlationVal = corrMatrix.[maxRowofCol.[i],i]
+                        if  correlationVal < corrMatrix.[maxRowofCol.[i-1],i-1] ||
+                            correlationVal < corrMatrix.[maxRowofCol.[i-2],i-2] ||
+                            correlationVal < corrMatrix.[maxRowofCol.[i+1],i+1] ||
+                            correlationVal < corrMatrix.[maxRowofCol.[i+2],i+2] then 
                                 findLocalMaximaLoop (i+1) corrMatrix
                         else 
                             findLocalMaxima i
@@ -567,7 +593,7 @@ module SignalDetection =
             findLocalMaximaLoop 2 corrMatrix 
 
         /// 
-        let refinePeaks mzTol (scalings: float[]) (mzData:float []) (intensityData:float [])  (allLines: ResizeArray<RidgeLine>) (xSpacingAvg:float []) =          
+        let refinePeaks yThreshold mzTol (scalings: float[]) (mzData:float []) (intensityData:float [])  (allLines: ResizeArray<RidgeLine>) (xSpacingAvg:float []) =          
             let xPeakValues = ResizeArray<float>()
             let yPeakValues = ResizeArray<float>()
             if allLines.Count = 0 then 
@@ -575,7 +601,7 @@ module SignalDetection =
                 let finalY = yPeakValues |> Seq.toArray
                 finalX, finalY 
             else
-                for i = 1 to allLines.Count-1 do
+                for i = 0 to allLines.Count-1 do
                     let mzCol = convertColToMz mzData allLines.[i].Col 
                     let mzColIdx = allLines.[i].Col  / 2
                     let row = allLines.[i].Row
@@ -594,15 +620,20 @@ module SignalDetection =
                     let mutable intensityAccumulator = 0.0 
                     let mutable maxIntensityMZ = 0.0
                     for j = startFittingPoint to endFittingPoint do 
-                        intensityAccumulator <- intensityAccumulator + intensityData.[j] //is never used, maybe important to determine the spectra intensity?
+                        intensityAccumulator <- intensityAccumulator + intensityData.[j] 
                         if intensityData.[j] >= maxIntensity
                             then
                                 maxIntensity   <- intensityData.[j]
                                 maxIntensityMZ <- mzData.[j]
-
-                    if i>1 && maxIntensityMZ <> xPeakValues.[xPeakValues.Count-1] then //0.1 //(maxIntensityMZ - xPeakValues.[xPeakValues.Count-1] ) <> mzTol
+                    
+                    if i>1 && (maxIntensityMZ - xPeakValues.[xPeakValues.Count-1] ) < mzTol && (maxIntensity > yPeakValues.[xPeakValues.Count-1] ) then 
+                            xPeakValues.[xPeakValues.Count-1] <- maxIntensityMZ
+                            yPeakValues.[yPeakValues.Count-1] <- maxIntensity
+                     
+                    elif i>1 && maxIntensityMZ <> xPeakValues.[xPeakValues.Count-1] && (maxIntensityMZ - xPeakValues.[xPeakValues.Count-1] ) > mzTol && maxIntensityMZ > yThreshold then //0.1 //(maxIntensityMZ - xPeakValues.[xPeakValues.Count-1] ) <> mzTol
                             xPeakValues.Add maxIntensityMZ
                             yPeakValues.Add maxIntensity
+                    
                     elif i=1 then
                             xPeakValues.Add maxIntensityMZ
                             yPeakValues.Add maxIntensity
@@ -613,12 +644,12 @@ module SignalDetection =
                 finalX, finalY                
                 
         /// Returns a MzIntensityArray that containing the spectral centroids of the input spectra. 
-        let toCentroid mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  =
+        let inline toCentroid waveletF nScales yThreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  =
             if mzData.Length < 3 then
                 [||], [||] 
-            else  
+            else
             //FixedParameters
-            let nScales = 10;
+//            let nScales = 10;
             let windowMaxLow = 5
             let windowMaxHigh = 5
             let initialWidthScaling = 1.; 
@@ -650,7 +681,7 @@ module SignalDetection =
             let waveletData = Array.create (paddingPoints) 0.   
             let corrMatrixLength = 2*mzData.Length-1 //almost twice as long because also the correlation for Midpoints will be calculated.
             let corrMatrix = Array2D.create nScales corrMatrixLength 0. 
-            calcCorrWaveletAndDataMatrix nScales paddingPoints mzDataPadded intensityDataPadded mzData intensityData waveletData nPoints xSpacingAvg scalings corrMatrix
+            calcCorrWaveletAndDataMatrix waveletF nScales paddingPoints mzDataPadded intensityDataPadded mzData intensityData waveletData nPoints xSpacingAvg scalings corrMatrix
 
             // Compares the previously selected correlation values of each mz value locally and selects the best scoring point
             let allLines = ResizeArray<RidgeLine>()
@@ -658,55 +689,61 @@ module SignalDetection =
             //
             getSNRFilteredPeakLines snrs_perc mzTol nScales mzData allLines corrMatrix
 
-//            // 
-            refinePeaks mzTol scalings mzData intensityData allLines xSpacingAvg 
+            refinePeaks yThreshold mzTol scalings mzData intensityData allLines xSpacingAvg 
+
+        let inline toCentroidWithRicker2D nScales yYhreshold mzTol spacing_perc snrs_perc (mzData: float []) (intensityData: float [])  = 
+            toCentroid ricker2d nScales yYhreshold mzTol spacing_perc snrs_perc mzData intensityData
 
     module SecondDerivative =
     
-        let toCentroid windowSize mzTol noise_perc (mzData:float []) (intensityData:float []) =
-            if mzData.Length < 3 || intensityData.Length < 3 then [||]
+        let toCentroid windowSizeSNR windowSizeSGfilter mzTol noise_perc (mzData:float []) (intensityData:float []) =
+            if mzData.Length < 5 || intensityData.Length < 5 then [||],[||]
             else
             // Step 1: Calculate negative snd derivative of the intensity Data
             let negSndDev = 
-                Filtering.savitzky_golay windowSize 3 2 5 intensityData 
+                Filtering.savitzky_golay windowSizeSGfilter 3 2 5 intensityData 
                 |> Array.ofSeq
                 |> Array.map (fun x -> x * -1.)
 
-            // Step 2: Calculate noise threshold in snd derivative space; if intensity is negative then 0. is set as a noise level
+            // Step 2: Calculate noise threshold in snd derivative space;
             let minSnr = 1.
-            let nNoiseBins = negSndDev.Length / windowSize + 1 //number of NoiseBins
+            let nNoiseBins = negSndDev.Length / windowSizeSNR + 1 //number of NoiseBins
             let noises = Array.create nNoiseBins 0.0
 
             for i = 0 to nNoiseBins-1 do
-                let windowLow = i * windowSize  // inclusive
-                let mutable windowHigh = windowLow + windowSize 
-                
+                let windowLow = 
+                    match i * windowSizeSNR with 
+                    | x when x = 0 -> 3
+                    | x -> x  // inclusive
+                let mutable windowHigh = 
+                    let windowHigh' = windowLow + windowSizeSNR
+                    if windowHigh' >= negSndDev.Length then 
+                        negSndDev.Length
+                    else
+                        windowHigh'  
                 if i = nNoiseBins-1 
                     then windowHigh <- negSndDev.Length
-                
-                let nTot = windowHigh - windowLow 
+                       
+                let unsortedData = ResizeArray<float>()
 
-                let unsortedData = Array.create nTot 0.0 //nTot ist = windowsize, es sei den die Distanz von windowlow zum array Ende ist größer als windowsize
-                
-                for j = windowLow to windowHigh - 1 do
-                    if negSndDev.[j] > 0. then
-                        unsortedData.[j-windowLow] <- negSndDev.[j]
-                    else
-                        unsortedData.[j-windowLow] <- 0. 
-                    
-                let sortedData = unsortedData |> Array.sort
+                for j = windowLow to windowHigh - 3 do
+                     if (negSndDev.[j] < negSndDev.[j - 1] && negSndDev.[j] < negSndDev.[j + 1] 
+                        && negSndDev.[j - 1] <= negSndDev.[j - 2] && negSndDev.[j + 1] <= negSndDev.[j + 2]) then unsortedData.Add (abs intensityData.[j])
+
+                let nTot = unsortedData.Count
+                let sortedData = unsortedData |> Seq.toArray |> Array.sort
                 let mutable noise = Care.scoreAtPercentile noise_perc nTot sortedData  //calcs Noisethreshold in bin i 
                 if noise < 1.0 then noise <- 1.0
                 noises.[i] <- noise
     
-            // Step 4: find maxima above the noise level
+            // Step 3: find maxima above the noise level
             let filteredPeaks =
                 let filteredPeaks = ResizeArray<(float*float)*int>()
                 negSndDev
                 |> (Care.localMaximaIdx 0. mzData) 
                 |> Array.iter (fun i -> 
                                 let noiseBin = 
-                                    let tmp = i/windowSize
+                                    let tmp = i/windowSizeSNR
                                     match tmp with
                                     | tmp when tmp > nNoiseBins-1 -> nNoiseBins-1 
                                     | _ -> tmp
@@ -717,7 +754,7 @@ module SignalDetection =
                 filteredPeaks
                 |> Array.ofSeq
 
-            // Step 5: refine Peak positions to real maxima
+            // Step 4: refine Peak positions to real maxima
             let refinedCentroids = 
                 let refCentroids = ResizeArray<float*float>()
                 filteredPeaks
@@ -734,18 +771,28 @@ module SignalDetection =
                                                 maxIntensity   <- intensityData.[j]
                                                 maxIntensityMZ <- mzData.[j] 
                                     let refCentLength = refCentroids.Count    
+
                                     if refCentLength = 0 then 
                                         refCentroids.Add (maxIntensityMZ, maxIntensity)
-                                    elif fst refCentroids.[refCentLength-1] - maxIntensityMZ < mzTol && snd refCentroids.[refCentLength-1] < maxIntensity then
-                                         refCentroids.[refCentLength-1] <- (maxIntensityMZ, maxIntensity)
-                                    else
+
+                                    elif maxIntensityMZ - fst refCentroids.[refCentLength-1] >= mzTol then
                                          refCentroids.Add (maxIntensityMZ, maxIntensity) 
+
+                                    elif  maxIntensityMZ - fst refCentroids.[refCentLength-1] <= mzTol && snd refCentroids.[refCentLength-1] < maxIntensity then
+                                         refCentroids.[refCentLength-1] <- (maxIntensityMZ, maxIntensity)
                                )
         
-                refCentroids
-                |> Array.ofSeq
+                let nTotFinal = refCentroids.Count
+                let xDataPadded = Array.zeroCreate nTotFinal
+                let yDataPadded = Array.zeroCreate nTotFinal 
+                refCentroids 
+                |> Seq.iteri (fun i (x,y) -> 
+                                xDataPadded.[i] <- x
+                                yDataPadded.[i] <- y
+                                )  
+                xDataPadded, yDataPadded   
             refinedCentroids
-
+            
     /// Returns mzIntensityArray after noise reduction 
     let filterByIntensitySNR perc minSnr (mzData: float []) (intensityData:float [])  = 
         let noise = Care.scoreAtPercentile perc (intensityData.Length-1) intensityData 

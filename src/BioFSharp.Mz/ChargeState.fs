@@ -61,6 +61,7 @@ module ChargeState =
     let createTestedItem testedObject pValue = {
         TestedObject=testedObject; PValue=pValue }
     
+    //TODO add to SignalDetection
     /// Returns Index of the highestPeak flanking a given mzValue
     let idxOfHighestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
         let idxHigh = 
@@ -80,8 +81,11 @@ module ChargeState =
                  idxLow.Value
             else idxHigh.Value
                 
+    /// TODO refactor to SignalDetection 
     /// Returns Index of the highestPeak flanking a given mzValue
     let idxOfClosestPeakBy (mzData: float []) (intensityData: float []) mzValue = 
+        if mzData |> Array.isEmpty then 0
+        else
         mzData 
         |> Array.mapi (fun i x -> abs (x - mzValue), i) // faster as binary search
         |> Array.minBy (fun (value,idx) -> value)
@@ -218,7 +222,7 @@ module ChargeState =
 
     /// Returns the empirically determined PValue. The PValue is the quotient of simulated mzChargeDeviations lower than the mzChargeDeviation
     /// observed divided by their total number
-    let empiricalPValueOf distribution (nrOfPeaksInSubSet,charge) score  = //TODO nrOfPeaks,charge score in parameter
+    let empiricalRightPValueOf distribution score  = //TODO nrOfPeaks,charge score in parameter
         let numerator =  (distribution |> Array.tryFindIndex (fun x -> x > score)) 
         match numerator with
         | Some x -> (float x) / float distribution.Length
@@ -226,6 +230,8 @@ module ChargeState =
 
     /// Returns list of putative precursorChargeStates along with Properties used for evaluation.
     let putativePrecursorChargeStatesBy (chargeDeterminationParams: ChargeDetermParams) (mzData: float []) (intensityData: float []) (precursorMZ:float) =
+        if mzData |> Array.isEmpty || intensityData |> Array.isEmpty then []
+        else
         let (startPeakIntensity,originSet) = getRelPeakPosInWindowBy (mzData: float []) (intensityData: float [])  chargeDeterminationParams.Width chargeDeterminationParams.MinIntensity chargeDeterminationParams.DeltaMinIntensity (idxOfClosestPeakBy  (mzData: float []) (intensityData: float [])  precursorMZ)
         originSet
         |> powerSetOf 
