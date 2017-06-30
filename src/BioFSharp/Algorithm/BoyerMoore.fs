@@ -1,15 +1,15 @@
 /// The effectiveness rises with longer patterns
 
-namespace BioFSharp.Algorithm
+namespace BoyerMooreStringSearchAlgorithm 
 
 module BoyerMoore=
 
     // <summary>
-    /// Creates N(j) that is needed for the good suffix rule
+    /// Creates N(j) that is needed for the good suffix rule.
     // <summary>
     //
     /// <param name="searchString" >array of 'a/param>
-    /// <returns> an array containing the strong suffix ruel values </returns> 
+    /// <returns> an array containing the strong suffix rule values </returns> 
     let suffixes (searchString:array<'a>) =
         let length = searchString.Length
         let suffixes = Array.zeroCreate length
@@ -38,7 +38,7 @@ module BoyerMoore=
 
 
     // <summary>
-    /// Creates an array containing the shiftig values created by using the good suffix heuristics
+    /// Creates an array containing the shiftig values created by using the good suffix heuristics.
     // <summary>
     //
     /// <param name="suffixes" >array of int</param>
@@ -70,7 +70,7 @@ module BoyerMoore=
         lastchanges 0
 
     // <summary>
-    /// Creates an array for any values containing the shiftig values created by using the bad character rule
+    /// Creates an array for any values containing the shiftig values created by using the bad character rule.
     // <summary>
     //
     /// <param name="pattern" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
@@ -85,7 +85,7 @@ module BoyerMoore=
 
 
     // <summary>
-    /// Retruns a list with the beginning positions of the searched pattern 
+    /// Retruns a list with the beginning positions of the searched pattern. 
     // <summary>
     //
     /// <param name="source" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
@@ -122,34 +122,21 @@ module BoyerMoore=
                 (-1) 
         findMatches is (query.Length-1) 
         
+
     // <summary>
-    /// Finds the first occurence of a pattern in a string that is found behind the given index
+    /// Finds the first occurence of a pattern in a string that is found behind the given index.
     // <summary>
     //
     /// <param name="source" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
     /// <param name="query" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
     /// <param name="startindex" >int</param>
     /// <returns> the first position of a pattern in a source that is found after behind the given index</returns>  
-    let inline findFrom startindex (source:array<'a> when 'a : (static member op_Explicit :  'a -> int)) (query:array<'a> when 'a : (static member op_Explicit :  'a -> int))  =
-        let badCharPattern =  getBadCharacterShift query 
-        let goodCharPattern = getGoodSuffixShift (suffixes query) query
-        searchBoyerMoore badCharPattern goodCharPattern (startindex+(query.Length-1)) source query
-
-
-    // <summary>
-    /// Finds the first occurence of a pattern in a string that is found behind the given index
-    // <summary>
-    //
-    /// <param name="source" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
-    /// <param name="query" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
-    /// <param name="startindex" >int</param>
-    /// <returns> the first position of a pattern in a source that is found after behind the given index</returns>  
-    let inline private findFrom1 badCharPattern goodCharPattern startindex (source:array<'a> when 'a : (static member op_Explicit :  'a -> int)) (query:array<'a> when 'a : (static member op_Explicit :  'a -> int))  =
+    let inline findFrom badCharPattern goodCharPattern startindex (source:array<'a> when 'a : (static member op_Explicit :  'a -> int)) (query:array<'a> when 'a : (static member op_Explicit :  'a -> int))  =
         searchBoyerMoore badCharPattern goodCharPattern (startindex+(query.Length-1)) source query
     
 
     // <summary>
-    /// Finds the first occurence of a pattern in a string
+    /// Finds the first occurence of a pattern in a string.
     // <summary>
     //
     /// <param name="source" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
@@ -158,11 +145,11 @@ module BoyerMoore=
     let inline findFirst (source:array<'a> when 'a : (static member op_Explicit :  'a -> int)) (query:array<'a> when 'a : (static member op_Explicit :  'a -> int) ) = 
         let badCharPattern =  getBadCharacterShift query 
         let goodCharPattern = getGoodSuffixShift (suffixes query) query
-        findFrom1 badCharPattern goodCharPattern 0 source query 
+        findFrom badCharPattern goodCharPattern 0 source query 
  
 
     // <summary>
-    /// Finds all occurences of a pattern in a string
+    /// Finds all occurences of a pattern in a string.
     // <summary>
     //
     /// <param name="source" >array of 'a when 'a : (static member op_Explicit :  'a -> int)</param>
@@ -171,7 +158,7 @@ module BoyerMoore=
     let inline findAll (source:array<'a> when 'a : (static member op_Explicit :  'a -> int) ) (query:array<'a> when 'a : (static member op_Explicit :  'a -> int) ) = 
         let badCharPattern =  getBadCharacterShift query 
         let goodCharPattern = getGoodSuffixShift (suffixes query) query
-        let currentElements startindex = findFrom1 badCharPattern goodCharPattern startindex source query  
+        let currentElements startindex = findFrom badCharPattern goodCharPattern startindex source query  
         let rec findAll is indices =
             if is < source.Length then
                 let current = currentElements is
@@ -183,5 +170,4 @@ module BoyerMoore=
             else
                 indices 
         findAll 0 []
-
 
