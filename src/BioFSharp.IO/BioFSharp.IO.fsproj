@@ -55,6 +55,7 @@
     <Compile Include="Mgf.fs" />
     <Compile Include="Obo.fs" />
     <Compile Include="OrthoMCL.fs" />
+    <Compile Include="FastQ.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
