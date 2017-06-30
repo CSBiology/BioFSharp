@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CP - BioFSharp</title>
+    <title>BoyerMoore - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,14 +37,11 @@
 
 
 
-<h1>CP</h1>
+<h1>BoyerMoore</h1>
 <p>
   <span>Namespace: BioFSharp.Algorithm</span><br />
-  <span>Parent Module: <a href="biofsharp-algorithm-rabinkarp.html">RabinKarp</a></span>
 </p>
 <div class="xmldoc">
-<p>A collection of Rabin-Karp string matching algorithms using the cyclic polynomial (CP) hash</p>
-
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -58,99 +55,95 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '327', 327)" onmouseover="showTip(event, '327', 327)">
-            addToHashValue hs inchar
+          <code onmouseout="hideTip(event, '298', 298)" onmouseover="showTip(event, '298', 298)">
+            findAll source query
           </code>
-          <div class="tip" id="327">
-            <strong>Signature:</strong> hs:uint64 -&gt; inchar:^?7957 -&gt; uint64<br />
-                          <strong>Type parameters:</strong> ^?7957          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L153-153" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>adds a hashvalue to an existing hashvalue</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '328', 328)" onmouseover="showTip(event, '328', 328)">
-            blockHash pattern
-          </code>
-          <div class="tip" id="328">
-            <strong>Signature:</strong> pattern:^a array -&gt; uint64<br />
+          <div class="tip" id="298">
+            <strong>Signature:</strong> source:^a array -&gt; query:^a array -&gt; int list<br />
                           <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L158-158" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L158-158" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>hashes a pattern</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '329', 329)" onmouseover="showTip(event, '329', 329)">
-            find pattern s
+          <code onmouseout="hideTip(event, '299', 299)" onmouseover="showTip(event, '299', 299)">
+            findFirst source query
           </code>
-          <div class="tip" id="329">
-            <strong>Signature:</strong> pattern:^a array -&gt; s:^a array -&gt; int<br />
+          <div class="tip" id="299">
+            <strong>Signature:</strong> source:^a array -&gt; query:^a array -&gt; int<br />
                           <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L185-185" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L145-145" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>find the first match of a query pattern in a source</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '330', 330)" onmouseover="showTip(event, '330', 330)">
-            findAll pattern s
+          <code onmouseout="hideTip(event, '300', 300)" onmouseover="showTip(event, '300', 300)">
+            findFrom (...)
           </code>
-          <div class="tip" id="330">
-            <strong>Signature:</strong> pattern:^a array -&gt; s:^a array -&gt; int list<br />
+          <div class="tip" id="300">
+            <strong>Signature:</strong> badCharPattern:int array -&gt; goodCharPattern:int array -&gt; startindex:int -&gt; source:^a array -&gt; query:^a array -&gt; int<br />
                           <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L175-175" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L134-134" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>find all matches of a query pattern in a source</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '331', 331)" onmouseover="showTip(event, '331', 331)">
-            findFrom startPos pattern s
+          <code onmouseout="hideTip(event, '301', 301)" onmouseover="showTip(event, '301', 301)">
+            getBadCharacterShift pattern
           </code>
-          <div class="tip" id="331">
-            <strong>Signature:</strong> startPos:int -&gt; pattern:^a array -&gt; s:^a array -&gt; int<br />
+          <div class="tip" id="301">
+            <strong>Signature:</strong> pattern:^a array -&gt; int []<br />
                           <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L180-180" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L79-79" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>find the first match of a query pattern in a source starting from a specific position in the source</p>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '302', 302)" onmouseover="showTip(event, '302', 302)">
+            getGoodSuffixShift suffixes searchString
+          </code>
+          <div class="tip" id="302">
+            <strong>Signature:</strong> suffixes:int [] -&gt; searchString:&#39;a array -&gt; int []<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L48-48" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates an array containing the shiftig values created by using the good suffix heuristics.
+<param name="suffixes" >array of int</param>
+<param name="searchString" >array of 'a</param>
+<remarks>Shifting distance becomes 1 if the bad character rule and the matchcount returns 0</remarks>
+<returns> an array containing the shiftig values created by using the good suffix heuristics </returns></p>
 
 
         </td>
@@ -158,39 +151,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '332', 332)" onmouseover="showTip(event, '332', 332)">
-            rotateLeft r x
+          <code onmouseout="hideTip(event, '303', 303)" onmouseover="showTip(event, '303', 303)">
+            searchBoyerMoore (...)
           </code>
-          <div class="tip" id="332">
-            <strong>Signature:</strong> r:int32 -&gt; x:^?7955 -&gt; ^?7955<br />
-                          <strong>Type parameters:</strong> ^?7955          </div>
+          <div class="tip" id="303">
+            <strong>Signature:</strong> badCharPattern:int array -&gt; goodCharPattern:int array -&gt; is:int -&gt; source:^a array -&gt; query:^a array -&gt; int<br />
+                          <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L149-149" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L96-96" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>bitwise cyclic rotation of a 64 bit pattern</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '333', 333)" onmouseover="showTip(event, '333', 333)">
-            updateHash pLength hs inchar outchar
+          <code onmouseout="hideTip(event, '304', 304)" onmouseover="showTip(event, '304', 304)">
+            suffixes searchString
           </code>
-          <div class="tip" id="333">
-            <strong>Signature:</strong> pLength:int32 -&gt; hs:uint64 -&gt; inchar:^?7961 -&gt; outchar:^?7962 -&gt; uint64<br />
-                          <strong>Type parameters:</strong> ^?7961, ^?7962          </div>
+          <div class="tip" id="304">
+            <strong>Signature:</strong> searchString:&#39;a array -&gt; int []<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PatternQuery.fs#L169-169" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L13-13" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>updates an existing hashvalue</p>
+          <p>Creates N(j) that is needed for the good suffix rule.
+<param name="searchString" >array of 'a/param&gt;
+<returns> an array containing the strong suffix rule values </returns></p>
 
 
         </td>
