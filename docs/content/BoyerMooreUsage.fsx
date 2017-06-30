@@ -15,7 +15,7 @@ open BioFSharp.Algorithm.BoyerMoore
 (**
 Introducing the Boyer Moore string search algorithm
 ===================================================
-This part of the documentation gives a short introduction into the Boyer Moore string search algorithm which is particulary desined to work on IBioItems.This algorithm searches a query within a longer source. In using two arrays that are created using the bad character rule and the good suffix heuristics the best shifting value is determined. This accounts for higher shifts which prevents unnecessary comparisons which saves time.
+This part of the documentation gives a short introduction into the Boyer Moore string search algorithm which is particulary desined to work on IBioItems.This algorithm searches a query within a longer source. In using two arrays that are created using the bad character rule and the good suffix heuristics the best shifting value is determined. This accounts for higher shifts which prevents unnecessary comparisons to save time.
 *)
 
 

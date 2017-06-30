@@ -80,9 +80,9 @@
     <Compile Include="AminoProperties.fs" />
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
-    <Compile Include="Algorithm\ScoringMatrix.fs" />
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />
+    <Compile Include="Algorithm\ScoringMatrix.fs" />
     <Resource Include="Resources\BLOSUM45.txt" />
     <EmbeddedResource Include="Resources\BLOSUM50.txt" />
     <EmbeddedResource Include="Resources\BLOSUM80.txt" />
