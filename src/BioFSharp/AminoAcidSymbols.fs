@@ -72,7 +72,7 @@ module AminoAcidSymbols =
         /// *  *Termination
         static member Ter = AminoAcidSymbol (byte '*')
 
-        //static member inline op_Explicit (value) = AminoAcidSymbol(byte value)
+        static member op_Explicit (value) = AminoAcidSymbol(byte value)
         static member op_Explicit (value:AminoAcidSymbol) : byte = value.Value
         static member op_Explicit (value:AminoAcidSymbol) : int = int value.Value
 
@@ -175,8 +175,8 @@ module AminoAcidSymbols =
                     | _ -> failwithf "Not an amino acid symbol"
                 
                 name this
-
-
+    // Conversion operators
+    let inline aminoAcidSymbol a = AminoAcidSymbol.op_Explicit(int a)
 
     let inline parseChar (c:char) =
         match System.Char.ToUpper c with                                    

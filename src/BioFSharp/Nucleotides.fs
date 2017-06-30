@@ -46,7 +46,7 @@ module Nucleotides =
     | D
     /// H : A or C or U = not G
     | H
-    /// V : G or V or A = not T/U
+    /// V : G or C or A = not T/U
     | V
 
     // 'Ambiguous Nucleotide Codes
@@ -220,7 +220,7 @@ module Nucleotides =
                         
                     name this               
 
-
+        //static member op_Explicit (value) = (byte value)
         static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol
         static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 
@@ -501,10 +501,10 @@ module Nucleotides =
 
 
 
-    /// Properties of a nucleatide like formula, name, symbole, but also Physicochemical features
-    module Properties = 
-        
-        let a = 42
+//    /// Properties of a nucleatide like formula, name, symbole, but also Physicochemical features
+//    module Properties = 
+//        
+//        let a = 42
             
 
 

@@ -53,11 +53,11 @@ type IonTypes =
     | Unknown 
     | Precursor 
     | Immonium
-    | Main          of IonSeries
-    | LossH20       of IonSeries
-    | LossNH3       of IonSeries
-    | NeutralLoss   of IonSeries
-    | Diagnostic    of IonSeries
+    | Main         of IonSeries
+    | LossH20      of IonSeries
+    | LossNH3      of IonSeries
+    | NeutralLoss  of IonSeries
+    | Diagnostic   of IonSeries
 
 type Tag<'t,'v> = {
     Meta : 't

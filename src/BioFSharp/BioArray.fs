@@ -139,6 +139,26 @@ module BioArray =
         input
         |> Array.iter (fun a ->                         
                             let index = (int (BioItem.symbol a)) - 65
-                            compVec.[index] <- compVec.[index] + 1)
+                            if index >= 0 then compVec.[index] <- compVec.[index] + 1)
         compVec    
+
+
+    let initSampleBy (rnd:System.Random) (compositionVector:int[]) =
+        if compositionVector.Length < 26 then failwith "Amino acid composition vector must have length 26 "
+        let normalize (arr:int[]) =
+            let sum = arr |> Array.sum |> float
+            arr |> Array.map (fun x -> float x / sum)
+        let tmp =
+            compositionVector
+            |> normalize
+            |> Array.mapi (fun i x -> i,x)
+            |> Array.sortBy snd
+        let indexArr = tmp |> Array.map fst 
+        let valueArr = tmp |> Array.map snd |> Array.scan (fun s v -> s + v) 0.0 |> Array.tail
+        fun () ->
+            let rndv =  rnd.NextDouble()
+            match Array.tryFindIndex (fun x -> x > rndv) valueArr with
+            | Some index -> 
+                indexArr.[index] + 65 |> AminoAcidSymbols.aminoAcidSymbol
+            | None -> AminoAcidSymbols.AminoAcidSymbol.Gap
 
