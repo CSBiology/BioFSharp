@@ -36,10 +36,10 @@
         <div class="span9" id="main">
           
 <h1><a name="Introducing-BlastWrapper" class="anchor" href="#Introducing-BlastWrapper">Introducing BlastWrapper</a></h1>
-<p>BlastWrapper is a tool for performing different tasks and in NCBI BLAST console applications (version 2.2.31+).
-It is able to create BLAST databases and perform blastN or blastP algorithms, while providing a way to set
-any output parameter for creating a custom output format.
-Official documentation for all BLAST applications can be found [here] (<a href="http://www.ncbi.nlm.nih.gov/books/NBK279690).">http://www.ncbi.nlm.nih.gov/books/NBK279690).</a></p>
+<p>BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
+It is able to create BLAST databases and perform <strong>blastN</strong> or <strong>blastP</strong> queries, while providing a way to set
+output parameter for creating a custom output format.
+Official documentation for all BLAST applications can be found <a href="http://www.ncbi.nlm.nih.gov/books/NBK279690">here</a>.</p>
 <p>For the purpose of this tutorial, we will build a protein database using a <code>.fastA</code> file containing chloroplast proteins
 of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data.</p>
 <p>Our query protein for the subsequent BLAST search will be the <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta">photosystem II protein D1</a> from Arabidopsis thaliana chloroplast.</p>
@@ -91,9 +91,9 @@ for every other parameter.</p>
 </tr>
 </table>
 <p>This creates 3 new files in our directory:
-<code>Chlamy_Cp.fastA.phr</code>,<code>Chlamy_Cp.fastA.pin</code> and <code>Chlamy_Cp.fastA.psq</code>.
-We have sucesssfully created our search database.</p>
-<h2><a name="Creating-a-file-from-an-aminoacid-string" class="anchor" href="#Creating-a-file-from-an-aminoacid-string">Creating a <code>.fastA</code> file from an aminoacid string</a></h2>
+<code>Chlamy_Cp.fastA.phr</code>,<code>Chlamy_Cp.fastA.pin</code> and <code>Chlamy_Cp.fastA.psq</code>.</p>
+<p>We have sucesssfully created our search database.</p>
+<h2><a name="Creating-a-fastA-file-from-an-aminoacid-string" class="anchor" href="#Creating-a-fastA-file-from-an-aminoacid-string">Creating a .fastA file from an aminoacid string</a></h2>
 <p><em>Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3.</em></p>
 <p>First, lets specify a string with our aminoacid sequence and convert it to a <code>BioSeq</code>.
 For more information about <code>BioSeq</code>, please refer to this <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html">documentation</a></p>
@@ -117,7 +117,7 @@ For more information about <code>BioSeq</code>, please refer to this <a href="ht
 <span class="s">FSAMHGSLVTSSLIRETTENESANEGYRFGQEEETYNIVAAHGYFGRLIFQYASFNNSRSLHFFLAAWPV</span>
 <span class="s">VGIWFTALGISTMAFNLNGFNFNQSVVDSQGRVINTWADIINRANLGMEVMHERNAHNFPLDLAAVEAPS</span>
 <span class="s">TNG&quot;</span>
-<span class="c">///header for the `.fastA` file</span>
+<span class="c">///header for the .fastA file</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="i">header</span> <span class="o">=</span> <span class="s">&quot;&gt;gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]&quot;</span>
 
 <span class="c">///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp&#39;s `BioItems`</span>
@@ -149,12 +149,12 @@ to the one letter symbol (eg. Met -&gt; M)</p>
 </tr>
 </table>
 <h2><a name="Performing-the-BLAST-search" class="anchor" href="#Performing-the-BLAST-search">Performing the BLAST search</a></h2>
-<p>We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
-<em>Note: custom output formats can only be specified for output types <code>CSV</code>, <code>tabular</code> and <code>tabular with comments</code>. For more information, check
+<p>We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.</p>
+<p><em>Note: custom output formats can only be specified for output types <code>CSV</code>, <code>tabular</code> and <code>tabular with comments</code>. For more information, check
 the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">options for the command-line applicaions</a></em></p>
 <p>First, lets specify the overall output type. This will define the outline of our output. We want our output to be in tabular form, with added information
-in the form of comments.
-<em>Note: when not specified, the output type will be <code>pairwise</code></em></p>
+in the form of comments.</p>
+<p><em>Note: when not specified otherwise, the output type will be <code>pairwise</code></em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -164,43 +164,61 @@ in the form of comments.
 </tr>
 </table>
 <p>We have a large selection of parameters that we can include in the output.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-<span class="l">8: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///a sequence of custom output format parameters</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">outputFormat</span><span class="o">=</span> 
     
-    [   <span onmouseout="hideTip(event, 'fs3', 43)" onmouseover="showTip(event, 'fs3', 43)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 44)" onmouseover="showTip(event, 'fs4', 44)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 46)" onmouseover="showTip(event, 'fs30', 46)" class="p">Query_SeqId</span>; <span onmouseout="hideTip(event, 'fs3', 47)" onmouseover="showTip(event, 'fs3', 47)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 48)" onmouseover="showTip(event, 'fs4', 48)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 50)" onmouseover="showTip(event, 'fs31', 50)" class="p">Subject_SeqId</span>;<span onmouseout="hideTip(event, 'fs3', 51)" onmouseover="showTip(event, 'fs3', 51)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 52)" onmouseover="showTip(event, 'fs4', 52)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 54)" onmouseover="showTip(event, 'fs32', 54)" class="p">Query_Length</span>;
-        <span onmouseout="hideTip(event, 'fs3', 55)" onmouseover="showTip(event, 'fs3', 55)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 56)" onmouseover="showTip(event, 'fs4', 56)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 57)" onmouseover="showTip(event, 'fs29', 57)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 58)" onmouseover="showTip(event, 'fs33', 58)" class="p">Subject_Length</span>;<span onmouseout="hideTip(event, 'fs3', 59)" onmouseover="showTip(event, 'fs3', 59)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 60)" onmouseover="showTip(event, 'fs4', 60)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 62)" onmouseover="showTip(event, 'fs34', 62)" class="p">AlignmentLength</span>;<span onmouseout="hideTip(event, 'fs3', 63)" onmouseover="showTip(event, 'fs3', 63)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 64)" onmouseover="showTip(event, 'fs4', 64)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 65)" onmouseover="showTip(event, 'fs29', 65)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 66)" onmouseover="showTip(event, 'fs35', 66)" class="p">MismatchCount</span>;
-        <span onmouseout="hideTip(event, 'fs3', 67)" onmouseover="showTip(event, 'fs3', 67)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 68)" onmouseover="showTip(event, 'fs4', 68)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 69)" onmouseover="showTip(event, 'fs29', 69)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 70)" onmouseover="showTip(event, 'fs36', 70)" class="p">IdentityCount</span>;<span onmouseout="hideTip(event, 'fs3', 71)" onmouseover="showTip(event, 'fs3', 71)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 72)" onmouseover="showTip(event, 'fs4', 72)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 73)" onmouseover="showTip(event, 'fs29', 73)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 74)" onmouseover="showTip(event, 'fs37', 74)" class="p">PositiveScoringMatchCount</span>;<span onmouseout="hideTip(event, 'fs3', 75)" onmouseover="showTip(event, 'fs3', 75)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 76)" onmouseover="showTip(event, 'fs4', 76)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 77)" onmouseover="showTip(event, 'fs29', 77)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 78)" onmouseover="showTip(event, 'fs38', 78)" class="p">Evalue</span>;
-        <span onmouseout="hideTip(event, 'fs3', 79)" onmouseover="showTip(event, 'fs3', 79)" class="t">BlastNCBI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 80)" onmouseover="showTip(event, 'fs4', 80)" class="t">Parameters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 81)" onmouseover="showTip(event, 'fs29', 81)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 82)" onmouseover="showTip(event, 'fs39', 82)" class="p">Bitscore</span>;
-    ] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 83)" onmouseover="showTip(event, 'fs40', 83)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 84)" onmouseover="showTip(event, 'fs41', 84)" class="f">toSeq</span>
+    [   
+        <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="p">Query_SeqId</span>; 
+        <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="p">Subject_SeqId</span>;
+        <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 48)" onmouseover="showTip(event, 'fs32', 48)" class="p">Query_Length</span>;
+        <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="p">Subject_Length</span>;
+        <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="p">AlignmentLength</span>;
+        <span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="p">MismatchCount</span>;
+        <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="p">IdentityCount</span>;
+        <span onmouseout="hideTip(event, 'fs29', 57)" onmouseover="showTip(event, 'fs29', 57)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="p">PositiveScoringMatchCount</span>;
+        <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="p">Evalue</span>;
+        <span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 62)" onmouseover="showTip(event, 'fs39', 62)" class="p">Bitscore</span>;
+    ] 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 64)" onmouseover="showTip(event, 'fs41', 64)" class="f">toSeq</span>
 </code></pre></td>
 </tr>
 </table>
-<p>Finally, we create a <code>BlastParam</code> of the type <code>OutputTypeCustom</code> from a touple of <code>outputType</code> and <code>outputFormat</code>.
-_Note: No touple required if you want to use the default output format. If this is the case,
-just create a <code>BlastParam</code> of type <code>OutputType</code>.</p>
+<p>Finally, we create a <code>BlastParam</code> of the type <code>OutputTypeCustom</code> from a touple of <code>outputType</code> and <code>outputFormat</code>.</p>
+<p><em>Note: No touple required if you want to use the default output format. If this is the case,
+just create a <code>BlastParam</code> of type <code>OutputType</code>.</em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///The final output format</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 85)" onmouseover="showTip(event, 'fs42', 85)" class="i">customOutputFormat</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 86)" onmouseover="showTip(event, 'fs43', 86)" class="p">OutputTypeCustom</span>(<span onmouseout="hideTip(event, 'fs25', 87)" onmouseover="showTip(event, 'fs25', 87)" class="i">outputType</span> , <span onmouseout="hideTip(event, 'fs28', 88)" onmouseover="showTip(event, 'fs28', 88)" class="i">outputFormat</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 65)" onmouseover="showTip(event, 'fs42', 65)" class="i">customOutputFormat</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 66)" onmouseover="showTip(event, 'fs43', 66)" class="p">OutputTypeCustom</span>(<span onmouseout="hideTip(event, 'fs25', 67)" onmouseover="showTip(event, 'fs25', 67)" class="i">outputType</span> , <span onmouseout="hideTip(event, 'fs28', 68)" onmouseover="showTip(event, 'fs28', 68)" class="i">outputFormat</span>)
 </code></pre></td>
 </tr>
 </table>
-<p>We now have everything set up to perform the BLAST search. As we are talking about proteins, we will use blastP. The parameters needed for the Wrapper function are:
-- path of the ncbi/bin folder
-- path and name of the search database
-- path and name of the query
-- path and name of our output file
-- a sequence of BLAST parameters, containing any parameters additional to the above (like our customOutputFormat)</p>
+<p>We now have everything set up to perform the BLAST search. As we are talking about proteins, we will use blastP. The parameters needed for the Wrapper function are:</p>
+<ul>
+<li>path of the ncbi/bin folder</li>
+<li>path and name of the search database</li>
+<li>path and name of the query</li>
+<li>path and name of our output file</li>
+<li>a sequence of BLAST parameters, containing any parameters additional to the above (like our customOutputFormat)</li>
+</ul>
 <p><em>Note: in this case we can use the string <code>inputFile</code> that we used above for creating our database, as we did not specify another path or name for our database. Adjust accordingly if
 done otherwise</em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -209,9 +227,9 @@ done otherwise</em></p>
 <span class="l">4: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///output file of the BLAST search</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 89)" onmouseover="showTip(event, 'fs44', 89)" class="i">outputPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Output.txt&quot;</span>) 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="i">outputPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Output.txt&quot;</span>) 
 
-<span onmouseout="hideTip(event, 'fs11', 90)" onmouseover="showTip(event, 'fs11', 90)" class="t">BlastWrapper</span>(<span onmouseout="hideTip(event, 'fs10', 91)" onmouseover="showTip(event, 'fs10', 91)" class="i">ncbiPath</span>)<span class="o">.</span><span class="f">blastP</span> <span onmouseout="hideTip(event, 'fs5', 92)" onmouseover="showTip(event, 'fs5', 92)" class="i">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 93)" onmouseover="showTip(event, 'fs18', 93)" class="i">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs44', 94)" onmouseover="showTip(event, 'fs44', 94)" class="i">outputPath</span> ([<span onmouseout="hideTip(event, 'fs42', 95)" onmouseover="showTip(event, 'fs42', 95)" class="i">customOutputFormat</span>;] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 96)" onmouseover="showTip(event, 'fs12', 96)" class="i">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs45', 97)" onmouseover="showTip(event, 'fs45', 97)" class="t">BlastParams</span><span class="o">&gt;</span>)
+<span onmouseout="hideTip(event, 'fs11', 70)" onmouseover="showTip(event, 'fs11', 70)" class="t">BlastWrapper</span>(<span onmouseout="hideTip(event, 'fs10', 71)" onmouseover="showTip(event, 'fs10', 71)" class="i">ncbiPath</span>)<span class="o">.</span><span class="f">blastP</span> <span onmouseout="hideTip(event, 'fs5', 72)" onmouseover="showTip(event, 'fs5', 72)" class="i">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 73)" onmouseover="showTip(event, 'fs18', 73)" class="i">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs44', 74)" onmouseover="showTip(event, 'fs44', 74)" class="i">outputPath</span> ([<span onmouseout="hideTip(event, 'fs42', 75)" onmouseover="showTip(event, 'fs42', 75)" class="i">customOutputFormat</span>;] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 76)" onmouseover="showTip(event, 'fs12', 76)" class="i">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs45', 77)" onmouseover="showTip(event, 'fs45', 77)" class="t">BlastParams</span><span class="o">&gt;</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -229,7 +247,7 @@ done otherwise</em></p>
 <div class="tip" id="fs11">Multiple items<br />type BlastWrapper =<br />&#160;&#160;new : rootPath:string -&gt; BlastWrapper<br />&#160;&#160;member blastN : searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />&#160;&#160;member blastP : searchDB:string -&gt; query:string -&gt; output:string -&gt; ps:seq&lt;BlastParams&gt; -&gt; unit<br />&#160;&#160;member makeblastdb : searchDB:string -&gt; ps:seq&lt;MakeDbParams&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.BlastNCBI.BlastWrapper<br /><br />--------------------<br />new : rootPath:string -&gt; BlastWrapper</div>
 <div class="tip" id="fs12">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
 <div class="tip" id="fs13">val aminoacidString : string<br /><br />Full name: BlastWrapper.aminoacidString<br /><em><br /><br />Raw string of the aminoacid sequence of our query protein</em></div>
-<div class="tip" id="fs14">val header : string<br /><br />Full name: BlastWrapper.header<br /><em><br /><br />header for the `.fastA` file</em></div>
+<div class="tip" id="fs14">val header : string<br /><br />Full name: BlastWrapper.header<br /><em><br /><br />header for the .fastA file</em></div>
 <div class="tip" id="fs15">val querySequence : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BlastWrapper.querySequence<br /><em><br /><br />Query sequency represented as a sequence of `AminoAcid` one of BioFSharp&#39;s `BioItems`</em></div>
 <div class="tip" id="fs16">module BioSeq<br /><br />from BioFSharp</div>
 <div class="tip" id="fs17">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.ofAminoAcidString</div>
@@ -278,6 +296,9 @@ done otherwise</em></p>
               
               <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
 			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
+			  <li><a href="/BioFSharp/IO.html">I/O</a>
+            </li>
               <li class="divider"></li>
               <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>

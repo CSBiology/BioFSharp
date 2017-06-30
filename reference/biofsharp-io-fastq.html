@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>BlastNCBI - BioFSharp</title>
+    <title>FastQ - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,7 +37,7 @@
 
 
 
-<h1>BlastNCBI</h1>
+<h1>FastQ</h1>
 <p>
   <span>Namespace: BioFSharp.IO</span><br />
 </p>
@@ -54,30 +54,11 @@
     <tbody>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-io-blastncbi-blastwrapper.html">BlastWrapper</a>
+            <a href="biofsharp-io-fastq-fastqitem-2.html">FastqItem<'a, 'b></a>
           </td>
-          <td class="xmldoc"><p>A Wrapper to perform different BLAST tasks</p>
+          <td class="xmldoc"><p>FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</p>
 
 </td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-blastncbi-cblastresult.html">CBlastResult</a>
-          </td>
-          <td class="xmldoc"></td>
-        </tr>
-    </tbody>
-  </table>
-  <table class="table table-bordered module-list">
-    <thead>
-      <tr><td>Module</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-io-blastncbi-parameters.html">Parameters</a>
-          </td>
-          <td class="xmldoc"></td>
         </tr>
     </tbody>
   </table>
@@ -93,37 +74,81 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '341', 341)" onmouseover="showTip(event, '341', 341)">
-            ncbiPath 
+          <code onmouseout="hideTip(event, '352', 352)" onmouseover="showTip(event, '352', 352)">
+            createFastqItem (...)
           </code>
-          <div class="tip" id="341">
-            <strong>Signature:</strong> string<br />
-                      </div>
+          <div class="tip" id="352">
+            <strong>Signature:</strong> header:string -&gt; sequence:&#39;?8182 -&gt; qualityHeader:string -&gt; qualitySequence:&#39;?8183 -&gt; FastqItem&lt;&#39;?8182,&#39;?8183&gt;<br />
+                          <strong>Type parameters:</strong> '?8182, '?8183          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L212-212" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastQ.fs#L19-19" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Creates FastqItem with header line, sequence, qualityHeader and qualitySequence</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '342', 342)" onmouseover="showTip(event, '342', 342)">
-            readCustomBlastResult (...)
+          <code onmouseout="hideTip(event, '353', 353)" onmouseover="showTip(event, '353', 353)">
+            fromFile (...)
           </code>
-          <div class="tip" id="342">
-            <strong>Signature:</strong> cAttributes:seq&lt;OutputCustom&gt; -&gt; separator:char -&gt; filePath:string -&gt; seq&lt;CBlastResult&gt;<br />
-                      </div>
+          <div class="tip" id="353">
+            <strong>Signature:</strong> converter:(string -&gt; &#39;?8188) -&gt; qualityConverter:(string -&gt; &#39;?8189) -&gt; filePath:string -&gt; seq&lt;FastqItem&lt;&#39;?8188,&#39;?8189&gt;&gt;<br />
+                          <strong>Type parameters:</strong> '?8188, '?8189          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L309-309" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastQ.fs#L47-47" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Reads FastqItem from FastQ format file. Converter and qualityConverter determines type of sequence by converting seq<char> -&gt; type</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '354', 354)" onmouseover="showTip(event, '354', 354)">
+            fromFileEnumerator (...)
+          </code>
+          <div class="tip" id="354">
+            <strong>Signature:</strong> converter:(string -&gt; &#39;?8185) -&gt; qualityConverter:(string -&gt; &#39;?8186) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastqItem&lt;&#39;?8185,&#39;?8186&gt;&gt;<br />
+                          <strong>Type parameters:</strong> '?8185, '?8186          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastQ.fs#L23-23" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maps each lines from an entry to FastqItem</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '355', 355)" onmouseover="showTip(event, '355', 355)">
+            fromGzipFile (...)
+          </code>
+          <div class="tip" id="355">
+            <strong>Signature:</strong> converter:(string -&gt; &#39;?8191) -&gt; qualityConverter:(string -&gt; &#39;?8192) -&gt; filePath:string -&gt; seq&lt;FastqItem&lt;&#39;?8191,&#39;?8192&gt;&gt;<br />
+                          <strong>Type parameters:</strong> '?8191, '?8192          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastQ.fs#L52-52" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Reads FastqItem from GZip format file. Converter and qualityConverter determines type of sequence by converting seq<char> -&gt; type</p>
+
+
         </td>
       </tr>
     </tbody>

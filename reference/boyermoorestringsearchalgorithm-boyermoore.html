@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>OntologyEnrichment - BioFSharp</title>
+    <title>BoyerMoore - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,41 +37,14 @@
 
 
 
-<h1>OntologyEnrichment</h1>
+<h1>BoyerMoore</h1>
 <p>
-  <span>Namespace: BioFSharp.Stats</span><br />
+  <span>Namespace: BoyerMooreStringSearchAlgorithm</span><br />
 </p>
 <div class="xmldoc">
 </div>
 
 <!-- Render nested types and modules, if there are any -->
-  <h2>Nested types and modules</h2>
-  <div>
-      <table class="table table-bordered type-list">
-    <thead>
-      <tr><td>Type</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-stats-ontologyenrichment-gsearesult.html">GseaResult</a>
-          </td>
-          <td class="xmldoc"><p>Represents a gene set enrichment result</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-stats-ontologyenrichment-ontologyitem-1.html">OntologyItem<'a></a>
-          </td>
-          <td class="xmldoc"><p>Represents an item in an ontology set</p>
-
-</td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -82,39 +55,95 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '573', 573)" onmouseover="showTip(event, '573', 573)">
-            CalcHyperGeoPvalue (...)
+          <code onmouseout="hideTip(event, '580', 580)" onmouseover="showTip(event, '580', 580)">
+            findAll source query
           </code>
-          <div class="tip" id="573">
-            <strong>Signature:</strong> numberOfDEsInBin:int -&gt; numberInBin:int -&gt; totalUnivers:int -&gt; totalNumberOfDE:int -&gt; splitPvalueThreshold:int -&gt; float&lt;MeasureOne&gt;<br />
-                      </div>
+          <div class="tip" id="580">
+            <strong>Signature:</strong> source:^a array -&gt; query:^a array -&gt; int list<br />
+                          <strong>Type parameters:</strong> ^a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L71-71" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L158-158" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Calculates p value based on hypergeometric distribution (pValue &lt;= k)</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '574', 574)" onmouseover="showTip(event, '574', 574)">
-            CalcOverEnrichment (...)
+          <code onmouseout="hideTip(event, '581', 581)" onmouseover="showTip(event, '581', 581)">
+            findFirst source query
           </code>
-          <div class="tip" id="574">
-            <strong>Signature:</strong> deGroupIndex:int -&gt; splitPvalueThreshold:int option -&gt; minNumberInTerm:int option -&gt; data:seq&lt;OntologyItem&lt;&#39;a&gt;&gt; -&gt; seq&lt;GseaResult&gt;<br />
+          <div class="tip" id="581">
+            <strong>Signature:</strong> source:^a array -&gt; query:^a array -&gt; int<br />
+                          <strong>Type parameters:</strong> ^a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L145-145" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '582', 582)" onmouseover="showTip(event, '582', 582)">
+            findFrom (...)
+          </code>
+          <div class="tip" id="582">
+            <strong>Signature:</strong> badCharPattern:int array -&gt; goodCharPattern:int array -&gt; startindex:int -&gt; source:^a array -&gt; query:^a array -&gt; int<br />
+                          <strong>Type parameters:</strong> ^a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L134-134" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '583', 583)" onmouseover="showTip(event, '583', 583)">
+            getBadCharacterShift pattern
+          </code>
+          <div class="tip" id="583">
+            <strong>Signature:</strong> pattern:^a array -&gt; int []<br />
+                          <strong>Type parameters:</strong> ^a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L79-79" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '584', 584)" onmouseover="showTip(event, '584', 584)">
+            getGoodSuffixShift suffixes searchString
+          </code>
+          <div class="tip" id="584">
+            <strong>Signature:</strong> suffixes:int [] -&gt; searchString:&#39;a array -&gt; int []<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L118-118" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L48-48" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Calculates functional term enrichment</p>
+          <p>Creates an array containing the shiftig values created by using the good suffix heuristics.
+<param name="suffixes" >array of int</param>
+<param name="searchString" >array of 'a</param>
+<remarks>Shifting distance becomes 1 if the bad character rule and the matchcount returns 0</remarks>
+<returns> an array containing the shiftig values created by using the good suffix heuristics </returns></p>
 
 
         </td>
@@ -122,100 +151,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '575', 575)" onmouseover="showTip(event, '575', 575)">
-            CalcSimpleOverEnrichment (...)
+          <code onmouseout="hideTip(event, '585', 585)" onmouseover="showTip(event, '585', 585)">
+            searchBoyerMoore (...)
           </code>
-          <div class="tip" id="575">
-            <strong>Signature:</strong> deGroupIndex:int -&gt; splitPvalueThreshold:int option -&gt; data:seq&lt;OntologyItem&lt;&#39;a&gt;&gt; -&gt; seq&lt;GseaResult&gt;<br />
+          <div class="tip" id="585">
+            <strong>Signature:</strong> badCharPattern:int array -&gt; goodCharPattern:int array -&gt; is:int -&gt; source:^a array -&gt; query:^a array -&gt; int<br />
+                          <strong>Type parameters:</strong> ^a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L96-96" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '586', 586)" onmouseover="showTip(event, '586', 586)">
+            suffixes searchString
+          </code>
+          <div class="tip" id="586">
+            <strong>Signature:</strong> searchString:&#39;a array -&gt; int []<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L91-91" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/BoyerMoore.fs#L13-13" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Calculates functional term enrichment</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '576', 576)" onmouseover="showTip(event, '576', 576)">
-            createGseaResult (...)
-          </code>
-          <div class="tip" id="576">
-            <strong>Signature:</strong> ontologyTerm:string -&gt; numberOfDEsInBin:int -&gt; numberInBin:int -&gt; totalNumberOfDE:int -&gt; totalUnivers:int -&gt; pValue:float -&gt; GseaResult<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L34-34" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Creates a gene set enrichment result</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '577', 577)" onmouseover="showTip(event, '577', 577)">
-            createOntologyItem (...)
-          </code>
-          <div class="tip" id="577">
-            <strong>Signature:</strong> id:string -&gt; ontologyTerm:string -&gt; groupIndex:int -&gt; item:&#39;?9118 -&gt; OntologyItem&lt;&#39;?9118&gt;<br />
-                          <strong>Type parameters:</strong> '?9118          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L20-20" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Creates an item in an ontology set</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '578', 578)" onmouseover="showTip(event, '578', 578)">
-            expandOntologyTree data
-          </code>
-          <div class="tip" id="578">
-            <strong>Signature:</strong> data:seq&lt;OntologyItem&lt;&#39;a&gt;&gt; -&gt; seq&lt;OntologyItem&lt;&#39;a&gt;&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L56-56" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Extends leaf OntologyEntries to their full tree</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '579', 579)" onmouseover="showTip(event, '579', 579)">
-            splitMapManOntologyItems separator data
-          </code>
-          <div class="tip" id="579">
-            <strong>Signature:</strong> separator:char -&gt; data:seq&lt;OntologyItem&lt;&#39;a&gt;&gt; -&gt; seq&lt;OntologyItem&lt;&#39;a&gt;&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L40-40" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Splites OntologyEntry with conacat TermId
-Attention: Also parses string to int to get rit of 0 - terms</p>
+          <p>Creates N(j) that is needed for the good suffix rule.
+<param name="searchString" >array of 'a/param&gt;
+<returns> an array containing the strong suffix rule values </returns></p>
 
 
         </td>
