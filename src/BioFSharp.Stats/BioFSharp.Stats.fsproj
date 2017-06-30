@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>BioFSharp.Stats</RootNamespace>
     <AssemblyName>BioFSharp.Stats</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>BioFSharp.Stats</Name>
