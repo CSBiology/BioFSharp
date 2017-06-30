@@ -1,6 +1,6 @@
 /// The effectiveness rises with longer patterns
 
-namespace BoyerMooreStringSearchAlgorithm 
+namespace BioFSharp.Algorithm
 
 module BoyerMoore=
 
