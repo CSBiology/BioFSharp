@@ -5,7 +5,7 @@
 /*--------------------------------------------------------------------------*/
 
 div.box {border-style: solid;}
-
+td.snippet {overflow : auto}
 
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
@@ -76,7 +76,6 @@ table.pre, pre.fssnip, pre {
   padding:10px;
   border-radius:5px;
   color:#d1d1d1;
-  max-width: none;
 }
 pre.fssnip code {
   font: 9pt 'Droid Sans Mono',consolas,monospace;
