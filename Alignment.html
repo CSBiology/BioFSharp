@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>BioFSharp: DualAlignment
+    <title>BioFSharp: Pairwise Alignment
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
@@ -35,8 +35,8 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="BioFSharp-DualAlignment" class="anchor" href="#BioFSharp-DualAlignment">BioFSharp: DualAlignment</a></h1>
-<p>In this short tutorial, the usage of the DualAlignment-algorithm is demonstrated.
+<h1><a name="BioFSharp-Pairwise-Alignment" class="anchor" href="#BioFSharp-Pairwise-Alignment">BioFSharp: Pairwise Alignment</a></h1>
+<p>In this short tutorial, the usage of the Pairwise alignment-implementation is demonstrated.
 For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local alignments, the <b>SmithWaterman</b>-algorithm is used.
 For both implementations, the gapvalues are evaluated using the <b>affine</b> gapscoremodel.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -69,7 +69,7 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="f">aaScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="f">getScoringMatrixAminoAcid</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="t">ScoringMatrixAminoAcid</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="p">BLOSUM62</span>
 
-<span class="c">//&gt;For nucleotides</span>
+<span class="c">//For nucleotides</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="f">nucScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="f">getScoringMatrixNucleotide</span>  <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="t">ScoringMatrixNucleotide</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="p">EDNA</span>
 </code></pre></td>
 </tr>
@@ -97,7 +97,7 @@ The scoring function (in this case a substitution matrix) and the two gap penalt
     <span class="i">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 21)" onmouseover="showTip(event, 'fs7', 21)" class="f">aaScoring</span> 
     }
 
-<span class="c">//&gt;For nucleotides</span>
+<span class="c">//For nucleotides</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="i">nucCosts</span> <span class="o">=</span> {
     <span class="i">Open</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span>
     <span class="i">Continuation</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span>
@@ -106,9 +106,8 @@ The scoring function (in this case a substitution matrix) and the two gap penalt
 </code></pre></td>
 </tr>
 </table>
-<div class="box">
-The alignment functions use <b>Arrays</b> as input. The Elements can be of any type, but require type equality. Also they need to have type equality with the input of the scoring function.
-Both the global and local alignment algorithms take the same parameters (costs,firstSequence,secondSequence) and return the same format.
+<p>The alignment functions use <b>Arrays</b> as input. The Elements can be of any type, but require type equality. Also they need to have type equality with the input of the scoring function.
+Both the global and local alignment algorithms take the same parameters (costs,firstSequence,secondSequence) and return the same format.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -130,7 +129,7 @@ Both the global and local alignment algorithms take the same parameters (costs,f
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="i">globalAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="f">needlemanWunsch</span> <span onmouseout="hideTip(event, 'fs16', 36)" onmouseover="showTip(event, 'fs16', 36)" class="i">aaCosts</span> <span onmouseout="hideTip(event, 'fs18', 37)" onmouseover="showTip(event, 'fs18', 37)" class="i">aaSeq1</span> <span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="i">aaSeq2</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="i">localAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 40)" onmouseover="showTip(event, 'fs27', 40)" class="f">smithWaterman</span> <span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="i">aaCosts</span> <span onmouseout="hideTip(event, 'fs18', 42)" onmouseover="showTip(event, 'fs18', 42)" class="i">aaSeq1</span> <span onmouseout="hideTip(event, 'fs23', 43)" onmouseover="showTip(event, 'fs23', 43)" class="i">aaSeq2</span>
 
-<span class="c">//&gt;For nucleotides</span>
+<span class="c">//For nucleotides</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 44)" onmouseover="showTip(event, 'fs28', 44)" class="i">nucSeq1</span> <span class="o">=</span> [|<span class="s">&#39;A&#39;</span>;<span class="s">&#39;T&#39;</span>;<span class="s">&#39;G&#39;</span>;<span class="s">&#39;A&#39;</span>|] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 46)" onmouseover="showTip(event, 'fs30', 46)" class="f">ofNucleotideString</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 47)" onmouseover="showTip(event, 'fs31', 47)" class="i">nucSeq2</span> <span class="o">=</span> [|<span class="s">&#39;B&#39;</span>;<span class="s">&#39;A&#39;</span>;<span class="s">&#39;T&#39;</span>;<span class="s">&#39;V&#39;</span>;<span class="s">&#39;A&#39;</span>;<span class="s">&#39;W&#39;</span>;<span class="s">&#39;G&#39;</span>|] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 48)" onmouseover="showTip(event, 'fs29', 48)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="f">ofNucleotideString</span>
 
