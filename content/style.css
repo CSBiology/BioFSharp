@@ -84,7 +84,8 @@ table.pre pre {
   padding:0px;
   margin:0px;
   border-radius:0px;
-  width: 100%;
+  max-width: 80%;
+  overflow: scroll
 }
 table.pre td {
   padding:0px;
