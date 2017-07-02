@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Wavelet - BioFSharp</title>
+    <title>GeneBankParser - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,12 +37,13 @@
 
 
 
-<h1>Wavelet</h1>
+<h1>GeneBankParser</h1>
 <p>
-  <span>Namespace: BioFSharp.Mz</span><br />
-  <span>Parent Module: <a href="biofsharp-mz-signaldetection.html">SignalDetection</a></span>
+  <span>Namespace: BioFSharp.IO</span><br />
 </p>
 <div class="xmldoc">
+<p>A collection of functions for reading and writing GeneBank files.</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -55,15 +56,51 @@
     <tbody>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-mz-signaldetection-wavelet-ridgeline.html">RidgeLine</a>
+            <a href="biofsharp-io-genebankparser-currentsection.html">CurrentSection</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Represents the possible section locations in a GeneBank file</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-mz-signaldetection-wavelet-waveletparameters.html">waveletParameters</a>
+            <a href="biofsharp-io-genebankparser-features.html">Features</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Represents the features part of a GeneBank file.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-genebankparser-genebank.html">GeneBank</a>
+          </td>
+          <td class="xmldoc"><p>Represents a GeneBank file consistign of Meta, Reference, Features and Origin section.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-genebankparser-meta.html">Meta</a>
+          </td>
+          <td class="xmldoc"><p>Represents the upper part of the header of a GeneBank file.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-genebankparser-origin.html">Origin</a>
+          </td>
+          <td class="xmldoc"><p>Represents the origin part of a GeneBank file.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-genebankparser-reference.html">Reference</a>
+          </td>
+          <td class="xmldoc"><p>Represents the lower part of the header of a GeneBank file.</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -79,15 +116,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '590', 590)" onmouseover="showTip(event, '590', 590)">
-            calcCorrWaveletAndDataMatrix (...)
+          <code onmouseout="hideTip(event, '373', 373)" onmouseover="showTip(event, '373', 373)">
+            featuresDefault 
           </code>
-          <div class="tip" id="590">
-            <strong>Signature:</strong> waveletF:(float [] -&gt; float [] -&gt; int -&gt; int -&gt; int -&gt; float -&gt; float -&gt; float []) -&gt; nScales:int -&gt; paddingPoints:int -&gt; mzDataPadded:float [] -&gt; intensityDataPadded:float [] -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; waveletData:float [] -&gt; nPoints:int [,,] -&gt; xSpacingAvg:float [] -&gt; scalings:float [] -&gt; corrMatrix:float [,] -&gt; unit<br />
+          <div class="tip" id="373">
+            <strong>Signature:</strong> Features<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L443-443" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L64-64" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -97,19 +134,20 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '591', 591)" onmouseover="showTip(event, '591', 591)">
-            convertColToMz mzData col
+          <code onmouseout="hideTip(event, '374', 374)" onmouseover="showTip(event, '374', 374)">
+            featuresParser enum initK initV
           </code>
-          <div class="tip" id="591">
-            <strong>Signature:</strong> mzData:float [] -&gt; col:int -&gt; float<br />
-                      </div>
+          <div class="tip" id="374">
+            <strong>Signature:</strong> enum:IEnumerator&lt;string&gt; -&gt; initK:string -&gt; initV:&#39;?8197 -&gt; Features<br />
+                          <strong>Type parameters:</strong> '?8197          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L352-352" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L227-227" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Helperfunction to get mz back of Columnnumber</p>
+          <p>Parses the Features section of a GeneBank file until the 'Origin' keyword is found. Returns a List keys representing
+the feature name, toupled with a list of the features belonging to that key</p>
 
 
         </td>
@@ -117,15 +155,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '592', 592)" onmouseover="showTip(event, '592', 592)">
-            createPadding (...)
+          <code onmouseout="hideTip(event, '375', 375)" onmouseover="showTip(event, '375', 375)">
+            metaDefault 
           </code>
-          <div class="tip" id="592">
-            <strong>Signature:</strong> paddingPoints:int -&gt; mzDataPadded:float [] -&gt; intensityDataPadded:float [] -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; unit<br />
+          <div class="tip" id="375">
+            <strong>Signature:</strong> Meta<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L346-346" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L31-31" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -135,15 +173,35 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '593', 593)" onmouseover="showTip(event, '593', 593)">
-            createRidgeLine row col
+          <code onmouseout="hideTip(event, '376', 376)" onmouseover="showTip(event, '376', 376)">
+            metaParser enum initKey initValue
           </code>
-          <div class="tip" id="593">
-            <strong>Signature:</strong> row:int -&gt; col:int -&gt; RidgeLine<br />
+          <div class="tip" id="376">
+            <strong>Signature:</strong> enum:IEnumerator&lt;string&gt; -&gt; initKey:string -&gt; initValue:string -&gt; Meta<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L305-305" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L123-123" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parses the upper section of the header until the 'Reference' keyword is found. Returns the Meta type filled with the parsed key value pairs or default values</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '377', 377)" onmouseover="showTip(event, '377', 377)">
+            originDefault 
+          </code>
+          <div class="tip" id="377">
+            <strong>Signature:</strong> Origin<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L70-70" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -153,15 +211,55 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '594', 594)" onmouseover="showTip(event, '594', 594)">
-            createWaveletParameters (...)
+          <code onmouseout="hideTip(event, '378', 378)" onmouseover="showTip(event, '378', 378)">
+            originParser enum initKey initValue
           </code>
-          <div class="tip" id="594">
-            <strong>Signature:</strong> numberOfScales:int -&gt; yThreshold:float -&gt; mzTolerance:float -&gt; spacing_Percentile:float -&gt; sNRS_Percentile:float -&gt; waveletParameters<br />
+          <div class="tip" id="378">
+            <strong>Signature:</strong> enum:IEnumerator&lt;string&gt; -&gt; initKey:string -&gt; initValue:string -&gt; Origin<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L317-317" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L274-274" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parses the Origin section of a GeneBank file. Returns a Map mappping the position in the sequence to the nucleotide sequences starting from that position</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '379', 379)" onmouseover="showTip(event, '379', 379)">
+            readFile filePath
+          </code>
+          <div class="tip" id="379">
+            <strong>Signature:</strong> filePath:string -&gt; seq&lt;string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L84-84" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns the input as a sequence of strings, one line at a time</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '380', 380)" onmouseover="showTip(event, '380', 380)">
+            readGBFile path
+          </code>
+          <div class="tip" id="380">
+            <strong>Signature:</strong> path:string -&gt; GeneBank<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L293-293" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -171,36 +269,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '595', 595)" onmouseover="showTip(event, '595', 595)">
-            getNpointsX (...)
+          <code onmouseout="hideTip(event, '381', 381)" onmouseover="showTip(event, '381', 381)">
+            referenceDefault 
           </code>
-          <div class="tip" id="595">
-            <strong>Signature:</strong> centerIdx:int -&gt; scaling:int -&gt; maxMZwindow:float -&gt; nPoints:int [,,] -&gt; mzData:float [] -&gt; unit<br />
+          <div class="tip" id="381">
+            <strong>Signature:</strong> Reference<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L323-323" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Helperfunction to calculate the mz values left and right from the target value which will be included in the computation of
-the CWT correlation coefficient</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '596', 596)" onmouseover="showTip(event, '596', 596)">
-            getScales (...)
-          </code>
-          <div class="tip" id="596">
-            <strong>Signature:</strong> nScales:int -&gt; scalings:float [] -&gt; spacing_perc:float -&gt; windowMaxLow:int -&gt; windowMaxHigh:int -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; xSpacingAvg:float [] -&gt; nPoints:int [,,] -&gt; xspaced:float [] -&gt; unit<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L360-360" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L51-51" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -210,15 +287,35 @@ the CWT correlation coefficient</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '597', 597)" onmouseover="showTip(event, '597', 597)">
-            getSNRFilteredPeakLines (...)
+          <code onmouseout="hideTip(event, '382', 382)" onmouseover="showTip(event, '382', 382)">
+            referenceParser enum initK initV
           </code>
-          <div class="tip" id="597">
-            <strong>Signature:</strong> noise_perc:float -&gt; mzTol:float -&gt; nScales:int -&gt; mzData:float [] -&gt; allLines:List&lt;RidgeLine&gt; -&gt; corrMatrix:float [,] -&gt; unit<br />
+          <div class="tip" id="382">
+            <strong>Signature:</strong> enum:IEnumerator&lt;string&gt; -&gt; initK:string -&gt; initV:string -&gt; Reference list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L485-485" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parses the lower section of the header until the 'Features' keyword is found. Returns a List of Reference types filled with the parsed key value pairs or default values</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '383', 383)" onmouseover="showTip(event, '383', 383)">
+            setNextSectionFromKey key
+          </code>
+          <div class="tip" id="383">
+            <strong>Signature:</strong> key:string -&gt; CurrentSection<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L99-99" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -228,73 +325,19 @@ the CWT correlation coefficient</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '598', 598)" onmouseover="showTip(event, '598', 598)">
-            refinePeaks (...)
+          <code onmouseout="hideTip(event, '384', 384)" onmouseover="showTip(event, '384', 384)">
+            splitToKV s pos
           </code>
-          <div class="tip" id="598">
-            <strong>Signature:</strong> yThreshold:float&lt;MeasureOne&gt; -&gt; mzTol:float -&gt; scalings:float [] -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; allLines:ResizeArray&lt;RidgeLine&gt; -&gt; xSpacingAvg:float [] -&gt; float [] * float []<br />
+          <div class="tip" id="384">
+            <strong>Signature:</strong> s:string -&gt; pos:int -&gt; string * string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L596-596" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L87-87" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '599', 599)" onmouseover="showTip(event, '599', 599)">
-            ricker2d (...)
-          </code>
-          <div class="tip" id="599">
-            <strong>Signature:</strong> mzDataPadded:float [] -&gt; waveletData:float [] -&gt; centerIdx:int -&gt; nPointsLeft:int -&gt; nPointsRight:int -&gt; focusedPaddedMzValue:float -&gt; width:float -&gt; float []<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L409-409" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '600', 600)" onmouseover="showTip(event, '600', 600)">
-            ricker2DWithMem (...)
-          </code>
-          <div class="tip" id="600">
-            <strong>Signature:</strong> mzDataPadded:float [] -&gt; waveletData:float [] -&gt; centerIdx:int -&gt; nPointsLeft:int -&gt; nPointsRight:int -&gt; focusedPaddedMzValue:float -&gt; width:float -&gt; float []<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L426-426" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '601', 601)" onmouseover="showTip(event, '601', 601)">
-            toCentroid (...)
-          </code>
-          <div class="tip" id="601">
-            <strong>Signature:</strong> waveletF:(float [] -&gt; float [] -&gt; int -&gt; int -&gt; int -&gt; float -&gt; float -&gt; float []) -&gt; nScales:int -&gt; yThreshold:float&lt;MeasureOne&gt; -&gt; mzTol:float -&gt; spacing_perc:float -&gt; snrs_perc:float -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; float [] * float []<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L647-647" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Returns a MzIntensityArray that containing the spectral centroids of the input spectra.</p>
+          <p>returns a trimmed tuple created from an input string, splitted at the input position</p>
 
 
         </td>
@@ -302,19 +345,21 @@ the CWT correlation coefficient</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '602', 602)" onmouseover="showTip(event, '602', 602)">
-            toCentroidWithRicker2D (...)
+          <code onmouseout="hideTip(event, '385', 385)" onmouseover="showTip(event, '385', 385)">
+            valueOrDefault map key defaultValue
           </code>
-          <div class="tip" id="602">
-            <strong>Signature:</strong> nScales:int -&gt; yYhreshold:float&lt;MeasureOne&gt; -&gt; mzTol:float -&gt; spacing_perc:float -&gt; snrs_perc:float -&gt; mzData:float [] -&gt; intensityData:float [] -&gt; float [] * float []<br />
-                      </div>
+          <div class="tip" id="385">
+            <strong>Signature:</strong> map:Map&lt;&#39;key,&#39;value&gt; -&gt; key:&#39;key -&gt; defaultValue:&#39;value -&gt; &#39;value<br />
+                          <strong>Type parameters:</strong> 'key, 'value          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/SignalDetection.fs#L694-694" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L93-93" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>returns the value belonging to a query key, or a default value if the key is not present in the map.</p>
+
+
         </td>
       </tr>
     </tbody>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Element - BioFSharp</title>
+    <title>GeneBank - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,33 +37,33 @@
 
 
 
-<h1>Element</h1>
+<h1>GeneBank</h1>
 <p>
-  <span>Namespace: BioFSharp</span><br />
-  <span>Parent Module: <a href="biofsharp-elements.html">Elements</a></span>
+  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-genebankparser.html">GeneBankParser</a></span>
 </p>
 <div class="xmldoc">
-<p>Discriminant union type of Mono-,Di-,Tri- and Multi-isotopic elements</p>
+<p>Represents a GeneBank file consistign of Meta, Reference, Features and Origin section.</p>
 
 </div>
-  <h3>Union Cases</h3>
+  <h3>Record Fields</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Union Case</td><td>Description</td></tr>
+      <tr><td>Record Field</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '724', 724)" onmouseover="showTip(event, '724', 724)">
-            Di(DiIsotopic)
+          <code onmouseout="hideTip(event, '1031', 1031)" onmouseover="showTip(event, '1031', 1031)">
+            Features
           </code>
-          <div class="tip" id="724">
-            <strong>Signature:</strong> DiIsotopic<br />
+          <div class="tip" id="1031">
+            <strong>Signature:</strong> Features<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L106-106" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L77-77" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -73,15 +73,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '725', 725)" onmouseover="showTip(event, '725', 725)">
-            Mono(MonoIsotopic)
+          <code onmouseout="hideTip(event, '1032', 1032)" onmouseover="showTip(event, '1032', 1032)">
+            Meta
           </code>
-          <div class="tip" id="725">
-            <strong>Signature:</strong> MonoIsotopic<br />
+          <div class="tip" id="1032">
+            <strong>Signature:</strong> Meta<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L105-105" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L75-75" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -91,15 +91,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '726', 726)" onmouseover="showTip(event, '726', 726)">
-            Multi(MultiIsotopic)
+          <code onmouseout="hideTip(event, '1033', 1033)" onmouseover="showTip(event, '1033', 1033)">
+            Origin
           </code>
-          <div class="tip" id="726">
-            <strong>Signature:</strong> MultiIsotopic<br />
+          <div class="tip" id="1033">
+            <strong>Signature:</strong> Origin<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L108-108" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L78-78" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -109,15 +109,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '727', 727)" onmouseover="showTip(event, '727', 727)">
-            Tri(TriIsotopic)
+          <code onmouseout="hideTip(event, '1034', 1034)" onmouseover="showTip(event, '1034', 1034)">
+            References
           </code>
-          <div class="tip" id="727">
-            <strong>Signature:</strong> TriIsotopic<br />
+          <div class="tip" id="1034">
+            <strong>Signature:</strong> Reference list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L107-107" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GeneBankParser.fs#L76-76" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
