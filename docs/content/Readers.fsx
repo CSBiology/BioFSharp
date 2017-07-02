@@ -25,6 +25,10 @@ printfn "hello world: %i " a
 
 (**
 
+
+<hr>
+
+
 <a name="FastA"></a>
 FastA
 ------------------------------
@@ -34,9 +38,14 @@ This documentation is not yet here. Hopefully it will be soon =)
 
 
 (**
+
+
+<hr>
+
+
 <a name="GFF3"></a>
 Introducing GFF3Parser
-======================
+----------------------
 
 The GFF3Parser is a tool to validate, read and write **GFF3** _(Generic Feature Format Version 3)_-Files.
 
@@ -54,9 +63,9 @@ Comments lines have to start with a single **#**_[...]_. It is possible to have 
 For further information visit [GFF3-Specifications](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md).
 
 How to use GFF3Parser
-=====================
+---------------------
 
-To read in a gff you have to insert a filepath and optional a FastA converter. For further information about FastA visit [API Reference - FastA]https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html.
+To read in a gff you have to insert a filepath and optional a FastA converter. For further information about FastA visit [API Reference - FastA](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html).
 *)
 
 open BioFSharp.IO
@@ -68,18 +77,19 @@ let filepathGFF = (__SOURCE_DIRECTORY__ + "/data/gff3Example.gff")
 let fastaConverter (x:seq<char>) = 
     id x
 
-///to read in gff file insert converter and filepath. You also directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF
+///to read in gff file insert converter and filepath. 
+///You can also directly use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF
 let gffExampleRead = GFF3Parser.Reader.GFF3reader id filepathGFF 
 
 
 
 (**
 How to use GFF3Validator
-=====================
+------------------------
 
 The GFF3Validator prints wheter your GFF3 file is valid or not. If not, then it also returns the specified error and the line in which the error occured.
 In contrast to GFF2 the field 3 (**type**) is restricted to terms defined by the sequence ontology (SO) so this validator checks if the entry is a valid SO_Term.
-New versions of the SO you can find [here](https://sourceforge.net/projects/song/files/SO_Feature_Annotation/).
+You can find new versions of the SO [here](https://sourceforge.net/projects/song/files/SO_Feature_Annotation).
 *)
 
 ///path, name and version of the 'Sequence Ontology terms'-file
@@ -90,7 +100,7 @@ let gffExampleValidate = GFF3Parser.Validator.GFF3validator filepathSO_Terms fil
 
 (**
 How to use GFF3RelationshipSearch
-=================================
+---------------------------------
 You also can do a simple search for _Parent_ - _child_of_ relationships giving back all genomic features which contain the _searchterm_ in **ID** or **Parent** field.
 
 *)
@@ -104,7 +114,7 @@ let gffExampleSearch = GFF3Parser.Relationship.relationshipSearch gffExampleRead
 
 (**
 How to use GFF3Writer
-=====================
+---------------------
 
 
 *)
