@@ -4,6 +4,9 @@
   Formatting for F# code snippets
 /*--------------------------------------------------------------------------*/
 
+div.box {border-style: solid;}
+
+
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
 /* printf formatters */
