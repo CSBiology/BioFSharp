@@ -4,9 +4,6 @@
   Formatting for F# code snippets
 /*--------------------------------------------------------------------------*/
 
-div.box {border-style: solid;}
-
-
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
 /* printf formatters */
@@ -76,6 +73,7 @@ table.pre, pre.fssnip, pre {
   padding:10px;
   border-radius:5px;
   color:#d1d1d1;
+  max-width: none;
 }
 pre.fssnip code {
   font: 9pt 'Droid Sans Mono',consolas,monospace;
@@ -84,14 +82,12 @@ table.pre pre {
   padding:0px;
   margin:0px;
   border-radius:0px;
-  max-width: 80%;
+  width: 100%;
 }
 table.pre td {
   padding:0px;
   white-space:normal;
   margin:0px;
-  overflow: auto;
-  max-width: 80%;
 }
 table.pre td.lines {
   width:30px;
