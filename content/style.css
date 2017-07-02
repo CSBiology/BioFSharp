@@ -5,7 +5,7 @@
 /*--------------------------------------------------------------------------*/
 
 div.box {border-style: solid;}
-td.snippet {overflow : auto}
+
 
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
@@ -90,6 +90,8 @@ table.pre td {
   padding:0px;
   white-space:normal;
   margin:0px;
+  overflow: auto;
+  max-width: 80%;
 }
 table.pre td.lines {
   width:30px;
