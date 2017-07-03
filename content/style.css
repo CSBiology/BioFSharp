@@ -102,7 +102,7 @@ table.pre td.snippet {
 	overflow-x: scroll;
     white-space: nowrap;
 	display:block;
-	
+	margin: 10px
 }
 
 code {
