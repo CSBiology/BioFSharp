@@ -93,7 +93,7 @@ table.pre td.lines {
   width:30px;
 }
 
-table.pre {
+td.snippet {
 	overflow-x: scroll;
     white-space: nowrap;
 	display:block;
