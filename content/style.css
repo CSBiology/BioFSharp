@@ -69,11 +69,11 @@ table.pre, pre.fssnip, pre {
   font: 9pt 'Droid Sans Mono',consolas,monospace;
   width:90%;
   margin:10px 20px 20px 20px;
-  background-color:blue;
+  background-color:#212d30;
   padding:10px;
   border-radius:5px;
-  color:blue;
-  max-width: 10%;
+  color:#d1d1d1;
+  max-width: none;
 }
 pre.fssnip code {
   font: 9pt 'Droid Sans Mono',consolas,monospace;
@@ -82,8 +82,7 @@ table.pre pre {
   padding:0px;
   margin:0px;
   border-radius:0px;
-  /*width: 100%;*/
-  max-width: 10%;
+  width: 100%;
 }
 table.pre td {
   padding:0px;
@@ -93,22 +92,11 @@ table.pre td {
 table.pre td.lines {
   width:30px;
 }
-
 table.pre {
-	max-width: 10%;
-}
-table.pre td.snippet {
-	max-width: 10%;
 	overflow-x: scroll;
     white-space: nowrap;
 	display:block;
-	margin: 10px
 }
-
-code {
-	max-width: 10%;
-}
-
 /*--------------------------------------------------------------------------
   Formatting for page & standard document content
 /*--------------------------------------------------------------------------*/
