@@ -32,11 +32,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\BioID.fsx = docs\content\BioID.fsx
 		docs\content\BioSequence.fsx = docs\content\BioSequence.fsx
 		docs\content\BlastWrapper.fsx = docs\content\BlastWrapper.fsx
+		docs\content\BoyerMooreUsage.fsx = docs\content\BoyerMooreUsage.fsx
 		docs\content\CentroidSpectra.fsx = docs\content\CentroidSpectra.fsx
 		docs\content\ChargeStateDetermination.fsx = docs\content\ChargeStateDetermination.fsx
 		docs\content\Formula.fsx = docs\content\Formula.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\PeptideLookUp.fsx = docs\content\PeptideLookUp.fsx
+		docs\content\Readers.fsx = docs\content\Readers.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
 	EndProjectSection
 EndProject
