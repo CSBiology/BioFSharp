@@ -72,7 +72,7 @@ table.pre, pre.fssnip, pre {
   background-color:#212d30;
   padding:10px;
   border-radius:5px;
-  color:#d1d1d1;
+  color:blue;
   max-width: 10%;
 }
 pre.fssnip code {
@@ -103,6 +103,8 @@ table.pre td.snippet {
     white-space: nowrap;
 	display:block;
 }
+
+code.
 
 /*--------------------------------------------------------------------------
   Formatting for page & standard document content
