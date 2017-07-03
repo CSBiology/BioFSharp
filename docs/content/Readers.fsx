@@ -64,7 +64,7 @@ let qualityConvertFn string =
 And then you can easily use this module to read your FastQ file
 *)
 
-let yourFastqFile = @"C:\Users\User\Documents\Test.fastq"
+let yourFastqFile = (__SOURCE_DIRECTORY__ + "/data/FastQtest.fastq")
 
 let FastQSequence = 
     FastQ.fromFile convertFn qualityConvertFn yourFastqFile
