@@ -93,11 +93,7 @@ table.pre td.lines {
   width:30px;
 }
 
-td.snippet {
-	overflow-x: scroll;
-    white-space: nowrap;
-	display:block;
-}
+
 
 /*--------------------------------------------------------------------------
   Formatting for page & standard document content
