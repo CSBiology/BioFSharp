@@ -82,7 +82,8 @@ table.pre pre {
   padding:0px;
   margin:0px;
   border-radius:0px;
-  width: 100%;
+  /*width: 100%;*/
+  max-width: 10%;
 }
 table.pre td {
   padding:0px;
@@ -97,7 +98,7 @@ table.pre {
 	max-width: 80%;
 }
 table.pre td.snippet {
-	max-width: 100%; 
+	max-width: 10%;
 	overflow-x: scroll;
     white-space: nowrap;
 	display:block;
