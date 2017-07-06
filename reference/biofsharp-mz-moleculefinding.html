@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>MultiIsotopic - BioFSharp</title>
+    <title>MoleculeFinding - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,163 +37,196 @@
 
 
 
-<h1>MultiIsotopic</h1>
+<h1>MoleculeFinding</h1>
 <p>
-  <span>Namespace: BioFSharp</span><br />
-  <span>Parent Module: <a href="biofsharp-elements.html">Elements</a></span>
+  <span>Namespace: BioFSharp.Mz</span><br />
 </p>
 <div class="xmldoc">
-<p>Multi-isotopic elements consist of more than three isotopes</p>
-
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-mz-moleculefinding-atom.html">atom</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '740', 740)" onmouseover="showTip(event, '740', 740)">
-            Symbol
+          <code onmouseout="hideTip(event, '453', 453)" onmouseover="showTip(event, '453', 453)">
+            C 
           </code>
-          <div class="tip" id="740">
-            <strong>Signature:</strong> string<br />
+          <div class="tip" id="453">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L87-87" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L19-19" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Carbon</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '741', 741)" onmouseover="showTip(event, '741', 741)">
-            X
+          <code onmouseout="hideTip(event, '454', 454)" onmouseover="showTip(event, '454', 454)">
+            find allAtoms nodeAtoms gap accuracy
           </code>
-          <div class="tip" id="741">
-            <strong>Signature:</strong> Isotope<br />
+          <div class="tip" id="454">
+            <strong>Signature:</strong> allAtoms:atom list -&gt; nodeAtoms:atom list -&gt; gap:float -&gt; accuracy:float -&gt; atom list list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L88-88" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L33-33" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>The pattern matching of this function checks if the float value "gap" is 0 +/- accuracy and if this is the case, the builded list of atoms (molecule) gets added to an accumulator list (acc). The list "molecule" is builded while the "gap" is bigger than the accuracy value and the number of valence electrons (counter) is between 1 and 9." This counter changes when choosing another atom from one of the predefined lists and gets substracted by one as often as the same atom is used. When "counter"=1 is reached another atom gets chosen from the predefined lists as long as the "gap" is not 0 +/- accuracy, because the "gap" gets substracted by the mass of each used atom. As result we get a list of potential molecule lists (acc).</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '742', 742)" onmouseover="showTip(event, '742', 742)">
-            X1
+          <code onmouseout="hideTip(event, '455', 455)" onmouseover="showTip(event, '455', 455)">
+            H 
           </code>
-          <div class="tip" id="742">
-            <strong>Signature:</strong> Isotope<br />
+          <div class="tip" id="455">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L90-90" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L17-17" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Hydrogen</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '743', 743)" onmouseover="showTip(event, '743', 743)">
-            X1comp
+          <code onmouseout="hideTip(event, '456', 456)" onmouseover="showTip(event, '456', 456)">
+            N 
           </code>
-          <div class="tip" id="743">
-            <strong>Signature:</strong> float<br />
+          <div class="tip" id="456">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L91-91" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L21-21" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Nitrogen</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '744', 744)" onmouseover="showTip(event, '744', 744)">
-            X2
+          <code onmouseout="hideTip(event, '457', 457)" onmouseover="showTip(event, '457', 457)">
+            O 
           </code>
-          <div class="tip" id="744">
-            <strong>Signature:</strong> Isotope<br />
+          <div class="tip" id="457">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L92-92" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L23-23" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Oxygen</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '745', 745)" onmouseover="showTip(event, '745', 745)">
-            X2comp
+          <code onmouseout="hideTip(event, '458', 458)" onmouseover="showTip(event, '458', 458)">
+            P 
           </code>
-          <div class="tip" id="745">
-            <strong>Signature:</strong> float<br />
+          <div class="tip" id="458">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L93-93" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L25-25" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Phosphorus</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '746', 746)" onmouseover="showTip(event, '746', 746)">
-            Xcomp
+          <code onmouseout="hideTip(event, '459', 459)" onmouseover="showTip(event, '459', 459)">
+            S 
           </code>
-          <div class="tip" id="746">
-            <strong>Signature:</strong> float<br />
+          <div class="tip" id="459">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L89-89" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Sulfur</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '747', 747)" onmouseover="showTip(event, '747', 747)">
-            XL
+          <code onmouseout="hideTip(event, '460', 460)" onmouseover="showTip(event, '460', 460)">
+            Se 
           </code>
-          <div class="tip" id="747">
-            <strong>Signature:</strong> Isotope []<br />
+          <div class="tip" id="460">
+            <strong>Signature:</strong> atom<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Elements.fs#L94-94" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/MoleculeFinding.fs#L29-29" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Selenium</p>
+
+
         </td>
       </tr>
     </tbody>
