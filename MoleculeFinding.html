@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Molecule Identification
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="Molecule-Identification" class="anchor" href="#Molecule-Identification">Molecule Identification</a></h1>
+<p>Given a specific mass and a list of atoms, this algorithm looks for atom-combinations, that fit together in mass and valence electrons. This documentations provides five examples on how to use the algorithm to identify post translational modifications.</p>
+<h2><a name="List-of-atoms" class="anchor" href="#List-of-atoms">List of atoms</a></h2>
+<p>A record type is defined called "atom". It consists of the symbol, the monoisotopic mass and the number of valence electrons of a chemical element.
+The monoisotopic masses can be found in the isotope table of the BioFSharp repository.</p>
+<p>After that a list of atoms can be created. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one <code>atom</code>. So it can not act as <code>node</code> between two or more atoms.
+The five examples shown here use the following list of atoms:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="t">atom</span> <span class="o">=</span> {
+    <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="i">symbol</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="t">string</span>
+    <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="i">mass</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="t">float</span>;
+    <span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="i">valence</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs14', 14)" onmouseover="showTip(event, 'fs14', 14)" class="t">int</span>;
+    }
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 15)" onmouseover="showTip(event, 'fs15', 15)" class="i">H</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 16)" onmouseover="showTip(event, 'fs16', 16)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;H&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 17)" onmouseover="showTip(event, 'fs17', 17)" class="i">H1</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 18)" onmouseover="showTip(event, 'fs18', 18)" class="i">Mass</span>  ; <span class="i">valence</span> <span class="o">=</span> <span class="n">1</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 19)" onmouseover="showTip(event, 'fs19', 19)" class="i">C</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;C&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 21)" onmouseover="showTip(event, 'fs20', 21)" class="i">C12</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="i">Mass</span> ; <span class="i">valence</span> <span class="o">=</span> <span class="n">4</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 23)" onmouseover="showTip(event, 'fs21', 23)" class="i">N</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;N&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="i">N14</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="i">Mass</span> ; <span class="i">valence</span> <span class="o">=</span> <span class="n">5</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="i">O</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;O&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 29)" onmouseover="showTip(event, 'fs24', 29)" class="i">O16</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="i">Mass</span> ; <span class="i">valence</span> <span class="o">=</span> <span class="n">6</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 31)" onmouseover="showTip(event, 'fs25', 31)" class="i">P</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 32)" onmouseover="showTip(event, 'fs16', 32)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span class="n">30.973762</span>; <span class="i">valence</span> <span class="o">=</span> <span class="n">5</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 33)" onmouseover="showTip(event, 'fs26', 33)" class="i">S</span> <span class="o">=</span>  { <span onmouseout="hideTip(event, 'fs16', 34)" onmouseover="showTip(event, 'fs16', 34)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;S&quot;</span> ; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 35)" onmouseover="showTip(event, 'fs27', 35)" class="i">S32</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 36)" onmouseover="showTip(event, 'fs18', 36)" class="i">Mass</span>; <span class="i">valence</span> <span class="o">=</span> <span class="n">6</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 37)" onmouseover="showTip(event, 'fs28', 37)" class="i">Se</span> <span class="o">=</span> { <span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="i">symbol</span> <span class="o">=</span> <span class="s">&quot;Se&quot;</span>; <span class="i">mass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 39)" onmouseover="showTip(event, 'fs29', 39)" class="i">Se74</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 40)" onmouseover="showTip(event, 'fs18', 40)" class="i">Mass</span>; <span class="i">valence</span> <span class="o">=</span> <span class="n">6</span> }
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 41)" onmouseover="showTip(event, 'fs30', 41)" class="i">atoms</span> <span class="o">=</span> [ <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">Se</span>; <span onmouseout="hideTip(event, 'fs26', 43)" onmouseover="showTip(event, 'fs26', 43)" class="i">S</span>; <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="i">P</span>; <span onmouseout="hideTip(event, 'fs23', 45)" onmouseover="showTip(event, 'fs23', 45)" class="i">O</span>; <span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="i">N</span>; <span onmouseout="hideTip(event, 'fs19', 47)" onmouseover="showTip(event, 'fs19', 47)" class="i">C</span>; <span onmouseout="hideTip(event, 'fs15', 48)" onmouseover="showTip(event, 'fs15', 48)" class="i">H</span>;]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 49)" onmouseover="showTip(event, 'fs31', 49)" class="i">nodes</span> <span class="o">=</span> [ <span onmouseout="hideTip(event, 'fs28', 50)" onmouseover="showTip(event, 'fs28', 50)" class="i">Se</span>; <span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="i">S</span>; <span onmouseout="hideTip(event, 'fs25', 52)" onmouseover="showTip(event, 'fs25', 52)" class="i">P</span>; <span onmouseout="hideTip(event, 'fs23', 53)" onmouseover="showTip(event, 'fs23', 53)" class="i">O</span>; <span onmouseout="hideTip(event, 'fs21', 54)" onmouseover="showTip(event, 'fs21', 54)" class="i">N</span>; <span onmouseout="hideTip(event, 'fs19', 55)" onmouseover="showTip(event, 'fs19', 55)" class="i">C</span>;] 
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="The-Core-Function" class="anchor" href="#The-Core-Function">The Core Function</a></h2>
+<p>The algorithm takes the two predefined lists, a float value as gap (Monoisotopic Mass of examples) and another float value as accuracy (0.5 in this examples).</p>
+<h1><a name="Example-results" class="anchor" href="#Example-results">Example results</a></h1>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+<span class="l">30: </span>
+<span class="l">31: </span>
+<span class="l">32: </span>
+<span class="l">33: </span>
+<span class="l">34: </span>
+<span class="l">35: </span>
+<span class="l">36: </span>
+<span class="l">37: </span>
+<span class="l">38: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 56)" onmouseover="showTip(event, 'fs32', 56)" class="f">moleculefkt</span> (<span onmouseout="hideTip(event, 'fs33', 57)" onmouseover="showTip(event, 'fs33', 57)" class="i">allAtoms</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 58)" onmouseover="showTip(event, 'fs8', 58)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 59)" onmouseover="showTip(event, 'fs34', 59)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs35', 60)" onmouseover="showTip(event, 'fs35', 60)" class="i">nodeAtoms</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 61)" onmouseover="showTip(event, 'fs8', 61)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 62)" onmouseover="showTip(event, 'fs34', 62)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs36', 63)" onmouseover="showTip(event, 'fs36', 63)" class="i">gap</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs12', 64)" onmouseover="showTip(event, 'fs12', 64)" class="t">float</span>) (<span onmouseout="hideTip(event, 'fs37', 65)" onmouseover="showTip(event, 'fs37', 65)" class="i">accuracy</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs12', 66)" onmouseover="showTip(event, 'fs12', 66)" class="t">float</span>) <span class="o">=</span>
+    <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs38', 67)" onmouseover="showTip(event, 'fs38', 67)" class="f">inner</span> (<span onmouseout="hideTip(event, 'fs33', 68)" onmouseover="showTip(event, 'fs33', 68)" class="i">allAtoms</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 69)" onmouseover="showTip(event, 'fs8', 69)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs35', 71)" onmouseover="showTip(event, 'fs35', 71)" class="i">nodeAtoms</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 72)" onmouseover="showTip(event, 'fs8', 72)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 73)" onmouseover="showTip(event, 'fs34', 73)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs36', 74)" onmouseover="showTip(event, 'fs36', 74)" class="i">gap</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs12', 75)" onmouseover="showTip(event, 'fs12', 75)" class="t">float</span>) (<span onmouseout="hideTip(event, 'fs37', 76)" onmouseover="showTip(event, 'fs37', 76)" class="i">accuracy</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs12', 77)" onmouseover="showTip(event, 'fs12', 77)" class="t">float</span>) (<span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="i">molecule</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 79)" onmouseover="showTip(event, 'fs8', 79)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 80)" onmouseover="showTip(event, 'fs34', 80)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs40', 81)" onmouseover="showTip(event, 'fs40', 81)" class="i">acc</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs8', 82)" onmouseover="showTip(event, 'fs8', 82)" class="t">atom</span> <span onmouseout="hideTip(event, 'fs34', 83)" onmouseover="showTip(event, 'fs34', 83)" class="t">list</span> <span onmouseout="hideTip(event, 'fs34', 84)" onmouseover="showTip(event, 'fs34', 84)" class="t">list</span>) (<span onmouseout="hideTip(event, 'fs41', 85)" onmouseover="showTip(event, 'fs41', 85)" class="i">counter</span><span class="o">:</span> <span onmouseout="hideTip(event, 'fs14', 86)" onmouseover="showTip(event, 'fs14', 86)" class="t">int</span>) <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs33', 87)" onmouseover="showTip(event, 'fs33', 87)" class="i">allAtoms</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs42', 88)" onmouseover="showTip(event, 'fs42', 88)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 89)" onmouseover="showTip(event, 'fs43', 89)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 90)" onmouseover="showTip(event, 'fs44', 90)" class="i">x</span> <span class="k">-&gt;</span>
+            
+            <span class="k">match</span> (<span onmouseout="hideTip(event, 'fs36', 91)" onmouseover="showTip(event, 'fs36', 91)" class="i">gap</span>,<span onmouseout="hideTip(event, 'fs41', 92)" onmouseover="showTip(event, 'fs41', 92)" class="i">counter</span>) <span class="k">with</span>
+            |(<span onmouseout="hideTip(event, 'fs45', 93)" onmouseover="showTip(event, 'fs45', 93)" class="i">g</span>,_) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 94)" onmouseover="showTip(event, 'fs45', 94)" class="i">g</span> <span class="o">=</span> <span class="n">0.</span> 
+                
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 95)" onmouseover="showTip(event, 'fs39', 95)" class="i">molecule</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs40', 96)" onmouseover="showTip(event, 'fs40', 96)" class="i">acc</span>
+            
+            |(<span onmouseout="hideTip(event, 'fs45', 97)" onmouseover="showTip(event, 'fs45', 97)" class="i">g</span>,_) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 98)" onmouseover="showTip(event, 'fs45', 98)" class="i">g</span> <span class="o">&gt;</span> <span class="n">0.</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs45', 99)" onmouseover="showTip(event, 'fs45', 99)" class="i">g</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs37', 100)" onmouseover="showTip(event, 'fs37', 100)" class="i">accuracy</span> 
+            
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 101)" onmouseover="showTip(event, 'fs39', 101)" class="i">molecule</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs40', 102)" onmouseover="showTip(event, 'fs40', 102)" class="i">acc</span>
+            
+            |(<span onmouseout="hideTip(event, 'fs45', 103)" onmouseover="showTip(event, 'fs45', 103)" class="i">g</span>,_) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 104)" onmouseover="showTip(event, 'fs45', 104)" class="i">g</span> <span class="o">&lt;</span> <span class="n">0.</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs45', 105)" onmouseover="showTip(event, 'fs45', 105)" class="i">g</span> <span class="o">&gt;</span> (<span class="n">0.</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs37', 106)" onmouseover="showTip(event, 'fs37', 106)" class="i">accuracy</span>) 
+            
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 107)" onmouseover="showTip(event, 'fs39', 107)" class="i">molecule</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs40', 108)" onmouseover="showTip(event, 'fs40', 108)" class="i">acc</span>
+
+
+            |(<span onmouseout="hideTip(event, 'fs45', 109)" onmouseover="showTip(event, 'fs45', 109)" class="i">g</span>,<span onmouseout="hideTip(event, 'fs46', 110)" onmouseover="showTip(event, 'fs46', 110)" class="i">c</span>) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 111)" onmouseover="showTip(event, 'fs45', 111)" class="i">g</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs37', 112)" onmouseover="showTip(event, 'fs37', 112)" class="i">accuracy</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs46', 113)" onmouseover="showTip(event, 'fs46', 113)" class="i">c</span> <span class="o">=</span> <span class="n">9</span> 
+                
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 114)" onmouseover="showTip(event, 'fs38', 114)" class="f">inner</span> <span onmouseout="hideTip(event, 'fs33', 115)" onmouseover="showTip(event, 'fs33', 115)" class="i">allAtoms</span> <span onmouseout="hideTip(event, 'fs35', 116)" onmouseover="showTip(event, 'fs35', 116)" class="i">nodeAtoms</span> (<span onmouseout="hideTip(event, 'fs36', 117)" onmouseover="showTip(event, 'fs36', 117)" class="i">gap</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs44', 118)" onmouseover="showTip(event, 'fs44', 118)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 119)" onmouseover="showTip(event, 'fs11', 119)" class="i">mass</span>) <span onmouseout="hideTip(event, 'fs37', 120)" onmouseover="showTip(event, 'fs37', 120)" class="i">accuracy</span> (<span onmouseout="hideTip(event, 'fs44', 121)" onmouseover="showTip(event, 'fs44', 121)" class="i">x</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs39', 122)" onmouseover="showTip(event, 'fs39', 122)" class="i">molecule</span>) <span onmouseout="hideTip(event, 'fs40', 123)" onmouseover="showTip(event, 'fs40', 123)" class="i">acc</span> <span onmouseout="hideTip(event, 'fs44', 124)" onmouseover="showTip(event, 'fs44', 124)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 125)" onmouseover="showTip(event, 'fs13', 125)" class="i">valence</span>
+            
+            |(<span onmouseout="hideTip(event, 'fs45', 126)" onmouseover="showTip(event, 'fs45', 126)" class="i">g</span>,<span onmouseout="hideTip(event, 'fs46', 127)" onmouseover="showTip(event, 'fs46', 127)" class="i">c</span>) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 128)" onmouseover="showTip(event, 'fs45', 128)" class="i">g</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs37', 129)" onmouseover="showTip(event, 'fs37', 129)" class="i">accuracy</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs46', 130)" onmouseover="showTip(event, 'fs46', 130)" class="i">c</span> <span class="o">&gt;</span> <span class="n">1</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs46', 131)" onmouseover="showTip(event, 'fs46', 131)" class="i">c</span> <span class="o">&lt;</span> <span class="n">9</span>
+            
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 132)" onmouseover="showTip(event, 'fs38', 132)" class="f">inner</span> <span onmouseout="hideTip(event, 'fs33', 133)" onmouseover="showTip(event, 'fs33', 133)" class="i">allAtoms</span> <span onmouseout="hideTip(event, 'fs35', 134)" onmouseover="showTip(event, 'fs35', 134)" class="i">nodeAtoms</span> (<span onmouseout="hideTip(event, 'fs36', 135)" onmouseover="showTip(event, 'fs36', 135)" class="i">gap</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs44', 136)" onmouseover="showTip(event, 'fs44', 136)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 137)" onmouseover="showTip(event, 'fs11', 137)" class="i">mass</span>) <span onmouseout="hideTip(event, 'fs37', 138)" onmouseover="showTip(event, 'fs37', 138)" class="i">accuracy</span> (<span onmouseout="hideTip(event, 'fs44', 139)" onmouseover="showTip(event, 'fs44', 139)" class="i">x</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs39', 140)" onmouseover="showTip(event, 'fs39', 140)" class="i">molecule</span>) <span onmouseout="hideTip(event, 'fs40', 141)" onmouseover="showTip(event, 'fs40', 141)" class="i">acc</span> (<span onmouseout="hideTip(event, 'fs41', 142)" onmouseover="showTip(event, 'fs41', 142)" class="i">counter</span><span class="o">-</span><span class="n">1</span>)
+
+            |(<span onmouseout="hideTip(event, 'fs45', 143)" onmouseover="showTip(event, 'fs45', 143)" class="i">g</span>,<span onmouseout="hideTip(event, 'fs46', 144)" onmouseover="showTip(event, 'fs46', 144)" class="i">c</span>) <span class="k">when</span> <span onmouseout="hideTip(event, 'fs45', 145)" onmouseover="showTip(event, 'fs45', 145)" class="i">g</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs37', 146)" onmouseover="showTip(event, 'fs37', 146)" class="i">accuracy</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs46', 147)" onmouseover="showTip(event, 'fs46', 147)" class="i">c</span> <span class="o">=</span> <span class="n">1</span> 
+            
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 148)" onmouseover="showTip(event, 'fs38', 148)" class="f">inner</span> <span onmouseout="hideTip(event, 'fs35', 149)" onmouseover="showTip(event, 'fs35', 149)" class="i">nodeAtoms</span> <span onmouseout="hideTip(event, 'fs35', 150)" onmouseover="showTip(event, 'fs35', 150)" class="i">nodeAtoms</span> (<span onmouseout="hideTip(event, 'fs36', 151)" onmouseover="showTip(event, 'fs36', 151)" class="i">gap</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs44', 152)" onmouseover="showTip(event, 'fs44', 152)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 153)" onmouseover="showTip(event, 'fs11', 153)" class="i">mass</span>) <span onmouseout="hideTip(event, 'fs37', 154)" onmouseover="showTip(event, 'fs37', 154)" class="i">accuracy</span> (<span onmouseout="hideTip(event, 'fs44', 155)" onmouseover="showTip(event, 'fs44', 155)" class="i">x</span><span class="o">::</span><span onmouseout="hideTip(event, 'fs39', 156)" onmouseover="showTip(event, 'fs39', 156)" class="i">molecule</span>) <span onmouseout="hideTip(event, 'fs40', 157)" onmouseover="showTip(event, 'fs40', 157)" class="i">acc</span> (<span onmouseout="hideTip(event, 'fs44', 158)" onmouseover="showTip(event, 'fs44', 158)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 159)" onmouseover="showTip(event, 'fs13', 159)" class="i">valence</span><span class="o">-</span><span class="n">1</span>) 
+
+            |_
+            
+                <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 160)" onmouseover="showTip(event, 'fs40', 160)" class="i">acc</span>
+        ) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs42', 161)" onmouseover="showTip(event, 'fs42', 161)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 162)" onmouseover="showTip(event, 'fs47', 162)" class="f">concat</span>
+
+    <span onmouseout="hideTip(event, 'fs38', 163)" onmouseover="showTip(event, 'fs38', 163)" class="f">inner</span> <span onmouseout="hideTip(event, 'fs33', 164)" onmouseover="showTip(event, 'fs33', 164)" class="i">allAtoms</span> <span onmouseout="hideTip(event, 'fs35', 165)" onmouseover="showTip(event, 'fs35', 165)" class="i">nodeAtoms</span> <span onmouseout="hideTip(event, 'fs36', 166)" onmouseover="showTip(event, 'fs36', 166)" class="i">gap</span> <span onmouseout="hideTip(event, 'fs37', 167)" onmouseover="showTip(event, 'fs37', 167)" class="i">accuracy</span> [] [] <span class="n">9</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 168)" onmouseover="showTip(event, 'fs48', 168)" class="i">resulteg1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 169)" onmouseover="showTip(event, 'fs32', 169)" class="f">moleculefkt</span> <span onmouseout="hideTip(event, 'fs30', 170)" onmouseover="showTip(event, 'fs30', 170)" class="i">atoms</span> <span onmouseout="hideTip(event, 'fs31', 171)" onmouseover="showTip(event, 'fs31', 171)" class="i">nodes</span> <span class="n">87.068414</span> <span class="n">0.5</span>
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="example-1" class="anchor" href="#example-1">example 1</a></h2>
+<ul>
+<li>Name: <strong>Hypusine</strong></li>
+<li>Monoisotopic Mass: <em>87.068414</em></li>
+<li>Atom-Composition: <strong>H(9) C(4) N O</strong></li>
+<li>Found?-<strong>NO</strong></li>
+<li>Number of potential molecules: <em>16979</em></li>
+<li>Time: Real: 00:00:00.185, CPU: 00:00:00.234, GC Gen0: 10, Gen1: 0, Gen2: 0</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 172)" onmouseover="showTip(event, 'fs49', 172)" class="i">resulteg2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 173)" onmouseover="showTip(event, 'fs32', 173)" class="f">moleculefkt</span> <span onmouseout="hideTip(event, 'fs30', 174)" onmouseover="showTip(event, 'fs30', 174)" class="i">atoms</span> <span onmouseout="hideTip(event, 'fs31', 175)" onmouseover="showTip(event, 'fs31', 175)" class="i">nodes</span> <span class="n">107.997631</span> <span class="n">0.5</span>
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="example-2" class="anchor" href="#example-2">example 2</a></h2>
+<ul>
+<li>Name: <strong>Ethylphosphate</strong></li>
+<li>Description: O-Ethylphosphorylation</li>
+<li>Monoisotopic Mass: <em>107.997631</em></li>
+<li>Atom-Composition: <strong>H(5) C(2) O(3) P</strong></li>
+<li>Found?-<strong>YES</strong></li>
+<li>Number of potential molecules: <em>80529</em></li>
+<li>Time: Real: 00:00:00.543, CPU: 00:00:00.546, GC Gen0: 82, Gen1: 1, Gen2: 0</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 176)" onmouseover="showTip(event, 'fs50', 176)" class="i">resulteg3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 177)" onmouseover="showTip(event, 'fs32', 177)" class="f">moleculefkt</span> <span onmouseout="hideTip(event, 'fs30', 178)" onmouseover="showTip(event, 'fs30', 178)" class="i">atoms</span> <span onmouseout="hideTip(event, 'fs31', 179)" onmouseover="showTip(event, 'fs31', 179)" class="i">nodes</span> <span class="n">136.001656</span> <span class="n">0.5</span>
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="example-3" class="anchor" href="#example-3">example 3</a></h2>
+<ul>
+<li>Name: <strong>DTT_ST</strong></li>
+<li>Description: Dithiothreitol (DTT)</li>
+<li>Monoisotopic Mass: <em>136.001656</em></li>
+<li>Atom-Composition: <strong>H(8) C(4) O S(2)</strong></li>
+<li>Found?-<strong>YES</strong></li>
+<li>Number of potential molecules: <em>995704</em></li>
+<li>Time: Real: 00:00:07.470, CPU: 00:00:07.953, GC Gen0: 968, Gen1: 10, Gen2: 1</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 180)" onmouseover="showTip(event, 'fs51', 180)" class="i">resulteg4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 181)" onmouseover="showTip(event, 'fs32', 181)" class="f">moleculefkt</span> <span onmouseout="hideTip(event, 'fs30', 182)" onmouseover="showTip(event, 'fs30', 182)" class="i">atoms</span> <span onmouseout="hideTip(event, 'fs31', 183)" onmouseover="showTip(event, 'fs31', 183)" class="i">nodes</span> <span class="n">86.000394</span> <span class="n">0.5</span>
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="example-4" class="anchor" href="#example-4">example 4</a></h2>
+<ul>
+<li>Name: <strong>Malonyl</strong></li>
+<li>Monoisotopic Mass: <em>86.000394</em></li>
+<li>Atom-Composition: <strong>H(2) C(3) O(3)</strong></li>
+<li>Found?-<strong>YES</strong></li>
+<li>Number of potential molecules: <em>13755</em></li>
+<li>Time: Real: 00:00:00.070, CPU: 00:00:00.046, GC Gen0: 11, Gen1: 1, Gen2: 0</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 184)" onmouseover="showTip(event, 'fs52', 184)" class="i">resulteg5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 185)" onmouseover="showTip(event, 'fs32', 185)" class="f">moleculefkt</span> <span onmouseout="hideTip(event, 'fs30', 186)" onmouseover="showTip(event, 'fs30', 186)" class="i">atoms</span> <span onmouseout="hideTip(event, 'fs31', 187)" onmouseover="showTip(event, 'fs31', 187)" class="i">nodes</span> <span class="n">42.021798</span> <span class="n">0.5</span>
+</code></pre></td>
+</tr>
+</table>
+<h2><a name="example-5" class="anchor" href="#example-5">example 5</a></h2>
+<ul>
+<li>Name: <strong>Guanidination</strong></li>
+<li>Monoisotopic Mass: <em>42.021798</em></li>
+<li>Atom-Composition: <strong>H(2) C N(2)</strong></li>
+<li>Found?-<strong>YES</strong></li>
+<li>Number of potential molecules: <em>60</em></li>
+<li>Time: Real: 00:00:00.004, CPU: 00:00:00.000, GC Gen0: 0, Gen1: 0, Gen2: 0</li>
+</ul>
+<h2><a name="Time-complexity" class="anchor" href="#Time-complexity">Time complexity</a></h2>
+<p>O(n*g)^g</p>
+
+<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs2">namespace FSharp.Plotly</div>
+<div class="tip" id="fs3">namespace System</div>
+<div class="tip" id="fs4">namespace BioFSharp</div>
+<div class="tip" id="fs5">module Isotopes<br /><br />from BioFSharp</div>
+<div class="tip" id="fs6">module Table<br /><br />from BioFSharp.Isotopes</div>
+<div class="tip" id="fs7">module AminoAcids<br /><br />from BioFSharp</div>
+<div class="tip" id="fs8">type atom =<br />&#160;&#160;{symbol: string;<br />&#160;&#160;&#160;mass: float;<br />&#160;&#160;&#160;valence: int;}<br /><br />Full name: MoleculeFinding.atom</div>
+<div class="tip" id="fs9">atom.symbol: string</div>
+<div class="tip" id="fs10">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
+<div class="tip" id="fs11">atom.mass: float</div>
+<div class="tip" id="fs12">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs13">atom.valence: int</div>
+<div class="tip" id="fs14">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
+<div class="tip" id="fs15">val H : atom<br /><br />Full name: MoleculeFinding.H</div>
+<div class="tip" id="fs16">val symbol : aa:AminoAcid -&gt; char<br /><br />Full name: BioFSharp.AminoAcids.symbol</div>
+<div class="tip" id="fs17">val H1 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.H1</div>
+<div class="tip" id="fs18">Isotopes.Isotope.Mass: float</div>
+<div class="tip" id="fs19">val C : atom<br /><br />Full name: MoleculeFinding.C</div>
+<div class="tip" id="fs20">val C12 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.C12</div>
+<div class="tip" id="fs21">val N : atom<br /><br />Full name: MoleculeFinding.N</div>
+<div class="tip" id="fs22">val N14 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.N14</div>
+<div class="tip" id="fs23">val O : atom<br /><br />Full name: MoleculeFinding.O</div>
+<div class="tip" id="fs24">val O16 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.O16</div>
+<div class="tip" id="fs25">val P : atom<br /><br />Full name: MoleculeFinding.P</div>
+<div class="tip" id="fs26">val S : atom<br /><br />Full name: MoleculeFinding.S</div>
+<div class="tip" id="fs27">val S32 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.S32</div>
+<div class="tip" id="fs28">val Se : atom<br /><br />Full name: MoleculeFinding.Se</div>
+<div class="tip" id="fs29">val Se74 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.Se74</div>
+<div class="tip" id="fs30">val atoms : atom list<br /><br />Full name: MoleculeFinding.atoms</div>
+<div class="tip" id="fs31">val nodes : atom list<br /><br />Full name: MoleculeFinding.nodes</div>
+<div class="tip" id="fs32">val moleculefkt : allAtoms:atom list -&gt; nodeAtoms:atom list -&gt; gap:float -&gt; accuracy:float -&gt; atom list list<br /><br />Full name: MoleculeFinding.moleculefkt</div>
+<div class="tip" id="fs33">val allAtoms : atom list</div>
+<div class="tip" id="fs34">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
+<div class="tip" id="fs35">val nodeAtoms : atom list</div>
+<div class="tip" id="fs36">val gap : float</div>
+<div class="tip" id="fs37">val accuracy : float</div>
+<div class="tip" id="fs38">val inner : (atom list -&gt; atom list -&gt; float -&gt; float -&gt; atom list -&gt; atom list list -&gt; int -&gt; atom list list)</div>
+<div class="tip" id="fs39">val molecule : atom list</div>
+<div class="tip" id="fs40">val acc : atom list list</div>
+<div class="tip" id="fs41">val counter : int</div>
+<div class="tip" id="fs42">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs43">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fs44">val x : atom</div>
+<div class="tip" id="fs45">val g : float</div>
+<div class="tip" id="fs46">val c : int</div>
+<div class="tip" id="fs47">val concat : lists:seq&lt;&#39;T list&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.concat</div>
+<div class="tip" id="fs48">val resulteg1 : atom list list<br /><br />Full name: MoleculeFinding.resulteg1</div>
+<div class="tip" id="fs49">val resulteg2 : atom list list<br /><br />Full name: MoleculeFinding.resulteg2</div>
+<div class="tip" id="fs50">val resulteg3 : atom list list<br /><br />Full name: MoleculeFinding.resulteg3</div>
+<div class="tip" id="fs51">val resulteg4 : atom list list<br /><br />Full name: MoleculeFinding.resulteg4</div>
+<div class="tip" id="fs52">val resulteg5 : atom list list<br /><br />Full name: MoleculeFinding.resulteg5</div>
+<div class="tip" id="fs53">val values : float list<br /><br />Full name: MoleculeFinding.values</div>
+<div class="tip" id="fs54">val keys : string list<br /><br />Full name: MoleculeFinding.keys</div>
+<div class="tip" id="fs55">val labels : string list<br /><br />Full name: MoleculeFinding.labels</div>
+<div class="tip" id="fs56">type Chart =<br />&#160;&#160;static member Area : xy:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Area : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Bar : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member Bar : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : xy:seq&lt;&#39;a0 * &#39;a1&gt; * ?Name:string * ?Showlegend:bool * ?Color:string * ?Opacity:float * ?Whiskerwidth:float * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:float * ?Pointpos:float * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : ?x:&#39;a0 * ?y:&#39;a1 * ?Name:string * ?Showlegend:bool * ?Color:string * ?Opacity:float * ?Whiskerwidth:float * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:float * ?Pointpos:float * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member Bubble : xysizes:seq&lt;#IConvertible * #IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions -&gt; GenericChart<br />&#160;&#160;static member Bubble : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * sizes:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions -&gt; GenericChart<br />&#160;&#160;static member Column : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member Column : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;c * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;...<br /><br />Full name: FSharp.Plotly.Chart</div>
+<div class="tip" id="fs57">static member Chart.Column : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:StyleOption.TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart.GenericChart<br />static member Chart.Column : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;c * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:StyleOption.TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart.GenericChart</div>
+<div class="tip" id="fs58">Multiple items<br />type Marker =<br />&#160;&#160;new : unit -&gt; Marker<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolors : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: FSharp.Plotly.TraceAuxiliaryObjects.Marker<br /><br />--------------------<br />new : unit -&gt; Marker</div>
+<div class="tip" id="fs59">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;static member Axis : ?AxisType:AxisType * ?Title:string * ?Titlefont:FontOptions * ?Autorange:AutoRange * ?Rangemode:RangeMode * ?Range:RangeValues * ?Fixedrange:bool * ?Tickmode:TickMode * ?nTicks:int * ?Tick0:float * ?dTick:&#39;d * ?Tickvals:&#39;e * ?Ticktext:&#39;f * ?Ticks:TickOptions * ?Mirror:Mirror * ?Ticklen:float * ?Tickwidth:float * ?Tickcolor:string * ?Showticklabels:bool * ?Tickfont:FontOptions * ?Tickangle:float * ?Tickprefix:string * ?Showtickprefix:ShowTickOption * ?Ticksuffix:string * ?Showticksuffix:ShowTickOption * ?Showexponent:ShowExponent * ?Exponentformat:ExponentFormat * ?Tickformat:string * ?Hoverformat:string * ?Showline:bool * ?Linecolor:string * ?Linewidth:float * ?Showgrid:bool * ?Gridcolor:string * ?Gridwidth:float * ?Zeroline:bool * ?Zerolinecolor:string * ?Zerolinewidth:float * ?Anchor:&#39;g * ?Side:Side * ?Overlaying:&#39;h * ?Domain:RangeValues * ?Position:float * ?IsSubplotObj:bool * ?Tickvalssrc:string * ?Ticktextsrc:string * ?Showspikes:bool * ?Spikesides:bool * ?Spikethickness:float * ?Spikecolor:string * ?Showbackground:bool * ?Backgroundcolor:string * ?Showaxeslabels:bool -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; LinearAxis)<br />&#160;&#160;static member Bar : ?X:seq&lt;#IConvertible&gt; * ?Y:seq&lt;#IConvertible&gt; * ?Marker:MarkerOptions * ?R:&#39;g * ?T:&#39;h * ?Error_y:ErrorOptions * ?Error_x:ErrorOptions * ?Orientation:Orientation -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Bar)<br />&#160;&#160;static member Bins : ?StartBins:float * ?EndBins:float * ?Size:&#39;a0 -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Bins)<br />&#160;&#160;static member BoxPlot : ?Y:&#39;c * ?X:&#39;d * ?X0:&#39;e * ?Y0:&#39;f * ?Whiskerwidth:float * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:float * ?Pointpos:float * ?Orientation:Orientation * ?Fillcolor:string * ?xAxis:string * ?yAxis:string * ?Ysrc:string * ?Xsrc:string -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Box)<br />&#160;&#160;static member Colorbar : ?Thicknessmode:&#39;a0 * ?Thickness:float * ?Lenmode:&#39;a1 * ?Len:float * ?X:float * ?Xanchor:&#39;a2 * ?Xpad:float * ?Y:float * ?Yanchor:&#39;a3 * ?Ypad:float * ?Outlinecolor:string * ?Outlinewidth:float * ?Bordercolor:string * ?Borderwidth:float * ?Bgcolor:string * ?Tickmode:&#39;a4 * ?nTicks:int * ?Tick0:float * ?dTick:&#39;a5 * ?Tickvals:&#39;a6 * ?Ticktext:&#39;a7 * ?Ticks:&#39;a8 * ?Ticklen:float * ?Tickwidth:float * ?Tickcolor:string * ?Showticklabels:bool * ?Tickfont:#Font * ?Tickangle:float * ?Tickformat:string * ?Tickprefix:string * ?Showtickprefix:&#39;a10 * ?Ticksuffix:string * ?Showticksuffix:&#39;a11 * ?Exponentformat:&#39;a12 * ?Showexponent:&#39;a13 * ?Title:string * ?Titlefont:#Font * ?Titleside:&#39;a15 * ?Tickvalssrc:string * ?Ticktextsrc:string -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Colorbar)<br />&#160;&#160;static member Error : ?Symmetric:bool * ?Array:&#39;a0 * ?Arrayminus:&#39;a1 * ?Value:float * ?Valueminus:float * ?Traceref:int * ?Tracerefminus:int * ?Copy_ystyle:bool * ?Copy_zstyle:bool * ?Color:string * ?Thickness:float * ?Width:float * ?Arraysrc:string * ?Arrayminussrc:string -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Error)<br />&#160;&#160;static member Font : ?Family:FontFamily * ?Size:float * ?Color:string * ?Familysrc:string * ?Sizesrc:string * ?Colorsrc:string -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Font)<br />&#160;&#160;static member IColormap : ?Transpose:bool * ?zAuto:bool * ?zMin:float * ?zMax:float * ?Colorscale:ColorScale * ?Autocolorscale:bool * ?Reversescale:bool * ?Showscale:bool * ?zSmooth:SmoothAlg * ?Colorbar:#Colorbar -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; IColormap)<br />&#160;&#160;static member IHistogram : ?histfunc:HistNorm * ?histnorm:HistNorm * ?autobinx:bool * ?nbinsx:int * ?xbins:BinsOption * ?autobiny:bool * ?nbinsy:int * ?ybins:BinsOption * ?orientation:&#39;a0 -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; IHistogram)<br />&#160;&#160;...<br /><br />Full name: FSharp.Plotly.Options<br /><br />--------------------<br />new : unit -&gt; Options</div>
+<div class="tip" id="fs60">static member Options.Marker : ?Size:int * ?Color:&#39;f * ?Symbol:StyleOption.Symbol * ?Opacity:float * ?MultiSizes:seq&lt;#IConvertible&gt; -&gt; (&#39;T -&gt; &#39;T) (requires &#39;T :&gt; Marker)</div>
+<div class="tip" id="fs61">static member Chart.Show : ch:GenericChart.GenericChart -&gt; unit</div>
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
+			  <li><a href="/BioFSharp/Readers.html">I/O</a>
+			  </li>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
+			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
