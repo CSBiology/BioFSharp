@@ -103,13 +103,33 @@ module GFF3Parser =
     
         ///If there is a ##FASTA directive, all subsequent lines are taken by this function, transformed to seq<FastA.FastaItem<'a>> and added to the previous parsed GFF<'a> list.
         let addFastaSequence (en:IEnumerator<string>) (acc:GFF<'a> list) converter= 
+//            let rec yielder (s:IEnumerator<_>) =
+//                seq [
+//                    if s.MoveNext() then
+//                        yield s.Current
+//                        yield! yielder s
+//                    ]
+//            
+//            let seqLeft = 
+//                yielder en
+//                |> FastA.fromFileEnumerator converter
+//                let rec loop (acc:seq<string>) =
+//                    if en.MoveNext() then
+//                        loop (Seq.append acc (seq [en.Current]))
+//                    else acc |> FastA.fromFileEnumerator converter
+//                loop [en.Current]
             let seqLeft = 
-                let rec loop (acc:seq<string>) =
+                let rec loop (acc:string list) =
                     if en.MoveNext() then
-                        loop (Seq.append acc (seq [en.Current]))
-                    else acc |> FastA.fromFileEnumerator converter
+                        //printfn "%s" en.Current
+                        //loop (Seq.append acc (seq [en.Current]))
+                        loop (en.Current::acc)
+                    else 
+                        acc 
+                        |> List.rev
+                        |> fun x -> FastA.fromFileEnumerator converter x
                 loop [en.Current]
-            
+
             let finalSeq =
                 List.append (acc |> List.rev) [(Fasta seqLeft)]
                 |> Seq.cast
@@ -150,26 +170,28 @@ module GFF3Parser =
         let GFF3readerWithoutFasta filepath = GFF3reader id filepath
     
     
-    module Validator =
+    module SanityCheck =
 
         //SO_Terms which can be chosen for the feature field. Only these SO_Terms are valid
-        let SO_Terms so_TermsPath=
+        let private SO_Terms so_TermsPath=
             FileIO.readFile(so_TermsPath)
             |> Seq.head
             |> fun x -> x.Split([|' '|])
             
         //directives of GFF3
-        let directives = 
+        let private directives = 
             [|"##gff-version"; "##sequence-region"; "##feature-ontology";
             "##attribute-ontology"; "##source-ontology"; "##species"; 
             "##genome-build"; "###"|]
     
         //Validates GFF3 file. Prints first appearance of an error with line index. If needed an SO(FA) check is possible
-        let GFF3validator so_TermsPath filepath =
+        let sanityCheckWithSOTerm so_TermsPath filepath =
             let strEnumerator = (FileIO.readFile(filepath)).GetEnumerator()
+            let so_TermsPathEmpty = 
+                if so_TermsPath = "" then true else false 
             if strEnumerator.MoveNext() then
                 //every gff3 file has to start with "##gff-version 3[...]"
-                match strEnumerator.Current.StartsWith("##gff-version 3") || strEnumerator.Current.StartsWith("##gff-version\t3") with
+                match strEnumerator.Current.StartsWith("##gff-version 3") || strEnumerator.Current.StartsWith("##gff-version\t3") || strEnumerator.Current.StartsWith("##gff-version   3") with
                 | false -> printfn "Error in first line. Should be ##gff-version 3[...]! with separation by one whitespace (no tab or '   ')"
                 | true  ->
                     let rec loop i =
@@ -198,29 +220,33 @@ module GFF3Parser =
                                         match splitstr.[0].Contains(" ") with
                                         | true -> printfn "Field seqid must not contain whitespace in line %i!" i
                                         | false -> 
-                                            match (SO_Terms so_TermsPath) |> Array.tryFind (fun x -> x= splitstr.[2]) with //eclude these to ignore Sequence Ontology terms
-                                            | Some x ->                                                    //eclude these to ignore Sequence Ontology terms
-                                                match splitstr.[2] with
-                                                | "CDS" -> 
-                                                    match splitstr.[7] with
-                                                    | "" -> printfn "Empty colum 8 in line %i!" i
-                                                    | "." -> printfn "At CDS features the phase (column 8) is missing in line %i!" i
-                                                    | _ -> loop (i+1)
-                                                | _ ->
-                                                    let attributesSubStr = splitstr.[8].Split([|'=';';'|])
-                                                    match attributesSubStr.Length%2 with
-                                                    | 0 -> loop (i+1) 
-                                                    | _ -> printfn "Error in field 9 (attributes) in line %i. ['=';';'] are reserved for separation purposes and are not allowed in the key/value!" i
-                                            | _ -> printfn "In line %i coloum 3 should contain SO-Name or SOFA-ID" i //eclude these to ignore Sequence Ontology terms
+                                                let attributesSubStr = splitstr.[8].Split([|'=';';'|])
+                                                match attributesSubStr.Length%2 with
+                                                | 0 -> 
+                                                    match splitstr.[2] with
+                                                    | "CDS" -> 
+                                                        match splitstr.[7] with
+                                                        | "" -> printfn "Empty colum 8 in line %i!" i
+                                                        | "." -> printfn "At CDS features the phase (column 8) is missing in line %i!" i
+                                                        | _ -> loop (i+1)
+                                                    | _ ->
+                                                        if so_TermsPathEmpty then 
+                                                            loop (i+1) 
+                                                        else 
+                                                            match (SO_Terms so_TermsPath) |> Array.tryFind (fun x -> x= splitstr.[2]) with  //eclude these to ignore Sequence Ontology terms
+                                                            | None -> printfn "In line %i coloum 3 should contain SO-Name or SOFA-ID. %s is not part of it" i splitstr.[2]    //eclude these to ignore Sequence Ontology terms
+                                                            | Some x ->                                                                     //eclude these to ignore Sequence Ontology terms
+                                                                loop (i+1) 
+                                                | _ -> printfn "Error in field 9 (attributes) in line %i. ['=';';'] are reserved for separation purposes and are not allowed in the key or value!" i
                                     | true -> printfn "Wrong column filling. The number of fields in row %i is not 9!" i
                         else printfn "Valid GFF3 file!"
                     loop 2
-    
+
+        let sanityCheck filepath = sanityCheckWithSOTerm "" filepath
     
     
     
     module Relationship = 
-    
         ///Searches for an term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent) (shows all features which are linked to searchterm)
         let relationshipSearch (gffList:seq<GFF<'a>>) searchterm = 
             let filteredGFFentries = 
@@ -234,6 +260,12 @@ module GFF3Parser =
                 |> Seq.filter (fun x -> 
                     if x.Attributes.ContainsKey("ID") then 
                         let IDlist = x.Attributes.["ID"]
+                        let IDlistfilt = IDlist |> List.tryFind (fun x -> x.Contains(searchterm)) //x = searchterm
+                        match IDlistfilt with
+                        | Some x -> true
+                        | _ -> false
+                    elif x.Attributes.ContainsKey("Id") then 
+                        let IDlist = x.Attributes.["Id"]
                         let IDlistfilt = IDlist |> List.tryFind (fun x -> x.Contains(searchterm)) //x = searchterm
                         match IDlistfilt with
                         | Some x -> true
@@ -252,6 +284,61 @@ module GFF3Parser =
             Seq.append parent child_of
   
 
-//    module Writer =
-//        
-//        let GFF3Writer (input : seq<GFF<'a>>) :unit = 
+    module Writer =
+        let toStringGFFEntry (g: GFFEntry) =
+            let toStringMap (m: Map<string,string list>)= 
+                m
+                |> Seq.map (fun entry -> entry.Key,String.concat "," entry.Value)
+                |> Seq.map (fun (k,v) -> sprintf "%s=%s" k v)
+                |> String.concat ";"
+            let toStringSup s=  
+                String.concat "\t" s 
+            let toStringChar c=
+                match c with
+                |'\u0000' -> "."
+                | _ -> c |> string
+            let toStringInt i=
+                match i with
+                | -1 -> "."
+                | _ -> i |> string
+            let toStringFloat f=
+                let preC = f |> string
+                match preC with
+                | "NaN" -> "."
+                | _ -> preC
+            if g.Supplement.[0] = "No supplement" then 
+                sprintf  "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (g.StartPos |> toStringInt) (g.EndPos |> toStringInt) (g.Score |> toStringFloat) (g.Strand |> toStringChar) (g.Phase|> toStringInt) (g.Attributes |> toStringMap)
+            else sprintf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (g.StartPos |> toStringInt) (g.EndPos |> toStringInt) (g.Score |> toStringFloat) (g.Strand |> toStringChar) (g.Phase|> toStringInt) (g.Attributes |> toStringMap) (g.Supplement |> toStringSup)
+        
+
+        let GFF3Writer (input : seq<GFF<seq<'a>>>) converter path=
+            let en = input.GetEnumerator()
+            let rec writeLoop acc counter=
+                if counter = 20000 then 
+                    acc 
+                    |> List.rev
+                    |> Seq.writeOrAppend path
+                    writeLoop [] 0
+                else
+                    if en.MoveNext() then 
+                        match en.Current with
+                        | GFFLine (x)      ->   writeLoop ((toStringGFFEntry x)::acc) (counter+1)
+
+                        | Comment (x)      ->   writeLoop (x::acc) (counter+1)
+
+                        | Directive (x)    ->   writeLoop (x::acc) (counter+1)
+
+                        | Fasta (x)        ->   acc 
+                                                |> List.rev
+                                                |> Seq.writeOrAppend path
+                                                Seq.writeOrAppend path (seq ["##FASTA"])
+                                                FastA.write converter path x  
+                                                printfn "Writing (incl. FastA-Sequence) is finished! Path: %s" path
+                                                //writeLoop [] 0 if something follows the FastA-Sequence
+
+                    else 
+                        acc 
+                        |> List.rev
+                        |> Seq.writeOrAppend path
+                        printfn "Writing is finished! Path: %s" path
+            writeLoop [] 0

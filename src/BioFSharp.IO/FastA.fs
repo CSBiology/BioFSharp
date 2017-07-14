@@ -81,7 +81,7 @@ module FastA =
                                    ()
         
             loop ()
-        use sWriter = new System.IO.StreamWriter(filePath)
+        use sWriter = new System.IO.StreamWriter(filePath,true)
         data
         |> Seq.iter (fun (i:FastaItem<_>) ->
                                 sWriter.WriteLine(">" + i.Header)
