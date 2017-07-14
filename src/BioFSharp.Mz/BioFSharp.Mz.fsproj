@@ -61,6 +61,7 @@
     <None Include="BioFSharp.Mz.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
+    <Compile Include="MoleculeFinding.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care.IO\FSharp.Care.IO.fsproj">
