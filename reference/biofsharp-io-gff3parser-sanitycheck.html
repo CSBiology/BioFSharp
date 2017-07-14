@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>PeakArray - BioFSharp</title>
+    <title>SanityCheck - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,9 +37,10 @@
 
 
 
-<h1>PeakArray</h1>
+<h1>SanityCheck</h1>
 <p>
-  <span>Namespace: BioFSharp.Mz</span><br />
+  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-gff3parser.html">GFF3Parser</a></span>
 </p>
 <div class="xmldoc">
 </div>
@@ -55,111 +56,33 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '462', 462)" onmouseover="showTip(event, '462', 462)">
-            binToUpperIntergerMass (...)
+          <code onmouseout="hideTip(event, '370', 370)" onmouseover="showTip(event, '370', 370)">
+            sanityCheck filepath
           </code>
-          <div class="tip" id="462">
-            <strong>Signature:</strong> pkarr:PeakArray&lt;&#39;?9017&gt; -&gt; minMassBoarder:int -&gt; maxMassBoarder:int -&gt; float []<br />
-                          <strong>Type parameters:</strong> '?9017          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L27-27" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Bins peaks to their next upper 1 Da bin</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '463', 463)" onmouseover="showTip(event, '463', 463)">
-            map f pkarr
-          </code>
-          <div class="tip" id="463">
-            <strong>Signature:</strong> f:(&#39;?9011 -&gt; &#39;?9012) -&gt; pkarr:&#39;?9011 [] -&gt; PeakArray&lt;&#39;?9012&gt;<br />
-                          <strong>Type parameters:</strong> '?9011, '?9012          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L10-10" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '464', 464)" onmouseover="showTip(event, '464', 464)">
-            peaksToNearestUnitDaltonBin (...)
-          </code>
-          <div class="tip" id="464">
-            <strong>Signature:</strong> pkarr:PeakArray&lt;&#39;?9019&gt; -&gt; minMassBoarder:int -&gt; maxMassBoarder:int -&gt; float []<br />
-                          <strong>Type parameters:</strong> '?9019          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L38-38" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Bins peaks to their nearest 1 Da bin</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '465', 465)" onmouseover="showTip(event, '465', 465)">
-            peaksToNearestUnitDaltonBinVector (...)
-          </code>
-          <div class="tip" id="465">
-            <strong>Signature:</strong> pkarr:PeakArray&lt;&#39;a&gt; -&gt; minMassBoarder:int -&gt; maxMassBoarder:int -&gt; Vector&lt;float&lt;MeasureOne&gt;&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L49-49" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Bins peaks to their nearest 1 Da bin</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '466', 466)" onmouseover="showTip(event, '466', 466)">
-            unzipMzInt pkarr
-          </code>
-          <div class="tip" id="466">
-            <strong>Signature:</strong> pkarr:PeakArray&lt;&#39;?9015&gt; -&gt; &#39;?9015 [] * &#39;?9015 []<br />
-                          <strong>Type parameters:</strong> '?9015          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L16-16" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '467', 467)" onmouseover="showTip(event, '467', 467)">
-            zipMzInt mz intensity
-          </code>
-          <div class="tip" id="467">
-            <strong>Signature:</strong> mz:float array -&gt; intensity:float array -&gt; PeakArray&lt;Peak&gt;<br />
+          <div class="tip" id="370">
+            <strong>Signature:</strong> filepath:string -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Mz/PeakArray.fs#L13-13" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L245-245" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '371', 371)" onmouseover="showTip(event, '371', 371)">
+            sanityCheckWithSOTerm (...)
+          </code>
+          <div class="tip" id="371">
+            <strong>Signature:</strong> so_TermsPath:string -&gt; filepath:string -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3Parser.fs#L188-188" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
