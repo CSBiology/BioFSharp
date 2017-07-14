@@ -48,36 +48,6 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <ItemGroup>
-    <Compile Include="AgilentRaw.fs" />
-    <Compile Include="BlastWrapper.fs" />
-    <Compile Include="FastA.fs" />
-    <Compile Include="Mgf.fs" />
-    <Compile Include="Obo.fs" />
-    <Compile Include="OrthoMCL.fs" />
-    <Compile Include="FastQ.fs" />
-    <Compile Include="GFF3Parser.fs" />
-    <Compile Include="GeneBankParser.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care.IO\FSharp.Care.IO.fsproj">
-      <Name>FSharp.Care.IO</Name>
-      <Project>{2bd8f01a-03ce-4907-9449-b35b73eec916}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care\FSharp.Care.fsproj">
-      <Name>FSharp.Care</Name>
-      <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(TargetDir)*.dll"  "$(SolutionDir)bin\"
 xcopy /Y "$(TargetDir)*.xml" "$(SolutionDir)bin\"</PostBuildEvent>
@@ -154,4 +124,33 @@ xcopy /Y "$(TargetDir)*.xml" "$(SolutionDir)bin\"</PostBuildEvent>
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AgilentRaw.fs" />
+    <Compile Include="BlastWrapper.fs" />
+    <Compile Include="FastA.fs" />
+    <Compile Include="Mgf.fs" />
+    <Compile Include="Obo.fs" />
+    <Compile Include="OrthoMCL.fs" />
+    <Compile Include="FastQ.fs" />
+    <Compile Include="GFF3Parser.fs" />
+    <Compile Include="GeneBankParser.fs" />
+    <None Include="playground.fsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care.IO\FSharp.Care.IO.fsproj">
+      <Name>FSharp.Care.IO</Name>
+      <Project>{2bd8f01a-03ce-4907-9449-b35b73eec916}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care\FSharp.Care.fsproj">
+      <Name>FSharp.Care</Name>
+      <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
