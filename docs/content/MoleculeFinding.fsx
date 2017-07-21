@@ -22,7 +22,7 @@ open MoleculeFinding
 ##Input
 
 
-A list of atoms can be created. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one `atom`. So it can not act as `node` between two or more atoms.
+The function receaves a list of atoms as input. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one `atom`. So it can not act as `node` between two or more atoms.
 The five examples shown here use the following list of atoms:
 *)
 let atoms = [ Se; S; P; O; N; C; H;]
