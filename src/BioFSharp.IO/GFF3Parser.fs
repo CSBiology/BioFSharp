@@ -307,38 +307,73 @@ module GFF3Parser =
                 | "NaN" -> "."
                 | _ -> preC
             if g.Supplement.[0] = "No supplement" then 
-                sprintf  "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (g.StartPos |> toStringInt) (g.EndPos |> toStringInt) (g.Score |> toStringFloat) (g.Strand |> toStringChar) (g.Phase|> toStringInt) (g.Attributes |> toStringMap)
-            else sprintf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (g.StartPos |> toStringInt) (g.EndPos |> toStringInt) (g.Score |> toStringFloat) (g.Strand |> toStringChar) (g.Phase|> toStringInt) (g.Attributes |> toStringMap) (g.Supplement |> toStringSup)
+                sprintf  "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (toStringInt g.StartPos) (toStringInt g.EndPos) (toStringFloat g.Score) (toStringChar g.Strand) (toStringInt g.Phase) (toStringMap g.Attributes)
+            else sprintf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (toStringInt g.StartPos) (toStringInt g.EndPos) (toStringFloat g.Score) (toStringChar g.Strand) (toStringInt g.Phase) (toStringMap g.Attributes) (toStringSup g.Supplement)
         
 
-        let GFF3Writer (input : seq<GFF<seq<'a>>>) converter path=
+//        let GFF3Writer (input : seq<GFF<#seq<'a>>>) converter path=
+//            let en = input.GetEnumerator()
+//            let rec writeLoop acc counter=
+//                if counter = 20000 then 
+//                    acc 
+//                    |> List.rev
+//                    |> Seq.writeOrAppend path
+//                    writeLoop [] 0
+//                else
+//                    if en.MoveNext() then 
+//                        match en.Current with
+//                        | GFFLine (x)      ->   writeLoop ((toStringGFFEntry x)::acc) (counter+1)
+//
+//                        | Comment (x)      ->   writeLoop (x::acc) (counter+1)
+//
+//                        | Directive (x)    ->   writeLoop (x::acc) (counter+1)
+//
+//                        | Fasta (x)        ->   acc 
+//                                                |> List.rev
+//                                                |> Seq.writeOrAppend path
+//                                                Seq.writeOrAppend path (seq ["##FASTA"])
+//                                                FastA.write converter path x  
+//                                                printfn "Writing (incl. FastA-Sequence) is finished! Path: %s" path
+//                                                //writeLoop [] 0 if something follows the FastA-Sequence
+//
+//                    else 
+//                        acc 
+//                        |> List.rev
+//                        |> Seq.writeOrAppend path
+//                        printfn "Writing is finished! Path: %s" path
+//            writeLoop [] 0
+
+
+        let GFF3Writer (input : seq<GFF<#seq<'a>>>) converter path=
             let en = input.GetEnumerator()
-            let rec writeLoop acc counter=
-                if counter = 20000 then 
-                    acc 
-                    |> List.rev
-                    |> Seq.writeOrAppend path
-                    writeLoop [] 0
-                else
-                    if en.MoveNext() then 
-                        match en.Current with
-                        | GFFLine (x)      ->   writeLoop ((toStringGFFEntry x)::acc) (counter+1)
+            let toString =
+                seq {   
+                    while en.MoveNext() do
+                            match en.Current with
+                            | GFFLine (x)      ->   yield toStringGFFEntry x           
+                            | Comment (x)      ->   yield x             
+                            | Directive (x)    ->   yield x            
+                            | Fasta (x)        ->   yield "##FASTA"    
+                                                    yield! FastA.toString converter x
+                    }
+            toString
+            |> Seq.writeOrAppend path
+            printfn "Writing is finished! Path: %s" path
 
-                        | Comment (x)      ->   writeLoop (x::acc) (counter+1)
-
-                        | Directive (x)    ->   writeLoop (x::acc) (counter+1)
-
-                        | Fasta (x)        ->   acc 
-                                                |> List.rev
-                                                |> Seq.writeOrAppend path
-                                                Seq.writeOrAppend path (seq ["##FASTA"])
-                                                FastA.write converter path x  
-                                                printfn "Writing (incl. FastA-Sequence) is finished! Path: %s" path
-                                                //writeLoop [] 0 if something follows the FastA-Sequence
-
-                    else 
-                        acc 
-                        |> List.rev
-                        |> Seq.writeOrAppend path
-                        printfn "Writing is finished! Path: %s" path
-            writeLoop [] 0
+//
+//        let GFF3Writer4 (input : seq<GFF<#seq<'a>>>) converter path=
+//            let en = input.GetEnumerator()
+//            seq {   
+//                let rec loop ()=
+//                    if en.MoveNext() then
+//                        match en.Current with
+//                        | GFFLine (x)      ->   yield toStringGFFEntry en.Current
+//                                                loop ()
+//            
+//                        | Comment (x)      ->   yield en.Current
+//            
+//                        | Directive (x)    ->   yield en.Current
+//            
+//                        | Fasta (x)        ->   yield! FastA.toString en.Current
+//                loop 
+//                }
