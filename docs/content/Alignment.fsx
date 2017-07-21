@@ -2,10 +2,10 @@
 #I "../../bin"
 (**
 
-BioFSharp: DualAlignment
-========================
+# BioFSharp: Pairwise Alignment
 
-In this short tutorial, the usage of the DualAlignment-algorithm is demonstrated. 
+
+In this short tutorial, the usage of the Pairwise alignment-implementation is demonstrated. 
 For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local alignments, the <b>SmithWaterman</b>-algorithm is used.
 For both implementations, the gapvalues are evaluated using the <b>affine</b> gapscoremodel. 
 *)
@@ -19,8 +19,8 @@ open SmithWaterman
 
 (**
 <div class="box">
-Aligning aminoacid- and nucleotide-sequences
-----------------
+## Aligning aminoacid- and nucleotide-sequences
+
 
 For defining the scores of matching and missmatching characters, the <b>scoring</b>-function is defined. In the case of Aminoacid- or Nucleotide-sequence-alignments, the integrated substitution-matrices can be used.
 *)
@@ -28,7 +28,7 @@ For defining the scores of matching and missmatching characters, the <b>scoring<
 //For aminoacids
 let aaScoring = ScoringMatrix.getScoringMatrixAminoAcid ScoringMatrix.ScoringMatrixAminoAcid.BLOSUM62
 
-//>For nucleotides
+//For nucleotides
 let nucScoring = ScoringMatrix.getScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
 
 (**
@@ -45,7 +45,7 @@ let aaCosts = {
     Similarity = aaScoring 
     }
 
-//>For nucleotides
+//For nucleotides
 let nucCosts = {
     Open = -2
     Continuation = -1
@@ -53,7 +53,7 @@ let nucCosts = {
     }
 
 (**
-<div class="box">
+
 The alignment functions use <b>Arrays</b> as input. The Elements can be of any type, but require type equality. Also they need to have type equality with the input of the scoring function.
 Both the global and local alignment algorithms take the same parameters (costs,firstSequence,secondSequence) and return the same format.
 
@@ -66,7 +66,7 @@ let aaSeq2 = [|'M';'A';'A';'B';'E';'D';'M'|] |> Array.map AminoAcidSymbols.amino
 let globalAAAlignment = needlemanWunsch aaCosts aaSeq1 aaSeq2
 let localAAAlignment = smithWaterman aaCosts aaSeq1 aaSeq2
 
-//>For nucleotides
+//For nucleotides
 let nucSeq1 = [|'A';'T';'G';'A'|] |> BioArray.ofNucleotideString
 let nucSeq2 = [|'B';'A';'T';'V';'A';'W';'G'|] |> BioArray.ofNucleotideString
 
@@ -78,8 +78,8 @@ let localNucAlignment = smithWaterman nucCosts nucSeq1 nucSeq2
 
 (**
 <div class="box">
-Aligning anything else
-----------------
+## Aligning anything else
+
 
 This implementation was aimed to be as generic as possible. To achieve this, the scoring function can be designed at will, the only constraints being the need for two input variables and the type equality.
 

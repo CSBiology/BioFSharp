@@ -13,7 +13,6 @@ BioFSharp contains a set of readers for different biology-associated file format
 <a name="FastQ"></a>
 FastQ
 ------------------------------
-This documentation is not yet here. Hopefully it will be soon =)
 
 *)
 
