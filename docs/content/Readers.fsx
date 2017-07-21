@@ -103,19 +103,17 @@ Introducing Generic Feature Format Version 3
 In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9. 
 The nine fields are: 
 
-|Field          |   Description             |
-| ------------- |:-------------:            |
-| 1             | seqID                     |
-| 2             | source                    |
-| 3             | type, method or feature   |
-| 4             | startPos                  |
-| 5             | endPos                    |
-| 6             | score                     |
-| 7             | strand                    |
-| 8             | phase                     |
-| 9             | attributes                |
+1. seqID; 2. source; 3. type, method or feature; 4. startPos; 5. endPos; 6. score; 7. strand; 8. phase; 9. attributes             
+
+Below you can see an example GFF3 file.
 
 <img src="@Root/img/GFF3.png" alt="GFF3" style="width:150px;margin:10px" />
+
+Line 1: Declaration of file version
+Line 2: Comment
+Lines 4+5: GFF entry lines
+Line 6: FastA directive
+Lines 7+: Fasta Sequence
 
 Directives (marked with "##[...]") provide additional information like the gff-version which has to be the first line of each file ("##gff-version 3[...]"). 
 Comment lines have to start with a single "#[...]". It is possible that sequences in FastA format are at the end of the file. This has to be announced by a "##FASTA" directive line.
