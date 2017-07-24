@@ -81,16 +81,29 @@
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
+    <Compile Include="Algorithm\PairwiseAlignment.fs" />
+    <Compile Include="Algorithm\ScoringMatrix.fs" />
+    <Resource Include="Resources\BLOSUM45.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM50.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM80.txt" />
+    <EmbeddedResource Include="Resources\Default.txt" />
+    <EmbeddedResource Include="Resources\EDNA.txt" />
+    <EmbeddedResource Include="Resources\PAM250.txt" />
+    <EmbeddedResource Include="Resources\PAM30.txt" />
+    <EmbeddedResource Include="Resources\PAM70.txt" />
     <!-- Resources -->
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
+    <EmbeddedResource Include="Resources\BLOSUM62.txt" />
     <None Include="BioFSharp.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <Reference Include="FSharp.Core">
+      <HintPath>..\..\packages\FSharp.Core\lib\net40\FSharp.Core.dll</HintPath>
       <Private>True</Private>
+      <Paket>True</Paket>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />

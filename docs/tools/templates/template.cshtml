@@ -49,11 +49,24 @@
             <li class="nav-header">Getting started</li>
               @*<li><a href="@Root/tutorial.html">Sample tutorial</a></li>*@
               <li><a href="@Root/BioSequence.html">BioSequence</a></li>
+			  <li><a href="@Root/Alignment.html">Alignment</a></li>
+			  <li><a href="@Root/BoyerMooreUsage.html">BoyerMoore</a></li>
+			  <li><a href="@Root/Readers.html">I/O</a>
+			  @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Readers.fsx"))
+              {
+				  <ul class="nav nav-list">
+					<li><a href="@Root/Readers.html#FastQ">FastQ</a></li>
+					<li><a href="@Root/Readers.html#FastA">FastA</a></li>
+					<li><a href="@Root/Readers.html#GFF3">GFF3</a></li>
+				  </ul>
+              }
+			  </li>
               <li class="divider"></li>
               <li><a href="@Root/CentroidSpectra.html">Spectrum centroidization</a></li>
               <li><a href="@Root/ChargeStateDetermination.html">Charge state determination</a></li>
               <li><a href="@Root/PeptideLookUp.html">Peptide look up</a></li>
               <li><a href="@Root/PeptideIdentification.html">Peptide identification</a></li>
+			  <li><a href="@Root/MoleculeFinding.html">Molecule Finding</a>
               <li class="divider"></li>
               <li><a href="@Root/BlastWrapper.html">Use NCBI-Blast</a></li>
             <li class="nav-header">Documentation</li>
