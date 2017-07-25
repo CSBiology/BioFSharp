@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>BioFSharp.Mz</RootNamespace>
     <AssemblyName>BioFSharp.Mz</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.1.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>BioFSharp.Mz</Name>

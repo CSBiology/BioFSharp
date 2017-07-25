@@ -2,8 +2,6 @@
 #r "../../lib/FSharp.FGL.dll"
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.Mz.dll"
-#r "../../bin/FSharp.Care.dll"
-#r "../../bin/MathNet.Numerics.dll"
 #r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 #load "./data/Spectrum.fs"
 let exampleMzList,exampleIntList,charge,precursor = ExampleData.peakMassList,(ExampleData.peakIntensities |> List.map (fun x -> float x)),ExampleData.mz,ExampleData.precursorMass
@@ -11,7 +9,7 @@ let exampleMzList,exampleIntList,charge,precursor = ExampleData.peakMassList,(Ex
 De novo identification of an exemplary mass spectrum.
 ======================================================
 
-This part of the documentation aims at giving a brief introduction to the workflow of a de novo identification of real MS spectrum data using the DeNovoAlgorithm.fs.
+This part of the documentation aims at giving a brief introduction to the workflow of a graph based de novo identification of real MS spectrum data using the DeNovoAlgorithm.fs.
 Therefore an already identified spectrum representing a synthetic fusion protein with the sequence **APLDNDIGVSEATR** is identified.
 
 To interpret a mass spectrum several information are needed:
@@ -39,7 +37,7 @@ let peakList = PeakList.zipMzInt exampleMzList exampleIntList
 
 (*** define-output:exampleSpectrum ***)
 /// Creates and shows a point chart of the spectrum data with FSharp.Plotly.
-Chart.Point(exampleMzList, exampleIntList) |> Chart.Show
+Chart.Point(exampleMzList, exampleIntList)
 (*** include-it:exampleSpectrum ***)
 
 (**
@@ -55,7 +53,6 @@ let neutralPrecursorMass = Mass.ofMZ precursor charge
 
 /// Returns a list of nodes representing C-terminal ions resulting from the Peak list.
 let cTerminalNodeList = FunctionalGraph.cIonsOfSpectrumWCharges neutralPrecursorMass (charge |> int) peakList
-                        //FunctionalGraph.cIonsOfSpectrum neutralPrecursorMass peakList
 
 
 (**
@@ -67,30 +64,25 @@ To create the functional graph the [Functional Graph Library](https://github.com
 *)
 
 /// Calculates edges between the nodes with an accuracy of 40ppm and represents the mass spectrum data as functional graph.
-let funGraphofMS = FunctionalGraph.createfunGraph 40. FunctionalGraph.references cTerminalNodeList
-                   
+let funGraphofMS = FunctionalGraph.createfunGraph 40. FunctionalGraph.references cTerminalNodeList               
 (**
-<img src="@Root/img/TG1.JPG" alt="TG1" style="width:150px;margin:10px" />
+![example](./img/TG1.jpg)
 *)
-
 (**
 A depth first search algorithm is used to find the longest path of connected edges in the graph resulting from the position of a specified node.
 The maximum gap size must be defined as an integer value that decides how many adjacent nodes are considered if a potential gap is found.
 The algorithm returns the amino acid list of the longest path and the masses of found gaps.
 *)
- 
-(*** define-output:specificTestMSResult ***)
+(*** define-output:longestPath ***)
 /// Searches the longest path of connected edges from the first node of the graph with a maximum gap size of 5.
-let longestPath = DeNovoAlgorithm.findLongestPath neutralPrecursorMass funGraphofMS 1 5                  
-(*** include-it:specificTestMSResult ***)
+DeNovoAlgorithm.findLongestPath neutralPrecursorMass funGraphofMS 1 5 
+(*** include-it:longestPath ***)
 
 (**
 For closer investigation of the spectrum a more memory expensive approach can be used which stores all paths with gaps and chooses the most fitting ones based on the overall mass of the found path.
 *)
-
-(*** define-output:specificTestMSResult2 ***)
-/// Stores all paths with gaps in the spectrum in a collection and returns the one with the highest overall mass.
-let longestPath2 = DeNovoAlgorithm.collectAllLongestPaths neutralPrecursorMass funGraphofMS 1 10
-                   |> DeNovoAlgorithm.chooseResultsBasedOnMass 1  
-(*** include-it:specificTestMSResult2 ***)
- 
+(*** define-output:longestPathCollection***)
+/// Stores all paths up to a maximum gap size of 10 in a collection and returns the one with the highest overall mass.
+DeNovoAlgorithm.collectAllLongestPaths neutralPrecursorMass funGraphofMS 1 10
+|> DeNovoAlgorithm.chooseResultsBasedOnMass 1  
+(*** include-it:longestPathCollection ***)
