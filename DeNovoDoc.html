@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>De novo identification of an exemplary mass spectrum.
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="De-novo-identification-of-an-exemplary-mass-spectrum" class="anchor" href="#De-novo-identification-of-an-exemplary-mass-spectrum">De novo identification of an exemplary mass spectrum.</a></h1>
+<p>This part of the documentation aims at giving a brief introduction to the workflow of a graph based de novo identification of real MS spectrum data using the DeNovoAlgorithm.fs.
+Therefore an already identified spectrum representing a synthetic fusion protein with the sequence <strong>APLDNDIGVSEATR</strong> is identified.</p>
+<p>To interpret a mass spectrum several information are needed:</p>
+<ul>
+<li>The m/z values of the spectrum.</li>
+<li>The peak intensities of the spectrum.</li>
+<li>The precursor mass.</li>
+<li>The charge state of the spectrum.</li>
+</ul>
+<p>Also the spectral centroids of the MS data should be detected. Further information about this process can be found in the <a href="https://csbiology.github.io/BioFSharp/CentroidSpectra.html">Spectrum centroidization documentation</a>.</p>
+<p>As a first step the mass spectrum data are represented as a list of peaks.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="i">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="i">BioFSharp</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">Mz</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="i">FGL</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="i">FGL</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="i">Directed</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="i">Plotly</span>
+
+<span class="c">/// Creates a Peak list from the list of m/z values &amp; the list of intensity values.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="i">peakList</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="t">PeakList</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 31)" onmouseover="showTip(event, 'fs23', 31)" class="f">zipMzInt</span> <span onmouseout="hideTip(event, 'fs1', 32)" onmouseover="showTip(event, 'fs1', 32)" class="i">exampleMzList</span> <span onmouseout="hideTip(event, 'fs2', 33)" onmouseover="showTip(event, 'fs2', 33)" class="i">exampleIntList</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Creates and shows a point chart of the spectrum data with FSharp.Plotly.</span>
+<span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="f">Point</span>(<span onmouseout="hideTip(event, 'fs1', 36)" onmouseover="showTip(event, 'fs1', 36)" class="i">exampleMzList</span>, <span onmouseout="hideTip(event, 'fs2', 37)" onmouseover="showTip(event, 'fs2', 37)" class="i">exampleIntList</span>)
+</code></pre></td>
+</tr>
+</table>
+<div id="12bfc3c6-dbe4-4005-b727-372b0f6ebe4c" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
+  <script>
+    var data = [{"x":[116.070368559734,141.10277010666,158.092959537444,169.09772018073,170.101409300969,175.119025441182,183.149695169624,201.122167692672,211.144477369123,229.118180717999,230.078870766135,254.187832488534,259.140802267534,264.171660629495,276.168077866538,282.182353733865,283.185243615701,326.171130929798,327.172653811374,330.175640958466,343.162787229499,343.194534834633,345.106898615891,347.204019633424,397.208857911399,398.212504564054,412.217800180186,413.170219451946,422.236856093068,423.190842247022,440.213377226346,441.197710981338,458.188421417962,466.230846206237,476.2446236331,483.254526779546,494.226594883303,508.238178678601,509.233958220701,510.223448792437,511.248781729287,520.20467184793,529.22841689224,537.233360682133,538.217453258609,546.253045808801,555.239705190059,556.242195356754,563.278164696269,564.281060845186,580.276418919596,581.254669797945,591.242202623327,592.255700169707,608.267850519804,609.253350704436,610.257196076904,626.277891795165,627.278938129503,640.328992127744,645.322500799288,650.310867640847,651.299721342179,662.348576504592,663.349428714822,668.32514673353,676.328436167021,684.844393174574,685.333125327254,685.835912565568,693.848692725665,694.347786491087,701.35912621563,702.338320314845,706.859401053107,707.355793067109,708.320241490228,711.364951600131,712.366326623103,719.369627320282,720.36993089332,720.855966380153,721.353641463129,722.335075316866,729.367962921898,729.868426258636,739.363223296843,740.362265493883,779.356721692133,796.403775622093,807.387564857214,815.431952683024,832.4536576699,833.45493450397,878.430994646308,895.45126452726,929.472244530329,947.480298471253,948.485206021621,1044.49464580902,1061.52190577698,1062.52368881021,1158.53951153542,1159.52423477944,1176.55184060407,1177.55208124257,1271.61237082747,1272.61278091081,1289.63650349935,1290.63764817724,1299.62530759775,1300.60575128651,1386.69602059355,1387.68785639965],"y":[490.0,8557.0,375.0,13119.0,445.0,2580.0,5009.0,387.0,2537.0,845.0,638.0,694.0,682.0,1070.0,1033.0,3095.0,420.0,5975.0,464.0,541.0,780.0,693.0,1092.0,4291.0,4804.0,639.0,389.0,487.0,512.0,377.0,1724.0,666.0,1980.0,550.0,2035.0,823.0,608.0,388.0,970.0,620.0,1827.0,423.0,404.0,1113.0,1918.0,463.0,4516.0,444.0,11589.0,1255.0,372.0,876.0,568.0,395.0,1209.0,3392.0,506.0,4904.0,839.0,854.0,432.0,551.0,1139.0,3293.0,586.0,1087.0,400.0,762.0,1328.0,464.0,12808.0,5231.0,592.0,605.0,496.0,653.0,647.0,2044.0,362.0,34660.0,5801.0,2207.0,1557.0,1405.0,26724.0,9777.0,2135.0,359.0,671.0,520.0,407.0,357.0,15832.0,2825.0,394.0,930.0,414.0,6854.0,1296.0,1012.0,10918.0,2989.0,735.0,1278.0,19337.0,4869.0,763.0,867.0,10625.0,3326.0,399.0,533.0,530.0,377.0],"mode":"markers","type":"scatter","marker":{}}];
+    var layout = {};
+    Plotly.newPlot('12bfc3c6-dbe4-4005-b727-372b0f6ebe4c', data, layout);
+  </script>
+<p>With this list of peaks ion nodes are created. The creation of the SpectrumGraphNode list is based on:
+Chen T., Kao M., Tepel M., Rush J., Church G. (2001). A Dynamic Programming Approach to De Novo Peptide Sequencing via Tandem Mass Spectrometry.
+Each peak of the spectrum is represented by a specific ion node. By default only a C-ion node list is created instead of both a C &amp; N - ion list.
+Calculating and including both ion types would allow to further determine if the resulting path is part of the N- or C-terminal ion ladder.
+As this information isn't essential for the identification of the spectrum it can be skipped in favor of a better performance.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Calculates the neutral precursor mass.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="i">neutralPrecursorMass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="t">Mass</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 40)" onmouseover="showTip(event, 'fs28', 40)" class="f">ofMZ</span> <span onmouseout="hideTip(event, 'fs4', 41)" onmouseover="showTip(event, 'fs4', 41)" class="i">precursor</span> <span onmouseout="hideTip(event, 'fs3', 42)" onmouseover="showTip(event, 'fs3', 42)" class="i">charge</span>
+
+<span class="c">/// Returns a list of nodes representing C-terminal ions resulting from the Peak list.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="i">cTerminalNodeList</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="t">FunctionalGraph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 45)" onmouseover="showTip(event, 'fs31', 45)" class="f">cIonsOfSpectrumWCharges</span> <span onmouseout="hideTip(event, 'fs26', 46)" onmouseover="showTip(event, 'fs26', 46)" class="i">neutralPrecursorMass</span> (<span onmouseout="hideTip(event, 'fs3', 47)" onmouseover="showTip(event, 'fs3', 47)" class="i">charge</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 48)" onmouseover="showTip(event, 'fs32', 48)" class="f">int</span>) <span onmouseout="hideTip(event, 'fs21', 49)" onmouseover="showTip(event, 'fs21', 49)" class="i">peakList</span>
+</code></pre></td>
+</tr>
+</table>
+<p>The mass spectrum data is represented as a functional graph, consisting of a list of contexts,
+whereas each context is related to a specific node and contains the information about the nodes predecessor and successor list, as well as its label.
+An edge between two nodes is created if the difference between their masses matches the mass of an amino acid within a defined accuracy range.
+The representation is based on Erwig, M. (2001). Inductive graphs and functional graph algorithms.
+To create the functional graph the <a href="https://github.com/CSBiology/FSharp.FGL">Functional Graph Library</a> was used.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Calculates edges between the nodes with an accuracy of 40ppm and represents the mass spectrum data as functional graph.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="i">funGraphofMS</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="t">FunctionalGraph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="f">createfunGraph</span> <span class="n">40.</span> <span onmouseout="hideTip(event, 'fs30', 53)" onmouseover="showTip(event, 'fs30', 53)" class="t">FunctionalGraph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="i">references</span> <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="i">cTerminalNodeList</span>               
+</code></pre></td>
+</tr>
+</table>
+<p><img src="./img/TG1.jpg" alt="example" /></p>
+<p>A depth first search algorithm is used to find the longest path of connected edges in the graph resulting from the position of a specified node.
+The maximum gap size must be defined as an integer value that decides how many adjacent nodes are considered if a potential gap is found.
+The algorithm returns the amino acid list of the longest path and the masses of found gaps.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Searches the longest path of connected edges from the first node of the graph with a maximum gap size of 5.</span>
+<span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="t">DeNovoAlgorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="f">findLongestPath</span> <span onmouseout="hideTip(event, 'fs26', 58)" onmouseover="showTip(event, 'fs26', 58)" class="i">neutralPrecursorMass</span> <span onmouseout="hideTip(event, 'fs33', 59)" onmouseover="showTip(event, 'fs33', 59)" class="i">funGraphofMS</span> <span class="n">1</span> <span class="n">5</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>[([Gap; Pro; Xle; Asx; Gap; Asx; Xle; Gly; Val; Ser; Glx; Ala; Thr; Arg],
+  [70.0407929; 114.0361139])]</code></pre></td></tr></table>
+<p>For closer investigation of the spectrum a more memory expensive approach can be used which stores all paths with gaps and chooses the most fitting ones based on the overall mass of the found path.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Stores all paths up to a maximum gap size of 10 in a collection and returns the one with the highest overall mass.</span>
+<span onmouseout="hideTip(event, 'fs36', 60)" onmouseover="showTip(event, 'fs36', 60)" class="t">DeNovoAlgorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 61)" onmouseover="showTip(event, 'fs38', 61)" class="f">collectAllLongestPaths</span> <span onmouseout="hideTip(event, 'fs26', 62)" onmouseover="showTip(event, 'fs26', 62)" class="i">neutralPrecursorMass</span> <span onmouseout="hideTip(event, 'fs33', 63)" onmouseover="showTip(event, 'fs33', 63)" class="i">funGraphofMS</span> <span class="n">1</span> <span class="n">10</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 64)" onmouseover="showTip(event, 'fs36', 64)" class="t">DeNovoAlgorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 65)" onmouseover="showTip(event, 'fs39', 65)" class="f">chooseResultsBasedOnMass</span> <span class="n">1</span>  
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>[((1437.70758,
+   [Gap; Pro; Xle; Asx; Gap; Asx; Xle; Gly; Val; Ser; Glx; Ala; Thr; Arg]),
+  [70.0407929; 114.0416073])]</code></pre></td></tr></table>
+
+<div class="tip" id="fs1">val exampleMzList : float list<br /><br />Full name: DeNovoDoc.exampleMzList</div>
+<div class="tip" id="fs2">val exampleIntList : float list<br /><br />Full name: DeNovoDoc.exampleIntList</div>
+<div class="tip" id="fs3">val charge : float<br /><br />Full name: DeNovoDoc.charge</div>
+<div class="tip" id="fs4">val precursor : float<br /><br />Full name: DeNovoDoc.precursor</div>
+<div class="tip" id="fs5">module ExampleData</div>
+<div class="tip" id="fs6">val peakMassList : float list<br /><br />Full name: ExampleData.peakMassList</div>
+<div class="tip" id="fs7">val peakIntensities : int list<br /><br />Full name: ExampleData.peakIntensities</div>
+<div class="tip" id="fs8">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs9">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
+<div class="tip" id="fs10">val x : int</div>
+<div class="tip" id="fs11">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs12">val mz : float<br /><br />Full name: ExampleData.mz</div>
+<div class="tip" id="fs13">val precursorMass : float<br /><br />Full name: ExampleData.precursorMass</div>
+<div class="tip" id="fs14">namespace System</div>
+<div class="tip" id="fs15">namespace BioFSharp</div>
+<div class="tip" id="fs16">namespace BioFSharp.Mz</div>
+<div class="tip" id="fs17">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs18">namespace FSharp.FGL</div>
+<div class="tip" id="fs19">namespace FSharp.FGL.Directed</div>
+<div class="tip" id="fs20">namespace FSharp.Plotly</div>
+<div class="tip" id="fs21">val peakList : PeakList&lt;Peak&gt;<br /><br />Full name: DeNovoDoc.peakList<br /><em><br /><br />&#160;Creates a Peak list from the list of m/z values &amp; the list of intensity values.</em></div>
+<div class="tip" id="fs22">Multiple items<br />module PeakList<br /><br />from BioFSharp.Mz<br /><br />--------------------<br />type PeakList&lt;&#39;a (requires &#39;a :&gt; IPeak)&gt; = &#39;a list<br /><br />Full name: BioFSharp.Mz.PeakList&lt;_&gt;</div>
+<div class="tip" id="fs23">val zipMzInt : mz:float list -&gt; intensity:float list -&gt; PeakList&lt;Peak&gt;<br /><br />Full name: BioFSharp.Mz.PeakList.zipMzInt</div>
+<div class="tip" id="fs24">type Chart =<br />&#160;&#160;static member Area : xy:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Area : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Bar : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member Bar : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : xy:seq&lt;&#39;a0 * &#39;a1&gt; * ?Name:string * ?Showlegend:bool * ?Color:string * ?Opacity:float * ?Whiskerwidth:float * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:float * ?Pointpos:float * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : ?x:&#39;a0 * ?y:&#39;a1 * ?Name:string * ?Showlegend:bool * ?Color:string * ?Opacity:float * ?Whiskerwidth:float * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:float * ?Pointpos:float * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member Bubble : xysizes:seq&lt;#IConvertible * #IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions -&gt; GenericChart<br />&#160;&#160;static member Bubble : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * sizes:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions -&gt; GenericChart<br />&#160;&#160;static member Column : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;static member Column : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:FontOptions * ?Marker:(Marker -&gt; Marker) -&gt; GenericChart<br />&#160;&#160;...<br /><br />Full name: FSharp.Plotly.Chart</div>
+<div class="tip" id="fs25">static member Chart.Point : xy:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:StyleOption.Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:StyleOption.TextPosition * ?TextFont:FontOptions -&gt; GenericChart.GenericChart<br />static member Chart.Point : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:StyleOption.Symbol * ?Color:&#39;c * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:StyleOption.TextPosition * ?TextFont:FontOptions -&gt; GenericChart.GenericChart</div>
+<div class="tip" id="fs26">val neutralPrecursorMass : float<br /><br />Full name: DeNovoDoc.neutralPrecursorMass<br /><em><br /><br />&#160;Creates and shows a point chart of the spectrum data with FSharp.Plotly.<br />&#160;Calculates the neutral precursor mass.</em></div>
+<div class="tip" id="fs27">module Mass<br /><br />from BioFSharp</div>
+<div class="tip" id="fs28">val ofMZ : mz:float -&gt; z:float -&gt; float<br /><br />Full name: BioFSharp.Mass.ofMZ</div>
+<div class="tip" id="fs29">val cTerminalNodeList : FunctionalGraph.SpectrumGraphNode list<br /><br />Full name: DeNovoDoc.cTerminalNodeList<br /><em><br /><br />&#160;Returns a list of nodes representing C-terminal ions resulting from the Peak list.</em></div>
+<div class="tip" id="fs30">module FunctionalGraph<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs31">val cIonsOfSpectrumWCharges : precursorMass:float -&gt; chargeState:int -&gt; spectrum:PeakList&lt;Peak&gt; -&gt; FunctionalGraph.SpectrumGraphNode list<br /><br />Full name: BioFSharp.Mz.FunctionalGraph.cIonsOfSpectrumWCharges</div>
+<div class="tip" id="fs32">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
+<div class="tip" id="fs33">val funGraphofMS : Map&lt;FunctionalGraph.SpectrumGraphNode,MContext&lt;FunctionalGraph.SpectrumGraphNode,int,AminoAcids.AminoAcid&gt;&gt;<br /><br />Full name: DeNovoDoc.funGraphofMS<br /><em><br /><br />&#160;Calculates edges between the nodes with an accuracy of 40ppm and represents the mass spectrum data as functional graph.</em></div>
+<div class="tip" id="fs34">val createfunGraph : accuracy:float -&gt; aaReferences:(AminoAcids.AminoAcid * float) array -&gt; ncIons:FunctionalGraph.SpectrumGraphNode list -&gt; Map&lt;FunctionalGraph.SpectrumGraphNode,MContext&lt;FunctionalGraph.SpectrumGraphNode,int,AminoAcids.AminoAcid&gt;&gt;<br /><br />Full name: BioFSharp.Mz.FunctionalGraph.createfunGraph</div>
+<div class="tip" id="fs35">val references : (AminoAcids.AminoAcid * float) []<br /><br />Full name: BioFSharp.Mz.FunctionalGraph.references</div>
+<div class="tip" id="fs36">module DeNovoAlgorithm<br /><br />from BioFSharp.Mz</div>
+<div class="tip" id="fs37">val findLongestPath : precursorMass:float -&gt; completeGraph:Graph&lt;FunctionalGraph.SpectrumGraphNode,int,AminoAcids.AminoAcid&gt; -&gt; startLabel:int -&gt; maxGapSize:int -&gt; (AminoAcids.AminoAcid list * float list) list<br /><br />Full name: BioFSharp.Mz.DeNovoAlgorithm.findLongestPath</div>
+<div class="tip" id="fs38">val collectAllLongestPaths : precursorMass:float -&gt; completeGraph:Graph&lt;FunctionalGraph.SpectrumGraphNode,int,AminoAcids.AminoAcid&gt; -&gt; startLabel:int -&gt; gapLimit:int -&gt; ((float * AminoAcids.AminoAcid list) * float list) list list<br /><br />Full name: BioFSharp.Mz.DeNovoAlgorithm.collectAllLongestPaths</div>
+<div class="tip" id="fs39">val chooseResultsBasedOnMass : i:int -&gt; inList:((float * AminoAcids.AminoAcid list) * float list) list list -&gt; ((float * AminoAcids.AminoAcid list) * float list) list<br /><br />Full name: BioFSharp.Mz.DeNovoAlgorithm.chooseResultsBasedOnMass</div>
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
+			  <li><a href="/BioFSharp/Readers.html">I/O</a>
+			  </li>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
+			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>			  
+              <li><a href="/BioFSharp/DeNovoDoc.html">De Novo identification</a>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

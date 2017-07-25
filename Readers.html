@@ -117,54 +117,16 @@ then you can use our converting function:</p>
 <h2><a name="Introducing-Generic-Feature-Format-Version-3" class="anchor" href="#Introducing-Generic-Feature-Format-Version-3">Introducing Generic Feature Format Version 3</a></h2>
 <p>In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9.
 The nine fields are:</p>
-<table>
-<thead>
-<tr class="header">
-<th><p>Field</p></th>
-<th align="center"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>1</p></td>
-<td align="center"><p>seqID</p></td>
-</tr>
-<tr class="even">
-<td><p>2</p></td>
-<td align="center"><p>source</p></td>
-</tr>
-<tr class="odd">
-<td><p>3</p></td>
-<td align="center"><p>type, method or feature</p></td>
-</tr>
-<tr class="even">
-<td><p>4</p></td>
-<td align="center"><p>startPos</p></td>
-</tr>
-<tr class="odd">
-<td><p>5</p></td>
-<td align="center"><p>endPos</p></td>
-</tr>
-<tr class="even">
-<td><p>6</p></td>
-<td align="center"><p>score</p></td>
-</tr>
-<tr class="odd">
-<td><p>7</p></td>
-<td align="center"><p>strand</p></td>
-</tr>
-<tr class="even">
-<td><p>8</p></td>
-<td align="center"><p>phase</p></td>
-</tr>
-<tr class="odd">
-<td><p>9</p></td>
-<td align="center"><p>attributes</p></td>
-</tr>
-</tbody>
-</table>
-
+<ol>
+<li>seqID; 2. source; 3. type, method or feature; 4. startPos; 5. endPos; 6. score; 7. strand; 8. phase; 9. attributes</li>
+</ol>
+<p>Below you can see an example GFF3 file.</p>
 <p><img src="./img/GFF3.png" alt="example" /></p>
+<p>Line 1: Declaration of file version
+Line 2: Comment
+Lines 4+5: GFF entry lines
+Line 6: FastA directive
+Lines 7+: Fasta Sequence</p>
 <p>Directives (marked with "##[...]") provide additional information like the gff-version which has to be the first line of each file ("##gff-version 3[...]").
 Comment lines have to start with a single "#[...]". It is possible that sequences in FastA format are at the end of the file. This has to be announced by a "##FASTA" directive line.</p>
 <p>For further information visit <a href="https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md">GFF3-Specifications</a>.</p>
@@ -299,7 +261,7 @@ If FastA sequences are included they are appended by a FastA writer described in
 <div class="tip" id="fs46">val relationshipSearch : gffList:seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Relationship.relationshipSearch</div>
 <div class="tip" id="fs47">val gffExampleWrite : unit<br /><br />Full name: Readers.gffExampleWrite<br /><em><br /><br />Takes a seq&lt;GFF&lt;&#39;a&gt;&gt;, a FastA converter and a destination filepath and writes it into a .gff.</em></div>
 <div class="tip" id="fs48">module Writer<br /><br />from BioFSharp.IO.GFF3Parser</div>
-<div class="tip" id="fs49">val GFF3Writer : input:seq&lt;GFF3Parser.GFF&lt;seq&lt;&#39;a&gt;&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.Writer.GFF3Writer</div>
+<div class="tip" id="fs49">val GFF3Writer : input:seq&lt;GFF3Parser.GFF&lt;#seq&lt;&#39;a&gt;&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.Writer.GFF3Writer</div>
 
         </div>
         <div class="span3">
@@ -330,7 +292,8 @@ If FastA sequences are included they are appended by a FastA writer described in
               <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
               <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
               <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
-			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>
+			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>			  
+              <li><a href="/BioFSharp/DeNovoDoc.html">De Novo identification</a>
               <li class="divider"></li>
               <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
             <li class="nav-header">Documentation</li>
