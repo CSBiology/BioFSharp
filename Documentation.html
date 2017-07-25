@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">(*</span>
+<span class="c">#Creating a Documentation</span>
+
+<span class="c">This documentation is aimed at people who want to document their stuff by using the FSharp.Formatting formatter. First I&#39;ll give a little introduction on how it works and where to find what. Also different smaller things like including a graph or an image is shortly explained. If you just want to look those things up feel free to skip to that part by using the drop-down menue.</span>
+
+<span class="c">##Introduction</span>
+
+<span class="c">The libraries of the CSBiology organization are built using the [ProjectScaffold](https://github.com/fsprojects/ProjectScaffold). Besides many other features, this includes automatic Documentation via the [FSharpFormattin](https://github.com/fsprojects/FSharp.Formatting) formatter. This formatter is called when one executes the build.cmd which is located in the project folder. Opening this build.cmd does not only compile the project, it also formats the &lt;b&gt;.fsx&lt;/b&gt;(FSharp script file) documents to &lt;b&gt;.html&lt;/b&gt; documents by using the FSharpFormatting formatter, besides other things. </span>
+<span class="c">The script files which are formatted have to be placed in &quot;..&lt;i&gt;project name&lt;/i&gt;\docs\content&quot;. The formatted html files are being placed in &quot;..&lt;i&gt;project name&lt;/i&gt;\docs\output&quot;. Keep in mind that by using the build.cmd, those files are built and stored only locally.</span>
+<span class="c">*)</span>
+</code></pre></td>
+</tr>
+</table>
+
+
+        </div>
+        <div class="span3">
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BioFSharp</li>
+            <li><a href="/BioFSharp/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+            <li><a href="/BioFSharp/license.html">License</a></li>
+            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              
+              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
+			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
+			  <li><a href="/BioFSharp/Readers.html">I/O</a>
+			  </li>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
+              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
+              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
+              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
+			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>			  
+              <li><a href="/BioFSharp/DeNovoDoc.html">De Novo identification</a>
+              <li class="divider"></li>
+              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+            <li class="nav-header">Documentation</li>
+            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
