@@ -46,24 +46,22 @@ let valid = OptionConverter.charToOptionAminoAcid 'A'
 let invalid = OptionConverter.charToOptionAminoAcid '?'
 
 (**
-Which results in 'A' being recognized as `Some Ala` and '?' as `None` :
+Which results in 'A' being recognized as `Some Ala` and '?' as `None`.
 
-![Output1](img/IntroductionOutput1.PNG)
-
-To parse our entire string, we use the `ofAminoAcidString` function from the `BioList` library
+To parse our entire string, we can use any of the BioCollections' `ofAminoAcidString` functions. For more information about BioSeq, BioList and BioArray go [here](Biosequences.html)
 *)
 
-let parsedProtein = rawString |> BioList.ofAminoAcidString 
+///Protein represented as a Bioseq
+let parsedProtein1 = rawString |> BioSeq.ofAminoAcidString 
+
+///Protein represented as a BioList
+let parsedProtein2 = rawString |> BioList.ofAminoAcidString 
+
+///Protein represented as a BioArray
+let parsedProtein3 = rawString |> BioArray.ofAminoAcidString 
 
 (**
 This yields us our Hello World protein. note that the '!' from the raw string is not contained in the sequence as it is not coding for an aminoacid.
-
-![Output2](img/IntroductionOutput2.PNG)
-
-We can also calculate the monoisotopic mass of our protein (because why not?):
 *)
-
-///monoisotopic mass of the hello world protein
-let mass = parsedProtein |> BioList.toMonoisotopicMass
 
 

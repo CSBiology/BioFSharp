@@ -4,9 +4,10 @@
 #I "../../bin"
 
 (**
-BioFSharp
-======================
+Formula
+=======
 
+work in progress... 
 
 *)
 #r "BioFSharp.dll"
@@ -19,5 +20,3 @@ Formula.toString CO2
 let c = Formula.add CO2 CO2
 Formula.toString c
 
-
-Modific

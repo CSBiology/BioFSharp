@@ -30,18 +30,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 	ProjectSection(SolutionItems) = preProject
 		docs\content\Alignment.fsx = docs\content\Alignment.fsx
 		docs\content\Aminoacids.fsx = docs\content\Aminoacids.fsx
+		docs\content\BioCollections.fsx = docs\content\BioCollections.fsx
 		docs\content\BioID.fsx = docs\content\BioID.fsx
-		docs\content\BiologicalObjects.fsx = docs\content\BiologicalObjects.fsx
-		docs\content\BioSequences.fsx = docs\content\BioSequences.fsx
 		docs\content\BlastWrapper.fsx = docs\content\BlastWrapper.fsx
-		docs\content\BoyerMooreUsage.fsx = docs\content\BoyerMooreUsage.fsx
+		docs\content\Elements.fsx = docs\content\Elements.fsx
 		docs\content\Formula.fsx = docs\content\Formula.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\Introduction.fsx = docs\content\Introduction.fsx
 		docs\content\LibraryStructure.fsx = docs\content\LibraryStructure.fsx
 		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
 		docs\content\Nucleotides.fsx = docs\content\Nucleotides.fsx
+		docs\content\Plotly.fsx = docs\content\Plotly.fsx
 		docs\content\Readers.fsx = docs\content\Readers.fsx
+		docs\content\StringMatching.fsx = docs\content\StringMatching.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
 	EndProjectSection
 EndProject
