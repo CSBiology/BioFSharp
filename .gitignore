@@ -194,3 +194,8 @@ docs/content/release-notes.md
 .fake
 docs/tools/FSharp.Formatting.svclog
 docs/content/data/Output.txt
+docs/content/data/gffExampleWrite.gff
+docs/content/data/testQuery.fastA
+docs/content/data/Chlamy_Cp.fastA.phr
+docs/content/data/Chlamy_Cp.fastA.pin
+docs/content/data/Chlamy_Cp.fastA.psq
