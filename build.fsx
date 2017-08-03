@@ -384,6 +384,9 @@ Target "BuildPackage" DoNothing
 
 Target "All" DoNothing
 
+"All"
+ ==> "ReleaseLocal"
+
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"

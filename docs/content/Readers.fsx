@@ -4,6 +4,8 @@
 #I "../../bin"
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.IO.dll"
+#r "../../bin/FSharp.Care.dll"
+#r "../../bin/FSharp.Care.IO.dll"
 
 (**
 Using Bio Format Readers
@@ -20,6 +22,8 @@ FastQ
 open System
 open BioFSharp
 open BioFSharp.IO
+open FSharp.Care
+open FSharp.Care.IO
 
 (**
 This module allows to parse FASTQ format data with original 4-lines entries into this record type
@@ -44,7 +48,8 @@ from our library 'BioFSharp.BioItemsConverter.OptionConverter'
 /// get characters as sequence units
 let converterToAA string =
     string
-    |> String.map (BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid)
+    |> String.toCharArray
+    |> Array.map (BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid)
 
 (**
 If you have following possible values for quality sequence:
@@ -66,7 +71,7 @@ And then you can easily use this module to read your FastQ file
 let yourFastqFile = (__SOURCE_DIRECTORY__ + "/data/FastQtest.fastq")
 
 let FastQSequence = 
-    FastQ.fromFile convertFn qualityConvertFn yourFastqFile
+    FastQ.fromFile converterToAA qualityConvertFn yourFastqFile
 
 (**
 

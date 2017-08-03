@@ -1,6 +1,6 @@
 # BLASTP 2.2.31+
 # Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
-# Database: C:\Users\LocalUser\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
 # Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
 # 8 hits found
 >gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
@@ -13,7 +13,7 @@
 >gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
 # BLASTP 2.2.31+
 # Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
-# Database: C:\Users\LocalUser\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
 # Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
 # 8 hits found
 >gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
@@ -24,4 +24,771 @@
 >gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
 >gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
 >gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
-# BLAST processed 2 queries
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\k3v1n\Source\Repos\BioFSharp\docs\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+# BLAST processed 61 queries
