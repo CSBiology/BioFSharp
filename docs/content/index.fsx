@@ -35,7 +35,7 @@ _Note: in the near future, we will provide a NuGet package_
 
 As long as the repositories are in the same folder, you can now build BioFSharp in Visual Studio. 
 Alternatively, open the terminal application of your choice, set your current directory to the BioFSharp root folder and build it by 
-using the `build` command. (this will execute build.cmd)
+using the `build` command. (this will execute build.cmd, which starts an automated build process orchestrated by [paket](https://github.com/fsprojects/Paket) and [FAKE](https://github.com/fsharp/FAKE))
 
 <br></br>
 <hr>

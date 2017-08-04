@@ -29,3 +29,28 @@ table.pre::-webkit-scrollbar-thumb
 {
 	text-align:justify;
 }
+
+#SourceCode
+{
+	text-align:center;
+	color:#2E75B6;
+	padding: 2px 6px 2px 6px;
+	border-radius: 25px;
+    border: 2px solid #2E75B6;
+	text-decoration:none;
+
+}
+#Author
+{
+	text-align:center;
+	color:#2E75B6;
+	padding: 2px 6px 2px 6px;
+	border-radius: 25px;
+    border: 2px solid #2E75B6;
+	text-decoration:none;
+}
+
+#Author:hover, #SourceCode:hover 
+{
+	background-color:#BDD7EE;
+}
