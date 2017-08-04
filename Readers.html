@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -49,11 +49,11 @@
 <span class="l">7: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</span>
-<span class="k">type</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="t">FastqItem</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span>,<span class="o">&#39;</span><span class="i">b</span><span class="o">&gt;</span> <span class="o">=</span> {
-    <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">Header</span>    <span class="o">:</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="t">string</span>;
-    <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">Sequence</span>  <span class="o">:</span> <span class="o">&#39;</span><span class="i">a</span>;
-    <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="i">QualityHeader</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="t">string</span>;
-    <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">QualitySequence</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">b</span>;       
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="t">FastqItem</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span>,<span class="o">&#39;</span><span class="i">b</span><span class="o">&gt;</span> <span class="o">=</span> {
+    <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="i">Header</span>    <span class="o">:</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="t">string</span>;
+    <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">Sequence</span>  <span class="o">:</span> <span class="o">&#39;</span><span class="i">a</span>;
+    <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="i">QualityHeader</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="t">string</span>;
+    <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">QualitySequence</span> <span class="o">:</span> <span class="o">&#39;</span><span class="i">b</span>;       
 }
 </code></pre></td>
 </tr>
@@ -66,11 +66,13 @@ from our library 'BioFSharp.BioItemsConverter.OptionConverter'</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
+<span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// get characters as sequence units</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="f">converterToAA</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">string</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="i">string</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="t">String</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="f">map</span> (<span onmouseout="hideTip(event, 'fs2', 17)" onmouseover="showTip(event, 'fs2', 17)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="t">BioItemsConverter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="t">OptionConverter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="f">charToOptionAminoAcid</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="f">converterToAA</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="i">string</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="i">string</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="t">String</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="f">toCharArray</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="f">map</span> (<span onmouseout="hideTip(event, 'fs2', 24)" onmouseover="showTip(event, 'fs2', 24)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 25)" onmouseover="showTip(event, 'fs19', 25)" class="t">BioItemsConverter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 26)" onmouseover="showTip(event, 'fs20', 26)" class="t">OptionConverter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 27)" onmouseover="showTip(event, 'fs21', 27)" class="f">charToOptionAminoAcid</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -85,10 +87,10 @@ then you can use our converting function:</p>
 <span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// get Phred quality score</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="f">qualityConvertFn</span> <span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="i">string</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="i">string</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="i">String</span><span class="o">.</span><span class="i">toCharArray</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 25)" onmouseover="showTip(event, 'fs19', 25)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 26)" onmouseover="showTip(event, 'fs20', 26)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs21', 27)" onmouseover="showTip(event, 'fs21', 27)" class="i">i</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs21', 28)" onmouseover="showTip(event, 'fs21', 28)" class="i">i</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 29)" onmouseover="showTip(event, 'fs22', 29)" class="f">GetHashCode</span>()<span class="o">-</span><span class="n">33</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 28)" onmouseover="showTip(event, 'fs22', 28)" class="f">qualityConvertFn</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="i">string</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs14', 30)" onmouseover="showTip(event, 'fs14', 30)" class="i">string</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="t">String</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 32)" onmouseover="showTip(event, 'fs16', 32)" class="f">toCharArray</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 33)" onmouseover="showTip(event, 'fs17', 33)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="i">i</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="i">i</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 37)" onmouseover="showTip(event, 'fs24', 37)" class="f">GetHashCode</span>()<span class="o">-</span><span class="n">33</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -98,10 +100,10 @@ then you can use our converting function:</p>
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 30)" onmouseover="showTip(event, 'fs23', 30)" class="i">yourFastqFile</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/FastQtest.fastq&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 38)" onmouseover="showTip(event, 'fs25', 38)" class="i">yourFastqFile</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/FastQtest.fastq&quot;</span>)
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 31)" onmouseover="showTip(event, 'fs24', 31)" class="i">FastQSequence</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs25', 32)" onmouseover="showTip(event, 'fs25', 32)" class="t">FastQ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 33)" onmouseover="showTip(event, 'fs26', 33)" class="f">fromFile</span> <span class="i">convertFn</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="f">qualityConvertFn</span> <span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="i">yourFastqFile</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="i">FastQSequence</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs27', 40)" onmouseover="showTip(event, 'fs27', 40)" class="t">FastQ</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 41)" onmouseover="showTip(event, 'fs28', 41)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs13', 42)" onmouseover="showTip(event, 'fs13', 42)" class="f">converterToAA</span> <span onmouseout="hideTip(event, 'fs22', 43)" onmouseover="showTip(event, 'fs22', 43)" class="f">qualityConvertFn</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="i">yourFastqFile</span>
 </code></pre></td>
 </tr>
 </table>
@@ -121,7 +123,7 @@ The nine fields are:</p>
 <li>seqID; 2. source; 3. type, method or feature; 4. startPos; 5. endPos; 6. score; 7. strand; 8. phase; 9. attributes</li>
 </ol>
 <p>Below you can see an example GFF3 file.</p>
-<p><img src="./img/GFF3.png" alt="example" /></p>
+<p><img src="@Root/img/GFF3.png" alt="GFF3" style="width:150px;margin:10px" /></p>
 <p>Line 1: Declaration of file version
 Line 2: Comment
 Lines 4+5: GFF entry lines
@@ -145,18 +147,18 @@ Comment lines have to start with a single "#[...]". It is possible that sequence
 <span class="l">11: </span>
 <span class="l">12: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 36)" onmouseover="showTip(event, 'fs2', 36)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 37)" onmouseover="showTip(event, 'fs3', 37)" class="i">IO</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 45)" onmouseover="showTip(event, 'fs2', 45)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 46)" onmouseover="showTip(event, 'fs3', 46)" class="i">IO</span>
 
 <span class="c">///path and name of the input file</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 38)" onmouseover="showTip(event, 'fs27', 38)" class="i">filepathGFF</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/gff3Example.gff&quot;</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="i">filepathGFF</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/gff3Example.gff&quot;</span>)
 
 <span class="c">///converter for FastA.FastaItem</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 39)" onmouseover="showTip(event, 'fs28', 39)" class="f">fastaConverter</span> (<span onmouseout="hideTip(event, 'fs29', 40)" onmouseover="showTip(event, 'fs29', 40)" class="i">x</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs30', 41)" onmouseover="showTip(event, 'fs30', 41)" class="t">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs31', 42)" onmouseover="showTip(event, 'fs31', 42)" class="t">char</span><span class="o">&gt;</span>) <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs32', 43)" onmouseover="showTip(event, 'fs32', 43)" class="f">id</span> <span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="i">x</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 48)" onmouseover="showTip(event, 'fs30', 48)" class="f">fastaConverter</span> (<span onmouseout="hideTip(event, 'fs31', 49)" onmouseover="showTip(event, 'fs31', 49)" class="i">x</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs32', 50)" onmouseover="showTip(event, 'fs32', 50)" class="t">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs33', 51)" onmouseover="showTip(event, 'fs33', 51)" class="t">char</span><span class="o">&gt;</span>) <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="f">id</span> <span onmouseout="hideTip(event, 'fs31', 53)" onmouseover="showTip(event, 'fs31', 53)" class="i">x</span>
 
 <span class="c">///To read in a gff file you have to insert a FastA converter and a source filepath. </span>
 <span class="c">///If no FastA Sequence is included you directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 45)" onmouseover="showTip(event, 'fs33', 45)" class="i">gffExampleRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 46)" onmouseover="showTip(event, 'fs34', 46)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 47)" onmouseover="showTip(event, 'fs35', 47)" class="t">Reader</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 48)" onmouseover="showTip(event, 'fs36', 48)" class="f">GFF3reader</span> <span onmouseout="hideTip(event, 'fs28', 49)" onmouseover="showTip(event, 'fs28', 49)" class="f">fastaConverter</span> <span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="i">filepathGFF</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="i">gffExampleRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 55)" onmouseover="showTip(event, 'fs36', 55)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 56)" onmouseover="showTip(event, 'fs37', 56)" class="t">Reader</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 57)" onmouseover="showTip(event, 'fs38', 57)" class="f">GFF3reader</span> <span onmouseout="hideTip(event, 'fs30', 58)" onmouseover="showTip(event, 'fs30', 58)" class="f">fastaConverter</span> <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="i">filepathGFF</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -174,13 +176,13 @@ You can find new versions of the SO at (<a href="https://sourceforge.net/project
 <span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///to validate the gff file without SOTerm verification use this function and only insert filepath</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 51)" onmouseover="showTip(event, 'fs37', 51)" class="i">gffExampleSanityCheckSimple</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 53)" onmouseover="showTip(event, 'fs38', 53)" class="t">SanityCheck</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 54)" onmouseover="showTip(event, 'fs39', 54)" class="f">sanityCheck</span> <span onmouseout="hideTip(event, 'fs27', 55)" onmouseover="showTip(event, 'fs27', 55)" class="i">filepathGFF</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 60)" onmouseover="showTip(event, 'fs39', 60)" class="i">gffExampleSanityCheckSimple</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 61)" onmouseover="showTip(event, 'fs36', 61)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 62)" onmouseover="showTip(event, 'fs40', 62)" class="t">SanityCheck</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 63)" onmouseover="showTip(event, 'fs41', 63)" class="f">sanityCheck</span> <span onmouseout="hideTip(event, 'fs29', 64)" onmouseover="showTip(event, 'fs29', 64)" class="i">filepathGFF</span>
 
 <span class="c">///path, name and version of the &#39;Sequence Ontology terms&#39;-file</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 56)" onmouseover="showTip(event, 'fs40', 56)" class="i">filepathSO_Terms</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Sequence_Ontology_Terms_2_5_3.txt&quot;</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 65)" onmouseover="showTip(event, 'fs42', 65)" class="i">filepathSO_Terms</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Sequence_Ontology_Terms_2_5_3.txt&quot;</span>)
 
 <span class="c">///to validate the gff file insert filepath</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 57)" onmouseover="showTip(event, 'fs41', 57)" class="i">gffExampleSanityCheck</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 58)" onmouseover="showTip(event, 'fs34', 58)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 59)" onmouseover="showTip(event, 'fs38', 59)" class="t">SanityCheck</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs42', 60)" onmouseover="showTip(event, 'fs42', 60)" class="f">sanityCheckWithSOTerm</span> <span onmouseout="hideTip(event, 'fs40', 61)" onmouseover="showTip(event, 'fs40', 61)" class="i">filepathSO_Terms</span> <span onmouseout="hideTip(event, 'fs27', 62)" onmouseover="showTip(event, 'fs27', 62)" class="i">filepathGFF</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 66)" onmouseover="showTip(event, 'fs43', 66)" class="i">gffExampleSanityCheck</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 67)" onmouseover="showTip(event, 'fs36', 67)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 68)" onmouseover="showTip(event, 'fs40', 68)" class="t">SanityCheck</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="f">sanityCheckWithSOTerm</span> <span onmouseout="hideTip(event, 'fs42', 70)" onmouseover="showTip(event, 'fs42', 70)" class="i">filepathSO_Terms</span> <span onmouseout="hideTip(event, 'fs29', 71)" onmouseover="showTip(event, 'fs29', 71)" class="i">filepathGFF</span>
 </code></pre></td>
 </tr>
 </table>
@@ -193,10 +195,10 @@ You can find new versions of the SO at (<a href="https://sourceforge.net/project
 <span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Term to search for:</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 63)" onmouseover="showTip(event, 'fs43', 63)" class="i">searchterm</span> <span class="o">=</span> <span class="s">&quot;YAL069W&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs45', 72)" onmouseover="showTip(event, 'fs45', 72)" class="i">searchterm</span> <span class="o">=</span> <span class="s">&quot;YAL069W&quot;</span>
 
 <span class="c">///with this function you can search for a searchterm and you will get features which are related</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 64)" onmouseover="showTip(event, 'fs44', 64)" class="i">gffExampleSearch</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 65)" onmouseover="showTip(event, 'fs34', 65)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 66)" onmouseover="showTip(event, 'fs45', 66)" class="t">Relationship</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 67)" onmouseover="showTip(event, 'fs46', 67)" class="f">relationshipSearch</span> <span onmouseout="hideTip(event, 'fs33', 68)" onmouseover="showTip(event, 'fs33', 68)" class="i">gffExampleRead</span> <span onmouseout="hideTip(event, 'fs43', 69)" onmouseover="showTip(event, 'fs43', 69)" class="i">searchterm</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs46', 73)" onmouseover="showTip(event, 'fs46', 73)" class="i">gffExampleSearch</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 74)" onmouseover="showTip(event, 'fs36', 74)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 75)" onmouseover="showTip(event, 'fs47', 75)" class="t">Relationship</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs48', 76)" onmouseover="showTip(event, 'fs48', 76)" class="f">relationshipSearch</span> <span onmouseout="hideTip(event, 'fs35', 77)" onmouseover="showTip(event, 'fs35', 77)" class="i">gffExampleRead</span> <span onmouseout="hideTip(event, 'fs45', 78)" onmouseover="showTip(event, 'fs45', 78)" class="i">searchterm</span>
 </code></pre></td>
 </tr>
 </table>
@@ -208,7 +210,7 @@ If FastA sequences are included they are appended by a FastA writer described in
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Takes a seq&lt;GFF&lt;&#39;a&gt;&gt;, a FastA converter and a destination filepath and writes it into a .gff.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 70)" onmouseover="showTip(event, 'fs47', 70)" class="i">gffExampleWrite</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 71)" onmouseover="showTip(event, 'fs34', 71)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs48', 72)" onmouseover="showTip(event, 'fs48', 72)" class="t">Writer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 73)" onmouseover="showTip(event, 'fs49', 73)" class="f">GFF3Writer</span> <span onmouseout="hideTip(event, 'fs33', 74)" onmouseover="showTip(event, 'fs33', 74)" class="i">gffExampleRead</span> <span onmouseout="hideTip(event, 'fs32', 75)" onmouseover="showTip(event, 'fs32', 75)" class="f">id</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/gffExampleWrite.gff&quot;</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 79)" onmouseover="showTip(event, 'fs49', 79)" class="i">gffExampleWrite</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 80)" onmouseover="showTip(event, 'fs36', 80)" class="t">GFF3Parser</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs50', 81)" onmouseover="showTip(event, 'fs50', 81)" class="t">Writer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs51', 82)" onmouseover="showTip(event, 'fs51', 82)" class="f">GFF3Writer</span> <span onmouseout="hideTip(event, 'fs35', 83)" onmouseover="showTip(event, 'fs35', 83)" class="i">gffExampleRead</span> <span onmouseout="hideTip(event, 'fs34', 84)" onmouseover="showTip(event, 'fs34', 84)" class="f">id</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/gffExampleWrite.gff&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -216,89 +218,104 @@ If FastA sequences are included they are appended by a FastA writer described in
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace BioFSharp</div>
 <div class="tip" id="fs3">namespace BioFSharp.IO</div>
-<div class="tip" id="fs4">type FastqItem&lt;&#39;a,&#39;b&gt; =<br />&#160;&#160;{Header: string;<br />&#160;&#160;&#160;Sequence: &#39;a;<br />&#160;&#160;&#160;QualityHeader: string;<br />&#160;&#160;&#160;QualitySequence: &#39;b;}<br /><br />Full name: Readers.FastqItem&lt;_,_&gt;<br /><em><br /><br />&#160;FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</em></div>
-<div class="tip" id="fs5">FastqItem.Header: string</div>
-<div class="tip" id="fs6">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs7">FastqItem.Sequence: &#39;a</div>
-<div class="tip" id="fs8">FastqItem.QualityHeader: string</div>
-<div class="tip" id="fs9">FastqItem.QualitySequence: &#39;b</div>
-<div class="tip" id="fs10">val converterToAA : string:string -&gt; string<br /><br />Full name: Readers.converterToAA<br /><em><br /><br />&#160;get characters as sequence units</em></div>
-<div class="tip" id="fs11">Multiple items<br />val string : string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs12">Multiple items<br />type String =<br />&#160;&#160;new : value:char -&gt; string + 7 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 2 overloads<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.String<br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : unit<br />String(value: nativeptr&lt;sbyte&gt;) : unit<br />String(value: char []) : unit<br />String(c: char, count: int) : unit<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : unit<br />String(value: char [], startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : unit</div>
-<div class="tip" id="fs13">val map : mapping:(char -&gt; char) -&gt; str:string -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.String.map</div>
-<div class="tip" id="fs14">module BioItemsConverter<br /><br />from BioFSharp</div>
-<div class="tip" id="fs15">module OptionConverter<br /><br />from BioFSharp.BioItemsConverter</div>
-<div class="tip" id="fs16">val charToOptionAminoAcid : aac:char -&gt; AminoAcids.AminoAcid option<br /><br />Full name: BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid</div>
-<div class="tip" id="fs17">val qualityConvertFn : string:&#39;a -&gt; int []<br /><br />Full name: Readers.qualityConvertFn<br /><em><br /><br />&#160;get Phred quality score</em></div>
-<div class="tip" id="fs18">Multiple items<br />val string : &#39;a<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs19">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
-<div class="tip" id="fs20">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs21">val i : obj</div>
-<div class="tip" id="fs22">Object.GetHashCode() : int</div>
-<div class="tip" id="fs23">val yourFastqFile : string<br /><br />Full name: Readers.yourFastqFile</div>
-<div class="tip" id="fs24">val FastQSequence : seq&lt;FastQ.FastqItem&lt;obj,int []&gt;&gt;<br /><br />Full name: Readers.FastQSequence</div>
-<div class="tip" id="fs25">module FastQ<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs26">val fromFile : converter:(string -&gt; &#39;a) -&gt; qualityConverter:(string -&gt; &#39;b) -&gt; filePath:string -&gt; seq&lt;FastQ.FastqItem&lt;&#39;a,&#39;b&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastQ.fromFile</div>
-<div class="tip" id="fs27">val filepathGFF : string<br /><br />Full name: Readers.filepathGFF<br /><em><br /><br />path and name of the input file</em></div>
-<div class="tip" id="fs28">val fastaConverter : x:seq&lt;char&gt; -&gt; seq&lt;char&gt;<br /><br />Full name: Readers.fastaConverter<br /><em><br /><br />converter for FastA.FastaItem</em></div>
-<div class="tip" id="fs29">val x : seq&lt;char&gt;</div>
-<div class="tip" id="fs30">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
-<div class="tip" id="fs31">Multiple items<br />val char : value:&#39;T -&gt; char (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.char<br /><br />--------------------<br />type char = Char<br /><br />Full name: Microsoft.FSharp.Core.char</div>
-<div class="tip" id="fs32">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
-<div class="tip" id="fs33">val gffExampleRead : seq&lt;GFF3Parser.GFF&lt;seq&lt;char&gt;&gt;&gt;<br /><br />Full name: Readers.gffExampleRead<br /><em><br /><br />To read in a gff file you have to insert a FastA converter and a source filepath. <br />If no FastA Sequence is included you directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF</em></div>
-<div class="tip" id="fs34">module GFF3Parser<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs35">module Reader<br /><br />from BioFSharp.IO.GFF3Parser</div>
-<div class="tip" id="fs36">val GFF3reader : fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Reader.GFF3reader</div>
-<div class="tip" id="fs37">val gffExampleSanityCheckSimple : unit<br /><br />Full name: Readers.gffExampleSanityCheckSimple<br /><em><br /><br />to validate the gff file without SOTerm verification use this function and only insert filepath</em></div>
-<div class="tip" id="fs38">module SanityCheck<br /><br />from BioFSharp.IO.GFF3Parser</div>
-<div class="tip" id="fs39">val sanityCheck : filepath:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.SanityCheck.sanityCheck</div>
-<div class="tip" id="fs40">val filepathSO_Terms : string<br /><br />Full name: Readers.filepathSO_Terms<br /><em><br /><br />path, name and version of the &#39;Sequence Ontology terms&#39;-file</em></div>
-<div class="tip" id="fs41">val gffExampleSanityCheck : unit<br /><br />Full name: Readers.gffExampleSanityCheck<br /><em><br /><br />to validate the gff file insert filepath</em></div>
-<div class="tip" id="fs42">val sanityCheckWithSOTerm : so_TermsPath:string -&gt; filepath:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.SanityCheck.sanityCheckWithSOTerm</div>
-<div class="tip" id="fs43">val searchterm : string<br /><br />Full name: Readers.searchterm<br /><em><br /><br />Term to search for:</em></div>
-<div class="tip" id="fs44">val gffExampleSearch : seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: Readers.gffExampleSearch<br /><em><br /><br />with this function you can search for a searchterm and you will get features which are related</em></div>
-<div class="tip" id="fs45">module Relationship<br /><br />from BioFSharp.IO.GFF3Parser</div>
-<div class="tip" id="fs46">val relationshipSearch : gffList:seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Relationship.relationshipSearch</div>
-<div class="tip" id="fs47">val gffExampleWrite : unit<br /><br />Full name: Readers.gffExampleWrite<br /><em><br /><br />Takes a seq&lt;GFF&lt;&#39;a&gt;&gt;, a FastA converter and a destination filepath and writes it into a .gff.</em></div>
-<div class="tip" id="fs48">module Writer<br /><br />from BioFSharp.IO.GFF3Parser</div>
-<div class="tip" id="fs49">val GFF3Writer : input:seq&lt;GFF3Parser.GFF&lt;#seq&lt;&#39;a&gt;&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.Writer.GFF3Writer</div>
+<div class="tip" id="fs4">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs5">namespace FSharp.Care</div>
+<div class="tip" id="fs6">namespace FSharp.Care.IO</div>
+<div class="tip" id="fs7">type FastqItem&lt;&#39;a,&#39;b&gt; =<br />&#160;&#160;{Header: string;<br />&#160;&#160;&#160;Sequence: &#39;a;<br />&#160;&#160;&#160;QualityHeader: string;<br />&#160;&#160;&#160;QualitySequence: &#39;b;}<br /><br />Full name: Readers.FastqItem&lt;_,_&gt;<br /><em><br /><br />&#160;FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</em></div>
+<div class="tip" id="fs8">FastqItem.Header: string</div>
+<div class="tip" id="fs9">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
+<div class="tip" id="fs10">FastqItem.Sequence: &#39;a</div>
+<div class="tip" id="fs11">FastqItem.QualityHeader: string</div>
+<div class="tip" id="fs12">FastqItem.QualitySequence: &#39;b</div>
+<div class="tip" id="fs13">val converterToAA : string:string -&gt; AminoAcids.AminoAcid option []<br /><br />Full name: Readers.converterToAA<br /><em><br /><br />&#160;get characters as sequence units</em></div>
+<div class="tip" id="fs14">Multiple items<br />val string : string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
+<div class="tip" id="fs15">Multiple items<br />type String =<br />&#160;&#160;new : value:char -&gt; string + 7 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 2 overloads<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.String<br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : unit<br />String(value: nativeptr&lt;sbyte&gt;) : unit<br />String(value: char []) : unit<br />String(c: char, count: int) : unit<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : unit<br />String(value: char [], startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : unit</div>
+<div class="tip" id="fs16">val toCharArray : str:string -&gt; char []<br /><br />Full name: FSharp.Care.String.toCharArray</div>
+<div class="tip" id="fs17">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
+<div class="tip" id="fs18">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
+<div class="tip" id="fs19">module BioItemsConverter<br /><br />from BioFSharp</div>
+<div class="tip" id="fs20">module OptionConverter<br /><br />from BioFSharp.BioItemsConverter</div>
+<div class="tip" id="fs21">val charToOptionAminoAcid : aac:char -&gt; AminoAcids.AminoAcid option<br /><br />Full name: BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid</div>
+<div class="tip" id="fs22">val qualityConvertFn : string:string -&gt; int []<br /><br />Full name: Readers.qualityConvertFn<br /><em><br /><br />&#160;get Phred quality score</em></div>
+<div class="tip" id="fs23">val i : char</div>
+<div class="tip" id="fs24">Char.GetHashCode() : int</div>
+<div class="tip" id="fs25">val yourFastqFile : string<br /><br />Full name: Readers.yourFastqFile</div>
+<div class="tip" id="fs26">val FastQSequence : seq&lt;FastQ.FastqItem&lt;AminoAcids.AminoAcid option [],int []&gt;&gt;<br /><br />Full name: Readers.FastQSequence</div>
+<div class="tip" id="fs27">module FastQ<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs28">val fromFile : converter:(string -&gt; &#39;a) -&gt; qualityConverter:(string -&gt; &#39;b) -&gt; filePath:string -&gt; seq&lt;FastQ.FastqItem&lt;&#39;a,&#39;b&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastQ.fromFile</div>
+<div class="tip" id="fs29">val filepathGFF : string<br /><br />Full name: Readers.filepathGFF<br /><em><br /><br />path and name of the input file</em></div>
+<div class="tip" id="fs30">val fastaConverter : x:seq&lt;char&gt; -&gt; seq&lt;char&gt;<br /><br />Full name: Readers.fastaConverter<br /><em><br /><br />converter for FastA.FastaItem</em></div>
+<div class="tip" id="fs31">val x : seq&lt;char&gt;</div>
+<div class="tip" id="fs32">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
+<div class="tip" id="fs33">Multiple items<br />val char : value:&#39;T -&gt; char (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.char<br /><br />--------------------<br />type char = Char<br /><br />Full name: Microsoft.FSharp.Core.char</div>
+<div class="tip" id="fs34">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>
+<div class="tip" id="fs35">val gffExampleRead : seq&lt;GFF3Parser.GFF&lt;seq&lt;char&gt;&gt;&gt;<br /><br />Full name: Readers.gffExampleRead<br /><em><br /><br />To read in a gff file you have to insert a FastA converter and a source filepath. <br />If no FastA Sequence is included you directly can use GFF3Parser.Reader.GFF3readerWithoutFasta filepathGFF</em></div>
+<div class="tip" id="fs36">module GFF3Parser<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs37">module Reader<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs38">val GFF3reader : fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Reader.GFF3reader</div>
+<div class="tip" id="fs39">val gffExampleSanityCheckSimple : unit<br /><br />Full name: Readers.gffExampleSanityCheckSimple<br /><em><br /><br />to validate the gff file without SOTerm verification use this function and only insert filepath</em></div>
+<div class="tip" id="fs40">module SanityCheck<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs41">val sanityCheck : filepath:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.SanityCheck.sanityCheck</div>
+<div class="tip" id="fs42">val filepathSO_Terms : string<br /><br />Full name: Readers.filepathSO_Terms<br /><em><br /><br />path, name and version of the &#39;Sequence Ontology terms&#39;-file</em></div>
+<div class="tip" id="fs43">val gffExampleSanityCheck : unit<br /><br />Full name: Readers.gffExampleSanityCheck<br /><em><br /><br />to validate the gff file insert filepath</em></div>
+<div class="tip" id="fs44">val sanityCheckWithSOTerm : so_TermsPath:string -&gt; filepath:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.SanityCheck.sanityCheckWithSOTerm</div>
+<div class="tip" id="fs45">val searchterm : string<br /><br />Full name: Readers.searchterm<br /><em><br /><br />Term to search for:</em></div>
+<div class="tip" id="fs46">val gffExampleSearch : seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: Readers.gffExampleSearch<br /><em><br /><br />with this function you can search for a searchterm and you will get features which are related</em></div>
+<div class="tip" id="fs47">module Relationship<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs48">val relationshipSearch : gffList:seq&lt;GFF3Parser.GFF&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFF3Parser.GFFEntry&gt;<br /><br />Full name: BioFSharp.IO.GFF3Parser.Relationship.relationshipSearch</div>
+<div class="tip" id="fs49">val gffExampleWrite : unit<br /><br />Full name: Readers.gffExampleWrite<br /><em><br /><br />Takes a seq&lt;GFF&lt;&#39;a&gt;&gt;, a FastA converter and a destination filepath and writes it into a .gff.</em></div>
+<div class="tip" id="fs50">module Writer<br /><br />from BioFSharp.IO.GFF3Parser</div>
+<div class="tip" id="fs51">val GFF3Writer : input:seq&lt;GFF3Parser.GFF&lt;#seq&lt;&#39;a0&gt;&gt;&gt; -&gt; converter:(&#39;a0 -&gt; char) -&gt; path:string -&gt; unit<br /><br />Full name: BioFSharp.IO.GFF3Parser.Writer.GFF3Writer</div>
 
         </div>
-        <div class="span3">
+        <div class="span3" >
           <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-              
-              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
-			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
-			  <li><a href="/BioFSharp/Readers.html">I/O</a>
-				  <ul class="nav nav-list">
-					<li><a href="/BioFSharp/Readers.html#FastQ">FastQ</a></li>
-					<li><a href="/BioFSharp/Readers.html#FastA">FastA</a></li>
-					<li><a href="/BioFSharp/Readers.html#GFF3">GFF3</a></li>
-				  </ul>
-			  </li>
-              <li class="divider"></li>
-              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
-              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
-              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
-              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
-			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>			  
-              <li><a href="/BioFSharp/DeNovoDoc.html">De Novo identification</a>
-              <li class="divider"></li>
-              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
+            <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                <li class="nav-header">BioFSharp</li>
+                <li><a href="/BioFSharp/index.html">Home page</a></li>
+                <li class="divider"></li>
+                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+                <li><a href="/BioFSharp/license.html">License</a></li>
+                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Getting started</li>
+                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
+                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
+                <li class="nav-header">Data Structures</li>
+                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
+                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li>
+                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
+                </li>
+                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
+                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li>
+                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                </li>
+                <li class="nav-header">File Parsing</li>
+                <li>
+                    <a href="/BioFSharp/Readers.html">I/O</a>
+                        <ul class="nav nav-list">
+                            <li><a href="/BioFSharp/Readers.html#FastQ">FastQ</a></li>
+                            <li><a href="/BioFSharp/Readers.html#FastA">FastA</a></li>
+                            <li><a href="/BioFSharp/Readers.html#GFF3">GFF3</a></li>
+                        </ul>
+                </li>
+                <li class="nav-header">Charting & Visualization</li>
+                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                <li class="nav-header">Our other projects</li>
+                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
+                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+            </ul>
         </div>
       </div>
     </div>

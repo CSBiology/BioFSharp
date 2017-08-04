@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -55,42 +55,42 @@ into amino acids and then they get concatenated and transformed into an array.</
 <span class="l">14: </span>
 <span class="l">15: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="i">chlamyproteins</span> <span class="o">=</span> 
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="f">converter</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="i">letters</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="t">BioList</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="t">BioList</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="t">AminoAcid</span><span class="o">&gt;</span> <span class="o">=</span> 
-        <span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="i">letters</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 21)" onmouseover="showTip(event, 'fs18', 21)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="f">map</span> ( <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="i">x</span> <span class="k">-&gt;</span> <span class="k">match</span> (<span onmouseout="hideTip(event, 'fs2', 24)" onmouseover="showTip(event, 'fs2', 24)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 25)" onmouseover="showTip(event, 'fs7', 25)" class="t">AminoAcids</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="f">charToParsedAminoAcidChar</span> <span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="i">x</span>) <span class="k">with</span>
-                                  | <span onmouseout="hideTip(event, 'fs22', 28)" onmouseover="showTip(event, 'fs22', 28)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 29)" onmouseover="showTip(event, 'fs23', 29)" class="p">StandardCodes</span>  <span onmouseout="hideTip(event, 'fs24', 30)" onmouseover="showTip(event, 'fs24', 30)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 31)" onmouseover="showTip(event, 'fs24', 31)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs22', 32)" onmouseover="showTip(event, 'fs22', 32)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="p">AmbiguityCodes</span> <span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 37)" onmouseover="showTip(event, 'fs26', 37)" class="p">GapTer</span>         <span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 39)" onmouseover="showTip(event, 'fs24', 39)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs22', 40)" onmouseover="showTip(event, 'fs22', 40)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="p">NoAAChar</span>       <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="f">failwith</span> <span class="s">&quot;No AA Char given&quot;</span>)
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 44)" onmouseover="showTip(event, 'fs18', 44)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="f">toList</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">chlamyproteins</span> <span class="o">=</span> 
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="f">converter</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="i">letters</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="t">BioList</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="t">BioList</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="t">AminoAcid</span><span class="o">&gt;</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="i">letters</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 21)" onmouseover="showTip(event, 'fs18', 21)" class="f">map</span> ( <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="i">x</span> <span class="k">-&gt;</span> <span class="k">match</span> (<span onmouseout="hideTip(event, 'fs2', 23)" onmouseover="showTip(event, 'fs2', 23)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="t">AminoAcids</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="f">charToParsedAminoAcidChar</span> <span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="i">x</span>) <span class="k">with</span>
+                                  | <span onmouseout="hideTip(event, 'fs21', 27)" onmouseover="showTip(event, 'fs21', 27)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 28)" onmouseover="showTip(event, 'fs22', 28)" class="p">StandardCodes</span>  <span onmouseout="hideTip(event, 'fs23', 29)" onmouseover="showTip(event, 'fs23', 29)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs23', 30)" onmouseover="showTip(event, 'fs23', 30)" class="i">v</span>
+                                  | <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 32)" onmouseover="showTip(event, 'fs24', 32)" class="p">AmbiguityCodes</span> <span onmouseout="hideTip(event, 'fs23', 33)" onmouseover="showTip(event, 'fs23', 33)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="i">v</span>
+                                  | <span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="p">GapTer</span>         <span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="i">v</span>
+                                  | <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="p">NoAAChar</span>       <span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="f">failwith</span> <span class="s">&quot;No AA Char given&quot;</span>)
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 43)" onmouseover="showTip(event, 'fs17', 43)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="f">toList</span>
 
-    <span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="t">FileIO</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 47)" onmouseover="showTip(event, 'fs32', 47)" class="f">readFile</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Proteins.fasta&quot;</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs33', 48)" onmouseover="showTip(event, 'fs33', 48)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 49)" onmouseover="showTip(event, 'fs34', 49)" class="f">fromFileEnumerator</span> (<span onmouseout="hideTip(event, 'fs13', 50)" onmouseover="showTip(event, 'fs13', 50)" class="f">converter</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 51)" onmouseover="showTip(event, 'fs18', 51)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 52)" onmouseover="showTip(event, 'fs19', 52)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs35', 53)" onmouseover="showTip(event, 'fs35', 53)" class="i">item</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="i">item</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 55)" onmouseover="showTip(event, 'fs36', 55)" class="i">Sequence</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 56)" onmouseover="showTip(event, 'fs18', 56)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="f">toArray</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 58)" onmouseover="showTip(event, 'fs18', 58)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 59)" onmouseover="showTip(event, 'fs38', 59)" class="f">concat</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 60)" onmouseover="showTip(event, 'fs18', 60)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 61)" onmouseover="showTip(event, 'fs37', 61)" class="f">toArray</span>
+    <span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="t">FileIO</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="f">readFile</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Proteins.fasta&quot;</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 47)" onmouseover="showTip(event, 'fs32', 47)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 48)" onmouseover="showTip(event, 'fs33', 48)" class="f">fromFileEnumerator</span> (<span onmouseout="hideTip(event, 'fs12', 49)" onmouseover="showTip(event, 'fs12', 49)" class="f">converter</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 50)" onmouseover="showTip(event, 'fs17', 50)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 51)" onmouseover="showTip(event, 'fs18', 51)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="i">item</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs34', 53)" onmouseover="showTip(event, 'fs34', 53)" class="i">item</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="i">Sequence</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 55)" onmouseover="showTip(event, 'fs17', 55)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="f">toArray</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 57)" onmouseover="showTip(event, 'fs17', 57)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="f">concat</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 59)" onmouseover="showTip(event, 'fs17', 59)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 60)" onmouseover="showTip(event, 'fs36', 60)" class="f">toArray</span>
 </code></pre></td>
 </tr>
 </table>
 <p>The following code will return the first occurence of the searched query within the source.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 62)" onmouseover="showTip(event, 'fs2', 62)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 63)" onmouseover="showTip(event, 'fs10', 63)" class="i">Algorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 64)" onmouseover="showTip(event, 'fs11', 64)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 65)" onmouseover="showTip(event, 'fs39', 65)" class="f">findFirst</span> <span onmouseout="hideTip(event, 'fs12', 66)" onmouseover="showTip(event, 'fs12', 66)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs12', 67)" onmouseover="showTip(event, 'fs12', 67)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 61)" onmouseover="showTip(event, 'fs2', 61)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 62)" onmouseover="showTip(event, 'fs10', 62)" class="i">Algorithm</span><span class="o">.</span><span class="i">BoyerMoore</span><span class="o">.</span><span class="i">findFirst</span> <span onmouseout="hideTip(event, 'fs11', 63)" onmouseover="showTip(event, 'fs11', 63)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs11', 64)" onmouseover="showTip(event, 'fs11', 64)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
 </code></pre></td>
 </tr>
 </table>
 <p>The following code will return the first occurence of the query after a given staring point.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 68)" onmouseover="showTip(event, 'fs2', 68)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 69)" onmouseover="showTip(event, 'fs10', 69)" class="i">Algorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 70)" onmouseover="showTip(event, 'fs11', 70)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 71)" onmouseover="showTip(event, 'fs40', 71)" class="f">findFrom</span> <span class="n">7</span> <span onmouseout="hideTip(event, 'fs12', 72)" onmouseover="showTip(event, 'fs12', 72)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs12', 73)" onmouseover="showTip(event, 'fs12', 73)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 65)" onmouseover="showTip(event, 'fs2', 65)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 66)" onmouseover="showTip(event, 'fs10', 66)" class="i">Algorithm</span><span class="o">.</span><span class="i">BoyerMoore</span><span class="o">.</span><span class="i">findFrom</span> <span class="n">7</span> <span onmouseout="hideTip(event, 'fs11', 67)" onmouseover="showTip(event, 'fs11', 67)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs11', 68)" onmouseover="showTip(event, 'fs11', 68)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
 </code></pre></td>
 </tr>
 </table>
 <p>The following code will return the all the occurence of the query within the given source.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 74)" onmouseover="showTip(event, 'fs2', 74)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 75)" onmouseover="showTip(event, 'fs10', 75)" class="i">Algorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 76)" onmouseover="showTip(event, 'fs11', 76)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 77)" onmouseover="showTip(event, 'fs41', 77)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs12', 78)" onmouseover="showTip(event, 'fs12', 78)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs12', 79)" onmouseover="showTip(event, 'fs12', 79)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 69)" onmouseover="showTip(event, 'fs2', 69)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 70)" onmouseover="showTip(event, 'fs10', 70)" class="i">Algorithm</span><span class="o">.</span><span class="i">BoyerMoore</span><span class="o">.</span><span class="i">findAll</span> <span onmouseout="hideTip(event, 'fs11', 71)" onmouseover="showTip(event, 'fs11', 71)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs11', 72)" onmouseover="showTip(event, 'fs11', 72)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
 </code></pre></td>
 </tr>
 </table>
@@ -105,69 +105,78 @@ into amino acids and then they get concatenated and transformed into an array.</
 <div class="tip" id="fs8">module Nucleotides<br /><br />from BioFSharp</div>
 <div class="tip" id="fs9">module AminoAcidSymbols<br /><br />from BioFSharp</div>
 <div class="tip" id="fs10">namespace BioFSharp.Algorithm</div>
-<div class="tip" id="fs11">module BoyerMoore<br /><br />from BioFSharp.Algorithm</div>
-<div class="tip" id="fs12">val chlamyproteins : AminoAcid []<br /><br />Full name: BoyerMooreUsage.chlamyproteins</div>
-<div class="tip" id="fs13">val converter : (seq&lt;char&gt; -&gt; BioList.BioList&lt;AminoAcid&gt;)</div>
-<div class="tip" id="fs14">val letters : seq&lt;char&gt;</div>
-<div class="tip" id="fs15">module BioList<br /><br />from BioFSharp</div>
-<div class="tip" id="fs16">type BioList&lt;&#39;a (requires &#39;a :&gt; IBioItem)&gt; = &#39;a list<br /><br />Full name: BioFSharp.BioList.BioList&lt;_&gt;</div>
-<div class="tip" id="fs17">type AminoAcid =<br />&#160;&#160;| Ala<br />&#160;&#160;| Cys<br />&#160;&#160;| Asp<br />&#160;&#160;| Glu<br />&#160;&#160;| Phe<br />&#160;&#160;| Gly<br />&#160;&#160;| His<br />&#160;&#160;| Ile<br />&#160;&#160;| Lys<br />&#160;&#160;| Leu<br />&#160;&#160;...<br />&#160;&#160;interface IBioItem<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; int<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; byte<br /><br />Full name: BioFSharp.AminoAcids.AminoAcid</div>
-<div class="tip" id="fs18">Multiple items<br />module Seq<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =<br />&#160;&#160;static member fromFile : filePath:string -&gt; seq&lt;string&gt;<br />&#160;&#160;static member fromFileWithCsvSchema : filePath:string * separator:char * firstLineHasHeader:bool * ?skipLines:int * ?skipLinesBeforeHeader:int * ?schemaMode:SchemaMode -&gt; seq&lt;&#39;schema&gt;<br />&#160;&#160;static member fromFileWithSeq : separator:char -&gt; filePath:string -&gt; seq&lt;string []&gt;<br />&#160;&#160;static member toCSV : separator:string -&gt; header:bool -&gt; data:seq&lt;&#39;a&gt; -&gt; seq&lt;string&gt;<br />&#160;&#160;static member write : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br />&#160;&#160;static member writeOrAppend : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br /><br />Full name: FSharp.Care.IO.SeqIO.Seq</div>
-<div class="tip" id="fs19">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
-<div class="tip" id="fs20">val x : char</div>
-<div class="tip" id="fs21">val charToParsedAminoAcidChar : c:char -&gt; ParsedAminoAcidChar<br /><br />Full name: BioFSharp.AminoAcids.charToParsedAminoAcidChar</div>
-<div class="tip" id="fs22">type ParsedAminoAcidChar =<br />&#160;&#160;| StandardCodes of AminoAcid<br />&#160;&#160;| AmbiguityCodes of AminoAcid<br />&#160;&#160;| GapTer of AminoAcid<br />&#160;&#160;| NoAAChar of char<br /><br />Full name: BioFSharp.AminoAcids.ParsedAminoAcidChar</div>
-<div class="tip" id="fs23">union case ParsedAminoAcidChar.StandardCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs24">val v : AminoAcid</div>
-<div class="tip" id="fs25">union case ParsedAminoAcidChar.AmbiguityCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs26">union case ParsedAminoAcidChar.GapTer: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs27">union case ParsedAminoAcidChar.NoAAChar: char -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs28">val v : char</div>
-<div class="tip" id="fs29">val failwith : message:string -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.failwith</div>
-<div class="tip" id="fs30">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>
-<div class="tip" id="fs31">module FileIO<br /><br />from FSharp.Care.IO</div>
-<div class="tip" id="fs32">val readFile : file:string -&gt; seq&lt;string&gt;<br /><br />Full name: FSharp.Care.IO.FileIO.readFile</div>
-<div class="tip" id="fs33">module FastA<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs34">val fromFileEnumerator : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastA.fromFileEnumerator</div>
-<div class="tip" id="fs35">val item : FastA.FastaItem&lt;BioList.BioList&lt;AminoAcid&gt;&gt;</div>
-<div class="tip" id="fs36">FastA.FastaItem.Sequence: BioList.BioList&lt;AminoAcid&gt;</div>
-<div class="tip" id="fs37">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
-<div class="tip" id="fs38">val concat : sources:seq&lt;#seq&lt;&#39;T&gt;&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.concat</div>
-<div class="tip" id="fs39">val findFirst : source:&#39;a array -&gt; query:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.BoyerMoore.findFirst</div>
-<div class="tip" id="fs40">val findFrom : badCharPattern:int array -&gt; goodCharPattern:int array -&gt; startindex:int -&gt; source:&#39;a array -&gt; query:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.BoyerMoore.findFrom</div>
-<div class="tip" id="fs41">val findAll : source:&#39;a array -&gt; query:&#39;a array -&gt; int list (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.BoyerMoore.findAll</div>
+<div class="tip" id="fs11">val chlamyproteins : AminoAcid []<br /><br />Full name: BoyerMooreUsage.chlamyproteins</div>
+<div class="tip" id="fs12">val converter : (seq&lt;char&gt; -&gt; BioList.BioList&lt;AminoAcid&gt;)</div>
+<div class="tip" id="fs13">val letters : seq&lt;char&gt;</div>
+<div class="tip" id="fs14">module BioList<br /><br />from BioFSharp</div>
+<div class="tip" id="fs15">type BioList&lt;&#39;a (requires &#39;a :&gt; IBioItem)&gt; = &#39;a list<br /><br />Full name: BioFSharp.BioList.BioList&lt;_&gt;</div>
+<div class="tip" id="fs16">type AminoAcid =<br />&#160;&#160;| Ala<br />&#160;&#160;| Cys<br />&#160;&#160;| Asp<br />&#160;&#160;| Glu<br />&#160;&#160;| Phe<br />&#160;&#160;| Gly<br />&#160;&#160;| His<br />&#160;&#160;| Ile<br />&#160;&#160;| Lys<br />&#160;&#160;| Leu<br />&#160;&#160;...<br />&#160;&#160;interface IBioItem<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; int<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; byte<br /><br />Full name: BioFSharp.AminoAcids.AminoAcid</div>
+<div class="tip" id="fs17">Multiple items<br />module Seq<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =<br />&#160;&#160;static member fromFile : filePath:string -&gt; seq&lt;string&gt;<br />&#160;&#160;static member fromFileWithCsvSchema : filePath:string * separator:char * firstLineHasHeader:bool * ?skipLines:int * ?skipLinesBeforeHeader:int * ?schemaMode:SchemaMode -&gt; seq&lt;&#39;schema&gt;<br />&#160;&#160;static member fromFileWithSep : separator:char -&gt; filePath:string -&gt; seq&lt;string []&gt;<br />&#160;&#160;static member toCSV : separator:string -&gt; header:bool -&gt; data:seq&lt;&#39;a&gt; -&gt; seq&lt;string&gt;<br />&#160;&#160;static member write : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br />&#160;&#160;static member writeOrAppend : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br /><br />Full name: FSharp.Care.IO.SeqIO.Seq</div>
+<div class="tip" id="fs18">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
+<div class="tip" id="fs19">val x : char</div>
+<div class="tip" id="fs20">val charToParsedAminoAcidChar : c:char -&gt; ParsedAminoAcidChar<br /><br />Full name: BioFSharp.AminoAcids.charToParsedAminoAcidChar</div>
+<div class="tip" id="fs21">type ParsedAminoAcidChar =<br />&#160;&#160;| StandardCodes of AminoAcid<br />&#160;&#160;| AmbiguityCodes of AminoAcid<br />&#160;&#160;| GapTer of AminoAcid<br />&#160;&#160;| NoAAChar of char<br /><br />Full name: BioFSharp.AminoAcids.ParsedAminoAcidChar</div>
+<div class="tip" id="fs22">union case ParsedAminoAcidChar.StandardCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
+<div class="tip" id="fs23">val v : AminoAcid</div>
+<div class="tip" id="fs24">union case ParsedAminoAcidChar.AmbiguityCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
+<div class="tip" id="fs25">union case ParsedAminoAcidChar.GapTer: AminoAcid -&gt; ParsedAminoAcidChar</div>
+<div class="tip" id="fs26">union case ParsedAminoAcidChar.NoAAChar: char -&gt; ParsedAminoAcidChar</div>
+<div class="tip" id="fs27">val v : char</div>
+<div class="tip" id="fs28">val failwith : message:string -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.failwith</div>
+<div class="tip" id="fs29">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>
+<div class="tip" id="fs30">module FileIO<br /><br />from FSharp.Care.IO</div>
+<div class="tip" id="fs31">val readFile : file:string -&gt; seq&lt;string&gt;<br /><br />Full name: FSharp.Care.IO.FileIO.readFile</div>
+<div class="tip" id="fs32">module FastA<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs33">val fromFileEnumerator : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastA.fromFileEnumerator</div>
+<div class="tip" id="fs34">val item : FastA.FastaItem&lt;BioList.BioList&lt;AminoAcid&gt;&gt;</div>
+<div class="tip" id="fs35">FastA.FastaItem.Sequence: BioList.BioList&lt;AminoAcid&gt;</div>
+<div class="tip" id="fs36">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
+<div class="tip" id="fs37">val concat : sources:seq&lt;#seq&lt;&#39;T&gt;&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.concat</div>
 
         </div>
-        <div class="span3">
+        <div class="span3" >
           <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-              
-              <li><a href="/BioFSharp/BioSequence.html">BioSequence</a></li>
-			  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-			  <li><a href="/BioFSharp/BoyerMooreUsage.html">BoyerMoore</a></li>
-			  <li><a href="/BioFSharp/Readers.html">I/O</a>
-			  </li>
-              <li class="divider"></li>
-              <li><a href="/BioFSharp/CentroidSpectra.html">Spectrum centroidization</a></li>
-              <li><a href="/BioFSharp/ChargeStateDetermination.html">Charge state determination</a></li>
-              <li><a href="/BioFSharp/PeptideLookUp.html">Peptide look up</a></li>
-              <li><a href="/BioFSharp/PeptideIdentification.html">Peptide identification</a></li>
-			  <li><a href="/BioFSharp/MoleculeFinding.html">Molecule Finding</a>			  
-              <li><a href="/BioFSharp/DeNovoDoc.html">De Novo identification</a>
-              <li class="divider"></li>
-              <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
+            <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                <li class="nav-header">BioFSharp</li>
+                <li><a href="/BioFSharp/index.html">Home page</a></li>
+                <li class="divider"></li>
+                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+                <li><a href="/BioFSharp/license.html">License</a></li>
+                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Getting started</li>
+                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
+                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
+                <li class="nav-header">Data Structures</li>
+                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
+                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li>
+                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
+                </li>
+                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
+                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li>
+                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                </li>
+                <li class="nav-header">File Parsing</li>
+                <li>
+                    <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li class="nav-header">Charting & Visualization</li>
+                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                <li class="nav-header">Our other projects</li>
+                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
+                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+            </ul>
         </div>
       </div>
     </div>
