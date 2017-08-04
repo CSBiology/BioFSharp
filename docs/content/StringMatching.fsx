@@ -16,7 +16,7 @@ open BioFSharp.Algorithm.StringMatching
 
 String matching algorithms
 ==========================
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a> <a id="Author" href="https://github.com/kMutagene">&#128366;view author of this documentation</a><br><br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a> <a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a><br><br>
 
 String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the `BioFSharp.Algorithm.StringMatching` module are organized as following:
 
@@ -36,6 +36,8 @@ Runtimes are provided using [Bachmann-Landau notations](https://en.wikipedia.org
  * n : length of the source
 
  * m : length of the query pattern
+
+ * k : size of the Alphabet
 
 The following query pattern and source will be used in all further examples demonstrating how to use the specific module. 
 
@@ -83,7 +85,7 @@ Runtime
 <br>
 Knuth Morris Pratt
 ==================
-the KMP algorithm makes use of previous match information to determine an amount of skips that can be made until the next position in the source gets examined as a possible match.
+The KMP algorithm makes use of previous match information to determine an amount of skips that can be made until the next position in the source gets examined as a possible match.
 To achieve that, a prefix table (or failure function) of the pattern needs to be computed, which determines the amount of skippable elements depending on the previous (partial) match.
 
 
@@ -185,7 +187,7 @@ Runtime
 <br>
 Boyer Moore
 ===========
-
+<a id="Author" href="https://github.com/WieczorekE">&#128366;view author of this tutorial</a>
 
 Usage
 -----
@@ -228,8 +230,9 @@ BoyerMoore.findAll chlamyproteins chlamyproteins.[16988..17978]
 (**
 Runtime
 -------
- * Preprocessing: _None_
- * Matching time: _O(nm)_
+ * Preprocessing: _Θ(m+k)_
+ * Matching time: best _Ω(n/m)_
+ * Worst Case: _O(nm)_
 
 Speed Comparison
 ================
