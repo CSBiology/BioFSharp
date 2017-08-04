@@ -52,5 +52,6 @@ table.pre::-webkit-scrollbar-thumb
 
 #Author:hover, #SourceCode:hover 
 {
-	background-color:#BDD7EE;
+	background-color:#2E75B6;
+	color:white;
 }

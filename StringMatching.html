@@ -36,7 +36,7 @@
         <div class="span9" id="main">
           
 <h1><a name="String-matching-algorithms" class="anchor" href="#String-matching-algorithms">String matching algorithms</a></h1>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a> <a id="Author" href="https://github.com/kMutagene">&#128366;view author of this documentation</a><br><br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a> <a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a><br><br>
 <p>String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the <code>BioFSharp.Algorithm.StringMatching</code> module are organized as following:</p>
 <ul>
 <li><p>AlgorithmName.<strong>findAll</strong> : returns the (zero-based) starting position of all matches of the query pattern in the source as an integer list</p></li>
@@ -45,11 +45,12 @@
 </ul>
 <p>All algorithms contained in this library are implemented as generic as possible regarding the data type that the input source and query pattern can contain, being only restricted by implementing the <code>IEquatable</code> interface, as there must be a way to assure that two equal elements are indeed equal.
 However, the nature of the specific algorithm may impose additional restrictions, for example concerning the size of a single comparable item.</p>
-<p>The type of query pattern and source has been constrained to be an <code>array&lt;'a&gt;</code> because many indices accessions are made during the search.</p>
+<p>The type of query pattern and source has been constrained to be an <code>array&lt;'a&gt;</code> because many index accessions are made during the search.</p>
 <p>Runtimes are provided using <a href="https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann.E2.80.93Landau_notations">Bachmann-Landau notations</a>:</p>
 <ul>
 <li>n : length of the source</li>
 <li>m : length of the query pattern</li>
+<li>k : size of the Alphabet</li>
 </ul>
 <p>The following query pattern and source will be used in all further examples demonstrating how to use the specific module.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -101,7 +102,7 @@ While being inefficient, it may be beneficial to use it in cases where the speed
 <hr></hr>
 <br>
 <h1><a name="Knuth-Morris-Pratt" class="anchor" href="#Knuth-Morris-Pratt">Knuth Morris Pratt</a></h1>
-<p>the KMP algorithm makes use of previous match information to determine an amount of skips that can be made until the next position in the source gets examined as a possible match.
+<p>The KMP algorithm makes use of previous match information to determine an amount of skips that can be made until the next position in the source gets examined as a possible match.
 To achieve that, a prefix table (or failure function) of the pattern needs to be computed, which determines the amount of skippable elements depending on the previous (partial) match.</p>
 <h2><a name="Usage-1" class="anchor" href="#Usage-1">Usage</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
@@ -231,6 +232,7 @@ In fact the two provided algorithms are built the same way:</p>
 <hr></hr>
 <br>
 <h1><a name="Boyer-Moore" class="anchor" href="#Boyer-Moore">Boyer Moore</a></h1>
+<a id="Author" href="https://github.com/WieczorekE">&#128366;view author of this tutorial</a>
 <h2><a name="Usage-3" class="anchor" href="#Usage-3">Usage</a></h2>
 <p>This part of the documentation gives a short introduction into the Boyer Moore string search algorithm which is particulary desined to work on IBioItems.This algorithm searches a query within a longer source. In using two arrays that are created using the bad character rule and the good suffix heuristics the best shifting value is determined. This accounts for higher shifts which prevents unnecessary comparisons to save time.</p>
 <p>The following code will return an array created out of all the proteins that are contained in the fasta file. First, the Symbols in the file get converted
@@ -292,8 +294,9 @@ into amino acids and then they get concatenated and transformed into an array.</
 </table>
 <h2><a name="Runtime-3" class="anchor" href="#Runtime-3">Runtime</a></h2>
 <ul>
-<li>Preprocessing: <em>None</em></li>
-<li>Matching time: <em>O(nm)</em></li>
+<li>Preprocessing: <em>Θ(m+k)</em></li>
+<li>Matching time: best <em>Ω(n/m)</em></li>
+<li>Worst Case: <em>O(nm)</em></li>
 </ul>
 <h1><a name="Speed-Comparison" class="anchor" href="#Speed-Comparison">Speed Comparison</a></h1>
 
