@@ -16,7 +16,9 @@ open BioFSharp.Algorithm.StringMatching
 
 String matching algorithms
 ==========================
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a> <a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a><br><br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a>
+<br><br>
 
 String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the `BioFSharp.Algorithm.StringMatching` module are organized as following:
 
@@ -29,7 +31,7 @@ String matching algorithms are concerned with finding a single or multiple match
 All algorithms contained in this library are implemented as generic as possible regarding the data type that the input source and query pattern can contain, being only restricted by implementing the `IEquatable` interface, as there must be a way to assure that two equal elements are indeed equal.
 However, the nature of the specific algorithm may impose additional restrictions, for example concerning the size of a single comparable item. 
 
-The type of query pattern and source has been constrained to be an `array<'a>` because many indices accessions are made during the search.
+The type of query pattern and source has been constrained to be an `array<'a>` because many index accessions are made during the search.
 
 Runtimes are provided using [Bachmann-Landau notations](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann.E2.80.93Landau_notations): 
 
@@ -236,5 +238,5 @@ Runtime
 
 Speed Comparison
 ================
-
+Coming soon...
 *)

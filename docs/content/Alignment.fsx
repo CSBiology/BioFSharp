@@ -2,8 +2,10 @@
 #I "../../bin"
 (**
 
-# BioFSharp: Pairwise Alignment
-
+# Pairwise Alignment
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
+<br><br>
 
 In this short tutorial, the usage of the Pairwise alignment-implementation is demonstrated. 
 For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local alignments, the <b>SmithWaterman</b>-algorithm is used.
