@@ -19,9 +19,9 @@ module Isotopes =
         // Hydrogen
         let H1   = create "H" 1 1 1.00782503207 0.999885 1.007947
         let H2   = create "D" 1 2 2.0141017778  0.000115 1.007947
-        let H3   = create "D" 1 3 3.0160492777  nan      1.007947
+        let H3   = create "T" 1 3 3.0160492777  nan      1.007947
         // Phosphorus
-        let P31  = create "D" 15 31 30.97376163 1.       30.973762
+        let P31  = create "P" 15 31 30.97376163 1.       30.973762
         // Carbon
         let C12  = create "C" 6 12 12.0000000    0.98938 12.01078
         let C13  = create "C" 6 13 13.0033548378 0.01078 12.01078 
@@ -38,7 +38,7 @@ module Isotopes =
         let S33  = create "S" 16 33 32.97145876 0.0075   32.066
         let S34  = create "S" 16 34 33.96786690 0.0425   32.066
         let S36  = create "S" 16 36 35.96708076 0.0001   32.066
-        // Seleon
+        // Selenium
         let Se74 = create "Se" 34 74 73.9224764 0.0089 78.96
         let Se76 = create "Se" 34 76 75.9192136 0.0937 78.96
         let Se77 = create "Se" 34 77 76.9199140 0.0763 78.96
