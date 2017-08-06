@@ -13,7 +13,7 @@ module AgilentRaw =
     
     
     type GalProbeDescription = {
-        //The block number for the feture
+        //The block number for the feature
         [<FieldAttribute("Block")>]    Block        : int;
         [<FieldAttribute("Row")>]      Row          : int;
         [<FieldAttribute("Column")>]   Column       : int;
