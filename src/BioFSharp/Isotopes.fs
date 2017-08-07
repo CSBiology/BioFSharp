@@ -45,5 +45,21 @@ module Isotopes =
         let Se78 = create "Se" 34 78 77.9173091 0.2377 78.96
         let Se80 = create "Se" 34 80 79.9165213 0.4961 78.96
         let Se82 = create "Se" 34 82 81.9166994 0.0873 78.96
-
+        // Sodium
+        let Na23 = create "Na" 11 23 22.98976928 1. 22.98976928
+        // Iron
+        let Fe54 = create "Fe" 26 54 53.939609 0.05845 55.845
+        let Fe56 = create "Fe" 26 56 55.934936 0.91754 55.845
+        let Fe57 = create "Fe" 26 57 56.935393 0.02119 55.845
+        let Fe58 = create "Fe" 26 58 57.933274 0.00282 55.845
+        // Calcium
+        let Ca40 = create "Ca" 20 40 39.9625909 0.96941 40.078
+        let Ca42 = create "Ca" 20 42 41.958618 0.00647 40.078
+        let Ca43 = create "Ca" 20 43 42.958766 0.00135 40.078
+        let Ca44 = create "Ca" 20 44 43.955482 0.02086 40.078
+        let Ca46 = create "Ca" 20 46 45.95369 0.00004 40.078
+        let Ca48 = create "Ca" 20 48 47.9525228 0.00187 40.078
+        // Chlorine
+        //let Cl35 = create "Cl" 17 35 34.9688527 0.755 35.457
+        //let Cl37 = create "Cl" 17 37 36.9659026 0.245 35.457
 

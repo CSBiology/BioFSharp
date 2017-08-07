@@ -162,7 +162,8 @@ module Elements =
     module Table = 
 
         let P = Mono (createMono "P" (Isotopes.Table.P31,Isotopes.Table.P31.NatAbundance) )
-    
+        let Na = Mono (createMono "Na" (Isotopes.Table.Na23,Isotopes.Table.Na23.NatAbundance) )
+
         let H = Di   (createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) )
         let C = Di   (createDi "C" (Isotopes.Table.C12,Isotopes.Table.C12.NatAbundance) (Isotopes.Table.C13,Isotopes.Table.C13.NatAbundance) )
         let N = Di   (createDi "N" (Isotopes.Table.N14,Isotopes.Table.N14.NatAbundance) (Isotopes.Table.N15,Isotopes.Table.N15.NatAbundance) )
@@ -172,7 +173,8 @@ module Elements =
 
         // Attention! Se is Multi
         let Se = Mono (createMono "Se" (Isotopes.Table.Se74,Isotopes.Table.Se74.NatAbundance) )
-    
+        
+
         /// Returns element object according to element symbol string
         let ElementAsObject (symbol:string) =
             match symbol with
@@ -184,7 +186,7 @@ module Elements =
             | "P"       -> P
             | "Se"      -> Se
             | _ -> raise (System.ArgumentException("Element unknown"))
-
+        
 
         module Heavy =
 
