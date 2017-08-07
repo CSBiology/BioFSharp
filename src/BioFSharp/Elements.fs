@@ -162,7 +162,11 @@ module Elements =
     module Table = 
 
         let P = Mono (createMono "P" (Isotopes.Table.P31,Isotopes.Table.P31.NatAbundance) )
-    
+        
+        let Mg = Tri  (createTri "Mg" (Isotopes.Table.Mg24,Isotopes.Table.Mg24.NatAbundance) (Isotopes.Table.Mg25,Isotopes.Table.Mg25.NatAbundance) (Isotopes.Table.Mg26,Isotopes.Table.Mg26.NatAbundance) )
+        let K = Tri  (createTri "K" (Isotopes.Table.K39,Isotopes.Table.K39.NatAbundance) (Isotopes.Table.K40,Isotopes.Table.K40.NatAbundance) (Isotopes.Table.K41,Isotopes.Table.K41.NatAbundance) )
+        let Cu = Di   (createDi "Cu" (Isotopes.Table.Cu63,Isotopes.Table.Cu63.NatAbundance) (Isotopes.Table.Cu65,Isotopes.Table.Cu65.NatAbundance) )
+
         let H = Di   (createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) )
         let C = Di   (createDi "C" (Isotopes.Table.C12,Isotopes.Table.C12.NatAbundance) (Isotopes.Table.C13,Isotopes.Table.C13.NatAbundance) )
         let N = Di   (createDi "N" (Isotopes.Table.N14,Isotopes.Table.N14.NatAbundance) (Isotopes.Table.N15,Isotopes.Table.N15.NatAbundance) )
