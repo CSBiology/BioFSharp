@@ -32,7 +32,7 @@ Isotopes are implemented as a record type containing the following fields:
 
 Creating an isotope
 -------------------
-The `Table` module provides prebuilt Isotopes for Hydrogen, Carbon, Nitrogen, Oxygen, Sulfur, Selenium and Phosphorus. 
+The `Table` module provides prebuilt Isotopes for most biological relevant elements. 
 
 You can either directly create an isotope type like any other record type or use the provided `create` function:
 
