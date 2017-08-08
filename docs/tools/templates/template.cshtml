@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <link type="text/css" rel="stylesheet" href="@Root/style/CSBstyle.css" />
     <link type="text/css" rel="stylesheet" href="@Root/content/style.css" />
     <script type="text/javascript" src="@Root/content/tips.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -35,43 +35,80 @@
         <div class="span9" id="main">
           @RenderBody()
         </div>
-        <div class="span3">
+        <div class="span3" >
           <img src="@Root/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">@Properties["project-name"]</li>
-            <li><a href="@Root/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
-            <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
-            <li><a href="@Root/license.html">License</a></li>
-            <li><a href="@Root/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-              @*<li><a href="@Root/tutorial.html">Sample tutorial</a></li>*@
-              <li><a href="@Root/BioSequence.html">BioSequence</a></li>
-			  <li><a href="@Root/Alignment.html">Alignment</a></li>
-			  <li><a href="@Root/BoyerMooreUsage.html">BoyerMoore</a></li>
-			  <li><a href="@Root/Readers.html">I/O</a>
-			  @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Readers.fsx"))
-              {
-				  <ul class="nav nav-list">
-					<li><a href="@Root/Readers.html#FastQ">FastQ</a></li>
-					<li><a href="@Root/Readers.html#FastA">FastA</a></li>
-					<li><a href="@Root/Readers.html#GFF3">GFF3</a></li>
-				  </ul>
-              }
-			  </li>
-              <li class="divider"></li>
-              <li><a href="@Root/CentroidSpectra.html">Spectrum centroidization</a></li>
-              <li><a href="@Root/ChargeStateDetermination.html">Charge state determination</a></li>
-              <li><a href="@Root/PeptideLookUp.html">Peptide look up</a></li>
-              <li><a href="@Root/PeptideIdentification.html">Peptide identification</a></li>
-			  <li><a href="@Root/MoleculeFinding.html">Molecule Finding</a>
-              <li class="divider"></li>
-              <li><a href="@Root/BlastWrapper.html">Use NCBI-Blast</a></li>
-            <li class="nav-header">Documentation</li>
-            <li><a href="@Root/reference/index.html">API Reference</a></li>
-          </ul>
+            <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                <li class="nav-header">@Properties["project-name"]</li>
+                <li><a href="@Root/index.html">Home page</a></li>
+                <li class="divider"></li>
+                <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
+                <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
+                <li><a href="@Root/license.html">License</a></li>
+                <li><a href="@Root/release-notes.html">Release Notes</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Getting started</li>
+                <li><a href="@Root/Introduction.html">Introduction</a></li>
+                <li><a href="@Root/LibraryStructure.html">Library Structure</a></li>
+                <li class="nav-header">Data Structures</li>
+                <li><a href="@Root/Elements.html">Elements</a></li>
+                <li><a href="@Root/Isotopes.html">Isotopes</a></li>
+                <li><a href="@Root/Formula.html">Formula</a></li>
+                <li><a href="@Root/IBioItem.html">IBioItem</a></li>
+                <li><a href="@Root/Nucleotides.html">Nucleotides</a></li>
+                <li><a href="@Root/Aminoacids.html">Aminoacids</a></li>
+                <li>
+                    <a href="@Root/BioCollections.html">BioCollections</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("BioCollections.fsx"))
+                    {
+                        <ul class="nav nav-list">
+                            <li><a href="@Root/BioCollections.html#BioSeq">BioSeq</a></li>
+                            <li><a href="@Root/BioCollections.html#BioList">BioList</a></li>
+                            <li><a href="@Root/BioCollections.html#BioArray">BioArray</a></li>
+                        </ul>
+                    }
+                </li>
+                <li><a href="@Root/BioID.html">BioID</a></li>
+                <li class="nav-header">Pattern Queries</li>
+                <li><a href="@Root/Alignment.html">Alignment</a></li>
+                <li><a href="@Root/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li>
+                    <a href="@Root/StringMatching.html">String matching algorithms</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("StringMatching.fsx"))
+                    {
+                        <ul class="nav nav-list">
+                            <li><a href="@Root/StringMatching.html#The-Naive-Algorithm">Naive</a></li>
+                            <li><a href="@Root/StringMatching.html#Knuth-Morris-Pratt">KnuthMorrisPratt</a></li>
+                            <li><a href="@Root/StringMatching.html#Rabin-Karp">RabinKarp</a></li>
+                            <li><a href="@Root/StringMatching.html#Boyer-Moore">BoyerMoore</a></li>
+                        </ul>
+                    }
+                </li>
+                <li class="nav-header">File Parsing</li>
+                <li>
+                    <a href="@Root/Readers.html">I/O</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Readers.fsx"))
+                    {
+                        <ul class="nav nav-list">
+                            <li><a href="@Root/Readers.html#FastQ">FastQ</a></li>
+                            <li><a href="@Root/Readers.html#FastA">FastA</a></li>
+                            <li><a href="@Root/Readers.html#GFF3">GFF3</a></li>
+                        </ul>
+                    }
+                </li>
+                <li class="nav-header">Statistics</li>
+                <li><a href="@Root/StatisticalMeasures.html">Common measures</a></li>
+                <li><a href="@Root/Distributions.html">Distributions</a></li>
+                <li><a href="@Root/StatisticalTests.html">Statistical Tests</a></li>
+                <li class="nav-header">Charting & Visualization</li>
+                <li><a href="@Root/Plotly.html">Charting with Plotly</a></li>
+                <li class="nav-header">Documentation</li>
+                <li><a href="@Root/reference/index.html">API Reference</a></li>
+                <li class="nav-header">Our other projects</li>
+                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
+                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+            </ul>
         </div>
       </div>
     </div>

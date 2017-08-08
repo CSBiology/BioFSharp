@@ -4,6 +4,8 @@
 #I "../../bin"
 #r "../../bin/BioFSharp.dll"
 #r "../../bin/BioFSharp.IO.dll"
+#r "../../bin/FSharp.Care.dll"
+#r "../../bin/FSharp.Care.IO.dll"
 
 (**
 Using Bio Format Readers
@@ -13,13 +15,18 @@ BioFSharp contains a set of readers for different biology-associated file format
 <a name="FastQ"></a>
 FastQ
 ------------------------------
-
+<br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/FastQ.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/MikhayN">&#128366;view author of this tutorial</a>
+<br><br>
 *)
 
 (*** hide ***)
 open System
 open BioFSharp
 open BioFSharp.IO
+open FSharp.Care
+open FSharp.Care.IO
 
 (**
 This module allows to parse FASTQ format data with original 4-lines entries into this record type
@@ -44,7 +51,8 @@ from our library 'BioFSharp.BioItemsConverter.OptionConverter'
 /// get characters as sequence units
 let converterToAA string =
     string
-    |> String.map (BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid)
+    |> String.toCharArray
+    |> Array.map (BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid)
 
 (**
 If you have following possible values for quality sequence:
@@ -66,7 +74,7 @@ And then you can easily use this module to read your FastQ file
 let yourFastqFile = (__SOURCE_DIRECTORY__ + "/data/FastQtest.fastq")
 
 let FastQSequence = 
-    FastQ.fromFile convertFn qualityConvertFn yourFastqFile
+    FastQ.fromFile converterToAA qualityConvertFn yourFastqFile
 
 (**
 
@@ -91,7 +99,10 @@ This documentation is not yet here. Hopefully it will be soon =)
 <a name="GFF3"></a>
 Introducing GFF3Parser
 ----------------------
-
+<br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GFF3Parser.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/bvenn">&#128366;view author of this tutorial</a>
+<br><br>
 The GFF3Parser is a tool to validate, read and write **GFF3** _(Generic Feature Format Version 3)_-Files.
 
 All examples are executed on a modified version of [saccharomyces_cerevisiae.gff](http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff).

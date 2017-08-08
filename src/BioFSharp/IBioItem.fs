@@ -24,7 +24,7 @@ module BioItem =
 
     /// Returns then display name of the bio item
     let inline name (bItem:#IBioItem) =
-        bItem.Symbol
+        bItem.Name
     
     /// Returns then symbol of the bio item
     let inline symbol (bItem:#IBioItem) =

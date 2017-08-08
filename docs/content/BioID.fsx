@@ -4,20 +4,23 @@
 #I "../../bin"
 
 (**
-BioFSharp
+BioID
 ======================
 
+work in progress... 
 
 *)
 #r "BioFSharp.dll"
+#r "FSharp.Care"
 open BioFSharp
+open FSharp.Care
 
 
 
 BioID.parseCreId "sp| Cre01.g121121.1.1 acyl-CoA thioesterase 4 ALS=MGI:2159621;Acot4 DBV=UP"
 
-
-let fh = 
-    fromString "UniqueIdentifier any description DID=DisplayId ALS=Alias1;Alias2 DBV=DataBaseVersion TOU=TypeOfUniqueIdentifier SV=SequenceVersion OS=OrganismName PE=ProteinExistence GN=GeneName PN=ProteinName"
-toString fh
+(*** hide ***)
+//let fh = 
+//    fromString "UniqueIdentifier any description DID=DisplayId ALS=Alias1;Alias2 DBV=DataBaseVersion TOU=TypeOfUniqueIdentifier SV=SequenceVersion OS=OrganismName PE=ProteinExistence GN=GeneName PN=ProteinName"
+//toString fh
 

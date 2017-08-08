@@ -1,0 +1,121 @@
+table.pre {
+	overflow-x: auto;
+    white-space: nowrap;
+	display:block;
+}
+
+table.pre::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 5px;
+	background-color: #212d30;
+}
+
+table.pre::-webkit-scrollbar
+{
+	height: 8px;
+	background-color: #212d30;
+	border-radius:5px
+}
+
+table.pre::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #80b0b0;
+}
+
+#main
+{
+	text-align:justify;
+}
+
+#main h2
+{
+	margin: 10px 0px 10px 0px;
+}
+
+#responsiveTable 
+{
+	overflow-x:auto;
+}
+
+#responsiveTable::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 5px;
+	background-color: #212d30;
+}
+
+#responsiveTable::-webkit-scrollbar
+{
+	height: 8px;
+	background-color: #212d30;
+	border-radius:5px
+}
+
+#responsiveTable::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #80b0b0;
+}
+
+#responsiveTable p 
+{
+	margin: 0px 0px 0px	0px;
+}
+
+#responsiveTable table 
+{
+	border: 2px solid #2E75B6;
+	border-radius:50px;
+}
+
+#responsiveTable  tr:nth-child(even) 
+{
+	background-color: #BDD7EE;
+}
+
+#responsiveTable tr
+{
+	border: 1px solid #2E75B6;
+}
+
+#responsiveTable th
+{
+	background-color:#2E75B6;
+	color:white;
+}
+
+#responsiveTable  th, td 
+{
+	text-align: left;
+	padding: 0px 10px 0px 10px;
+}
+
+#SourceCode
+{
+	text-align:center;
+	color:#2E75B6;
+	padding: 2px 6px 2px 6px;
+	border-radius: 25px;
+    border: 2px solid #2E75B6;
+	text-decoration:none;
+
+}
+#Author
+{
+	text-align:center;
+	color:#2E75B6;
+	padding: 2px 6px 2px 6px;
+	border-radius: 25px;
+    border: 2px solid #2E75B6;
+	text-decoration:none;
+}
+
+#Author:hover, #SourceCode:hover 
+{
+	background-color:#2E75B6;
+	color:white;
+}

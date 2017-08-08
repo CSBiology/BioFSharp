@@ -5,11 +5,39 @@
 #r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
 open FSharp.Plotly
 (**
-BioFSharp
-======================
+BioSeq
+======
+work in progress... 
 
+BioList
+=======
+work in progress... 
+
+BioArray
+========
+work in progress... 
 
 *)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(*** hide ***)
 #r "BioFSharp.dll"
 open BioFSharp
 
@@ -22,11 +50,11 @@ Formula.toString c
 
 
 AminoAcidSymbols.AminoAcidSymbol.Ala |> int
-(**
 
-Converting a peptide string to a biosequence
 
-*)
+//Converting a peptide string to a biosequence
+
+
 
 let peptide1 = 
     "REYAHMIGMEYDTVQK"
