@@ -58,6 +58,7 @@
     <Compile Include="FastQ.fs" />
     <Compile Include="GFF3Parser.fs" />
     <Compile Include="GeneBankParser.fs" />
+    <Compile Include="Newick.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

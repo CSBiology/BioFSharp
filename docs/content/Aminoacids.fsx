@@ -28,7 +28,7 @@ This tutorial covers the following topics:
 
 * [Pattern Matching](Aminoacids.html#Pattern-Matching)
 
-   This part is about using 'AminoAcidSymbol' for quick pattern matching  
+   This part is about using `AminoAcidSymbol` for quick pattern matching  
 
 * [Example Workflow](Aminoacids.html#Example-Workflow) 
    
@@ -40,7 +40,7 @@ open BioFSharp
 <br>
 ##Basics
 
-The type `AminoAcid` is in principle a union case of three letter codes. 
+The type `AminoAcid` is in principle a discriminated union of three letter codes.  
 Besides the standard amino acids, there are also special cases like **Ter** which is a terminator and **Gap** which is a gap. (More on **Mod** [here](Aminoacids.html#Modification)
 In principle you have two different ways of defining values of type `AminoAcid`. You can directly call the union case of the type:
 
