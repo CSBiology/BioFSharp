@@ -78,6 +78,7 @@
     <Compile Include="BioArray.fs" />
     <Compile Include="BioList.fs" />
     <Compile Include="AminoProperties.fs" />
+    <Compile Include="IsoelectricPoint.fs" />
     <Compile Include="Digestion.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />

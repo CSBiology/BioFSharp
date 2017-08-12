@@ -96,7 +96,7 @@ For further functionalities check out the [API reference for IBioItem](https://c
 (**
 ##Modification
 
-The type `AminoAcid` also has a union case `mod`. This case is a tuple consisting of a Amino Acid and a list of `Modifications`.
+The type `AminoAcid` also has a union case `mod`. This case is a tuple consisting of a Amino Acid and a list of `Modifications`. Therefore it's a recursive type and can be modified at will.
 Those modifications can be created using the functions of the `ModificationInfo` module and set using the functions of the `AminoAcids` module:
 *)
 open ModificationInfo

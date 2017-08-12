@@ -14,6 +14,7 @@ module AminoProperties =
         | Coil                
         | Helicity            
         | Amphiphilicity      
+        | PKr
 
         static member toString = function
             | HydrophobicityIndex  -> "Hydrophobicity index (Argos et al., 1982)"
@@ -22,7 +23,7 @@ module AminoProperties =
             | Coil                 -> "Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)"
             | Helicity             -> "Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)"
             | Amphiphilicity       -> "PRIFT index (Cornette et al., 1987)"
-
+            | PKr                  -> "pKr (Christen, Jaussi, Benoit 2016)"
 
     let private ofPropteryString propertyName (str:string) = 
         // TODO: validation
