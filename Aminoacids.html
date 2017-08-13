@@ -60,7 +60,11 @@ This tutorial covers the following topics:</p>
 </li>
 <li>
 <p><a href="Aminoacids.html#Pattern-Matching">Pattern Matching</a></p>
-<p>This part is about using 'AminoAcidSymbol' for quick pattern matching</p>
+<p>This part is about using <code>AminoAcidSymbol</code> for quick pattern matching</p>
+</li>
+<li>
+<p><a href="Aminoacids.html#Isoelectric-Point">Isoelectric Point</a></p>
+<p>This part is about how to calculate the theoretic isoelectric point of peptides</p>
 </li>
 <li>
 <p><a href="Aminoacids.html#Example-Workflow">Example Workflow</a></p>
@@ -77,7 +81,7 @@ This tutorial covers the following topics:</p>
 </table>
 <br>
 <h2><a name="Basics" class="anchor" href="#Basics">Basics</a></h2>
-<p>The type <code>AminoAcid</code> is in principle a union case of three letter codes.
+<p>The type <code>AminoAcid</code> is in principle a discriminated union of three letter codes.<br />
 Besides the standard amino acids, there are also special cases like <strong>Ter</strong> which is a terminator and <strong>Gap</strong> which is a gap. (More on <strong>Mod</strong> <a href="Aminoacids.html#Modification">here</a>
 In principle you have two different ways of defining values of type <code>AminoAcid</code>. You can directly call the union case of the type:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -135,7 +139,7 @@ The variable myGlycine' is of type <code>IBioItem</code>. The following three st
 <p>With the built in functions you can e.g. receive the chemical formula of the AA, check if it's a Terminator or get its mass.
 For further functionalities check out the <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioitem.html">API reference for IBioItem</a> or for <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-AminoAcids.html">AminoAcids</a>.</p>
 <h2><a name="Modification" class="anchor" href="#Modification">Modification</a></h2>
-<p>The type <code>AminoAcid</code> also has a union case <code>mod</code>. This case is a tuple consisting of a Amino Acid and a list of <code>Modifications</code>.
+<p>The type <code>AminoAcid</code> also has a union case <code>mod</code>. This case is a tuple consisting of a Amino Acid and a list of <code>Modifications</code>. Therefore it's a recursive type and can be modified at will.
 Those modifications can be created using the functions of the <code>ModificationInfo</code> module and set using the functions of the <code>AminoAcids</code> module:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
@@ -146,6 +150,51 @@ Those modifications can be created using the functions of the <code>Modification
 <p>coming soon</p>
 <h2><a name="Pattern-Matching" class="anchor" href="#Pattern-Matching">Pattern Matching</a></h2>
 <p>coming soon</p>
+<h2><a name="Isoelectric-Point" class="anchor" href="#Isoelectric-Point">Isoelectric Point</a></h2>
+<p>The isoelectric point (pI) of a protein is the point at which it carries as many positive as negative charges.
+Therefore the overall charge is zero. Knowing this value can e.g. be useful for isolation of single proteins in a voltage gradient.<br />
+The implementation is based on: "<a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf"><a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf">http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf</a></a>".
+In principle, the distinct amino acids in the protein are counted.
+By using the <a href="https://en.wikipedia.org/wiki/Henderson-Hasselbalch_equation">Henderson-Hasselbalch equation</a> and the pKr values, the theoretic charge states of the amino acids for a specific pH can be calculated.
+Multiplying those charge states with the count of the associated amino acids and adding those products together then gives the overall charge of the protein. This is only done with the amino acids, which might be charged (basic, acidic).
+The isoelectric point is the pH value for which this function returns zero. It is found by <a href="https://en.wikipedia.org/wiki/Bisection_method">bisection</a> (also called Binary Search).<br />
+Disclaimer: Keep in mind, that this algorithm ignores post-translational modifications and interactions of the amino acids with each other. Therefore it is only intented to be a rough approximation and should be used as such.
+<br>
+The function for finding the isoelectric point is found in the <code>IsoelectricPoint</code> module.</p>
+<ul>
+<li>Besides the peptide sequence in form of a <code>AminoAcidSymbol</code> Seq, it takes</li>
+<li>a mapping function, which maps an <code>AminoAcidSymbol</code> to a float representing the pKr and</li>
+<li>an accuracy value. The found pI has to be at least as close to zero as this accuracy value</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//AA sequence</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="i">myProtein</span> <span class="o">=</span> 
+    <span class="s">&quot;ATPIIEMNYPWTMNIKLSSDACMTNWWPNCMTLKIIA&quot;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="f">map</span> <span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="t">AminoAcidSymbols</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="f">aminoAcidSymbol</span>
+
+<span class="c">//default function for pKr of charged aminoacids</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="f">pKrFunction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 45)" onmouseover="showTip(event, 'fs31', 45)" class="f">getpKr</span>
+
+<span class="c">//accuracy in z</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="i">acc</span> <span class="o">=</span> <span class="n">0.5</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 47)" onmouseover="showTip(event, 'fs33', 47)" class="i">pI</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 48)" onmouseover="showTip(event, 'fs30', 48)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 49)" onmouseover="showTip(event, 'fs34', 49)" class="f">tryFind</span> <span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="f">pKrFunction</span> <span onmouseout="hideTip(event, 'fs32', 51)" onmouseover="showTip(event, 'fs32', 51)" class="i">acc</span> <span onmouseout="hideTip(event, 'fs24', 52)" onmouseover="showTip(event, 'fs24', 52)" class="i">myProtein</span>
+</code></pre></td>
+</tr>
+</table>
+<p>The result will be of type <code>Option&lt;float*float&gt;</code>. The first float is the pH, the second one is the according charge.</p>
 <h2><a name="Example-Workflow" class="anchor" href="#Example-Workflow">Example Workflow</a></h2>
 <p>coming soon</p>
 
@@ -167,11 +216,22 @@ Those modifications can be created using the functions of the <code>Modification
 <div class="tip" id="fs16">val myGlycine&#39; : IBioItem<br /><br />Full name: Aminoacids.myGlycine&#39;</div>
 <div class="tip" id="fs17">type IBioItem =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;abstract member Formula : Formula<br />&#160;&#160;&#160;&#160;abstract member Name : string<br />&#160;&#160;&#160;&#160;abstract member Symbol : char<br />&#160;&#160;&#160;&#160;abstract member isGap : bool<br />&#160;&#160;&#160;&#160;abstract member isTerminator : bool<br />&#160;&#160;end<br /><br />Full name: BioFSharp.IBioItem</div>
 <div class="tip" id="fs18">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs19">val name : aa:AminoAcid -&gt; char<br /><br />Full name: BioFSharp.AminoAcids.name</div>
+<div class="tip" id="fs19">val name : aa:AminoAcid -&gt; string<br /><br />Full name: BioFSharp.AminoAcids.name</div>
 <div class="tip" id="fs20">module BioItem<br /><br />from BioFSharp</div>
-<div class="tip" id="fs21">val name : bItem:#IBioItem -&gt; char<br /><br />Full name: BioFSharp.BioItem.name</div>
+<div class="tip" id="fs21">val name : bItem:#IBioItem -&gt; string<br /><br />Full name: BioFSharp.BioItem.name</div>
 <div class="tip" id="fs22">property IBioItem.Name: string</div>
 <div class="tip" id="fs23">module ModificationInfo<br /><br />from BioFSharp</div>
+<div class="tip" id="fs24">val myProtein : seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: Aminoacids.myProtein</div>
+<div class="tip" id="fs25">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs26">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
+<div class="tip" id="fs27">module AminoAcidSymbols<br /><br />from BioFSharp</div>
+<div class="tip" id="fs28">val aminoAcidSymbol : a:&#39;a -&gt; AminoAcidSymbols.AminoAcidSymbol (requires member op_Explicit)<br /><br />Full name: BioFSharp.AminoAcidSymbols.aminoAcidSymbol</div>
+<div class="tip" id="fs29">val pKrFunction : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: Aminoacids.pKrFunction</div>
+<div class="tip" id="fs30">module IsoelectricPoint<br /><br />from BioFSharp</div>
+<div class="tip" id="fs31">val getpKr : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.IsoelectricPoint.getpKr</div>
+<div class="tip" id="fs32">val acc : float<br /><br />Full name: Aminoacids.acc</div>
+<div class="tip" id="fs33">val pI : (float * float) option<br /><br />Full name: Aminoacids.pI</div>
+<div class="tip" id="fs34">val tryFind : pKrFunc:(AminoAcidSymbols.AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; (float * float) option<br /><br />Full name: BioFSharp.IsoelectricPoint.tryFind</div>
 
         </div>
         <div class="span3" >

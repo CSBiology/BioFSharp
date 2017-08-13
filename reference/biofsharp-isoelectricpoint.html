@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>OntologyItem<'a> - BioFSharp</title>
+    <title>IsoelectricPoint - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,91 +37,61 @@
 
 
 
-<h1>OntologyItem<'a></h1>
+<h1>IsoelectricPoint</h1>
 <p>
-  <span>Namespace: BioFSharp.Stats</span><br />
-  <span>Parent Module: <a href="biofsharp-stats-ontologyenrichment.html">OntologyEnrichment</a></span>
+  <span>Namespace: BioFSharp</span><br />
 </p>
 <div class="xmldoc">
-<p>Represents an item in an ontology set</p>
+<p>Finding the isoelectric point of peptides</p>
 
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '937', 937)" onmouseover="showTip(event, '937', 937)">
-            GroupIndex
+          <code onmouseout="hideTip(event, '235', 235)" onmouseover="showTip(event, '235', 235)">
+            getpKr 
           </code>
-          <div class="tip" id="937">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="235">
+            <strong>Signature:</strong> AminoAcidSymbol -&gt; float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L14-14" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/IsoelectricPoint.fs#L45-45" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Maps AminoAcidSymbol to default pK value of it's sidechain. Returns 0.0 if sidechain is neither acidic nor basic</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '938', 938)" onmouseover="showTip(event, '938', 938)">
-            Id
+          <code onmouseout="hideTip(event, '236', 236)" onmouseover="showTip(event, '236', 236)">
+            tryFind pKrFunc accuracy aaSeq
           </code>
-          <div class="tip" id="938">
-            <strong>Signature:</strong> string<br />
+          <div class="tip" id="236">
+            <strong>Signature:</strong> pKrFunc:(AminoAcidSymbol -&gt; float) -&gt; accuracy:float&lt;MeasureOne&gt; -&gt; aaSeq:seq&lt;AminoAcidSymbol&gt; -&gt; (float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;) option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L12-12" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/IsoelectricPoint.fs#L48-48" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>Finds the pH for which the global charge of the aaSeq is closer to 0 than the given accuracy</p>
 
-          <code onmouseout="hideTip(event, '939', 939)" onmouseover="showTip(event, '939', 939)">
-            Item
-          </code>
-          <div class="tip" id="939">
-            <strong>Signature:</strong> &#39;a<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L15-15" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
 
-          <code onmouseout="hideTip(event, '940', 940)" onmouseover="showTip(event, '940', 940)">
-            OntologyTerm
-          </code>
-          <div class="tip" id="940">
-            <strong>Signature:</strong> string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L13-13" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
         </td>
       </tr>
     </tbody>
