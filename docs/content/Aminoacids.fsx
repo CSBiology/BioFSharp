@@ -28,7 +28,11 @@ This tutorial covers the following topics:
 
 * [Pattern Matching](Aminoacids.html#Pattern-Matching)
 
-   This part is about using `AminoAcidSymbol` for quick pattern matching  
+   This part is about using `AminoAcidSymbol` for quick pattern matching
+   
+* [Isoelectric Point](Aminoacids.html#Isoelectric-Point)
+
+    This part is about how to calculate the theoretic isoelectric point of peptides
 
 * [Example Workflow](Aminoacids.html#Example-Workflow) 
    
@@ -106,6 +110,43 @@ coming soon
 
 ##Pattern Matching
 coming soon
+*)
+
+(**
+##Isoelectric Point
+
+The isoelectric point (pI) of a protein is the point at which it carries as many positive as negative charges. 
+Therefore the overall charge is zero. Knowing this value can e.g. be useful for isolation of single proteins in a voltage gradient.  
+The implementation is based on: "[http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf](http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf)". 
+In principle, the distinct amino acids in the protein are counted. 
+By using the [Henderson-Hasselbalch equation](https://en.wikipedia.org/wiki/Henderson-Hasselbalch_equation) and the pKr values, the theoretic charge states of the amino acids for a specific pH can be calculated. 
+Multiplying those charge states with the count of the associated amino acids and adding those products together then gives the overall charge of the protein. This is only done with the amino acids, which might be charged (basic, acidic). 
+The isoelectric point is the pH value for which this function returns zero. It is found by [bisection](https://en.wikipedia.org/wiki/Bisection_method) (also called Binary Search).  
+Disclaimer: Keep in mind, that this algorithm ignores post-translational modifications and interactions of the amino acids with each other. Therefore it is only intented to be a rough approximation and should be used as such.
+<br>
+The function for finding the isoelectric point is found in the `IsoelectricPoint` module. 
+
+* Besides the peptide sequence in form of a `AminoAcidSymbol` Seq, it takes 
+* a mapping function, which maps an `AminoAcidSymbol` to a float representing the pKr and
+* an accuracy value. The found pI has to be at least as close to zero as this accuracy value
+
+*)
+
+//AA sequence
+let myProtein = 
+    "ATPIIEMNYPWTMNIKLSSDACMTNWWPNCMTLKIIA"
+    |> Seq.map AminoAcidSymbols.aminoAcidSymbol
+
+//default function for pKr of charged aminoacids
+let pKrFunction = IsoelectricPoint.getpKr
+
+//accuracy in z
+let acc = 0.5
+
+let pI = IsoelectricPoint.tryFind pKrFunction acc myProtein
+
+(**
+The result will be of type `Option<float*float>`. The first float is the pH, the second one is the according charge.
 *)
 
 (**
