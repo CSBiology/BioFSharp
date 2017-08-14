@@ -82,3 +82,9 @@ peptide2' |> Array.map getHydrophobicityIndex
 peptide2' |> AminoProperties.ofWindowedBioArray 3 getHydrophobicityIndex
 
 
+  
+BioItem.formula AminoAcidSymbols.AminoAcidSymbol.Ala
+
+Formula.Table.Ala 
+
+AminoAcidSymbols.name AminoAcidSymbols.AminoAcidSymbol.Ala

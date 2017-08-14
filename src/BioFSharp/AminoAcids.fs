@@ -192,7 +192,8 @@ module AminoAcids =
                             | AminoAcid.Mod (aa,mds) -> sprintf "%s[%s]" (name aa) (mds |> Seq.map (fun md -> md.Name) |> String.concat ";")
                     
                     name this
-
+        
+        //static member op_Explicit (value:#IBioItem) = value.Symbol |> byte |> AminoAcidSymbols.aminoAcidSymbol
         static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol
         static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 

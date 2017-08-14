@@ -93,7 +93,7 @@ module Formula =
 
 
         //Amino acid formulas minus H20   
-        let Ala = parseFormulaString "C3H5ON"    
+        let Ala = parseFormulaString "C3H5ON"
         let Cys = parseFormulaString "C3H5ONS"   
         let Asp = parseFormulaString "C4H5O3N"   
         let Glu = parseFormulaString "C5H7O3N"   

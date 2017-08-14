@@ -101,41 +101,47 @@ module AminoAcidSymbols =
             member this.isGap        = this.Value = AminoAcidSymbol.Gap.Value
             //Amino acid formulas minus H20  
             member this.Formula  = 
-                let formula =
-                    function
-                    | Field AminoAcidSymbol.Ala -> Formula.Table.Ala
-                    | Field AminoAcidSymbol.Cys -> Formula.Table.Cys
-                    | Field AminoAcidSymbol.Asp -> Formula.Table.Asp
-                    | Field AminoAcidSymbol.Glu -> Formula.Table.Glu
-                    | Field AminoAcidSymbol.Phe -> Formula.Table.Phe
-                    | Field AminoAcidSymbol.Gly -> Formula.Table.Gly
-                    | Field AminoAcidSymbol.His -> Formula.Table.His
-                    | Field AminoAcidSymbol.Ile -> Formula.Table.Ile
-                    | Field AminoAcidSymbol.Lys -> Formula.Table.Lys
-                    | Field AminoAcidSymbol.Leu -> Formula.Table.Leu
-                    | Field AminoAcidSymbol.Met -> Formula.Table.Met
-                    | Field AminoAcidSymbol.Asn -> Formula.Table.Asn
-                    | Field AminoAcidSymbol.Pyl -> Formula.Table.Pyl // Pyrrolysine
-                    | Field AminoAcidSymbol.Pro -> Formula.Table.Pro
-                    | Field AminoAcidSymbol.Gln -> Formula.Table.Gln
-                    | Field AminoAcidSymbol.Arg -> Formula.Table.Arg
-                    | Field AminoAcidSymbol.Ser -> Formula.Table.Ser
-                    | Field AminoAcidSymbol.Thr -> Formula.Table.Thr
-                    | Field AminoAcidSymbol.Sel -> Formula.Table.Sel // Selenocysteine
-                    | Field AminoAcidSymbol.Val -> Formula.Table.Val
-                    | Field AminoAcidSymbol.Trp -> Formula.Table.Trp
-                    | Field AminoAcidSymbol.Tyr -> Formula.Table.Tyr
-                                                                    
-                    | Field AminoAcidSymbol.Xaa -> Formula.Table.Xaa  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
-                    | Field AminoAcidSymbol.Xle -> Formula.Table.Xle
-                    | Field AminoAcidSymbol.Glx -> Formula.Table.Glx
-                    | Field AminoAcidSymbol.Asx -> Formula.Table.Asx
-                                               
-                    | Field AminoAcidSymbol.Gap -> Formula.emptyFormula
-                    | Field AminoAcidSymbol.Ter -> Formula.emptyFormula
-                    | _                         -> Formula.emptyFormula
+                let formula' (aa:AminoAcidSymbol) =
+                    printfn "outer"
+                    match aa with                    
+                    | x when x = AminoAcidSymbol.Ala -> 
+                        printfn "Formula.Table.Ala"
+                        Map.empty
+                        //Formula.emptyFormula //Formula.Table.Ala
+                    | _ -> failwithf "Alarm"
+//                    | Field AminoAcidSymbol.Cys -> Formula.Table.Cys
+//                    | Field AminoAcidSymbol.Asp -> Formula.Table.Asp
+//                    | Field AminoAcidSymbol.Glu -> Formula.Table.Glu
+//                    | Field AminoAcidSymbol.Phe -> Formula.Table.Phe
+//                    | Field AminoAcidSymbol.Gly -> Formula.Table.Gly
+//                    | Field AminoAcidSymbol.His -> Formula.Table.His
+//                    | Field AminoAcidSymbol.Ile -> Formula.Table.Ile
+//                    | Field AminoAcidSymbol.Lys -> Formula.Table.Lys
+//                    | Field AminoAcidSymbol.Leu -> Formula.Table.Leu
+//                    | Field AminoAcidSymbol.Met -> Formula.Table.Met
+//                    | Field AminoAcidSymbol.Asn -> Formula.Table.Asn
+//                    | Field AminoAcidSymbol.Pyl -> Formula.Table.Pyl // Pyrrolysine
+//                    | Field AminoAcidSymbol.Pro -> Formula.Table.Pro
+//                    | Field AminoAcidSymbol.Gln -> Formula.Table.Gln
+//                    | Field AminoAcidSymbol.Arg -> Formula.Table.Arg
+//                    | Field AminoAcidSymbol.Ser -> Formula.Table.Ser
+//                    | Field AminoAcidSymbol.Thr -> Formula.Table.Thr
+//                    | Field AminoAcidSymbol.Sel -> Formula.Table.Sel // Selenocysteine
+//                    | Field AminoAcidSymbol.Val -> Formula.Table.Val
+//                    | Field AminoAcidSymbol.Trp -> Formula.Table.Trp
+//                    | Field AminoAcidSymbol.Tyr -> Formula.Table.Tyr
+//                                                                    
+//                    | Field AminoAcidSymbol.Xaa -> Formula.Table.Xaa  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
+//                    | Field AminoAcidSymbol.Xle -> Formula.Table.Xle
+//                    | Field AminoAcidSymbol.Glx -> Formula.Table.Glx
+//                    | Field AminoAcidSymbol.Asx -> Formula.Table.Asx
+//                                               
+//                    | Field AminoAcidSymbol.Gap -> Formula.emptyFormula
+//                    | Field AminoAcidSymbol.Ter -> Formula.emptyFormula
+//                    | _                         -> Formula.emptyFormula
 
-                formula this
+                formula' AminoAcidSymbol.Ala 
+
             
             member this.Name =                   
                 /// Returns the name of AminoAcid
@@ -260,7 +266,7 @@ module AminoAcidSymbols =
         BioItem.name aa
 
     //Returns amino acid formulas minus H20            
-    let formula (aa:AminoAcidSymbol) =
+    let formula (aa:AminoAcidSymbol) =        
         BioItem.formula aa
     
     /// Returns the symbol of AminoAcidSymbol       
