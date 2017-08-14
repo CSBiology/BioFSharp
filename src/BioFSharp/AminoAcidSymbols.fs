@@ -260,6 +260,19 @@ module AminoAcidSymbols =
             AminoAcidSymbol.Gap
             AminoAcidSymbol.Ter ] 
 
+    let AminoSymbolSetPosCharged =
+        set [
+            AminoAcidSymbol.Arg
+            AminoAcidSymbol.Lys
+            AminoAcidSymbol.His ]
+
+    let AminoSymbolSetNegCharged =
+        set [
+
+            AminoAcidSymbol.Asp
+            AminoAcidSymbol.Glu
+            AminoAcidSymbol.Cys
+            AminoAcidSymbol.Tyr ]
 
     /// Returns the name of AminoAcid
     let name (aa:AminoAcidSymbol) =
@@ -296,7 +309,16 @@ module AminoAcidSymbols =
     /// Returns a function to calculate the average mass of a bio item with memoization
     let initAverageMassWithMemP = 
         Memoization.memoizeP (fun a -> averageMass a)
+
+    /// Returns true, if the AminoAcidSymbol has a charged side chain
+    let isCharged (aa:AminoAcidSymbol) = 
+        AminoSymbolSetPosCharged.Contains aa || AminoSymbolSetNegCharged.Contains aa
+    /// Returns true, if the AminoAcidSymbol has a charged side chain
+
+    let isPosCharged (aa:AminoAcidSymbol) = 
+        AminoSymbolSetPosCharged.Contains aa  
         
-            
-    
+    /// Returns true, if the AminoAcidSymbol has a charged side chain
+    let isNegCharged (aa:AminoAcidSymbol) = 
+        AminoSymbolSetNegCharged.Contains aa
 

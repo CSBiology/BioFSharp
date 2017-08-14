@@ -32,11 +32,11 @@ let project = "BioFSharp"
 
 // Short summary of the project
 // (used as description in AssemblyInfo and as a short summary for NuGet package)
-let summary = "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."
+let summary = "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."
 
 // Longer description of the project
 // (used as a description for NuGet package; line breaks are automatically cleaned up)
-let description = "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."
+let description = "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."
 
 // List of author names (for NuGet package)
 let authors = [ "Timo Mühlhaus" ]
@@ -332,6 +332,18 @@ Target "ReleaseDocs" (fun _ ->
     Branches.push tempDocsDir
 )
 
+Target "ReleaseLocal" (fun _ ->
+    let tempDocsDir = "docs/local"
+    CreateDir tempDocsDir
+    CleanDir tempDocsDir
+    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
+    ReplaceInFiles 
+        (seq {
+            yield "href=\"/" + project + "/","href=\""
+            yield "src=\"/" + project + "/","src=\""}) 
+        ((filesInDirMatching "*.html" (directoryInfo tempDocsDir)) |> Array.map (fun x -> tempDocsDir + "/" + x.Name))
+)
+
 #load "paket-files/build/fsharp/FAKE/modules/Octokit/Octokit.fsx"
 open Octokit
 
@@ -371,6 +383,9 @@ Target "BuildPackage" DoNothing
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
+
+"All"
+ ==> "ReleaseLocal"
 
 "Clean"
   ==> "AssemblyInfo"

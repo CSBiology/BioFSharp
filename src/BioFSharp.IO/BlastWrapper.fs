@@ -244,7 +244,7 @@ module BlastNCBI =
         ///Compares a nucleotide query to a nucleotide database
         member this.blastN searchDB query output  (ps:seq<Parameters.BlastParams>) = 
             let arg = [Parameters.BlastParams.SearchDB searchDB; Parameters.BlastParams.Query query; Parameters.BlastParams.Output output]
-            createProcess "BlastP" "/blastp.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
+            createProcess "BlastN" "/blastn.exe" Parameters.stringOfBlastParams (Seq.append arg ps)
 
 
 

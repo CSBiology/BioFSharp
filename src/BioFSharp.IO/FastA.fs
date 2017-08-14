@@ -81,10 +81,36 @@ module FastA =
                                    ()
         
             loop ()
-        use sWriter = new System.IO.StreamWriter(filePath)
+        use sWriter = new System.IO.StreamWriter(filePath,true)
         data
         |> Seq.iter (fun (i:FastaItem<_>) ->
                                 sWriter.WriteLine(">" + i.Header)
                                 toChunks sWriter 80 i.Sequence)   
 
+
+    /// Converts FastaItem to string. Converter determines type of sequence by converting type -> seq<char>
+    let toString (toString:'T -> char) (data:seq<FastaItem<#seq<'T>>>) =
+        let toChunks (length:int) (source: seq<'T>) (head:string)=    
+            let ie = source.GetEnumerator()
+            let sourceIsEmpty = ref false
+            let builder = System.Text.StringBuilder(length)        
+            seq {
+                yield sprintf ">%s" head
+                while ie.MoveNext () do                
+                            builder.Append(toString ie.Current) |> ignore
+                            for x in 2 .. length do
+                                if ie.MoveNext() then
+                                    builder.Append(toString ie.Current) |> ignore
+                                else
+                                    sourceIsEmpty := true                
+            
+                            match !sourceIsEmpty with
+                            | false -> // writer builder
+                                        yield (builder.ToString())
+                                        builder.Clear() |> ignore
+                            | true  -> yield (builder.ToString())
+                }
+        data
+        |> Seq.map (fun (i:FastaItem<_>) -> toChunks 80 i.Sequence i.Header)
+        |> Seq.concat
 

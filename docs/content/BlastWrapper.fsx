@@ -5,11 +5,13 @@
 (**
 Introducing BlastWrapper
 ========================
-
-BlastWrapper is a tool for performing different tasks and in NCBI BLAST console applications (version 2.2.31+).
-It is able to create BLAST databases and perform blastN or blastP algorithms, while providing a way to set
-any output parameter for creating a custom output format.
-Official documentation for all BLAST applications can be found [here] (http://www.ncbi.nlm.nih.gov/books/NBK279690).
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/BlastWrapper.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a>
+<br><br>
+BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
+It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
+output parameter for creating a custom output format.
+Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690).
 
 For the purpose of this tutorial, we will build a protein database using a `.fastA` file containing chloroplast proteins
 of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data. 
@@ -56,10 +58,11 @@ BlastWrapper(ncbiPath).makeblastdb inputFile ([typeOfDatabase;] |> seq<Parameter
 (**
 This creates 3 new files in our directory:
 `Chlamy_Cp.fastA.phr`,`Chlamy_Cp.fastA.pin` and `Chlamy_Cp.fastA.psq`.
+
 We have sucesssfully created our search database.
 
 
-Creating a `.fastA` file from an aminoacid string
+Creating a .fastA file from an aminoacid string
 -------------------------------------------------
 
 _Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3._
@@ -75,7 +78,7 @@ PWIAVAYSAPVAAATAVFLIYPIGQGSFSDGMPLGISGTFNFMIVFQAEHNILMHPFHMLGVAGVFGGSL
 FSAMHGSLVTSSLIRETTENESANEGYRFGQEEETYNIVAAHGYFGRLIFQYASFNNSRSLHFFLAAWPV
 VGIWFTALGISTMAFNLNGFNFNQSVVDSQGRVINTWADIINRANLGMEVMHERNAHNFPLDLAAVEAPS
 TNG"
-///header for the `.fastA` file
+///header for the .fastA file
 let header = ">gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]"
 
 ///Query sequency represented as a sequence of `AminoAcid` one of BioFSharp's `BioItems`
@@ -103,12 +106,15 @@ Performing the BLAST search
 ---------------------------
 
 We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
+
 _Note: custom output formats can only be specified for output types `CSV`, `tabular` and `tabular with comments`. For more information, check 
 the [options for the command-line applicaions](http://www.ncbi.nlm.nih.gov/books/NBK279675/)_
 
+
 First, lets specify the overall output type. This will define the outline of our output. We want our output to be in tabular form, with added information
 in the form of comments.
-_Note: when not specified, the output type will be `pairwise`_
+
+_Note: when not specified otherwise, the output type will be `pairwise`_
 *)
 
 ///overall outline of the output 
@@ -121,16 +127,25 @@ We have a large selection of parameters that we can include in the output.
 ///a sequence of custom output format parameters
 let outputFormat= 
     
-    [   BlastNCBI.Parameters.OutputCustom.Query_SeqId; BlastNCBI.Parameters.OutputCustom.Subject_SeqId;BlastNCBI.Parameters.OutputCustom.Query_Length;
-        BlastNCBI.Parameters.OutputCustom.Subject_Length;BlastNCBI.Parameters.OutputCustom.AlignmentLength;BlastNCBI.Parameters.OutputCustom.MismatchCount;
-        BlastNCBI.Parameters.OutputCustom.IdentityCount;BlastNCBI.Parameters.OutputCustom.PositiveScoringMatchCount;BlastNCBI.Parameters.OutputCustom.Evalue;
-        BlastNCBI.Parameters.OutputCustom.Bitscore;
-    ] |> List.toSeq
+    [   
+        OutputCustom.Query_SeqId; 
+        OutputCustom.Subject_SeqId;
+        OutputCustom.Query_Length;
+        OutputCustom.Subject_Length;
+        OutputCustom.AlignmentLength;
+        OutputCustom.MismatchCount;
+        OutputCustom.IdentityCount;
+        OutputCustom.PositiveScoringMatchCount;
+        OutputCustom.Evalue;
+        OutputCustom.Bitscore;
+    ] 
+        |> List.toSeq
 
 (**
 Finally, we create a `BlastParam` of the type `OutputTypeCustom` from a touple of `outputType` and `outputFormat`.
+
 _Note: No touple required if you want to use the default output format. If this is the case,
-just create a `BlastParam` of type `OutputType`.  
+just create a `BlastParam` of type `OutputType`._  
 *)
 
 ///The final output format
@@ -138,11 +153,12 @@ let customOutputFormat = OutputTypeCustom(outputType , outputFormat)
 
 (**
 We now have everything set up to perform the BLAST search. As we are talking about proteins, we will use blastP. The parameters needed for the Wrapper function are:
-    - path of the ncbi/bin folder
-    - path and name of the search database 
-    - path and name of the query
-    - path and name of our output file
-    - a sequence of BLAST parameters, containing any parameters additional to the above (like our customOutputFormat)
+
+ - path of the ncbi/bin folder
+ - path and name of the search database 
+ - path and name of the query
+ - path and name of our output file
+ - a sequence of BLAST parameters, containing any parameters additional to the above (like our customOutputFormat)
 
 _Note: in this case we can use the string `inputFile` that we used above for creating our database, as we did not specify another path or name for our database. Adjust accordingly if
 done otherwise_
