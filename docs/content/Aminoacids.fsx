@@ -109,9 +109,34 @@ open ModificationInfo
 coming soon
 
 ##Pattern Matching
-coming soon
+
+As stated above, for all matters where only the primary structure of the peptide is important, the `AminoAcidSymbol` should be the type of your choice. 
+This type gets hashed as byte and is therefore very quick for tasks like alignment or pattern search. To create values of this type, you again have different possibilites:
+First of all you can directly call the Enum case:
+*)
+open AminoAcidSymbols
+let myAla = AminoAcidSymbol.Ala
+(**
+The easiest and most flexible way though is to use the `aminoAcidSymbol` mapping function. As input it takes either a `character` or an `AminoAcid`.
 *)
 
+//we defined "myOligo" above
+let myAASOligo = myOligo |> Seq.map aminoAcidSymbol
+
+let myArg = 'A' |> aminoAcidSymbol
+
+let myAASProtein = "AMNTGILERVCMBPSSDT" |> Seq.map aminoAcidSymbol
+
+(**
+As you can see this function can be intuitively applied in different scenarios.  
+`AminoAcidSymbol`s can easily be used for comparison:
+*)
+myArg.GetHashCode() = myAla.GetHashCode()
+(**
+This makes using this type for pattern matching effective and easy. Some implementations of BioFSahrp are designed in a way which takes advantage of this. 
+An example for this is the implementation for `pairwise alignment`, which even comes equipped with a set of amino acid scoring matrices.
+A quick inroduction for aligning amino acid sequences using the implemented algorithm can be found [here](Alignment.html).
+*)
 (**
 ##Isoelectric Point
 
