@@ -65,6 +65,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp.Stats", "..\FSharp.S
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Stats", "src\BioFSharp.Stats\BioFSharp.Stats.fsproj", "{5BDD2574-E123-4E88-95D2-6F9F58053974}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.BioDB", "src\BioFSharp.BioDB\BioFSharp.BioDB.fsproj", "{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,14 @@ Global
 		{5BDD2574-E123-4E88-95D2-6F9F58053974}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BDD2574-E123-4E88-95D2-6F9F58053974}.Release|x64.ActiveCfg = Release|Any CPU
 		{5BDD2574-E123-4E88-95D2-6F9F58053974}.Release|x64.Build.0 = Release|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Debug|x64.Build.0 = Debug|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.ActiveCfg = Release|Any CPU
+		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
