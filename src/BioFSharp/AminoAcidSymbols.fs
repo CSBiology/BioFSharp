@@ -78,7 +78,7 @@ module AminoAcidSymbols =
 
         override this.Equals(other) =
             match other with
-                | :? AminoAcidSymbol as o -> this = o
+                | :? AminoAcidSymbol as o -> this.Value = o.Value
                 | _ -> false
 
         override this.GetHashCode () = hash value
