@@ -6,8 +6,10 @@ open System.Data.Services.Client
 //all credit for the database goes to https://github.com/goedels and https://github.com/luede
 module FaToolDb =
     
+    let[<Literal>]url = "http://iomiqsweb1.bio.uni-kl.de/Services/FaToolDbDataService.svc"
+
     type FaToolData = 
-        ODataService<"http://iomiqsweb1.bio.uni-kl.de/Services/FaToolDbDataService.svc">
+        ODataService<url>
 
     let context = FaToolData.GetDataContext()
     let fullContext = FaToolData.ServiceTypes.FaToolDbEntities()
