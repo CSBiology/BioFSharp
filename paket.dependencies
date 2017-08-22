@@ -4,6 +4,7 @@ nuget FSharp.Core redirects: force
 nuget Newtonsoft.Json
 nuget System.Data.SQLite
 nuget FSharp.Data.TypeProviders
+nuget SwaggerProvider
 
 
 group Build
