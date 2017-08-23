@@ -28,7 +28,11 @@ This tutorial covers the following topics:
 
 * [Pattern Matching](Aminoacids.html#Pattern-Matching)
 
-   This part is about using 'AminoAcidSymbol' for quick pattern matching  
+   This part is about using `AminoAcidSymbol` for quick pattern matching
+   
+* [Isoelectric Point](Aminoacids.html#Isoelectric-Point)
+
+    This part is about how to calculate the theoretic isoelectric point of peptides
 
 * [Example Workflow](Aminoacids.html#Example-Workflow) 
    
@@ -40,7 +44,7 @@ open BioFSharp
 <br>
 ##Basics
 
-The type `AminoAcid` is in principle a union case of three letter codes. 
+The type `AminoAcid` is in principle a discriminated union of three letter codes.  
 Besides the standard amino acids, there are also special cases like **Ter** which is a terminator and **Gap** which is a gap. (More on **Mod** [here](Aminoacids.html#Modification)
 In principle you have two different ways of defining values of type `AminoAcid`. You can directly call the union case of the type:
 
@@ -96,7 +100,7 @@ For further functionalities check out the [API reference for IBioItem](https://c
 (**
 ##Modification
 
-The type `AminoAcid` also has a union case `mod`. This case is a tuple consisting of a Amino Acid and a list of `Modifications`.
+The type `AminoAcid` also has a union case `mod`. This case is a tuple consisting of a Amino Acid and a list of `Modifications`. Therefore it's a recursive type and can be modified at will.
 Those modifications can be created using the functions of the `ModificationInfo` module and set using the functions of the `AminoAcids` module:
 *)
 open ModificationInfo
@@ -105,7 +109,69 @@ open ModificationInfo
 coming soon
 
 ##Pattern Matching
-coming soon
+
+As stated above, for all matters where only the primary structure of the peptide is important, the `AminoAcidSymbol` should be the type of your choice. 
+This type gets hashed as byte and is therefore very quick for tasks like alignment or pattern search. To create values of this type, you again have different possibilites:
+First of all you can directly call the Enum case:
+*)
+open AminoAcidSymbols
+let myAla = AminoAcidSymbol.Ala
+(**
+The easiest and most flexible way though is to use the `aminoAcidSymbol` mapping function. As input it takes either a `character` or an `AminoAcid`.
+*)
+
+//we defined "myOligo" above
+let myAASOligo = myOligo |> Seq.map aminoAcidSymbol
+
+let myArg = 'R' |> aminoAcidSymbol
+
+let myAASProtein = "AMNTGILERVCMBPSSDT" |> Seq.map aminoAcidSymbol
+
+(**
+As you can see this function can be intuitively applied in different scenarios.  
+Checking equality of AminoAcidSymbols can be done using the standard equals operator:
+*)
+myArg = myAla
+(**
+The comparison is based on comparing the according byte values. This makes using this type for pattern matching effective and easy. Some implementations of BioFSahrp are designed in a way which takes advantage of this. 
+An example for this is the implementation for `pairwise alignment`, which even comes equipped with a set of amino acid scoring matrices.
+A quick inroduction for aligning amino acid sequences using the implemented algorithm can be found [here](Alignment.html).
+*)
+(**
+##Isoelectric Point
+
+The isoelectric point (pI) of a protein is the point at which it carries as many positive as negative charges. 
+Therefore the overall charge is zero. Knowing this value can e.g. be useful for isolation of single proteins in a voltage gradient.  
+The implementation is based on: "[http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf](http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf)". 
+In principle, the distinct amino acids in the protein are counted. 
+By using the [Henderson-Hasselbalch equation](https://en.wikipedia.org/wiki/Henderson-Hasselbalch_equation) and the pKr values, the theoretic charge states of the amino acids for a specific pH can be calculated. 
+Multiplying those charge states with the count of the associated amino acids and adding those products together then gives the overall charge of the protein. This is only done with the amino acids, which might be charged (basic, acidic). 
+The isoelectric point is the pH value for which this function returns zero. It is found by [bisection](https://en.wikipedia.org/wiki/Bisection_method) (also called Binary Search).  
+Disclaimer: Keep in mind, that this algorithm ignores post-translational modifications and interactions of the amino acids with each other. Therefore it is only intented to be a rough approximation and should be used as such.
+<br>
+The function for finding the isoelectric point is found in the `IsoelectricPoint` module. 
+
+* Besides the peptide sequence in form of a `AminoAcidSymbol` Seq, it takes 
+* a mapping function, which maps an `AminoAcidSymbol` to a float representing the pKr and
+* an accuracy value. The found pI has to be at least as close to zero as this accuracy value
+
+*)
+
+//AA sequence
+let myProteinForPI = 
+    "ATPIIEMNYPWTMNIKLSSDACMTNWWPNCMTLKIIA"
+    |> Seq.map AminoAcidSymbols.aminoAcidSymbol
+
+//default function for pKr of charged aminoacids
+let pKrFunction = IsoelectricPoint.getpKr
+
+//accuracy in z
+let acc = 0.5
+
+let pI = IsoelectricPoint.tryFind pKrFunction acc myProteinForPI
+
+(**
+The result will be of type `Option<float*float>`. The first float is the pH, the second one is the according charge.
 *)
 
 (**

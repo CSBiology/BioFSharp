@@ -1,7 +1,7 @@
 ﻿namespace BioFSharp.IO
 
 ///A collection of functions for reading and writing GeneBank files.
-module GeneBankParser =
+module GenBankParser =
         
     open BioFSharp
     open System.IO
@@ -9,6 +9,7 @@ module GeneBankParser =
     open FSharp.Care.IO
     open FSharp.Care.Collections.Seq
     open FSharp.Care
+    open FSharp.Care.Regex
     
 //=================================================================== Types ==========================================================================
     
@@ -28,6 +29,8 @@ module GeneBankParser =
         Organism    :   string
     }
     
+    let createMeta locus def acc ver kw src org = {Locus=locus; Definition=def; Accession=acc; Version=ver; Keywords=kw; Source=src; Organism=org}
+
     let metaDefault = {
         Locus       =   "."
         Definition  =   "."
@@ -48,6 +51,8 @@ module GeneBankParser =
         Pubmed  :   string
     }
     
+    let createReference ref authors title journal pubmed = {Ref=ref; Authors=authors; Title=title; Journal=journal; Pubmed=pubmed} 
+    
     let referenceDefault = {
         Ref     =   "."
         Authors =   "."
@@ -55,14 +60,75 @@ module GeneBankParser =
         Journal =   "."
         Pubmed  =   "."
     }
-
-
-    ///Represents the features part of a GeneBank file.
+    
+    
+    ///Represents the base span of a feature
     //lots of refactoring needed here
-    type Features = (string*string list) list
-
-    let featuresDefault : Features = [("FEATURES",["."])]
-
+    type FeatureBaseSpan =
+        |CompleteSpan       of (int*int)
+        |FivePrimePartial   of (int*int)
+        |ThreePrimePartial  of (int*int)
+        |Complement         of (int*int)
+        |Default            of (int*int)
+    
+    
+    let parseBaseSpan (s:string) =
+        if s.Contains "complement" then
+            printfn "%i" 1
+            match s with
+            | RegexGroups "(?<begin>\d+)([.<>])*((?<end>\d+))" bs -> Complement (int bs.[0].["begin"].Value,int bs.[0].["end"].Value)
+            | _ -> Default (-1,-1)
+        elif s.StartsWith "<" then
+            printfn "%i" 2
+            match s with
+            | RegexGroups "(?<begin>\d+)([.<>])*((?<end>\d+))" bs  -> FivePrimePartial (int bs.[0].["begin"].Value,int bs.[0].["end"].Value)
+            | _ -> Default (-1,-1)
+        elif s.Contains ">" then
+            printfn "%i" 3
+            match s with
+            | RegexGroups "(?<begin>\d+)([.<>])*((?<end>\d+))" bs  -> ThreePrimePartial (int bs.[0].["begin"].Value,int bs.[0].["end"].Value)
+            | _ -> Default (-1,-1)
+        else
+            printfn "%i" 4
+            match s with
+            | RegexGroups "(?<begin>\d+)([.<>])*((?<end>\d+))" bs  -> CompleteSpan (int bs.[0].["begin"].Value,int bs.[0].["end"].Value)
+            | _ -> Default (-1,-1)
+     
+    
+    type FeatureQualifier = {
+        Name:string;
+        Value:string
+        }
+    
+    let defaultFeatureQualifier = {
+        Name = ".";
+        Value = "."
+        }
+    
+    let createFeatureQualifier name value = {Name=name;Value=value} 
+    
+    let parseFeatureQualifier (s: string) =
+        match s with 
+        |RegexGroups @"(?<qualifierName>.+)=(?<qualifierValue>.+)" qual -> createFeatureQualifier qual.[0].["qualifierName"].Value qual.[0].["qualifierValue"].Value
+        |_ -> defaultFeatureQualifier
+    
+    type Feature = {
+        Type        : string;
+        BaseSpan    : FeatureBaseSpan;
+        Qualifiers  : FeatureQualifier list
+    }
+    
+    let createFeature t bs qual = {Type = t; BaseSpan=bs; Qualifiers=qual}
+    
+    type Features = Feature list
+    
+    let featureDefault = {
+        Type = ".";
+        BaseSpan = CompleteSpan (-1,-1);
+        Qualifiers = [defaultFeatureQualifier]
+    }
+    
+    let featuresDefault : Features = [featureDefault]
 
     ///Represents the origin part of a GeneBank file.
     type Origin = Map<int,string>
@@ -228,7 +294,7 @@ module GeneBankParser =
     
         //
         //let mutable isFirstGroup = true
-        let rec loop key valueList outerL =
+        let rec loop (key,value) valueList outerL =
             
             //keep the enumeration going until the 'FEATURES' keyword is found.
             if key <> "ORIGIN" then
@@ -238,28 +304,34 @@ module GeneBankParser =
     
                     //collect the key value pairs belonging to one Reference group
                     if enum.Current.Length > 21 then
+    
                         let (k,v) = splitToKV enum.Current 21
+    
                         printfn "%A" (key,v)
+    
                         //when the key is empty, the value belongs to the previous line
                         if k = "" then
-                            loop key (v::valueList) outerL
+                            loop (key,value) (v::valueList) outerL
                         else 
-                            loop k [v] ((key,valueList)::outerL)
+                            loop (k,v) [] (((key,value),valueList)::outerL)
     
                     elif enum.Current.Contains "ORIGIN" then
-                        let temp = (key,valueList)::outerL |> List.rev |> List.map (fun (x,y) -> (x,List.rev y))
+                        let temp = ((key,value),valueList)::outerL |> List.rev |> List.map (fun (x,y) -> (x,List.rev y))
                         temp
+                        |> List.map (fun ((n,bs),y) -> createFeature n (parseBaseSpan bs) (y |> List.map (fun x -> parseFeatureQualifier x)))
+                        |> List.tail
                     else 
-                        failwith "wrong imput format"
+                        failwith "wrong imput format in features section"
     
-                else failwith "wrong input format"
+                else failwith "wrong input format in features section"
         
             else 
-                let temp = (key,valueList)::outerL |> List.rev 
+                let temp = ((key,value),valueList)::outerL |> List.rev 
                 temp
-                
-        loop initK [] []
-    
+                |> List.map (fun ((n,bs),y) -> createFeature n (parseBaseSpan bs) (y |> List.map (fun x -> parseFeatureQualifier x)))
+                |> List.tail
+        loop (initK,initV) [] []
+        
     
     
     //============================================================= Origin Parser ============================================================

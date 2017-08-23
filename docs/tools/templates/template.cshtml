@@ -95,6 +95,16 @@
                         </ul>
                     }
                 </li>
+                <li>
+                    <a href="@Root/BioDB.html">I/O</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("BioDB.fsx"))
+                    {
+                        <ul class="nav nav-list">
+                            <li><a href="@Root/Readers.html#FastQ">UniProt</a></li>
+                            <li><a href="@Root/Readers.html#FastA">BioDB</a></li>
+                        </ul>
+                    }
+                </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="@Root/StatisticalMeasures.html">Common measures</a></li>
                 <li><a href="@Root/Distributions.html">Distributions</a></li>

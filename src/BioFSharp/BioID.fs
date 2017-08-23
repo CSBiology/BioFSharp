@@ -69,8 +69,8 @@ module BioID =
 
     /// Parse NCBI RefSeqId (Reference Sequence Database identifier) EXAMPLE: 'NC_003070.9'.
     /// Returns Failure string in case of no match.
-    let parseCreId  = Regex.tryEitherParse CreId @"Cre[\d]*\.g[\d]*\.t[\d]*\.[\d]*"    
-    let parseCreSId = Regex.tryEitherParse CreSId @"Cre[\d]*\.g[\d]*"  
+    let parseCreId  = Regex.tryEitherParse CreId @"Cre-?[\d]*\.g[\d]*\.t[\d]*\.[\d]*"    
+    let parseCreSId = Regex.tryEitherParse CreSId @"Cre-?[\d]*\.g[\d]*"  
 
     // Example:
     //"Cre06.g1000.t1.1" |> parseCreId

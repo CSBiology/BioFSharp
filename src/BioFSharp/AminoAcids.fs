@@ -192,7 +192,8 @@ module AminoAcids =
                             | AminoAcid.Mod (aa,mds) -> sprintf "%s[%s]" (name aa) (mds |> Seq.map (fun md -> md.Name) |> String.concat ";")
                     
                     name this
-
+        
+        //static member op_Explicit (value:#IBioItem) = value.Symbol |> byte |> AminoAcidSymbols.aminoAcidSymbol
         static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol
         static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 
@@ -329,7 +330,18 @@ module AminoAcids =
             AminoAcid.Gap
             AminoAcid.Ter ]
 
+    let AminoAcidSetPosCharged =
+            set [
+                AminoAcid.Arg
+                AminoAcid.Lys
+                AminoAcid.His ]
 
+    let AminoAcidSetNegCharged =
+            set [
+                AminoAcid.Asp
+                AminoAcid.Glu
+                AminoAcid.Cys
+                AminoAcid.Tyr ]
  
     /// Returns the name of AminoAcid
     let name (aa:AminoAcid) =
@@ -366,4 +378,17 @@ module AminoAcids =
     /// Returns a function to calculate the average mass of a AminoAcid with memoization
     let initAverageMassWithMemP = 
         Memoization.memoizeP (fun a -> averageMass a)
+    
+    /// Returns true, if the AminoAcid has a charged side chain
+    let isCharged (aa:AminoAcid) =
+        AminoAcidSetPosCharged.Contains aa || AminoAcidSetNegCharged.Contains aa 
+
+    /// Returns true, if the AminoAcid has a charged side chain
+    let isPosCharged (aa:AminoAcid) =
+        AminoAcidSetPosCharged.Contains aa
+
+    /// Returns true, if the AminoAcid has a charged side chain
+    let isNegCharged (aa:AminoAcid) =
+        AminoAcidSetNegCharged.Contains aa 
+    
         
