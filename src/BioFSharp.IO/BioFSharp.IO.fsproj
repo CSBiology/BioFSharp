@@ -80,6 +80,11 @@
       <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj">
+      <Name>BioFSharp</Name>
+      <Project>{2a955278-f002-4ebd-ae86-8b548ebf1209}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(TargetDir)*.dll"  "$(SolutionDir)bin\"

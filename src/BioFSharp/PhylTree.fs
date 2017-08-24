@@ -41,3 +41,33 @@ module PhylTree =
                     nl)
                 (mapping tree)
 
+    /// Returns the count of nodes containing no subtrees
+    let countLeafs (tree:Node<'n>) =     
+        fold 0 (fun x y -> x + (match y with | Branch (n,[]) -> 1 | _ -> 0)) tree
+    
+    ///Returns the most top level element for which the condition returns true
+    let rec tryGetNodeBy (condition: Node<'n> -> bool) (tree:Node<'n>) =
+        let rec loopList nl =
+            match nl with
+            | n :: tail -> 
+                match tryGetNodeBy condition n with
+                | Some x -> Some x
+                | None -> loopList tail
+            | [] -> None
+        match tree with
+        | Branch _ when condition tree ->
+            Some tree
+        | Branch (_,nl) -> loopList nl        
+
+    ///Adds a child Node to the nodes for which the condition returns true
+    let rec addChildToNodes (condition: Node<'n> -> bool) (child: Node<'n>) (tree:Node<'n>) : Node<'n>=
+        let mapper = addChildToNodes (condition: Node<'n> -> bool) (child: Node<'n>)
+        let rec loop tree= 
+            match tree with             
+            | Branch (n,nl) when condition tree ->
+                loop (Branch(n,(child :: (List.map mapper nl))))
+            | Branch (_,[]) ->
+                tree
+            | Branch (n,nl) ->
+                loop (Branch(n,List.map mapper nl))
+        loop tree
