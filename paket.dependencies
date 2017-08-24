@@ -1,10 +1,10 @@
 source https://nuget.org/api/v2
 
 nuget FSharp.Core redirects: force
-nuget MathNet.Numerics
-nuget MathNet.Numerics.FSharp
 nuget Newtonsoft.Json
 nuget System.Data.SQLite
+nuget FSharp.Data.TypeProviders
+nuget SwaggerProvider
 
 
 group Build

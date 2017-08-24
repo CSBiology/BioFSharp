@@ -55,7 +55,13 @@ module AminoProperties =
         for a in arr do 
             av.[int (fst a) - 65] <- snd a
     
-        (fun  (amino:AminoAcidSymbol) -> av.[int amino - 65])
+        (fun  (amino:AminoAcidSymbol) -> 
+            let index = int amino - 65
+            // Ignores Gap and Term
+            if index < 0 || index > 25 then
+                nan
+            else
+                av.[index])
 
 
     let initGetAminoPropertyZnorm (property:AminoProperty) =
@@ -105,7 +111,7 @@ module AminoProperties =
     //                
     let ofBioArrayRndNorm (sampler:unit->'a) n sampleSize (pf:'a->float) (source:BioArray.BioArray<'a>) =
         let proSeqSampler size =
-            if source.Length <= (n+n) then failwithf "Error: "
+            if source.Length <= (n+n) then failwithf "Error: Source sequence must be at least of the length 2n"
             Array.init size (fun _ -> sampler () )
             |> ofWindowedBioArray n pf
             // TODO: Check length!!
