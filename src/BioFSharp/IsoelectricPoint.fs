@@ -4,10 +4,11 @@ open BioFSharp
 open AminoAcidSymbols
 open AminoProperties
 
-module Bisection = 
-        
+///Finding the isoelectric point of peptides
+module IsoelectricPoint = 
+
     ///Finds the value in an interval for which a given function returns a value close to 0 
-    let tryFindRoot func accuracy lowerBound upperBound maxIter = 
+    let private tryFindRoot func accuracy lowerBound upperBound maxIter = 
         let acc = abs accuracy
         let rec loop a b i = 
             let c = (a + b)/2.
@@ -36,10 +37,6 @@ module Bisection =
                     else None
         if lowerBound < upperBound then checkConditions lowerBound upperBound
         else checkConditions upperBound lowerBound
-            
-
-///Finding the isoelectric point of peptides
-module IsoelectricPoint = 
 
     ///Maps AminoAcidSymbol to default pK value of it's sidechain. Returns 0.0 if sidechain is neither acidic nor basic
     let getpKr  = initGetAminoProperty AminoProperty.PKr
@@ -90,5 +87,5 @@ module IsoelectricPoint =
                         0.
                         AminoSymbolSetNegCharged
                 posChargeState - negChargeState
-            Bisection.tryFindRoot f accuracy 0. 14. 50
+            tryFindRoot f accuracy 0. 14. 50
             |> Option.map (fun pH -> pH, f pH)

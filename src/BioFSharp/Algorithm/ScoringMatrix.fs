@@ -2,13 +2,14 @@
 
 open FSharp.Care.Collections
 
+///Contains functions for using the included similarity matrices. These assign a score to every pair of aminoacids/nucleotides and therefore rate the probability of their substitution. The Scoring Matrices are generally used for alignments.
 module ScoringMatrix =
     
     open System.Reflection
     open BioFSharp.AminoAcidSymbols
     open BioFSharp
 
-
+    ///Union case of implemented amino acid scoring matrices with the given reference to its place in the library. Use the "getScoringMatrixAminoAcid" function to obtain a simple mapping function for every amino acid pair
     type ScoringMatrixAminoAcid =
         | BLOSUM45
         | BLOSUM50
@@ -26,7 +27,7 @@ module ScoringMatrix =
             | PAM30     -> "PAM30.txt"
             | PAM70     -> "PAM70.txt"
             | PAM250    -> "PAM250.txt"
-
+    ///Union case of implemented nucleotide scoring matrices with the given reference to its place in the library. Use the "getScoringMatrixNucleotide" function to obtain a simple mapping function for every nucleotide pair
     type ScoringMatrixNucleotide =
         | EDNA
         | Default

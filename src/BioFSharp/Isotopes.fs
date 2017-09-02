@@ -1,7 +1,9 @@
 ﻿namespace BioFSharp
 
+///Contains functionality for working with and creating isotopes and list of biologically relevant isotopes
 module Isotopes = 
     
+    ///Representation of Isotopes
     type Isotope = { AtomicSymbol  : string;
                      AtomicNumberZ : int;
                      MassNumber    : int;
@@ -10,10 +12,11 @@ module Isotopes =
                      RelAtomicMass : float;
                     }
 
+    ///Creates an isotope out of the given information about the isotope
     let create atomicSymbol atomicNumberZ massNumber mass natAbundance relAtomicMass =
         { AtomicSymbol = atomicSymbol; AtomicNumberZ = atomicNumberZ; MassNumber =massNumber ; Mass = mass; NatAbundance = natAbundance; RelAtomicMass = relAtomicMass; }
 
-    
+    ///Contains the stable isotopes of biologically relevant chemical elements
     module Table =
         //according to http://www.ciaaw.org/
         // Hydrogen

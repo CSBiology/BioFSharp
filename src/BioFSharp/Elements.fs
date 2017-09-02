@@ -6,7 +6,7 @@ open FSharp.Care
 open FSharp.Care.Math
 open Isotopes
     
-
+///Contains chemical elements represented as a mixture of their stable isotopes and functionality for building them
 module Elements =
     
     //  #####
@@ -158,7 +158,7 @@ module Elements =
 //        | Tri   {X = x} -> x
 //        | Multi {X = x} -> x
 
-
+    ///Contains the biologically relevant, chemical elements represented as a mixture of their stable isotopes
     module Table = 
         ///Hydrogen
         let H = Di   (createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) )
@@ -181,7 +181,7 @@ module Elements =
         ///Copper
         let Cu = Di   (createDi "Cu" (Isotopes.Table.Cu63,Isotopes.Table.Cu63.NatAbundance) (Isotopes.Table.Cu65,Isotopes.Table.Cu65.NatAbundance) )
 
-        // Attention! Se is Multi
+        ///Selenium  -Attention! Se is Multi-
         let Se = Mono (createMono "Se" (Isotopes.Table.Se74,Isotopes.Table.Se74.NatAbundance) )
         
 
@@ -197,11 +197,13 @@ module Elements =
             | "Se"      -> Se
             | _ -> raise (System.ArgumentException("Element unknown"))
 
-
+        ///Contains elements with higher proportions of their heavy isotopes
         module Heavy =
 
+            ///Diisotopic representation of nitrogen with abundancy of N14 and N15 swapped
             let N15 = Di  (createDi "N15" (Isotopes.Table.N15,Isotopes.Table.N14.NatAbundance) (Isotopes.Table.N14,Isotopes.Table.N15.NatAbundance) )
             
+            ///Monoisotopic representation of pure N15
             let N15full = Mono (createMono "N15" (Isotopes.Table.N15,Isotopes.Table.N14.NatAbundance))
 
 

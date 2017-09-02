@@ -1,10 +1,11 @@
 ﻿namespace BioFSharp
 
+///Contains Functionalities for parsing Bioitems
 module BioItemsConverter =
     
     
     open FSharp.Care
-
+    ///Contains Functionalities for trying to parse Bioitems
     module OptionConverter =  
         
         /// Type abbreviation for converting char to optional Nucleotide
