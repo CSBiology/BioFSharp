@@ -59,31 +59,41 @@
           <td class="type-name">
             <a href="biofsharp-algorithm-pairwisealignment-rungeneric-alignment-1.html">Alignment<'a></a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Score of the alignment and the aligned sequences as a tuple</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-algorithm-pairwisealignment-rungeneric-cell.html">Cell</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>3 seperate matrices are used for evaluating the affine gap penalty. This is implemented by having every cell of the matrix carry 3 separate tracescore values</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-algorithm-pairwisealignment-rungeneric-costs-1.html">Costs<'a></a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Carries the costs for gaps and the scoring matrix (Similarity)</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-algorithm-pairwisealignment-rungeneric-operationcosts-1.html">OperationCosts<'a></a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Carries the functions for evaluating the Tracescores</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-algorithm-pairwisealignment-rungeneric-tracescore.html">TraceScore</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Represents one element of the matrix, contains direction for backtracing and score</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -99,109 +109,119 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '340', 340)" onmouseover="showTip(event, '340', 340)">
+          <code onmouseout="hideTip(event, '348', 348)" onmouseover="showTip(event, '348', 348)">
             addFloatToTrace ts opc
           </code>
-          <div class="tip" id="340">
+          <div class="tip" id="348">
             <strong>Signature:</strong> ts:TraceScore -&gt; opc:int -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L31-31" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L34-34" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Adds value to score of tracescore element</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '341', 341)" onmouseover="showTip(event, '341', 341)">
+          <code onmouseout="hideTip(event, '349', 349)" onmouseover="showTip(event, '349', 349)">
             createAlignment score sequence
           </code>
-          <div class="tip" id="341">
-            <strong>Signature:</strong> score:int -&gt; sequence:(&#39;?7236 option * &#39;?7236 option) list -&gt; Alignment&lt;&#39;?7236&gt;<br />
-                          <strong>Type parameters:</strong> '?7236          </div>
+          <div class="tip" id="349">
+            <strong>Signature:</strong> score:int -&gt; sequence:(&#39;?7238 option * &#39;?7238 option) list -&gt; Alignment&lt;&#39;?7238&gt;<br />
+                          <strong>Type parameters:</strong> '?7238          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L52-52" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L55-55" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Merges the alignment score and the aligned sequences</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '342', 342)" onmouseover="showTip(event, '342', 342)">
+          <code onmouseout="hideTip(event, '350', 350)" onmouseover="showTip(event, '350', 350)">
             createCell m x y
           </code>
-          <div class="tip" id="342">
+          <div class="tip" id="350">
             <strong>Signature:</strong> m:TraceScore -&gt; x:TraceScore -&gt; y:TraceScore -&gt; Cell<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L42-42" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L45-45" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Uses 3 TraceScores and creates a Cell from them</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '343', 343)" onmouseover="showTip(event, '343', 343)">
+          <code onmouseout="hideTip(event, '351', 351)" onmouseover="showTip(event, '351', 351)">
             getTraceScoreValue _arg1
           </code>
-          <div class="tip" id="343">
+          <div class="tip" id="351">
             <strong>Signature:</strong> _arg1:TraceScore -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L24-24" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Get score of matrix element</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '344', 344)" onmouseover="showTip(event, '344', 344)">
+          <code onmouseout="hideTip(event, '352', 352)" onmouseover="showTip(event, '352', 352)">
             maxBy2 f x y
           </code>
-          <div class="tip" id="344">
-            <strong>Signature:</strong> f:(&#39;?7238 -&gt; &#39;?7239) -&gt; x:&#39;?7238 -&gt; y:&#39;?7238 -&gt; &#39;?7238<br />
-                          <strong>Type parameters:</strong> '?7238, '?7239          </div>
+          <div class="tip" id="352">
+            <strong>Signature:</strong> f:(&#39;?7240 -&gt; &#39;?7241) -&gt; x:&#39;?7240 -&gt; y:&#39;?7240 -&gt; &#39;?7240<br />
+                          <strong>Type parameters:</strong> '?7240, '?7241          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L70-70" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L73-73" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Evaluates the bigger of two values (x y) after converting them with a function f</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '345', 345)" onmouseover="showTip(event, '345', 345)">
+          <code onmouseout="hideTip(event, '353', 353)" onmouseover="showTip(event, '353', 353)">
             runGeneric initArray fstSeq sndSeq opc
           </code>
-          <div class="tip" id="345">
+          <div class="tip" id="353">
             <strong>Signature:</strong> initArray:(Cell [,] -&gt; Cell [,]) -&gt; fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; opc:OperationCosts&lt;&#39;a&gt; -&gt; Cell [,]<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L74-74" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L77-77" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates an array and fills it with Cells</p>
+          <p>Creates an jagged array matrix and fills it with Backtracing Information (Cells)</p>
 
 
         </td>
@@ -209,15 +229,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '346', 346)" onmouseover="showTip(event, '346', 346)">
+          <code onmouseout="hideTip(event, '354', 354)" onmouseover="showTip(event, '354', 354)">
             traceBack fstSeq sndSeq i j acc array
           </code>
-          <div class="tip" id="346">
+          <div class="tip" id="354">
             <strong>Signature:</strong> fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; i:int -&gt; j:int -&gt; acc:(&#39;a option * &#39;a option) list -&gt; array:Cell [,] -&gt; (&#39;a option * &#39;a option) list<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L105-105" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L108-108" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -264,6 +284,9 @@
                 <li class="nav-header">File Parsing</li>
                 <li>
                     <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
                 </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>

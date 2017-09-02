@@ -42,28 +42,11 @@
   <span>Namespace: BioFSharp.IO</span><br />
 </p>
 <div class="xmldoc">
+<p>Contains functions for parsing phylogenetic trees in the Newick format</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
-  <h2>Nested types and modules</h2>
-  <div>
-      <table class="table table-bordered type-list">
-    <thead>
-      <tr><td>Type</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-newick-newicktree.html">NewickTree</a>
-          </td>
-          <td class="xmldoc"><p>Phylogenetic Tree which is used for parsing the Newick format</p>
-
-</td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -74,19 +57,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '438', 438)" onmouseover="showTip(event, '438', 438)">
-            fromFile path
+          <code onmouseout="hideTip(event, '458', 458)" onmouseover="showTip(event, '458', 458)">
+            ofFile converter path
           </code>
-          <div class="tip" id="438">
-            <strong>Signature:</strong> path:string -&gt; NewickTree<br />
-                      </div>
+          <div class="tip" id="458">
+            <strong>Signature:</strong> converter:(string -&gt; &#39;Distance) -&gt; path:string -&gt; Node&lt;&#39;Distance * string&gt;<br />
+                          <strong>Type parameters:</strong> 'Distance          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L72-72" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L120-120" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a phylogenetic tree of type newick tree of file</p>
+          <p>Returns a PhylTree of file. Converter is used to create a distancevalue of a string</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '459', 459)" onmouseover="showTip(event, '459', 459)">
+            toFile converter path tree
+          </code>
+          <div class="tip" id="459">
+            <strong>Signature:</strong> converter:(&#39;T -&gt; string) -&gt; path:string -&gt; tree:Node&lt;&#39;T * string&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L129-129" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates a NewickTree file of PhylTree. Converter is used to create a string of a distancevalue</p>
 
 
         </td>
@@ -129,6 +132,9 @@
                 <li class="nav-header">File Parsing</li>
                 <li>
                     <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
                 </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>

@@ -43,6 +43,8 @@
   <span>Parent Module: <a href="biofsharp-bioitemsconverter.html">BioItemsConverter</a></span>
 </p>
 <div class="xmldoc">
+<p>Contains Functionalities for trying to parse Bioitems</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -91,7 +93,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L16-16" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L17-17" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -104,14 +106,35 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
-            charToOptionNucleotid nuc
+            charToOptionAminoAcidWithoutGapTer aac
           </code>
           <div class="tip" id="110">
+            <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L27-27" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Converters char to AminoAcid option by ignoring bad character
+Ignores Gap and Ter</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
+            charToOptionNucleotid nuc
+          </code>
+          <div class="tip" id="111">
             <strong>Signature:</strong> nuc:char -&gt; Nucleotide option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L35-35" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L55-55" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -123,15 +146,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
+          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
             charToOptionStandardAminoAcid aac
           </code>
-          <div class="tip" id="111">
+          <div class="tip" id="112">
             <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L26-26" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L36-36" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -143,15 +166,36 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
+          <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
+            charToOptionStandardAminoAcidWithoutGapTer (...)
+          </code>
+          <div class="tip" id="113">
+            <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L46-46" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Converters char to AminoAcid option by ignoring bad character and ambiguis code
+Ignores Gap and Ter</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
             charToOptionStandardNucleotid nuc
           </code>
-          <div class="tip" id="112">
+          <div class="tip" id="114">
             <strong>Signature:</strong> nuc:char -&gt; Nucleotide option<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L47-47" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioItemsConverter.fs#L67-67" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -198,6 +242,9 @@
                 <li class="nav-header">File Parsing</li>
                 <li>
                     <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
                 </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>

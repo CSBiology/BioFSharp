@@ -171,21 +171,21 @@ First of all you can directly call the Enum case:</p>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//we defined &quot;myOligo&quot; above</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">myAASOligo</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 43)" onmouseover="showTip(event, 'fs6', 43)" class="i">myOligo</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="f">map</span> <span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="f">aminoAcidSymbol</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 47)" onmouseover="showTip(event, 'fs32', 47)" class="i">myArg</span> <span class="o">=</span> <span class="s">&#39;A&#39;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 48)" onmouseover="showTip(event, 'fs31', 48)" class="f">aminoAcidSymbol</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 47)" onmouseover="showTip(event, 'fs32', 47)" class="i">myArg</span> <span class="o">=</span> <span class="s">&#39;R&#39;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs31', 48)" onmouseover="showTip(event, 'fs31', 48)" class="f">aminoAcidSymbol</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 49)" onmouseover="showTip(event, 'fs33', 49)" class="i">myAASProtein</span> <span class="o">=</span> <span class="s">&quot;AMNTGILERVCMBPSSDT&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="f">map</span> <span onmouseout="hideTip(event, 'fs31', 52)" onmouseover="showTip(event, 'fs31', 52)" class="f">aminoAcidSymbol</span>
 </code></pre></td>
 </tr>
 </table>
 <p>As you can see this function can be intuitively applied in different scenarios.<br />
-<code>AminoAcidSymbol</code>s can easily be used for comparison:</p>
+Checking equality of AminoAcidSymbols can be done using the standard equals operator:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs32', 53)" onmouseover="showTip(event, 'fs32', 53)" class="i">myArg</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 54)" onmouseover="showTip(event, 'fs34', 54)" class="f">GetHashCode</span>() <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="i">myAla</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 56)" onmouseover="showTip(event, 'fs34', 56)" class="f">GetHashCode</span>()
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs32', 53)" onmouseover="showTip(event, 'fs32', 53)" class="i">myArg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 54)" onmouseover="showTip(event, 'fs25', 54)" class="i">myAla</span>
 </code></pre></td>
 </tr>
 </table>
-<p>This makes using this type for pattern matching effective and easy. Some implementations of BioFSahrp are designed in a way which takes advantage of this.
+<p>The comparison is based on comparing the according byte values. This makes using this type for pattern matching effective and easy. Some implementations of BioFSahrp are designed in a way which takes advantage of this.
 An example for this is the implementation for <code>pairwise alignment</code>, which even comes equipped with a set of amino acid scoring matrices.
 A quick inroduction for aligning amino acid sequences using the implemented algorithm can be found <a href="Alignment.html">here</a>.</p>
 <h2><a name="Isoelectric-Point" class="anchor" href="#Isoelectric-Point">Isoelectric Point</a></h2>
@@ -218,17 +218,17 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 <span class="l">12: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//AA sequence</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 57)" onmouseover="showTip(event, 'fs35', 57)" class="i">myProtein</span> <span class="o">=</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 55)" onmouseover="showTip(event, 'fs34', 55)" class="i">myProteinForPI</span> <span class="o">=</span> 
     <span class="s">&quot;ATPIIEMNYPWTMNIKLSSDACMTNWWPNCMTLKIIA&quot;</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 58)" onmouseover="showTip(event, 'fs29', 58)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 59)" onmouseover="showTip(event, 'fs30', 59)" class="f">map</span> <span onmouseout="hideTip(event, 'fs24', 60)" onmouseover="showTip(event, 'fs24', 60)" class="t">AminoAcidSymbols</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 61)" onmouseover="showTip(event, 'fs31', 61)" class="f">aminoAcidSymbol</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 56)" onmouseover="showTip(event, 'fs29', 56)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 57)" onmouseover="showTip(event, 'fs30', 57)" class="f">map</span> <span onmouseout="hideTip(event, 'fs24', 58)" onmouseover="showTip(event, 'fs24', 58)" class="t">AminoAcidSymbols</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 59)" onmouseover="showTip(event, 'fs31', 59)" class="f">aminoAcidSymbol</span>
 
 <span class="c">//default function for pKr of charged aminoacids</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 62)" onmouseover="showTip(event, 'fs36', 62)" class="f">pKrFunction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 63)" onmouseover="showTip(event, 'fs37', 63)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 64)" onmouseover="showTip(event, 'fs38', 64)" class="f">getpKr</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 60)" onmouseover="showTip(event, 'fs35', 60)" class="f">pKrFunction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 61)" onmouseover="showTip(event, 'fs36', 61)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 62)" onmouseover="showTip(event, 'fs37', 62)" class="f">getpKr</span>
 
 <span class="c">//accuracy in z</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 65)" onmouseover="showTip(event, 'fs39', 65)" class="i">acc</span> <span class="o">=</span> <span class="n">0.5</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 63)" onmouseover="showTip(event, 'fs38', 63)" class="i">acc</span> <span class="o">=</span> <span class="n">0.5</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 66)" onmouseover="showTip(event, 'fs40', 66)" class="i">pI</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 67)" onmouseover="showTip(event, 'fs37', 67)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 68)" onmouseover="showTip(event, 'fs41', 68)" class="f">tryFind</span> <span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="f">pKrFunction</span> <span onmouseout="hideTip(event, 'fs39', 70)" onmouseover="showTip(event, 'fs39', 70)" class="i">acc</span> <span onmouseout="hideTip(event, 'fs35', 71)" onmouseover="showTip(event, 'fs35', 71)" class="i">myProtein</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 64)" onmouseover="showTip(event, 'fs39', 64)" class="i">pI</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 65)" onmouseover="showTip(event, 'fs36', 65)" class="t">IsoelectricPoint</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 66)" onmouseover="showTip(event, 'fs40', 66)" class="f">tryFind</span> <span onmouseout="hideTip(event, 'fs35', 67)" onmouseover="showTip(event, 'fs35', 67)" class="f">pKrFunction</span> <span onmouseout="hideTip(event, 'fs38', 68)" onmouseover="showTip(event, 'fs38', 68)" class="i">acc</span> <span onmouseout="hideTip(event, 'fs34', 69)" onmouseover="showTip(event, 'fs34', 69)" class="i">myProteinForPI</span>
 </code></pre></td>
 </tr>
 </table>
@@ -269,14 +269,13 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 <div class="tip" id="fs31">val aminoAcidSymbol : a:&#39;a -&gt; AminoAcidSymbol (requires member op_Explicit)<br /><br />Full name: BioFSharp.AminoAcidSymbols.aminoAcidSymbol</div>
 <div class="tip" id="fs32">val myArg : AminoAcidSymbol<br /><br />Full name: Aminoacids.myArg</div>
 <div class="tip" id="fs33">val myAASProtein : seq&lt;AminoAcidSymbol&gt;<br /><br />Full name: Aminoacids.myAASProtein</div>
-<div class="tip" id="fs34">override AminoAcidSymbol.GetHashCode : unit -&gt; int</div>
-<div class="tip" id="fs35">val myProtein : seq&lt;AminoAcidSymbol&gt;<br /><br />Full name: Aminoacids.myProtein</div>
-<div class="tip" id="fs36">val pKrFunction : (AminoAcidSymbol -&gt; float)<br /><br />Full name: Aminoacids.pKrFunction</div>
-<div class="tip" id="fs37">module IsoelectricPoint<br /><br />from BioFSharp</div>
-<div class="tip" id="fs38">val getpKr : (AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.IsoelectricPoint.getpKr</div>
-<div class="tip" id="fs39">val acc : float<br /><br />Full name: Aminoacids.acc</div>
-<div class="tip" id="fs40">val pI : (float * float) option<br /><br />Full name: Aminoacids.pI</div>
-<div class="tip" id="fs41">val tryFind : pKrFunc:(AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbol&gt; -&gt; (float * float) option<br /><br />Full name: BioFSharp.IsoelectricPoint.tryFind</div>
+<div class="tip" id="fs34">val myProteinForPI : seq&lt;AminoAcidSymbol&gt;<br /><br />Full name: Aminoacids.myProteinForPI</div>
+<div class="tip" id="fs35">val pKrFunction : (AminoAcidSymbol -&gt; float)<br /><br />Full name: Aminoacids.pKrFunction</div>
+<div class="tip" id="fs36">module IsoelectricPoint<br /><br />from BioFSharp</div>
+<div class="tip" id="fs37">val getpKr : (AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.IsoelectricPoint.getpKr</div>
+<div class="tip" id="fs38">val acc : float<br /><br />Full name: Aminoacids.acc</div>
+<div class="tip" id="fs39">val pI : (float * float) option<br /><br />Full name: Aminoacids.pI</div>
+<div class="tip" id="fs40">val tryFind : pKrFunc:(AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbol&gt; -&gt; (float * float) option<br /><br />Full name: BioFSharp.IsoelectricPoint.tryFind</div>
 
         </div>
         <div class="span3" >
@@ -313,6 +312,9 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
                 <li class="nav-header">File Parsing</li>
                 <li>
                     <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
                 </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>

@@ -42,6 +42,8 @@
   <span>Namespace: BioFSharp.Algorithm</span><br />
 </p>
 <div class="xmldoc">
+<p>Contains functions for using the included similarity matrices. These assign a score to every pair of aminoacids/nucleotides and therefore rate the probability of their substitution. The Scoring Matrices are generally used for alignments.</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -56,13 +58,17 @@
           <td class="type-name">
             <a href="biofsharp-algorithm-scoringmatrix-scoringmatrixaminoacid.html">ScoringMatrixAminoAcid</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Union case of implemented amino acid scoring matrices with the given reference to its place in the library. Use the "getScoringMatrixAminoAcid" function to obtain a simple mapping function for every amino acid pair</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-algorithm-scoringmatrix-scoringmatrixnucleotide.html">ScoringMatrixNucleotide</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Union case of implemented nucleotide scoring matrices with the given reference to its place in the library. Use the "getScoringMatrixNucleotide" function to obtain a simple mapping function for every nucleotide pair</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -78,15 +84,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '348', 348)" onmouseover="showTip(event, '348', 348)">
+          <code onmouseout="hideTip(event, '356', 356)" onmouseover="showTip(event, '356', 356)">
             getScoringMatrixAminoAcid (...)
           </code>
-          <div class="tip" id="348">
+          <div class="tip" id="356">
             <strong>Signature:</strong> scoringMatrixType:ScoringMatrixAminoAcid -&gt; AminoAcidSymbol -&gt; AminoAcidSymbol -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/ScoringMatrix.fs#L68-68" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/ScoringMatrix.fs#L69-69" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -98,15 +104,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '349', 349)" onmouseover="showTip(event, '349', 349)">
+          <code onmouseout="hideTip(event, '357', 357)" onmouseover="showTip(event, '357', 357)">
             getScoringMatrixNucleotide (...)
           </code>
-          <div class="tip" id="349">
+          <div class="tip" id="357">
             <strong>Signature:</strong> scoringMatrixType:ScoringMatrixNucleotide -&gt; Nucleotide -&gt; Nucleotide -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/ScoringMatrix.fs#L76-76" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/ScoringMatrix.fs#L77-77" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -153,6 +159,9 @@
                 <li class="nav-header">File Parsing</li>
                 <li>
                     <a href="/BioFSharp/Readers.html">I/O</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
                 </li>
                 <li class="nav-header">Statistics</li>
                 <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>
