@@ -58,9 +58,9 @@
     <Compile Include="OrthoMCL.fs" />
     <Compile Include="FastQ.fs" />
     <Compile Include="GFF3Parser.fs" />
-    <Compile Include="GeneBankParser.fs" />
     <Compile Include="Newick.fs" />
     <Compile Include="Clustal.fs" />
+    <Compile Include="GenBank.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
