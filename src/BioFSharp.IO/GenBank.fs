@@ -9,6 +9,9 @@ module GenBank =
     open FSharp.Care.Regex
     open System.Collections.Generic
     open System.Text
+    open FSharp.Care.Collections
+    open BioFSharp.Nucleotides
+    open FSharp.Care.String
     
     ///Iterate over an array yielding the result of applying a function to each element in a sequence
     let rec private arrayIteriYield (mapping: int -> 'a -> 'b) (a:array<'a>) =
@@ -427,7 +430,6 @@ module GenBank =
             seq {
                 for i in gb do 
                     let lines = stringyfy i.Key i.Value
-                    printfn "%A" lines
                     yield! lines
 
                 if gb.ContainsKey "ORIGIN" then
@@ -480,7 +482,102 @@ module GenBank =
         else
             printfn "Collection does not contain features. Result is empty"
             []
-    
+
+    ///Represents the possible formats of a feature base span
+    type BaseSpanInformation =
+        |Complete 
+        |ThreePrimePartial 
+        |FivePrimePartial 
+        |Bipartial 
+
+
+    ///Distincts BaseSpans by joins,complements or single ranges
+    type BaseSpanRange =
+        |Single of BaseSpanInformation*(int*int)
+        |Complement of BaseSpanInformation*(int*int)
+        |Joined of seq<(BaseSpanInformation*(int*int))>
+        |JoinedComplement of seq<BaseSpanInformation*(int*int)>
+
+    ///Returns a correctly formatted BaseSpan string for a single BaseSpan
+    let private getBaseSpanString (info:BaseSpanInformation) (bsStart:int) (bsEnd:int) = 
+        let bsString = new StringBuilder()
+        match info with
+        |BaseSpanInformation.Complete 
+            ->  bsString.Insert(0,(string bsStart + ".." + string bsEnd)) |> ignore
+                printfn "%s" (bsString.ToString())
+                bsString.ToString()
+
+        |BaseSpanInformation.FivePrimePartial 
+            ->  bsString.Insert(0,("<" + string bsStart + ".." + string bsEnd)) |> ignore
+                printfn "%s" (bsString.ToString())
+                bsString.ToString()
+
+        |BaseSpanInformation.ThreePrimePartial 
+            ->  bsString.Insert(0,(string bsStart + "..>" + string bsEnd)) |> ignore
+                printfn "%s" (bsString.ToString())
+                bsString.ToString()
+
+        |BaseSpanInformation.Bipartial 
+            ->  bsString.Insert(0,("<" + string bsStart + "..>" + string bsEnd)) |> ignore
+                printfn "%s" (bsString.ToString())
+                bsString.ToString()
+
+    ///Wrapper type for Exact or partial matching
+    type private BaseSpanQuery =
+        |Exact of string
+        |Partially of seq<string>
+
+    ///Returns the full query String for a BaseSpanRange type, constructing either a string (if full matches are desired) or a sequence of strings(if partial matches are okay) containing all BaseSpans in the BaseSpanRange type
+    let private getBaseSpanQueryString (bs:BaseSpanRange) (matchExact:bool) =
+        match bs with
+        |Single (info,(bsStart,bsEnd)) when matchExact
+            ->  Exact (getBaseSpanString info bsStart bsEnd)
+
+        |Single (info,(bsStart,bsEnd)) 
+            ->  Partially (seq{yield (getBaseSpanString info bsStart bsEnd)})
+
+        |Complement (info,(bsStart,bsEnd)) when matchExact
+            ->  Exact ("complement(" + (getBaseSpanString info bsStart bsEnd) + ")")
+
+        |Complement (info,(bsStart,bsEnd))
+            ->  Partially (seq{yield getBaseSpanString info bsStart bsEnd})
+
+        |Joined j when matchExact
+            ->  let arr = [|for (info,(bsStart,bsEnd)) in j do yield getBaseSpanString info bsStart bsEnd|]
+                let lastIndex = arr.Length-1
+                Exact( "join(" + (arr |>  Array.foldi (fun index acc elem -> if not (index = lastIndex) then acc+elem+ "," else acc+elem+")") "") )
+
+        |Joined j 
+            ->  Partially (seq{for (info,(bsStart,bsEnd)) in j do yield getBaseSpanString info bsStart bsEnd})
+
+        |JoinedComplement jc when matchExact
+            ->  let arr = [|for (info,(bsStart,bsEnd)) in jc do yield getBaseSpanString info bsStart bsEnd|]
+                let lastIndex = arr.Length-1
+                Exact( "complement(join(" + (arr |>  Array.foldi (fun index acc elem -> if not (index = lastIndex) then acc+elem+ "," else acc+elem+"))") "") )
+
+        |JoinedComplement jc
+            ->  Partially (seq{for (info,(bsStart,bsEnd)) in jc do yield getBaseSpanString info bsStart bsEnd})
+
+    ///Returns a list of features containing the input BaseSpanRange. if matchExact = true, returns only the features with exactly matching baseSpans.
+    ///if matchExact = false, returns all distinct features that are contain any of the BaseSpans present in the input BaseSpanRange (still exactly matching the individual BaseSpan exactly).
+    let getFeaturesWithBaseSpan (indices:BaseSpanRange) (matchExact:bool) (gb:Dictionary<string,GenBankItem>) =
+        let queryString = getBaseSpanQueryString indices matchExact
+        match queryString with
+        |Exact s
+            ->  [for i in getFeatures gb do 
+                    let fullBs = i.BaseSpan.Split '\n' |> String.concat ""
+                    if (fullBs = s) then yield i]
+        |Partially s 
+            ->  match indices with
+                |BaseSpanRange.Single _
+                    -> [for x in s do yield! [for i in getFeatures gb do if (i.BaseSpan.Contains x) then yield i]] |> List.distinctBy id
+                |Complement _
+                    -> [for x in s do yield! [for i in getFeatures gb do if (i.BaseSpan.Contains x) && (i.BaseSpan.Contains "complement") then yield i]] |> List.distinctBy id
+                |Joined j
+                     -> [for x in s do yield! [for i in getFeatures gb do if (i.BaseSpan.Contains x) && (i.BaseSpan.Contains "join") then yield i]] |> List.distinctBy id
+                |JoinedComplement _
+                     -> [for x in s do yield! [for i in getFeatures gb do if (i.BaseSpan.Contains x) && (i.BaseSpan.Contains "complement") && (i.BaseSpan.Contains "join") then yield i]] |> List.distinctBy id
+
     ///Returns the Origin of a GenBank file representation
     let getOrigin (gb:Dictionary<string,GenBankItem>) =
         if gb.ContainsKey("ORIGIN") then
