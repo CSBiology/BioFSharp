@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>FeatureQualifier - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>FeatureQualifier</h1>
+<p>
+  <span>Namespace: BioFsharp.IO</span><br />
+  <span>Parent Module: <a href="biofsharp-io-genbank.html">GenBank</a></span>
+</p>
+<div class="xmldoc">
+<p>Represents a single feature Qualifier and its value from the FEATURES section of a Genbank file. Features can contain
+Information about genes and gene products, as well as regions of biological significance reported in the sequence</p>
+
+</div>
+  <h3>Record Fields</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Record Field</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '952', 952)" onmouseover="showTip(event, '952', 952)">
+            Name
+          </code>
+          <div class="tip" id="952">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L65-65" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Key of the Feature</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '953', 953)" onmouseover="showTip(event, '953', 953)">
+            Value
+          </code>
+          <div class="tip" id="953">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L67-67" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Value of the Feature</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3" >
+          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+            <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                <li class="nav-header">BioFSharp</li>
+                <li><a href="/BioFSharp/index.html">Home page</a></li>
+                <li class="divider"></li>
+                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
+                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
+                <li><a href="/BioFSharp/license.html">License</a></li>
+                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">Getting started</li>
+                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
+                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
+                <li class="nav-header">Data Structures</li>
+                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
+                <li><a href="/BioFSharp/Isotopes.html">Isotopes</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                <li><a href="/BioFSharp/IBioItem.html">IBioItem</a></li>
+                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
+                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li>
+                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
+                </li>
+                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
+                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li>
+                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                </li>
+                <li class="nav-header">File Parsing</li>
+                <li>
+                    <a href="/BioFSharp/Readers.html">Reading/Writing biological file formats</a>
+                </li>
+                <li>
+                    <a href="/BioFSharp/BioDB.html">I/O</a>
+                </li>
+                <li class="nav-header">Statistics</li>
+                <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>
+                <li><a href="/BioFSharp/Distributions.html">Distributions</a></li>
+                <li><a href="/BioFSharp/StatisticalTests.html">Statistical Tests</a></li>
+                <li class="nav-header">Charting & Visualization</li>
+                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                <li class="nav-header">Our other projects</li>
+                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
+                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
+                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

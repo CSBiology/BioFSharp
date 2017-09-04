@@ -57,7 +57,7 @@
     <tbody>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-biodb-fatooldb-queries-ontologytermqueryresult.html">ontologyTermQueryResult</a>
+            <a href="biofsharp-biodb-fatooldb-queries-ontologytermqueryresult.html">OntologyTermQueryResult</a>
           </td>
           <td class="xmldoc"><p>Wrapper for the result of an ontologyTerm query</p>
 
@@ -68,6 +68,74 @@
 
   </div>
 
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '397', 397)" onmouseover="showTip(event, '397', 397)">
+            createOntologyMapFromQueryResults (...)
+          </code>
+          <div class="tip" id="397">
+            <strong>Signature:</strong> stringFormattingConverter:(string -&gt; string) -&gt; input:OntologyTermQueryResult array -&gt; Map&lt;string,OntologyTermQueryResult&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/FaToolDb.fs#L78-78" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns a map containing the ids of OntologyTermQueryResults mapping to themselfes with an option to change the formatting of the id string</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '398', 398)" onmouseover="showTip(event, '398', 398)">
+            getOntologyterms ontologyName identifier
+          </code>
+          <div class="tip" id="398">
+            <strong>Signature:</strong> ontologyName:OntologyId -&gt; identifier:string -&gt; OntologyTermQueryResult<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/FaToolDb.fs#L61-61" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns ontology terms and term ids the selected ontology for a query gene</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '399', 399)" onmouseover="showTip(event, '399', 399)">
+            getSynonyms identifier
+          </code>
+          <div class="tip" id="399">
+            <strong>Signature:</strong> identifier:string -&gt; (string * string) list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/FaToolDb.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>returns synonyms for a query gene</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
         </div>
         <div class="span3" >
@@ -103,7 +171,7 @@
                 </li>
                 <li class="nav-header">File Parsing</li>
                 <li>
-                    <a href="/BioFSharp/Readers.html">I/O</a>
+                    <a href="/BioFSharp/Readers.html">Reading/Writing biological file formats</a>
                 </li>
                 <li>
                     <a href="/BioFSharp/BioDB.html">I/O</a>
