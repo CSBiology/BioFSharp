@@ -2,6 +2,7 @@
 
 open FSharp.Care
 
+///Contains the AminoAcid type and its according functions. The AminoAcid type is a complex presentation of amino acids, allowing modifications
 module AminoAcids =
 
     /// Amino acid Codes
@@ -69,8 +70,10 @@ module AminoAcids =
         | Mod of AminoAcid * ModificationInfo.Modification list
         
 
-        interface IBioItem with            
+        interface IBioItem with 
+                ///Returns the one letter code of the AminoAcid as a char
                 member this.Symbol   = 
+                    
                     let rec symbol (aa:AminoAcid) =
                             match aa with
                             | AminoAcid.Ala -> 'A' 
@@ -106,7 +109,7 @@ module AminoAcids =
 
                             | AminoAcid.Mod (aa,_) -> (symbol aa) |> System.Char.ToLower
                     symbol this
-                
+                ///Returns the full formula of the AminoAcid and its modifications
                 member this.Formula  =                                                         
                     let rec formula (aa:AminoAcid) =
                             match aa with
@@ -144,15 +147,16 @@ module AminoAcids =
                             | AminoAcid.Mod (aa,mds) -> Seq.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) (formula aa) mds
                     
                     formula this
-                
+                ///Returns true if the AminoAcid is a Terminator, otherwise returns false
                 member this.isTerminator = match this with
                                            | AminoAcid.Ter -> true
                                            | _             -> false
+                ///Returns true if the AminoAcid is a Gap, otherwise returns false
                 member this.isGap        = match this with
                                            | AminoAcid.Gap -> true
                                            | _             -> false
 
-
+                ///Returns the name of the AminoAcid and its modifications as a string
                 member this.Name = 
 
                     /// Returns the name of AminoAcid
@@ -247,14 +251,14 @@ module AminoAcids =
         | _           -> f
                 
 
-    
+    ///Lexer tags for parsing AminoAcids
     type ParsedAminoAcidChar = 
         | StandardCodes  of AminoAcid
         | AmbiguityCodes of AminoAcid
         | GapTer         of AminoAcid
         | NoAAChar       of char
 
-
+    ///Simple Lexer for parsing AminoAcids from chars. The full parser is located in the BioItemsConverter-module
     let charToParsedAminoAcidChar (c:char) =
         match System.Char.ToUpper c with                                    
         | 'A' ->  StandardCodes AminoAcid.Ala            
@@ -291,6 +295,7 @@ module AminoAcids =
         // no amino acid character
         | ch -> NoAAChar ch
 
+    ///Set of the 20 standard amino acids
     let AminoAcidSetStandard =
         set [
             AminoAcid.Ala
@@ -317,6 +322,7 @@ module AminoAcids =
             AminoAcid.Trp
             AminoAcid.Tyr ]  
     
+    ///Set of all ambiguous codes
     let AminoAcidSetAmbiguity =
         set [
             AminoAcid.Xaa
@@ -324,18 +330,20 @@ module AminoAcids =
             AminoAcid.Glx
             AminoAcid.Asx ]  
     
-
+    ///Set containing the Gap and the Terminator AminoAcid
     let AminoAcidSetGapTer =
         set [
             AminoAcid.Gap
             AminoAcid.Ter ]
 
+    ///Set of all AminoAcids with basic sidechain
     let AminoAcidSetPosCharged =
             set [
                 AminoAcid.Arg
                 AminoAcid.Lys
                 AminoAcid.His ]
-
+    
+    ///Set of all AminoAcids with acidic sidechain
     let AminoAcidSetNegCharged =
             set [
                 AminoAcid.Asp
@@ -379,15 +387,15 @@ module AminoAcids =
     let initAverageMassWithMemP = 
         Memoization.memoizeP (fun a -> averageMass a)
     
-    /// Returns true, if the AminoAcid has a charged side chain
+    /// Returns true, if the AminoAcid has a basic or acidic side chain
     let isCharged (aa:AminoAcid) =
         AminoAcidSetPosCharged.Contains aa || AminoAcidSetNegCharged.Contains aa 
 
-    /// Returns true, if the AminoAcid has a charged side chain
+    /// Returns true, if the AminoAcid has a basic side chain
     let isPosCharged (aa:AminoAcid) =
         AminoAcidSetPosCharged.Contains aa
 
-    /// Returns true, if the AminoAcid has a charged side chain
+    /// Returns true, if the AminoAcid has an acidic side chain
     let isNegCharged (aa:AminoAcid) =
         AminoAcidSetNegCharged.Contains aa 
     

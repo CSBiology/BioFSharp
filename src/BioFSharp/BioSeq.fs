@@ -1,10 +1,12 @@
 ﻿namespace BioFSharp
 
+///This module contains the BioSeq type and its according functions. The BioSeq type is a sequence of objects using the IBioItem interface
 module BioSeq =
 
     open FSharp.Care
     open BioFSharp.BioItemsConverter
 
+    ///Sequence of objects using the IBioItem interface
     type BioSeq<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> = seq<'a>
 
     /// Generates amino acid sequence of one-letter-code string using given OptionConverter
@@ -152,7 +154,7 @@ module BioSeq =
         (fun bs -> 
             bs |> Seq.fold (fun massAcc item -> massAcc + memAverageMass item) state)
 
-
+    ///Creates an array with information about the abundacies of the distinct BioItems by converting the symbol of the BioItem to an integer and incrementing the given integer. To decrease the size of the resulting array by still having a fast performance, all indices are shifted by 65. Therefore to call the abundancy of a given BioItem, use "Resultcompositionvector.[(BioItem.symbol bioitem) - 65]"
     let toCompositionVector (input:BioSeq<_>)  =
         let compVec = Array.zeroCreate 26
         input

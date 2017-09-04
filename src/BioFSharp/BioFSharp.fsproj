@@ -80,6 +80,7 @@
     <Compile Include="AminoProperties.fs" />
     <Compile Include="IsoelectricPoint.fs" />
     <Compile Include="Digestion.fs" />
+    <Compile Include="PhylTree.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />

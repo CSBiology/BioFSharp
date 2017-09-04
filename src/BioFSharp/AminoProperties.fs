@@ -2,11 +2,13 @@
 
 open FSharp.Care.Collections
 
+///Contains functionalities for obtaining included literary data on key amino acid properties
 module AminoProperties =
     
     open System.Reflection
     open AminoAcidSymbols
 
+    ///Union case of amino acid properties, referencing the according included information in this library. Use "initGetAminoProperty" function to obtain a simple mapping function
     type AminoProperty =
         | HydrophobicityIndex
         | HydrophobicityFasman
@@ -46,7 +48,7 @@ module AminoProperties =
                 yield pname, ofPropteryString pname (reader.ReadLine())
         ] |> Map.ofList
         
-    
+    ///Returns a simple mapping function for the given amino acid property
     let initGetAminoProperty (property:AminoProperty) =
         // TODO: Memorize
         let lookUp = initAminoPropertyLookUp()

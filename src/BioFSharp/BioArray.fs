@@ -1,11 +1,12 @@
 ﻿namespace BioFSharp
 
+///This module contains the BioArray type and its according functions. The BioArray type is an array of objects using the IBioItem interface
 module BioArray =
     
     open FSharp.Care
     open BioItemsConverter
 
-    //type IBioSequence<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> =  seq<'a>
+    ///Array of objects using the IBioItem interface
     type BioArray<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> = array<'a>
 
     /// Generates amino acid sequence of one-letter-code string using given OptionConverter
@@ -134,7 +135,8 @@ module BioArray =
         (fun bs -> 
             bs |> Array.fold (fun massAcc item -> massAcc + memAverageMass item) state)
 
-
+    
+    ///Creates an array with information about the abundacies of the distinct BioItems by converting the symbol of the BioItem to an integer and incrementing the given integer. To decrease the size of the resulting array by still having a fast performance, all indices are shifted by 65. Therefore to call the abundancy of a given BioItem, use "Resultcompositionvector.[(BioItem.symbol bioitem) - 65]"
     let toCompositionVector (input:BioArray<_>)  =
         let compVec = Array.zeroCreate 26
         input
