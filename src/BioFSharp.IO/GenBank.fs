@@ -1,4 +1,4 @@
-﻿namespace BioFsharp.IO
+﻿namespace BioFSharp.IO
 
 ///functions for reading and writing GenBank(.gb) files
 module GenBank =
