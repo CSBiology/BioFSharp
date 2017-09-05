@@ -129,6 +129,11 @@ table.pre::-webkit-scrollbar-thumb
 	background-color: #80b0b0;
 }
 
+#exampleToggle 
+{
+	border-color = #2E75B6;
+}
+
 #SourceCode, #Author, #APILink
 {
 	text-align:center;
