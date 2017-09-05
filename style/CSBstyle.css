@@ -94,7 +94,42 @@ table.pre::-webkit-scrollbar-thumb
 	padding: 0px 10px 0px 10px;
 }
 
-#SourceCode
+.fileExamples
+{
+	overflow-x: auto;
+    white-space: nowrap;
+	display:block;
+	
+}
+
+.fileExamples pre
+{
+	background-color: white;
+	color:black;
+}
+
+.fileExamples::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 5px;
+	background-color: #212d30;
+}
+
+.fileExamples::-webkit-scrollbar
+{
+	height: 8px;
+	background-color: #212d30;
+	border-radius:5px
+}
+
+.fileExamples::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #80b0b0;
+}
+
+#SourceCode, #Author, #APILink
 {
 	text-align:center;
 	color:#2E75B6;
@@ -104,17 +139,10 @@ table.pre::-webkit-scrollbar-thumb
 	text-decoration:none;
 
 }
-#Author
-{
-	text-align:center;
-	color:#2E75B6;
-	padding: 2px 6px 2px 6px;
-	border-radius: 25px;
-    border: 2px solid #2E75B6;
-	text-decoration:none;
-}
 
-#Author:hover, #SourceCode:hover 
+
+
+#Author:hover, #SourceCode:hover , #APILink:hover
 {
 	background-color:#2E75B6;
 	color:white;
