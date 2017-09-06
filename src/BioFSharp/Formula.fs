@@ -3,6 +3,7 @@
 open System.Text.RegularExpressions
 open FSharp.Care
 
+///Contains functionality for working with molecules as a formula of their elements and formulas of biologically relevant molecules
 module Formula =
         
        
@@ -80,7 +81,7 @@ module Formula =
             |> Seq.fold (fun acc (key,value) -> if acc.ContainsKey(key) then acc.Add(key,(value + acc.[key])) else acc.Add(key,value) ) Map.empty
         result
                    
-
+    ///Contains formulas for amino acids, nucleotides and biologically relevant anorganic molecules
     module Table =
 
         let CO  = parseFormulaString "CO"
@@ -93,32 +94,57 @@ module Formula =
 
 
         //Amino acid formulas minus H20   
+        ///Alanine
         let Ala = parseFormulaString "C3H5ON"
-        let Cys = parseFormulaString "C3H5ONS"   
-        let Asp = parseFormulaString "C4H5O3N"   
+        ///Cysteine
+        let Cys = parseFormulaString "C3H5ONS"  
+        ///Asparagic Acid
+        let Asp = parseFormulaString "C4H5O3N" 
+        ///Glutamic Acid
         let Glu = parseFormulaString "C5H7O3N"   
+        ///Phenylalanine
         let Phe = parseFormulaString "C9H9ON"    
-        let Gly = parseFormulaString "C2H3ON"    
+        ///Glycine
+        let Gly = parseFormulaString "C2H3ON"  
+        ///Histidine
         let His = parseFormulaString "C6H7ON3"   
-        let Ile = parseFormulaString "C6H11ON"   
+        ///Isoleucine
+        let Ile = parseFormulaString "C6H11ON" 
+        ///Lysine
         let Lys = parseFormulaString "C6H12ON2"  
+        ///Leucine
         let Leu = parseFormulaString "C6H11ON"   
+        ///Methionine
         let Met = parseFormulaString "C5H9ONS"   
-        let Asn = parseFormulaString "C4H6O2N2"  
+        ///Asparagine
+        let Asn = parseFormulaString "C4H6O2N2" 
+        ///Pyrrolysine
         let Pyl = parseFormulaString "C12H19N3O2"
+        ///Proline
         let Pro = parseFormulaString "C5H7ON"    
+        ///GLutamine
         let Gln = parseFormulaString "C5H8O2N2"  
+        ///Arginine
         let Arg = parseFormulaString "C6H12ON4"  
+        ///Serine
         let Ser = parseFormulaString "C3H5O2N"   
+        ///Threonine
         let Thr = parseFormulaString "C4H7O2N"   
+        ///Selenocysteine
         let Sel = parseFormulaString "C3H5NOSe"  
-        let Val = parseFormulaString "C5H9ON"    
+        ///Valine
+        let Val = parseFormulaString "C5H9ON"
+        ///Tryptophane
         let Trp = parseFormulaString "C11H10ON2" 
+        ///Tyrosine
         let Tyr = parseFormulaString "C9H9O2N"                      
-                                                 
+        ///Ambiguity: Unknown amino acid                                        
         let Xaa = parseFormulaString "C2H3N1O1"  
+        ///Ambiguity: Leucine or Isoleucine
         let Xle = parseFormulaString "C6H11N1O1" 
-        let Glx = parseFormulaString "C5H7N1O3"  
+        ///Ambiguity: Glutamine or Glutamic Acid
+        let Glx = parseFormulaString "C5H7N1O3" 
+        ///Ambiguity: Asparagine or Asparagic Acid
         let Asx = parseFormulaString "C4H5N1O3"  
 
 

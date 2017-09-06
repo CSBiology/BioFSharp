@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp
 
+///Contains the Nucleotide type and its according functions.
 module Nucleotides =
     
     open FSharp.Care
@@ -55,7 +56,7 @@ module Nucleotides =
 
         interface IBioItem with            
                 
-                //Nucleotide symbol (One letter code)
+                ///Returns the one letter code of the nucleotide as a char
                 member this.Symbol   = 
                     let rec symbol (nuc:Nucleotide) =
                             match nuc with
@@ -106,7 +107,7 @@ module Nucleotides =
                             | N   -> 'N' 
                     symbol this
                 
-                /// Nucleotide formula
+                /// Returns the formula of the nucleotide
                 member this.Formula  = 
                     //Amino acid formulas minus H20   
                     let rec formula (nuc:Nucleotide) =
@@ -160,14 +161,16 @@ module Nucleotides =
                     
                     formula this
                 
+                ///Returns true, if the nucleotide is a terminator, otherwise returns false
                 member this.isTerminator = match this with
                                            | Nucleotide.Ter -> true
                                            | _             -> false
+                ///Returns true, if the nucleotide is a gap, otherwise returns false
                 member this.isGap        = match this with
                                            | Nucleotide.Gap -> true
                                            | _             -> false
 
-
+                ///Returns the full name of the nucleotide as a string
                 member this.Name = 
                     // Nucleotide names
                     let name (nuc:Nucleotide) =
@@ -226,7 +229,7 @@ module Nucleotides =
 
 
 
-
+    ///Lexer tags for parsing Nucleotides
     type ParsedNucleotideChar = 
         | StandardCodes    of Nucleotide
         | Standard_DNAonly of Nucleotide
@@ -235,7 +238,7 @@ module Nucleotides =
         | AmbiguityCodes   of Nucleotide                
         | NoNucChar        of char
 
-
+    ///Simple Lexer for parsing Nucleotides from chars. The full parser is located in the BioItemsConverter-module
     let charToParsedNucleotideChar (c:char) =
         match System.Char.ToUpper c with                                    
         

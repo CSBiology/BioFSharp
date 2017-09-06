@@ -1,11 +1,12 @@
 namespace BioFSharp.Algorithm
 
 
-
+///Contains functions for evaluating the best possible alignments for 2 Sequences
 module PairwiseAlignment =
+
     open FSharp.Care.Collections   
      //Introduction!
-     //This page contains functions for evaluating the best possible Allignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
+     //This page contains functions for evaluating the best possible alignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
 
     //The RunGeneric-Module 
     //In this module are the typedefinitons. There is also the runGeneric-Function. It is the skeleton-function for creating the Backtrace-matrix. As parameters it takes the 2 sequences and the operation-cost-functions ( opcs) and basically just creates a loop, enabling the opcs to evaluate the values of the cells. There also is the backtrace-function. It creates the alignment from the matrix and the 2 initial sequences.
@@ -15,62 +16,64 @@ module PairwiseAlignment =
     /// Holds all types and helper-functions. Also includes the function for the matrix creation and the backtrace-function
     module RunGeneric =
 
+        ///Represents one element of the matrix, contains direction for backtracing and score
         type TraceScore =     
             | Diagonal   of int
             | Horizontal of int
             | Vertical   of int
             | NoTrace
 
+        ///Get score of matrix element
         let getTraceScoreValue = function
             | Diagonal   x -> x
             | Horizontal x -> x
             | Vertical   x -> x
             | NoTrace      -> 0
 
-        
+        ///Adds value to score of tracescore element
         let addFloatToTrace (ts:TraceScore) (opc:int) =
             getTraceScoreValue ts + opc
 
-        //3 seperate matrices are used for evaluating the affine gap penalty
+        ///3 seperate matrices are used for evaluating the affine gap penalty. This is implemented by having every cell of the matrix carry 3 separate tracescore values
         type Cell = {
             M : TraceScore
             X : TraceScore
             Y : TraceScore
             }
     
-        //Uses 3 TraceScores and creates a Cell from them
+        ///Uses 3 TraceScores and creates a Cell from them
         let createCell m x y =
             {M=m;X=x;Y=y;}
 
-        //The Type of the returned list + its score
+        ///Score of the alignment and the aligned sequences as a tuple
         type Alignment<'a> = {
             Score    : int
             Sequence : list<'a option * 'a option>
             }
     
-        //Adds the score to the alignment
+        ///Merges the alignment score and the aligned sequences
         let createAlignment score sequence =
             {Score=score;Sequence=sequence}
     
-        //Carries the costs for gaps and the scoring matrix (Similarity)
+        ///Carries the costs for gaps and the scoring matrix (Similarity)
         type Costs<'a> = {
             Open : int
             Continuation : int
             Similarity : 'a -> 'a -> int
             }
     
-        //Carries the functions for evaluating the Tracescores
+        ///Carries the functions for evaluating the Tracescores
         type OperationCosts<'a> = {
             DiagonalCost   : Cell -> 'a -> 'a -> int
             HorizontalCost : Cell -> int
             VerticalCost   : Cell -> int
             }
     
-        //Evaluates the bigger of two values (x y) after converting them with a function f
+        ///Evaluates the bigger of two values (x y) after converting them with a function f
         let maxBy2 f x y =
             if f x < f y then y else x
  
-        /// Creates an array and fills it with Cells
+        /// Creates an jagged array matrix and fills it with Backtracing Information (Cells)
         let runGeneric (initArray: Cell[,] -> Cell[,]) (fstSeq : 'a[]) (sndSeq : 'a[]) (opc:OperationCosts<'a>) = 
     
             let emptyCell = { M = NoTrace; Y = NoTrace; X = NoTrace}

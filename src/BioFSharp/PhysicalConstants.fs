@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp
 
+///Collection of physical constants
 module PhysicalConstants =
 
     /// <summary>

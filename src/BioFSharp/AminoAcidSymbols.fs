@@ -2,6 +2,7 @@ namespace BioFSharp
 
 open FSharp.Care
 
+///Contains the AminoAcidSymbol type and its according functions. The AminoAcidSymbol type is a lightweight, efficient presentation of amino acids
 module AminoAcidSymbols =
 
     // Partial active pattern. Match if field equals value.
@@ -81,8 +82,10 @@ module AminoAcidSymbols =
                 | :? AminoAcidSymbol as o -> this.Value = o.Value
                 | _ -> false
 
+        ///Returns integer hashcode of AminoAcidSymbol
         override this.GetHashCode () = hash value
 
+        ///Returns one letter code of AminoAcidSymbol as string
         override this.ToString () = sprintf "%c" ((char)value)
 
 
@@ -96,8 +99,11 @@ module AminoAcidSymbols =
         // #end region System.IComparable        
 
         interface IBioItem with
-            member this.Symbol = (char)value             
+            ///Returns one letter code of AminoAcidSymbol as char
+            member this.Symbol = (char)value     
+            ///Returns true, if AminoAcidSymbol is Terminator, otherwise returns false
             member this.isTerminator = this.Value = AminoAcidSymbol.Ter.Value
+            ///Returns true, if AminoAcidSymbol is Gap, otherwise returns false
             member this.isGap        = this.Value = AminoAcidSymbol.Gap.Value
             //Amino acid formulas minus H20  
             member this.Formula  = 
@@ -142,46 +148,44 @@ module AminoAcidSymbols =
 
                 formula' AminoAcidSymbol.Ala 
 
-            
+            /// Returns the name of AminoAcidSymbol as string
             member this.Name =                   
-                /// Returns the name of AminoAcid
-                let name (aa:AminoAcidSymbol) =
-                    match aa with
-                    | Field AminoAcidSymbol.Ala -> "Alanin"          
-                    | Field AminoAcidSymbol.Cys -> "Cysteine"       
-                    | Field AminoAcidSymbol.Asp -> "Aspartic Acid"  
-                    | Field AminoAcidSymbol.Glu -> "Glutamic Acid"  
-                    | Field AminoAcidSymbol.Phe -> "Phenylalanin"   
-                    | Field AminoAcidSymbol.Gly -> "Glycine"        
-                    | Field AminoAcidSymbol.His -> "Histidine"      
-                    | Field AminoAcidSymbol.Ile -> "Isoleucine"     
-                    | Field AminoAcidSymbol.Lys -> "Lysine"         
-                    | Field AminoAcidSymbol.Leu -> "Leucine"        
-                    | Field AminoAcidSymbol.Met -> "Methionine"     
-                    | Field AminoAcidSymbol.Asn -> "Asparagine"     
-                    | Field AminoAcidSymbol.Pyl -> "Pyrrolysine"    
-                    | Field AminoAcidSymbol.Pro -> "Proline"        
-                    | Field AminoAcidSymbol.Gln -> "Glutamine"      
-                    | Field AminoAcidSymbol.Arg -> "Arginine"       
-                    | Field AminoAcidSymbol.Ser -> "Serine"         
-                    | Field AminoAcidSymbol.Thr -> "Threonine"      
-                    | Field AminoAcidSymbol.Sel -> "Selenocysteine" 
-                    | Field AminoAcidSymbol.Val -> "Valine"         
-                    | Field AminoAcidSymbol.Trp -> "Tryptophan"     
-                    | Field AminoAcidSymbol.Tyr -> "Tyrosine"       
-             
-                    | Field AminoAcidSymbol.Xaa -> "Unspecified"             
-                    | Field AminoAcidSymbol.Xle -> "Leucine/Isoleucine"      
-                    | Field AminoAcidSymbol.Glx -> "Glutamine/glutamic acid" 
-                    | Field AminoAcidSymbol.Asx -> "Asparagine/aspartic acid"
-                                       
-                    | Field AminoAcidSymbol.Gap -> "Gap"
-                    | Field AminoAcidSymbol.Ter -> "Ter"
-                                     
-                    | _ -> failwithf "Not an amino acid symbol"
                 
-                name this
-    // Conversion operators
+                match this with
+                | Field AminoAcidSymbol.Ala -> "Alanin"          
+                | Field AminoAcidSymbol.Cys -> "Cysteine"       
+                | Field AminoAcidSymbol.Asp -> "Aspartic Acid"  
+                | Field AminoAcidSymbol.Glu -> "Glutamic Acid"  
+                | Field AminoAcidSymbol.Phe -> "Phenylalanin"   
+                | Field AminoAcidSymbol.Gly -> "Glycine"        
+                | Field AminoAcidSymbol.His -> "Histidine"      
+                | Field AminoAcidSymbol.Ile -> "Isoleucine"     
+                | Field AminoAcidSymbol.Lys -> "Lysine"         
+                | Field AminoAcidSymbol.Leu -> "Leucine"        
+                | Field AminoAcidSymbol.Met -> "Methionine"     
+                | Field AminoAcidSymbol.Asn -> "Asparagine"     
+                | Field AminoAcidSymbol.Pyl -> "Pyrrolysine"    
+                | Field AminoAcidSymbol.Pro -> "Proline"        
+                | Field AminoAcidSymbol.Gln -> "Glutamine"      
+                | Field AminoAcidSymbol.Arg -> "Arginine"       
+                | Field AminoAcidSymbol.Ser -> "Serine"         
+                | Field AminoAcidSymbol.Thr -> "Threonine"      
+                | Field AminoAcidSymbol.Sel -> "Selenocysteine" 
+                | Field AminoAcidSymbol.Val -> "Valine"         
+                | Field AminoAcidSymbol.Trp -> "Tryptophan"     
+                | Field AminoAcidSymbol.Tyr -> "Tyrosine"       
+             
+                | Field AminoAcidSymbol.Xaa -> "Unspecified"             
+                | Field AminoAcidSymbol.Xle -> "Leucine/Isoleucine"      
+                | Field AminoAcidSymbol.Glx -> "Glutamine/glutamic acid" 
+                | Field AminoAcidSymbol.Asx -> "Asparagine/aspartic acid"
+                                       
+                | Field AminoAcidSymbol.Gap -> "Gap"
+                | Field AminoAcidSymbol.Ter -> "Ter"
+                                     
+                | _ -> failwithf "Not an amino acid symbol"
+                
+    /// Maps input to AminoAcidSymbol if possible
     let inline aminoAcidSymbol a = AminoAcidSymbol.op_Explicit(int a)
 
     let inline parseChar (c:char) =
@@ -220,7 +224,7 @@ module AminoAcidSymbols =
         // no amino acid character
         | _  -> NcbiParsingType.NoAAChar, None
 
-
+    ///Set of the 20 standard amino acids
     let AminoSymbolSetStandard =
         set [
             AminoAcidSymbol.Ala
@@ -254,18 +258,20 @@ module AminoAcidSymbols =
             AminoAcidSymbol.Glx
             AminoAcidSymbol.Asx ]  
     
-
+    ///Set containing the Gap and the Terminator AminoAcidSymbols
     let AminoSymbolSetGapTer =
         set [
             AminoAcidSymbol.Gap
             AminoAcidSymbol.Ter ] 
 
+    ///Set of all AminoAcidSymbols with basic sidechain
     let AminoSymbolSetPosCharged =
         set [
             AminoAcidSymbol.Arg
             AminoAcidSymbol.Lys
             AminoAcidSymbol.His ]
 
+    ///Set of all AminoAcidSymbols with acidic sidechain
     let AminoSymbolSetNegCharged =
         set [
 
@@ -274,11 +280,11 @@ module AminoAcidSymbols =
             AminoAcidSymbol.Cys
             AminoAcidSymbol.Tyr ]
 
-    /// Returns the name of AminoAcid
+    /// Returns the name of AminoAcidSymbol
     let name (aa:AminoAcidSymbol) =
         BioItem.name aa
 
-    //Returns amino acid formulas minus H20            
+    ///Returns AminoAcidSymbol formulas minus H20            
     let formula (aa:AminoAcidSymbol) =        
         BioItem.formula aa
     
@@ -310,15 +316,15 @@ module AminoAcidSymbols =
     let initAverageMassWithMemP = 
         Memoization.memoizeP (fun a -> averageMass a)
 
-    /// Returns true, if the AminoAcidSymbol has a charged side chain
+    /// Returns true, if the AminoAcidSymbol has a basic or acidic side chain
     let isCharged (aa:AminoAcidSymbol) = 
         AminoSymbolSetPosCharged.Contains aa || AminoSymbolSetNegCharged.Contains aa
-    /// Returns true, if the AminoAcidSymbol has a charged side chain
 
+    /// Returns true, if the AminoAcidSymbol has a basic side chain
     let isPosCharged (aa:AminoAcidSymbol) = 
         AminoSymbolSetPosCharged.Contains aa  
         
-    /// Returns true, if the AminoAcidSymbol has a charged side chain
+    /// Returns true, if the AminoAcidSymbol has an acidic side chain
     let isNegCharged (aa:AminoAcidSymbol) = 
         AminoSymbolSetNegCharged.Contains aa
 

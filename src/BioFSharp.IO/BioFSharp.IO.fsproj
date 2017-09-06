@@ -58,9 +58,9 @@
     <Compile Include="OrthoMCL.fs" />
     <Compile Include="FastQ.fs" />
     <Compile Include="GFF3Parser.fs" />
-    <Compile Include="GeneBankParser.fs" />
     <Compile Include="Newick.fs" />
     <Compile Include="Clustal.fs" />
+    <Compile Include="GenBank.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -78,6 +78,11 @@
     <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care\FSharp.Care.fsproj">
       <Name>FSharp.Care</Name>
       <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj">
+      <Name>BioFSharp</Name>
+      <Project>{2a955278-f002-4ebd-ae86-8b548ebf1209}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
