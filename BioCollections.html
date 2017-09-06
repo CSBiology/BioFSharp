@@ -42,54 +42,6 @@
 <h1><a name="BioArray" class="anchor" href="#BioArray">BioArray</a></h1>
 <p>work in progress...</p>
 
-<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs2">namespace FSharp.Plotly</div>
-<div class="tip" id="fs3">namespace BioFSharp</div>
-<div class="tip" id="fs4">val CO2 : Formula.Formula<br /><br />Full name: BioCollections.CO2</div>
-<div class="tip" id="fs5">module Formula<br /><br />from BioFSharp</div>
-<div class="tip" id="fs6">val parseFormulaString : strFormula:string -&gt; Formula.Formula<br /><br />Full name: BioFSharp.Formula.parseFormulaString</div>
-<div class="tip" id="fs7">val toString : f:Formula.Formula -&gt; string<br /><br />Full name: BioFSharp.Formula.toString</div>
-<div class="tip" id="fs8">val c : Map&lt;Elements.Element,float&gt;<br /><br />Full name: BioCollections.c</div>
-<div class="tip" id="fs9">val add : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Map&lt;Elements.Element,float&gt;<br /><br />Full name: BioFSharp.Formula.add</div>
-<div class="tip" id="fs10">module AminoAcidSymbols<br /><br />from BioFSharp</div>
-<div class="tip" id="fs11">type AminoAcidSymbol =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;interface IBioItem<br />&#160;&#160;&#160;&#160;interface IComparable<br />&#160;&#160;&#160;&#160;private new : value:byte -&gt; AminoAcidSymbol<br />&#160;&#160;&#160;&#160;override Equals : other:obj -&gt; bool<br />&#160;&#160;&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;&#160;&#160;member private Value : byte<br />&#160;&#160;&#160;&#160;static member Ala : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Arg : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Asn : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end<br /><br />Full name: BioFSharp.AminoAcidSymbols.AminoAcidSymbol</div>
-<div class="tip" id="fs12">property AminoAcidSymbols.AminoAcidSymbol.Ala: AminoAcidSymbols.AminoAcidSymbol</div>
-<div class="tip" id="fs13">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
-<div class="tip" id="fs14">val peptide1 : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioCollections.peptide1</div>
-<div class="tip" id="fs15">module BioSeq<br /><br />from BioFSharp</div>
-<div class="tip" id="fs16">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.ofAminoAcidString</div>
-<div class="tip" id="fs17">val peptide2 : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioCollections.peptide2</div>
-<div class="tip" id="fs18">val fAlanin : Formula.Formula<br /><br />Full name: BioCollections.fAlanin</div>
-<div class="tip" id="fs19">val monoisoMass : f:Formula.Formula -&gt; float<br /><br />Full name: BioFSharp.Formula.monoisoMass</div>
-<div class="tip" id="fs20">val averageMass : f:Formula.Formula -&gt; float<br /><br />Full name: BioFSharp.Formula.averageMass</div>
-<div class="tip" id="fs21">module Table<br /><br />from BioFSharp.Formula</div>
-<div class="tip" id="fs22">val H2O : Formula.Formula<br /><br />Full name: BioFSharp.Formula.Table.H2O</div>
-<div class="tip" id="fs23">val carboxyAmidoMethylation : ModificationInfo.Modification<br /><br />Full name: BioCollections.carboxyAmidoMethylation</div>
-<div class="tip" id="fs24">module ModificationInfo<br /><br />from BioFSharp</div>
-<div class="tip" id="fs25">val createModificationWithAdd : name:string -&gt; location:ModificationInfo.ModLocation -&gt; formula:string -&gt; ModificationInfo.Modification<br /><br />Full name: BioFSharp.ModificationInfo.createModificationWithAdd</div>
-<div class="tip" id="fs26">type ModLocation =<br />&#160;&#160;|  Residual  =  0<br />&#160;&#160;|  Cterm  =  1<br />&#160;&#160;|  Nterm  =  2<br />&#160;&#160;|  ProteinCterm  =  3<br />&#160;&#160;|  ProteinNterm  =  4<br />&#160;&#160;|  Isotopic  =  5<br /><br />Full name: BioFSharp.ModificationInfo.ModLocation</div>
-<div class="tip" id="fs27">ModificationInfo.ModLocation.Residual: ModificationInfo.ModLocation = 0</div>
-<div class="tip" id="fs28">module AminoAcids<br /><br />from BioFSharp</div>
-<div class="tip" id="fs29">union case AminoAcids.AminoAcid.Cys: AminoAcids.AminoAcid</div>
-<div class="tip" id="fs30">val setModification : md:ModificationInfo.Modification -&gt; aa:AminoAcids.AminoAcid -&gt; AminoAcids.AminoAcid<br /><br />Full name: BioFSharp.AminoAcids.setModification</div>
-<div class="tip" id="fs31">val formula : aa:AminoAcids.AminoAcid -&gt; Formula.Formula<br /><br />Full name: BioFSharp.AminoAcids.formula</div>
-<div class="tip" id="fs32">module AminoProperties<br /><br />from BioFSharp</div>
-<div class="tip" id="fs33">val getHydrophobicityIndex : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioCollections.getHydrophobicityIndex</div>
-<div class="tip" id="fs34">val initGetAminoProperty : property:AminoProperty -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.AminoProperties.initGetAminoProperty</div>
-<div class="tip" id="fs35">type AminoProperty =<br />&#160;&#160;| HydrophobicityIndex<br />&#160;&#160;| HydrophobicityFasman<br />&#160;&#160;| BetaSheet<br />&#160;&#160;| Coil<br />&#160;&#160;| Helicity<br />&#160;&#160;| Amphiphilicity<br />&#160;&#160;| PKr<br />&#160;&#160;static member toString : (AminoProperty -&gt; string)<br /><br />Full name: BioFSharp.AminoProperties.AminoProperty</div>
-<div class="tip" id="fs36">union case AminoProperty.HydrophobicityIndex: AminoProperty</div>
-<div class="tip" id="fs37">val getHydrophobicityIndexZ : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioCollections.getHydrophobicityIndexZ</div>
-<div class="tip" id="fs38">val initGetAminoPropertyZnorm : property:AminoProperty -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.AminoProperties.initGetAminoPropertyZnorm</div>
-<div class="tip" id="fs39">val peptide2&#39; : AminoAcidSymbols.AminoAcidSymbol []<br /><br />Full name: BioCollections.peptide2&#39;</div>
-<div class="tip" id="fs40">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs41">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs42">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs43">val aminoAcidSymbol : a:&#39;a -&gt; AminoAcidSymbols.AminoAcidSymbol (requires member op_Explicit)<br /><br />Full name: BioFSharp.AminoAcidSymbols.aminoAcidSymbol</div>
-<div class="tip" id="fs44">val ofWindowedBioArray : n:int -&gt; pf:(&#39;a -&gt; float) -&gt; source:BioArray.BioArray&lt;&#39;a&gt; -&gt; float [] (requires &#39;a :&gt; IBioItem)<br /><br />Full name: BioFSharp.AminoProperties.ofWindowedBioArray</div>
-<div class="tip" id="fs45">module BioItem<br /><br />from BioFSharp</div>
-<div class="tip" id="fs46">val formula : bItem:#IBioItem -&gt; Formula.Formula<br /><br />Full name: BioFSharp.BioItem.formula</div>
-<div class="tip" id="fs47">val Ala : Formula.Formula<br /><br />Full name: BioFSharp.Formula.Table.Ala</div>
-<div class="tip" id="fs48">val name : aa:AminoAcidSymbols.AminoAcidSymbol -&gt; string<br /><br />Full name: BioFSharp.AminoAcidSymbols.name</div>
 
         </div>
         <div class="span3" >
@@ -98,21 +50,14 @@
                 <li class="nav-header">BioFSharp</li>
                 <li><a href="/BioFSharp/index.html">Home page</a></li>
                 <li class="divider"></li>
-                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-                <li><a href="/BioFSharp/license.html">License</a></li>
-                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Getting started</li>
-                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
-                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
-                <li class="nav-header">Data Structures</li>
-                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
-                <li><a href="/BioFSharp/Isotopes.html">Isotopes</a></li>
-                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
-                <li><a href="/BioFSharp/IBioItem.html">IBioItem</a></li>
-                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
-                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                
+                <li class="nav-header">BioFSharp core</li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li>
+                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                         <ul class="nav nav-list">
@@ -121,33 +66,32 @@
                             <li><a href="/BioFSharp/BioCollections.html#BioArray">BioArray</a></li>
                         </ul>
                 </li>
-                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
-                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
-                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                    <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
-                <li class="nav-header">I/O</li>
-                <li>
-                    <a href="/BioFSharp/Readers.html">Reading/Writing biological file formats</a>
-                </li>
-                <li>
-                    <a href="/BioFSharp/BioDB.html">I/O</a>
-                </li>
-                <li class="nav-header">Statistics</li>
-                <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>
-                <li><a href="/BioFSharp/Distributions.html">Distributions</a></li>
-                <li><a href="/BioFSharp/StatisticalTests.html">Statistical Tests</a></li>
-                <li class="nav-header">Charting & Visualization</li>
-                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
-                <li class="nav-header">Documentation</li>
-                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-                <li class="nav-header">Our other projects</li>
-                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
-                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+                <li class="nav-header">File I/O</li>
+                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
+                <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
+                <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li class="nav-header">Web I/O</li>
+                <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                <li class="nav-header">Biostatistics</li>
+                <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                <li class="nav-header">Biovisualization</li>
+                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+
+                
             </ul>
         </div>
       </div>

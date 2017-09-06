@@ -36,45 +36,99 @@
         <div class="span9" id="main">
           
 <h1><a name="BioFSharp" class="anchor" href="#BioFSharp">BioFSharp</a></h1>
-<p>BioFSharp aims to be a user-friendly library for Bioinformatics written in F#. It contains the basic data
-structures for common biological objects like amino acids and nucleotides based on chemical formulas and chemical elements.</p>
-<p>Furthermore, we provide a variety of parsers for many biological file formats, visualization tools for plots and networks and a variety of algorithms suited for bioinformatic workflows.</p>
-<p>F# being part of the .NET ecosystem provides seamless interoperability with other .NET languages and makes it easy to use in for example C#.</p>
-<p>BioFSharp consist of a core project and the following sub-projects, which are maintained and documented sperately:</p>
-<ul>
-<li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a> contains libraries for numerical computations including linear algebra, curve fitting and statistical measures.</li>
-</ul>
-<ul>
-<li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a> extends F# collections with auxilliary functions</li>
-</ul>
-<br></br>
-<hr>
-<h1><a name="Setting-up-BioFSharp" class="anchor" href="#Setting-up-BioFSharp">Setting up BioFSharp</a></h1>
-<p><em>Note: in the near future, we will provide a NuGet package</em></p>
-<ul>
-<li><p>Clone or download <a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a> and <a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a>.</p></li>
-<li><p>Clone or download <a href="https://github.com/CSBiology/BioFSharp">BioFSharp</a></p></li>
-</ul>
-<p>As long as the repositories are in the same folder, you can now build BioFSharp in Visual Studio.
-Alternatively, open the terminal application of your choice, set your current directory to the BioFSharp root folder and build it by
-using the <code>build</code> command. (this will execute build.cmd, which starts an automated build process orchestrated by <a href="https://github.com/fsprojects/Paket">paket</a> and <a href="https://github.com/fsharp/FAKE">FAKE</a>)</p>
-<br></br>
-<hr>
-<h1><a name="CSBlog" class="anchor" href="#CSBlog">CSBlog</a></h1>
-<p>Tutorials that have a more general scope or cover several topics at once are posted at our blog <a href="https://csbiology.github.io/CSBlog/">CSBlog</a>. It is a tool for us to document
-and share our workflows. It may be worth to check if your specific workflow is covered there to get an entry point for using BioFSharp for it.</p>
-<br></br>
-<hr>
-<h1><a name="Samples-amp-documentation" class="anchor" href="#Samples-amp-documentation">Samples &amp; documentation</a></h1>
-<p>The library comes with comprehensible documentation. All samples and tutorial snippets are written in F#, it should however be no problem to adjust the syntax and use them in other .NET languages.
-Tutorials are automatically generated from <code>*.fsx</code> files in the <a href="https://github.com/CSBiology/BioFSharp/tree/master/docs/content">content folder</a>.
-The API reference is automatically generated from Markdown comments in the library implementation.</p>
-<p>You can find the tutorials and the API reference in the sidebar to the right.</p>
-<p>Documentation and tutorials for our sub-projects can be found here:</p>
-<ul>
-<li><p><a href="https://csbiology.github.io/FSharp.Stats/">FSharp.Stats</a></p></li>
-<li><p><a href="http://csbiology.github.io/FSharp.Care/">FSharp.Care</a></p></li>
-</ul>
+<p>BioFSharp aims to be a user-friendly functional library for bioinformatics written in F#. It contains the basic data structures for common biological objects like amino acids and
+nucleotides based on chemical formulas and chemical elements. BioFSharp facilitate working with sequences in a strongly typed way and is designed to work well with F# Interactive.
+It provide a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.</p>
+<p>After you have downloaded BioFSharp, you will see how easy it is to start working with sequences:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span><span class="s">&quot;BioFSharp.dll&quot;</span>
+<span class="k">open</span> <span class="i">BioFSharp</span>
+
+
+<span class="c">// Create a peptide sequence </span>
+<span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofAminoAcidString</span>
+
+<span class="c">// Create a nucleotide sequence </span>
+<span class="s">&quot;ATGC&quot;</span> <span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofNucleotideString</span>
+</code></pre></td>
+</tr>
+</table>
+<p>BioFSharp comes equipped with a broad range of features and functions to map amino acids and nucleotides.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// </span>
+<span class="i">Nucleotides</span><span class="o">.</span><span class="i">G</span> <span class="o">|&gt;</span> <span class="i">Nucleotides</span><span class="o">.</span><span class="i">antiparallel</span>
+<span class="c">// Returns the monoicsotopic mass of Arginine (minus H2O)</span>
+<span class="i">AminoAcids</span><span class="o">.</span><span class="i">Arg</span> <span class="o">|&gt;</span> <span class="i">AminoAcids</span><span class="o">.</span><span class="i">monoisoMass</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Peptide represented as a Bioseq</span>
+<span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofAminoAcidString</span> 
+
+<span class="c">///Peptide represented as a BioList</span>
+<span class="s">&quot;PEPTIDE&quot;</span><span class="o">|&gt;</span> <span class="i">BioList</span><span class="o">.</span><span class="i">ofAminoAcidString</span> 
+
+<span class="c">///Peptide represented as a BioArray</span>
+<span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span> 
+
+
+<span class="k">open</span> <span class="i">Nucleotides</span>
+
+[|<span class="i">A</span>;<span class="i">T</span>;<span class="i">G</span>;<span class="i">C</span>;|]<span class="o">.</span>[<span class="n">1..</span><span class="n">3</span>]
+<span class="o">|&gt;</span> <span class="i">Array</span><span class="o">.</span><span class="i">map</span> <span class="i">Nucleotides</span><span class="o">.</span><span class="i">antiparallel</span>
+</code></pre></td>
+</tr>
+</table>
+<p>BioFSharp contains a set of readers for different biology-associated file formats like for example FastA:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;../../bin/BioFSharp.IO.dll&quot;</span>
+<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">IO</span>
+
+<span class="k">let</span> <span class="i">filepathFastaA</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/FASTAExample1.fasta&quot;</span>)
+
+<span class="c">//reads from file to an array of FastaItems.</span>
+<span class="i">FastA</span><span class="o">.</span><span class="i">fromFile</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span> <span class="i">filepathFastaA</span>
+</code></pre></td>
+</tr>
+</table>
+<p>For more detailed examples continue to explore the BioFSharp documentation.
+In the near future we will start to provide a cookbook like tutorial in the <a href="https://csbiology.github.io/CSBlog/">CSBlog</a>.</p>
 
 
         </div>
@@ -84,51 +138,43 @@ The API reference is automatically generated from Markdown comments in the libra
                 <li class="nav-header">BioFSharp</li>
                 <li><a href="/BioFSharp/index.html">Home page</a></li>
                 <li class="divider"></li>
-                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-                <li><a href="/BioFSharp/license.html">License</a></li>
-                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Getting started</li>
-                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
-                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
-                <li class="nav-header">Data Structures</li>
-                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
-                <li><a href="/BioFSharp/Isotopes.html">Isotopes</a></li>
-                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
-                <li><a href="/BioFSharp/IBioItem.html">IBioItem</a></li>
-                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
-                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                
+                <li class="nav-header">BioFSharp core</li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li>
+                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                 </li>
-                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
-                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
-                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                    <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
-                <li class="nav-header">I/O</li>
-                <li>
-                    <a href="/BioFSharp/Readers.html">Reading/Writing biological file formats</a>
-                </li>
-                <li>
-                    <a href="/BioFSharp/BioDB.html">I/O</a>
-                </li>
-                <li class="nav-header">Statistics</li>
-                <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>
-                <li><a href="/BioFSharp/Distributions.html">Distributions</a></li>
-                <li><a href="/BioFSharp/StatisticalTests.html">Statistical Tests</a></li>
-                <li class="nav-header">Charting & Visualization</li>
-                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
-                <li class="nav-header">Documentation</li>
-                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-                <li class="nav-header">Our other projects</li>
-                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
-                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+                <li class="nav-header">File I/O</li>
+                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
+                <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
+                <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li class="nav-header">Web I/O</li>
+                <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                <li class="nav-header">Biostatistics</li>
+                <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                <li class="nav-header">Biovisualization</li>
+                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+
+                
             </ul>
         </div>
       </div>

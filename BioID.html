@@ -48,21 +48,16 @@
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
 <span class="prep">#r</span> <span class="s">&quot;FSharp.Care&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">Care</span>
+<span class="k">open</span> <span class="i">BioFSharp</span>
+<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Care</span>
 
 
 
-<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">BioID</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="f">parseCreId</span> <span class="s">&quot;sp| Cre01.g121121.1.1 acyl-CoA thioesterase 4 ALS=MGI:2159621;Acot4 DBV=UP&quot;</span>
+<span class="i">BioID</span><span class="o">.</span><span class="i">parseCreId</span> <span class="s">&quot;sp| Cre01.g121121.1.1 acyl-CoA thioesterase 4 ALS=MGI:2159621;Acot4 DBV=UP&quot;</span>
 </code></pre></td>
 </tr>
 </table>
 
-<div class="tip" id="fs1">namespace BioFSharp</div>
-<div class="tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs3">namespace FSharp.Care</div>
-<div class="tip" id="fs4">module BioID<br /><br />from BioFSharp</div>
-<div class="tip" id="fs5">val parseCreId : (string -&gt; Monads.Either&lt;BioID.CreId,string&gt;)<br /><br />Full name: BioFSharp.BioID.parseCreId</div>
 
         </div>
         <div class="span3" >
@@ -71,51 +66,43 @@
                 <li class="nav-header">BioFSharp</li>
                 <li><a href="/BioFSharp/index.html">Home page</a></li>
                 <li class="divider"></li>
-                <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-                <li><a href="http://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-                <li><a href="/BioFSharp/license.html">License</a></li>
-                <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Getting started</li>
-                <li><a href="/BioFSharp/Introduction.html">Introduction</a></li>
-                <li><a href="/BioFSharp/LibraryStructure.html">Library Structure</a></li>
-                <li class="nav-header">Data Structures</li>
-                <li><a href="/BioFSharp/Elements.html">Elements</a></li>
-                <li><a href="/BioFSharp/Isotopes.html">Isotopes</a></li>
-                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
-                <li><a href="/BioFSharp/IBioItem.html">IBioItem</a></li>
-                <li><a href="/BioFSharp/Nucleotides.html">Nucleotides</a></li>
-                <li><a href="/BioFSharp/Aminoacids.html">Aminoacids</a></li>
+                <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                
+                <li class="nav-header">BioFSharp core</li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li>
+                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                 </li>
-                <li><a href="/BioFSharp/BioID.html">BioID</a></li>
-                <li class="nav-header">Pattern Queries</li>
+                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                <li><a href="/BioFSharp/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
-                    <a href="/BioFSharp/StringMatching.html">String matching algorithms</a>
+                    <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
-                <li class="nav-header">I/O</li>
-                <li>
-                    <a href="/BioFSharp/Readers.html">Reading/Writing biological file formats</a>
-                </li>
-                <li>
-                    <a href="/BioFSharp/BioDB.html">I/O</a>
-                </li>
-                <li class="nav-header">Statistics</li>
-                <li><a href="/BioFSharp/StatisticalMeasures.html">Common measures</a></li>
-                <li><a href="/BioFSharp/Distributions.html">Distributions</a></li>
-                <li><a href="/BioFSharp/StatisticalTests.html">Statistical Tests</a></li>
-                <li class="nav-header">Charting & Visualization</li>
-                <li><a href="/BioFSharp/Plotly.html">Charting with Plotly</a></li>
-                <li class="nav-header">Documentation</li>
-                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-                <li class="nav-header">Our other projects</li>
-                <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
-                <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
-                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+                <li class="nav-header">File I/O</li>
+                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
+                <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
+                <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li class="nav-header">Web I/O</li>
+                <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                <li class="nav-header">Biostatistics</li>
+                <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                <li class="nav-header">Biovisualization</li>
+                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+
+                
             </ul>
         </div>
       </div>
