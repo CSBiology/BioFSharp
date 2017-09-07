@@ -7,62 +7,69 @@
 BioFSharp
 =========
 
-BioFSharp aims to be a user-friendly library for Bioinformatics written in F#. It contains the basic data 
-structures for common biological objects like amino acids and nucleotides based on chemical formulas and chemical elements. 
+BioFSharp aims to be a user-friendly functional library for bioinformatics written in F#. It contains the basic data structures for common biological objects like amino acids and 
+nucleotides based on chemical formulas and chemical elements. BioFSharp facilitate working with sequences in a strongly typed way and is designed to work well with F# Interactive. 
+It provide a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.
+*)
 
-Furthermore, we provide a variety of parsers for many biological file formats, visualization tools for plots and networks and a variety of algorithms suited for bioinformatic workflows. 
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+open BioFSharp
+(**
+Example
+-------
 
-F# being part of the .NET ecosystem provides seamless interoperability with other .NET languages and makes it easy to use in for example C#. 
+The following example shows how easy it is to start working with sequences:
+*)
 
-BioFSharp consist of a core project and the following sub-projects, which are maintained and documented sperately:
+// Create a peptide sequence 
+"PEPTIDE" |> BioSeq.ofAminoAcidString
+// Create a nucleotide sequence 
+"ATGC" |> BioSeq.ofNucleotideString
 
- * [FSharp.Stats](https://github.com/CSBiology/FSharp.Stats) contains libraries for numerical computations including linear algebra, curve fitting and statistical measures.
-
-
- * [FSharp.Care](https://github.com/CSBiology/FSharp.Care) extends F# collections with auxilliary functions
-
-
-<br></br>
-<hr>
-
-Setting up BioFSharp
-====================
-_Note: in the near future, we will provide a NuGet package_ 
-
- * Clone or download [FSharp.Stats](https://github.com/CSBiology/FSharp.Stats) and [FSharp.Care](https://github.com/CSBiology/FSharp.Care).
-
- * Clone or download [BioFSharp](https://github.com/CSBiology/BioFSharp) 
-
-As long as the repositories are in the same folder, you can now build BioFSharp in Visual Studio. 
-Alternatively, open the terminal application of your choice, set your current directory to the BioFSharp root folder and build it by 
-using the `build` command. (this will execute build.cmd, which starts an automated build process orchestrated by [paket](https://github.com/fsprojects/Paket) and [FAKE](https://github.com/fsharp/FAKE))
-
-<br></br>
-<hr>
-
-CSBlog
-======
-Tutorials that have a more general scope or cover several topics at once are posted at our blog [CSBlog](https://csbiology.github.io/CSBlog/). It is a tool for us to document
-and share our workflows. It may be worth to check if your specific workflow is covered there to get an entry point for using BioFSharp for it.
+(**
+BioFSharp comes equipped with a broad range of features and functions to map amino acids and nucleotides. 
+*)
+// Returns the corresponding nucleotide of the anti-parallel strand
+Nucleotides.G |> Nucleotides.antiparallel
+// Returns the monoicsotopic mass of Arginine (minus H2O)
+AminoAcids.Arg |> AminoAcids.monoisoMass
 
 
-<br></br>
-<hr>
 
-Samples & documentation
-=======================
 
-The library comes with comprehensible documentation. All samples and tutorial snippets are written in F#, it should however be no problem to adjust the syntax and use them in other .NET languages.
-Tutorials are automatically generated from `*.fsx` files in the [content folder](https://github.com/CSBiology/BioFSharp/tree/master/docs/content). 
-The API reference is automatically generated from Markdown comments in the library implementation.
+(**
+Different file reader in BioFSharp help to easyly retrieve inforamtion and write  various biology-associated file formats like for example FastA:
+*)
+open BioFSharp.IO
 
-You can find the tutorials and the API reference in the sidebar to the right. 
 
-Documentation and tutorials for our sub-projects can be found here:
- 
- * [FSharp.Stats](https://csbiology.github.io/FSharp.Stats/)
+let filepathFastaA = (__SOURCE_DIRECTORY__ + "/data/FASTAExample1.fasta")
+//reads from file to an array of FastaItems.
+FastA.fromFile BioArray.ofAminoAcidString filepathFastaA
 
- * [FSharp.Care](http://csbiology.github.io/FSharp.Care/)
+(**
+For more detailed examples continue to explore the BioFSharp documentation.
+In the near future we will start to provide a cookbook like tutorial in the [CSBlog](https://csbiology.github.io/CSBlog/).
+*)
 
- 
+
+(**
+Contributing and copyright
+--------------------------
+
+The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
+the project and submit pull requests. If you're adding a new public API, please also 
+consider adding [samples][content] that can be turned into a documentation. You might
+also want to read the [library design notes][readme] to understand how it works.
+
+The library is available under Public Domain license, which allows modification and 
+redistribution for both commercial and non-commercial purposes. For more information see the 
+[License file][license] in the GitHub repository. 
+
+  [content]: https://github.com/CSBiology/BioFSharp/tree/master/docs/content
+  [gh]: https://csbiology.github.io/BioFSharp/
+  [issues]: https://github.com/CSBiology/BioFSharp/issues
+  [readme]: https://github.com/CSBiology/BioFSharp/blob/master/README.md
+  [license]: https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 *)

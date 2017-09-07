@@ -327,12 +327,12 @@ The file structure of a GenBank (.gb) flat file can be split into 4 subsections:
 <br>
 <div id="responsiveTable">
 
-| Section    | Description                                                                                                           | 
-| ---------- | --------------------------------------------------------------------------------------------------------------------  | 
-| Meta       | Contains meta information about the annotated sequence, the file itself and the organism the sequence is found in     | 
-| References | A collection of publications about the annotated sequence(or a subsequence of it) and information associated with them| 
-| Features   | A collection of features and their position within the sequence                                                       | 
-| Origin     | The annotated sequence itself                                                                                         | 
+| Section    | Description                                                                                                            | 
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- | 
+| Meta       | Contains meta information about the annotated sequence, the file itself and the organism the sequence is found in      | 
+| References | A collection of publications about the annotated sequence(or a subsequence of it) and information associated with them | 
+| Features   | A collection of features and their position within the sequence                                                        | 
+| Origin     | The annotated sequence itself                                                                                          | 
 
 </div>
 <br>
@@ -343,7 +343,7 @@ For more information about the sections and their formatting, have a look at thi
 This file will also be used for the purpose of this tutorial and in plain text looks like this:
 
 <br>
-<button data-toggle="collapse" data-target="#gbFileExample">Show/Hide example file</button>
+<button type="button" class="btn" data-toggle="collapse" data-target="#gbFileExample">Show/Hide example file</button>
 <div id="gbFileExample" class="collapse fileExamples ">
     <pre>
         LOCUS       SCU49845                5028 bp    DNA     linear   PLN 14-JUL-2016 
@@ -424,7 +424,7 @@ This file will also be used for the purpose of this tutorial and in plain text l
                              RVDSLEEKAEIERDSNWVKCQEDENLPDNNGFQPPKIKLTSLVGSDVGPLIIHQFSEK 
                              LISGDDKILNGVYSQYEEGESIFGSLF"                               
         ORIGIN                                                                          
-        		1 gatcctccat atacaacggt atctccacct caggtttaga tctcaacaac ggaaccattg     
+                1 gatcctccat atacaacggt atctccacct caggtttaga tctcaacaac ggaaccattg     
                61 ccgacatgag acagttaggt atcgtcgaga gttacaagct aaaacgagca gtagtcagct     
               121 ctgcatctga agccgctgaa gttctactaa gggtggataa catcatccgt gcaagaccaa     
               181 gaaccgccaa tagacaacat atgtaacata tttaggatat acctcgaaaa taataaaccg     
@@ -513,9 +513,51 @@ This file will also be used for the purpose of this tutorial and in plain text l
 </div>
 <br>
 
-Reading GenBank (.gb) files
----------------------------
+Reading GenBank files
+---------------------
+The type equivalent for a GenBank file in BioFSharp is a dictionary, mapping `string` keys to the `GenBankItem` type.
+More information about the type modelling can be found in our [API reference]().
+*)
+open BioFSharp.IO
 
+///Path of the example file
+let exampleFilePath = __SOURCE_DIRECTORY__ + @"\data\sequence.gb"
+
+///Parsed Example File 
+let parsedGBFile = GenBank.Read.fromFile exampleFilePath
+
+(**
+The GenBank module provides various helper functions for querying items on the created Dictionary:
+*)
+///All features contained in this GenBank file representation
+let features = GenBank.getFeatures parsedGBFile 
+
+///All features with the "CDS" tag
+let cdsFeatures = GenBank.getFeaturesWithType "CDS" parsedGBFile
+
+(**
+The `getfeaturesWithBaseSpan` function returns all Features that span the input BaseSpan of the sequence contained in the 
+file. However, due to the way the BaseSpans are modelled it is currently only possible to find features that have exactly the query BaseSpan, 
+or contain the exact BaseSpan in a join.
+Getting all features that fall within the input BaseSpan will be a goal for a future update of this parser. 
+
+We first need to create the BaseSpan that we want to find.
+For that, we create a `BaseSpanRange` union case containing the type of BaseSpan (modelled as the `BaseSpanInformation` type)
+and the start and end value as an integer tuple:
+*)
+///we are searching for a complete base span
+let queryBaseSpanType = GenBank.BaseSpanInformation.Complete
+
+///spanning nucleotides 687-3158
+let queryBaseSpan = GenBank.BaseSpanRange.Single (queryBaseSpanType,(687,3158))
+
+///
+let bsQueryResult = GenBank.getFeaturesWithBaseSpan queryBaseSpan true parsedGBFile
+
+
+(**
+Writing GenBank files
+---------------------
 *)
 
 
