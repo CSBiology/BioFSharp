@@ -1,17 +1,13 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-// #I "../../bin"
-// #r "../../bin/BioFSharp.dll"
-// #r "../../bin/BioFSharp.BioDB.dll"
-// #r "../../bin/BioFSharp.IO.dll"
-// #r "../../bin/FSharp.Care.dll"
-// #r "../../bin/FSharp.Care.IO.dll"
+#I "../../bin"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+#r "BioFSharp.BioDB.dll"
 
 
-#r "../../bin/SwaggerProvider.dll"
-#r "../../bin/SwaggerProvider.DesignTime.dll"
-#r "../../bin/SwaggerProvider.Runtime.dll"
+open BioFSharp.BioDB
 
 
 (**
@@ -25,13 +21,6 @@ UniProt's Proteins REST API online access
 -----------------------------------------
 *)
 
-(*** hide ***)
-// open System
-// open BioFSharp
-// open BioFSharp.IO
-// open BioFSharp.BioDB
-// open FSharp.Care
-// open FSharp.Care.IO
 
 (**
 The Proteins REST API provides access to key biological data from UniProt and data from Large Scale Studies data mapped to UniProt. 
@@ -40,20 +29,9 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 
 *)
 
-/// 
-open SwaggerProvider
-let [<Literal>]schemaURL = "D:/Source/BioFSharp/src/BioFSharp.BioDB/Resources/ebiProteinsAPIswagger.json"
 
-type ProteinsAPIschema = SwaggerProvider<schemaURL>
-let proteinsAPI = ProteinsAPIschema()
-
-
-let protein = proteinsAPI.GetByAccession2 ("Q64446") 
-protein.Sequence
-
-
-
-
+let a  = 
+    EbiAPI.getProteinFeaturesById "Q64446"
 
 
 
