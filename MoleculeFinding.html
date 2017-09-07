@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Molecule Finding
-</title>
+    <title>MoleculeFinding</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,128 +34,234 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Molecule-Finding" class="anchor" href="#Molecule-Finding">Molecule Finding</a></h1>
-<p>Given a specific mass and a list of atoms, this algorithm looks for atom-combinations, that fit together in mass and valence electrons. This documentations provides five examples on how to use the algorithm to identify post translational modifications.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">  1: </span>
+<span class="l">  2: </span>
+<span class="l">  3: </span>
+<span class="l">  4: </span>
+<span class="l">  5: </span>
+<span class="l">  6: </span>
+<span class="l">  7: </span>
+<span class="l">  8: </span>
+<span class="l">  9: </span>
+<span class="l"> 10: </span>
+<span class="l"> 11: </span>
+<span class="l"> 12: </span>
+<span class="l"> 13: </span>
+<span class="l"> 14: </span>
+<span class="l"> 15: </span>
+<span class="l"> 16: </span>
+<span class="l"> 17: </span>
+<span class="l"> 18: </span>
+<span class="l"> 19: </span>
+<span class="l"> 20: </span>
+<span class="l"> 21: </span>
+<span class="l"> 22: </span>
+<span class="l"> 23: </span>
+<span class="l"> 24: </span>
+<span class="l"> 25: </span>
+<span class="l"> 26: </span>
+<span class="l"> 27: </span>
+<span class="l"> 28: </span>
+<span class="l"> 29: </span>
+<span class="l"> 30: </span>
+<span class="l"> 31: </span>
+<span class="l"> 32: </span>
+<span class="l"> 33: </span>
+<span class="l"> 34: </span>
+<span class="l"> 35: </span>
+<span class="l"> 36: </span>
+<span class="l"> 37: </span>
+<span class="l"> 38: </span>
+<span class="l"> 39: </span>
+<span class="l"> 40: </span>
+<span class="l"> 41: </span>
+<span class="l"> 42: </span>
+<span class="l"> 43: </span>
+<span class="l"> 44: </span>
+<span class="l"> 45: </span>
+<span class="l"> 46: </span>
+<span class="l"> 47: </span>
+<span class="l"> 48: </span>
+<span class="l"> 49: </span>
+<span class="l"> 50: </span>
+<span class="l"> 51: </span>
+<span class="l"> 52: </span>
+<span class="l"> 53: </span>
+<span class="l"> 54: </span>
+<span class="l"> 55: </span>
+<span class="l"> 56: </span>
+<span class="l"> 57: </span>
+<span class="l"> 58: </span>
+<span class="l"> 59: </span>
+<span class="l"> 60: </span>
+<span class="l"> 61: </span>
+<span class="l"> 62: </span>
+<span class="l"> 63: </span>
+<span class="l"> 64: </span>
+<span class="l"> 65: </span>
+<span class="l"> 66: </span>
+<span class="l"> 67: </span>
+<span class="l"> 68: </span>
+<span class="l"> 69: </span>
+<span class="l"> 70: </span>
+<span class="l"> 71: </span>
+<span class="l"> 72: </span>
+<span class="l"> 73: </span>
+<span class="l"> 74: </span>
+<span class="l"> 75: </span>
+<span class="l"> 76: </span>
+<span class="l"> 77: </span>
+<span class="l"> 78: </span>
+<span class="l"> 79: </span>
+<span class="l"> 80: </span>
+<span class="l"> 81: </span>
+<span class="l"> 82: </span>
+<span class="l"> 83: </span>
+<span class="l"> 84: </span>
+<span class="l"> 85: </span>
+<span class="l"> 86: </span>
+<span class="l"> 87: </span>
+<span class="l"> 88: </span>
+<span class="l"> 89: </span>
+<span class="l"> 90: </span>
+<span class="l"> 91: </span>
+<span class="l"> 92: </span>
+<span class="l"> 93: </span>
+<span class="l"> 94: </span>
+<span class="l"> 95: </span>
+<span class="l"> 96: </span>
+<span class="l"> 97: </span>
+<span class="l"> 98: </span>
+<span class="l"> 99: </span>
+<span class="l">100: </span>
+<span class="l">101: </span>
+<span class="l">102: </span>
+<span class="l">103: </span>
+<span class="l">104: </span>
+<span class="l">105: </span>
+<span class="l">106: </span>
+<span class="l">107: </span>
+<span class="l">108: </span>
+<span class="l">109: </span>
+<span class="l">110: </span>
+<span class="l">111: </span>
+<span class="l">112: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">System</span>
-<span class="k">open</span> <span class="i">BioFSharp</span>
-<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">Mz</span>
-<span class="k">open</span> <span class="i">Isotopes</span><span class="o">.</span><span class="i">Table</span>
-<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Plotly</span>
-<span class="k">open</span> <span class="i">MoleculeFinding</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(*** hide ***)</span>
+<span class="c">//#r &quot;../../bin/BioFSharp.dll&quot;</span>
+<span class="c">//#r &quot;../../bin/BioFSharp.Mz.dll&quot;</span>
+<span class="c">//#r &quot;../../packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll&quot;</span>
+
+<span class="c">//(**</span>
+<span class="c">//#Molecule Finding</span>
+
+
+<span class="c">//Given a specific mass and a list of atoms, this algorithm looks for atom-combinations, that fit together in mass and valence electrons. This documentations provides five examples on how to use the algorithm to identify post translational modifications.</span>
+
+<span class="c">//*)</span>
+
+<span class="c">//open System</span>
+<span class="c">//open BioFSharp</span>
+<span class="c">//open BioFSharp.Mz</span>
+<span class="c">//open Isotopes.Table</span>
+<span class="c">//open FSharp.Plotly</span>
+<span class="c">//open MoleculeFinding</span>
+
+<span class="c">//(**</span>
+<span class="c">//##Input</span>
+
+
+<span class="c">//The function receaves a list of atoms as input. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one `atom`. So it can not act as `node` between two or more atoms.</span>
+<span class="c">//The five examples shown here use the following list of atoms:</span>
+<span class="c">//*)</span>
+<span class="c">//let atoms = [ Se; S; P; O; N; C; H;]</span>
+<span class="c">//let nodes = [ Se; S; P; O; N; C;] </span>
+
+<span class="c">//(**The Algorithm takes the two predefined lists, a float value as gap (Monoisotopic Mass of examples) and another float value as accuracy (0.5 in this examples). The result is a list of potential molecules.</span>
+<span class="c">//*)</span>
+
+
+<span class="c">//(**</span>
+<span class="c">//##Example Results</span>
+
+<span class="c">//*)</span>
+<span class="c">//let resulteg1 = find atoms nodes 87.068414 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 1</span>
+
+<span class="c">//- Name: **Hypusine**</span>
+<span class="c">//- Monoisotopic Mass: _87.068414_</span>
+<span class="c">//- Atom-Composition: **H(9) C(4) N O**</span>
+<span class="c">//- Found?-**NO** </span>
+<span class="c">//- Number of potential molecules: _16979_</span>
+<span class="c">//- Time: Real: 00:00:00.185, CPU: 00:00:00.234, GC Gen0: 10, Gen1: 0, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg2 = find atoms nodes 107.997631 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 2</span>
+
+<span class="c">//- Name: **Ethylphosphate**</span>
+<span class="c">//- Description: O-Ethylphosphorylation</span>
+<span class="c">//- Monoisotopic Mass: _107.997631_</span>
+<span class="c">//- Atom-Composition: **H(5) C(2) O(3) P**</span>
+<span class="c">//- Found?-**YES**</span>
+<span class="c">//- Number of potential molecules: _80529_</span>
+<span class="c">//- Time: Real: 00:00:00.543, CPU: 00:00:00.546, GC Gen0: 82, Gen1: 1, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg3 = find atoms nodes 136.001656 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 3</span>
+
+<span class="c">//- Name: **DTT_ST**</span>
+<span class="c">//- Description: Dithiothreitol (DTT)</span>
+<span class="c">//- Monoisotopic Mass: _136.001656_</span>
+<span class="c">//- Atom-Composition: **H(8) C(4) O S(2)**</span>
+<span class="c">//- Found?-**YES**</span>
+<span class="c">//- Number of potential molecules: _995704_</span>
+<span class="c">//- Time: Real: 00:00:07.470, CPU: 00:00:07.953, GC Gen0: 968, Gen1: 10, Gen2: 1</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg4 = find atoms nodes 86.000394 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 4</span>
+
+<span class="c">//- Name: **Malonyl**</span>
+<span class="c">//- Monoisotopic Mass: _86.000394_</span>
+<span class="c">//- Atom-Composition: **H(2) C(3) O(3)**</span>
+<span class="c">//- Found?-**YES** </span>
+<span class="c">//- Number of potential molecules: _13755_</span>
+<span class="c">//- Time: Real: 00:00:00.070, CPU: 00:00:00.046, GC Gen0: 11, Gen1: 1, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg5 = find atoms nodes 42.021798 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 5</span>
+
+<span class="c">//- Name: **Guanidination**</span>
+<span class="c">//- Monoisotopic Mass: _42.021798_</span>
+<span class="c">//- Atom-Composition: **H(2) C N(2)**</span>
+<span class="c">//- Found?-**YES** </span>
+<span class="c">//- Number of potential molecules: _60_</span>
+<span class="c">//- Time: Real: 00:00:00.004, CPU: 00:00:00.000, GC Gen0: 0, Gen1: 0, Gen2: 0</span>
+
+
+<span class="c">//##Time complexity</span>
+
+<span class="c">//O(n*g)^g</span>
+<span class="c">//*)</span>
+
+<span class="c">//(***hide***)</span>
+<span class="c">//let values = [0.004; 0.07; 0.185; 0.543; 7.47] </span>
+<span class="c">//let keys = [&quot;Guanidination: 42u, found&quot;;&quot;Malonyl: 86u, found&quot;;&quot;Hypusine: 88u, not found&quot;; &quot;Ethylphosphate: 108u, found&quot;;&quot;DTT_ST: 136u, found&quot;]</span>
+<span class="c">//let labels = [&quot;60 potential molecules&quot;; &quot;13755 potential molecules&quot;; &quot;16979 potential molecules&quot;; &quot;80529 potential molecules&quot;; &quot;995704 potential molecules&quot;]</span>
+<span class="c">//(*** define-output:bar1 ***)</span>
+<span class="c">//Chart.Column(keys,values,Labels=labels,Opacity=1.0,Marker=Options.Marker(Color=&quot;rgba(10,100,100,1.0)&quot;))</span>
+<span class="c">//(*** include-it:bar1 ***)</span>
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="Input" class="anchor" href="#Input">Input</a></h2>
-<p>The function receaves a list of atoms as input. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one <code>atom</code>. So it can not act as <code>node</code> between two or more atoms.
-The five examples shown here use the following list of atoms:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">atoms</span> <span class="o">=</span> [ <span class="i">Se</span>; <span class="i">S</span>; <span class="i">P</span>; <span class="i">O</span>; <span class="i">N</span>; <span class="i">C</span>; <span class="i">H</span>;]
-<span class="k">let</span> <span class="i">nodes</span> <span class="o">=</span> [ <span class="i">Se</span>; <span class="i">S</span>; <span class="i">P</span>; <span class="i">O</span>; <span class="i">N</span>; <span class="i">C</span>;] 
-</code></pre></td>
-</tr>
-</table>
-<p>The Algorithm takes the two predefined lists, a float value as gap (Monoisotopic Mass of examples) and another float value as accuracy (0.5 in this examples). The result is a list of potential molecules.</p>
-<h2><a name="Example-Results" class="anchor" href="#Example-Results">Example Results</a></h2>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">resulteg1</span> <span class="o">=</span> <span class="i">find</span> <span class="i">atoms</span> <span class="i">nodes</span> <span class="n">87.068414</span> <span class="n">0.5</span>
-</code></pre></td>
-</tr>
-</table>
-<h3><a name="Example-1" class="anchor" href="#Example-1">Example 1</a></h3>
-<ul>
-<li>Name: <strong>Hypusine</strong></li>
-<li>Monoisotopic Mass: <em>87.068414</em></li>
-<li>Atom-Composition: <strong>H(9) C(4) N O</strong></li>
-<li>Found?-<strong>NO</strong></li>
-<li>Number of potential molecules: <em>16979</em></li>
-<li>Time: Real: 00:00:00.185, CPU: 00:00:00.234, GC Gen0: 10, Gen1: 0, Gen2: 0</li>
-</ul>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">resulteg2</span> <span class="o">=</span> <span class="i">find</span> <span class="i">atoms</span> <span class="i">nodes</span> <span class="n">107.997631</span> <span class="n">0.5</span>
-</code></pre></td>
-</tr>
-</table>
-<h3><a name="Example-2" class="anchor" href="#Example-2">Example 2</a></h3>
-<ul>
-<li>Name: <strong>Ethylphosphate</strong></li>
-<li>Description: O-Ethylphosphorylation</li>
-<li>Monoisotopic Mass: <em>107.997631</em></li>
-<li>Atom-Composition: <strong>H(5) C(2) O(3) P</strong></li>
-<li>Found?-<strong>YES</strong></li>
-<li>Number of potential molecules: <em>80529</em></li>
-<li>Time: Real: 00:00:00.543, CPU: 00:00:00.546, GC Gen0: 82, Gen1: 1, Gen2: 0</li>
-</ul>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">resulteg3</span> <span class="o">=</span> <span class="i">find</span> <span class="i">atoms</span> <span class="i">nodes</span> <span class="n">136.001656</span> <span class="n">0.5</span>
-</code></pre></td>
-</tr>
-</table>
-<h3><a name="Example-3" class="anchor" href="#Example-3">Example 3</a></h3>
-<ul>
-<li>Name: <strong>DTT_ST</strong></li>
-<li>Description: Dithiothreitol (DTT)</li>
-<li>Monoisotopic Mass: <em>136.001656</em></li>
-<li>Atom-Composition: <strong>H(8) C(4) O S(2)</strong></li>
-<li>Found?-<strong>YES</strong></li>
-<li>Number of potential molecules: <em>995704</em></li>
-<li>Time: Real: 00:00:07.470, CPU: 00:00:07.953, GC Gen0: 968, Gen1: 10, Gen2: 1</li>
-</ul>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">resulteg4</span> <span class="o">=</span> <span class="i">find</span> <span class="i">atoms</span> <span class="i">nodes</span> <span class="n">86.000394</span> <span class="n">0.5</span>
-</code></pre></td>
-</tr>
-</table>
-<h3><a name="Example-4" class="anchor" href="#Example-4">Example 4</a></h3>
-<ul>
-<li>Name: <strong>Malonyl</strong></li>
-<li>Monoisotopic Mass: <em>86.000394</em></li>
-<li>Atom-Composition: <strong>H(2) C(3) O(3)</strong></li>
-<li>Found?-<strong>YES</strong></li>
-<li>Number of potential molecules: <em>13755</em></li>
-<li>Time: Real: 00:00:00.070, CPU: 00:00:00.046, GC Gen0: 11, Gen1: 1, Gen2: 0</li>
-</ul>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">resulteg5</span> <span class="o">=</span> <span class="i">find</span> <span class="i">atoms</span> <span class="i">nodes</span> <span class="n">42.021798</span> <span class="n">0.5</span>
-</code></pre></td>
-</tr>
-</table>
-<h3><a name="Example-5" class="anchor" href="#Example-5">Example 5</a></h3>
-<ul>
-<li>Name: <strong>Guanidination</strong></li>
-<li>Monoisotopic Mass: <em>42.021798</em></li>
-<li>Atom-Composition: <strong>H(2) C N(2)</strong></li>
-<li>Found?-<strong>YES</strong></li>
-<li>Number of potential molecules: <em>60</em></li>
-<li>Time: Real: 00:00:00.004, CPU: 00:00:00.000, GC Gen0: 0, Gen1: 0, Gen2: 0</li>
-</ul>
-<h2><a name="Time-complexity" class="anchor" href="#Time-complexity">Time complexity</a></h2>
-<p>O(n*g)^g</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Chart</span><span class="o">.</span><span class="i">Column</span>(<span class="i">keys</span>,<span class="i">values</span>,<span class="i">Labels</span><span class="o">=</span><span class="i">labels</span>,<span class="i">Opacity</span><span class="o">=</span><span class="n">1.0</span>,<span class="i">Marker</span><span class="o">=</span><span class="i">Options</span><span class="o">.</span><span class="i">Marker</span>(<span class="i">Color</span><span class="o">=</span><span class="s">&quot;rgba(10,100,100,1.0)&quot;</span>))
-</code></pre></td>
-</tr>
-</table>
-<div id="791c3d25-2e9e-434f-851e-ee12087ad87b" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
-  <script>
-    var data = [{"marker":{"color":"rgba(10,100,100,1.0)"},"x":["Guanidination: 42u, found","Malonyl: 86u, found","Hypusine: 88u, not found","Ethylphosphate: 108u, found","DTT_ST: 136u, found"],"y":[0.004,0.07,0.185,0.543,7.47],"type":"bar","opacity":1.0,"text":["60 potential molecules","13755 potential molecules","16979 potential molecules","80529 potential molecules","995704 potential molecules"]}];
-    var layout = {};
-    Plotly.newPlot('791c3d25-2e9e-434f-851e-ee12087ad87b', data, layout);
-  </script>
 
 
         </div>

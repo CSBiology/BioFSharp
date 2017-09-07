@@ -53,16 +53,16 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// </span>
-<span class="k">open</span> <span class="i">SwaggerProvider</span>
-<span class="k">let</span> [&lt;<span class="i">Literal</span>&gt;]<span class="i">schemaURL</span> <span class="o">=</span> <span class="s">&quot;D:/Source/BioFSharp/src/BioFSharp.BioDB/Resources/ebiProteinsAPIswagger.json&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///// </span>
+<span class="c">//open SwaggerProvider</span>
+<span class="c">//let [&lt;Literal&gt;]schemaURL = &quot;D:/Source/BioFSharp/src/BioFSharp.BioDB/Resources/ebiProteinsAPIswagger.json&quot;</span>
 
-<span class="k">type</span> <span class="i">ProteinsAPIschema</span> <span class="o">=</span> <span class="i">SwaggerProvider</span><span class="o">&lt;</span><span class="i">schemaURL</span><span class="o">&gt;</span>
-<span class="k">let</span> <span class="i">proteinsAPI</span> <span class="o">=</span> <span class="i">ProteinsAPIschema</span>()
+<span class="c">//type ProteinsAPIschema = SwaggerProvider&lt;schemaURL&gt;</span>
+<span class="c">//let proteinsAPI = ProteinsAPIschema()</span>
 
 
-<span class="k">let</span> <span class="i">protein</span> <span class="o">=</span> <span class="i">proteinsAPI</span><span class="o">.</span><span class="i">GetByAccession2</span> (<span class="s">&quot;Q64446&quot;</span>) 
-<span class="i">protein</span><span class="o">.</span><span class="i">Sequence</span>
+<span class="c">//let protein = proteinsAPI.GetByAccession2 (&quot;Q64446&quot;) </span>
+<span class="c">//protein.Sequence</span>
 </code></pre></td>
 </tr>
 </table>
