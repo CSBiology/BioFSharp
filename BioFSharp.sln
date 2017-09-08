@@ -32,16 +32,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\BioCollections.fsx = docs\content\BioCollections.fsx
 		docs\content\BioDB.fsx = docs\content\BioDB.fsx
 		docs\content\BioID.fsx = docs\content\BioID.fsx
+		docs\content\BioItem.fsx = docs\content\BioItem.fsx
 		docs\content\BlastWrapper.fsx = docs\content\BlastWrapper.fsx
+		docs\content\Clustal.fsx = docs\content\Clustal.fsx
+		docs\content\CSV.fsx = docs\content\CSV.fsx
 		docs\content\FastA.fsx = docs\content\FastA.fsx
+		docs\content\FastQ.fsx = docs\content\FastQ.fsx
 		docs\content\Formula.fsx = docs\content\Formula.fsx
-		docs\content\IBioItem.fsx = docs\content\IBioItem.fsx
+		docs\content\Genebank.fsx = docs\content\Genebank.fsx
+		docs\content\GESA.fsx = docs\content\GESA.fsx
+		docs\content\GFF.fsx = docs\content\GFF.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\Introduction.fsx = docs\content\Introduction.fsx
 		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
+		docs\content\Newick.fsx = docs\content\Newick.fsx
+		docs\content\Obo.fsx = docs\content\Obo.fsx
 		docs\content\Readers.fsx = docs\content\Readers.fsx
 		docs\content\StringMatching.fsx = docs\content\StringMatching.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
+		docs\content\UniProt.fsx = docs\content\UniProt.fsx
+		docs\content\WebLogo.fsx = docs\content\WebLogo.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
