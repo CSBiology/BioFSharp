@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp.IO
 
-///functions for reading and writing GenBank(.gb) files
+///functions for reading and writing GenBank files
 module GenBank =
       
     open System
@@ -252,7 +252,7 @@ module GenBank =
             else 
                 dict
         
-        ///Returns a dictionary containing genBank items that represents the GenBank file at the input path
+        ///Returns a dictionary containing GenBank items that represents the GenBank file at the input path
         ///taking a converter function for the origin sequence of the file 
         let fromFile (path:string) (originConverter:seq<char> -> 'a ) = 
             Seq.fromFile path
@@ -260,13 +260,14 @@ module GenBank =
             |> parser originConverter
         
         
-        ///Returns a dictionary containing genBank items parsed from an input string sequence
+        ///Returns a dictionary containing GenBank items parsed from an input string sequence
         ///taking a converter function for the origin sequence 
         let fromSeq (originConverter:seq<char> -> 'a) (input:seq<string>) =
             input
             |> tokenizer
             |> parser originConverter
         
+        ///contains a collection of prebuilt converters for parsing specific origin sequences 
         module OriginConverters =
             open BioFSharp.BioSeq
 
@@ -278,6 +279,7 @@ module GenBank =
 
             ///converts the origin sequence into a BioSeq of amino acids
             let peptideConverter (sequence : seq<char>) = ofAminoAcidString sequence
+
 
     ///Functions for writing a GenBank file  
     module Write =
@@ -363,20 +365,16 @@ module GenBank =
                 }
                 |> FileIO.writeToFile false path
     
-        
+        ///contains a collection of prebuilt converters for writing specific origin sequences 
         module OriginConverters =
             open BioFSharp.BioSeq
 
-            ///default converter that yields all characters of the origin sequence, skipping spaces.
+            ///default converter. returns a sequence of characters
             let defaultConverter (sequence : seq<char>) = id sequence
 
-            ///converts the origin sequence into a BioSeq of nucleotides
-            let nucleotideConverter (sequence : BioSeq<Nucleotides.Nucleotide>) = seq {yield! sequence |> BioSeq.toString}
+            ///converts the BioSeq to the 1 letter code representing the contained items
+            let bioItemConverter (sequence : BioSeq<'a>) = seq {yield! sequence |> BioSeq.toString}
 
-            ///converts the origin sequence into a BioSeq of amino acids
-            let peptideConverter (sequence : BioSeq<AminoAcids.AminoAcid>) = seq {yield! sequence |> BioSeq.toString}
-        
-    
 
     ///Returns all references of a GenBank file representation
     let getReferences (gb:Dictionary<string,GenBankItem<'a>>) =
@@ -384,10 +382,8 @@ module GenBank =
             match gb.["REFERENCES"] with 
             |References r
                 ->  r
-            |_  ->  printfn "unexpected type at key REFERENCES. Result is empty"
-                    []
+            |_  ->  []
         else
-            printfn "Collection does not contain references. Result is empty"
             []
     
     ///Returns all features of a GenBank file representation
@@ -395,11 +391,9 @@ module GenBank =
         if gb.ContainsKey("FEATURES") then
             match gb.["FEATURES"] with 
             |Features f
-                ->    f
-            |_  ->  printfn "unexpected type at key FEATURES. Result is empty"
-                    []
+                ->  f
+            |_  ->  []
         else
-            printfn "Collection does not contain features. Result is empty"
             []
     
     ///Returns all features of a specific type of a GenBank file representation
@@ -410,7 +404,6 @@ module GenBank =
             |_          ->  printfn "unexpected type at key FEATURES. Result is empty"
                             []
         else
-            printfn "Collection does not contain features. Result is empty"
             []
     
     ///Returns the Origin of a GenBank file representation
