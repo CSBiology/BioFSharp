@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\BioCollections.fsx = docs\content\BioCollections.fsx
 		docs\content\BioDB.fsx = docs\content\BioDB.fsx
 		docs\content\BioID.fsx = docs\content\BioID.fsx
+		docs\content\BioItem.fsx = docs\content\BioItem.fsx
 		docs\content\BlastWrapper.fsx = docs\content\BlastWrapper.fsx
 		docs\content\Clustal.fsx = docs\content\Clustal.fsx
 		docs\content\FastA.fsx = docs\content\FastA.fsx
@@ -44,11 +45,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\Introduction.fsx = docs\content\Introduction.fsx
 		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
 		docs\content\MotiveSearch.fsx = docs\content\MotiveSearch.fsx
+		docs\content\CSV.fsx = docs\content\CSV.fsx
+		docs\content\FastA.fsx = docs\content\FastA.fsx
+		docs\content\FastQ.fsx = docs\content\FastQ.fsx
+		docs\content\Formula.fsx = docs\content\Formula.fsx
+		docs\content\Genebank.fsx = docs\content\Genebank.fsx
+		docs\content\GESA.fsx = docs\content\GESA.fsx
+		docs\content\GFF.fsx = docs\content\GFF.fsx
+		docs\content\index.fsx = docs\content\index.fsx
+		docs\content\Introduction.fsx = docs\content\Introduction.fsx
+		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
 		docs\content\Newick.fsx = docs\content\Newick.fsx
 		docs\content\Obo.fsx = docs\content\Obo.fsx
 		docs\content\Readers.fsx = docs\content\Readers.fsx
 		docs\content\StringMatching.fsx = docs\content\StringMatching.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
+		docs\content\UniProt.fsx = docs\content\UniProt.fsx
+		docs\content\WebLogo.fsx = docs\content\WebLogo.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
@@ -66,6 +79,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Stats", "src\BioFSharp.Stats\BioFSharp.Stats.fsproj", "{5BDD2574-E123-4E88-95D2-6F9F58053974}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.BioDB", "src\BioFSharp.BioDB\BioFSharp.BioDB.fsproj", "{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Vis", "src\BioFSharp.Vis\BioFSharp.Vis.fsproj", "{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,6 +154,14 @@ Global
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.ActiveCfg = Release|Any CPU
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.Build.0 = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
