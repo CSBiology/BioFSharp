@@ -3,7 +3,10 @@
 ///Phyologenetic Tree
 module PhylTree =
     
-    type Node<'n> = | Branch of 'n * List<Node<'n>>
+    ///Recursive type representing a phylogenetic tree
+    type Node<'n> = 
+        ///Can be internal node or leaf node, depending on wether the list is empty or not. Match accordingly
+        | Branch of 'n * List<Node<'n>>
 
     ///Iterates trough a tree and transforms all nodes by applying a mapping function on them
     let rec map (mapping: Node<'n> -> 't) (tree:Node<'n>) = 
