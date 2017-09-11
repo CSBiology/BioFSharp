@@ -48,6 +48,25 @@
 </div>
 
 <!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-io-genbank-write-originconverters.html">OriginConverters</a>
+          </td>
+          <td class="xmldoc"><p>contains a collection of prebuilt converters for writing specific origin sequences</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -58,57 +77,21 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '441', 441)" onmouseover="showTip(event, '441', 441)">
-            toFile path gb
-          </code>
-          <div class="tip" id="441">
-            <strong>Signature:</strong> path:string -&gt; gb:Dictionary&lt;string,GenBankItem&gt; -&gt; unit<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L444-444" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Creates a GenBank file representing the input dictionary of GenBank items at the specified path</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '442', 442)" onmouseover="showTip(event, '442', 442)">
-            toString gb
-          </code>
-          <div class="tip" id="442">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L447-447" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
           <code onmouseout="hideTip(event, '443', 443)" onmouseover="showTip(event, '443', 443)">
-            toStringSeq gb
+            write path originConverter gb
           </code>
           <div class="tip" id="443">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; seq&lt;string&gt;<br />
-                      </div>
+            <strong>Signature:</strong> path:string -&gt; originConverter:(&#39;a -&gt; seq&lt;char&gt;) -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L429-429" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L329-329" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>creates a GenBank file at the specified path, taking a converter function for the origin sequence of the file</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -125,9 +108,9 @@
 
                 
                 <li class="nav-header">BioFSharp core</li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
                 <li>
-                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                    <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
@@ -143,19 +126,23 @@
                 <li class="nav-header">File I/O</li>
                 <li><a href="/BioFSharp/FastA.html">FastA</a></li>
                 <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
-                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genbank.html">Genbank</a></li>
                 <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
                 <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
                 <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>
                 <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
                 <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
                 <li class="nav-header">Biostatistics</li>
                 <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
                 <li class="nav-header">Biovisualization</li>
-                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+                <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
 
                 
             </ul>

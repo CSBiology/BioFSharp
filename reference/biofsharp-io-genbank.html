@@ -42,7 +42,7 @@
   <span>Namespace: BioFSharp.IO</span><br />
 </p>
 <div class="xmldoc">
-<p>functions for reading and writing GenBank(.gb) files</p>
+<p>functions for reading and writing GenBank files</p>
 
 </div>
 
@@ -54,22 +54,6 @@
       <tr><td>Type</td><td>Description</td></tr>
     </thead>
     <tbody>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-genbank-basespaninformation.html">BaseSpanInformation</a>
-          </td>
-          <td class="xmldoc"><p>Represents the possible formats of a feature base span</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-genbank-basespanrange.html">BaseSpanRange</a>
-          </td>
-          <td class="xmldoc"><p>Distincts BaseSpans by joins,complements or single ranges</p>
-
-</td>
-        </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-io-genbank-feature.html">Feature</a>
@@ -90,25 +74,9 @@ Information about genes and gene products, as well as regions of biological sign
         </tr>
         <tr>
           <td class="type-name">
-            <a href="biofsharp-io-genbank-genbankitem.html">GenBankItem</a>
+            <a href="biofsharp-io-genbank-genbankitem-1.html">GenBankItem<'a></a>
           </td>
           <td class="xmldoc"><p>Represents any Item a GenBank file can contain as a union case. The result of parsing a genBank file will be a dictionary containing this type.</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-genbank-origin.html">Origin</a>
-          </td>
-          <td class="xmldoc"><p>Represents the origin part of a GeneBank file.</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-genbank-reference.html">Reference</a>
-          </td>
-          <td class="xmldoc"><p>Represents a single reference from the REFERENCE section of a GenBank file. A Reference represents publications by the authors of the sequence that discuss the data reported in the record.</p>
 
 </td>
         </tr>
@@ -123,7 +91,7 @@ Information about genes and gene products, as well as regions of biological sign
           <td class="module-name">
             <a href="biofsharp-io-genbank-read.html">Read</a>
           </td>
-          <td class="xmldoc"><p>Functions for reading a GenBank file</p>
+          <td class="xmldoc"><p>functions for parsing a GenBank file.</p>
 
 </td>
         </tr>
@@ -149,15 +117,15 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '429', 429)" onmouseover="showTip(event, '429', 429)">
+          <code onmouseout="hideTip(event, '430', 430)" onmouseover="showTip(event, '430', 430)">
             createFeature t bs qual
           </code>
-          <div class="tip" id="429">
+          <div class="tip" id="430">
             <strong>Signature:</strong> t:string -&gt; bs:string -&gt; qual:FeatureQualifier list -&gt; Feature<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L102-102" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L44-44" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -167,35 +135,15 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '430', 430)" onmouseover="showTip(event, '430', 430)">
+          <code onmouseout="hideTip(event, '431', 431)" onmouseover="showTip(event, '431', 431)">
             createFeatureQualifier name value
           </code>
-          <div class="tip" id="430">
+          <div class="tip" id="431">
             <strong>Signature:</strong> name:string -&gt; value:string -&gt; FeatureQualifier<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L71-71" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>create a FeatureQualifier from input c</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '431', 431)" onmouseover="showTip(event, '431', 431)">
-            createReference (...)
-          </code>
-          <div class="tip" id="431">
-            <strong>Signature:</strong> ref:string -&gt; authors:string -&gt; title:string -&gt; journal:string -&gt; pubmed:string -&gt; rem:string -&gt; ai:(string * string) list -&gt; Reference<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L59-59" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L31-31" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -209,11 +157,11 @@ Information about genes and gene products, as well as regions of biological sign
             getFeatures gb
           </code>
           <div class="tip" id="432">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; Feature list<br />
-                      </div>
+            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; Feature list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L464-464" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L390-390" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -226,35 +174,14 @@ Information about genes and gene products, as well as regions of biological sign
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '433', 433)" onmouseover="showTip(event, '433', 433)">
-            getFeaturesWithBaseSpan (...)
-          </code>
-          <div class="tip" id="433">
-            <strong>Signature:</strong> indices:BaseSpanRange -&gt; matchExact:bool -&gt; gb:Dictionary&lt;string,GenBankItem&gt; -&gt; Feature list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L563-563" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Returns a list of features containing the input BaseSpanRange. if matchExact = true, returns only the features with exactly matching baseSpans.
-if matchExact = false, returns all distinct features that are contain any of the BaseSpans present in the input BaseSpanRange (still exactly matching the individual BaseSpan exactly).</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '434', 434)" onmouseover="showTip(event, '434', 434)">
             getFeaturesWithType featureType gb
           </code>
-          <div class="tip" id="434">
-            <strong>Signature:</strong> featureType:string -&gt; gb:Dictionary&lt;string,GenBankItem&gt; -&gt; Feature list<br />
-                      </div>
+          <div class="tip" id="433">
+            <strong>Signature:</strong> featureType:string -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; Feature list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L476-476" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L400-400" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -266,15 +193,15 @@ if matchExact = false, returns all distinct features that are contain any of the
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '435', 435)" onmouseover="showTip(event, '435', 435)">
+          <code onmouseout="hideTip(event, '434', 434)" onmouseover="showTip(event, '434', 434)">
             getOrigin gb
           </code>
-          <div class="tip" id="435">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; Origin<br />
-                      </div>
+          <div class="tip" id="434">
+            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; &#39;a<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L582-582" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L410-410" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -286,15 +213,15 @@ if matchExact = false, returns all distinct features that are contain any of the
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '436', 436)" onmouseover="showTip(event, '436', 436)">
+          <code onmouseout="hideTip(event, '435', 435)" onmouseover="showTip(event, '435', 435)">
             getReferences gb
           </code>
-          <div class="tip" id="436">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; Reference list<br />
-                      </div>
+          <div class="tip" id="435">
+            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; (string * string) list list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L452-452" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L380-380" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -306,15 +233,15 @@ if matchExact = false, returns all distinct features that are contain any of the
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
+          <code onmouseout="hideTip(event, '436', 436)" onmouseover="showTip(event, '436', 436)">
             getValues gb
           </code>
-          <div class="tip" id="437">
-            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&gt; -&gt; (string * string) list<br />
-                      </div>
+          <div class="tip" id="436">
+            <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; (string * string) list<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L593-593" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L419-419" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -326,15 +253,15 @@ if matchExact = false, returns all distinct features that are contain any of the
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '438', 438)" onmouseover="showTip(event, '438', 438)">
+          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
             tryGetItem key gb
           </code>
-          <div class="tip" id="438">
-            <strong>Signature:</strong> key:string -&gt; gb:Dictionary&lt;string,GenBankItem&gt; -&gt; GenBankItem option<br />
-                      </div>
+          <div class="tip" id="437">
+            <strong>Signature:</strong> key:string -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; GenBankItem&lt;&#39;a&gt; option<br />
+                          <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L601-601" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L427-427" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -357,9 +284,9 @@ if matchExact = false, returns all distinct features that are contain any of the
 
                 
                 <li class="nav-header">BioFSharp core</li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
                 <li>
-                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                    <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
@@ -375,19 +302,23 @@ if matchExact = false, returns all distinct features that are contain any of the
                 <li class="nav-header">File I/O</li>
                 <li><a href="/BioFSharp/FastA.html">FastA</a></li>
                 <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
-                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genbank.html">Genbank</a></li>
                 <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
                 <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
                 <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>
                 <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
                 <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
                 <li class="nav-header">Biostatistics</li>
                 <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
                 <li class="nav-header">Biovisualization</li>
-                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+                <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
 
                 
             </ul>

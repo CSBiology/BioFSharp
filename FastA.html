@@ -38,16 +38,14 @@
 <h1><a name="FastA-format-I-O" class="anchor" href="#FastA-format-I-O">FastA format I/O</a></h1>
 <p>One of the various biology-associated file formats that can be manipulated using BioFSharp is the FastA format.
 The FastA format can be used to represent sequences of amino acids or nucleotides written in single-letter code.
-<br></p>
-<blockquote>
-<p>sp|P19532| ribosomal protein L20 GN=rpl20 PE=rpl20.p01
+<br>
+>sp|P19532| ribosomal protein L20 GN=rpl20 PE=rpl20.p01
 MTRVKRGNVSRKRHKKILNMSKGFRGAASTLFRTANQQNMKALRYSYRNRRQKKRDFRRM
 WITRVNSAVRRYGLNYSEFMNYLKTHKIQLNRKVIAQLSICDPEAFMQLLLF*
 <br>
 One sequence constists of two parts: The first line (Header) starting with a "&gt;" is followed by a sequence identification code which should represent a unique description of the sequence.
 Subsequent lines contain the sequence itself, which is separated into chunks of 60 to 80 characters per line.
 For further information about the format please visit <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&amp;PAGE_TYPE=BlastDocs&amp;DOC_TYPE=BlastHelp">NCBI - FASTA</a>.</p>
-</blockquote>
 <h2><a name="Reading-FastA-files" class="anchor" href="#Reading-FastA-files">Reading FastA files</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -82,11 +80,11 @@ For further information about the format please visit <a href="https://blast.ncb
 </code></pre></td>
 </tr>
 </table>
-<p>In both cases it is worth noticing that 'BioArray.ofAminoAcidString' can be replaced by any converter function.
-The converter maps from the sequence of character to either amino acid or nucleotide sequences. Therefore use 'BioArray.ofAminoAcidString' for petide and 'BioArray.ofNucleotideString' for gene FastA files, respectively.
+<p>In both cases it is worth noticing that <code>BioArray.ofAminoAcidString</code> can be replaced by any converter function.
+The converter maps from the sequence of character to either amino acid or nucleotide sequences. Therefore use <code>BioArray.ofAminoAcidString</code> for petide and <code>BioArray.ofNucleotideString</code> for gene FastA files, respectively.
 It is of course also possible to introduce any converter function.</p>
 <h2><a name="Writing-FastA-files" class="anchor" href="#Writing-FastA-files">Writing FastA files</a></h2>
-<p>In order to write a collection of sequences ('FastaItem<_>') into a file use the following function.</p>
+<p>In order to write a collection of sequences (<code>FastaItem&lt;_&gt;</code>) into a file use the following function.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -119,11 +117,11 @@ It is of course also possible to introduce any converter function.</p>
 </code></pre></td>
 </tr>
 </table>
-<div id="beacce0c-3bc5-4ccb-b5b0-8e6d30bb3df9" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
+<div id="8686ce96-ce3d-4da5-97f6-3591e69b0029" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
   <script>
     var data = [{"type":"histogram","x":[161,688,47,419,113,525,216,294,38,96,279,93,137,123,180,154,752,258,353,353,34,142,169,101,35,63,354,89,45,32,509,738,911,138,198,192,83,627,823,45,39,38,713,3121,736,476,509,38,501,83,176,131,470,492,1996,134,42,239,43,353,2972,462,82,33,490,589,382,444,547,506,383,163,293,369],"marker":{}}];
     var layout = {"xaxis":{"title":"length"},"yaxis":{"title":"#count"}};
-    Plotly.newPlot('beacce0c-3bc5-4ccb-b5b0-8e6d30bb3df9', data, layout);
+    Plotly.newPlot('8686ce96-ce3d-4da5-97f6-3591e69b0029', data, layout);
   </script>
 
 <div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
@@ -162,9 +160,9 @@ It is of course also possible to introduce any converter function.</p>
 
                 
                 <li class="nav-header">BioFSharp core</li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
                 <li>
-                    <a href="/BioFSharp/IBioItem.html">BioItems</a>
+                    <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
@@ -180,19 +178,23 @@ It is of course also possible to introduce any converter function.</p>
                 <li class="nav-header">File I/O</li>
                 <li><a href="/BioFSharp/FastA.html">FastA</a></li>
                 <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF.html">GFF format</a></li>
-                <li><a href="/BioFSharp/Genebank.html">Genebank</a></li>
+                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
+                <li><a href="/BioFSharp/Genbank.html">Genbank</a></li>
                 <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
                 <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
                 <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-                <li><a href="/BioFSharp/Formula.html">Chemical formula</a></li>
+                <li><a href="/BioFSharp/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>
                 <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
                 <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
                 <li class="nav-header">Biostatistics</li>
                 <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
                 <li class="nav-header">Biovisualization</li>
-                <li><a href="/BioFSharp/GESA.html">Web logo</a></li>
+                <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                
+                <li class="nav-header">Documentation</li>
+                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
 
                 
             </ul>
