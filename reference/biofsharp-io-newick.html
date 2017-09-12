@@ -61,7 +61,7 @@
             ofFile converter path
           </code>
           <div class="tip" id="455">
-            <strong>Signature:</strong> converter:(string -&gt; &#39;Distance) -&gt; path:string -&gt; Node&lt;&#39;Distance * string&gt;<br />
+            <strong>Signature:</strong> converter:(string -&gt; &#39;Distance) -&gt; path:string -&gt; Node&lt;string * &#39;Distance&gt;<br />
                           <strong>Type parameters:</strong> 'Distance          </div>
         </td>
         <td class="xmldoc">
@@ -78,10 +78,10 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '456', 456)" onmouseover="showTip(event, '456', 456)">
-            toFile converter path tree
+            toFile nodeConverter path tree
           </code>
           <div class="tip" id="456">
-            <strong>Signature:</strong> converter:(&#39;T -&gt; string) -&gt; path:string -&gt; tree:Node&lt;&#39;T * string&gt; -&gt; unit<br />
+            <strong>Signature:</strong> nodeConverter:(&#39;T -&gt; string * string) -&gt; path:string -&gt; tree:Node&lt;&#39;T&gt; -&gt; unit<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
@@ -89,7 +89,7 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a NewickTree file of PhylTree. Converter is used to create a string of a distancevalue</p>
+          <p>Creates a NewickTree file of PhylTree. nodeConverter is used to split the distanceInfo and the name of a node, because they are parsed separately. First result of the tuple is name, second is distance.</p>
 
 
         </td>
@@ -129,7 +129,9 @@
                 <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
                 <li><a href="/BioFSharp/Genbank.html">Genbank</a></li>
                 <li><a href="/BioFSharp/Clustal.html">Clustal</a></li>
-                <li><a href="/BioFSharp/Newick.html">Newick</a></li>                
+                <li>
+                    <a href="/BioFSharp/Newick.html">Newick</a>
+                </li>                
                 <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
                 <li><a href="/BioFSharp/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>
