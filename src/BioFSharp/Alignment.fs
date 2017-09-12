@@ -1,12 +1,14 @@
 ﻿namespace BioFSharp
 
-///Basic structure and functionality for sequence alignments. Functions for aligning functions can be found in the BioFSharp.Algorithm namespace.
+///Basic structure and functionality for sequence alignments. Alignment functions can be found in the BioFSharp.Algorithm namespace.
 module Alignment = 
         
-        type Alignment<'Sequence,'Metadata> = 
-                
+        ///General Alignment type used throughout BioFSharp
+        type Alignment<'Sequence,'Metadata> =                
                 {
+                ///Additional information for this alignment
                 MetaData            : 'Metadata;
+                ///List of aligned Sequences
                 AlignedSequences    : list<'Sequence>;
                 }
 
