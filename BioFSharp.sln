@@ -29,27 +29,39 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D5255-776D-4B61-85F9-73C37AA1FB9A}"
 	ProjectSection(SolutionItems) = preProject
 		docs\content\Alignment.fsx = docs\content\Alignment.fsx
-		docs\content\Aminoacids.fsx = docs\content\Aminoacids.fsx
 		docs\content\BioCollections.fsx = docs\content\BioCollections.fsx
 		docs\content\BioDB.fsx = docs\content\BioDB.fsx
 		docs\content\BioID.fsx = docs\content\BioID.fsx
+		docs\content\BioItem.fsx = docs\content\BioItem.fsx
 		docs\content\BlastWrapper.fsx = docs\content\BlastWrapper.fsx
-		docs\content\Distributions.fsx = docs\content\Distributions.fsx
-		docs\content\Elements.fsx = docs\content\Elements.fsx
+		docs\content\Clustal.fsx = docs\content\Clustal.fsx
+		docs\content\FastA.fsx = docs\content\FastA.fsx
+		docs\content\FastQ.fsx = docs\content\FastQ.fsx
 		docs\content\Formula.fsx = docs\content\Formula.fsx
+		docs\content\GenBank.fsx = docs\content\GenBank.fsx
+		docs\content\GFF3.fsx = docs\content\GFF3.fsx
 		docs\content\IBioItem.fsx = docs\content\IBioItem.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\Introduction.fsx = docs\content\Introduction.fsx
-		docs\content\Isotopes.fsx = docs\content\Isotopes.fsx
-		docs\content\LibraryStructure.fsx = docs\content\LibraryStructure.fsx
 		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
-		docs\content\Nucleotides.fsx = docs\content\Nucleotides.fsx
-		docs\content\Plotly.fsx = docs\content\Plotly.fsx
+		docs\content\MotiveSearch.fsx = docs\content\MotiveSearch.fsx
+		docs\content\CSV.fsx = docs\content\CSV.fsx
+		docs\content\FastA.fsx = docs\content\FastA.fsx
+		docs\content\FastQ.fsx = docs\content\FastQ.fsx
+		docs\content\Formula.fsx = docs\content\Formula.fsx
+		docs\content\Genebank.fsx = docs\content\Genebank.fsx
+		docs\content\GESA.fsx = docs\content\GESA.fsx
+		docs\content\GFF.fsx = docs\content\GFF.fsx
+		docs\content\index.fsx = docs\content\index.fsx
+		docs\content\Introduction.fsx = docs\content\Introduction.fsx
+		docs\content\MoleculeFinding.fsx = docs\content\MoleculeFinding.fsx
+		docs\content\Newick.fsx = docs\content\Newick.fsx
+		docs\content\Obo.fsx = docs\content\Obo.fsx
 		docs\content\Readers.fsx = docs\content\Readers.fsx
-		docs\content\StatisticalMeasures.fsx = docs\content\StatisticalMeasures.fsx
-		docs\content\StatisticalTests.fsx = docs\content\StatisticalTests.fsx
 		docs\content\StringMatching.fsx = docs\content\StringMatching.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
+		docs\content\UniProt.fsx = docs\content\UniProt.fsx
+		docs\content\WebLogo.fsx = docs\content\WebLogo.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
@@ -67,6 +79,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Stats", "src\BioFSharp.Stats\BioFSharp.Stats.fsproj", "{5BDD2574-E123-4E88-95D2-6F9F58053974}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.BioDB", "src\BioFSharp.BioDB\BioFSharp.BioDB.fsproj", "{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Vis", "src\BioFSharp.Vis\BioFSharp.Vis.fsproj", "{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +154,14 @@ Global
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.ActiveCfg = Release|Any CPU
 		{2291C80C-C2B0-46FE-BEFD-BB0F956CFA82}.Release|x64.Build.0 = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{AAFE6698-B9A4-4448-A1A1-98EFD4CB7FB4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,5 +170,8 @@ Global
 		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{07D1FF79-E2D9-46DB-BF05-92ACD1469187} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D870EC7-DF69-45F3-8A88-8DF673AF3E22}
 	EndGlobalSection
 EndGlobal

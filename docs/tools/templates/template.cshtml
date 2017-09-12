@@ -41,21 +41,27 @@
                 <li class="nav-header">@Properties["project-name"]</li>
                 <li><a href="@Root/index.html">Home page</a></li>
                 <li class="divider"></li>
+                <li><a href="@Root/Introduction.html">Getting started</a></li>
+
+                @*<li class="divider"></li>
                 <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
                 <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
                 <li><a href="@Root/license.html">License</a></li>
                 <li><a href="@Root/release-notes.html">Release Notes</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Getting started</li>
-                <li><a href="@Root/Introduction.html">Introduction</a></li>
-                <li><a href="@Root/LibraryStructure.html">Library Structure</a></li>
-                <li class="nav-header">Data Structures</li>
-                <li><a href="@Root/Elements.html">Elements</a></li>
-                <li><a href="@Root/Isotopes.html">Isotopes</a></li>
+                <li class="divider"></li>*@
+                <li class="nav-header">BioFSharp core</li>
                 <li><a href="@Root/Formula.html">Formula</a></li>
-                <li><a href="@Root/IBioItem.html">IBioItem</a></li>
-                <li><a href="@Root/Nucleotides.html">Nucleotides</a></li>
-                <li><a href="@Root/Aminoacids.html">Aminoacids</a></li>
+                <li>
+                    <a href="@Root/BioItem.html">BioItems</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("IBioItem.fsx"))
+                    {
+                        <ul class="nav nav-list">
+                            <li><a href="@Root/IBioItem.html#Nucleotides">Nucleotides</a></li>
+                            <li><a href="@Root/IBioItem.html#Aminoacids">Aminoacids</a></li>
+                            <li><a href="@Root/IBioItem.html#Converter">BioItem converter</a></li>
+                        </ul>
+                    }
+                </li>
                 <li>
                     <a href="@Root/BioCollections.html">BioCollections</a>
                     @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("BioCollections.fsx"))
@@ -67,12 +73,13 @@
                         </ul>
                     }
                 </li>
-                <li><a href="@Root/BioID.html">BioID</a></li>
-                <li class="nav-header">Pattern Queries</li>
+                <li><a href="@Root/SeqProperties.html">Sequence Properties</a></li>
+                <li class="nav-header">Algorithm</li>
                 <li><a href="@Root/Alignment.html">Alignment</a></li>
-                <li><a href="@Root/BlastWrapper.html">Use NCBI-Blast</a></li>
+                <li><a href="@Root/MotiveSearch.html">Motive search</a></li>
+                <li><a href="@Root/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
-                    <a href="@Root/StringMatching.html">String matching algorithms</a>
+                    <a href="@Root/StringMatching.html">Pattern Queries</a>
                     @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("StringMatching.fsx"))
                     {
                         <ul class="nav nav-list">
@@ -83,29 +90,28 @@
                         </ul>
                     }
                 </li>
-                <li class="nav-header">File Parsing</li>
-                <li>
-                    <a href="@Root/Readers.html">I/O</a>
-                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Readers.fsx"))
-                    {
-                        <ul class="nav nav-list">
-                            <li><a href="@Root/Readers.html#FastQ">FastQ</a></li>
-                            <li><a href="@Root/Readers.html#FastA">FastA</a></li>
-                            <li><a href="@Root/Readers.html#GFF3">GFF3</a></li>
-                        </ul>
-                    }
-                </li>
-                <li>
-                    <a href="@Root/BioDB.html">I/O</a>
-                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("BioDB.fsx"))
-                    {
-                        <ul class="nav nav-list">
-                            <li><a href="@Root/Readers.html#FastQ">UniProt</a></li>
-                            <li><a href="@Root/Readers.html#FastA">BioDB</a></li>
-                        </ul>
-                    }
-                </li>
-                <li class="nav-header">Statistics</li>
+                <li class="nav-header">File I/O</li>
+                <li><a href="@Root/FastA.html">FastA</a></li>
+                <li><a href="@Root/FastQ.html">FastQ</a></li>
+                <li><a href="@Root/GFF3.html">GFF format</a></li>
+                <li><a href="@Root/Genbank.html">Genbank</a></li>
+                <li><a href="@Root/Clustal.html">Clustal</a></li>
+                <li><a href="@Root/Newick.html">Newick</a></li>                
+                <li><a href="@Root/Obo.html">Obo ontology format</a></li>
+                <li><a href="@Root/CSV.html">Delimited files</a></li>
+                <li class="nav-header">Web I/O</li>
+                <li><a href="@Root/UniProt.html">UniProt</a></li>
+                <li><a href="@Root/BioDB.html">BioDB</a></li>
+                <li class="nav-header">Biostatistics</li>
+                <li><a href="@Root/GESA.html">Ontology enrichment</a></li>
+                <li class="nav-header">Biovisualization</li>
+                <li><a href="@Root/WebLogo.html">Web logo</a></li>
+                
+                <li class="nav-header">Documentation</li>
+                <li><a href="@Root/reference/index.html">API Reference</a></li>
+
+
+                @*<li class="nav-header">Statistics</li>
                 <li><a href="@Root/StatisticalMeasures.html">Common measures</a></li>
                 <li><a href="@Root/Distributions.html">Distributions</a></li>
                 <li><a href="@Root/StatisticalTests.html">Statistical Tests</a></li>
@@ -117,7 +123,7 @@
                 <li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
                 <li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
                 <li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
-                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>
+                <li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>*@
             </ul>
         </div>
       </div>

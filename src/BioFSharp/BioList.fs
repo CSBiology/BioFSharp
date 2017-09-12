@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp
 
+///This module contains the BioList type and its according functions. The BioList type is a List of objects using the IBioItem interface
 module BioList =
 
     open System
@@ -9,6 +10,7 @@ module BioList =
     open ModificationInfo
     open GlobalModificationInfo
 
+    ///List of objects using the IBioItem interface
     type BioList<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> = list<'a>
 
     /// Generates amino acid sequence of one-letter-code string using given OptionConverter
@@ -191,7 +193,7 @@ module BioList =
         (fun bs -> 
             bs |> List.fold (fun massAcc item -> massAcc + memAverageMass item) state)
 
-
+    ///Creates an array with information about the abundacies of the distinct BioItems by converting the symbol of the BioItem to an integer and incrementing the given integer. To decrease the size of the resulting array by still having a fast performance, all indices are shifted by 65. Therefore to call the abundancy of a given BioItem, use "Resultcompositionvector.[(BioItem.symbol bioitem) - 65]"
     let toCompositionVector (input:BioList<_>)  =
         let compVec = Array.zeroCreate 26
         input

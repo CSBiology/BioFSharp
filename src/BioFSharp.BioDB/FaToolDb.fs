@@ -41,7 +41,7 @@ module FaToolDb =
     module Queries =
     
         ///Wrapper for the result of an ontologyTerm query
-        type ontologyTermQueryResult = 
+        type OntologyTermQueryResult = 
             {
                 Id: string;
                 OntologyGroups: (string*string) list
@@ -57,13 +57,13 @@ module FaToolDb =
                 |(_,[]) -> true
                 |_ -> false
         
-        ///returns ontology term and ontology id of the selected ontology
-        let private getOntologyterms (ontologyName:OntologyId) (locusIdentifier:string) = 
+        ///returns ontology terms and term ids the selected ontology for a query gene
+        let getOntologyterms (ontologyName:OntologyId) (identifier:string) = 
             let temp = 
                 (query 
                     {
                     for ann in fullContext.Annotations.Expand("Protein,Term") do
-                    where (ann.Protein.Name = locusIdentifier && ann.Term.Ontology.ID=(OntologyId.toString ontologyName))
+                    where (ann.Protein.Name = identifier && ann.Term.Ontology.ID=(OntologyId.toString ontologyName))
                     select ann
                     } |> Seq.toList |> List.map (fun p -> p.Protein.Name,p.Term.ID,p.Term.Name))
         
@@ -74,4 +74,19 @@ module FaToolDb =
             }
 
 
+        ///returns a map containing the ids of OntologyTermQueryResults mapping to themselfes with an option to change the formatting of the id string
+        let createOntologyMapFromQueryResults (stringFormattingConverter: string -> string) (input: OntologyTermQueryResult array) =
+            input 
+            |> Array.filter (fun x -> not x.isEmpty)
+            |> Array.map (fun x -> ((stringFormattingConverter x.Id),x))
+            |> Map.ofArray
 
+
+        ///returns synonyms for a query gene
+        let getSynonyms (identifier:string) = 
+            query 
+                {
+                    for syn in fullContext.Synonyms.Expand("Protein") do
+                        where (syn.Protein.Name = identifier)
+                        select syn
+                    } |> Seq.toList |> List.map (fun x -> x.Protein.Name, x.SynonymValue)

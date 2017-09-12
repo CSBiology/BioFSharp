@@ -2,9 +2,30 @@
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 #I "../../bin"
-#r "../../packages/build/FSharp.Plotly/lib/net40/Fsharp.Plotly.dll"
+#r "../../packages/build/FSharp.Plotly/lib/net45/Fsharp.Plotly.dll"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+open BioFSharp
 open FSharp.Plotly
 (**
+Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. 
+*)
+
+///Peptide represented as a Bioseq
+"PEPTIDE" |> BioSeq.ofAminoAcidString 
+///Peptide represented as a BioList
+"PEPTIDE"|> BioList.ofAminoAcidString 
+///Peptide represented as a BioArray
+"PEPTIDE" |> BioArray.ofAminoAcidString 
+
+
+open Nucleotides
+
+[|A;T;G;C;|].[1..3]
+|> Array.map Nucleotides.antiparallel
+
+(**
+
 BioSeq
 ======
 work in progress... 

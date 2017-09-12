@@ -12,7 +12,7 @@ type IBioItem =
     abstract member isTerminator : bool         
     abstract member isGap        : bool    
 
-
+///Lexer Tags for parsing BioItems
 type NcbiParsingType = 
     | StandardCodes  = 10y 
     | AmbiguityCodes = 20y

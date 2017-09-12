@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp
 
+///Contains functionality for working with isotopic abundancies of molecules
 module IsotopicDistribution =
 
     open BioFSharp.Formula
