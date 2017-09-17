@@ -95,7 +95,17 @@
                 <li><a href="@Root/FastQ.html">FastQ</a></li>
                 <li><a href="@Root/GFF3.html">GFF format</a></li>
                 <li><a href="@Root/Genbank.html">Genbank</a></li>
-                <li><a href="@Root/Clustal.html">Clustal</a></li>
+                <li>
+                    <a href="@Root/Clustal.html">Clustal</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Clustal.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/Clustal.html#Clustal-Format">Format</a></li>
+                        <li><a href="@Root/Clustal.html#Reading-Clustal-Files">Reading</a></li>
+                        <li><a href="@Root/NClustal.html#Writing-Clustal-Files">Writing</a></li>
+                    </ul>
+                    }
+                </li>        
                 <li>
                     <a href="@Root/Newick.html">Newick</a>
                     @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Newick.fsx"))
