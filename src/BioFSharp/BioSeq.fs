@@ -9,17 +9,21 @@ module BioSeq =
     ///Sequence of objects using the IBioItem interface
     type BioSeq<[<EqualityConditionalOn; ComparisonConditionalOn >]'a when 'a :> IBioItem> = seq<'a>
 
-    /// Generates amino acid sequence of one-letter-code string using given OptionConverter
+    /// Generates AminoAcid sequence of one-letter-code string using given OptionConverter
     let ofAminoAcidStringWithOptionConverter (converter:OptionConverter.AminoAcidOptionConverter) (s:#seq<char>) : BioSeq<_> =          
         s
         |> Seq.choose converter
 
 
-    /// Generates amino acid sequence of one-letter-code raw string
+    /// Generates AminoAcid sequence of one-letter-code raw string
     let ofAminoAcidString (s:#seq<char>) : BioSeq<_> =          
         s
         |> Seq.choose OptionConverter.charToOptionAminoAcid
 
+    /// Generates AminoAcidSymbol sequence of one-letter-code raw string
+    let ofAminoAcidSymbolString (s:#seq<char>) : BioSeq<_> =          
+        s
+        |> Seq.choose (AminoAcidSymbols.parseChar >> snd)
 
     /// Generates nucleotide sequence of one-letter-code string using given OptionConverter
     let ofNucleotideStringWithOptionConverter (converter:OptionConverter.NucleotideOptionConverter) (s:#seq<char>) : BioSeq<_> =             

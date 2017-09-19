@@ -75,6 +75,12 @@ module BioList =
         |> Seq.choose OptionConverter.charToOptionAminoAcid
         |> Seq.toList
 
+    /// Generates AminoAcidSymbol sequence of one-letter-code raw string
+    let ofAminoAcidSymbolString (s:#seq<char>) : BioList<_> =          
+        s
+        |> Seq.choose (AminoAcidSymbols.parseChar >> snd)
+        |> Seq.toList
+
     /// Generates nucleotide sequence of one-letter-code string using given OptionConverter
     let ofNucleotideStringWithOptionConverter (converter:OptionConverter.NucleotideOptionConverter) (s:#seq<char>) : BioList<_> =             
         s

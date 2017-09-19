@@ -20,7 +20,12 @@ module BioArray =
         s
         |> Seq.choose OptionConverter.charToOptionAminoAcid
         |> Seq.toArray
-
+    
+    /// Generates amino acid symbol sequence of one-letter-code raw string
+    let ofAminoAcidSymbolString (s:#seq<char>) : BioArray<_> =          
+        s
+        |> Seq.choose (AminoAcidSymbols.parseChar >> snd)
+        |> Seq.toArray
 
     /// Generates nucleotide sequence of one-letter-code string using given OptionConverter
     let ofNucleotideStringWithOptionConverter (converter:OptionConverter.NucleotideOptionConverter) (s:#seq<char>) : BioArray<_> =             

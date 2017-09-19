@@ -168,7 +168,7 @@ module PairwiseAlignment =
                 fstSeq  sndSeq 
                     opcs
 
-        ///Returns the optimal gloabl alignment of two arrays of generic values
+        ///Returns the optimal global alignment of two arrays of generic values
         let runGeneric (costs:Costs<'a>) (fstSeq : 'a [])  (sndSeq : 'a []) =
             let len1,len2 = fstSeq.Length, sndSeq.Length
             let cellMatrix = createCellMatrix costs fstSeq sndSeq
@@ -177,7 +177,7 @@ module PairwiseAlignment =
                 (cellMatrix.[len1,len2].M |> getTraceScoreValue)
                 (traceBackOption fstSeq sndSeq len1 len2 list.Empty list.Empty cellMatrix)
         
-        ///Returns the optimal gloabl alignment of two AminoAcid BioArrays
+        ///Returns the optimal global alignment of two AminoAcid BioArrays
         let runAminoAcid (costs:Costs<AminoAcid>) (fstSeq : BioArray<AminoAcid>)  (sndSeq : BioArray<AminoAcid>) =
             let len1,len2 = fstSeq.Length, sndSeq.Length
             let cellMatrix = createCellMatrix costs fstSeq sndSeq
@@ -185,7 +185,7 @@ module PairwiseAlignment =
                 (cellMatrix.[len1,len2].M |> getTraceScoreValue)
                 (traceBackZeroValue AminoAcid.Gap fstSeq sndSeq len1 len2 list.Empty list.Empty cellMatrix)
 
-        ///Returns the optimal gloabl alignment of two AminoAcidSymbol BioArrays
+        ///Returns the optimal global alignment of two AminoAcidSymbol BioArrays
         let runAminoAcidSymbol (costs:Costs<AminoAcidSymbol>) (fstSeq : BioArray<AminoAcidSymbol>)  (sndSeq : BioArray<AminoAcidSymbol>) =
             let len1,len2 = fstSeq.Length, sndSeq.Length
             let cellMatrix = createCellMatrix costs fstSeq sndSeq
@@ -193,7 +193,7 @@ module PairwiseAlignment =
                 (cellMatrix.[len1,len2].M |> getTraceScoreValue)
                 (traceBackZeroValue AminoAcidSymbol.Gap fstSeq sndSeq len1 len2 list.Empty list.Empty cellMatrix)
         
-        ///Returns the optimal gloabl alignment of two Nucleotide BioArrays
+        ///Returns the optimal global alignment of two Nucleotide BioArrays
         let runNucleotide (costs:Costs<Nucleotide>) (fstSeq : BioArray<Nucleotide>)  (sndSeq : BioArray<Nucleotide>) =
             let len1,len2 = fstSeq.Length, sndSeq.Length
             let cellMatrix = createCellMatrix costs fstSeq sndSeq
