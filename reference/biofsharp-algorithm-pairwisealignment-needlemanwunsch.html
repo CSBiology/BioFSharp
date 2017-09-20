@@ -43,7 +43,7 @@
   <span>Parent Module: <a href="biofsharp-algorithm-pairwisealignment.html">PairwiseAlignment</a></span>
 </p>
 <div class="xmldoc">
-<p>Global alignment algorithm. (AffineGaps)</p>
+<p>Global pairwise alignment algorithm. (AffineGaps)</p>
 
 </div>
 
@@ -58,19 +58,79 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '347', 347)" onmouseover="showTip(event, '347', 347)">
-            needlemanWunsch costs fstSeq sndSeq
+          <code onmouseout="hideTip(event, '350', 350)" onmouseover="showTip(event, '350', 350)">
+            runAminoAcid costs fstSeq sndSeq
           </code>
-          <div class="tip" id="347">
-            <strong>Signature:</strong> costs:Costs&lt;&#39;a&gt; -&gt; fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; Alignment&lt;&#39;a&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
+          <div class="tip" id="350">
+            <strong>Signature:</strong> costs:Costs&lt;AminoAcid&gt; -&gt; fstSeq:BioArray&lt;AminoAcid&gt; -&gt; sndSeq:BioArray&lt;AminoAcid&gt; -&gt; Alignment&lt;AminoAcid list,Score&gt;<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L120-120" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L181-181" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Uses the runGeneric function to create a matrix and then aligns the sequences via backtracing</p>
+          <p>Returns the optimal global alignment of two AminoAcid BioArrays</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '351', 351)" onmouseover="showTip(event, '351', 351)">
+            runAminoAcidSymbol costs fstSeq sndSeq
+          </code>
+          <div class="tip" id="351">
+            <strong>Signature:</strong> costs:Costs&lt;AminoAcidSymbol&gt; -&gt; fstSeq:BioArray&lt;AminoAcidSymbol&gt; -&gt; sndSeq:BioArray&lt;AminoAcidSymbol&gt; -&gt; Alignment&lt;AminoAcidSymbol list,Score&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L189-189" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the optimal global alignment of two AminoAcidSymbol BioArrays</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '352', 352)" onmouseover="showTip(event, '352', 352)">
+            runGeneric costs fstSeq sndSeq
+          </code>
+          <div class="tip" id="352">
+            <strong>Signature:</strong> costs:Costs&lt;&#39;a&gt; -&gt; fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; Alignment&lt;&#39;a option list,Score&gt;<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L172-172" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the optimal global alignment of two arrays of generic values</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '353', 353)" onmouseover="showTip(event, '353', 353)">
+            runNucleotide costs fstSeq sndSeq
+          </code>
+          <div class="tip" id="353">
+            <strong>Signature:</strong> costs:Costs&lt;Nucleotide&gt; -&gt; fstSeq:BioArray&lt;Nucleotide&gt; -&gt; sndSeq:BioArray&lt;Nucleotide&gt; -&gt; Alignment&lt;Nucleotide list,Score&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Algorithm/PairwiseAlignment.fs#L197-197" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the optimal global alignment of two Nucleotide BioArrays</p>
 
 
         </td>

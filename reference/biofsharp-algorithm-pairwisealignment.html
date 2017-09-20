@@ -49,7 +49,30 @@
 <!-- Render nested types and modules, if there are any -->
   <h2>Nested types and modules</h2>
   <div>
-      <table class="table table-bordered module-list">
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-algorithm-pairwisealignment-costs-1.html">Costs<'a></a>
+          </td>
+          <td class="xmldoc"><p>Carries the costs for gaps and the scoring matrix (Similarity)</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-algorithm-pairwisealignment-score.html">Score</a>
+          </td>
+          <td class="xmldoc"><p>Score of the alignment and the aligned sequences as a tuple</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
     <thead>
       <tr><td>Module</td><td>Description</td></tr>
     </thead>
@@ -58,15 +81,7 @@
           <td class="module-name">
             <a href="biofsharp-algorithm-pairwisealignment-needlemanwunsch.html">NeedlemanWunsch</a>
           </td>
-          <td class="xmldoc"><p>Global alignment algorithm. (AffineGaps)</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-algorithm-pairwisealignment-rungeneric.html">RunGeneric</a>
-          </td>
-          <td class="xmldoc"><p>Holds all types and helper-functions. Also includes the function for the matrix creation and the backtrace-function</p>
+          <td class="xmldoc"><p>Global pairwise alignment algorithm. (AffineGaps)</p>
 
 </td>
         </tr>
@@ -74,7 +89,7 @@
           <td class="module-name">
             <a href="biofsharp-algorithm-pairwisealignment-smithwaterman.html">SmithWaterman</a>
           </td>
-          <td class="xmldoc"><p>Local alignment algorithm  (AffineGaps)</p>
+          <td class="xmldoc"><p>Local pairwise alignment algorithm  (AffineGaps)</p>
 
 </td>
         </tr>
