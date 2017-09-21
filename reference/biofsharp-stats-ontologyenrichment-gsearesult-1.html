@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Mass - BioFSharp</title>
+    <title>GseaResult<'a> - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,136 +37,145 @@
 
 
 
-<h1>Mass</h1>
+<h1>GseaResult<'a></h1>
 <p>
-  <span>Namespace: BioFSharp</span><br />
+  <span>Namespace: BioFSharp.Stats</span><br />
+  <span>Parent Module: <a href="biofsharp-stats-ontologyenrichment.html">OntologyEnrichment</a></span>
 </p>
 <div class="xmldoc">
+<p>Represents a gene set enrichment result</p>
+
 </div>
-
-<!-- Render nested types and modules, if there are any -->
-  <h2>Nested types and modules</h2>
-  <div>
-      <table class="table table-bordered module-list">
-    <thead>
-      <tr><td>Module</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-mass-table.html">Table</a>
-          </td>
-          <td class="xmldoc"></td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-  <h3>Functions and values</h3>
+  <h3>Record Fields</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Function or value</td><td>Description</td></tr>
+      <tr><td>Record Field</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
-            accuracy mass referenceMass
+          <code onmouseout="hideTip(event, '957', 957)" onmouseover="showTip(event, '957', 957)">
+            ItemsInBin
           </code>
-          <div class="tip" id="289">
-            <strong>Signature:</strong> mass:float&lt;MeasureOne&gt; -&gt; referenceMass:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+          <div class="tip" id="957">
+            <strong>Signature:</strong> seq&lt;OntologyItem&lt;&#39;a&gt;&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Mass.fs#L44-44" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L26-26" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Calculates accuracy of mass versus (theoretical) reference mass</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
-            deltaMassByPpm ppm mass
+          <code onmouseout="hideTip(event, '958', 958)" onmouseover="showTip(event, '958', 958)">
+            NumberInBin
           </code>
-          <div class="tip" id="290">
-            <strong>Signature:</strong> ppm:float&lt;MeasureOne&gt; -&gt; mass:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+          <div class="tip" id="958">
+            <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Mass.fs#L49-49" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L28-28" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Returns delta mass by ppm</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
-            ofMZ mz z
+          <code onmouseout="hideTip(event, '959', 959)" onmouseover="showTip(event, '959', 959)">
+            NumberOfDEsInBin
           </code>
-          <div class="tip" id="291">
-            <strong>Signature:</strong> mz:float -&gt; z:float -&gt; float<br />
+          <div class="tip" id="959">
+            <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Mass.fs#L40-40" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Converts m/z to neutral mass</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
-            rangePpm ppm mass
+          <code onmouseout="hideTip(event, '960', 960)" onmouseover="showTip(event, '960', 960)">
+            OntologyTerm
           </code>
-          <div class="tip" id="292">
-            <strong>Signature:</strong> ppm:float&lt;MeasureOne&gt; -&gt; mass:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;<br />
+          <div class="tip" id="960">
+            <strong>Signature:</strong> string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Mass.fs#L53-53" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L25-25" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Returns -/+ mass range</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
-            toMZ mass z
+          <code onmouseout="hideTip(event, '961', 961)" onmouseover="showTip(event, '961', 961)">
+            PValue
           </code>
-          <div class="tip" id="293">
-            <strong>Signature:</strong> mass:float -&gt; z:float -&gt; float<br />
+          <div class="tip" id="961">
+            <strong>Signature:</strong> float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Mass.fs#L29-29" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L31-31" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Converts mass to m/z</p>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
 
+          <code onmouseout="hideTip(event, '962', 962)" onmouseover="showTip(event, '962', 962)">
+            TotalNumberOfDE
+          </code>
+          <div class="tip" id="962">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L29-29" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
 
+          <code onmouseout="hideTip(event, '963', 963)" onmouseover="showTip(event, '963', 963)">
+            TotalUnivers
+          </code>
+          <div class="tip" id="963">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/OntologyEnrichment.fs#L30-30" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
         </td>
       </tr>
     </tbody>
