@@ -39,7 +39,7 @@ module Formula =
     let substract (f1:Formula) (f2:Formula) =
         merge (f1) (f2) (fun _ (v, v') -> v - v')
 
-    /// substract two formula
+    // substract two formula
     //let (-)  (f1:Formula) (f2:Formula) = substract f1 f2
 
     /// Returns average mass of sum formula
@@ -51,6 +51,7 @@ module Formula =
         f |> Seq.sumBy (fun elem -> (Elements.getMainIsotope elem.Key).Mass * elem.Value)
     
     /// Lables all elements of a certain kind within a formula
+    // TODO: refactor formula last
     let lableElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
         let result : Formula = 
             f 
