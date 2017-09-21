@@ -21,8 +21,9 @@ module OntologyEnrichment =
         {Id = id; OntologyTerm = ontologyTerm; GroupIndex = groupIndex; Item = item}
 
     /// Represents a gene set enrichment result 
-    type GseaResult = {
+    type GseaResult<'a> = {
         OntologyTerm     : string
+        ItemsInBin       : seq<OntologyItem<'a>>
         NumberOfDEsInBin : int
         NumberInBin      : int    
         TotalNumberOfDE  : int
@@ -31,8 +32,9 @@ module OntologyEnrichment =
         }
 
     /// Creates a gene set enrichment result 
-    let createGseaResult ontologyTerm numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue = 
-        {OntologyTerm = ontologyTerm; NumberOfDEsInBin = numberOfDEsInBin; NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUnivers = totalUnivers; PValue = pValue}
+    let createGseaResult ontologyTerm desInBin numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue = 
+        {OntologyTerm = ontologyTerm;ItemsInBin = desInBin; NumberOfDEsInBin = numberOfDEsInBin; 
+            NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUnivers = totalUnivers; PValue = pValue}
 
 
     /// Splites OntologyEntry with conacat TermId
@@ -80,9 +82,7 @@ module OntologyEnrichment =
         else
                 nan
         
-        
-
-
+       
     // #######################################################    
     //  functional term enrichment is calculated according to following publication
     //  http://bioinformatics.oxfordjournals.org/cgi/content/abstract/23/4/401
@@ -107,7 +107,7 @@ module OntologyEnrichment =
         |> Seq.map (fun (oTerm,values) -> 
             let numberOfDEsInBin,numberInBin = countDE values
             let pValue = CalcHyperGeoPvalue numberOfDEsInBin numberInBin totalUnivers totalNumberOfDE _splitPvalueThreshold
-            createGseaResult oTerm numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue)
+            createGseaResult oTerm values numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue)
 
 
     // #######################################################    
@@ -147,6 +147,6 @@ module OntologyEnrichment =
         |> Seq.map (fun (oTerm,values) -> 
             let numberOfDEsInBin,numberInBin = countDE values
             let pValue = CalcHyperGeoPvalue numberOfDEsInBin numberInBin totalUnivers totalNumberOfDE _splitPvalueThreshold
-            createGseaResult oTerm numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue)
+            createGseaResult oTerm values numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue)
 
 
