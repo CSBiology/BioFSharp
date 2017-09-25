@@ -32,7 +32,7 @@ module Formula =
     let add (f1:Formula) (f2:Formula) =
         merge (f1) (f2) (fun _ (v, v') -> v + v')
     
-    /// adds two formula
+    // adds two formula
     //let (+)  (f1:Formula) (f2:Formula) = add f1 f2
 
     /// substract two formula
