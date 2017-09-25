@@ -43,6 +43,8 @@
   <span>Parent Module: <a href="biofsharp-digestion.html">Digestion</a></span>
 </p>
 <div class="xmldoc">
+<p>Contains functions for digesting AminoAcid sequences</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -56,33 +58,35 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '165', 165)" onmouseover="showTip(event, '165', 165)">
+          <code onmouseout="hideTip(event, '166', 166)" onmouseover="showTip(event, '166', 166)">
             digest protease aas
           </code>
-          <div class="tip" id="165">
+          <div class="tip" id="166">
             <strong>Signature:</strong> protease:Protease -&gt; aas:seq&lt;AminoAcid&gt; -&gt; seq&lt;AminoAcid list&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L69-69" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L81-81" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Cuts AminoAcid sequence at each place, where the sequence fits the cutting pattern of the protease. Returns sequence of resulting AminoAcid sequences</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '166', 166)" onmouseover="showTip(event, '166', 166)">
+          <code onmouseout="hideTip(event, '167', 167)" onmouseover="showTip(event, '167', 167)">
             motivy prefixLength suffixLength source
           </code>
-          <div class="tip" id="166">
+          <div class="tip" id="167">
             <strong>Signature:</strong> prefixLength:int -&gt; suffixLength:int -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T * &#39;T option []&gt;<br />
                           <strong>Type parameters:</strong> 'T          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L42-42" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L54-54" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -112,7 +116,7 @@
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                 </li>
-                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                 <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>

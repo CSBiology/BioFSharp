@@ -42,6 +42,8 @@
   <span>Namespace: BioFSharp</span><br />
 </p>
 <div class="xmldoc">
+<p>Contains types and functions needed to digest amino acid sequences with proteases</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -56,13 +58,17 @@
           <td class="type-name">
             <a href="biofsharp-digestion-digestedpeptide.html">DigestedPeptide</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Digested peptide</p>
+
+</td>
         </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-digestion-protease.html">Protease</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>p4 p3 p2 p1 || p1' p2'</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -75,19 +81,25 @@
           <td class="module-name">
             <a href="biofsharp-digestion-bioarray.html">BioArray</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Contains functions for digesting AminoAcid arrays</p>
+
+</td>
         </tr>
         <tr>
           <td class="module-name">
             <a href="biofsharp-digestion-bioseq.html">BioSeq</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Contains functions for digesting AminoAcid sequences</p>
+
+</td>
         </tr>
         <tr>
           <td class="module-name">
             <a href="biofsharp-digestion-table.html">Table</a>
           </td>
-          <td class="xmldoc"></td>
+          <td class="xmldoc"><p>Contains frequently needed proteases</p>
+
+</td>
         </tr>
     </tbody>
   </table>
@@ -103,55 +115,61 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
             createDigestedPeptide (...)
           </code>
-          <div class="tip" id="159">
+          <div class="tip" id="160">
             <strong>Signature:</strong> proteinID:int -&gt; missCleavages:int -&gt; missCleavageStart:int -&gt; missCleavageEnd:int -&gt; pepSequence:AminoAcid list -&gt; DigestedPeptide<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L25-25" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L34-34" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>Creates digested peptide from given information</p>
 
-          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
-            createProtease name f
-          </code>
-          <div class="tip" id="160">
-            <strong>Signature:</strong> name:string -&gt; f:(AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; bool) -&gt; Protease<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L14-14" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '161', 161)" onmouseover="showTip(event, '161', 161)">
-            isCutingSite protease arr
+            createProtease name f
           </code>
           <div class="tip" id="161">
+            <strong>Signature:</strong> name:string -&gt; f:(AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; AminoAcid option -&gt; bool) -&gt; Protease<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L17-17" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates a Protease from given name and motifFunction f</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '162', 162)" onmouseover="showTip(event, '162', 162)">
+            isCutingSite protease arr
+          </code>
+          <div class="tip" id="162">
             <strong>Signature:</strong> protease:Protease -&gt; arr:AminoAcid option [] -&gt; bool<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L33-33" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L44-44" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Returns true, if AminoAcid array resembles cutting site of given protease, else returns false</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -175,7 +193,7 @@
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                 </li>
-                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                 <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>

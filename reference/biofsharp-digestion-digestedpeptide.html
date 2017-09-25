@@ -43,6 +43,8 @@
   <span>Parent Module: <a href="biofsharp-digestion.html">Digestion</a></span>
 </p>
 <div class="xmldoc">
+<p>Digested peptide</p>
+
 </div>
   <h3>Record Fields</h3>
   <table class="table table-bordered member-list">
@@ -53,33 +55,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '592', 592)" onmouseover="showTip(event, '592', 592)">
-            MissCleavageEnd
-          </code>
-          <div class="tip" id="592">
-            <strong>Signature:</strong> int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L21-21" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
           <code onmouseout="hideTip(event, '593', 593)" onmouseover="showTip(event, '593', 593)">
-            MissCleavages
+            MissCleavageEnd
           </code>
           <div class="tip" id="593">
             <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L19-19" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L28-28" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -90,14 +74,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '594', 594)" onmouseover="showTip(event, '594', 594)">
-            MissCleavageStart
+            MissCleavages
           </code>
           <div class="tip" id="594">
             <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L20-20" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L26-26" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -108,14 +92,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '595', 595)" onmouseover="showTip(event, '595', 595)">
-            PepSequence
+            MissCleavageStart
           </code>
           <div class="tip" id="595">
-            <strong>Signature:</strong> AminoAcid list<br />
+            <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L22-22" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L27-27" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -126,18 +110,40 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '596', 596)" onmouseover="showTip(event, '596', 596)">
-            ProteinID
+            PepSequence
           </code>
           <div class="tip" id="596">
+            <strong>Signature:</strong> AminoAcid list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L30-30" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sequence of peptide</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '597', 597)" onmouseover="showTip(event, '597', 597)">
+            ProteinID
+          </code>
+          <div class="tip" id="597">
             <strong>Signature:</strong> int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L18-18" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Digestion.fs#L24-24" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Identifier of protein</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -161,7 +167,7 @@
                 <li>
                     <a href="/BioFSharp/BioCollections.html">BioCollections</a>
                 </li>
-                <li><a href="/BioFSharp/SeqProperties.html">Sequence Properties</a></li>
+                <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                 <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
