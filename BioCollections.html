@@ -45,11 +45,11 @@
 <span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Peptide represented as a Bioseq</span>
-<span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="f">ofAminoAcidString</span> 
+<span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofAminoAcidString</span> 
 <span class="c">///Peptide represented as a BioList</span>
-<span class="s">&quot;PEPTIDE&quot;</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="t">BioList</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="f">ofAminoAcidSymbolString</span> 
+<span class="s">&quot;PEPTIDE&quot;</span><span class="o">|&gt;</span> <span class="i">BioList</span><span class="o">.</span><span class="i">ofAminoAcidSymbolString</span> 
 <span class="c">///Peptide represented as a BioArray</span>
-<span class="s">&quot;TAGCAT&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="f">ofNucleotideString</span> 
+<span class="s">&quot;TAGCAT&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofNucleotideString</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -61,11 +61,11 @@
 <span class="l">4: </span>
 <span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="i">myPeptide</span> <span class="o">=</span> <span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="f">ofAminoAcidString</span> 
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">myPeptide</span> <span class="o">=</span> <span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofAminoAcidString</span> 
 
-<span onmouseout="hideTip(event, 'fs4', 13)" onmouseover="showTip(event, 'fs4', 13)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="f">toFormula</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">myPeptide</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="f">toString</span> <span class="c">// val it : string = &quot;C34.00 H51.00 N7.00 O14.00 &quot;</span>
+<span class="i">BioSeq</span><span class="o">.</span><span class="i">toFormula</span> <span class="i">myPeptide</span> <span class="o">|&gt;</span> <span class="i">Formula</span><span class="o">.</span><span class="i">toString</span> <span class="c">// val it : string = &quot;C34.00 H51.00 N7.00 O14.00 &quot;</span>
 
-<span onmouseout="hideTip(event, 'fs4', 18)" onmouseover="showTip(event, 'fs4', 18)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="f">toAverageMass</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="i">myPeptide</span> <span class="c">// val it : string = &quot;C34.00 H51.00 N7.00 O14.00&quot;</span>
+<span class="i">BioSeq</span><span class="o">.</span><span class="i">toAverageMass</span> <span class="i">myPeptide</span> <span class="c">// val it : string = &quot;C34.00 H51.00 N7.00 O14.00&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -81,20 +81,20 @@ In the first step, we define our input sequence and the protease we want to use.
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="i">RBCS</span> <span class="o">=</span> 
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">RBCS</span> <span class="o">=</span> 
     <span class="s">&quot;&quot;&quot;MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
 <span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
 <span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFTG&quot;&quot;&quot;</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="f">ofAminoAcidString</span>
+    <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="i">trypsin</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="t">Digestion</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="f">getProteaseBy</span> <span class="s">&quot;Trypsin&quot;</span>
+<span class="k">let</span> <span class="i">trypsin</span> <span class="o">=</span> <span class="i">Digestion</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">getProteaseBy</span> <span class="s">&quot;Trypsin&quot;</span>
 </code></pre></td>
 </tr>
 </table>
 <p>With these two things done, digesting the protein is a piece of cake. For doing this, just use the <code>digest</code> function.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 28)" onmouseover="showTip(event, 'fs21', 28)" class="i">digestedRBCS</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="t">Digestion</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 31)" onmouseover="showTip(event, 'fs23', 31)" class="f">digest</span> <span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="i">trypsin</span> <span class="n">0</span> <span onmouseout="hideTip(event, 'fs15', 33)" onmouseover="showTip(event, 'fs15', 33)" class="i">RBCS</span> 
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">digestedRBCS</span> <span class="o">=</span> <span class="i">Digestion</span><span class="o">.</span><span class="i">BioArray</span><span class="o">.</span><span class="i">digest</span> <span class="i">trypsin</span> <span class="n">0</span> <span class="i">RBCS</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -214,7 +214,7 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 In reality, proteases don't always completely cut the protein completely down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="i">digestedRBCS&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 35)" onmouseover="showTip(event, 'fs18', 35)" class="t">Digestion</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="f">concernMissCleavages</span> <span class="n">0</span> <span class="n">2</span> <span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="i">digestedRBCS</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">digestedRBCS&#39;</span> <span class="o">=</span> <span class="i">Digestion</span><span class="o">.</span><span class="i">BioArray</span><span class="o">.</span><span class="i">concernMissCleavages</span> <span class="n">0</span> <span class="n">2</span> <span class="i">digestedRBCS</span>
 </code></pre></td>
 </tr>
 </table>
@@ -489,14 +489,14 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 <p>Let's imagine you have a given gene sequence and want to find out what the according protein might look like.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="i">myGene</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 40)" onmouseover="showTip(event, 'fs4', 40)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="f">ofNucleotideString</span> <span class="s">&quot;ATGGCTAGATCGATCGATCGGCTAACGTAA&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">myGene</span> <span class="o">=</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">ofNucleotideString</span> <span class="s">&quot;ATGGCTAGATCGATCGATCGGCTAACGTAA&quot;</span>
 </code></pre></td>
 </tr>
 </table>
 <p>Yikes! Unfortunately we got the 5'-3' strand. For proper transcription we should get the complementary strand first:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">myProperGene</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="f">map</span> <span onmouseout="hideTip(event, 'fs31', 45)" onmouseover="showTip(event, 'fs31', 45)" class="t">Nucleotides</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="f">complement</span> <span onmouseout="hideTip(event, 'fs26', 47)" onmouseover="showTip(event, 'fs26', 47)" class="i">myGene</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">myProperGene</span> <span class="o">=</span> <span class="i">Seq</span><span class="o">.</span><span class="i">map</span> <span class="i">Nucleotides</span><span class="o">.</span><span class="i">complement</span> <span class="i">myGene</span>
 </code></pre></td>
 </tr>
 </table>
@@ -506,49 +506,14 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="i">myProperGene</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 49)" onmouseover="showTip(event, 'fs4', 49)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="f">transcribeTemplateStrand</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 51)" onmouseover="showTip(event, 'fs4', 51)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="f">translate</span> <span class="n">0</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="f">toList</span> <span class="c">//val it : AminoAcids.AminoAcid list = [Met; Ala; Arg; Ser; Ile; Asp; Arg; Leu; Thr; Ter]</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">myProperGene</span>
+<span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">transcribeTemplateStrand</span>
+<span class="o">|&gt;</span> <span class="i">BioSeq</span><span class="o">.</span><span class="i">translate</span> <span class="n">0</span>
+<span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">toList</span> <span class="c">//val it : AminoAcids.AminoAcid list = [Met; Ala; Arg; Ser; Ile; Asp; Arg; Leu; Thr; Ter]</span>
 </code></pre></td>
 </tr>
 </table>
 
-<div class="tip" id="fs1">namespace BioFSharp</div>
-<div class="tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs3">namespace FSharp.Plotly</div>
-<div class="tip" id="fs4">module BioSeq<br /><br />from BioFSharp</div>
-<div class="tip" id="fs5">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.ofAminoAcidString</div>
-<div class="tip" id="fs6">module BioList<br /><br />from BioFSharp</div>
-<div class="tip" id="fs7">val ofAminoAcidSymbolString : s:#seq&lt;char&gt; -&gt; BioList.BioList&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: BioFSharp.BioList.ofAminoAcidSymbolString</div>
-<div class="tip" id="fs8">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs9">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioArray.ofNucleotideString</div>
-<div class="tip" id="fs10">val myPeptide : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioCollections.myPeptide<br /><em><br /><br />Peptide represented as a Bioseq<br />Peptide represented as a BioList<br />Peptide represented as a BioArray</em></div>
-<div class="tip" id="fs11">val toFormula : bs:seq&lt;#IBioItem&gt; -&gt; Map&lt;Elements.Element,float&gt;<br /><br />Full name: BioFSharp.BioSeq.toFormula</div>
-<div class="tip" id="fs12">module Formula<br /><br />from BioFSharp</div>
-<div class="tip" id="fs13">val toString : f:Formula.Formula -&gt; string<br /><br />Full name: BioFSharp.Formula.toString</div>
-<div class="tip" id="fs14">val toAverageMass : bs:seq&lt;#IBioItem&gt; -&gt; float<br /><br />Full name: BioFSharp.BioSeq.toAverageMass</div>
-<div class="tip" id="fs15">val RBCS : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioCollections.RBCS</div>
-<div class="tip" id="fs16">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioArray.ofAminoAcidString</div>
-<div class="tip" id="fs17">val trypsin : Digestion.Protease<br /><br />Full name: BioCollections.trypsin</div>
-<div class="tip" id="fs18">module Digestion<br /><br />from BioFSharp</div>
-<div class="tip" id="fs19">module Table<br /><br />from BioFSharp.Digestion</div>
-<div class="tip" id="fs20">val getProteaseBy : name:string -&gt; Digestion.Protease<br /><br />Full name: BioFSharp.Digestion.Table.getProteaseBy</div>
-<div class="tip" id="fs21">val digestedRBCS : Digestion.DigestedPeptide []<br /><br />Full name: BioCollections.digestedRBCS</div>
-<div class="tip" id="fs22">module BioArray<br /><br />from BioFSharp.Digestion</div>
-<div class="tip" id="fs23">val digest : protease:Digestion.Protease -&gt; proteinID:int -&gt; aas:AminoAcids.AminoAcid [] -&gt; Digestion.DigestedPeptide []<br /><br />Full name: BioFSharp.Digestion.BioArray.digest</div>
-<div class="tip" id="fs24">val digestedRBCS&#39; : Digestion.DigestedPeptide []<br /><br />Full name: BioCollections.digestedRBCS&#39;</div>
-<div class="tip" id="fs25">val concernMissCleavages : minMissCleavages:int -&gt; maxMisscleavages:int -&gt; digestedPeptidesA:Digestion.DigestedPeptide [] -&gt; Digestion.DigestedPeptide []<br /><br />Full name: BioFSharp.Digestion.BioArray.concernMissCleavages</div>
-<div class="tip" id="fs26">val myGene : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioCollections.myGene</div>
-<div class="tip" id="fs27">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioSeq.ofNucleotideString</div>
-<div class="tip" id="fs28">val myProperGene : seq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioCollections.myProperGene</div>
-<div class="tip" id="fs29">Multiple items<br />module Seq<br /><br />from FSharp.Plotly<br /><br />--------------------<br />module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs30">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
-<div class="tip" id="fs31">module Nucleotides<br /><br />from BioFSharp</div>
-<div class="tip" id="fs32">val complement : nuc:Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide<br /><br />Full name: BioFSharp.Nucleotides.complement</div>
-<div class="tip" id="fs33">val transcribeTemplateStrand : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioSeq.transcribeTemplateStrand</div>
-<div class="tip" id="fs34">val translate : nucleotideOffset:int -&gt; rnaSeq:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.translate</div>
-<div class="tip" id="fs35">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>
 
         </div>
         <div class="span3" >

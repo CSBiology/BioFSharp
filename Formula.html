@@ -50,11 +50,11 @@ BioFSharp offers a great bunch of functionality for working with molecules. All 
 <span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span>
+<span class="k">open</span> <span class="i">BioFSharp</span>
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">CO2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">parseFormulaString</span> <span class="s">&quot;CO2&quot;</span>
-<span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="f">toString</span> <span onmouseout="hideTip(event, 'fs2', 7)" onmouseover="showTip(event, 'fs2', 7)" class="i">CO2</span> <span class="c">// val it : string = &quot;C1.00 O2.00 &quot;</span>
+<span class="k">let</span> <span class="i">CO2</span> <span class="o">=</span> <span class="i">Formula</span><span class="o">.</span><span class="i">parseFormulaString</span> <span class="s">&quot;CO2&quot;</span>
+<span class="i">Formula</span><span class="o">.</span><span class="i">toString</span> <span class="i">CO2</span> <span class="c">// val it : string = &quot;C1.00 O2.00 &quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -62,8 +62,8 @@ BioFSharp offers a great bunch of functionality for working with molecules. All 
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="i">sprudel</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="f">add</span> <span onmouseout="hideTip(event, 'fs2', 11)" onmouseover="showTip(event, 'fs2', 11)" class="i">CO2</span> (<span onmouseout="hideTip(event, 'fs3', 12)" onmouseover="showTip(event, 'fs3', 12)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">H2O</span>)
-<span onmouseout="hideTip(event, 'fs3', 15)" onmouseover="showTip(event, 'fs3', 15)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 16)" onmouseover="showTip(event, 'fs5', 16)" class="f">toString</span> <span onmouseout="hideTip(event, 'fs6', 17)" onmouseover="showTip(event, 'fs6', 17)" class="i">sprudel</span> <span class="c">// val it : string = &quot;C1.00 H2.00 O3.00 &quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">sprudel</span> <span class="o">=</span> <span class="i">Formula</span><span class="o">.</span><span class="i">add</span> <span class="i">CO2</span> (<span class="i">Formula</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">H2O</span>)
+<span class="i">Formula</span><span class="o">.</span><span class="i">toString</span> <span class="i">sprudel</span> <span class="c">// val it : string = &quot;C1.00 H2.00 O3.00 &quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -79,14 +79,14 @@ BioFSharp offers a great bunch of functionality for working with molecules. All 
 <span class="l">9: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// create a monoisotopic carbon consisting only of C14</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="i">monoC14</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="t">Elements</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="f">createMono</span> <span class="s">&quot;C14&quot;</span> (<span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="t">Isotopes</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="i">C14</span>,<span class="n">1.</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 24)" onmouseover="showTip(event, 'fs11', 24)" class="t">Elements</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="p">Mono</span> 
+<span class="k">let</span> <span class="i">monoC14</span> <span class="o">=</span> 
+    <span class="i">Elements</span><span class="o">.</span><span class="i">createMono</span> <span class="s">&quot;C14&quot;</span> (<span class="i">Isotopes</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">C14</span>,<span class="n">1.</span>)
+    <span class="o">|&gt;</span> <span class="i">Elements</span><span class="o">.</span><span class="i">Mono</span> 
 
 <span class="c">/// exchanges all carbon in formula with monoIsotopic C14</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="f">lableWithC14</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="i">molecule</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 28)" onmouseover="showTip(event, 'fs3', 28)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="f">lableElement</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="i">molecule</span> <span onmouseout="hideTip(event, 'fs11', 31)" onmouseover="showTip(event, 'fs11', 31)" class="t">Elements</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="i">C</span> <span onmouseout="hideTip(event, 'fs10', 34)" onmouseover="showTip(event, 'fs10', 34)" class="i">monoC14</span>
+<span class="k">let</span> <span class="i">lableWithC14</span> <span class="i">molecule</span> <span class="o">=</span> <span class="i">Formula</span><span class="o">.</span><span class="i">lableElement</span> <span class="i">molecule</span> <span class="i">Elements</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">C</span> <span class="i">monoC14</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="i">radioactiveSprudel</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 36)" onmouseover="showTip(event, 'fs17', 36)" class="f">lableWithC14</span> <span onmouseout="hideTip(event, 'fs6', 37)" onmouseover="showTip(event, 'fs6', 37)" class="i">sprudel</span>
+<span class="k">let</span> <span class="i">radioactiveSprudel</span> <span class="o">=</span> <span class="i">lableWithC14</span> <span class="i">sprudel</span>
 </code></pre></td>
 </tr>
 </table>
@@ -94,35 +94,12 @@ BioFSharp offers a great bunch of functionality for working with molecules. All 
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 38)" onmouseover="showTip(event, 'fs3', 38)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 39)" onmouseover="showTip(event, 'fs23', 39)" class="f">monoisoMass</span> <span onmouseout="hideTip(event, 'fs6', 40)" onmouseover="showTip(event, 'fs6', 40)" class="i">sprudel</span> <span class="c">// val it : float = 62.00039392</span>
-<span onmouseout="hideTip(event, 'fs3', 41)" onmouseover="showTip(event, 'fs3', 41)" class="t">Formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="f">monoisoMass</span> <span onmouseout="hideTip(event, 'fs22', 43)" onmouseover="showTip(event, 'fs22', 43)" class="i">radioactiveSprudel</span> <span class="c">// val it : float = 64.00363591</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Formula</span><span class="o">.</span><span class="i">monoisoMass</span> <span class="i">sprudel</span> <span class="c">// val it : float = 62.00039392</span>
+<span class="i">Formula</span><span class="o">.</span><span class="i">monoisoMass</span> <span class="i">radioactiveSprudel</span> <span class="c">// val it : float = 64.00363591</span>
 </code></pre></td>
 </tr>
 </table>
 
-<div class="tip" id="fs1">namespace BioFSharp</div>
-<div class="tip" id="fs2">val CO2 : Formula.Formula<br /><br />Full name: Formula.CO2</div>
-<div class="tip" id="fs3">module Formula<br /><br />from BioFSharp</div>
-<div class="tip" id="fs4">val parseFormulaString : strFormula:string -&gt; Formula.Formula<br /><br />Full name: BioFSharp.Formula.parseFormulaString</div>
-<div class="tip" id="fs5">val toString : f:Formula.Formula -&gt; string<br /><br />Full name: BioFSharp.Formula.toString</div>
-<div class="tip" id="fs6">val sprudel : Map&lt;Elements.Element,float&gt;<br /><br />Full name: Formula.sprudel</div>
-<div class="tip" id="fs7">val add : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Map&lt;Elements.Element,float&gt;<br /><br />Full name: BioFSharp.Formula.add</div>
-<div class="tip" id="fs8">module Table<br /><br />from BioFSharp.Formula</div>
-<div class="tip" id="fs9">val H2O : Formula.Formula<br /><br />Full name: BioFSharp.Formula.Table.H2O</div>
-<div class="tip" id="fs10">val monoC14 : Elements.Element<br /><br />Full name: Formula.monoC14<br /><em><br /><br />&#160;create a monoisotopic carbon consisting only of C14</em></div>
-<div class="tip" id="fs11">module Elements<br /><br />from BioFSharp</div>
-<div class="tip" id="fs12">val createMono : symbol:string -&gt; x:Isotopes.Isotope * xcomp:float -&gt; Elements.MonoIsotopic<br /><br />Full name: BioFSharp.Elements.createMono</div>
-<div class="tip" id="fs13">module Isotopes<br /><br />from BioFSharp</div>
-<div class="tip" id="fs14">module Table<br /><br />from BioFSharp.Isotopes</div>
-<div class="tip" id="fs15">val C14 : Isotopes.Isotope<br /><br />Full name: BioFSharp.Isotopes.Table.C14</div>
-<div class="tip" id="fs16">union case Elements.Element.Mono: Elements.MonoIsotopic -&gt; Elements.Element</div>
-<div class="tip" id="fs17">val lableWithC14 : molecule:Formula.Formula -&gt; Formula.Formula<br /><br />Full name: Formula.lableWithC14<br /><em><br /><br />&#160;exchanges all carbon in formula with monoIsotopic C14</em></div>
-<div class="tip" id="fs18">val molecule : Formula.Formula</div>
-<div class="tip" id="fs19">val lableElement : f:Formula.Formula -&gt; unlabled:Elements.Element -&gt; labled:Elements.Element -&gt; Formula.Formula<br /><br />Full name: BioFSharp.Formula.lableElement</div>
-<div class="tip" id="fs20">module Table<br /><br />from BioFSharp.Elements</div>
-<div class="tip" id="fs21">val C : Elements.Element<br /><br />Full name: BioFSharp.Elements.Table.C</div>
-<div class="tip" id="fs22">val radioactiveSprudel : Formula.Formula<br /><br />Full name: Formula.radioactiveSprudel</div>
-<div class="tip" id="fs23">val monoisoMass : f:Formula.Formula -&gt; float<br /><br />Full name: BioFSharp.Formula.monoisoMass</div>
 
         </div>
         <div class="span3" >

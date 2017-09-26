@@ -77,76 +77,48 @@
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;FSharp.Care.dll&quot;</span>
 
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">Care</span>
+<span class="k">open</span> <span class="i">FSharp</span><span class="o">.</span><span class="i">Care</span>
 
 
 <span class="prep">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
 <span class="prep">#r</span> <span class="s">&quot;BioFSharp.IO.dll&quot;</span>
 <span class="prep">#r</span> <span class="s">&quot;BioFSharp.Vis.dll&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">BioFSharp</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">Vis</span>
+<span class="k">open</span> <span class="i">BioFSharp</span>
+<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">Vis</span>
 
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">a</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">set</span> [ <span class="s">&quot;Earth&quot;</span>; <span class="s">&quot;Jupiter&quot;</span>; <span class="s">&quot;Mars&quot;</span>; <span class="s">&quot;Mercury&quot;</span>; ]
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">b</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="f">set</span> [ <span class="s">&quot;Earth&quot;</span>;  <span class="s">&quot;Mercury&quot;</span>; ]
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">c</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="f">set</span> [ <span class="s">&quot;Jupiter&quot;</span>; <span class="s">&quot;Mars&quot;</span>; <span class="s">&quot;Mercury&quot;</span>; ]
+<span class="k">let</span> <span class="i">a</span> <span class="o">=</span> <span class="i">set</span> [ <span class="s">&quot;Earth&quot;</span>; <span class="s">&quot;Jupiter&quot;</span>; <span class="s">&quot;Mars&quot;</span>; <span class="s">&quot;Mercury&quot;</span>; ]
+<span class="k">let</span> <span class="i">b</span> <span class="o">=</span> <span class="i">set</span> [ <span class="s">&quot;Earth&quot;</span>;  <span class="s">&quot;Mercury&quot;</span>; ]
+<span class="k">let</span> <span class="i">c</span> <span class="o">=</span> <span class="i">set</span> [ <span class="s">&quot;Jupiter&quot;</span>; <span class="s">&quot;Mars&quot;</span>; <span class="s">&quot;Mercury&quot;</span>; ]
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">label</span>  <span class="o">=</span> [|<span class="s">&quot;A&quot;</span>; <span class="s">&quot;B&quot;</span>; <span class="s">&quot;C&quot;</span>|]
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">colors</span> <span class="o">=</span> 
+<span class="k">let</span> <span class="i">label</span>  <span class="o">=</span> [|<span class="s">&quot;A&quot;</span>; <span class="s">&quot;B&quot;</span>; <span class="s">&quot;C&quot;</span>|]
+<span class="k">let</span> <span class="i">colors</span> <span class="o">=</span> 
     [| 
-        <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="t">Colors</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="t">Office</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="i">grey</span>;
-        <span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="t">Colors</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="t">Office</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="i">blue</span> ;
-        <span onmouseout="hideTip(event, 'fs11', 22)" onmouseover="showTip(event, 'fs11', 22)" class="t">Colors</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="t">Table</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="t">Office</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="i">yellow</span>;
-    |] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="f">map</span> <span onmouseout="hideTip(event, 'fs11', 28)" onmouseover="showTip(event, 'fs11', 28)" class="t">Colors</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="f">toWebColor</span>
+        <span class="i">Colors</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">Office</span><span class="o">.</span><span class="i">grey</span>;
+        <span class="i">Colors</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">Office</span><span class="o">.</span><span class="i">blue</span> ;
+        <span class="i">Colors</span><span class="o">.</span><span class="i">Table</span><span class="o">.</span><span class="i">Office</span><span class="o">.</span><span class="i">yellow</span>;
+    |] <span class="o">|&gt;</span> <span class="i">Array</span><span class="o">.</span><span class="i">map</span> <span class="i">Colors</span><span class="o">.</span><span class="i">toWebColor</span>
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="i">venn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="t">Venn</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 32)" onmouseover="showTip(event, 'fs22', 32)" class="f">ofSetList</span> <span onmouseout="hideTip(event, 'fs9', 33)" onmouseover="showTip(event, 'fs9', 33)" class="i">label</span> [|<span onmouseout="hideTip(event, 'fs5', 34)" onmouseover="showTip(event, 'fs5', 34)" class="i">a</span>; <span onmouseout="hideTip(event, 'fs7', 35)" onmouseover="showTip(event, 'fs7', 35)" class="i">b</span>; <span onmouseout="hideTip(event, 'fs8', 36)" onmouseover="showTip(event, 'fs8', 36)" class="i">c</span>|]
+<span class="k">let</span> <span class="i">venn</span> <span class="o">=</span> <span class="i">Venn</span><span class="o">.</span><span class="i">ofSetList</span> <span class="i">label</span> [|<span class="i">a</span>; <span class="i">b</span>; <span class="i">c</span>|]
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="i">chord</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="t">Venn</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 39)" onmouseover="showTip(event, 'fs24', 39)" class="f">toChordConnections</span> <span onmouseout="hideTip(event, 'fs9', 40)" onmouseover="showTip(event, 'fs9', 40)" class="i">label</span> <span onmouseout="hideTip(event, 'fs20', 41)" onmouseover="showTip(event, 'fs20', 41)" class="i">venn</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 42)" onmouseover="showTip(event, 'fs21', 42)" class="t">Venn</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="f">chordConnectionsToString</span>
+<span class="k">let</span> <span class="i">chord</span> <span class="o">=</span> 
+    <span class="i">Venn</span><span class="o">.</span><span class="i">toChordConnections</span> <span class="i">label</span> <span class="i">venn</span>
+    <span class="o">|&gt;</span> <span class="i">Venn</span><span class="o">.</span><span class="i">chordConnectionsToString</span>
 
 
-<span onmouseout="hideTip(event, 'fs3', 44)" onmouseover="showTip(event, 'fs3', 44)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 45)" onmouseover="showTip(event, 'fs4', 45)" class="i">Vis</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 46)" onmouseover="showTip(event, 'fs26', 46)" class="t">Chord</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 47)" onmouseover="showTip(event, 'fs27', 47)" class="f">show</span> <span class="n">1</span> <span class="n">450</span> <span class="n">450</span>  <span onmouseout="hideTip(event, 'fs9', 48)" onmouseover="showTip(event, 'fs9', 48)" class="i">label</span>  <span onmouseout="hideTip(event, 'fs10', 49)" onmouseover="showTip(event, 'fs10', 49)" class="i">colors</span> <span onmouseout="hideTip(event, 'fs23', 50)" onmouseover="showTip(event, 'fs23', 50)" class="i">chord</span>
+<span class="i">BioFSharp</span><span class="o">.</span><span class="i">Vis</span><span class="o">.</span><span class="i">Chord</span><span class="o">.</span><span class="i">show</span> <span class="n">1</span> <span class="n">450</span> <span class="n">450</span>  <span class="i">label</span>  <span class="i">colors</span> <span class="i">chord</span>
 
 
-<span onmouseout="hideTip(event, 'fs3', 51)" onmouseover="showTip(event, 'fs3', 51)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 52)" onmouseover="showTip(event, 'fs4', 52)" class="i">Vis</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 53)" onmouseover="showTip(event, 'fs26', 53)" class="t">Chord</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 54)" onmouseover="showTip(event, 'fs28', 54)" class="f">showInBrowser</span> <span class="n">1</span> <span class="n">450</span> <span class="n">450</span>  <span onmouseout="hideTip(event, 'fs9', 55)" onmouseover="showTip(event, 'fs9', 55)" class="i">label</span>  <span onmouseout="hideTip(event, 'fs10', 56)" onmouseover="showTip(event, 'fs10', 56)" class="i">colors</span> <span onmouseout="hideTip(event, 'fs23', 57)" onmouseover="showTip(event, 'fs23', 57)" class="i">chord</span>
+<span class="i">BioFSharp</span><span class="o">.</span><span class="i">Vis</span><span class="o">.</span><span class="i">Chord</span><span class="o">.</span><span class="i">showInBrowser</span> <span class="n">1</span> <span class="n">450</span> <span class="n">450</span>  <span class="i">label</span>  <span class="i">colors</span> <span class="i">chord</span>
 </code></pre></td>
 </tr>
 </table>
 <h2><a name="Example" class="anchor" href="#Example">Example</a></h2>
 <p>The following example shows how easy it is to start working with sequences:</p>
 
-<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs2">namespace FSharp.Care</div>
-<div class="tip" id="fs3">namespace BioFSharp</div>
-<div class="tip" id="fs4">namespace BioFSharp.Vis</div>
-<div class="tip" id="fs5">val a : Set&lt;string&gt;<br /><br />Full name: WebLogo.a</div>
-<div class="tip" id="fs6">val set : elements:seq&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt; (requires comparison)<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.set</div>
-<div class="tip" id="fs7">val b : Set&lt;string&gt;<br /><br />Full name: WebLogo.b</div>
-<div class="tip" id="fs8">val c : Set&lt;string&gt;<br /><br />Full name: WebLogo.c</div>
-<div class="tip" id="fs9">val label : string []<br /><br />Full name: WebLogo.label</div>
-<div class="tip" id="fs10">val colors : string []<br /><br />Full name: WebLogo.colors</div>
-<div class="tip" id="fs11">module Colors<br /><br />from FSharp.Care</div>
-<div class="tip" id="fs12">module Table<br /><br />from FSharp.Care.Colors</div>
-<div class="tip" id="fs13">module Office<br /><br />from FSharp.Care.Colors.Table</div>
-<div class="tip" id="fs14">val grey : Colors.Color<br /><br />Full name: FSharp.Care.Colors.Table.Office.grey</div>
-<div class="tip" id="fs15">val blue : Colors.Color<br /><br />Full name: FSharp.Care.Colors.Table.Office.blue</div>
-<div class="tip" id="fs16">val yellow : Colors.Color<br /><br />Full name: FSharp.Care.Colors.Table.Office.yellow</div>
-<div class="tip" id="fs17">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs18">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs19">val toWebColor : c:Colors.Color -&gt; string<br /><br />Full name: FSharp.Care.Colors.toWebColor</div>
-<div class="tip" id="fs20">val venn : Map&lt;string,Venn.VennSet&lt;string,string&gt;&gt;<br /><br />Full name: WebLogo.venn</div>
-<div class="tip" id="fs21">module Venn<br /><br />from BioFSharp.Vis</div>
-<div class="tip" id="fs22">val ofSetList : labels:string array -&gt; sets:Set&lt;&#39;a&gt; array -&gt; Map&lt;string,Venn.VennSet&lt;string,&#39;a&gt;&gt; (requires comparison)<br /><br />Full name: BioFSharp.Vis.Venn.ofSetList</div>
-<div class="tip" id="fs23">val chord : string<br /><br />Full name: WebLogo.chord</div>
-<div class="tip" id="fs24">val toChordConnections : labels:&#39;a array -&gt; genericVenn:Venn.GenericVenn&lt;&#39;a,&#39;b&gt; -&gt; seq&lt;seq&lt;Venn.ChordConnections&gt;&gt; (requires equality and comparison)<br /><br />Full name: BioFSharp.Vis.Venn.toChordConnections</div>
-<div class="tip" id="fs25">val chordConnectionsToString : d:seq&lt;seq&lt;Venn.ChordConnections&gt;&gt; -&gt; string<br /><br />Full name: BioFSharp.Vis.Venn.chordConnectionsToString</div>
-<div class="tip" id="fs26">module Chord<br /><br />from BioFSharp.Vis</div>
-<div class="tip" id="fs27">val show : tickInterval:int -&gt; width:int -&gt; height:int -&gt; labels:&#39;a array -&gt; clabels:string array -&gt; data:string -&gt; unit<br /><br />Full name: BioFSharp.Vis.Chord.show</div>
-<div class="tip" id="fs28">val showInBrowser : tickInterval:int -&gt; width:int -&gt; height:int -&gt; labels:&#39;a array -&gt; clabels:string array -&gt; data:string -&gt; unit<br /><br />Full name: BioFSharp.Vis.Chord.showInBrowser</div>
 
         </div>
         <div class="span3" >
