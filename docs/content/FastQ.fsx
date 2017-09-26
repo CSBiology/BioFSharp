@@ -1,87 +1,73 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#r "../../packages/build/FSharp.Plotly/lib/net45/Fsharp.Plotly.dll"
-open FSharp.Plotly
-
 #I "../../bin"
-#r "BioFSharp.dll"
-#r "BioFSharp.IO.dll"
-#r "FSharp.Care.dll"
-#r "FSharp.Care.IO.dll"
-
+#r "../../bin/BioFSharp.dll"
+#r "../../bin/BioFSharp.IO.dll"
+#r "../../bin/FSharp.Care.dll"
+#r "../../bin/FSharp.Care.IO.dll"
 
 (**
-FastA format I/O
-================
-One of the various biology-associated file formats that can be manipulated using BioFSharp is the FastA format.
-The FastA format can be used to represent sequences of amino acids or nucleotides written in single-letter code.
-<br>
-\>sp|P19532| ribosomal protein L20 GN=rpl20 PE=rpl20.p01
-MTRVKRGNVSRKRHKKILNMSKGFRGAASTLFRTANQQNMKALRYSYRNRRQKKRDFRRM
-WITRVNSAVRRYGLNYSEFMNYLKTHKIQLNRKVIAQLSICDPEAFMQLLLF*
-<br>
-One sequence constists of two parts: The first line (Header) starting with a ">" is followed by a sequence identification code which should represent a unique description of the sequence. 
-Subsequent lines contain the sequence itself, which is separated into chunks of 60 to 80 characters per line.
-For further information about the format please visit [NCBI - FASTA](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp).
 
-Reading FastA files
--------------------
+#FastQ
+
+<br>
+<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/FastQ.fs">&lt;/&gt;view source code</a>
+<a id="Author" href="https://github.com/MikhayN">&#128366;view author of this tutorial</a>
+<br><br>
 *)
 
+(*** hide ***)
+open System
 open BioFSharp
 open BioFSharp.IO
-
-let fileDir = __SOURCE_DIRECTORY__ + "/data/"  //FASTAExample1.fasta"
-
-//reads from file to an array of FastaItems.
-let sequences = 
-    fileDir + "Chlamy_Cp.fastA"
-    |> FastA.fromFile BioArray.ofAminoAcidString
-
-
-(** 
-Analogously it is possible to directly read compressed fastA files:
-*)
-let sequences2 = 
-    fileDir + "Chlamy_Cp.gz"
-    |> FastA.fromFile BioArray.ofAminoAcidString
+open FSharp.Care
+open FSharp.Care.IO
 
 (**
-
-In both cases it is worth noticing that `BioArray.ofAminoAcidString` can be replaced by any converter function.
-The converter maps from the sequence of character to either amino acid or nucleotide sequences. Therefore use `BioArray.ofAminoAcidString` for petide and `BioArray.ofNucleotideString` for gene FastA files, respectively.
-It is of course also possible to introduce any converter function.
-
-
-
-Writing FastA files
--------------------
-
-In order to write a collection of sequences (`FastaItem<_>`) into a file use the following function.
-
+This module allows to parse FASTQ format data with original 4-lines entries into this record type
 *)
-sequences
-|> FastA.write BioItem.symbol (fileDir + "FASTAExample3.fasta")  
 
+/// FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry
+type FastqItem<'a,'b> = {
+    Header          : string
+    Sequence        : 'a
+    QualityHeader   : string
+    QualitySequence : 'b      
+}
 
 (**
-Example: protein length distribution
-------------------------------------
+To be able to use this parser you need to define two converter functions, 
+one example for each you can also find in our module, but you also may need to write your own.
 
-With the FastA reader it is straightforward to access the protein length distribution:
+We can convert sequence string to predefined option type of Amino Acids, using converter function
+from our library 'BioFSharp.BioItemsConverter.OptionConverter'
 *)
 
-let sequencesLength = 
-    fileDir + "Chlamy_Cp.fastA"
-    |> FastA.fromFile BioArray.ofAminoAcidString
-    |> Seq.map (fun item -> item.Sequence.Length)
+/// get characters as sequence units
+let converterToAA string =
+    string
+    |> String.toCharArray
+    |> Array.map (BioFSharp.BioItemsConverter.OptionConverter.charToOptionAminoAcid)
 
-(*** define-output:lengthHisto1 ***)
-Chart.Histogram sequencesLength
-|> Chart.withX_AxisStyle("length")
-|> Chart.withY_AxisStyle("#count")
-(*** include-it:lengthHisto1 ***)
+(**
+If you have following possible values for quality sequence:
+'!""#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~',
+with Sanger format, that can encode a Phred quality score from 0 to 93 using ASCII 33 to 126, 
+then you can use our converting function:
+*)
 
+/// get Phred quality score
+let qualityConvertFn string =
+    string
+    |> String.toCharArray
+    |> Array.map (fun i -> i.GetHashCode()-33)
 
+(**
+And then you can easily use this module to read your FastQ file
+*)
 
+let yourFastqFile = (__SOURCE_DIRECTORY__ + "/data/FastQtest.fastq")
+
+let FastQSequence = 
+    FastQ.fromFile converterToAA qualityConvertFn yourFastqFile

@@ -73,7 +73,7 @@
                         </ul>
                     }
                 </li>
-                <li><a href="@Root/SeqProperties.html">Sequence Properties</a></li>
+                <li><a href="@Root/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="@Root/Alignment.html">Alignment</a></li>
                 <li><a href="@Root/MotiveSearch.html">Motive search</a></li>
@@ -93,10 +93,30 @@
                 <li class="nav-header">File I/O</li>
                 <li><a href="@Root/FastA.html">FastA</a></li>
                 <li><a href="@Root/FastQ.html">FastQ</a></li>
-                <li><a href="@Root/GFF.html">GFF format</a></li>
-                <li><a href="@Root/Genebank.html">Genebank</a></li>
-                <li><a href="@Root/Clustal.html">Clustal</a></li>
-                <li><a href="@Root/Newick.html">Newick</a></li>                
+                <li><a href="@Root/GFF3.html">GFF format</a></li>
+                <li><a href="@Root/GenBank.html">GenBank</a></li>
+                <li>
+                    <a href="@Root/Clustal.html">Clustal</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Clustal.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/Clustal.html#Clustal-Format">Format</a></li>
+                        <li><a href="@Root/Clustal.html#Reading-Clustal-Files">Reading</a></li>
+                        <li><a href="@Root/NClustal.html#Writing-Clustal-Files">Writing</a></li>
+                    </ul>
+                    }
+                </li>        
+                <li>
+                    <a href="@Root/Newick.html">Newick</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Newick.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/Newick.html#Newick-Format">Format</a></li>
+                        <li><a href="@Root/Newick.html#Reading-Newick-Files">Reading</a></li>
+                        <li><a href="@Root/Newick.html#Writing-Newick-Files">Writing</a></li>
+                    </ul>
+                    }
+                </li>                
                 <li><a href="@Root/Obo.html">Obo ontology format</a></li>
                 <li><a href="@Root/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>

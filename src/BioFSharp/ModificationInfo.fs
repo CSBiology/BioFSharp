@@ -4,12 +4,15 @@
 //open System.Reflection 
 //open System.Runtime.Serialization 
 
+/// Functionality for creating formula modifications
 module ModificationInfo =
     
     open FSharp.Care.Collections
-        
+    
+    /// Specifier for location of modification
     type ModLocation = | Residual = 0 | Cterm = 1 | Nterm = 2 | ProteinCterm = 3 | ProteinNterm = 4 | Isotopic = 5 
 
+    /// Modification consisting of name, location specifier and a formula modifier
     [<CustomEquality; CustomComparison>]
     type Modification = {
          Name     : string
@@ -17,12 +20,12 @@ module ModificationInfo =
          // Labeled Atom
          Modify   : Formula.Formula -> Formula.Formula 
                         }
-                        
+                        ///Returns true if both modifications have the same name, else returns false
                         override x.Equals(yobj) =
                             match yobj with
                             | :? Modification as y -> (x.Name = y.Name)
                             | _ -> false
- 
+                        ///Returns hash code of name of modification
                         override x.GetHashCode() = hash x.Name
                         
                         interface System.IComparable with
@@ -32,19 +35,26 @@ module ModificationInfo =
                                 | _ -> invalidArg "yobj" "cannot compare values of different types"
 
                         interface IBioItem with
+                            ///Returns name of modification
                             member this.Name = this.Name
-                            member this.Symbol = '#'             
+                            ///Returns '#'
+                            member this.Symbol = '#'         
+                            ///Returns false 
                             member this.isTerminator = false
+                            ///Returns false 
                             member this.isGap        = false
-                            
+                            ///Returns formula of modification
                             member this.Formula  = this.Modify Formula.emptyFormula
 
+    /// Create modification, where molecule will be modified by application of given modifier
     let createModification name location modifier =
         { Name = name; Location = location; Modify = modifier}           
 
+    /// Create modification, where elements of given formula will be added to molecule
     let createModificationWithAdd name location formula =
         createModification name location (Formula.add (Formula.parseFormulaString formula))            
 
+    /// Create modification, where elements of given formula will be substracted molecule
     let createModificationWithSubstract name location formula =
         createModification name location (Formula.substract (Formula.parseFormulaString formula))    
 
@@ -74,7 +84,7 @@ module ModificationInfo =
     let isGap (md:Modification) =
         BioItem.isGap md
 
- 
+    ///Contains frequent modifications
     module Table = 
         
         let N15    = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
