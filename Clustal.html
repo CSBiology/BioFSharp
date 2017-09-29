@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Clustal Format
+    <title>Clustal format
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
@@ -35,7 +35,7 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Clustal-Format" class="anchor" href="#Clustal-Format">Clustal Format</a></h1>
+<h1><a name="Clustal-format" class="anchor" href="#Clustal-format">Clustal format</a></h1>
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/Clustal.fs">&lt;/&gt;view source code</a>
 <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustal.html" >&#128194;View module documentation</a>
 <a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
@@ -109,7 +109,7 @@ O_sativa           RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--<b
 <button type="button" class="btn" data-toggle="collapse" data-target="#clustalExample">Hide again</button>  
 </div>
 <br>
-<h2><a name="Reading-Clustal-Files" class="anchor" href="#Reading-Clustal-Files">Reading Clustal Files</a></h2>
+<h2><a name="Reading-Clustal-files" class="anchor" href="#Reading-Clustal-files">Reading Clustal files</a></h2>
 <p>To read Clustal files, just use the ofFile function located in the Clustal module of the BioFSharp.IO namespace. It does not need anything but the file path and will return the alignment as <code>Alignment</code>.<br />
 Keep in mind that if your clustal file containts numbers representing the character count at the line end. They and their line space will be included in the Alignment. Make sure to filter them out if not needed.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -130,7 +130,7 @@ Keep in mind that if your clustal file containts numbers representing the charac
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="Writing-Clustal-Files" class="anchor" href="#Writing-Clustal-Files">Writing Clustal Files</a></h2>
+<h2><a name="Writing-Clustal-files" class="anchor" href="#Writing-Clustal-files">Writing Clustal files</a></h2>
 <p>Work in progress...</p>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
@@ -167,18 +167,24 @@ Keep in mind that if your clustal file containts numbers representing the charac
                     <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
                 <li class="nav-header">File I/O</li>
-                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
-                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
-                <li><a href="/BioFSharp/GenBank.html">GenBank</a></li>
                 <li>
                     <a href="/BioFSharp/Clustal.html">Clustal</a>
                     <ul class="nav nav-list">
-                        <li><a href="/BioFSharp/Clustal.html#Clustal-Format">Format</a></li>
-                        <li><a href="/BioFSharp/Clustal.html#Reading-Clustal-Files">Reading</a></li>
-                        <li><a href="/BioFSharp/NClustal.html#Writing-Clustal-Files">Writing</a></li>
+                        <li><a href="/BioFSharp/Clustal.html#Clustal-format">Format</a></li>
+                        <li><a href="/BioFSharp/Clustal.html#Reading-Clustal-files">Reading</a></li>
+                        <li><a href="/BioFSharp/Clustal.html#Writing-Clustal-files">Writing</a></li>
                     </ul>
-                </li>        
+                </li>      
+                <li>
+                    <a href="/BioFSharp/FastA.html">FastA</a>
+                </li>   
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li>
+                    <a href="/BioFSharp/GenBank.html">GenBank</a>
+                </li>  
+                <li>
+                    <a href="/BioFSharp/GFF3.html">GFF3</a>
+                </li>    
                 <li>
                     <a href="/BioFSharp/Newick.html">Newick</a>
                 </li>                

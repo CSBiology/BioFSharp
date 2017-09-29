@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Introducing GFF3Parser
+    <title>GFF3 format
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
@@ -35,7 +35,7 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Introducing-GFF3Parser" class="anchor" href="#Introducing-GFF3Parser">Introducing GFF3Parser</a></h1>
+<h1><a name="GFF3-format" class="anchor" href="#GFF3-format">GFF3 format</a></h1>
 <br>
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GFF3Parser.fs">&lt;/&gt;view source code</a>
 <a id="Author" href="https://github.com/bvenn">&#128366;view author of this tutorial</a>
@@ -157,7 +157,7 @@ Below you can see an example GFF3 file.
 <p>Directives (marked with "##[...]") provide additional information like the gff-version which has to be the first line of each file ("##gff-version 3[...]").
 Comment lines have to start with a single "#[...]". It is possible that sequences in FastA format are at the end of the file. This has to be announced by a "##FASTA" directive line.</p>
 <p>For further information visit <a href="https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md">GFF3-Specifications</a>.</p>
-<h2><a name="How-to-use-GFF3Parser" class="anchor" href="#How-to-use-GFF3Parser">How to use GFF3Parser</a></h2>
+<h2><a name="Reading-GFF3-files" class="anchor" href="#Reading-GFF3-files">Reading GFF3 files</a></h2>
 <p>To read in a gff you have to insert a filepath and optional a FASTA converter. For further information about FASTA check the <a href="https://csbiology.github.io/BioFSharp/Readers.html#FastA">FASTA section</a> on this site
 or visit <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html">API Reference - FastA</a>.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -180,7 +180,7 @@ or visit <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-f
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="How-to-use-GFF3SanityCheck" class="anchor" href="#How-to-use-GFF3SanityCheck">How to use GFF3SanityCheck</a></h2>
+<h3><a name="How-to-use-GFF3SanityCheck" class="anchor" href="#How-to-use-GFF3SanityCheck">How to use GFF3SanityCheck</a></h3>
 <p>The GFF3SanityCheck prints wheter your GFF3 file is valid or not. It returns all specified errors including the lines in which the errors occured.
 In contrast to GFF2 the field 3 (type, feature or method) of a GFF3 entry is restricted to terms defined by the sequence ontology (SO) so this validator checks if the entry is a valid SO term.
 You can find new versions of the SO at (<a href="https://sourceforge.net/projects/song/files/SO_Feature_Annotation).">https://sourceforge.net/projects/song/files/SO_Feature_Annotation).</a></p>
@@ -204,7 +204,7 @@ You can find new versions of the SO at (<a href="https://sourceforge.net/project
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="How-to-use-GFF3RelationshipSearch" class="anchor" href="#How-to-use-GFF3RelationshipSearch">How to use GFF3RelationshipSearch</a></h2>
+<h3><a name="How-to-use-GFF3RelationshipSearch" class="anchor" href="#How-to-use-GFF3RelationshipSearch">How to use GFF3RelationshipSearch</a></h3>
 <p>You also can do a simple search for "<em>Parent</em> - <em>child of</em>" relationships giving back all genomic features which contain the <em>searchterm</em> in <strong>ID/Id</strong> or <strong>Parent</strong> field.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -220,7 +220,7 @@ You can find new versions of the SO at (<a href="https://sourceforge.net/project
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="How-to-use-GFF3Writer" class="anchor" href="#How-to-use-GFF3Writer">How to use GFF3Writer</a></h2>
+<h2><a name="Writing-GFF3-files" class="anchor" href="#Writing-GFF3-files">Writing GFF3 files</a></h2>
 <p>This writer takes GFF lines in stacks of 20,000 items and write/append them to a given filepath.
 If FastA sequences are included they are appended by a FastA writer described in the <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html">API Reference - FastA</a>.</p>
 <p><em>Note: The order of key value pairs in field 9 (attributes) may be changed.</em></p>
@@ -281,13 +281,24 @@ If FastA sequences are included they are appended by a FastA writer described in
                     <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
                 <li class="nav-header">File I/O</li>
-                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
-                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
-                <li><a href="/BioFSharp/GenBank.html">GenBank</a></li>
                 <li>
                     <a href="/BioFSharp/Clustal.html">Clustal</a>
-                </li>        
+                </li>      
+                <li>
+                    <a href="/BioFSharp/FastA.html">FastA</a>
+                </li>   
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li>
+                    <a href="/BioFSharp/GenBank.html">GenBank</a>
+                </li>  
+                <li>
+                    <a href="/BioFSharp/GFF3.html">GFF3</a>
+                    <ul class="nav nav-list">
+                        <li><a href="/BioFSharp/GFF3.html#GFF3-format">Format</a></li>
+                        <li><a href="/BioFSharp/GFF3.html#Reading-GFF3-files">Reading</a></li>
+                        <li><a href="/BioFSharp/GFF3.html#Writing-GFF3-files">Writing</a></li>
+                    </ul>
+                </li>    
                 <li>
                     <a href="/BioFSharp/Newick.html">Newick</a>
                 </li>                

@@ -211,7 +211,7 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 <button type="button" class="btn" data-toggle="collapse" data-target="#digested">Hide again</button>  
 </div>
 <br>
-In reality, proteases don't always completely cut the protein completely down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
+In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="i">digestedRBCS&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 35)" onmouseover="showTip(event, 'fs18', 35)" class="t">Digestion</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="f">concernMissCleavages</span> <span class="n">0</span> <span class="n">2</span> <span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="i">digestedRBCS</span>
@@ -582,13 +582,19 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
                     <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
                 </li>
                 <li class="nav-header">File I/O</li>
-                <li><a href="/BioFSharp/FastA.html">FastA</a></li>
-                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li><a href="/BioFSharp/GFF3.html">GFF format</a></li>
-                <li><a href="/BioFSharp/GenBank.html">GenBank</a></li>
                 <li>
                     <a href="/BioFSharp/Clustal.html">Clustal</a>
-                </li>        
+                </li>      
+                <li>
+                    <a href="/BioFSharp/FastA.html">FastA</a>
+                </li>   
+                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                <li>
+                    <a href="/BioFSharp/GenBank.html">GenBank</a>
+                </li>  
+                <li>
+                    <a href="/BioFSharp/GFF3.html">GFF3</a>
+                </li>    
                 <li>
                     <a href="/BioFSharp/Newick.html">Newick</a>
                 </li>                
