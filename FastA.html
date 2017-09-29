@@ -57,15 +57,15 @@ For further information about the format please visit <a href="https://blast.ncb
 <span class="l">8: </span>
 <span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">BioFSharp</span>
-<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">IO</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">BioFSharp</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">IO</span>
 
-<span class="k">let</span> <span class="i">fileDir</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/&quot;</span>  <span class="c">//FASTAExample1.fasta&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">fileDir</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/&quot;</span>  <span class="c">//FASTAExample1.fasta&quot;</span>
 
 <span class="c">//reads from file to an array of FastaItems.</span>
-<span class="k">let</span> <span class="i">sequences</span> <span class="o">=</span> 
-    <span class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.fastA&quot;</span>
-    <span class="o">|&gt;</span> <span class="i">FastA</span><span class="o">.</span><span class="i">fromFile</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="i">sequences</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.fastA&quot;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="f">ofAminoAcidString</span>
 </code></pre></td>
 </tr>
 </table>
@@ -74,9 +74,9 @@ For further information about the format please visit <a href="https://blast.ncb
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">sequences2</span> <span class="o">=</span> 
-    <span class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.gz&quot;</span>
-    <span class="o">|&gt;</span> <span class="i">FastA</span><span class="o">.</span><span class="i">fromFile</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">sequences2</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.gz&quot;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="f">ofAminoAcidString</span>
 </code></pre></td>
 </tr>
 </table>
@@ -88,8 +88,8 @@ It is of course also possible to introduce any converter function.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">sequences</span>
-<span class="o">|&gt;</span> <span class="i">FastA</span><span class="o">.</span><span class="i">write</span> <span class="i">BioItem</span><span class="o">.</span><span class="i">symbol</span> (<span class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;FASTAExample3.fasta&quot;</span>)  
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="i">sequences</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs7', 20)" onmouseover="showTip(event, 'fs7', 20)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="f">write</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="t">BioItem</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="f">symbol</span> (<span onmouseout="hideTip(event, 'fs5', 24)" onmouseover="showTip(event, 'fs5', 24)" class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;FASTAExample3.fasta&quot;</span>)  
 </code></pre></td>
 </tr>
 </table>
@@ -100,10 +100,10 @@ It is of course also possible to introduce any converter function.</p>
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">sequencesLength</span> <span class="o">=</span> 
-    <span class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.fastA&quot;</span>
-    <span class="o">|&gt;</span> <span class="i">FastA</span><span class="o">.</span><span class="i">fromFile</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidString</span>
-    <span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">map</span> (<span class="k">fun</span> <span class="i">item</span> <span class="k">-&gt;</span> <span class="i">item</span><span class="o">.</span><span class="i">Sequence</span><span class="o">.</span><span class="i">Length</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="i">sequencesLength</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs5', 26)" onmouseover="showTip(event, 'fs5', 26)" class="i">fileDir</span> <span class="o">+</span> <span class="s">&quot;Chlamy_Cp.fastA&quot;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs7', 27)" onmouseover="showTip(event, 'fs7', 27)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 28)" onmouseover="showTip(event, 'fs8', 28)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs9', 29)" onmouseover="showTip(event, 'fs9', 29)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 30)" onmouseover="showTip(event, 'fs10', 30)" class="f">ofAminoAcidString</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 31)" onmouseover="showTip(event, 'fs16', 31)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="i">item</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="i">item</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="i">Sequence</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 36)" onmouseover="showTip(event, 'fs20', 36)" class="i">Length</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -111,19 +111,43 @@ It is of course also possible to introduce any converter function.</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Chart</span><span class="o">.</span><span class="i">Histogram</span> <span class="i">sequencesLength</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">withX_AxisStyle</span>(<span class="s">&quot;length&quot;</span>)
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">withY_AxisStyle</span>(<span class="s">&quot;#count&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="f">Histogram</span> <span onmouseout="hideTip(event, 'fs15', 39)" onmouseover="showTip(event, 'fs15', 39)" class="i">sequencesLength</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 41)" onmouseover="showTip(event, 'fs23', 41)" class="f">withX_AxisStyle</span>(<span class="s">&quot;length&quot;</span>)
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 42)" onmouseover="showTip(event, 'fs21', 42)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 43)" onmouseover="showTip(event, 'fs24', 43)" class="f">withY_AxisStyle</span>(<span class="s">&quot;#count&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-<div id="b423d30d-ab6f-4479-bc7c-f4cb80a565ce" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
+<div id="a70039a3-1cb2-4ea8-8fb5-9bc170c54af8" style="width: 700px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>        
   <script>
     var data = [{"type":"histogram","x":[161,688,47,419,113,525,216,294,38,96,279,93,137,123,180,154,752,258,353,353,34,142,169,101,35,63,354,89,45,32,509,738,911,138,198,192,83,627,823,45,39,38,713,3121,736,476,509,38,501,83,176,131,470,492,1996,134,42,239,43,353,2972,462,82,33,490,589,382,444,547,506,383,163,293,369],"marker":{}}];
     var layout = {"xaxis":{"title":"length"},"yaxis":{"title":"#count"}};
-    Plotly.newPlot('b423d30d-ab6f-4479-bc7c-f4cb80a565ce', data, layout);
+    Plotly.newPlot('a70039a3-1cb2-4ea8-8fb5-9bc170c54af8', data, layout);
   </script>
 
+<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs2">namespace FSharp.Plotly</div>
+<div class="tip" id="fs3">namespace BioFSharp</div>
+<div class="tip" id="fs4">namespace BioFSharp.IO</div>
+<div class="tip" id="fs5">val fileDir : string<br /><br />Full name: FastA.fileDir</div>
+<div class="tip" id="fs6">val sequences : seq&lt;FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;<br /><br />Full name: FastA.sequences</div>
+<div class="tip" id="fs7">module FastA<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs8">val fromFile : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filePath:string -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastA.fromFile</div>
+<div class="tip" id="fs9">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs10">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioArray.ofAminoAcidString</div>
+<div class="tip" id="fs11">val sequences2 : seq&lt;FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;<br /><br />Full name: FastA.sequences2</div>
+<div class="tip" id="fs12">val write : toString:(&#39;T -&gt; char) -&gt; filePath:string -&gt; data:seq&lt;FastA.FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.FastA.write</div>
+<div class="tip" id="fs13">module BioItem<br /><br />from BioFSharp</div>
+<div class="tip" id="fs14">val symbol : bItem:#IBioItem -&gt; char<br /><br />Full name: BioFSharp.BioItem.symbol</div>
+<div class="tip" id="fs15">val sequencesLength : seq&lt;int&gt;<br /><br />Full name: FastA.sequencesLength</div>
+<div class="tip" id="fs16">Multiple items<br />module Seq<br /><br />from FSharp.Plotly<br /><br />--------------------<br />module Seq<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs17">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
+<div class="tip" id="fs18">val item : FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;</div>
+<div class="tip" id="fs19">FastA.FastaItem.Sequence: BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs20">property System.Array.Length: int</div>
+<div class="tip" id="fs21">type Chart =<br />&#160;&#160;static member Area : xy:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Area : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * ?Name:string * ?ShowMarkers:bool * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Dash:DrawingStyle * ?Width:&#39;a4 -&gt; GenericChart<br />&#160;&#160;static member Bar : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Marker:Marker -&gt; GenericChart<br />&#160;&#160;static member Bar : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Marker:Marker -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : xy:seq&lt;&#39;a0 * &#39;a1&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Fillcolor:&#39;a3 * ?Opacity:float * ?Whiskerwidth:&#39;a4 * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:&#39;a5 * ?Pointpos:&#39;a6 * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member BoxPlot : ?x:&#39;a0 * ?y:&#39;a1 * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Fillcolor:&#39;a3 * ?Opacity:float * ?Whiskerwidth:&#39;a4 * ?Boxpoints:Boxpoints * ?Boxmean:BoxMean * ?Jitter:&#39;a5 * ?Pointpos:&#39;a6 * ?Orientation:Orientation -&gt; GenericChart<br />&#160;&#160;static member Bubble : xysizes:seq&lt;#IConvertible * #IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font -&gt; GenericChart<br />&#160;&#160;static member Bubble : x:seq&lt;#IConvertible&gt; * y:seq&lt;#IConvertible&gt; * sizes:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?MarkerSymbol:Symbol * ?Color:&#39;a3 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font -&gt; GenericChart<br />&#160;&#160;static member Column : keysvalues:seq&lt;#IConvertible * #IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Marker:Marker -&gt; GenericChart<br />&#160;&#160;static member Column : keys:seq&lt;#IConvertible&gt; * values:seq&lt;#IConvertible&gt; * ?Name:string * ?Showlegend:bool * ?Color:&#39;a2 * ?Opacity:float * ?Labels:seq&lt;#IConvertible&gt; * ?TextPosition:TextPosition * ?TextFont:Font * ?Marker:Marker -&gt; GenericChart<br />&#160;&#160;...<br /><br />Full name: FSharp.Plotly.Chart</div>
+<div class="tip" id="fs22">static member Chart.Histogram : data:seq&lt;#System.IConvertible&gt; * ?Orientation:StyleParam.Orientation * ?Name:string * ?Showlegend:bool * ?Opacity:float * ?Color:&#39;b * ?HistNorm:StyleParam.HistNorm * ?HistFunc:StyleParam.HistNorm * ?nBinsx:int * ?nBinsy:int * ?Xbins:Bins * ?Ybins:Bins * ?xError:&#39;c * ?yError:&#39;d -&gt; GenericChart.GenericChart</div>
+<div class="tip" id="fs23">static member Chart.withX_AxisStyle : title:&#39;a * ?MinMax:(float * float) * ?Showgrid:&#39;b * ?Showline:&#39;c -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="tip" id="fs24">static member Chart.withY_AxisStyle : title:&#39;a * ?MinMax:(float * float) * ?Showgrid:&#39;b * ?Showline:&#39;c -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
 
         </div>
         <div class="span3" >

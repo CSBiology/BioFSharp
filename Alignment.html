@@ -48,9 +48,9 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 <span class="l">4: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
-<span class="k">open</span> <span class="i">BioFSharp</span>
-<span class="k">open</span> <span class="i">BioFSharp</span><span class="o">.</span><span class="i">Algorithm</span>
-<span class="k">open</span> <span class="i">PairwiseAlignment</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">Algorithm</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">PairwiseAlignment</span>
 </code></pre></td>
 </tr>
 </table>
@@ -64,10 +64,10 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 <span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
-<span class="k">let</span> <span class="i">aaScoring</span> <span class="o">=</span> <span class="i">ScoringMatrix</span><span class="o">.</span><span class="i">getScoringMatrixAminoAcid</span> <span class="i">ScoringMatrix</span><span class="o">.</span><span class="i">ScoringMatrixAminoAcid</span><span class="o">.</span><span class="i">BLOSUM62</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="f">aaScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">getScoringMatrixAminoAcid</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="t">ScoringMatrixAminoAcid</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="p">BLOSUM62</span>
 
 <span class="c">//For nucleotides</span>
-<span class="k">let</span> <span class="i">nucScoring</span> <span class="o">=</span> <span class="i">ScoringMatrix</span><span class="o">.</span><span class="i">getScoringMatrixNucleotide</span>  <span class="i">ScoringMatrix</span><span class="o">.</span><span class="i">ScoringMatrixNucleotide</span><span class="o">.</span><span class="i">EDNA</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="f">nucScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="f">getScoringMatrixNucleotide</span>  <span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="t">ScoringMatrixNucleotide</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="p">EDNA</span>
 </code></pre></td>
 </tr>
 </table>
@@ -88,17 +88,17 @@ The scoring function (in this case a substitution matrix) and the two gap penalt
 <span class="l">13: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
-<span class="k">let</span> <span class="i">aaCosts</span> <span class="o">=</span> {
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="i">aaCosts</span> <span class="o">=</span> {
     <span class="i">Open</span> <span class="o">=</span> <span class="o">-</span><span class="n">5</span>
     <span class="i">Continuation</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span>
-    <span class="i">Similarity</span> <span class="o">=</span> <span class="i">aaScoring</span> 
+    <span class="i">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 18)" onmouseover="showTip(event, 'fs4', 18)" class="f">aaScoring</span> 
     }
 
 <span class="c">//For nucleotides</span>
-<span class="k">let</span> <span class="i">nucCosts</span> <span class="o">=</span> {
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="i">nucCosts</span> <span class="o">=</span> {
     <span class="i">Open</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span>
     <span class="i">Continuation</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span>
-    <span class="i">Similarity</span> <span class="o">=</span> <span class="i">nucScoring</span> 
+    <span class="i">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="f">nucScoring</span> 
     }
 </code></pre></td>
 </tr>
@@ -113,11 +113,11 @@ Both the global and local alignment algorithms take the same parameters (costs,f
 <span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
-<span class="k">let</span> <span class="i">aaSeq1</span> <span class="o">=</span> <span class="s">&quot;ACDM&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidSymbolString</span>
-<span class="k">let</span> <span class="i">aaSeq2</span> <span class="o">=</span> <span class="s">&quot;MAACEDM&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofAminoAcidSymbolString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="i">aaSeq1</span> <span class="o">=</span> <span class="s">&quot;ACDM&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="f">ofAminoAcidSymbolString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="i">aaSeq2</span> <span class="o">=</span> <span class="s">&quot;MAACEDM&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="f">ofAminoAcidSymbolString</span>
 
-<span class="k">let</span> <span class="i">globalAAAlignment</span> <span class="o">=</span> <span class="i">NeedlemanWunsch</span><span class="o">.</span><span class="i">runAminoAcidSymbol</span> <span class="i">aaCosts</span> <span class="i">aaSeq1</span> <span class="i">aaSeq2</span>
-<span class="k">let</span> <span class="i">localAAAlignment</span> <span class="o">=</span> <span class="i">SmithWaterman</span><span class="o">.</span><span class="i">runAminoAcidSymbol</span> <span class="i">aaCosts</span> <span class="i">aaSeq1</span> <span class="i">aaSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="i">globalAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="t">NeedlemanWunsch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="f">runAminoAcidSymbol</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="i">aaCosts</span> <span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="i">aaSeq1</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="i">aaSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="i">localAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="f">runAminoAcidSymbol</span> <span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="i">aaCosts</span> <span onmouseout="hideTip(event, 'fs15', 37)" onmouseover="showTip(event, 'fs15', 37)" class="i">aaSeq1</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="i">aaSeq2</span>
 </code></pre></td>
 </tr>
 </table>
@@ -141,11 +141,11 @@ AlignedSequences = [[A; C; -; D; M]; [A; C; E; D; M]];}
 <span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For nucleotides</span>
-<span class="k">let</span> <span class="i">nucSeq1</span> <span class="o">=</span> <span class="s">&quot;ATGA&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofNucleotideString</span>
-<span class="k">let</span> <span class="i">nucSeq2</span> <span class="o">=</span> <span class="s">&quot;BATVAWG&quot;</span> <span class="o">|&gt;</span> <span class="i">BioArray</span><span class="o">.</span><span class="i">ofNucleotideString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="i">nucSeq1</span> <span class="o">=</span> <span class="s">&quot;ATGA&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 40)" onmouseover="showTip(event, 'fs16', 40)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 41)" onmouseover="showTip(event, 'fs26', 41)" class="f">ofNucleotideString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 42)" onmouseover="showTip(event, 'fs27', 42)" class="i">nucSeq2</span> <span class="o">=</span> <span class="s">&quot;BATVAWG&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 43)" onmouseover="showTip(event, 'fs16', 43)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="f">ofNucleotideString</span>
 
-<span class="k">let</span> <span class="i">globalNucAlignment</span> <span class="o">=</span> <span class="i">NeedlemanWunsch</span><span class="o">.</span><span class="i">runNucleotide</span> <span class="i">nucCosts</span> <span class="i">nucSeq1</span> <span class="i">nucSeq2</span>
-<span class="k">let</span> <span class="i">localNucAlignment</span> <span class="o">=</span> <span class="i">SmithWaterman</span><span class="o">.</span><span class="i">runNucleotide</span> <span class="i">nucCosts</span> <span class="i">nucSeq1</span> <span class="i">nucSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="i">globalNucAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="t">NeedlemanWunsch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="f">runNucleotide</span> <span onmouseout="hideTip(event, 'fs14', 48)" onmouseover="showTip(event, 'fs14', 48)" class="i">nucCosts</span> <span onmouseout="hideTip(event, 'fs25', 49)" onmouseover="showTip(event, 'fs25', 49)" class="i">nucSeq1</span> <span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="i">nucSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="i">localNucAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 52)" onmouseover="showTip(event, 'fs23', 52)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 53)" onmouseover="showTip(event, 'fs31', 53)" class="f">runNucleotide</span> <span onmouseout="hideTip(event, 'fs14', 54)" onmouseover="showTip(event, 'fs14', 54)" class="i">nucCosts</span> <span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="i">nucSeq1</span> <span onmouseout="hideTip(event, 'fs27', 56)" onmouseover="showTip(event, 'fs27', 56)" class="i">nucSeq2</span>
 </code></pre></td>
 </tr>
 </table>
@@ -169,19 +169,19 @@ Also besides the alignment functions which only take BioItems as input and repre
 <span class="l">12: </span>
 <span class="l">13: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">scoring</span> <span class="i">a</span> <span class="i">b</span> <span class="o">=</span> 
-    <span class="k">if</span> <span class="i">a</span> <span class="o">=</span> <span class="i">b</span> <span class="k">then</span> <span class="n">2</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 57)" onmouseover="showTip(event, 'fs32', 57)" class="f">scoring</span> <span onmouseout="hideTip(event, 'fs33', 58)" onmouseover="showTip(event, 'fs33', 58)" class="i">a</span> <span onmouseout="hideTip(event, 'fs34', 59)" onmouseover="showTip(event, 'fs34', 59)" class="i">b</span> <span class="o">=</span> 
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs33', 60)" onmouseover="showTip(event, 'fs33', 60)" class="i">a</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 61)" onmouseover="showTip(event, 'fs34', 61)" class="i">b</span> <span class="k">then</span> <span class="n">2</span>
     <span class="k">else</span> <span class="o">-</span><span class="n">2</span>
 
-<span class="k">let</span> <span class="i">costs</span> <span class="o">=</span> {
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 62)" onmouseover="showTip(event, 'fs35', 62)" class="i">costs</span> <span class="o">=</span> {
     <span class="i">Open</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span>
     <span class="i">Continuation</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span>
-    <span class="i">Similarity</span> <span class="o">=</span> <span class="i">scoring</span>
+    <span class="i">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 63)" onmouseover="showTip(event, 'fs32', 63)" class="f">scoring</span>
     }
 
 
-<span class="k">let</span> <span class="i">globalAlignmentNuc</span> <span class="o">=</span> <span class="i">NeedlemanWunsch</span><span class="o">.</span><span class="i">runGeneric</span> <span class="i">costs</span> <span class="i">nucSeq1</span> <span class="i">nucSeq2</span>
-<span class="k">let</span> <span class="i">localAlignmentNuc</span> <span class="o">=</span> <span class="i">SmithWaterman</span><span class="o">.</span><span class="i">runGeneric</span> <span class="i">costs</span> <span class="i">nucSeq1</span> <span class="i">nucSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 64)" onmouseover="showTip(event, 'fs36', 64)" class="i">globalAlignmentNuc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 65)" onmouseover="showTip(event, 'fs20', 65)" class="t">NeedlemanWunsch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 66)" onmouseover="showTip(event, 'fs37', 66)" class="f">runGeneric</span> <span onmouseout="hideTip(event, 'fs35', 67)" onmouseover="showTip(event, 'fs35', 67)" class="i">costs</span> <span onmouseout="hideTip(event, 'fs25', 68)" onmouseover="showTip(event, 'fs25', 68)" class="i">nucSeq1</span> <span onmouseout="hideTip(event, 'fs27', 69)" onmouseover="showTip(event, 'fs27', 69)" class="i">nucSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 70)" onmouseover="showTip(event, 'fs38', 70)" class="i">localAlignmentNuc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 71)" onmouseover="showTip(event, 'fs23', 71)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 72)" onmouseover="showTip(event, 'fs39', 72)" class="f">runGeneric</span> <span onmouseout="hideTip(event, 'fs35', 73)" onmouseover="showTip(event, 'fs35', 73)" class="i">costs</span> <span onmouseout="hideTip(event, 'fs25', 74)" onmouseover="showTip(event, 'fs25', 74)" class="i">nucSeq1</span> <span onmouseout="hideTip(event, 'fs27', 75)" onmouseover="showTip(event, 'fs27', 75)" class="i">nucSeq2</span>
 </code></pre></td>
 </tr>
 </table>
@@ -206,16 +206,59 @@ AlignedSequences =
 <span class="l">4: </span>
 <span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">intSeq1</span> <span class="o">=</span> [|<span class="n">1</span>;<span class="n">2</span>;<span class="n">3</span>;<span class="n">4</span>;<span class="n">5</span>|]
-<span class="k">let</span> <span class="i">intSeq2</span> <span class="o">=</span> [|<span class="n">1</span>;<span class="n">1</span>;<span class="n">2</span>;<span class="n">4</span>;<span class="n">6</span>;<span class="n">7</span>;|]
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 76)" onmouseover="showTip(event, 'fs40', 76)" class="i">intSeq1</span> <span class="o">=</span> [|<span class="n">1</span>;<span class="n">2</span>;<span class="n">3</span>;<span class="n">4</span>;<span class="n">5</span>|]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 77)" onmouseover="showTip(event, 'fs41', 77)" class="i">intSeq2</span> <span class="o">=</span> [|<span class="n">1</span>;<span class="n">1</span>;<span class="n">2</span>;<span class="n">4</span>;<span class="n">6</span>;<span class="n">7</span>;|]
 
-<span class="k">let</span> <span class="i">globalAlignmentInt</span> <span class="o">=</span> <span class="i">NeedlemanWunsch</span><span class="o">.</span><span class="i">runGeneric</span> <span class="i">costs</span> <span class="i">intSeq1</span> <span class="i">intSeq2</span>
-<span class="k">let</span> <span class="i">localAlignmentInt</span> <span class="o">=</span> <span class="i">SmithWaterman</span><span class="o">.</span><span class="i">runGeneric</span> <span class="i">costs</span> <span class="i">intSeq1</span> <span class="i">intSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 78)" onmouseover="showTip(event, 'fs42', 78)" class="i">globalAlignmentInt</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 79)" onmouseover="showTip(event, 'fs20', 79)" class="t">NeedlemanWunsch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 80)" onmouseover="showTip(event, 'fs37', 80)" class="f">runGeneric</span> <span onmouseout="hideTip(event, 'fs35', 81)" onmouseover="showTip(event, 'fs35', 81)" class="i">costs</span> <span onmouseout="hideTip(event, 'fs40', 82)" onmouseover="showTip(event, 'fs40', 82)" class="i">intSeq1</span> <span onmouseout="hideTip(event, 'fs41', 83)" onmouseover="showTip(event, 'fs41', 83)" class="i">intSeq2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 84)" onmouseover="showTip(event, 'fs43', 84)" class="i">localAlignmentInt</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 85)" onmouseover="showTip(event, 'fs23', 85)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 86)" onmouseover="showTip(event, 'fs39', 86)" class="f">runGeneric</span> <span onmouseout="hideTip(event, 'fs35', 87)" onmouseover="showTip(event, 'fs35', 87)" class="i">costs</span> <span onmouseout="hideTip(event, 'fs40', 88)" onmouseover="showTip(event, 'fs40', 88)" class="i">intSeq1</span> <span onmouseout="hideTip(event, 'fs41', 89)" onmouseover="showTip(event, 'fs41', 89)" class="i">intSeq2</span>
 </code></pre></td>
 </tr>
 </table>
 </div>
 
+<div class="tip" id="fs1">namespace BioFSharp</div>
+<div class="tip" id="fs2">namespace BioFSharp.Algorithm</div>
+<div class="tip" id="fs3">module PairwiseAlignment<br /><br />from BioFSharp.Algorithm</div>
+<div class="tip" id="fs4">val aaScoring : (AminoAcidSymbols.AminoAcidSymbol -&gt; AminoAcidSymbols.AminoAcidSymbol -&gt; int)<br /><br />Full name: Alignment.aaScoring</div>
+<div class="tip" id="fs5">module ScoringMatrix<br /><br />from BioFSharp.Algorithm</div>
+<div class="tip" id="fs6">val getScoringMatrixAminoAcid : scoringMatrixType:ScoringMatrix.ScoringMatrixAminoAcid -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; AminoAcidSymbols.AminoAcidSymbol -&gt; int)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.getScoringMatrixAminoAcid</div>
+<div class="tip" id="fs7">type ScoringMatrixAminoAcid =<br />&#160;&#160;| BLOSUM45<br />&#160;&#160;| BLOSUM50<br />&#160;&#160;| BLOSUM62<br />&#160;&#160;| BLOSUM80<br />&#160;&#160;| PAM30<br />&#160;&#160;| PAM70<br />&#160;&#160;| PAM250<br />&#160;&#160;static member toFileName : (ScoringMatrixAminoAcid -&gt; string)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.ScoringMatrixAminoAcid</div>
+<div class="tip" id="fs8">union case ScoringMatrix.ScoringMatrixAminoAcid.BLOSUM62: ScoringMatrix.ScoringMatrixAminoAcid</div>
+<div class="tip" id="fs9">val nucScoring : (Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide -&gt; int)<br /><br />Full name: Alignment.nucScoring</div>
+<div class="tip" id="fs10">val getScoringMatrixNucleotide : scoringMatrixType:ScoringMatrix.ScoringMatrixNucleotide -&gt; (Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide -&gt; int)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.getScoringMatrixNucleotide</div>
+<div class="tip" id="fs11">type ScoringMatrixNucleotide =<br />&#160;&#160;| EDNA<br />&#160;&#160;| Default<br />&#160;&#160;static member toFileName : (ScoringMatrixNucleotide -&gt; string)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.ScoringMatrixNucleotide</div>
+<div class="tip" id="fs12">union case ScoringMatrix.ScoringMatrixNucleotide.EDNA: ScoringMatrix.ScoringMatrixNucleotide</div>
+<div class="tip" id="fs13">val aaCosts : Costs&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: Alignment.aaCosts</div>
+<div class="tip" id="fs14">val nucCosts : Costs&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: Alignment.nucCosts</div>
+<div class="tip" id="fs15">val aaSeq1 : BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: Alignment.aaSeq1</div>
+<div class="tip" id="fs16">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs17">val ofAminoAcidSymbolString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: BioFSharp.BioArray.ofAminoAcidSymbolString</div>
+<div class="tip" id="fs18">val aaSeq2 : BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt;<br /><br />Full name: Alignment.aaSeq2</div>
+<div class="tip" id="fs19">val globalAAAlignment : Alignment.Alignment&lt;AminoAcidSymbols.AminoAcidSymbol list,Score&gt;<br /><br />Full name: Alignment.globalAAAlignment</div>
+<div class="tip" id="fs20">module NeedlemanWunsch<br /><br />from BioFSharp.Algorithm.PairwiseAlignment</div>
+<div class="tip" id="fs21">val runAminoAcidSymbol : costs:Costs&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; fstSeq:BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; sndSeq:BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; Alignment.Alignment&lt;AminoAcidSymbols.AminoAcidSymbol list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.NeedlemanWunsch.runAminoAcidSymbol</div>
+<div class="tip" id="fs22">val localAAAlignment : Alignment.Alignment&lt;AminoAcidSymbols.AminoAcidSymbol list,Score&gt;<br /><br />Full name: Alignment.localAAAlignment</div>
+<div class="tip" id="fs23">module SmithWaterman<br /><br />from BioFSharp.Algorithm.PairwiseAlignment</div>
+<div class="tip" id="fs24">val runAminoAcidSymbol : costs:Costs&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; fstSeq:BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; sndSeq:BioArray.BioArray&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; Alignment.Alignment&lt;AminoAcidSymbols.AminoAcidSymbol list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.SmithWaterman.runAminoAcidSymbol</div>
+<div class="tip" id="fs25">val nucSeq1 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: Alignment.nucSeq1</div>
+<div class="tip" id="fs26">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioArray.ofNucleotideString</div>
+<div class="tip" id="fs27">val nucSeq2 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: Alignment.nucSeq2</div>
+<div class="tip" id="fs28">val globalNucAlignment : Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;<br /><br />Full name: Alignment.globalNucAlignment</div>
+<div class="tip" id="fs29">val runNucleotide : costs:Costs&lt;Nucleotides.Nucleotide&gt; -&gt; fstSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; sndSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.NeedlemanWunsch.runNucleotide</div>
+<div class="tip" id="fs30">val localNucAlignment : Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;<br /><br />Full name: Alignment.localNucAlignment</div>
+<div class="tip" id="fs31">val runNucleotide : costs:Costs&lt;Nucleotides.Nucleotide&gt; -&gt; fstSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; sndSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.SmithWaterman.runNucleotide</div>
+<div class="tip" id="fs32">val scoring : a:&#39;a -&gt; b:&#39;a -&gt; int (requires equality)<br /><br />Full name: Alignment.scoring</div>
+<div class="tip" id="fs33">val a : &#39;a (requires equality)</div>
+<div class="tip" id="fs34">val b : &#39;a (requires equality)</div>
+<div class="tip" id="fs35">val costs : Costs&lt;&#39;a&gt; (requires equality)<br /><br />Full name: Alignment.costs</div>
+<div class="tip" id="fs36">val globalAlignmentNuc : Alignment.Alignment&lt;Nucleotides.Nucleotide option list,Score&gt;<br /><br />Full name: Alignment.globalAlignmentNuc</div>
+<div class="tip" id="fs37">val runGeneric : costs:Costs&lt;&#39;a&gt; -&gt; fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; Alignment.Alignment&lt;&#39;a option list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.NeedlemanWunsch.runGeneric</div>
+<div class="tip" id="fs38">val localAlignmentNuc : Alignment.Alignment&lt;Nucleotides.Nucleotide option list,Score&gt;<br /><br />Full name: Alignment.localAlignmentNuc</div>
+<div class="tip" id="fs39">val runGeneric : costs:Costs&lt;&#39;a&gt; -&gt; fstSeq:&#39;a [] -&gt; sndSeq:&#39;a [] -&gt; Alignment.Alignment&lt;&#39;a option list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.SmithWaterman.runGeneric</div>
+<div class="tip" id="fs40">val intSeq1 : int []<br /><br />Full name: Alignment.intSeq1</div>
+<div class="tip" id="fs41">val intSeq2 : int []<br /><br />Full name: Alignment.intSeq2</div>
+<div class="tip" id="fs42">val globalAlignmentInt : Alignment.Alignment&lt;int option list,Score&gt;<br /><br />Full name: Alignment.globalAlignmentInt</div>
+<div class="tip" id="fs43">val localAlignmentInt : Alignment.Alignment&lt;int option list,Score&gt;<br /><br />Full name: Alignment.localAlignmentInt</div>
 
         </div>
         <div class="span3" >
