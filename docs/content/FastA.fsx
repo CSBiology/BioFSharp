@@ -12,7 +12,7 @@ open FSharp.Plotly
 
 
 (**
-FastA format I/O
+FastA format
 ================
 One of the various biology-associated file formats that can be manipulated using BioFSharp is the FastA format.
 The FastA format can be used to represent sequences of amino acids or nucleotides written in single-letter code.

@@ -468,7 +468,7 @@ module Nucleotides =
     let name (nuc:Nucleotide) =
         BioItem.name nuc
 
-    //Returns nucleotide formulas minus H20            
+    ///Returns nucleotide formulas minus H20            
     let formula (nuc:Nucleotide) =
         BioItem.formula nuc
     

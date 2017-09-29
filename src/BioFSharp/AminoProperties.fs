@@ -65,7 +65,7 @@ module AminoProperties =
             else
                 av.[index])
 
-
+    ///Returns a simple mapping function for the given amino acid property. Normalizes the values to the Z-Norm scale
     let initGetAminoPropertyZnorm (property:AminoProperty) =
         // TODO: Memorize
         let lookUp = initAminoPropertyLookUp()

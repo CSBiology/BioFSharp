@@ -165,7 +165,7 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 
 </div>
 <br>
-In reality, proteases don't always completely cut the protein completely down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
+In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
 *)
 let digestedRBCS' = Digestion.BioArray.concernMissCleavages 0 2 digestedRBCS
 

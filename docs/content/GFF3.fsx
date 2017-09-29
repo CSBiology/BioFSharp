@@ -11,7 +11,7 @@ open BioFSharp
 
 
 (**
-#Introducing GFF3Parser
+#GFF3 format
 
 <br>
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GFF3Parser.fs">&lt;/&gt;view source code</a>
@@ -67,8 +67,8 @@ Comment lines have to start with a single "#[...]". It is possible that sequence
 
 For further information visit [GFF3-Specifications](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md).
 
-How to use GFF3Parser
----------------------
+##Reading GFF3 files
+
 
 To read in a gff you have to insert a filepath and optional a FASTA converter. For further information about FASTA check the [FASTA section](https://csbiology.github.io/BioFSharp/Readers.html#FastA) on this site 
 or visit [API Reference - FastA](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html).
@@ -86,8 +86,8 @@ let gffExampleRead = GFF3Parser.GFF3reader BioFSharp.BioArray.ofNucleotideString
 
 
 (**
-How to use GFF3SanityCheck
---------------------------
+###How to use GFF3SanityCheck
+
 
 The GFF3SanityCheck prints wheter your GFF3 file is valid or not. It returns all specified errors including the lines in which the errors occured.
 In contrast to GFF2 the field 3 (type, feature or method) of a GFF3 entry is restricted to terms defined by the sequence ontology (SO) so this validator checks if the entry is a valid SO term.
@@ -105,8 +105,8 @@ let gffExampleSanityCheck = GFF3Parser.sanityCheckWithSOTerm filepathSO_Terms fi
 
 
 (**
-How to use GFF3RelationshipSearch
----------------------------------
+###How to use GFF3RelationshipSearch
+
 
 You also can do a simple search for "_Parent_ - _child of_" relationships giving back all genomic features which contain the _searchterm_ in **ID/Id** or **Parent** field.
 
@@ -120,8 +120,8 @@ let gffExampleSearch = GFF3Parser.relationshipSearch gffExampleRead searchterm
 
 
 (**
-How to use GFF3Writer
----------------------
+##Writing GFF3 files
+
 
 This writer takes GFF lines in stacks of 20,000 items and write/append them to a given filepath. 
 If FastA sequences are included they are appended by a FastA writer described in the [API Reference - FastA](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html).

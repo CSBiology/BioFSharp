@@ -8,7 +8,7 @@
 #r "../../bin/FSharp.Care.IO.dll"
 
 (**
-#GenBank
+#GenBank format
 
 <br>
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GenBank.fs">&lt;/&gt;view source code</a>

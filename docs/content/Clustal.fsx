@@ -9,7 +9,7 @@
 #r "../../bin/FSharp.Care.IO.dll"
 
 (**
-# Clustal Format
+# Clustal format
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/Clustal.fs">&lt;/&gt;view source code</a>
 <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustal.html" >&#128194;View module documentation</a>
 <a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
@@ -88,7 +88,7 @@ O\_sativa           RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--<
 </div>
 <br>
 
-## Reading Clustal Files
+## Reading Clustal files
 
 To read Clustal files, just use the ofFile function located in the Clustal module of the BioFSharp.IO namespace. It does not need anything but the file path and will return the alignment as `Alignment`.  
 Keep in mind that if your clustal file containts numbers representing the character count at the line end. They and their line space will be included in the Alignment. Make sure to filter them out if not needed.
@@ -104,7 +104,7 @@ let path = fileDir + "clustalExample.asn"
 Clustal.ofFile path
 
 (**
-## Writing Clustal Files
+## Writing Clustal files
 
 Work in progress...
 *)
