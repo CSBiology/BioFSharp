@@ -1,10 +1,11 @@
 ﻿namespace BioFSharp
 
+///Molecular mass related functions
 module Mass =
     
     open BioFSharp
    
-
+    ///Nucleon masses
     module Table = 
         
         /// <summary>

@@ -41,7 +41,7 @@ module IsoelectricPoint =
     ///Maps AminoAcidSymbol to default pK value of it's sidechain. Returns 0.0 if sidechain is neither acidic nor basic
     let getpKr  = initGetAminoProperty AminoProperty.PKr
 
-    ///Finds the pH for which the global charge of the aaSeq is closer to 0 than the given accuracy
+    ///Finds the pH for which the global charge of the aaSeq is closer to 0 than the given accuracy.
     let tryFind (pKrFunc: AminoAcidSymbol -> float) accuracy (aaSeq : AminoAcidSymbol seq) = 
         let en = aaSeq.GetEnumerator()
         let compVec = Array.zeroCreate 26
