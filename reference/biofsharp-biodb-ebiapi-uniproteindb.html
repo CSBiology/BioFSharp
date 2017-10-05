@@ -55,15 +55,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '699', 699)" onmouseover="showTip(event, '699', 699)">
+          <code onmouseout="hideTip(event, '693', 693)" onmouseover="showTip(event, '693', 693)">
             new()
           </code>
-          <div class="tip" id="699">
+          <div class="tip" id="693">
             <strong>Signature:</strong> unit -&gt; UniProteinDB<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L25-25" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L24-24" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -82,15 +82,55 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '700', 700)" onmouseover="showTip(event, '700', 700)">
-            getSeqFeatureByAccession(...)
+          <code onmouseout="hideTip(event, '694', 694)" onmouseover="showTip(event, '694', 694)">
+            getAntigen(accession)
           </code>
-          <div class="tip" id="700">
+          <div class="tip" id="694">
+            <strong>Signature:</strong> accession:string -&gt; ProteinFeatureInfo<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L27-27" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Get antigen by UniProt accession</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '695', 695)" onmouseover="showTip(event, '695', 695)">
+            getGenomicCoordinates(accession)
+          </code>
+          <div class="tip" id="695">
+            <strong>Signature:</strong> accession:string -&gt; GnEntry<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L32-32" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Get genomic coordinates by UniProt accession</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '696', 696)" onmouseover="showTip(event, '696', 696)">
+            getProteinSeqFeature(...)
+          </code>
+          <div class="tip" id="696">
             <strong>Signature:</strong> (accession:string * categories:string [] option * types:string [] option) -&gt; ProteinFeatureInfo<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L28-28" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L37-37" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -102,15 +142,135 @@
       <tr>
         <td class="member-name">
 
+          <code onmouseout="hideTip(event, '697', 697)" onmouseover="showTip(event, '697', 697)">
+            getProteomicsPeptide(accession)
+          </code>
+          <div class="tip" id="697">
+            <strong>Signature:</strong> accession:string -&gt; ProteinFeatureInfo<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L55-55" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Get proteomics peptide mapped to UniProt by accession</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '698', 698)" onmouseover="showTip(event, '698', 698)">
+            getUniProtEntry(accession)
+          </code>
+          <div class="tip" id="698">
+            <strong>Signature:</strong> accession:string -&gt; Entry<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Get UniProt entry by accession</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '699', 699)" onmouseover="showTip(event, '699', 699)">
+            searchAntigens(...)
+          </code>
+          <div class="tip" id="699">
+            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * antigenSequence:string option * antigenID:string option * ensemblIDs:string option * matchscore:int option) -&gt; ProteinFeatureInfo []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L97-97" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search antigen in UniProt</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '700', 700)" onmouseover="showTip(event, '700', 700)">
+            searchEntries(...)
+          </code>
+          <div class="tip" id="700">
+            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * reviewed:string option * isoforms:int option * goterms:string option * keywords:string option * ec:string option * gene:string option * protein:string option * organism:string option * taxid:string option * pubmed:string option) -&gt; Entry []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L159-159" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search entries in UniProt</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
           <code onmouseout="hideTip(event, '701', 701)" onmouseover="showTip(event, '701', 701)">
-            searchFeature(...)
+            searchGenomicCoordinates(...)
           </code>
           <div class="tip" id="701">
+            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * chromosome:string option * ensembl:string option * gene:string option * protein:string option * taxid:string option * location:string option) -&gt; GnEntry []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L124-124" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search genomic coordinates in UniProt</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '702', 702)" onmouseover="showTip(event, '702', 702)">
+            searchNaturalVariants(...)
+          </code>
+          <div class="tip" id="702">
+            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * taxid:string option * sourcetype:string option * consequencetype:string option * wildtype:string option * alternativesequence:string option * location:string option * disease:string option * omim:string option * evidence:string option) -&gt; ProteinFeatureInfo []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L273-273" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search natural variants in UniProt</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '703', 703)" onmouseover="showTip(event, '703', 703)">
+            searchProteinSeqFeature(...)
+          </code>
+          <div class="tip" id="703">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * reviewed:string option * gene:string option * protein:string option * organism:string option * taxid:string option * categories:string option * types:string option) -&gt; ProteinFeatureInfo []<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L42-42" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L61-61" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -122,19 +282,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '702', 702)" onmouseover="showTip(event, '702', 702)">
-            searchFeature2(...)
+          <code onmouseout="hideTip(event, '704', 704)" onmouseover="showTip(event, '704', 704)">
+            searchProteomes(...)
           </code>
-          <div class="tip" id="702">
-            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * reviewed:string option * gene:string option * protein:string option * organism:string option * taxid:string option * categories:string option * types:string option) -&gt; ProteinFeatureInfo []<br />
+          <div class="tip" id="704">
+            <strong>Signature:</strong> (offset:int option * size:int option * upid:string option * name:string option * taxid:string option * keyword:string option * xref:string option * genomeAcc:string option * isRefProteome:string option * isRedundant:string option) -&gt; Proteome<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L80-80" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L204-204" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Search protein sequence features in UniProt</p>
+          <p>Search proteomes in UniProt</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '705', 705)" onmouseover="showTip(event, '705', 705)">
+            searchProteomicsPeptides(...)
+          </code>
+          <div class="tip" id="705">
+            <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * taxid:string option * upid:string option * datasource:string option * peptide:string option * unique:string option) -&gt; ProteinFeatureInfo []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioDB/EbiAPI.fs#L241-241" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search ProteomicsPeptides in UniProt</p>
 
 
         </td>
