@@ -8,6 +8,7 @@ open BioFSharp.Alignment
 ///Contains functions for reading clustal alignment files
 module Clustal = 
 
+
     ///Sequence and its ID
     type NamedSequence = {Name: string; Sequence: seq<char>}
 
@@ -124,3 +125,43 @@ module Clustal =
                 else 
                     false     
         loop 0
+    
+    ///Writes an alignment to given path in clustal format. Overwrites file if it already exists
+    let toFileWithOverWrite (path:string) (alignment: Alignment<NamedSequence,AlignmentInfo>) =
+        use sw = new System.IO.StreamWriter(path)     
+        let seqs = 
+            let sb = StringBuilder()
+            let max = (Seq.maxBy (fun x -> x.Name.Length) alignment.AlignedSequences).Name.Length
+            let addEmpty (s:string) = 
+                sb.Append(s) |> ignore
+                for i = 0 to max - sb.Length do
+                    sb.Append(' ') |> ignore
+                let s = sb.ToString()
+                sb.Clear() |> ignore
+                s
+            createNS "" alignment.MetaData.ConservationInfo
+            |> Seq.appendSingleton alignment.AlignedSequences 
+            |> Seq.map (fun x -> 
+                addEmpty x.Name, 
+                x.Sequence |> Seq.groupsOfAtMost 60 |> fun x -> x.GetEnumerator()) 
+            |> Seq.toArray
+        let rec loop i b =
+            match b with 
+            | false when i = seqs.Length -> 
+                sw.WriteLine()
+                sw.Flush()
+                loop 0 false 
+            | true when i = seqs.Length -> () 
+            | _ -> 
+                let (n, s) = seqs.[i]
+                match s.MoveNext() with
+                | true -> 
+                    sw.Write(n)
+                    List.iter (fun (x:char) -> sw.Write(x)) s.Current
+                    sw.WriteLine()
+                    sw.Flush()
+                    loop (i+1) false    
+                | false -> loop (i+1) true   
+        Seq.iter (fun (x:char) -> sw.Write(x)) alignment.MetaData.Header
+        sw.WriteLine();sw.WriteLine();sw.Flush()         
+        loop 0 false

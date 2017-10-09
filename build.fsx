@@ -379,10 +379,13 @@ Target "Release" (fun _ ->
 
 Target "BuildPackage" DoNothing
 
+
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
+Target "Raw" DoNothing
+
 
 "All"
  ==> "ReleaseLocal"
@@ -396,6 +399,13 @@ Target "All" DoNothing
   ==> "GenerateDocs"
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
+  ==> "CopyBinaries"
+  ==> "RunTests"
+  ==> "Raw"
 
 "All"
 #if MONO
