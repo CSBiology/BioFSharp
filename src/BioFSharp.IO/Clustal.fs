@@ -147,21 +147,19 @@ module Clustal =
             |> Seq.toArray
         let rec loop i b =
             match b with 
-            | false when i = seqs.Length -> 
-                sw.WriteLine()
-                sw.Flush()
+            | false when i = seqs.Length ->            
                 loop 0 false 
-            | true when i = seqs.Length -> () 
+            | true when i = seqs.Length -> sw.Flush()
             | _ -> 
                 let (n, s) = seqs.[i]
-                match s.MoveNext() with
-                | true -> 
+                match s.MoveNext() with 
+                | true ->
+                    if i = 0 then sw.WriteLine()
+                    sw.WriteLine()
                     sw.Write(n)
                     List.iter (fun (x:char) -> sw.Write(x)) s.Current
-                    sw.WriteLine()
-                    sw.Flush()
+                    
                     loop (i+1) false    
                 | false -> loop (i+1) true   
         Seq.iter (fun (x:char) -> sw.Write(x)) alignment.MetaData.Header
-        sw.WriteLine();sw.WriteLine();sw.Flush()         
         loop 0 false
