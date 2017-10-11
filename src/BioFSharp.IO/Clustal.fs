@@ -4,20 +4,13 @@ open FSharp.Care.Collections
 open System.Text
 open System.IO
 open BioFSharp.Alignment
+open BioFSharp.BioID
 
 ///Contains functions for reading clustal alignment files
 module Clustal = 
 
-
-    ///Sequence and its ID
-    type NamedSequence = {Name: string; Sequence: seq<char>}
-
     //Header of file and info on conservation of sequences
     type AlignmentInfo = {Header : seq<char>; ConservationInfo : seq<char>}
-
-    ///creates NamedSequence of name and sequence
-    let private createNS key value = 
-        {Name = key; Sequence = value}
 
     ///Reads file character by character
     let private readFile (file:string) =   
@@ -65,7 +58,7 @@ module Clustal =
         loop false 0 0 (Header 'p')
 
     ///Builds the alignment out of the Tokensequence
-    let private parser (lexerInput: seq<Token>) : Alignment<NamedSequence,AlignmentInfo>= 
+    let private parser (lexerInput: seq<Token>) : Alignment<TaggedSequence<string,char>,AlignmentInfo>= 
         let sequences = System.Collections.Generic.Dictionary<string,char seq>()
         let en = lexerInput.GetEnumerator()
         let sb = System.Text.StringBuilder()
@@ -98,7 +91,7 @@ module Clustal =
             AlignedSequences =    
                 [
                     for kv in sequences do
-                        yield createNS kv.Key kv.Value
+                        yield createTaggedSequence kv.Key kv.Value
                 ]
         }
     
@@ -109,7 +102,7 @@ module Clustal =
         |> parser
     
     ///Checks if the header of a parsed clustal alignment matches the clustal file conventions
-    let hasClustalFileHeader (alignment:Alignment<NamedSequence,AlignmentInfo>) = 
+    let hasClustalFileHeader (alignment:Alignment<TaggedSequence<string,char>,AlignmentInfo>) = 
         let en = alignment.MetaData.Header.GetEnumerator()
         let rec loop i =
             match en.MoveNext() with
@@ -127,11 +120,11 @@ module Clustal =
         loop 0
     
     ///Writes an alignment to given path in clustal format. Overwrites file if it already exists
-    let toFileWithOverWrite (path:string) (alignment: Alignment<NamedSequence,AlignmentInfo>) =
+    let toFileWithOverWrite (path:string) (alignment: Alignment<TaggedSequence<string,char>,AlignmentInfo>) =
         use sw = new System.IO.StreamWriter(path)     
         let seqs = 
             let sb = StringBuilder()
-            let max = (Seq.maxBy (fun x -> x.Name.Length) alignment.AlignedSequences).Name.Length
+            let max = (Seq.maxBy (fun (x:TaggedSequence<string,char>) -> x.Tag.Length) alignment.AlignedSequences).Tag.Length
             let addEmpty (s:string) = 
                 sb.Append(s) |> ignore
                 for i = 0 to max - sb.Length do
@@ -139,10 +132,10 @@ module Clustal =
                 let s = sb.ToString()
                 sb.Clear() |> ignore
                 s
-            createNS "" alignment.MetaData.ConservationInfo
+            createTaggedSequence "" alignment.MetaData.ConservationInfo
             |> Seq.appendSingleton alignment.AlignedSequences 
             |> Seq.map (fun x -> 
-                addEmpty x.Name, 
+                addEmpty x.Tag, 
                 x.Sequence |> Seq.groupsOfAtMost 60 |> fun x -> x.GetEnumerator()) 
             |> Seq.toArray
         let rec loop i b =

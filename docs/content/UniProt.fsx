@@ -82,6 +82,7 @@ let createAlignmentMatrix (sequences : BioArray.BioArray<AminoAcidSymbols.AminoA
 (**
 <button type="button" class="btn" data-toggle="collapse" data-target="#alignmentExample">Hide again</button>  
 </div>
+<br>
 Let's see what we get..
 *)
 
@@ -93,6 +94,7 @@ createAlignmentMatrix sequences
 
 (**
 We can see that the Copper-transporting ATPase 2 of mouse and rat are the most similar to each other, while the one of the sheep is relatively different.  
+<br>
 But not only the protein names and their sequences can be stored in UniProt. For these proteins we also get information about the cellular location of each of their amino acids. Why not see if the hydrophobic amino acids are located in the membrane after all?  
 First we design a type to model the location more nicely. Afterwards we create a function for mapping the protein information to just the location information of all amino acids in one protein.
 *)
