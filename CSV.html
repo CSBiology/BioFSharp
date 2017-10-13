@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CSV reader
-</title>
+    <title>CSV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,9 +34,14 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="CSV-reader" class="anchor" href="#CSV-reader">CSV reader</a></h1>
-<p>The CSV reader is a straightforward, modular tool for reading tabular data.<br />
-As a first step the input type has to be modelled. This type should represent the information of one line of the given file. The fields have to be marked as <code>FieldAttribute</code>s with the according column header, or if with the according line numbers.</p>
+<table class="HeadAPI">
+<td class="Head"><h1>CSV Format</h1></td>
+<td class="API">
+    <a id="APILink" href="http://csbiology.github.io/FSharp.Care/reference/fsharp-care-io-schemareader.html" >&#128194;View module documentation</a>
+<td>
+</table>
+The CSV reader is a straightforward, modular tool for reading tabular data.  
+As a first step the input type has to be modelled. This type should represent the information of one line of the given file. The fields have to be marked as `FieldAttribute`s with the according column header, or if with the according line numbers. 
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -446,9 +450,7 @@ val myMultiIrisData : irisItemWithMulti list =
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>

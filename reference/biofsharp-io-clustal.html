@@ -60,14 +60,6 @@
           </td>
           <td class="xmldoc"></td>
         </tr>
-        <tr>
-          <td class="type-name">
-            <a href="biofsharp-io-clustal-namedsequence.html">NamedSequence</a>
-          </td>
-          <td class="xmldoc"><p>Sequence and its ID</p>
-
-</td>
-        </tr>
     </tbody>
   </table>
 
@@ -82,15 +74,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '406', 406)" onmouseover="showTip(event, '406', 406)">
+          <code onmouseout="hideTip(event, '413', 413)" onmouseover="showTip(event, '413', 413)">
             hasClustalFileHeader alignment
           </code>
-          <div class="tip" id="406">
-            <strong>Signature:</strong> alignment:Alignment&lt;NamedSequence,AlignmentInfo&gt; -&gt; bool<br />
+          <div class="tip" id="413">
+            <strong>Signature:</strong> alignment:Alignment&lt;TaggedSequence&lt;string,char&gt;,AlignmentInfo&gt; -&gt; bool<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Clustal.fs#L112-112" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Clustal.fs#L105-105" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -102,19 +94,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '407', 407)" onmouseover="showTip(event, '407', 407)">
+          <code onmouseout="hideTip(event, '414', 414)" onmouseover="showTip(event, '414', 414)">
             ofFile path
           </code>
-          <div class="tip" id="407">
-            <strong>Signature:</strong> path:string -&gt; Alignment&lt;NamedSequence,AlignmentInfo&gt;<br />
+          <div class="tip" id="414">
+            <strong>Signature:</strong> path:string -&gt; Alignment&lt;TaggedSequence&lt;string,char&gt;,AlignmentInfo&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Clustal.fs#L106-106" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Clustal.fs#L99-99" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Reads clustal File (W or Omega) of given path and creates an alignment out of it. Also reads in numbers at end of line. Those have to be filtered out afterwards if not needed.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '415', 415)" onmouseover="showTip(event, '415', 415)">
+            toFileWithOverWrite path alignment
+          </code>
+          <div class="tip" id="415">
+            <strong>Signature:</strong> path:string -&gt; alignment:Alignment&lt;TaggedSequence&lt;string,char&gt;,AlignmentInfo&gt; -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Clustal.fs#L123-123" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Writes an alignment to given path in clustal format. Overwrites file if it already exists</p>
 
 
         </td>
@@ -137,9 +149,7 @@
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>

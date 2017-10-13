@@ -90,6 +90,14 @@
         </tr>
         <tr>
           <td class="type-name">
+            <a href="biofsharp-bioid-taggedsequence-2.html">TaggedSequence<'a, 'b></a>
+          </td>
+          <td class="xmldoc"><p>Record of a sequence and its tag</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
             <a href="biofsharp-bioid-uniprotid.html">UniProtId</a>
           </td>
           <td class="xmldoc"><p>UniProt sequence identifier</p>
@@ -130,9 +138,29 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
-            parseCreId 
+            createTaggedSequence tag sequence
           </code>
           <div class="tip" id="71">
+            <strong>Signature:</strong> tag:&#39;?8138 -&gt; sequence:seq&lt;&#39;?8139&gt; -&gt; TaggedSequence&lt;&#39;?8138,&#39;?8139&gt;<br />
+                          <strong>Type parameters:</strong> '?8138, '?8139          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/BioID.fs#L265-265" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maps tag and sequence to tagged sequence</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+            parseCreId 
+          </code>
+          <div class="tip" id="72">
             <strong>Signature:</strong> string -&gt; Either&lt;CreId,string&gt;<br />
                       </div>
         </td>
@@ -150,10 +178,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
             parseCreSId 
           </code>
-          <div class="tip" id="72">
+          <div class="tip" id="73">
             <strong>Signature:</strong> string -&gt; Either&lt;CreId,string&gt;<br />
                       </div>
         </td>
@@ -168,10 +196,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
+          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
             parseMgiId 
           </code>
-          <div class="tip" id="73">
+          <div class="tip" id="74">
             <strong>Signature:</strong> string -&gt; Either&lt;MouseId,string&gt;<br />
                       </div>
         </td>
@@ -186,10 +214,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
+          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
             parseRefSeqId 
           </code>
-          <div class="tip" id="74">
+          <div class="tip" id="75">
             <strong>Signature:</strong> string -&gt; Either&lt;RefSeqId,string&gt;<br />
                       </div>
         </td>
@@ -207,10 +235,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
+          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
             parseSgdId 
           </code>
-          <div class="tip" id="75">
+          <div class="tip" id="76">
             <strong>Signature:</strong> string -&gt; Either&lt;YeastId,string&gt;<br />
                       </div>
         </td>
@@ -225,10 +253,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
+          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
             parseUniParc 
           </code>
-          <div class="tip" id="76">
+          <div class="tip" id="77">
             <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
                       </div>
         </td>
@@ -245,10 +273,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
+          <code onmouseout="hideTip(event, '78', 78)" onmouseover="showTip(event, '78', 78)">
             parseUniProtKB 
           </code>
-          <div class="tip" id="77">
+          <div class="tip" id="78">
             <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
                       </div>
         </td>
@@ -265,10 +293,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '78', 78)" onmouseover="showTip(event, '78', 78)">
+          <code onmouseout="hideTip(event, '79', 79)" onmouseover="showTip(event, '79', 79)">
             parseUniRef 
           </code>
-          <div class="tip" id="78">
+          <div class="tip" id="79">
             <strong>Signature:</strong> string -&gt; Either&lt;UniProtId,string&gt;<br />
                       </div>
         </td>
@@ -285,10 +313,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '79', 79)" onmouseover="showTip(event, '79', 79)">
+          <code onmouseout="hideTip(event, '80', 80)" onmouseover="showTip(event, '80', 80)">
             parseYeastSN 
           </code>
-          <div class="tip" id="79">
+          <div class="tip" id="80">
             <strong>Signature:</strong> string -&gt; Either&lt;YeastId,string&gt;<br />
                       </div>
         </td>
@@ -303,10 +331,10 @@ Returns Failure string in case of no match.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '80', 80)" onmouseover="showTip(event, '80', 80)">
+          <code onmouseout="hideTip(event, '81', 81)" onmouseover="showTip(event, '81', 81)">
             stringFromYeastId yid
           </code>
-          <div class="tip" id="80">
+          <div class="tip" id="81">
             <strong>Signature:</strong> yid:YeastId -&gt; string<br />
                       </div>
         </td>
@@ -336,9 +364,7 @@ Returns Failure string in case of no match.</p>
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>

@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>BioItems
-</title>
+    <title>BioItem</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,17 +34,12 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="BioItems" class="anchor" href="#BioItems">BioItems</a></h1>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/AminoAcids.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoacids.html" >&#128194;View module documentation</a>
-(AminoAcids)
-<br><br>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Nucleotides.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-nucleotides.html" >&#128194;View module documentation</a>
-(Nucleotides)
-<br><br>
-<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>BioItems</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioitem.html" >&#128194;View module documentation</a>
+<td>
+</table>
 Often, dealing with similar problems separately results in different approaches. In a programming background, this might make things needlessly complex. Therefore in BioFSharp nucleotides and amino acids are based on the same structural scaffold, leading to a consistent way of working with them. This can come in handy especially when working with their formulas.  
 <h2><a name="Basics" class="anchor" href="#Basics">Basics</a></h2>
 <p>First let's define some amino acids and nucleotides</p>
@@ -160,7 +154,12 @@ val it : unit = ()
 I am Glutamic Acid, short: E. I'm usually in a negative mood
 val it : unit = ()
 </pre>  
-<h2><a name="AminoAcids" class="anchor" href="#AminoAcids">AminoAcids</a></h2>
+<table class="HeadAPI">
+<td class="Head"><h2>Amino Acids</h2></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoacids.html" >&#128194;View module documentation</a>
+<td>
+</table>
 <h3><a name="Modification" class="anchor" href="#Modification">Modification</a></h3>
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/ModificationInfo.fs">&lt;/&gt;view source code</a>
 <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-modificationinfo.html" >&#128194;View module documentation</a>
@@ -236,8 +235,13 @@ As a first step, we make ourselves an easy helper function which returns the for
 </code></pre></td>
 </tr>
 </table>
-<h2><a name="Nucleotides" class="anchor" href="#Nucleotides">Nucleotides</a></h2>
-<p>As working with nucleotides is usually focused on the sequence of the bases, rather than how they actually look like, the list of nucleotide specific functions would be quite short. But there are some helper like:</p>
+<table class="HeadAPI">
+<td class="Head"><h2>Nucleotides</h2></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-nucleotides.html" >&#128194;View module documentation</a>
+<td>
+</table>
+As working with nucleotides is usually focused on the sequence of the bases, rather than how they actually look like, the list of nucleotide specific functions would be quite short. But there are some helper like: 
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -329,9 +333,7 @@ As a first step, we make ourselves an easy helper function which returns the for
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>

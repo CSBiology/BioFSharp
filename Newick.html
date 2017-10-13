@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Newick format
-</title>
+    <title>Newick</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,14 +34,15 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Newick-format" class="anchor" href="#Newick-format">Newick format</a></h1>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/Newick.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-newick.html" >&#128194;View module documentation</a>
-<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
-<br><br>
-<p>The newick format is a simple, strictly symbolised format representing phylogenetic trees. It is the standard tree format used by the Clustal tool.<br />
-In general, internal nodes (nodes with a least one descendant) are opened with <code>(</code> and closed with <code>)</code>. The childnodes within those internals are separated by <code>,</code>. After every node, there can be, but most not be information about its name and the distance from its parent. Name and distance are separated by <code>:</code>. Every full tree has a <code>;</code> at its end.<br />
-These key characters are not allowed to be used within the given names or distances. This restriction allows a wide range of possible trees as can be seen by the following list of example trees:</p>
+<table class="HeadAPI">
+<td class="Head"><h1>Newick format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-newick.html" >&#128194;View module documentation</a>
+</td>
+</table>
+The newick format is a simple, strictly symbolised format representing phylogenetic trees. It is the standard tree format used by the Clustal tool.  
+In general, internal nodes (nodes with a least one descendant) are opened with `(` and closed with `)`. The childnodes within those internals are separated by `,`. After every node, there can be, but most not be information about its name and the distance from its parent. Name and distance are separated by `:`. Every full tree has a `;` at its end.  
+These key characters are not allowed to be used within the given names or distances. This restriction allows a wide range of possible trees as can be seen by the following list of example trees:  
 <br>
 <button type="button" class="btn" data-toggle="collapse" data-target="#newickExample">Show/Hide example trees</button>
 <div id="newickExample" class="collapse treeExamples ">
@@ -234,9 +234,7 @@ Branch
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>

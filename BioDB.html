@@ -43,14 +43,8 @@
 The services provide sequence feature annotations from UniProtKB, variation data from UniProtKB and mapped from Large Scale data sources (1000 Genomes, ExAC and COSMIC),
 proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) and genome coordinate mappings</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//let a  = </span>
-<span class="c">//    EbiAPI.getProteinFeaturesById &quot;Q64446&quot;</span>
-
-<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">EbiAPI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">UniProteinDB</span><span class="o">.</span><span class="i">getSeqFeatureByAccession</span> <span class="s">&quot;Q64446&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">EbiAPI</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">UniProteinDB</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="f">getProteinSeqFeature</span> <span class="s">&quot;Q64446&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -63,6 +57,7 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 <div class="tip" id="fs2">namespace BioFSharp.BioDB</div>
 <div class="tip" id="fs3">module EbiAPI<br /><br />from BioFSharp.BioDB</div>
 <div class="tip" id="fs4">Multiple items<br />type UniProteinDB =<br />&#160;&#160;new : unit -&gt; UniProteinDB<br />&#160;&#160;static member getAntigen : accession:string -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getGenomicCoordinates : accession:string -&gt; GnEntry<br />&#160;&#160;static member getProteinSeqFeature : accession:string * ?categories:string [] * ?types:string [] -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getProteomicsPeptide : accession:string -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getUniProtEntry : accession:string -&gt; Entry<br />&#160;&#160;static member searchAntigens : ?offset:int * ?size:int * ?accession:string * ?antigenSequence:string * ?antigenID:string * ?ensemblIDs:string * ?matchscore:int -&gt; ProteinFeatureInfo []<br />&#160;&#160;static member searchEntries : ?offset:int * ?size:int * ?accession:string * ?reviewed:string * ?isoforms:int * ?goterms:string * ?keywords:string * ?ec:string * ?gene:string * ?protein:string * ?organism:string * ?taxid:string * ?pubmed:string -&gt; Entry []<br />&#160;&#160;static member searchGenomicCoordinates : ?offset:int * ?size:int * ?accession:string * ?chromosome:string * ?ensembl:string * ?gene:string * ?protein:string * ?taxid:string * ?location:string -&gt; GnEntry []<br />&#160;&#160;static member searchNaturalVariants : ?offset:int * ?size:int * ?accession:string * ?taxid:string * ?sourcetype:string * ?consequencetype:string * ?wildtype:string * ?alternativesequence:string * ?location:string * ?disease:string * ?omim:string * ?evidence:string -&gt; ProteinFeatureInfo []<br />&#160;&#160;...<br /><br />Full name: BioFSharp.BioDB.EbiAPI.UniProteinDB<br /><br />--------------------<br />new : unit -&gt; EbiAPI.UniProteinDB</div>
+<div class="tip" id="fs5">static member EbiAPI.UniProteinDB.getProteinSeqFeature : accession:string * ?categories:string [] * ?types:string [] -&gt; EbiAPI.ProteinsAPIschema.ProteinFeatureInfo</div>
 
         </div>
         <div class="span3" >
@@ -79,9 +74,7 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
                 <li>
                     <a href="/BioFSharp/BioItem.html">BioItems</a>
                 </li>
-                <li>
-                    <a href="/BioFSharp/BioCollections.html">BioCollections</a>
-                </li>
+                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
