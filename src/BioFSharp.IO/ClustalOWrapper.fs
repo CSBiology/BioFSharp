@@ -263,7 +263,7 @@ module ClustalOWrapper =
                 printfn "try %s" defaultPath
                 if File.Exists defaultPath then defaultPath
                 else failwith "Default clustalo file could not be found, define rootPath argument."
-        let runProcess rootPath arg name = 
+        let runProcess rootPath arg name =           
             let beginTime = DateTime.UtcNow
             printfn "Starting %s..." name
             let p = 
@@ -277,8 +277,8 @@ module ClustalOWrapper =
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
         
         ///Runs clustalo tool with given input file paths and parameters and creates output file for given path
-        member this.Align((inputPath:Input),(outPutPath:string),(parameters:seq<Parameters.ClustalParams>),(?name:string)) = 
-            let out = sprintf "-o %s " outPutPath
+        member this.AlignFromFile((inputPath:Input),(outputPath:string),(parameters:seq<Parameters.ClustalParams>),(?name:string)) = 
+            let out = sprintf "-o %s " outputPath
             let arg = 
                 Seq.map Parameters.stringOfClustalParams parameters
                 |> String.concat ""
@@ -295,7 +295,7 @@ module ClustalOWrapper =
             let temp = System.IO.Path.GetTempPath()
            
             let inPath = temp + Guid.NewGuid().ToString() + ".fasta"
-            let outPath = Guid.NewGuid().ToString() + ".aln"
+            let outPath = temp + Guid.NewGuid().ToString() + ".aln"
             
             let inArg = sprintf "-i %s " inPath
             let outArg = sprintf "-o %s " outPath       
@@ -307,16 +307,15 @@ module ClustalOWrapper =
                         parameters
                         |> Seq.map (fun cParam -> 
                                 match cParam with
-                                | Output oParam  -> ClustalParams.Output (Seq.filter (fun x -> match x with | OutputCustom.Format _ -> true | _ -> false) oParam)
-                                | Input iParam -> ClustalParams.Input (Seq.filter (fun x -> match x with | InputCustom.Format _ -> true | _ -> false) iParam)
+                                | Output oParam  -> ClustalParams.Output (Seq.filter (fun x -> match x with | OutputCustom.Format _ -> false | _ -> true) oParam)
+                                | Input iParam -> ClustalParams.Input (Seq.filter (fun x -> match x with | InputCustom.Format _ -> false | _ -> true) iParam)
                                 | _ -> cParam)
                     Seq.map Parameters.stringOfClustalParams (Seq.append p format)
                     |> String.concat ""
                     |> fun x -> inArg + outArg + x
                 let name = defaultArg name arg
                 runProcess rootPath arg name
-                let c = Clustal.ofFile outPath
-                c
+                Clustal.ofFile outPath
             finally       
                 System.IO.File.Delete inPath
                 System.IO.File.Delete outPath

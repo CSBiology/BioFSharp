@@ -8,13 +8,12 @@
 #r "../../bin/FSharp.Care.IO.dll"
 
 (**
-#GenBank format
-
-<br>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GenBank.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href= >&#128194;View module documentation</a>
-<a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>GenBank format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-genbank.html" >&#128194;View module documentation</a>
+<td>
+</table>
 GenBank is the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences
 ([Nucleic Acids Research, 2013 Jan;41(D1):D36-42](https://www.ncbi.nlm.nih.gov/pubmed/23193287)). 
 A GenBank file contains various information about a sequence and its features.

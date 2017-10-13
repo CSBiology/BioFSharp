@@ -13,12 +13,12 @@ open Nucleotides
 open AminoAcidSymbols
 open BioFSharp.Algorithm.StringMatching
 (**
-
-String matching algorithms
-==========================
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Algorithm/PatternQuery.fs">&lt;/&gt;view source code</a>
-<a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>String matching algorithms</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-algorithm-patternquery.html" >&#128194;View module documentation</a>
+<td>
+</table>
 
 String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the `BioFSharp.Algorithm.StringMatching` module are organized as following:
 

@@ -7,17 +7,13 @@ open BioFSharp
 open BioFSharp.Formula.Table
 
 (**
-# BioItems
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/AminoAcids.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoacids.html" >&#128194;View module documentation</a>
-(AminoAcids)
-<br><br>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Nucleotides.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-nucleotides.html" >&#128194;View module documentation</a>
-(Nucleotides)
-<br><br>
-<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
-<br><br>
+
+<table class="HeadAPI">
+<td class="Head"><h1>BioItems</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioitem.html" >&#128194;View module documentation</a>
+<td>
+</table>
 Often, dealing with similar problems separately results in different approaches. In a programming background, this might make things needlessly complex. Therefore in BioFSharp nucleotides and amino acids are based on the same structural scaffold, leading to a consistent way of working with them. This can come in handy especially when working with their formulas.  
 
 ## Basics
@@ -89,7 +85,12 @@ val it : unit = ()
 I am Glutamic Acid, short: E. I'm usually in a negative mood
 val it : unit = ()
 </pre>  
-##AminoAcids
+<table class="HeadAPI">
+<td class="Head"><h2>Amino Acids</h2></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoacids.html" >&#128194;View module documentation</a>
+<td>
+</table>
 ###Modification
 <a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/ModificationInfo.fs">&lt;/&gt;view source code</a>
 <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-modificationinfo.html" >&#128194;View module documentation</a>
@@ -138,8 +139,12 @@ As you can see the Serine is phosphorylated just as we wanted. Our inital aim wa
 AminoAcids.averageMass mySerine //val it : float = 87.077575
 AminoAcids.averageMass phosphoSerine //val it : float = 183.056884
 (**
-## Nucleotides
-
+<table class="HeadAPI">
+<td class="Head"><h2>Nucleotides</h2></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-nucleotides.html" >&#128194;View module documentation</a>
+<td>
+</table>
 As working with nucleotides is usually focused on the sequence of the bases, rather than how they actually look like, the list of nucleotide specific functions would be quite short. But there are some helper like: 
 *)
 

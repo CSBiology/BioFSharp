@@ -11,12 +11,12 @@ open BioFSharp
 
 
 (**
-#GFF3 format
-
-<br>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/GFF3Parser.fs">&lt;/&gt;view source code</a>
-<a id="Author" href="https://github.com/bvenn">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>GFF3 format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-gff3.html" >&#128194;View module documentation</a>
+<td>
+</table>
 The GFF3Parser is a tool to validate, read and write **GFF3** _(Generic Feature Format Version 3)_-Files.
 
 All examples are executed on a modified version of [saccharomyces_cerevisiae.gff](http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff).

@@ -9,11 +9,12 @@
 //
 
 (**
-#Formula
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Formula.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-formula.html" >&#128194;View module documentation</a>
-<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>Formula</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-formula.html" >&#128194;View module documentation</a>
+<td>
+</table>
 BioFSharp offers a great bunch of functionality for working with molecules. All elements are represented as the composition of their stable isotopes. A `Formula` is a collection of those Elements with the given count. Creating and altering formulas is quite easy. Also functions for obtaining a mass of a molecule, which becomes quite handy especially for mass spectrometry, can be used straightforwardly.  
 
 To create formulas, no direct fiddling around with the data type is necessary. You can just use the stringparser:
