@@ -377,6 +377,10 @@ Target "Release" (fun _ ->
     |> Async.RunSynchronously
 )
 
+Target "Raw" (fun _ -> 
+    let tempDocsDir = "temp/gh-pages"
+    CleanDir tempDocsDir)
+
 Target "BuildPackage" DoNothing
 
 
@@ -384,7 +388,6 @@ Target "BuildPackage" DoNothing
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
-Target "Raw" DoNothing
 
 
 "All"
