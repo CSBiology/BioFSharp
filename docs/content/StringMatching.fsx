@@ -189,52 +189,7 @@ Runtime
 <br>
 Boyer Moore
 ===========
-<a id="Author" href="https://github.com/WieczorekE">&#128366;view author of this tutorial</a>
-
-Usage
------
-
-This part of the documentation gives a short introduction into the Boyer Moore string search algorithm which is particulary desined to work on IBioItems.This algorithm searches a query within a longer source. In using two arrays that are created using the bad character rule and the good suffix heuristics the best shifting value is determined. This accounts for higher shifts which prevents unnecessary comparisons to save time.
-*)
-
-
-(**
-The following code will return an array created out of all the proteins that are contained in the fasta file. First, the Symbols in the file get converted 
-into amino acids and then they get concatenated and transformed into an array.
-*)
-
-let chlamyproteins = 
-    let converter letters : BioList.BioList<AminoAcid> = 
-        letters
-            |> Seq.map ( fun x -> match (BioFSharp.AminoAcids.charToParsedAminoAcidChar x) with
-                                  | ParsedAminoAcidChar.StandardCodes  v -> v
-                                  | ParsedAminoAcidChar.AmbiguityCodes v -> v
-                                  | ParsedAminoAcidChar.GapTer         v -> v
-                                  | ParsedAminoAcidChar.NoAAChar       v -> failwith "No AA Char given")
-            |> Seq.toList
-
-    FileIO.readFile (__SOURCE_DIRECTORY__ + "/data/Proteins.fasta")
-    |> FastA.fromFileEnumerator (converter)
-    |> Seq.map (fun item -> item.Sequence |> Seq.toArray)
-    |> Seq.concat
-    |> Seq.toArray
-
-
-(**The following code will return the first occurence of the searched query within the source.*)
-BoyerMoore.findFirst chlamyproteins chlamyproteins.[16988..17978]
-
-(**The following code will return the first occurence of the query after a given staring point.*)
-BoyerMoore.findFrom 7 chlamyproteins chlamyproteins.[16988..17978]
-
-(**The following code will return the all the occurence of the query within the given source.*)
-BoyerMoore.findAll chlamyproteins chlamyproteins.[16988..17978]
-
-(**
-Runtime
--------
- * Preprocessing: _Θ(m+k)_
- * Matching time: best _Ω(n/m)_
- * Worst Case: _O(nm)_
+coming soon...
 
 Speed Comparison
 ================

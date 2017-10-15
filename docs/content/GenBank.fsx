@@ -210,10 +210,12 @@ This file will also be used for the purpose of this tutorial and in plain text l
 
 Reading GenBank files
 ---------------------
-The type equivalent for a GenBank file in BioFSharp is a dictionary, mapping `string` keys to the `GenBankItem` type.
-More information about the type modelling can be found in our [API reference]().
+The type equivalent for a GenBank file in BioFSharp is a dictionary, mapping `string` keys to the `GenBankItem<'a>` type, where 'a is the type of the origin sequence in the file.
+More information about the type modelling can be found in our [API reference](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-genbank.html).
+The default reader `fromFile` simply takes the origin sequence as a sequence of `chars`.
 *)
 open BioFSharp.IO
+open BioFSharp
 
 ///Path of the example file
 let exampleFilePath = __SOURCE_DIRECTORY__ + @"\data\sequence.gb"
@@ -222,35 +224,38 @@ let exampleFilePath = __SOURCE_DIRECTORY__ + @"\data\sequence.gb"
 let parsedGBFile = GenBank.Read.fromFile exampleFilePath
 
 (**
-The GenBank module provides various helper functions for querying items on the created Dictionary:
+You can also use converter functions for the origin sequence, which makes it easier to use them for other BioFSharp workflows. There are multiple prebuilt converters contained in the
+OriginConverters module for reading and writing. For example, the following code will parse the sequence as a `BioSeq` containing nucleotides
 *)
-///All features contained in this GenBank file representation
-let features = GenBank.getFeatures parsedGBFile 
 
-///All features with the "CDS" tag
-let cdsFeatures = GenBank.getFeaturesWithType "CDS" parsedGBFile
+let converter = GenBank.OriginConverters.Input.nucleotideConverter
+
+let parsedGBFile' = GenBank.Read.fromFileWithOriginConverter converter exampleFilePath
 
 (**
-The `getfeaturesWithBaseSpan` function returns all Features that span the input BaseSpan of the sequence contained in the 
-file. However, due to the way the BaseSpans are modelled it is currently only possible to find features that have exactly the query BaseSpan, 
-or contain the exact BaseSpan in a join.
-Getting all features that fall within the input BaseSpan will be a goal for a future update of this parser. 
-
-We first need to create the BaseSpan that we want to find.
-For that, we create a `BaseSpanRange` union case containing the type of BaseSpan (modelled as the `BaseSpanInformation` type)
-and the start and end value as an integer tuple:
+This makes it easy to perform additional tasks with the origin sequence:
 *)
-///we are searching for a complete base span
-let queryBaseSpanType = GenBank.BaseSpanInformation.Complete
 
-///spanning nucleotides 687-3158
-let queryBaseSpan = GenBank.BaseSpanRange.Single (queryBaseSpanType,(687,3158))
+let origin = GenBank.getOrigin parsedGBFile'
 
-///
-let bsQueryResult = GenBank.getFeaturesWithBaseSpan queryBaseSpan true parsedGBFile
+///Transcribed origin sequence
+let rnaSeq = origin |> BioSeq.transcribeCodeingStrand // val it : seq<Nucleotides.Nucleotide> = seq [G; A; U; C; ...]
 
+///Translated origin sequence
+let protein = rnaSeq |> BioSeq.translate 0 // val it : seq<AminoAcids.AminoAcid> = seq [Asp; Pro; Pro; Tyr; ...]
+  
 
 (**
 Writing GenBank files
 ---------------------
+Just as in the Read module, there is a default writer for a GenBank dictionary that contains a sequence of chars, as a writer taking a custom converter function. Just specify the output path, and you are ready to go.
 *)
+
+let outputPath1 = __SOURCE_DIRECTORY__ + @"\data\sequenceTestWrite1.gb"
+
+let outputPath2 = __SOURCE_DIRECTORY__ + @"\data\sequenceTestWrite2.gb"
+let outputConverter = GenBank.OriginConverters.Output.bioItemConverter
+
+parsedGBFile |> GenBank.Write.toFile outputPath1
+
+parsedGBFile' |> GenBank.Write.toFileWithOriginConverter outputPath2 outputConverter
