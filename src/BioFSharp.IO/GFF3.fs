@@ -1,4 +1,5 @@
 ﻿namespace BioFSharp.IO
+///Contains functions for reading and writing GFF3 files
 module GFF3 =
 
     open BioFSharp.IO
@@ -6,6 +7,7 @@ module GFF3 =
     open FSharp.Care.IO
     open System.Collections.Generic
     
+    ///represents fields of one GFF3 entry line
     type GFFEntry = {
         ///name of sequence where the feature is located
         Seqid       : string
@@ -29,6 +31,7 @@ module GFF3 =
         Supplement  : string [] 
                    }
     
+    ///represents all kinds of lines which can be present in a GFF3 file
     type GFFLine<'a>  =
     | GFFEntryLine    of GFFEntry
     | Comment         of string
@@ -327,7 +330,7 @@ module GFF3 =
         |> Seq.writeOrAppend path
         printfn "Writing is finished! Path: %s" path
 
-
+    ///if a FastA sequence is included this function searches the features corresponding sequence
     let getSequence (gFFFile : seq<GFFLine<#seq<'a>>>) (cDSfeature:GFFEntry)= 
     
 //        let firstCDS = 
@@ -343,7 +346,7 @@ module GFF3 =
 //                |> Seq.filter (fun x -> x.Feature = "CDS")
 //
 //            filteredCDSFeatures |> Seq.head
-
+        
         let sequenceOfLandmark = 
             let fastaItems = 
                 gFFFile 
@@ -359,6 +362,7 @@ module GFF3 =
 
 
         let sequenceOfFirstCDS = 
+            
             match cDSfeature.Strand with
             | '+' ->
                 let phase    = cDSfeature.Phase
@@ -368,7 +372,6 @@ module GFF3 =
                 sequenceOfLandmark 
                 |> Seq.skip startPos 
                 |> Seq.take (endPos - startPos + 1)
-
 
             | '-' ->
                 let phase    = cDSfeature.Phase
