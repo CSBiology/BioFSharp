@@ -49,7 +49,7 @@ Analogously it is possible to directly read compressed fastA files:
 *)
 let sequences2 = 
     fileDir + "Chlamy_Cp.gz"
-    |> FastA.fromFile BioArray.ofAminoAcidString
+    |> FastA.fromGzipFile BioArray.ofAminoAcidString
 
 (**
 

@@ -1,36 +1,46 @@
 ﻿namespace BioFSharp.IO
-module GFF3Parser =
-
+///Contains functions for reading and writing GFF3 files
+module GFF3 =
 
     open BioFSharp.IO
     open FSharp.Care.Regex
     open FSharp.Care.IO
     open System.Collections.Generic
     
+    ///represents fields of one GFF3 entry line
     type GFFEntry = {
+        ///name of sequence where the feature is located
         Seqid       : string
+        ///program, organization or database where the sequence is derived from
         Source      : string
+        ///feature, type or method; has to be a term from SO or SO accession number
         Feature     : string
+        ///positive 1-based integer start coordinate, relative to the landmark given in column 1
         StartPos    : int
+        ///positive 1-based integer end coordinate, relative to the landmark given in column 1
         EndPos      : int
+        ///the score of the feature; semantics are ill-defined
         Score       : float
+        ///the strand of the feature
         Strand      : char
+        ///for CDS features: indicates where the feature begins with reference to the reading frame
         Phase       : int
+        ///a semicolon-separated list of tag-value pairs, providing additional information about each feature
         Attributes  : Map<string,(string list)>
+        ///additional supplement information about the feature (optional)
         Supplement  : string [] 
                    }
     
-    type GFF<'a>  =
-    | GFFLine         of GFFEntry
+    ///represents all kinds of lines which can be present in a GFF3 file
+    type GFFLine<'a>  =
+    | GFFEntryLine    of GFFEntry
     | Comment         of string
     | Directive       of string
     | Fasta           of seq<FastA.FastaItem<'a>>
     
-    
-    
     ///Separates every key-value pair of field 'attributes' at ';'. Seperates key from value at '=' and separates values at ','.
     let private innerTokenizer (attributes: string) = 
-        //Regex for separating key and values
+        ///Regex for separation of key and values
         let tryMatchKeyValues str =
             match str with
                 | RegexGroups @"(?<key>[^=]+)={1}((?<values>[^,]+),?)*" g -> 
@@ -43,7 +53,7 @@ module GFF3Parser =
         |> Seq.choose tryMatchKeyValues
         |> Map.ofSeq
     
-    ///Gets strings of each field and creates a GFFEntry type thereby converting the strings into desired types.        
+    ///Takes strings of each field and creates a GFFEntry type thereby converting the strings into desired types.        
     let createGFFEntry seqid source feature startPos endPos score strand phase attributes (supplement:string) =
         let parseStrToFloat (str:string) =
             let defaultFloat = nan
@@ -86,10 +96,9 @@ module GFF3Parser =
         Supplement  = supplement    |> fun x -> x.Split([|'\t'|])
         }
     
-    
-    ///Converts a string into a GFFEntry type. If there are more than 9 fields an additional "supplement" field gets filled. If there are less than 9 only the supplement field gets filled with the string.
+    ///Converts a string into a GFFEntry type. If there are more than 9 fields an additional "supplement" field gets filled. If there are less than 9 only the supplement field gets filled with the whole line.
     let parseStrToGFFEntry (str:string) =
-        //splits the string at tap('\t') in <= 10 substrings 
+        //splits the string at tap in <= 10 substrings 
         let split = str.Split([|'\t'|],10)
         //counts the number of entries to validate the GFF line
         let columNumber = split.Length
@@ -99,15 +108,11 @@ module GFF3Parser =
                 createGFFEntry split.[0] split.[1] split.[2] split.[3] split.[4] split.[5] split.[6] split.[7] split.[8] "No supplement"
         else createGFFEntry split.[0] split.[1] split.[2] split.[3] split.[4] split.[5] split.[6] split.[7] split.[8] split.[9] 
     
-    
-    
-    ///If there is a ##FASTA directive, all subsequent lines are taken by this function, transformed to seq<FastA.FastaItem<'a>> and added to the previous parsed GFF<'a> list.
-    let private addFastaSequence (en:IEnumerator<string>) (acc:GFF<'a> list) converter= 
+    ///If there is a ##FASTA directive, all subsequent lines are transformed to seq<FastA.FastaItem<'a>> and added to the previous parsed GFFLine<'a> list. Converter determines type of sequence by converting seq<char> -> type
+    let private addFastaSequence (en:IEnumerator<string>) (acc:GFFLine<'a> list) converter= 
         let seqLeft = 
             let rec loop (acc:string list) =
                 if en.MoveNext() then
-                    //printfn "%s" en.Current
-                    //loop (Seq.append acc (seq [en.Current]))
                     loop (en.Current::acc)
                 else 
                     acc 
@@ -120,12 +125,12 @@ module GFF3Parser =
             |> Seq.cast
         finalSeq         
             
-    ///reads in a file and gives a GFF<'a> list. If file contains a FastA sequence it is converted to FastA.FastaItem with given converter. (Use 'id' as converter if no FastA is required).
-    let GFF3reader fastAconverter filepath =
+    ///reads in a file and gives a GFFLine<'a> list. If file contains a FastA sequence it is converted to FastA.FastaItem with given converter. (Use 'id' as converter if no FastA is required).
+    let fromFile fastAconverter filepath =
         let strEnumerator = (FileIO.readFile(filepath)).GetEnumerator()
     
-        //Converts every string in file into GFF type by using active pattern. If FastA sequence is included the IEnumerator and the until here parsed GFF<'a> list is transfered to 'addFastaSequence'.
-        let rec parseFile (acc:GFF<'a> list) : seq<GFF<'a>>=
+        ///Converts every string in file into GFF type. If FastA sequence is included the IEnumerator and the until here parsed GFFLine<'a> list is transfered to 'addFastaSequence'.
+        let rec parseFile (acc:GFFLine<'a> list) : seq<GFFLine<'a>>=
             if strEnumerator.MoveNext() then 
     
                 let (|Directive|_|) (str:string) =
@@ -143,7 +148,7 @@ module GFF3Parser =
                 | Directive s       -> parseFile ((Directive s)::acc)
                 | Comment s         -> parseFile ((Comment s)::acc)
                 | BlankLine s       -> parseFile acc                    
-                | _                 -> parseFile ((GFFLine (currentString |> parseStrToGFFEntry))::acc) 
+                | _                 -> parseFile ((GFFEntryLine (currentString |> parseStrToGFFEntry))::acc) 
             
             else 
                 acc 
@@ -151,25 +156,22 @@ module GFF3Parser =
                 |> Seq.cast
         parseFile []
     
-    ///If no information about Sequence is required or no Fasta is included you can use this function
-    let GFF3readerWithoutFasta filepath = GFF3reader id filepath
-    
-    
-    
-
-    //SO_Terms which can be chosen for the feature field. Only these SO_Terms are valid
+    ///if no information about Sequence is required or no Fasta is included you can use this function
+    let fromFileWithoutFasta filepath = fromFile id filepath
+   
+    ///SO_Terms which can be chosen for the feature field. Only these SO_Terms are valid
     let private SO_Terms so_TermsPath=
         FileIO.readFile(so_TermsPath)
         |> Seq.head
         |> fun x -> x.Split([|' '|])
             
-    //directives of GFF3
+    ///directives allowed in GFF3 format
     let private directives = 
         [|"##gff-version"; "##sequence-region"; "##feature-ontology";
         "##attribute-ontology"; "##source-ontology"; "##species"; 
         "##genome-build"; "###"|]
     
-    //Validates GFF3 file. Prints first appearance of an error with line index. If needed an SO(FA) check is possible
+    ///Validates GFF3 file. Prints all appearances of errors with line index. If no (SO)FA check is needed set "" as so_TermsPath.
     let sanityCheckWithSOTerm so_TermsPath filepath =
         let strEnumerator = (FileIO.readFile(filepath)).GetEnumerator()
         let so_TermsPathEmpty = 
@@ -244,16 +246,13 @@ module GFF3Parser =
 
     let sanityCheck filepath = sanityCheckWithSOTerm "" filepath
     
-    
-    
-    
-    ///Searches for an term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent) (shows all features which are linked to searchterm)
-    let relationshipSearch (gffList:seq<GFF<'a>>) searchterm = 
+    ///Searches for a term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent).
+    let relationshipSearch (gffList:seq<GFFLine<'a>>) searchterm = 
         let filteredGFFentries = 
             gffList 
             |> Seq.choose (fun x -> 
                 match x with
-                | GFFLine(s) -> Some s
+                | GFFEntryLine(s) -> Some s
                 | _ -> None)
         let parent   =  
             filteredGFFentries 
@@ -284,7 +283,7 @@ module GFF3Parser =
         Seq.append parent child_of
   
 
-    
+    ///converts a single GFF entry to a line (string) of a GFF file
     let gFFEntrytoString (g: GFFEntry) =
         let toStringMap (m: Map<string,string list>)= 
             m
@@ -310,19 +309,80 @@ module GFF3Parser =
             sprintf  "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (toStringInt g.StartPos) (toStringInt g.EndPos) (toStringFloat g.Score) (toStringChar g.Strand) (toStringInt g.Phase) (toStringMap g.Attributes)
         else sprintf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (toStringInt g.StartPos) (toStringInt g.EndPos) (toStringFloat g.Score) (toStringChar g.Strand) (toStringInt g.Phase) (toStringMap g.Attributes) (toStringSup g.Supplement)
 
-
-    let GFF3Writer (input : seq<GFF<#seq<'a>>>) converter path=
+    ///converts GFF lines to string sequence. Hint: Use id as converter if no FASTA sequence is included.
+    let toString (input : seq<GFFLine<#seq<'a>>>) converter path=
         let en = input.GetEnumerator()
         let toString =
             seq {   
                 while en.MoveNext() do
                         match en.Current with
-                        | GFFLine (x)      ->   yield gFFEntrytoString x           
+                        | GFFEntryLine (x)      ->   yield gFFEntrytoString x           
                         | Comment (x)      ->   yield x             
                         | Directive (x)    ->   yield x            
                         | Fasta (x)        ->   yield "##FASTA"    
                                                 yield! FastA.toString converter x
                 }
         toString
+
+    ///writes GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.
+    let write (input : seq<GFFLine<#seq<'a>>>) converter path=
+        toString input converter path
         |> Seq.writeOrAppend path
         printfn "Writing is finished! Path: %s" path
+
+    ///if a FastA sequence is included this function searches the features corresponding sequence
+    let getSequence (gFFFile : seq<GFFLine<#seq<'a>>>) (cDSfeature:GFFEntry)= 
+    
+//        let firstCDS = 
+//            let filteredGFFEntries = 
+//                gFFFile 
+//                |> Seq.choose (fun x ->    
+//                    match x with
+//                    | GFFEntryLine x -> Some x
+//                    | _ -> None)
+//
+//            let filteredCDSFeatures =
+//                filteredGFFEntries
+//                |> Seq.filter (fun x -> x.Feature = "CDS")
+//
+//            filteredCDSFeatures |> Seq.head
+        
+        let sequenceOfLandmark = 
+            let fastaItems = 
+                gFFFile 
+                |> Seq.choose (fun x -> 
+                    match x with
+                    | Fasta x -> Some x
+                    | _ -> None)
+                |> Seq.head
+
+            fastaItems
+            |> Seq.tryFind (fun x -> x.Header = cDSfeature.Seqid)
+            |> fun x -> x.Value.Sequence
+
+
+        let sequenceOfFirstCDS = 
+            
+            match cDSfeature.Strand with
+            | '+' ->
+                let phase    = cDSfeature.Phase
+                //because start- and endPos are index based 1 they have to be modified by x-1
+                let startPos = cDSfeature.StartPos + phase - 1 
+                let endPos   = cDSfeature.EndPos - 1
+                sequenceOfLandmark 
+                |> Seq.skip startPos 
+                |> Seq.take (endPos - startPos + 1)
+
+            | '-' ->
+                let phase    = cDSfeature.Phase
+                let startPos = cDSfeature.StartPos - 1 
+                let endPos   = cDSfeature.EndPos - phase - 1
+                sequenceOfLandmark 
+                |> Seq.skip startPos 
+                |> Seq.take (endPos - startPos + 1) 
+                |> Seq.rev
+            | _ -> failwith "No strand defined!"
+
+        sequenceOfFirstCDS
+
+    //Output: Nucleotides.Nucleotides [] (ATG...TAA)
