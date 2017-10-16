@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Generic Feature Format Version 3
-</title>
+    <title>GFF3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -36,18 +35,15 @@
         <div class="span9" id="main">
           
 <table class="HeadAPI">
-<td class="Head"><h1>GFF3 format</h1></td>
+<td class="Head"><h1>Generic Feature Format Version 3</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-gff3.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
-The GFF3 module is a tool to validate, read and write GFF3 (Generic Feature Format Version 3) files.
-<p>All examples are executed on a modified version of <a href="http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff">saccharomyces_cerevisiae.gff</a>.</p>
-<h1><a name="Generic-Feature-Format-Version-3" class="anchor" href="#Generic-Feature-Format-Version-3">Generic Feature Format Version 3</a></h1>
-<p>In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9.
-It is possible to link multiple features to genomic units using the 'Parent tag'.</p>
-<p>In the following you can see a GFF file example:</p>
-<p><img src="@Root/img/GFF3.png" alt="GFF3" style="width:150px;margin:10px" /></p>
+In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9. 
+It is possible to link multiple features to genomic units using the 'Parent tag'.
+<p>In the following you can see a GFF file example (modified version of <a href="http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff">saccharomyces_cerevisiae.gff</a>):</p>
+<p><img src="img/GFF3.png" alt="GFF3" /></p>
 <p>Directives (marked with "##[...]") provide additional information like the gff-version which has to be the first line of each file ("##gff-version 3[...]").
 Comment lines have to start with a single "#[...]". It is possible that sequences in FastA format are attached at the end of the file. This has to be announced by a "##FASTA" directive line.</p>
 <p>For further information visit <a href="https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md">GFF3-Specifications</a>.</p>
@@ -148,9 +144,6 @@ If FastA sequences are included they are appended by a FastA writer described in
 <span class="l">18: </span>
 <span class="l">19: </span>
 <span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="i">firstCDS</span> <span class="o">=</span> 
     <span class="c">//get GFFEntries</span>
@@ -172,9 +165,6 @@ If FastA sequences are included they are appended by a FastA writer described in
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 59)" onmouseover="showTip(event, 'fs36', 59)" class="i">firstCDSSequence</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 60)" onmouseover="showTip(event, 'fs7', 60)" class="t">GFF3</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 61)" onmouseover="showTip(event, 'fs37', 61)" class="f">getSequence</span> <span onmouseout="hideTip(event, 'fs6', 62)" onmouseover="showTip(event, 'fs6', 62)" class="i">features</span> <span onmouseout="hideTip(event, 'fs23', 63)" onmouseover="showTip(event, 'fs23', 63)" class="i">firstCDS</span>
 
 <span class="c">//Output: Nucleotides.Nucleotides [] (ATG...TAA)</span>
-
-
-          
 </code></pre></td>
 </tr>
 </table>
