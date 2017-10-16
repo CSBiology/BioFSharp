@@ -48,25 +48,6 @@
 </div>
 
 <!-- Render nested types and modules, if there are any -->
-  <h2>Nested types and modules</h2>
-  <div>
-      <table class="table table-bordered module-list">
-    <thead>
-      <tr><td>Module</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="module-name">
-            <a href="biofsharp-io-genbank-write-originconverters.html">OriginConverters</a>
-          </td>
-          <td class="xmldoc"><p>contains a collection of prebuilt converters for writing specific origin sequences</p>
-
-</td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -77,15 +58,35 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '449', 449)" onmouseover="showTip(event, '449', 449)">
-            write path originConverter gb
+          <code onmouseout="hideTip(event, '455', 455)" onmouseover="showTip(event, '455', 455)">
+            toFile path gb
           </code>
-          <div class="tip" id="449">
+          <div class="tip" id="455">
+            <strong>Signature:</strong> path:string -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L389-389" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>creates a GenBank file at the specified path</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '456', 456)" onmouseover="showTip(event, '456', 456)">
+            toFileWithOriginConverter (...)
+          </code>
+          <div class="tip" id="456">
             <strong>Signature:</strong> path:string -&gt; originConverter:(&#39;a -&gt; seq&lt;char&gt;) -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; unit<br />
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L329-329" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GenBank.fs#L393-393" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

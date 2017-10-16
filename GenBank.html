@@ -250,48 +250,9 @@ For more information about the sections and their formatting, have a look at thi
 </div>
 <br>
 <h2><a name="Reading-GenBank-files" class="anchor" href="#Reading-GenBank-files">Reading GenBank files</a></h2>
-<p>The type equivalent for a GenBank file in BioFSharp is a dictionary, mapping <code>string</code> keys to the <code>GenBankItem</code> type.
-More information about the type modelling can be found in our <a href="">API reference</a>.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">IO</span>
-
-<span class="c">///Path of the example file</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">exampleFilePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\sequence.gb&quot;</span>
-
-<span class="c">///Parsed Example File </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">parsedGBFile</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="t">Read</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs3', 8)" onmouseover="showTip(event, 'fs3', 8)" class="i">exampleFilePath</span>
-</code></pre></td>
-</tr>
-</table>
-<p>The GenBank module provides various helper functions for querying items on the created Dictionary:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///All features contained in this GenBank file representation</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="i">features</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="f">getFeatures</span> <span onmouseout="hideTip(event, 'fs4', 12)" onmouseover="showTip(event, 'fs4', 12)" class="f">parsedGBFile</span> 
-
-<span class="c">///All features with the &quot;CDS&quot; tag</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">cdsFeatures</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="f">getFeaturesWithType</span> <span class="s">&quot;CDS&quot;</span> <span onmouseout="hideTip(event, 'fs4', 16)" onmouseover="showTip(event, 'fs4', 16)" class="f">parsedGBFile</span>
-</code></pre></td>
-</tr>
-</table>
-<p>The <code>getfeaturesWithBaseSpan</code> function returns all Features that span the input BaseSpan of the sequence contained in the
-file. However, due to the way the BaseSpans are modelled it is currently only possible to find features that have exactly the query BaseSpan,
-or contain the exact BaseSpan in a join.
-Getting all features that fall within the input BaseSpan will be a goal for a future update of this parser.</p>
-<p>We first need to create the BaseSpan that we want to find.
-For that, we create a <code>BaseSpanRange</code> union case containing the type of BaseSpan (modelled as the <code>BaseSpanInformation</code> type)
-and the start and end value as an integer tuple:</p>
+<p>The type equivalent for a GenBank file in BioFSharp is a dictionary, mapping <code>string</code> keys to the <code>GenBankItem&lt;'a&gt;</code> type, where 'a is the type of the origin sequence in the file.
+More information about the type modelling can be found in our <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-genbank.html">API reference</a>.
+The default reader <code>fromFile</code> simply takes the origin sequence as a sequence of <code>chars</code>.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -301,33 +262,101 @@ and the start and end value as an integer tuple:</p>
 <span class="l">7: </span>
 <span class="l">8: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///we are searching for a complete base span</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="i">queryBaseSpanType</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="i">GenBank</span><span class="o">.</span><span class="i">BaseSpanInformation</span><span class="o">.</span><span class="i">Complete</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">IO</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="i">BioFSharp</span>
 
-<span class="c">///spanning nucleotides 687-3158</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="i">queryBaseSpan</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 20)" onmouseover="showTip(event, 'fs5', 20)" class="i">GenBank</span><span class="o">.</span><span class="i">BaseSpanRange</span><span class="o">.</span><span class="i">Single</span> (<span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="i">queryBaseSpanType</span>,(<span class="n">687</span>,<span class="n">3158</span>))
+<span class="c">///Path of the example file</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">exampleFilePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\sequence.gb&quot;</span>
 
-<span class="c">///</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="i">bsQueryResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 23)" onmouseover="showTip(event, 'fs5', 23)" class="i">GenBank</span><span class="o">.</span><span class="i">getFeaturesWithBaseSpan</span> <span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="i">queryBaseSpan</span> <span class="k">true</span> <span onmouseout="hideTip(event, 'fs4', 25)" onmouseover="showTip(event, 'fs4', 25)" class="i">parsedGBFile</span>
+<span class="c">///Parsed Example File </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">parsedGBFile</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="t">Read</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="f">fromFile</span> <span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="i">exampleFilePath</span>
+</code></pre></td>
+</tr>
+</table>
+<p>You can also use converter functions for the origin sequence, which makes it easier to use them for other BioFSharp workflows. There are multiple prebuilt converters contained in the
+OriginConverters module for reading and writing. For example, the following code will parse the sequence as a <code>BioSeq</code> containing nucleotides</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="f">converter</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="t">OriginConverters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="t">Input</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="f">nucleotideConverter</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="i">parsedGBFile&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 16)" onmouseover="showTip(event, 'fs5', 16)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 17)" onmouseover="showTip(event, 'fs6', 17)" class="t">Read</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="f">fromFileWithOriginConverter</span> <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="f">converter</span> <span onmouseout="hideTip(event, 'fs3', 20)" onmouseover="showTip(event, 'fs3', 20)" class="i">exampleFilePath</span>
+</code></pre></td>
+</tr>
+</table>
+<p>This makes it easy to perform additional tasks with the origin sequence:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">origin</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 22)" onmouseover="showTip(event, 'fs5', 22)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="f">getOrigin</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="i">parsedGBFile&#39;</span>
+
+<span class="c">///Transcribed origin sequence</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="i">rnaSeq</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="i">origin</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="f">transcribeCodeingStrand</span> <span class="c">// val it : seq&lt;Nucleotides.Nucleotide&gt; = seq [G; A; U; C; ...]</span>
+
+<span class="c">///Translated origin sequence</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="i">protein</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">rnaSeq</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="t">BioSeq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="f">translate</span> <span class="n">0</span> <span class="c">// val it : seq&lt;AminoAcids.AminoAcid&gt; = seq [Asp; Pro; Pro; Tyr; ...]</span>
+  
 </code></pre></td>
 </tr>
 </table>
 <h2><a name="Writing-GenBank-files" class="anchor" href="#Writing-GenBank-files">Writing GenBank files</a></h2>
+<p>Just as in the Read module, there is a default writer for a GenBank dictionary that contains a sequence of chars, as a writer taking a custom converter function. Just specify the output path, and you are ready to go.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="i">outputPath1</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\sequenceTestWrite1.gb&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="i">outputPath2</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\sequenceTestWrite2.gb&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="f">outputConverter</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 36)" onmouseover="showTip(event, 'fs5', 36)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 37)" onmouseover="showTip(event, 'fs9', 37)" class="t">OriginConverters</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="t">Output</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="f">bioItemConverter</span>
+
+<span onmouseout="hideTip(event, 'fs4', 40)" onmouseover="showTip(event, 'fs4', 40)" class="i">parsedGBFile</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 41)" onmouseover="showTip(event, 'fs5', 41)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="t">Write</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="f">toFile</span> <span onmouseout="hideTip(event, 'fs21', 44)" onmouseover="showTip(event, 'fs21', 44)" class="i">outputPath1</span>
+
+<span onmouseout="hideTip(event, 'fs12', 45)" onmouseover="showTip(event, 'fs12', 45)" class="i">parsedGBFile&#39;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 46)" onmouseover="showTip(event, 'fs5', 46)" class="t">GenBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 47)" onmouseover="showTip(event, 'fs26', 47)" class="t">Write</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="f">toFileWithOriginConverter</span> <span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="i">outputPath2</span> <span onmouseout="hideTip(event, 'fs23', 50)" onmouseover="showTip(event, 'fs23', 50)" class="f">outputConverter</span>
+</code></pre></td>
+</tr>
+</table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
 <div class="tip" id="fs3">val exampleFilePath : string<br /><br />Full name: GenBank.exampleFilePath<br /><em><br /><br />Path of the example file</em></div>
-<div class="tip" id="fs4">val parsedGBFile : ((seq&lt;char&gt; -&gt; obj) -&gt; System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;obj&gt;&gt;)<br /><br />Full name: GenBank.parsedGBFile<br /><em><br /><br />Parsed Example File </em></div>
+<div class="tip" id="fs4">val parsedGBFile : System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;seq&lt;char&gt;&gt;&gt;<br /><br />Full name: GenBank.parsedGBFile<br /><em><br /><br />Parsed Example File </em></div>
 <div class="tip" id="fs5">module GenBank<br /><br />from BioFSharp.IO</div>
 <div class="tip" id="fs6">module Read<br /><br />from BioFSharp.IO.GenBank</div>
-<div class="tip" id="fs7">val fromFile : path:string -&gt; originConverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.GenBank.Read.fromFile</div>
-<div class="tip" id="fs8">val features : GenBank.Feature list<br /><br />Full name: GenBank.features<br /><em><br /><br />All features contained in this GenBank file representation</em></div>
-<div class="tip" id="fs9">val getFeatures : gb:System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt; -&gt; GenBank.Feature list<br /><br />Full name: BioFSharp.IO.GenBank.getFeatures</div>
-<div class="tip" id="fs10">val cdsFeatures : GenBank.Feature list<br /><br />Full name: GenBank.cdsFeatures<br /><em><br /><br />All features with the &quot;CDS&quot; tag</em></div>
-<div class="tip" id="fs11">val getFeaturesWithType : featureType:string -&gt; gb:System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt; -&gt; GenBank.Feature list<br /><br />Full name: BioFSharp.IO.GenBank.getFeaturesWithType</div>
-<div class="tip" id="fs12">val queryBaseSpanType : obj<br /><br />Full name: GenBank.queryBaseSpanType<br /><em><br /><br />we are searching for a complete base span</em></div>
-<div class="tip" id="fs13">val queryBaseSpan : obj<br /><br />Full name: GenBank.queryBaseSpan<br /><em><br /><br />spanning nucleotides 687-3158</em></div>
-<div class="tip" id="fs14">val bsQueryResult : obj<br /><br />Full name: GenBank.bsQueryResult<br /><em><br /><br /></em></div>
+<div class="tip" id="fs7">val fromFile : path:string -&gt; System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;seq&lt;char&gt;&gt;&gt;<br /><br />Full name: BioFSharp.IO.GenBank.Read.fromFile</div>
+<div class="tip" id="fs8">val converter : (seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;)<br /><br />Full name: GenBank.converter</div>
+<div class="tip" id="fs9">module OriginConverters<br /><br />from BioFSharp.IO.GenBank</div>
+<div class="tip" id="fs10">module Input<br /><br />from BioFSharp.IO.GenBank.OriginConverters</div>
+<div class="tip" id="fs11">val nucleotideConverter : sequence:seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.IO.GenBank.OriginConverters.Input.nucleotideConverter</div>
+<div class="tip" id="fs12">val parsedGBFile&#39; : System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;&gt;&gt;<br /><br />Full name: GenBank.parsedGBFile&#39;</div>
+<div class="tip" id="fs13">val fromFileWithOriginConverter : originConverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; path:string -&gt; System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.GenBank.Read.fromFileWithOriginConverter</div>
+<div class="tip" id="fs14">val origin : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: GenBank.origin</div>
+<div class="tip" id="fs15">val getOrigin : gb:System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt; -&gt; &#39;a<br /><br />Full name: BioFSharp.IO.GenBank.getOrigin</div>
+<div class="tip" id="fs16">val rnaSeq : seq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: GenBank.rnaSeq<br /><em><br /><br />Transcribed origin sequence</em></div>
+<div class="tip" id="fs17">module BioSeq<br /><br />from BioFSharp</div>
+<div class="tip" id="fs18">val transcribeCodeingStrand : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioSeq.transcribeCodeingStrand</div>
+<div class="tip" id="fs19">val protein : seq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: GenBank.protein<br /><em><br /><br />Translated origin sequence</em></div>
+<div class="tip" id="fs20">val translate : nucleotideOffset:int -&gt; rnaSeq:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;AminoAcids.AminoAcid&gt;<br /><br />Full name: BioFSharp.BioSeq.translate</div>
+<div class="tip" id="fs21">val outputPath1 : string<br /><br />Full name: GenBank.outputPath1</div>
+<div class="tip" id="fs22">val outputPath2 : string<br /><br />Full name: GenBank.outputPath2</div>
+<div class="tip" id="fs23">val outputConverter : (BioSeq.BioSeq&lt;#IBioItem&gt; -&gt; seq&lt;char&gt;)<br /><br />Full name: GenBank.outputConverter</div>
+<div class="tip" id="fs24">module Output<br /><br />from BioFSharp.IO.GenBank.OriginConverters</div>
+<div class="tip" id="fs25">val bioItemConverter : sequence:BioSeq.BioSeq&lt;#IBioItem&gt; -&gt; seq&lt;char&gt;<br /><br />Full name: BioFSharp.IO.GenBank.OriginConverters.Output.bioItemConverter</div>
+<div class="tip" id="fs26">module Write<br /><br />from BioFSharp.IO.GenBank</div>
+<div class="tip" id="fs27">val toFile : path:string -&gt; gb:System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;#seq&lt;char&gt;&gt;&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.GenBank.Write.toFile</div>
+<div class="tip" id="fs28">val toFileWithOriginConverter : path:string -&gt; originConverter:(&#39;a -&gt; seq&lt;char&gt;) -&gt; gb:System.Collections.Generic.Dictionary&lt;string,GenBank.GenBankItem&lt;&#39;a&gt;&gt; -&gt; unit<br /><br />Full name: BioFSharp.IO.GenBank.Write.toFileWithOriginConverter</div>
 
         </div>
         <div class="span3" >

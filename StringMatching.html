@@ -236,72 +236,7 @@ In fact the two provided algorithms are built the same way:</p>
 <hr></hr>
 <br>
 <h1><a name="Boyer-Moore" class="anchor" href="#Boyer-Moore">Boyer Moore</a></h1>
-<a id="Author" href="https://github.com/WieczorekE">&#128366;view author of this tutorial</a>
-<h2><a name="Usage-3" class="anchor" href="#Usage-3">Usage</a></h2>
-<p>This part of the documentation gives a short introduction into the Boyer Moore string search algorithm which is particulary desined to work on IBioItems.This algorithm searches a query within a longer source. In using two arrays that are created using the bad character rule and the good suffix heuristics the best shifting value is determined. This accounts for higher shifts which prevents unnecessary comparisons to save time.</p>
-<p>The following code will return an array created out of all the proteins that are contained in the fasta file. First, the Symbols in the file get converted
-into amino acids and then they get concatenated and transformed into an array.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 112)" onmouseover="showTip(event, 'fs49', 112)" class="i">chlamyproteins</span> <span class="o">=</span> 
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 113)" onmouseover="showTip(event, 'fs50', 113)" class="f">converter</span> <span onmouseout="hideTip(event, 'fs51', 114)" onmouseover="showTip(event, 'fs51', 114)" class="i">letters</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs52', 115)" onmouseover="showTip(event, 'fs52', 115)" class="t">BioList</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 116)" onmouseover="showTip(event, 'fs53', 116)" class="t">BioList</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs54', 117)" onmouseover="showTip(event, 'fs54', 117)" class="t">AminoAcid</span><span class="o">&gt;</span> <span class="o">=</span> 
-        <span onmouseout="hideTip(event, 'fs51', 118)" onmouseover="showTip(event, 'fs51', 118)" class="i">letters</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 119)" onmouseover="showTip(event, 'fs55', 119)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 120)" onmouseover="showTip(event, 'fs56', 120)" class="f">map</span> ( <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs57', 121)" onmouseover="showTip(event, 'fs57', 121)" class="i">x</span> <span class="k">-&gt;</span> <span class="k">match</span> (<span onmouseout="hideTip(event, 'fs2', 122)" onmouseover="showTip(event, 'fs2', 122)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 123)" onmouseover="showTip(event, 'fs7', 123)" class="t">AminoAcids</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs58', 124)" onmouseover="showTip(event, 'fs58', 124)" class="f">charToParsedAminoAcidChar</span> <span onmouseout="hideTip(event, 'fs57', 125)" onmouseover="showTip(event, 'fs57', 125)" class="i">x</span>) <span class="k">with</span>
-                                  | <span onmouseout="hideTip(event, 'fs59', 126)" onmouseover="showTip(event, 'fs59', 126)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs60', 127)" onmouseover="showTip(event, 'fs60', 127)" class="p">StandardCodes</span>  <span onmouseout="hideTip(event, 'fs61', 128)" onmouseover="showTip(event, 'fs61', 128)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs61', 129)" onmouseover="showTip(event, 'fs61', 129)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs59', 130)" onmouseover="showTip(event, 'fs59', 130)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs62', 131)" onmouseover="showTip(event, 'fs62', 131)" class="p">AmbiguityCodes</span> <span onmouseout="hideTip(event, 'fs61', 132)" onmouseover="showTip(event, 'fs61', 132)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs61', 133)" onmouseover="showTip(event, 'fs61', 133)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs59', 134)" onmouseover="showTip(event, 'fs59', 134)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs63', 135)" onmouseover="showTip(event, 'fs63', 135)" class="p">GapTer</span>         <span onmouseout="hideTip(event, 'fs61', 136)" onmouseover="showTip(event, 'fs61', 136)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs61', 137)" onmouseover="showTip(event, 'fs61', 137)" class="i">v</span>
-                                  | <span onmouseout="hideTip(event, 'fs59', 138)" onmouseover="showTip(event, 'fs59', 138)" class="t">ParsedAminoAcidChar</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs64', 139)" onmouseover="showTip(event, 'fs64', 139)" class="p">NoAAChar</span>       <span onmouseout="hideTip(event, 'fs65', 140)" onmouseover="showTip(event, 'fs65', 140)" class="i">v</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs66', 141)" onmouseover="showTip(event, 'fs66', 141)" class="f">failwith</span> <span class="s">&quot;No AA Char given&quot;</span>)
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 142)" onmouseover="showTip(event, 'fs55', 142)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs67', 143)" onmouseover="showTip(event, 'fs67', 143)" class="f">toList</span>
-
-    <span onmouseout="hideTip(event, 'fs68', 144)" onmouseover="showTip(event, 'fs68', 144)" class="t">FileIO</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs69', 145)" onmouseover="showTip(event, 'fs69', 145)" class="f">readFile</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Proteins.fasta&quot;</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs70', 146)" onmouseover="showTip(event, 'fs70', 146)" class="t">FastA</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs71', 147)" onmouseover="showTip(event, 'fs71', 147)" class="f">fromFileEnumerator</span> (<span onmouseout="hideTip(event, 'fs50', 148)" onmouseover="showTip(event, 'fs50', 148)" class="f">converter</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 149)" onmouseover="showTip(event, 'fs55', 149)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 150)" onmouseover="showTip(event, 'fs56', 150)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs72', 151)" onmouseover="showTip(event, 'fs72', 151)" class="i">item</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs72', 152)" onmouseover="showTip(event, 'fs72', 152)" class="i">item</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs73', 153)" onmouseover="showTip(event, 'fs73', 153)" class="i">Sequence</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 154)" onmouseover="showTip(event, 'fs55', 154)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs74', 155)" onmouseover="showTip(event, 'fs74', 155)" class="f">toArray</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 156)" onmouseover="showTip(event, 'fs55', 156)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs75', 157)" onmouseover="showTip(event, 'fs75', 157)" class="f">concat</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 158)" onmouseover="showTip(event, 'fs55', 158)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs74', 159)" onmouseover="showTip(event, 'fs74', 159)" class="f">toArray</span>
-</code></pre></td>
-</tr>
-</table>
-<p>The following code will return the first occurence of the searched query within the source.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs76', 160)" onmouseover="showTip(event, 'fs76', 160)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs77', 161)" onmouseover="showTip(event, 'fs77', 161)" class="f">findFirst</span> <span onmouseout="hideTip(event, 'fs49', 162)" onmouseover="showTip(event, 'fs49', 162)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs49', 163)" onmouseover="showTip(event, 'fs49', 163)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
-</code></pre></td>
-</tr>
-</table>
-<p>The following code will return the first occurence of the query after a given staring point.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs76', 164)" onmouseover="showTip(event, 'fs76', 164)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs78', 165)" onmouseover="showTip(event, 'fs78', 165)" class="f">findFrom</span> <span class="n">7</span> <span onmouseout="hideTip(event, 'fs49', 166)" onmouseover="showTip(event, 'fs49', 166)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs49', 167)" onmouseover="showTip(event, 'fs49', 167)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
-</code></pre></td>
-</tr>
-</table>
-<p>The following code will return the all the occurence of the query within the given source.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs76', 168)" onmouseover="showTip(event, 'fs76', 168)" class="t">BoyerMoore</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs79', 169)" onmouseover="showTip(event, 'fs79', 169)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs49', 170)" onmouseover="showTip(event, 'fs49', 170)" class="i">chlamyproteins</span> <span onmouseout="hideTip(event, 'fs49', 171)" onmouseover="showTip(event, 'fs49', 171)" class="i">chlamyproteins</span><span class="o">.</span>[<span class="n">16988..</span><span class="n">17978</span>]
-</code></pre></td>
-</tr>
-</table>
-<h2><a name="Runtime-3" class="anchor" href="#Runtime-3">Runtime</a></h2>
-<ul>
-<li>Preprocessing: <em>Θ(m+k)</em></li>
-<li>Matching time: best <em>Ω(n/m)</em></li>
-<li>Worst Case: <em>O(nm)</em></li>
-</ul>
+<p>coming soon...</p>
 <h1><a name="Speed-Comparison" class="anchor" href="#Speed-Comparison">Speed Comparison</a></h1>
 <p>Coming soon...</p>
 
@@ -350,40 +285,9 @@ into amino acids and then they get concatenated and transformed into an array.</
 <div class="tip" id="fs43">type &#39;T array = &#39;T []<br /><br />Full name: Microsoft.FSharp.Core.array&lt;_&gt;</div>
 <div class="tip" id="fs44">val s : &#39;a array (requires member op_Explicit and equality)</div>
 <div class="tip" id="fs45">val findAllGeneric : updateHash:(&#39;c -&gt; &#39;a -&gt; &#39;a -&gt; &#39;c) -&gt; blockHash:(&#39;a array -&gt; &#39;c) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.findAllGeneric</div>
-<div class="tip" id="fs46">val updateHash : pLength:int32 -&gt; hs:uint64 -&gt; inchar:&#39;a -&gt; outchar:&#39;b -&gt; uint64 (requires member op_Explicit and member op_Explicit)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.updateHash</div>
+<div class="tip" id="fs46">val updateHash : pLength:int32 -&gt; hs:uint64 -&gt; inchar:&#39;b -&gt; outchar:&#39;c -&gt; uint64 (requires member op_Explicit and member op_Explicit)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.updateHash</div>
 <div class="tip" id="fs47">property Array.Length: int</div>
 <div class="tip" id="fs48">val blockHash : pattern:&#39;a array -&gt; uint64 (requires member op_Explicit)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.blockHash</div>
-<div class="tip" id="fs49">val chlamyproteins : AminoAcid []<br /><br />Full name: StringMatching.chlamyproteins</div>
-<div class="tip" id="fs50">val converter : (seq&lt;char&gt; -&gt; BioList.BioList&lt;AminoAcid&gt;)</div>
-<div class="tip" id="fs51">val letters : seq&lt;char&gt;</div>
-<div class="tip" id="fs52">module BioList<br /><br />from BioFSharp</div>
-<div class="tip" id="fs53">type BioList&lt;&#39;a (requires &#39;a :&gt; IBioItem)&gt; = &#39;a list<br /><br />Full name: BioFSharp.BioList.BioList&lt;_&gt;</div>
-<div class="tip" id="fs54">type AminoAcid =<br />&#160;&#160;| Ala<br />&#160;&#160;| Cys<br />&#160;&#160;| Asp<br />&#160;&#160;| Glu<br />&#160;&#160;| Phe<br />&#160;&#160;| Gly<br />&#160;&#160;| His<br />&#160;&#160;| Ile<br />&#160;&#160;| Lys<br />&#160;&#160;| Leu<br />&#160;&#160;...<br />&#160;&#160;interface IBioItem<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; int<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; byte<br /><br />Full name: BioFSharp.AminoAcids.AminoAcid</div>
-<div class="tip" id="fs55">Multiple items<br />module Seq<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =<br />&#160;&#160;static member fromFile : filePath:string -&gt; seq&lt;string&gt;<br />&#160;&#160;static member fromFileWithCsvSchema : filePath:string * separator:char * firstLineHasHeader:bool * ?skipLines:int * ?skipLinesBeforeHeader:int * ?schemaMode:SchemaMode -&gt; seq&lt;&#39;schema&gt;<br />&#160;&#160;static member fromFileWithSep : separator:char -&gt; filePath:string -&gt; seq&lt;string []&gt;<br />&#160;&#160;static member toCSV : separator:string -&gt; header:bool -&gt; data:seq&lt;&#39;a&gt; -&gt; seq&lt;string&gt;<br />&#160;&#160;static member write : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br />&#160;&#160;static member writeOrAppend : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br /><br />Full name: FSharp.Care.IO.SeqIO.Seq</div>
-<div class="tip" id="fs56">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.map</div>
-<div class="tip" id="fs57">val x : char</div>
-<div class="tip" id="fs58">val charToParsedAminoAcidChar : c:char -&gt; ParsedAminoAcidChar<br /><br />Full name: BioFSharp.AminoAcids.charToParsedAminoAcidChar</div>
-<div class="tip" id="fs59">type ParsedAminoAcidChar =<br />&#160;&#160;| StandardCodes of AminoAcid<br />&#160;&#160;| AmbiguityCodes of AminoAcid<br />&#160;&#160;| GapTer of AminoAcid<br />&#160;&#160;| NoAAChar of char<br /><br />Full name: BioFSharp.AminoAcids.ParsedAminoAcidChar</div>
-<div class="tip" id="fs60">union case ParsedAminoAcidChar.StandardCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs61">val v : AminoAcid</div>
-<div class="tip" id="fs62">union case ParsedAminoAcidChar.AmbiguityCodes: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs63">union case ParsedAminoAcidChar.GapTer: AminoAcid -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs64">union case ParsedAminoAcidChar.NoAAChar: char -&gt; ParsedAminoAcidChar</div>
-<div class="tip" id="fs65">val v : char</div>
-<div class="tip" id="fs66">val failwith : message:string -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.failwith</div>
-<div class="tip" id="fs67">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>
-<div class="tip" id="fs68">module FileIO<br /><br />from FSharp.Care.IO</div>
-<div class="tip" id="fs69">val readFile : file:string -&gt; seq&lt;string&gt;<br /><br />Full name: FSharp.Care.IO.FileIO.readFile</div>
-<div class="tip" id="fs70">module FastA<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs71">val fromFileEnumerator : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;<br /><br />Full name: BioFSharp.IO.FastA.fromFileEnumerator</div>
-<div class="tip" id="fs72">val item : FastA.FastaItem&lt;BioList.BioList&lt;AminoAcid&gt;&gt;</div>
-<div class="tip" id="fs73">FastA.FastaItem.Sequence: BioList.BioList&lt;AminoAcid&gt;</div>
-<div class="tip" id="fs74">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
-<div class="tip" id="fs75">val concat : sources:seq&lt;#seq&lt;&#39;T&gt;&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.Seq.concat</div>
-<div class="tip" id="fs76">module BoyerMoore<br /><br />from BioFSharp.Algorithm.StringMatching</div>
-<div class="tip" id="fs77">val findFirst : source:&#39;a array -&gt; query:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.BoyerMoore.findFirst</div>
-<div class="tip" id="fs78">val findFrom : badCharPattern:int array -&gt; goodCharPattern:int array -&gt; startindex:int -&gt; source:&#39;a array -&gt; query:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.BoyerMoore.findFrom</div>
-<div class="tip" id="fs79">val findAll : source:&#39;a array -&gt; query:&#39;a array -&gt; int list (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.BoyerMoore.findAll</div>
 
         </div>
         <div class="span3" >

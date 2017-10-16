@@ -155,12 +155,12 @@ Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}
 <div class="tip" id="fs17">union case Parameters.FileFormat.FastA: Parameters.FileFormat</div>
 <div class="tip" id="fs18">val outputModifier : Parameters.ClustalParams<br /><br />Full name: ClustalOWrapper.outputModifier</div>
 <div class="tip" id="fs19">union case Parameters.ClustalParams.Output: seq&lt;Parameters.OutputCustom&gt; -&gt; Parameters.ClustalParams</div>
-<div class="tip" id="fs20">type OutputCustom =<br />&#160;&#160;| Format of FileFormat<br />&#160;&#160;| ResidueNumber<br />&#160;&#160;| Wrap of int<br />&#160;&#160;| OutputOrder<br /><br />Full name: BioFSharp.IO.ClustalOWrapper.Parameters.OutputCustom</div>
+<div class="tip" id="fs20">type OutputCustom =<br />&#160;&#160;| Format of FileFormat<br />&#160;&#160;| ResidueNumber<br />&#160;&#160;| Wrap of int<br />&#160;&#160;| OutputOrderAsTree<br /><br />Full name: BioFSharp.IO.ClustalOWrapper.Parameters.OutputCustom</div>
 <div class="tip" id="fs21">union case Parameters.OutputCustom.Format: Parameters.FileFormat -&gt; Parameters.OutputCustom</div>
 <div class="tip" id="fs22">union case Parameters.FileFormat.Clustal: Parameters.FileFormat</div>
 <div class="tip" id="fs23">val forceModifier : Parameters.ClustalParams<br /><br />Full name: ClustalOWrapper.forceModifier</div>
 <div class="tip" id="fs24">union case Parameters.ClustalParams.Miscallaneous: seq&lt;Parameters.MiscallaneousCustom&gt; -&gt; Parameters.ClustalParams</div>
-<div class="tip" id="fs25">type MiscallaneousCustom =<br />&#160;&#160;| Auto<br />&#160;&#160;| Threads of int<br />&#160;&#160;| Log of string<br />&#160;&#160;| Help<br />&#160;&#160;| VerboseLevel of int<br />&#160;&#160;| Version<br />&#160;&#160;| LongVersion<br />&#160;&#160;| Force<br /><br />Full name: BioFSharp.IO.ClustalOWrapper.Parameters.MiscallaneousCustom</div>
+<div class="tip" id="fs25">type MiscallaneousCustom =<br />&#160;&#160;| Auto<br />&#160;&#160;| Threads of int<br />&#160;&#160;| Log of string<br />&#160;&#160;| VerboseLevel of int<br />&#160;&#160;| Version<br />&#160;&#160;| LongVersion<br />&#160;&#160;| Force<br /><br />Full name: BioFSharp.IO.ClustalOWrapper.Parameters.MiscallaneousCustom</div>
 <div class="tip" id="fs26">union case Parameters.MiscallaneousCustom.Force: Parameters.MiscallaneousCustom</div>
 <div class="tip" id="fs27">member ClustalOWrapper.AlignFromFile : inputPath:Input * outputPath:string * parameters:seq&lt;Parameters.ClustalParams&gt; * ?name:string -&gt; unit</div>
 <div class="tip" id="fs28">val sequences : BioID.TaggedSequence&lt;string,char&gt; list<br /><br />Full name: ClustalOWrapper.sequences</div>

@@ -78,8 +78,8 @@
             createFastaItem header sequence
           </code>
           <div class="tip" id="417">
-            <strong>Signature:</strong> header:string -&gt; sequence:&#39;?8862 -&gt; FastaItem&lt;&#39;?8862&gt;<br />
-                          <strong>Type parameters:</strong> '?8862          </div>
+            <strong>Signature:</strong> header:string -&gt; sequence:&#39;?8876 -&gt; FastaItem&lt;&#39;?8876&gt;<br />
+                          <strong>Type parameters:</strong> '?8876          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastA.fs#L18-18" class="github-link">
@@ -98,8 +98,8 @@
             fromFile converter filePath
           </code>
           <div class="tip" id="418">
-            <strong>Signature:</strong> converter:(seq&lt;char&gt; -&gt; &#39;?8867) -&gt; filePath:string -&gt; seq&lt;FastaItem&lt;&#39;?8867&gt;&gt;<br />
-                          <strong>Type parameters:</strong> '?8867          </div>
+            <strong>Signature:</strong> converter:(seq&lt;char&gt; -&gt; &#39;?8881) -&gt; filePath:string -&gt; seq&lt;FastaItem&lt;&#39;?8881&gt;&gt;<br />
+                          <strong>Type parameters:</strong> '?8881          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastA.fs#L48-48" class="github-link">
@@ -138,8 +138,8 @@
             fromGzipFile converter filePath
           </code>
           <div class="tip" id="420">
-            <strong>Signature:</strong> converter:(seq&lt;char&gt; -&gt; &#39;?8869) -&gt; filePath:string -&gt; seq&lt;FastaItem&lt;&#39;?8869&gt;&gt;<br />
-                          <strong>Type parameters:</strong> '?8869          </div>
+            <strong>Signature:</strong> converter:(seq&lt;char&gt; -&gt; &#39;?8883) -&gt; filePath:string -&gt; seq&lt;FastaItem&lt;&#39;?8883&gt;&gt;<br />
+                          <strong>Type parameters:</strong> '?8883          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastA.fs#L55-55" class="github-link">
@@ -158,15 +158,15 @@
             toString toString data
           </code>
           <div class="tip" id="421">
-            <strong>Signature:</strong> toString:(&#39;T -&gt; char) -&gt; data:seq&lt;FastaItem&lt;&#39;b&gt;&gt; -&gt; seq&lt;string&gt;<br />
-                          <strong>Type parameters:</strong> 'T, 'b          </div>
+            <strong>Signature:</strong> toString:(&#39;T -&gt; char) -&gt; data:seq&lt;FastaItem&lt;&#39;c&gt;&gt; -&gt; seq&lt;string&gt;<br />
+                          <strong>Type parameters:</strong> 'T, 'c          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FastA.fs#L92-92" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Converts FastaItem to string. Converter determines type of sequence by converting type -&gt; seq<char></p>
+          <p>Converts FastaItem to string. Converter determines type of sequence by converting type -&gt; char</p>
 
 
         </td>
@@ -186,7 +186,7 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Writes FastaItem to file. Converter determines type of sequence by converting seq<char> -&gt; type</p>
+          <p>Writes FastaItem to file. Converter determines type of sequence by converting type -&gt; char</p>
 
 
         </td>

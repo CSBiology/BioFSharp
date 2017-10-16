@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>OutputType - BioFSharp</title>
+    <title>GFF3 - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,32 +37,202 @@
 
 
 
-<h1>OutputType</h1>
+<h1>GFF3</h1>
 <p>
   <span>Namespace: BioFSharp.IO</span><br />
-  <span>Parent Module: <a href="biofsharp-io-blastncbi-parameters.html">Parameters</a></span>
 </p>
 <div class="xmldoc">
+<p>Contains functions for reading and writing GFF3 files</p>
+
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-gff3-gffentry.html">GFFEntry</a>
+          </td>
+          <td class="xmldoc"><p>represents fields of one GFF3 entry line</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-gff3-gffline-1.html">GFFLine<'a></a>
+          </td>
+          <td class="xmldoc"><p>represents all kinds of lines which can be present in a GFF3 file</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '893', 893)" onmouseover="showTip(event, '893', 893)">
-            BinaryASN1
+          <code onmouseout="hideTip(event, '427', 427)" onmouseover="showTip(event, '427', 427)">
+            createGFFEntry (...)
           </code>
-          <div class="tip" id="893">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="427">
+            <strong>Signature:</strong> seqid:string -&gt; source:string -&gt; feature:string -&gt; startPos:string -&gt; endPos:string -&gt; score:string -&gt; strand:string -&gt; phase:string -&gt; attributes:string -&gt; supplement:string -&gt; GFFEntry<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L48-48" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L57-57" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Takes strings of each field and creates a GFFEntry type thereby converting the strings into desired types.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '428', 428)" onmouseover="showTip(event, '428', 428)">
+            fromFile fastAconverter filepath
+          </code>
+          <div class="tip" id="428">
+            <strong>Signature:</strong> fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFFLine&lt;&#39;a&gt;&gt;<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L129-129" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>reads in a file and gives a GFFLine<'a> list. If file contains a FastA sequence it is converted to FastA.FastaItem with given converter. (Use 'id' as converter if no FastA is required).</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '429', 429)" onmouseover="showTip(event, '429', 429)">
+            fromFileWithoutFasta filepath
+          </code>
+          <div class="tip" id="429">
+            <strong>Signature:</strong> filepath:string -&gt; seq&lt;GFFLine&lt;seq&lt;char&gt;&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L160-160" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>if no information about Sequence is required or no Fasta is included you can use this function</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '430', 430)" onmouseover="showTip(event, '430', 430)">
+            getSequence gFFFile cDSfeature
+          </code>
+          <div class="tip" id="430">
+            <strong>Signature:</strong> gFFFile:seq&lt;GFFLine&lt;&#39;?8673&gt;&gt; -&gt; cDSfeature:GFFEntry -&gt; seq&lt;&#39;a&gt;<br />
+                          <strong>Type parameters:</strong> '?8673, 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L334-334" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>if a FastA sequence is included this function searches the features corresponding sequence</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '431', 431)" onmouseover="showTip(event, '431', 431)">
+            gFFEntrytoString g
+          </code>
+          <div class="tip" id="431">
+            <strong>Signature:</strong> g:GFFEntry -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L287-287" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>converts a single GFF entry to a line (string) of a GFF file</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '432', 432)" onmouseover="showTip(event, '432', 432)">
+            parseStrToGFFEntry str
+          </code>
+          <div class="tip" id="432">
+            <strong>Signature:</strong> str:string -&gt; GFFEntry<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L100-100" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Converts a string into a GFFEntry type. If there are more than 9 fields an additional "supplement" field gets filled. If there are less than 9 only the supplement field gets filled with the whole line.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '433', 433)" onmouseover="showTip(event, '433', 433)">
+            relationshipSearch gffList searchterm
+          </code>
+          <div class="tip" id="433">
+            <strong>Signature:</strong> gffList:seq&lt;GFFLine&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFFEntry&gt;<br />
+                          <strong>Type parameters:</strong> 'a          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L250-250" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Searches for a term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent).</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '434', 434)" onmouseover="showTip(event, '434', 434)">
+            sanityCheck filepath
+          </code>
+          <div class="tip" id="434">
+            <strong>Signature:</strong> filepath:string -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L247-247" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -72,267 +242,61 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '894', 894)" onmouseover="showTip(event, '894', 894)">
-            BLAST_ArchiveFormat
+          <code onmouseout="hideTip(event, '435', 435)" onmouseover="showTip(event, '435', 435)">
+            sanityCheckWithSOTerm (...)
           </code>
-          <div class="tip" id="894">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="435">
+            <strong>Signature:</strong> so_TermsPath:string -&gt; filepath:string -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L50-50" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L175-175" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Validates GFF3 file. Prints all appearances of errors with line index. If no (SO)FA check is needed set "" as so_TermsPath.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '895', 895)" onmouseover="showTip(event, '895', 895)">
-            CSV
+          <code onmouseout="hideTip(event, '436', 436)" onmouseover="showTip(event, '436', 436)">
+            toString input converter path
           </code>
-          <div class="tip" id="895">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
+          <div class="tip" id="436">
+            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?8666&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:&#39;?8668 -&gt; seq&lt;string&gt;<br />
+                          <strong>Type parameters:</strong> '?8666, 'a, '?8668          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L49-49" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L313-313" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>converts GFF lines to string sequence. Hint: Use id as converter if no FASTA sequence is included.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '896', 896)" onmouseover="showTip(event, '896', 896)">
-            JSON_Blast
+          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
+            write input converter path
           </code>
-          <div class="tip" id="896">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
+          <div class="tip" id="437">
+            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?8670&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br />
+                          <strong>Type parameters:</strong> '?8670, 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L52-52" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L328-328" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>writes GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.</p>
 
-          <code onmouseout="hideTip(event, '897', 897)" onmouseover="showTip(event, '897', 897)">
-            JSON_Seqalign
-          </code>
-          <div class="tip" id="897">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L51-51" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
 
-          <code onmouseout="hideTip(event, '898', 898)" onmouseover="showTip(event, '898', 898)">
-            Pairwise
-          </code>
-          <div class="tip" id="898">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L39-39" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '899', 899)" onmouseover="showTip(event, '899', 899)">
-            Query_anchored
-          </code>
-          <div class="tip" id="899">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L40-40" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '900', 900)" onmouseover="showTip(event, '900', 900)">
-            Query_anchored_Flat
-          </code>
-          <div class="tip" id="900">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L42-42" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '901', 901)" onmouseover="showTip(event, '901', 901)">
-            Query_anchored_Flat_NoIdentities
-          </code>
-          <div class="tip" id="901">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L43-43" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '902', 902)" onmouseover="showTip(event, '902', 902)">
-            Query_anchored_NoIdentities
-          </code>
-          <div class="tip" id="902">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L41-41" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '903', 903)" onmouseover="showTip(event, '903', 903)">
-            Tabular
-          </code>
-          <div class="tip" id="903">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L45-45" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '904', 904)" onmouseover="showTip(event, '904', 904)">
-            TabularWithComments
-          </code>
-          <div class="tip" id="904">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L46-46" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '905', 905)" onmouseover="showTip(event, '905', 905)">
-            TextASN1
-          </code>
-          <div class="tip" id="905">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L47-47" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '906', 906)" onmouseover="showTip(event, '906', 906)">
-            XML
-          </code>
-          <div class="tip" id="906">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L44-44" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '907', 907)" onmouseover="showTip(event, '907', 907)">
-            XML2_Blast
-          </code>
-          <div class="tip" id="907">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L53-53" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
         </td>
       </tr>
     </tbody>
