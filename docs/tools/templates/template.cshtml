@@ -62,18 +62,8 @@
                         </ul>
                     }
                 </li>
-                <li>
-                    <a href="@Root/BioCollections.html">BioCollections</a>
-                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("BioCollections.fsx"))
-                    {
-                        <ul class="nav nav-list">
-                            <li><a href="@Root/BioCollections.html#BioSeq">BioSeq</a></li>
-                            <li><a href="@Root/BioCollections.html#BioList">BioList</a></li>
-                            <li><a href="@Root/BioCollections.html#BioArray">BioArray</a></li>
-                        </ul>
-                    }
-                </li>
-                <li><a href="@Root/SeqProperties.html">Sequence Properties</a></li>
+                <li><a href="@Root/BioCollections.html">BioCollections</a></li>
+                <li><a href="@Root/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="@Root/Alignment.html">Alignment</a></li>
                 <li><a href="@Root/MotiveSearch.html">Motive search</a></li>
@@ -91,14 +81,64 @@
                     }
                 </li>
                 <li class="nav-header">File I/O</li>
-                <li><a href="@Root/FastA.html">FastA</a></li>
+                <li>
+                    <a href="@Root/Clustal.html">Clustal</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Clustal.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/Clustal.html#Clustal-format">Format</a></li>
+                        <li><a href="@Root/Clustal.html#Reading-Clustal-files">Reading</a></li>
+                        <li><a href="@Root/Clustal.html#Writing-Clustal-files">Writing</a></li>
+                    </ul>
+                    }
+                </li>
+                <li><a href="@Root/CSV.html">CSV / Tabular</a></li>
+                <li>
+                    <a href="@Root/FastA.html">FastA</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("FastA.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/FastA.html#FastA-format">Format</a></li>
+                        <li><a href="@Root/FastA.html#Reading-FastA-files">Reading</a></li>
+                        <li><a href="@Root/FastA.html#Writing-FastA-files">Writing</a></li>
+                    </ul>
+                    }
+                </li>   
                 <li><a href="@Root/FastQ.html">FastQ</a></li>
-                <li><a href="@Root/GFF3.html">GFF format</a></li>
-                <li><a href="@Root/Genbank.html">Genbank</a></li>
-                <li><a href="@Root/Clustal.html">Clustal</a></li>
-                <li><a href="@Root/Newick.html">Newick</a></li>                
+                <li>
+                    <a href="@Root/GenBank.html">GenBank</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("GenBank.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/GenBank.html#GenBank-format">Format</a></li>
+                        <li><a href="@Root/GenBank.html#Reading-GenBank-files">Reading</a></li>
+                        <li><a href="@Root/GenBank.html#Writing-GenBank-files">Writing</a></li>
+                    </ul>
+                    }
+                </li>  
+                <li>
+                    <a href="@Root/GFF3.html">GFF3</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("GFF3.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/GFF3.html#GFF3-format">Format</a></li>
+                        <li><a href="@Root/GFF3.html#Reading-GFF3-files">Reading</a></li>
+                        <li><a href="@Root/GFF3.html#Writing-GFF3-files">Writing</a></li>
+                    </ul>
+                    }
+                </li>    
+                <li>
+                    <a href="@Root/Newick.html">Newick</a>
+                    @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Newick.fsx"))
+                    {
+                    <ul class="nav nav-list">
+                        <li><a href="@Root/Newick.html#Newick-format">Format</a></li>
+                        <li><a href="@Root/Newick.html#Reading-Newick-files">Reading</a></li>
+                        <li><a href="@Root/Newick.html#Writing-Newick-files">Writing</a></li>
+                    </ul>
+                    }
+                </li>                
                 <li><a href="@Root/Obo.html">Obo ontology format</a></li>
-                <li><a href="@Root/CSV.html">Delimited files</a></li>
                 <li class="nav-header">Web I/O</li>
                 <li><a href="@Root/UniProt.html">UniProt</a></li>
                 <li><a href="@Root/BioDB.html">BioDB</a></li>

@@ -30,11 +30,7 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 *)
 
 
-
-//let a  = 
-//    EbiAPI.getProteinFeaturesById "Q64446"
-
-EbiAPI.UniProteinDB.getSeqFeatureByAccession "Q64446"
+EbiAPI.UniProteinDB.getProteinSeqFeature "Q64446"
 
 
 (**

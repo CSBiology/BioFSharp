@@ -81,10 +81,36 @@ module GenBank =
             |RegexGroups featureRegexPattern2 qual -> (qual.[0].["qualifierName"].Value),"."
             |_ -> ".","."
     
+    ///contains prebuilt converters for origin sequences in a gb file for both reading and writing
+    module OriginConverters =
+        open BioFSharp.BioSeq
+
+        ///contains a collection of prebuilt converters for parsing specific origin sequences 
+        module Input =
+
+            ///default converter that yields all characters of the origin sequence, skipping spaces.
+            let defaultConverter (sequence : seq<char>) = seq{for i in sequence do if not (i=' ') then yield i}
+
+            ///converts the origin sequence into a BioSeq of nucleotides
+            let nucleotideConverter (sequence : seq<char>) = ofNucleotideString sequence
+
+            ///converts the origin sequence into a BioSeq of amino acids
+            let peptideConverter (sequence : seq<char>) = ofAminoAcidString sequence
+
+        ///contains a collection of prebuilt converters for writing specific origin sequences 
+        module Output =
+
+            ///default converter. returns a sequence of characters
+            let defaultConverter (sequence : seq<char>) = id sequence
+
+            ///converts the BioSeq to the 1 letter code representing the contained items
+            let bioItemConverter (sequence : BioSeq<'a>) = seq {yield! sequence |> BioSeq.toString}
+
 
     ///functions for parsing a GenBank file.
     module Read =
-    
+        open OriginConverters.Input
+
         ///Token representing lines of a GenBank file for parsing purposes
         type private Token =
         ///Represents the lines ranking highest in hierarchy. These lines are not idented, and are parsed as key,value pair
@@ -110,7 +136,7 @@ module GenBank =
         let private isIdent (s:string) = s.StartsWith " " 
         ///Retursn true if the input string is empty after being trimmed of whitespace, otherwise returns false
         let private isEmpty (s:string) =
-            if s.Trim() = "" then true else false
+            s.Trim() = "" 
         
         ///Returns a CurrentSection depending on an input key. Returns the input currentSection if the key does not indicate that the section changes.
         let private getCurrentSection (current: CurrentSection) (key : string) =
@@ -239,9 +265,9 @@ module GenBank =
                             |CurrentSection.Origin
                                 -> match nextToken with
                                    |Member (k',v')
-                                        -> loop nextSec k' v' ref refList featType featBs featQual qname featQualList feat (origin+v) false
-                                   |_ -> dict.Add("ORIGIN",GenBankItem<'a>.Sequence((toCharArray (origin+v)) |> originConverter))
-                            |_  -> dict.Add("ORIGIN",GenBankItem<'a>.Sequence((toCharArray (origin+v)) |> originConverter))
+                                        ->  loop nextSec k' v' ref refList featType featBs featQual qname featQualList feat (origin+v) false
+                                   |_ ->dict.Add("ORIGIN",GenBankItem.Sequence((toCharArray (origin+v)) |> originConverter))
+                            |_  ->  dict.Add("ORIGIN",GenBankItem.Sequence((toCharArray (origin+v)) |> originConverter))
                     |_ -> ()
             if en.MoveNext() then
                 match (snd en.Current) with
@@ -252,38 +278,35 @@ module GenBank =
             else 
                 dict
         
-        ///Returns a dictionary containing GenBank items that represents the GenBank file at the input path
+        ///Returns a dictionary containing GenBank items, that represents the GenBank file at the input path
+        let fromFile (path:string) = 
+            Seq.fromFile path
+            |> tokenizer
+            |> parser defaultConverter
+        
+        ///Returns a dictionary containing GenBank items, that represents the GenBank file at the input path
         ///taking a converter function for the origin sequence of the file 
-        let fromFile (path:string) (originConverter:seq<char> -> 'a ) = 
+        let fromFileWithOriginConverter (originConverter:seq<char> -> 'a) (path:string) = 
             Seq.fromFile path
             |> tokenizer
             |> parser originConverter
-        
+
+        ///Returns a dictionary containing GenBank items parsed from an input string sequence
+        let fromSeq (input:seq<string>) =
+            input
+            |> tokenizer
+            |> parser defaultConverter
         
         ///Returns a dictionary containing GenBank items parsed from an input string sequence
         ///taking a converter function for the origin sequence 
-        let fromSeq (originConverter:seq<char> -> 'a) (input:seq<string>) =
+        let fromSeqWithOriginConverter (originConverter:seq<char> -> 'a) (input:seq<string>) =
             input
             |> tokenizer
             |> parser originConverter
-        
-        ///contains a collection of prebuilt converters for parsing specific origin sequences 
-        module OriginConverters =
-            open BioFSharp.BioSeq
-
-            ///default converter that yields all characters of the origin sequence, skipping spaces.
-            let defaultConverter (sequence : seq<char>) = seq{for i in sequence do if not (i=' ') then yield i}
-
-            ///converts the origin sequence into a BioSeq of nucleotides
-            let nucleotideConverter (sequence : seq<char>) = ofNucleotideString sequence
-
-            ///converts the origin sequence into a BioSeq of amino acids
-            let peptideConverter (sequence : seq<char>) = ofAminoAcidString sequence
-
 
     ///Functions for writing a GenBank file  
     module Write =
-        
+        open OriginConverters.Output
         ///constructs a sequence of strings in the right formatting (including identation of the key and the position for splitting key/value in the file) 
         ///from input key and value.
         let private constructSeqs (key:string) (value:string) split ident =
@@ -304,7 +327,6 @@ module GenBank =
 
             if value.Length < (80-split) then
                 let line = k+value
-                printfn "singleLine:%A" line
                 seq{yield line}
             elif not (value.Contains " ") && not (value.Contains ",") then
                 let x = 
@@ -312,10 +334,8 @@ module GenBank =
                     |> toCharArray
                     |> Seq.chunkBySize (79-split) 
                     |> Seq.mapi (fun i x -> if i=0 then k+(fromCharArray x) else splitSeq + (fromCharArray x))
-                printfn "nonSeperated lines: %A" x
                 x
             else 
-                printfn "splitmagic..."
                 let words = 
                     value 
                     |> toCharArray
@@ -326,7 +346,7 @@ module GenBank =
         
 
         ///creates a GenBank file at the specified path, taking a converter function for the origin sequence of the file 
-        let write (path:string) (originConverter: 'a -> seq<char>) (gb : Dictionary<string,GenBankItem<'a>>)= 
+        let private write (path:string) (originConverter: 'a -> seq<char>) (gb : Dictionary<string,GenBankItem<'a>>)= 
             seq{
                 for kv in gb do
                     let k,gbi = kv.Key,kv.Value
@@ -364,17 +384,14 @@ module GenBank =
                                 yield "//"
                 }
                 |> FileIO.writeToFile false path
-    
-        ///contains a collection of prebuilt converters for writing specific origin sequences 
-        module OriginConverters =
-            open BioFSharp.BioSeq
+        
+        ///creates a GenBank file at the specified path
+        let toFile (path:string) (gb : Dictionary<string,GenBankItem<'a>>) = 
+            write path defaultConverter gb
 
-            ///default converter. returns a sequence of characters
-            let defaultConverter (sequence : seq<char>) = id sequence
-
-            ///converts the BioSeq to the 1 letter code representing the contained items
-            let bioItemConverter (sequence : BioSeq<'a>) = seq {yield! sequence |> BioSeq.toString}
-
+        ///creates a GenBank file at the specified path, taking a converter function for the origin sequence of the file 
+        let toFileWithOriginConverter (path:string) (originConverter: 'a -> seq<char>) (gb : Dictionary<string,GenBankItem<'a>>)=
+            write path originConverter gb
 
     ///Returns all references of a GenBank file representation
     let getReferences (gb:Dictionary<string,GenBankItem<'a>>) =

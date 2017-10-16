@@ -12,8 +12,11 @@ module Elements =
     //  #####
     /// Mono-isotopic elements consist of one isotope
     type MonoIsotopic  = { 
+        ///Symbol of Element
         Symbol : string;
+        ///Isotope
         X      : Isotopes.Isotope;
+        ///Relative abundancy of isotope
         Xcomp  : float;
         Root   : float   
         }
@@ -26,10 +29,15 @@ module Elements =
     //  #####
     /// Di-isotopic elements consist of two isotopes
     type DiIsotopic    = { 
+        ///Symbol of element
         Symbol : string;
+        ///First isotope
         X      : Isotopes.Isotope;
+        ///Relative abundancy of first isotope
         Xcomp  : float;
+        ///Second isotope
         X1     : Isotopes.Isotope;
+        ///Relative abundancy of second isotope
         X1comp : float;
         Root   : float
         }
@@ -43,12 +51,19 @@ module Elements =
     /// Tri-isotopic elements consist of three isotopes
     [<CustomEquality; CustomComparison>]
     type TriIsotopic   = { 
+        ///Symbol of element
         Symbol : string;
+        ///First isotope
         X      : Isotopes.Isotope;
+        ///Relative abundancy of first isotope
         Xcomp  : float;
+        ///Second isotope
         X1     : Isotopes.Isotope;
+        ///Relative abundancy of second isotope
         X1comp : float;
+        ///Third isotope
         X2     : Isotopes.Isotope;
+        ///Relative abundancy of third isotope
         X2comp : float;                           
         Root   : System.Numerics.Complex*System.Numerics.Complex 
         }
@@ -84,13 +99,21 @@ module Elements =
     //  #####
     /// Multi-isotopic elements consist of more than three isotopes
     type MultiIsotopic = { 
+        ///Symbol of element
         Symbol : string;
+        ///First isotope
         X      : Isotopes.Isotope;
+        ///Relative abundancy of first isotope
         Xcomp  : float;
+        ///Second isotope
         X1     : Isotopes.Isotope;
+        ///Relative abundancy of first isotope
         X1comp  : float;
+        ///Third isotope
         X2     : Isotopes.Isotope;
+        ///Relative abundancy of first isotope
         X2comp  : float;
+        ///Other isotopes of element
         XL     : Isotopes.Isotope[];
         } 
 

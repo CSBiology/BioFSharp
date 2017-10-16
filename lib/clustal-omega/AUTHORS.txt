@@ -1,0 +1,20 @@
+* Clustal Omega:
+Fabian Sievers   UCD Dublin, Ireland
+Andreas Wilm     UCD Dublin, Ireland
+David Dineen     UCD Dublin, Ireland
+Johannes Söding  Gene Center Munich, Germany
+Michael Remmert  Gene Center Munich, Germany
+
+* Clustal 2
+Mark Larkin      UCD Dublin, Ireland
+
+* Clustal 1.X
+Toby Gibson      EMBL Heidelberg, Germany
+Des Higgins      UCC Cork, Ireland
+Julie Thompson   IGBMC Strasbourg, France
+
+* Contributors:
+Chenna Ramu      EMBL Heidelberg, Germany
+Nigel Brown      EMBL Heidelberg, Germany
+
+

@@ -1,0 +1,100 @@
+2016-07-01 Release 1.2.2 (AndreaGiacomo)
+
+	- fixed a memory leak in hhalign
+	- paralleised hhalign
+	- increased MAC-RAM default from 2GB to 8GB
+
+	(no new command-line flags)
+
+2014-02-28 Release 1.2.1 (AndreaGiacomo)
+
+	- corrected Clustal format consensus line
+	- label justification (multi-bit)
+	
+2013-06-12 Release 1.2.0 (AndreaGiacomo)
+
+	--is-profile              disable check if profile, force profile (default no)
+	--use-kimura              use Kimura distance correction for aligned sequences (default no)
+	--percent-id              convert distances into percent identities (default no)
+
+	fixed bug in --output-order=tree-order for pair-wise alignment
+
+	Kimura distance correction no longer default for protein
+	
+	fixed bug in Viterbi algorithm (predominantly affected long nucleotide but also protein, to lesser extent)
+
+		Viterbi is less (~10x) memory hungry than MAC but still scales quadratically with length:
+
+		2GB of RAM (ClustalO default) can align sequences of 6.5k residues with MAC and 18k with Viterbi
+
+		8GB of RAM (EBI limit) can align sequences of 12.5k residues with MAC and 37k with Viterbi
+
+		A Viterbi alignment of sequences of 100k residues will require 59GB of RAM
+	
+	
+2013-05-16 Release 1.1.1
+
+	  --cluster-size=<n>        soft maximum of sequences in sub-clusters
+	  --clustering-out=<file>   Clustering output file
+	  --residuenumber, --resno  in Clustal format print residue numbers (default no)
+	  --wrap=<n>                number of residues before line-wrap in output
+	  --output-order={input-order,tree-order} MSA output order like in input/guide-tree
+
+	turned off Kimura correction for DNA/RNA
+
+	enable distance matrix output after initial mBed but subsequent full distance calculation
+
+	enable termination after distance/guide-tree calculation (--max-hmm-iterations=-1)
+
+	longer sequence labels 
+
+2012-04-25 Release 1.1.0
+
+   DNA and RNA support now added. Sequence type can be specified manually
+   using --seqtype={Protein|DNA|RNA}
+
+2012-03-27 Release 1.0.4
+
+   zipped input now supported
+
+2011-09-07 Release 1.0.3 
+
+Bugs fixed:
+
+   input failed if first line in fasta file was empty
+
+   input failed if Clustal formatted file had trailing residue numbers
+
+   '*' character was causing problems, did not get filtered out by squid 
+
+   --outfmt=fasta was not recognized
+
+   '~' gap characters were not recognized in MSF format
+
+   amended README re sequence/profile alignment
+
+   disallowed empty sequences
+
+   doxygen documentation fixes and fix of API example
+
+   introduced MAC-RAM flag to set amount of RAM given to MAC (in MB)
+	
+2011-06-23 Release 1.0.2
+
+2011-06-17 Release 1.0.0 (DeshilHollesEamus)
+
+2010-06-17 Release 0.0.1 (Dubliniensis)
+		
+		First "release" as program has been able for a while to perform
+		all basic tasks without problems.
+
+		Non-standard features already built-in include:
+		HMM-iteration (using HMMER for building an HMM) and guide-tree
+		iteration. On top of that HMM input works fine and
+		background-frequencies are added to the HHalign process.
+		
+		Known issues: RNA/DNA alignment is considered buggy. Aligned
+		sequences have to be dealigned for HHalign to work properly.
+		
+		The HMMER version message can be ignored if no HMM-iteration
+		was used.

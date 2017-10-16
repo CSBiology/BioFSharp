@@ -56,11 +56,11 @@ module Newick =
 
     (*    Parser    *)
     ///Parses a seq of tokens to a PhylTree
-    let private parser (converter : string -> 'Distance) (input:seq<Token>) : PhylTree.Node<'Distance*string> = 
+    let private parser (converter : string -> 'Distance) (input:seq<Token>) : PhylTree.Node<string*'Distance> = 
         let en = input.GetEnumerator()
         let sbID,sbDist = StringBuilder(),StringBuilder()
         ///Reduces tree to a tuple of its info
-        let cutDown (tree:PhylTree.Node<'Distance*string>) = 
+        let cutDown (tree:PhylTree.Node<string*'Distance>) = 
             match tree with | PhylTree.Branch (x,y) -> x
         let mutable iOpen,iClosed = 0,0
         let rec loop() =
@@ -97,17 +97,17 @@ module Newick =
                     iClosed <- iClosed + 1
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((converter dist,id),[]),true
+                    PhylTree.Branch((id,converter dist),[]),true
                 //name is obtained from stringbuilder, distance is obtained from stringbuilder and converted; tree is built from these info and branchclosed boolean false is returned
                 | NextNode -> 
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((converter dist,id),[]),false
+                    PhylTree.Branch((id,converter dist),[]),false
                 //name is obtained from stringbuilder, distance is obtained from stringbuilder and converted; tree is built from these infos and branchclosed boolean true is returned
                 | EndTree ->
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((converter dist,id),[]),true
+                    PhylTree.Branch((id,converter dist),[]),true
                 //ignored
                 | Separator -> 
                     loop()
@@ -117,7 +117,7 @@ module Newick =
         fst (loop())
 
     ///Returns a PhylTree of file. Converter is used to create a distancevalue of a string
-    let ofFile (converter : string -> 'Distance) (path: string) : PhylTree.Node<'Distance*string> =
+    let ofFile (converter : string -> 'Distance) (path: string) : PhylTree.Node<string*'Distance> =
         path
         |> readFile
         |> tokenizer
@@ -125,23 +125,27 @@ module Newick =
 
      //---Writer---//
 
-    ///Creates a NewickTree file of PhylTree. Converter is used to create a string of a distancevalue
-    let toFile (converter : 'T -> string) (path:string) (tree: PhylTree.Node<'T*string>) = 
+    ///Creates a NewickTree file of PhylTree. nodeConverter is used to split the distanceInfo and the name of a node, because they are parsed separately. First result of the tuple is name, second is distance.
+    let toFile (nodeConverter: 'T -> string * string) (path:string) (tree: PhylTree.Node<'T>) = 
         let rec loop tree =
-            seq {  
+            seq {
                 match tree with
-                | PhylTree.Branch ((n,x),[]) -> 
-                    yield x + ":" + (converter n)
-                | PhylTree.Branch ((n,a), nl) ->
+                | PhylTree.Branch ((nodeInfo),[]) ->
+                    let name,distance = nodeConverter nodeInfo
+                    yield name + ":" + (distance)
+                | PhylTree.Branch ((nodeInfo), nl) ->
+                    let nodeInfo = 
+                        match nodeConverter nodeInfo with
+                        | (name, "") -> name
+                        | (name, distance) -> name + ":" + (distance)                        
                     yield "(" + "\013" +  "\010"
                     let l = nl.Length
-                
                     for i = 0 to l-2 do
                         yield! loop nl.[i]
                         yield "," + "\013" +  "\010"
                     yield! loop nl.[l-1]
                     yield ")" + "\013" + "\010"
-                    yield a + ":" + (converter n)
+                    yield nodeInfo
             }
         let s = loop tree
         use sw = (new System.IO.StreamWriter(path))

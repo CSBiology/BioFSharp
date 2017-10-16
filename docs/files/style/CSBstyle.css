@@ -1,3 +1,4 @@
+
 table.pre {
 	overflow-x: auto;
     white-space: nowrap;
@@ -131,7 +132,7 @@ table.pre::-webkit-scrollbar-thumb
 
 #exampleToggle 
 {
-	border-color = #2E75B6;
+	border-color: #2E75B6;
 }
 
 #SourceCode, #Author, #APILink
@@ -139,8 +140,8 @@ table.pre::-webkit-scrollbar-thumb
 	text-align:center;
 	color:#2E75B6;
 	padding: 2px 6px 2px 6px;
-	border-radius: 25px;
-    border: 2px solid #2E75B6;
+	/*border-radius: 25px;
+    border: 2px solid #2E75B6;*/
 	text-decoration:none;
 
 }
@@ -151,4 +152,19 @@ table.pre::-webkit-scrollbar-thumb
 {
 	background-color:#2E75B6;
 	color:white;
+}
+
+
+
+table.HeadAPI {
+	width: 100%
+}
+
+td.Head {
+	padding: 0px;
+}
+
+td.API {
+	padding: 0px;
+	text-align: right;
 }

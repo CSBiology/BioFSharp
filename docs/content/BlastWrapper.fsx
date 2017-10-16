@@ -3,11 +3,12 @@
 #r "../../bin/BioFSharp.IO.dll"
 
 (**
-Introducing BlastWrapper
-========================
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/BlastWrapper.fs">&lt;/&gt;view source code</a>
-<a id="Author" href="https://github.com/kMutagene">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>Blast Wrapper</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
+<td>
+</table>
 BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
 It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
 output parameter for creating a custom output format.

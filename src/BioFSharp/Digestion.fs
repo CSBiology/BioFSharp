@@ -1,27 +1,36 @@
 ﻿namespace BioFSharp
 
+///Contains types and functions needed to digest amino acid sequences with proteases
 module Digestion =
     
     open AminoAcids
 
-    // p4 p3 p2 p1 || p1' p2'
+    /// p4 p3 p2 p1 || p1' p2'
     type Protease = {
         Name : string
         Expression : AminoAcid option -> AminoAcid option
                   -> AminoAcid option -> AminoAcid option
                   -> AminoAcid option-> AminoAcid option -> bool    
         }
+
+    ///Creates a Protease from given name and motifFunction f
     let createProtease name f =
          {Name = name; Expression = f}
 
+    /// Digested peptide
+    // TODO: type of ProteinID to 'a; rename "missCleavageStart" to "cleavageStart"; Same for ..End..
     type DigestedPeptide = {
+        ///Identifier of protein
         ProteinID: int
+        ///
         MissCleavages: int
         MissCleavageStart:int
         MissCleavageEnd: int
+        ///Sequence of peptide
         PepSequence: AminoAcid list
         }
 
+    ///Creates digested peptide from given information
     let createDigestedPeptide proteinID missCleavages missCleavageStart missCleavageEnd pepSequence = {
          ProteinID=proteinID
          MissCleavages=missCleavages
@@ -30,12 +39,15 @@ module Digestion =
          PepSequence=pepSequence
          }
    
+    ///Returns true, if AminoAcid array resembles cutting site of given protease, else returns false
+    // TODO: rename
     let isCutingSite (protease:Protease) (arr:AminoAcid option[]) =
         match arr with
         | [|p4; p3; p2; p1; p1'; p2';|] -> protease.Expression p4 p3 p2 p1 p1' p2'
         | _ -> false
 
     [<AutoOpen>]
+    ///Contains functions for digesting AminoAcid sequences
     module BioSeq =
         
         /// Returns current value,array tuple (current, [|prefix; current; suffix)
@@ -65,7 +77,7 @@ module Digestion =
                         yield (tmp.[prefixLength].Value,tmp)
                         }
 
-        /// 
+        ///Cuts AminoAcid sequence at each place, where the sequence fits the cutting pattern of the protease. Returns sequence of resulting AminoAcid sequences
         let digest (protease:Protease) (aas:seq<AminoAcid>) =
 
             let groupAfter f (input:seq<_>) =     
@@ -85,6 +97,7 @@ module Digestion =
 
 
     [<AutoOpen>]
+    ///Contains functions for digesting AminoAcid arrays
     module BioArray =
 
         /// Returns current value,array tuple (current, [|prefix; current; suffix|])
@@ -150,9 +163,9 @@ module Digestion =
             |> List.concat
             |> Array.ofList
 
-
+    ///Contains frequently needed proteases
     module Table = 
-        
+        ///Possible inputs: "Trypsin", "Lys-C"
         let getProteaseBy name = 
             match name with
             | "Trypsin" ->

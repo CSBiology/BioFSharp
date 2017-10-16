@@ -202,39 +202,40 @@ module AminoAcids =
         static member op_Explicit (value:#IBioItem) : int = int value.Symbol
 
 
-    // Sets amino acid modification 
+    /// Sets amino acid modification 
     let setModification (md:ModificationInfo.Modification) (aa:AminoAcid) =
         match aa with
         | Mod (a,mds) -> Mod ( a ,  md::mds )
         | _           -> Mod ( aa, [md] )
 
-    // Sets a multiple amino acid modifications 
+    /// Sets multiple amino acid modifications 
     let setModifications (md:ModificationInfo.Modification list) (aa:AminoAcid) =
         match aa with
         | Mod (a,mds) -> Mod ( a ,  md@mds )
         | _           -> Mod ( aa, md )
 
-    // Gets amino acid modification 
+    /// Gets amino acid modifications 
     let getModifications (aa:AminoAcid) =
         match aa with
         | Mod (_,mds) -> mds
         | _           -> []
 
-    // Gets amino acid without the modification 
+    /// Gets amino acid without the modifications 
+    //TODO: Function is wrong
     let getAminoAcidWithoutMod (aa:AminoAcid) =
         match aa with
         | Mod (_,mds) -> mds
         | _           -> []
 
 
-    // Gets amino acid modification 
+    /// Gets amino acid modifications 
     let tryGetModifications (aa:AminoAcid) =
         match aa with
         | Mod (_,mds) -> Some mds
         | _           -> None
 
 
-
+    ///Modifies a formula f by applying all isotopic modifications of a given amino acid aa
     let isotopicLabelFunc (aa:AminoAcid) (f:Formula.Formula)  = 
         match aa with
         | Mod (_,mds) -> 
@@ -355,7 +356,7 @@ module AminoAcids =
     let name (aa:AminoAcid) =
         BioItem.name aa
 
-    //Returns amino acid formulas minus H20            
+    ///Returns amino acid formulas minus H20            
     let formula (aa:AminoAcid) =
         BioItem.formula aa
     

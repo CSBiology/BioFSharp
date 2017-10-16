@@ -9,12 +9,12 @@
 
 (**
 
-#FastQ
-
-<br>
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/FastQ.fs">&lt;/&gt;view source code</a>
-<a id="Author" href="https://github.com/MikhayN">&#128366;view author of this tutorial</a>
-<br><br>
+<table class="HeadAPI">
+<td class="Head"><h1>FastQ format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fastq.html" >&#128194;View module documentation</a>
+<td>
+</table>
 *)
 
 (*** hide ***)
