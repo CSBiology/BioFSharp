@@ -11,7 +11,7 @@
 <td class="Head"><h1>Sequence properties</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoproperties.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 ## General
 BioFSharp comes equipped with a range of numerical values for important amino acid properties. To access them in an easy fashion, you can use the `initGetAminoProperty` function in the following way. The result is a mapping function, which assigns a value to each compatible amino acid.  

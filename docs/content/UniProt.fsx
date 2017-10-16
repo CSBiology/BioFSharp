@@ -29,7 +29,8 @@ BioFSharp contains a set of readers that facilitate the access to different biol
 <td class="Head"><h1>UniProt's Proteins REST API online access</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-biodb-ebiapi.html" >&#128194;View module documentation</a>
-
+</td>
+</table>
 The Proteins REST API provides access to key biological data from UniProt and data from Large Scale Studies data mapped to UniProt. 
 The services provide sequence feature annotations from UniProtKB, variation data from UniProtKB and mapped from Large Scale data sources (1000 Genomes, ExAC and COSMIC), 
 proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) and genome coordinate mappings.

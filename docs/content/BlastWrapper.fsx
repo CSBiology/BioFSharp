@@ -7,7 +7,7 @@
 <td class="Head"><h1>Blast Wrapper</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
 It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set

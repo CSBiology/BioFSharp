@@ -12,23 +12,17 @@ open FSharp.Care
 
 (**
 <table class="HeadAPI">
-<td class="Head"><h1>GFF3 format</h1></td>
+<td class="Head"><h1>Generic Feature Format Version 3</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-gff3.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
-The GFF3 module is a tool to validate, read and write GFF3 (Generic Feature Format Version 3) files.
-
-All examples are executed on a modified version of [saccharomyces_cerevisiae.gff](http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff).
-
-# Generic Feature Format Version 3
-
 In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9. 
 It is possible to link multiple features to genomic units using the 'Parent tag'.
 
-In the following you can see a GFF file example:
+In the following you can see a GFF file example (modified version of [saccharomyces_cerevisiae.gff](http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff)):
 
-<img src="@Root/img/GFF3.png" alt="GFF3" style="width:150px;margin:10px" />
+![GFF3](img/GFF3.png)
 
 Directives (marked with "##[...]") provide additional information like the gff-version which has to be the first line of each file ("##gff-version 3[...]"). 
 Comment lines have to start with a single "#[...]". It is possible that sequences in FastA format are attached at the end of the file. This has to be announced by a "##FASTA" directive line.
@@ -128,6 +122,3 @@ let firstCDS =
 let firstCDSSequence = GFF3.getSequence features firstCDS
 
 //Output: Nucleotides.Nucleotides [] (ATG...TAA)
-
-
-          

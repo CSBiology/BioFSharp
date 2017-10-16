@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp.IO
 
+///Blast Wrapper
 module BlastNCBI =
 
     open System

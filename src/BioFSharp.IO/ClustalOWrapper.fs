@@ -116,15 +116,15 @@ module ClustalOWrapper =
             | ResidueNumber 
             ///	number of residues before line-wrap in output
             | Wrap of int
-            /// TODO: what is this?
-            | OutputOrder 
+            /// Aligned sequences are ordered according to guide tree instead of input order
+            | OutputOrderAsTree
 
         let private stringOfOutputCustom (o:OutputCustom) = 
             match o with
             | Format f -> stringOfFileFormatOut f
             | ResidueNumber -> "--residuenumber "
             | Wrap i -> sprintf "--wrap=%i " i
-            | OutputOrder -> "TODO"
+            | OutputOrderAsTree -> "--output-order=tree-order "
         
         ///Specify maximum number of iterations for given step
         type IterationCustom =
@@ -163,7 +163,7 @@ module ClustalOWrapper =
             /// Log all non-essential output to this file
             | Log of string
             /// Print help and exit
-            | Help
+            //| Help
             /// Verbose output (ranging from 0 [nonverbose,standard] to 3 [very verbose,everything above 3 is set to 3])
             | VerboseLevel of int
             /// Print version information and exit
@@ -178,7 +178,7 @@ module ClustalOWrapper =
             | Auto -> "--auto "
             | Threads i -> sprintf "--threads=%i " i
             | Log s -> sprintf "--log=%s " s
-            | Help -> "--help "
+            //| Help -> "--help "
             | VerboseLevel i -> 
                 let sb = System.Text.StringBuilder()
                 let n = if i < 0 then 0; elif i > 3 then 3; else i
@@ -246,20 +246,35 @@ module ClustalOWrapper =
     open System.Diagnostics
     open System.IO
     open BioFSharp.BioID
-
+    
     let private tsToFasta (ts:TaggedSequence<string,char>) =
         {FastA.Header = ts.Tag;
         FastA.Sequence = ts.Sequence}
-
+    
     /// A wrapper to perform Clustal Omega alignment tasks    
     type ClustalOWrapper (?rootPath: string) =
+        
+        //isLinux = System.Environment.OSVersion.Platform = System.PlatformID.Unix
+        #if INTERACTIVE
+        
         let rootPath = 
             match rootPath with
             | Some r -> 
                 if File.Exists r then r
                 else failwith "clustalo file could not be found for given rootPath"
             | None -> 
-                let defaultPath = __SOURCE_DIRECTORY__ |> FSharp.Care.String.replace "src\BioFSharp.IO" @"lib\clustal-omega\clustalo.exe"
+                let defaultPath = __SOURCE_DIRECTORY__ |> FSharp.Care.String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
+                printfn "try %s" defaultPath
+                if File.Exists defaultPath then defaultPath
+                else failwith "Default clustalo file could not be found, define rootPath argument."
+        #else
+        let rootPath = 
+            match rootPath with
+            | Some r -> 
+                if File.Exists r then r
+                else failwith "clustalo file could not be found for given rootPath"
+            | None -> 
+                let defaultPath = __SOURCE_DIRECTORY__ |> FSharp.Care.String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
                 printfn "try %s" defaultPath
                 if File.Exists defaultPath then defaultPath
                 else failwith "Default clustalo file could not be found, define rootPath argument."
@@ -275,7 +290,7 @@ module ClustalOWrapper =
             p.WaitForExit()
             printfn "%s done." name
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
-        
+        #endif
         ///Runs clustalo tool with given input file paths and parameters and creates output file for given path
         member this.AlignFromFile((inputPath:Input),(outputPath:string),(parameters:seq<Parameters.ClustalParams>),(?name:string)) = 
             let out = sprintf "-o %s " outputPath

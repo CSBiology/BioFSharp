@@ -13,7 +13,7 @@
 <td class="Head"><h1>FastQ format</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fastq.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 *)
 

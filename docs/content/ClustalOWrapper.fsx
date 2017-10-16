@@ -7,7 +7,7 @@
 <td class="Head"><h1>Clustal Omega Wrapper</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustalowrapper.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 Clustal Omega is a multiple sequence alignment (MSA) tool. This tutorial describes using it in F# via the ClustalOWrapper.  
 For some more indepth information about which parameters to choose for your goal, also check out [the official tutorial](http://www.clustal.org/omega/README).

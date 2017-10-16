@@ -17,7 +17,7 @@ open BioFSharp.Algorithm.StringMatching
 <td class="Head"><h1>String matching algorithms</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-algorithm-patternquery.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 
 String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the `BioFSharp.Algorithm.StringMatching` module are organized as following:

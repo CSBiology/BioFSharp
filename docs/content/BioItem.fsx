@@ -12,7 +12,7 @@ open BioFSharp.Formula.Table
 <td class="Head"><h1>BioItems</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioitem.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 Often, dealing with similar problems separately results in different approaches. In a programming background, this might make things needlessly complex. Therefore in BioFSharp nucleotides and amino acids are based on the same structural scaffold, leading to a consistent way of working with them. This can come in handy especially when working with their formulas.  
 
@@ -89,12 +89,15 @@ val it : unit = ()
 <td class="Head"><h2>Amino Acids</h2></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-aminoacids.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
-###Modification
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/ModificationInfo.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-modificationinfo.html" >&#128194;View module documentation</a>
-<br>
+</pre>  
+<table class="HeadAPI">
+<td class="Head"><h3>Modification</h3></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-modificationinfo.html" >&#128194;View module documentation</a>
+</td>
+</table>
 What makes working on Amino Acids with BioFSharp truly powerful is the ability to easily modify AminoAcids, even altering their mass and formula. In the following example we try to find out the mass of a phosphorylated Serine. Applications like these might be quite usefull for identification of peptides in mass spectrometry.  
 As a first step, we make ourselves an easy helper function which returns the formula of an AminoAcid as string. Afterwards we start out by creating a Serine.
 *)

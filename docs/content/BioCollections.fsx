@@ -12,7 +12,7 @@ open FSharp.Plotly
 <td class="Head"><h1>BioCollections</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html" >&#128194;View BioSeq documentation</a>
-<td>
+</td>
 </table>
 Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the ofBioItemString-functions
 *)

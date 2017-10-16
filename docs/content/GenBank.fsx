@@ -12,7 +12,7 @@
 <td class="Head"><h1>GenBank format</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-genbank.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 GenBank is the NIH genetic sequence database, an annotated collection of all publicly available DNA sequences
 ([Nucleic Acids Research, 2013 Jan;41(D1):D36-42](https://www.ncbi.nlm.nih.gov/pubmed/23193287)). 

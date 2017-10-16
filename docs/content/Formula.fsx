@@ -13,7 +13,7 @@
 <td class="Head"><h1>Formula</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-formula.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 BioFSharp offers a great bunch of functionality for working with molecules. All elements are represented as the composition of their stable isotopes. A `Formula` is a collection of those Elements with the given count. Creating and altering formulas is quite easy. Also functions for obtaining a mass of a molecule, which becomes quite handy especially for mass spectrometry, can be used straightforwardly.  
 

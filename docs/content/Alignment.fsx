@@ -6,7 +6,7 @@
 <td class="Head"><h1>Pairwise Alignment</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-algorithm-pairwisealignment.html" >&#128194;View module documentation</a>
-<td>
+</td>
 </table>
 
 In this short tutorial, the usage of the Pairwise alignment-implementation is demonstrated. 
