@@ -21,8 +21,7 @@ The GFF3 module is a tool to validate, read and write GFF3 (Generic Feature Form
 
 All examples are executed on a modified version of [saccharomyces_cerevisiae.gff](http://downloads.yeastgenome.org/curation/chromosomal_feature/saccharomyces_cerevisiae.gff).
 
-Introducing Generic Feature Format Version 3
---------------------------------------------
+# Generic Feature Format Version 3
 
 In GFF3 files every line represents one genomic feature with nine tab-delimited fields, whereas unlimited key-value pairs can be stored in field 9. 
 It is possible to link multiple features to genomic units using the 'Parent tag'.
@@ -39,7 +38,7 @@ For further information visit [GFF3-Specifications](https://github.com/The-Seque
 ##Reading GFF3 files
 
 
-To read in a gff you have to insert a filepath and optional a FastA converter. For further information about FastA check the [FastA section](https://csbiology.github.io/BioFSharp/FastA.html)
+To read in a gff you have to insert a filepath and optionally a FastA converter. For further information about FastA check the [FastA section](https://csbiology.github.io/BioFSharp/FastA.html)
 or visit [API Reference - FastA](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html).
 *)
 
@@ -58,7 +57,7 @@ let features = GFF3.fromFile BioFSharp.BioArray.ofNucleotideString filepathGFF
 ###How to use GFF3SanityCheck
 
 
-The GFF3SanityCheck prints wheter your GFF3 file is valid or not. It returns all specified errors including the lines in which they occured.
+The GFF3SanityCheck prints wether your GFF3 file is valid or not. It returns all specified errors including the lines in which they occured.
 In contrast to GFF2 the field 3 (type, feature or method) of a GFF3 entry is restricted to terms defined by the sequence ontology (SO) so this validator is able to check if the entry is a valid SO term.
 You can find new versions of the SO at (https://sourceforge.net/projects/song/files/SO_Feature_Annotation).
 *)
@@ -103,9 +102,9 @@ _Note: The order of key value pairs in field 9 (attributes) may be changed._
 let gffExampleWrite = GFF3.write features BioItem.symbol (__SOURCE_DIRECTORY__ + "/data/gffExampleWrite.gff")
 
 (**
-##Exampe: Sequence of CDS
+##Example: Sequence of CDS
 
-If a FastA file is included can look up the sequence of a CDS feature using the following function.
+If a FastA file is included you can look up the sequence of a CDS feature using the following function.
 
 *)
 
