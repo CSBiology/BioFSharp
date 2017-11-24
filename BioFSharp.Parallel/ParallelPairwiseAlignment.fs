@@ -8,7 +8,7 @@ module ParallelPairwiseAlignment =
     // Conversion functions
 
     /// Character array to integer array
-    let chars_to_ints (chars:char[]) =
+    let charsToInts (chars:char[]) =
         Array.map (fun c -> int c) chars
 
     /// Character array to string
@@ -24,76 +24,76 @@ module ParallelPairwiseAlignment =
         Array.map (fun myInt -> if myInt = -1 then '-' else char myInt) ints
 
     /// String to integer array.
-    let string_to_char_ints (my_string:string) =
+    let stringToCharInts (my_string:string) =
         let exploded = explode my_string
-        exploded |> chars_to_ints    
+        exploded |> charsToInts    
             
 
     // Alignment functions
 
     /// Primitive version of TraceScore.
     [<Struct>]
-    type prim_trace_score =
+    type TraceScore =
         val Value : int
-        val Trace_type : byte
+        val TraceType : byte
 
-        // TRACE_TYPE LEGEND:
+        // TraceType LEGEND:
         // 0 : NoTrace
         // 1 : Diagonal
         // 2 : Horizontal
         // 3 : Vertical
         
         [<ReflectedDefinition>]
-        new (value, trace_type) = {Value = value; Trace_type = trace_type}
+        new (value, traceType) = {Value = value; TraceType = traceType}
 
     /// Primitive version of Cell.
     [<Struct>]
-    type prim_cell = 
-        val M : prim_trace_score
-        val X : prim_trace_score
-        val Y : prim_trace_score
+    type Cell = 
+        val M : TraceScore
+        val X : TraceScore
+        val Y : TraceScore
 
         [<ReflectedDefinition>]
         new (m, x, y) = {M = m; X = x; Y = y}
 
     /// Primitive version of AddFloatToTrace
     [<ReflectedDefinition>]
-    let prim_add_float_to_trace (ts:prim_trace_score) (opc:int) =
+    let AddFloatToTrace (ts:TraceScore) (opc:int) =
         ts.Value + opc
 
     /// Primitive version of DiagonalCost
     [<ReflectedDefinition>]
-    let diagonal_cost (cell:prim_cell) (item1:int) (item2:int) =
+    let diagonalCost (cell:Cell) (item1:int) (item2:int) =
         let sim' = if item1 = item2 then 5 else -4
-        let mM = prim_add_float_to_trace cell.M sim' 
-        let mY = prim_add_float_to_trace cell.Y sim' 
-        let mX = prim_add_float_to_trace cell.X sim'             
+        let mM = AddFloatToTrace cell.M sim' 
+        let mY = AddFloatToTrace cell.Y sim' 
+        let mX = AddFloatToTrace cell.X sim'             
         max mM mY |> max mX |> max 0
 
     /// Primitive version of HorizontalCost
     [<ReflectedDefinition>]
-    let horizontal_cost (cell:prim_cell) = 
-        let xM = prim_add_float_to_trace cell.M -5
-        let xX = prim_add_float_to_trace cell.X -1
+    let horizontalCost (cell:Cell) = 
+        let xM = AddFloatToTrace cell.M -5
+        let xX = AddFloatToTrace cell.X -1
         max xM xX |> max 0
 
     /// Primitive version of VerticalCost
     [<ReflectedDefinition>]
-    let vertical_cost (cell:prim_cell) =
-        let yM = prim_add_float_to_trace cell.M -5
-        let yY = prim_add_float_to_trace cell.Y -1
+    let verticalCost (cell:Cell) =
+        let yM = AddFloatToTrace cell.M -5
+        let yY = AddFloatToTrace cell.Y -1
         max yM yY |> max 0
 
     /// Primitive function for calculating the best cost.
     [<ReflectedDefinition>]
-    let prim_best_trace m x y seq1_char seq2_char =
-        let mCost = diagonal_cost m seq1_char seq2_char
+    let bestTrace m x y seq1Char seq2Char =
+        let mCost = diagonalCost m seq1Char seq2Char
 
-        let xCost = horizontal_cost x
-        let x' = new prim_trace_score(xCost, 2uy)
+        let xCost = horizontalCost x
+        let x' = new TraceScore(xCost, 2uy)
 
-        let yCost = vertical_cost y
-        let y' = new prim_trace_score(yCost, 3uy)
+        let yCost = verticalCost y
+        let y' = new TraceScore(yCost, 3uy)
 
         let mutable bestCost = xCost
         let mutable bestTraceType = 2uy
@@ -106,12 +106,12 @@ module ParallelPairwiseAlignment =
             bestCost <- mCost
             bestTraceType <- 1uy
 
-        let new_best_trace = new prim_trace_score(bestCost, bestTraceType)
+        let newBestTrace = new TraceScore(bestCost, bestTraceType)
 
-        new prim_cell(new_best_trace, x', y')
+        new Cell(newBestTrace, x', y')
     
     /// Primitive function for calculating the max cell in a matrix.
-    let index_of_max_in_matrix_TRACE (matrix:(prim_cell)[,]) =
+    let indexOfMaxInMatrix (matrix:(Cell)[,]) =
         let mutable val_best = 0
         let mutable i_best = 0
         let mutable j_best = 0
@@ -127,18 +127,18 @@ module ParallelPairwiseAlignment =
         i_best, j_best
 
     /// Primitive version of TraceBackZerovalue. Note how I represent a gap with a "-1"
-    let rec traceBackPrimitive (fst_seq:int[]) (snd_seq:int[]) (i:int) (j:int) (acc1:int list) (acc2:int list) (matrix:prim_cell[,]) =
-        match matrix.[i,j].M.Trace_type with
+    let rec traceBackPrimitive (fstSeq:int[]) (sndSeq:int[]) (i:int) (j:int) (acc1:int list) (acc2:int list) (matrix:Cell[,]) =
+        match matrix.[i,j].M.TraceType with
         |0uy -> acc1, acc2
-        |1uy -> traceBackPrimitive fst_seq snd_seq (i-1) (j-1) (fst_seq.[i-1]::acc1) (snd_seq.[j-1]::acc2) matrix
-        |2uy -> traceBackPrimitive fst_seq snd_seq (i)   (j-1) (-1::acc1)            (snd_seq.[j-1]::acc2) matrix
-        |3uy -> traceBackPrimitive fst_seq snd_seq (i-1) (j)   (fst_seq.[i-1]::acc1) (-1::acc2)            matrix
+        |1uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j-1) (fstSeq.[i-1]::acc1) (sndSeq.[j-1]::acc2) matrix
+        |2uy -> traceBackPrimitive fstSeq sndSeq (i)   (j-1) (-1::acc1)            (sndSeq.[j-1]::acc2) matrix
+        |3uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)            matrix
 
 
     module ParallelMatrix =
 
         [<ReflectedDefinition>]
-        let max_diag_cell (d:int) (rows:int) (cols:int) =
+        let maxDiagCell (d:int) (rows:int) (cols:int) =
             let mutable l = 0
             let mutable a = 0
             if rows > cols then
@@ -157,23 +157,23 @@ module ParallelPairwiseAlignment =
                 -d + 2 * l - 2 - b
 
         [<ReflectedDefinition>]
-        let initial_i d max_row = 
-            if d > max_row then max_row else d
+        let initialI d maxRow = 
+            if d > maxRow then maxRow else d
 
         [<ReflectedDefinition>]
-        let initial_j d max_row =
-            if d < max_row then 0 else d - max_row
+        let initialJ d maxRow =
+            if d < maxRow then 0 else d - maxRow
 
         [<ReflectedDefinition>]
-        let get_i d m max_row = 
-            (initial_i d max_row) - m
+        let getI d m maxRow = 
+            (initialI d maxRow) - m
 
         [<ReflectedDefinition>]
-        let get_j d m max_row = 
-            (initial_j d max_row) + m
+        let getJ d m maxRow = 
+            (initialJ d maxRow) + m
 
         [<ReflectedDefinition>]
-        let kernel (matrix:(prim_cell)[,]) (fst_seq:int[]) (snd_seq:int[]) (m_maxs:int[]) =
+        let kernel (matrix:(Cell)[,]) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) =
 
             let start = blockIdx.x * blockDim.x + threadIdx.x
             let stride = gridDim.x * blockDim.x
@@ -181,58 +181,58 @@ module ParallelPairwiseAlignment =
             let rows = matrix.GetLength(0)
             let cols = matrix.GetLength(1)
 
-            let d_max = rows + cols
+            let dMax = rows + cols
 
             __syncthreads()
-            for d in 0..d_max do
-                let m_max = m_maxs.[d]
+            for d in 0..dMax do
+                let mMax = mMaxs.[d]
                 let mutable m = start
-                while m <= m_max do
-                    let i = get_i d m (rows - 1)
-                    let j = get_j d m (rows - 1)
+                while m <= mMax do
+                    let i = getI d m (rows - 1)
+                    let j = getJ d m (rows - 1)
 
                     // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
                     if i <> 0 && j <> 0 then
-                        matrix.[i,j] <- prim_best_trace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fst_seq.[i-1] snd_seq.[j-1] 
+                        matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] 
 
                     m <- m + stride
                 __syncthreads()
             __syncthreads()
 
 
-        let transform_kernel = <@ kernel @> |> Compiler.makeKernel
+        let transformKernel = <@ kernel @> |> Compiler.makeKernel
 
-        let gpu_cell_matrix (fst_seq:int[]) (snd_seq:int[]) =
+        let gpuCellMatrix (fst_seq:int[]) (snd_seq:int[]) =
             let rows, cols = fst_seq.Length + 1, snd_seq.Length + 1
 
             let d_max = rows + cols - 1
             let d_maxs = [|for d in 0..d_max -> d|]
-            let m_maxs = d_maxs |> Array.map (fun d -> max_diag_cell d rows cols)
+            let m_maxs = d_maxs |> Array.map (fun d -> maxDiagCell d rows cols)
 
             let gpu = Gpu.Default
-            let fst_seq_gpu = gpu.Allocate(fst_seq)
-            let snd_seq_gpu = gpu.Allocate(snd_seq)
-            let m_maxs_gpu = gpu.Allocate(m_maxs)
-            let matrix_gpu = gpu.Allocate<prim_cell>(rows, cols)
+            let fstSeqGpu = gpu.Allocate(fst_seq)
+            let sndSeqGpu = gpu.Allocate(snd_seq)
+            let mMaxsGpu = gpu.Allocate(m_maxs)
+            let matrixGpu = gpu.Allocate<Cell>(rows, cols)
 
             let lp = LaunchParam(1, 512)
-            gpu.Launch transform_kernel lp matrix_gpu fst_seq_gpu snd_seq_gpu m_maxs_gpu
+            gpu.Launch transformKernel lp matrixGpu fstSeqGpu sndSeqGpu mMaxsGpu
 
-            let matrix = Gpu.CopyToHost(matrix_gpu)
+            let matrix = Gpu.CopyToHost(matrixGpu)
 
-            Gpu.Free(fst_seq_gpu)
-            Gpu.Free(snd_seq_gpu)
-            Gpu.Free(m_maxs_gpu)
-            Gpu.Free(matrix_gpu)
+            Gpu.Free(fstSeqGpu)
+            Gpu.Free(sndSeqGpu)
+            Gpu.Free(mMaxsGpu)
+            Gpu.Free(matrixGpu)
 
             matrix
 
     module ParallelSmithWaterman =
         let run (fstSeq:string) (sndSeq:string) =
-            let fstSeqPrim = fstSeq |> string_to_char_ints
-            let sndSeqPrim = sndSeq |> string_to_char_ints
-            let cell_matrix = ParallelMatrix.gpu_cell_matrix fstSeqPrim sndSeqPrim
-            let i, j = index_of_max_in_matrix_TRACE cell_matrix
+            let fstSeqPrim = fstSeq |> stringToCharInts
+            let sndSeqPrim = sndSeq |> stringToCharInts
+            let cell_matrix = ParallelMatrix.gpuCellMatrix fstSeqPrim sndSeqPrim
+            let i, j = indexOfMaxInMatrix cell_matrix
 
             let alignment = traceBackPrimitive fstSeqPrim sndSeqPrim i j List.Empty List.Empty cell_matrix
 
