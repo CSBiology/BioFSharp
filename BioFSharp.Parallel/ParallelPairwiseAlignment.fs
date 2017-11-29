@@ -1,30 +1,30 @@
-﻿namespace BioFSharp.Parallel
+namespace BioFSharp.Parallel
 open System
 open Alea
 open Alea.FSharp
 
-module ParallelPairwiseAlignment =
+module PairwiseAlignment =
 
     // Conversion functions
 
     /// Character array to integer array
-    let charsToInts (chars:char[]) =
+    let private charsToInts (chars:char[]) =
         Array.map (fun c -> int c) chars
 
     /// Character array to string
-    let implode (chars:char[]) =
+    let private implode (chars:char[]) =
         chars |> System.String
 
     /// String to character array
-    let explode (my_string:string) =
+    let private explode (my_string:string) =
         [| for i in 0..my_string.Length-1 -> char my_string.[i] |]
 
     /// Integer array to character array. Note how I convert my -1's to hyphens.
-    let intsToChars (ints:int[]) =
+    let private intsToChars (ints:int[]) =
         Array.map (fun myInt -> if myInt = -1 then '-' else char myInt) ints
 
     /// String to integer array.
-    let stringToCharInts (my_string:string) =
+    let private stringToCharInts (my_string:string) =
         let exploded = explode my_string
         exploded |> charsToInts    
             
@@ -58,12 +58,12 @@ module ParallelPairwiseAlignment =
 
     /// Primitive version of AddFloatToTrace
     [<ReflectedDefinition>]
-    let AddFloatToTrace (ts:TraceScore) (opc:int) =
+    let private AddFloatToTrace (ts:TraceScore) (opc:int) =
         ts.Value + opc
 
     /// Primitive version of DiagonalCost
     [<ReflectedDefinition>]
-    let diagonalCost (cell:Cell) (item1:int) (item2:int) =
+    let private diagonalCost (cell:Cell) (item1:int) (item2:int) =
         let sim' = if item1 = item2 then 5 else -4
         let mM = AddFloatToTrace cell.M sim' 
         let mY = AddFloatToTrace cell.Y sim' 
@@ -72,21 +72,21 @@ module ParallelPairwiseAlignment =
 
     /// Primitive version of HorizontalCost
     [<ReflectedDefinition>]
-    let horizontalCost (cell:Cell) = 
+    let private horizontalCost (cell:Cell) = 
         let xM = AddFloatToTrace cell.M -5
         let xX = AddFloatToTrace cell.X -1
         max xM xX |> max 0
 
     /// Primitive version of VerticalCost
     [<ReflectedDefinition>]
-    let verticalCost (cell:Cell) =
+    let private verticalCost (cell:Cell) =
         let yM = AddFloatToTrace cell.M -5
         let yY = AddFloatToTrace cell.Y -1
         max yM yY |> max 0
 
     /// Primitive function for calculating the best cost.
     [<ReflectedDefinition>]
-    let bestTrace m x y seq1Char seq2Char =
+    let private bestTrace m x y seq1Char seq2Char =
         let mCost = diagonalCost m seq1Char seq2Char
 
         let xCost = horizontalCost x
@@ -111,7 +111,7 @@ module ParallelPairwiseAlignment =
         new Cell(newBestTrace, x', y')
     
     /// Primitive function for calculating the max cell in a matrix.
-    let indexOfMaxInMatrix (matrix:(Cell)[,]) =
+    let private indexOfMaxInMatrix (matrix:(Cell)[,]) =
         let mutable val_best = 0
         let mutable i_best = 0
         let mutable j_best = 0
@@ -127,7 +127,7 @@ module ParallelPairwiseAlignment =
         i_best, j_best
 
     /// Primitive version of TraceBackZerovalue. Note how I represent a gap with a "-1"
-    let rec traceBackPrimitive (fstSeq:int[]) (sndSeq:int[]) (i:int) (j:int) (acc1:int list) (acc2:int list) (matrix:Cell[,]) =
+    let rec private traceBackPrimitive (fstSeq:int[]) (sndSeq:int[]) (i:int) (j:int) (acc1:int list) (acc2:int list) (matrix:Cell[,]) =
         match matrix.[i,j].M.TraceType with
         |0uy -> acc1, acc2
         |1uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j-1) (fstSeq.[i-1]::acc1) (sndSeq.[j-1]::acc2) matrix
@@ -227,7 +227,7 @@ module ParallelPairwiseAlignment =
 
             matrix
 
-    module ParallelSmithWaterman =
+    module SmithWaterman =
         let run (fstSeq:string) (sndSeq:string) =
             let fstSeqPrim = fstSeq |> stringToCharInts
             let sndSeqPrim = sndSeq |> stringToCharInts
