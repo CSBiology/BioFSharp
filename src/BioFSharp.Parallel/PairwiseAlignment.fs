@@ -1,4 +1,4 @@
-namespace BioFSharp.Parallel
+﻿namespace BioFSharp.Parallel
 open System
 open Alea
 open Alea.FSharp
