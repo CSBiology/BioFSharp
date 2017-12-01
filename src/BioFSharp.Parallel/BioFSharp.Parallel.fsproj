@@ -300,4 +300,7 @@
       </ItemGroup>
     </When>
   </Choose>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)*.dll"  "$(SolutionDir)bin\"xcopy /Y "$(TargetDir)*.xml" "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
