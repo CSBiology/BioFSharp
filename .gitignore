@@ -190,6 +190,7 @@ localpackages/
 paket-files
 *.orig
 .paket/paket.exe
+.paket/Paket.Restore.Targets
 docs/content/license.md
 docs/content/release-notes.md
 .fake
@@ -203,3 +204,4 @@ docs/content/data/Chlamy_Cp.fastA.psq
 /docs/content/data/FASTAExample3.fasta
 /docs/content/data/sequenceTestWrite1.gb
 /docs/content/data/sequenceTestWrite2.gb
+/docs/content/data/blastTestOutput.csv
