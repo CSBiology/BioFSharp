@@ -12,8 +12,8 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+     <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -41,18 +41,18 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
 </td>
 </table>
-BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
-It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
-output parameter for creating a custom output format.
-Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690).
-<p>For the purpose of this tutorial, we will build a protein database using a <code>.fastA</code> file containing chloroplast proteins
-of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data.</p>
-<p>Our query protein for the subsequent BLAST search will be the <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta">photosystem II protein D1</a> from Arabidopsis thaliana chloroplast.</p>
+<p>BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
+It is able to create BLAST databases and perform <strong>blastN</strong> or <strong>blastP</strong> queries, while providing a way to set
+output parameters for creating a custom output format.
+Official documentation for all BLAST applications can be found <a href="http://www.ncbi.nlm.nih.gov/books/NBK279690/">here</a> .</p>
+<p>For the purpose of this tutorial, we will build a protein database using a <code>.fastA</code> file containing the aminoacid sequences of chloroplast encoded proteins
+of Chlamydomonas reinhardtii (take a look at the file <a href="https://github.com/CSBiology/BioFSharp/blob/master/docs/content/data/Chlamy_Cp.fastA">here</a>).</p>
+<p>Our query protein for the subsequent BLAST search will be the <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta/">photosystem II protein D1</a> from Arabidopsis thaliana chloroplast.</p>
 <h1><a name="How-to-use-BlastWrapper" class="anchor" href="#How-to-use-BlastWrapper">How to use BlastWrapper</a></h1>
 <h2><a name="Creation-of-a-BLAST-database" class="anchor" href="#Creation-of-a-BLAST-database">Creation of a BLAST database</a></h2>
 <p>We will use the minimal amount of parameters needed to create a BLAST database from an input file.
 The created database files will have the same name as the input file and will be located in the same folder.
-However, there are many parameters you can use to specify your database. Please refer to the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279675/">NCBI user manual</a> for more information.</p>
+However, there are many parameters you can use to specify your database. Please refer to the <a href="http://www.ncbi.nlm.nih.gov/books/NBK279690/">NCBI user manual</a> for more information.</p>
 <p>First, lets specify the path of our input and the type of our database. Use a string for the input path and the provided <code>MakeDbParams</code> type
 for every other parameter.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
@@ -65,11 +65,13 @@ for every other parameter.</p>
 <span class="l"> 8: </span>
 <span class="l"> 9: </span>
 <span class="l">10: </span>
+<span class="l">11: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">BioFSharp</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">IO</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">BlastNCBI</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="i">Parameters</span>
+
 
 <span class="c">///path and name of the input file/output database. </span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="i">inputFile</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Chlamy_Cp.fastA&quot;</span>)
@@ -164,7 +166,7 @@ in the form of comments.</p>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///overall outline of the output </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="i">outputType</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="t">OutputType</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="i">TabularWithComments</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="i">outputType</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="t">OutputType</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="i">CSV</span>
 </code></pre></td>
 </tr>
 </table>
@@ -182,26 +184,20 @@ in the form of comments.</p>
 <span class="l">11: </span>
 <span class="l">12: </span>
 <span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///a sequence of custom output format parameters</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="i">outputFormat</span><span class="o">=</span> 
     
     [   
         <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="p">Query_SeqId</span>; 
-        <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="p">Subject_SeqId</span>;
-        <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 48)" onmouseover="showTip(event, 'fs32', 48)" class="p">Query_Length</span>;
-        <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="p">Subject_Length</span>;
-        <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="p">AlignmentLength</span>;
-        <span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="p">MismatchCount</span>;
-        <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="p">IdentityCount</span>;
-        <span onmouseout="hideTip(event, 'fs29', 57)" onmouseover="showTip(event, 'fs29', 57)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="p">PositiveScoringMatchCount</span>;
-        <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="p">Evalue</span>;
-        <span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 62)" onmouseover="showTip(event, 'fs39', 62)" class="p">Bitscore</span>;
+        <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="p">Subject_Title</span>
+        <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 48)" onmouseover="showTip(event, 'fs32', 48)" class="p">Subject_SeqId</span>;
+        <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="p">AlignmentLength</span>;
+        <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 52)" onmouseover="showTip(event, 'fs34', 52)" class="p">MismatchCount</span>;
+        <span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="p">IdentityCount</span>;
+        <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="t">OutputCustom</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="p">RawScore</span>
     ] 
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 64)" onmouseover="showTip(event, 'fs41', 64)" class="f">toSeq</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 58)" onmouseover="showTip(event, 'fs38', 58)" class="f">toSeq</span>
 </code></pre></td>
 </tr>
 </table>
@@ -212,7 +208,7 @@ just create a <code>BlastParam</code> of type <code>OutputType</code>.</em></p>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///The final output format</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 65)" onmouseover="showTip(event, 'fs42', 65)" class="i">customOutputFormat</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 66)" onmouseover="showTip(event, 'fs43', 66)" class="p">OutputTypeCustom</span>(<span onmouseout="hideTip(event, 'fs25', 67)" onmouseover="showTip(event, 'fs25', 67)" class="i">outputType</span> , <span onmouseout="hideTip(event, 'fs28', 68)" onmouseover="showTip(event, 'fs28', 68)" class="i">outputFormat</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 59)" onmouseover="showTip(event, 'fs39', 59)" class="i">customOutputFormat</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 60)" onmouseover="showTip(event, 'fs40', 60)" class="p">OutputTypeCustom</span>(<span onmouseout="hideTip(event, 'fs25', 61)" onmouseover="showTip(event, 'fs25', 61)" class="i">outputType</span> , <span onmouseout="hideTip(event, 'fs28', 62)" onmouseover="showTip(event, 'fs28', 62)" class="i">outputFormat</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -232,12 +228,75 @@ done otherwise</em></p>
 <span class="l">4: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///output file of the BLAST search</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="i">outputPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Output.txt&quot;</span>) 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 63)" onmouseover="showTip(event, 'fs41', 63)" class="i">outputPath</span> <span class="o">=</span> (<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/blastTestOutput.csv&quot;</span>) 
 
-<span onmouseout="hideTip(event, 'fs11', 70)" onmouseover="showTip(event, 'fs11', 70)" class="t">BlastWrapper</span>(<span onmouseout="hideTip(event, 'fs10', 71)" onmouseover="showTip(event, 'fs10', 71)" class="i">ncbiPath</span>)<span class="o">.</span><span class="f">blastP</span> <span onmouseout="hideTip(event, 'fs5', 72)" onmouseover="showTip(event, 'fs5', 72)" class="i">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 73)" onmouseover="showTip(event, 'fs18', 73)" class="i">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs44', 74)" onmouseover="showTip(event, 'fs44', 74)" class="i">outputPath</span> ([<span onmouseout="hideTip(event, 'fs42', 75)" onmouseover="showTip(event, 'fs42', 75)" class="i">customOutputFormat</span>;] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 76)" onmouseover="showTip(event, 'fs12', 76)" class="i">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs45', 77)" onmouseover="showTip(event, 'fs45', 77)" class="t">BlastParams</span><span class="o">&gt;</span>)
+<span onmouseout="hideTip(event, 'fs11', 64)" onmouseover="showTip(event, 'fs11', 64)" class="t">BlastWrapper</span>(<span onmouseout="hideTip(event, 'fs10', 65)" onmouseover="showTip(event, 'fs10', 65)" class="i">ncbiPath</span>)<span class="o">.</span><span class="f">blastP</span> <span onmouseout="hideTip(event, 'fs5', 66)" onmouseover="showTip(event, 'fs5', 66)" class="i">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 67)" onmouseover="showTip(event, 'fs18', 67)" class="i">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs41', 68)" onmouseover="showTip(event, 'fs41', 68)" class="i">outputPath</span> ([<span onmouseout="hideTip(event, 'fs39', 69)" onmouseover="showTip(event, 'fs39', 69)" class="i">customOutputFormat</span>;] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 70)" onmouseover="showTip(event, 'fs12', 70)" class="i">seq</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs42', 71)" onmouseover="showTip(event, 'fs42', 71)" class="t">BlastParams</span><span class="o">&gt;</span>)
 </code></pre></td>
 </tr>
 </table>
+<p>If written in csv (seperator char is ',') or tabular (seperator char is '\t') format, we can youe the built in <code>readCustomBlastResult</code> function to parse our result.
+note that this function will fill all output parameters that we didnt use with default values. it may be beneficial to create a new record type for the result if this is not wanted.
+head <a href="https://csbiology.github.io/BioFSharp/CSV.html">here</a> to see a example how to parse comma-/tab-seperated files</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 72)" onmouseover="showTip(event, 'fs43', 72)" class="i">queryResults</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 73)" onmouseover="showTip(event, 'fs44', 73)" class="f">readCustomBlastResult</span> <span onmouseout="hideTip(event, 'fs28', 74)" onmouseover="showTip(event, 'fs28', 74)" class="i">outputFormat</span> <span class="s">&#39;,&#39;</span> <span onmouseout="hideTip(event, 'fs41', 75)" onmouseover="showTip(event, 'fs41', 75)" class="i">outputPath</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs45', 76)" onmouseover="showTip(event, 'fs45', 76)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 77)" onmouseover="showTip(event, 'fs46', 77)" class="f">ofSeq</span>
+</code></pre></td>
+</tr>
+</table>
+<br>
+The result can be seen here:  
+<button type="button" class="btn" data-toggle="collapse" data-target="#blastResultExample">Show/Hide result</button>
+<div id="blastResultExample" class="collapse blastResultExample ">
+<pre>
+val queryResults : CBlastResult [] =
+   [|{Query_SeqId = ">gi|7525013|ref|NP_051039.1|";
+     Query_GI = "";
+     Query_Accesion = "";
+     Query_Accesion_Version = "";
+     Query_Length = -1;
+     Subject_SeqId = "sp|P19547|";
+     Subject_All_SeqIds = "";
+     Subject_GI = "";
+     Subject_All_GIs = "";
+     Subject_Accession = "";
+     Subject_Accession_Version = "";
+     Subject_All_Accession = "";
+     Subject_Length = -1;
+     Query_StartOfAlignment = "";
+     Query_EndOfAlignment = "";
+     Subject_StartOfAlignment = "";
+     Subject_EndOfAlignment = "";
+     Query_AlignedPartOf = "";
+     Subject_AlignedPartOf = "";
+     Evalue = nan;
+     Bitscore = nan;
+     RawScore = 1664.0;
+     AlignmentLength = 346;
+     Identity = nan;
+     IdentityCount = 326;
+     MismatchCount = 20;
+     PositiveScoringMatchCount = -1;
+     GapOpeningCount = -1;
+     GapCount = -1;
+     PositiveScoringMatch = nan;
+     Frames = "";
+     Query_Frames = "";
+     Subject_Frames = "";
+     BTOP = "";
+     Subject_TaxonomyIDs = "";
+     Subject_Scientific_Names = "";
+     Subject_Common_Names = "";
+     Subject_Blast_Names = "";
+     Subject_Super_Kingdoms = "";
+     Subject_Title =
+      "sp|P19547| photosystem II protein D1 GN=psbA.2 PE=psbA.p01.2";
+     Subject_All_Titles = "";
+     Subject_Strand = "";
+     Query_CoveragePerSubject = "";
+     Query_CoveragePerHSP = "";}; ...|]
+<p></pre></p>
+<button type="button" class="btn" data-toggle="collapse" data-target="#blastResultExample">Hide again</button>  
+</div>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
@@ -265,25 +324,26 @@ done otherwise</em></p>
 <div class="tip" id="fs24">val symbol : bItem:#IBioItem -&gt; char<br /><br />Full name: BioFSharp.BioItem.symbol</div>
 <div class="tip" id="fs25">val outputType : OutputType<br /><br />Full name: BlastWrapper.outputType<br /><em><br /><br />overall outline of the output </em></div>
 <div class="tip" id="fs26">Multiple items<br />union case BlastParams.OutputType: OutputType -&gt; BlastParams<br /><br />--------------------<br />type OutputType =<br />&#160;&#160;|  Pairwise  =  0<br />&#160;&#160;|  Query_anchored  =  1<br />&#160;&#160;|  Query_anchored_NoIdentities  =  2<br />&#160;&#160;|  Query_anchored_Flat  =  3<br />&#160;&#160;|  Query_anchored_Flat_NoIdentities  =  4<br />&#160;&#160;|  XML  =  5<br />&#160;&#160;|  Tabular  =  6<br />&#160;&#160;|  TabularWithComments  =  7<br />&#160;&#160;|  TextASN1  =  8<br />&#160;&#160;|  BinaryASN1  =  9<br />&#160;&#160;|  CSV  =  10<br />&#160;&#160;|  BLAST_ArchiveFormat  =  11<br />&#160;&#160;|  JSON_Seqalign  =  12<br />&#160;&#160;|  JSON_Blast  =  13<br />&#160;&#160;|  XML2_Blast  =  14<br /><br />Full name: BioFSharp.IO.BlastNCBI.Parameters.OutputType</div>
-<div class="tip" id="fs27">OutputType.TabularWithComments: OutputType = 7</div>
+<div class="tip" id="fs27">OutputType.CSV: OutputType = 10</div>
 <div class="tip" id="fs28">val outputFormat : seq&lt;OutputCustom&gt;<br /><br />Full name: BlastWrapper.outputFormat<br /><em><br /><br />a sequence of custom output format parameters</em></div>
 <div class="tip" id="fs29">type OutputCustom =<br />&#160;&#160;| Query_SeqId<br />&#160;&#160;| Query_GI<br />&#160;&#160;| Query_Accesion<br />&#160;&#160;| Query_Accesion_Version<br />&#160;&#160;| Query_Length<br />&#160;&#160;| Subject_SeqId<br />&#160;&#160;| Subject_All_SeqIds<br />&#160;&#160;| Subject_GI<br />&#160;&#160;| Subject_All_GIs<br />&#160;&#160;| Subject_Accession<br />&#160;&#160;...<br /><br />Full name: BioFSharp.IO.BlastNCBI.Parameters.OutputCustom</div>
 <div class="tip" id="fs30">union case OutputCustom.Query_SeqId: OutputCustom</div>
-<div class="tip" id="fs31">union case OutputCustom.Subject_SeqId: OutputCustom</div>
-<div class="tip" id="fs32">union case OutputCustom.Query_Length: OutputCustom</div>
-<div class="tip" id="fs33">union case OutputCustom.Subject_Length: OutputCustom</div>
-<div class="tip" id="fs34">union case OutputCustom.AlignmentLength: OutputCustom</div>
-<div class="tip" id="fs35">union case OutputCustom.MismatchCount: OutputCustom</div>
-<div class="tip" id="fs36">union case OutputCustom.IdentityCount: OutputCustom</div>
-<div class="tip" id="fs37">union case OutputCustom.PositiveScoringMatchCount: OutputCustom</div>
-<div class="tip" id="fs38">union case OutputCustom.Evalue: OutputCustom</div>
-<div class="tip" id="fs39">union case OutputCustom.Bitscore: OutputCustom</div>
-<div class="tip" id="fs40">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs41">val toSeq : list:&#39;T list -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.List.toSeq</div>
-<div class="tip" id="fs42">val customOutputFormat : BlastParams<br /><br />Full name: BlastWrapper.customOutputFormat<br /><em><br /><br />The final output format</em></div>
-<div class="tip" id="fs43">union case BlastParams.OutputTypeCustom: OutputType * seq&lt;OutputCustom&gt; -&gt; BlastParams</div>
-<div class="tip" id="fs44">val outputPath : string<br /><br />Full name: BlastWrapper.outputPath<br /><em><br /><br />output file of the BLAST search</em></div>
-<div class="tip" id="fs45">type BlastParams =<br />&#160;&#160;| SearchDB of string<br />&#160;&#160;| Query of string<br />&#160;&#160;| Output of string<br />&#160;&#160;| OutputType of OutputType<br />&#160;&#160;| OutputTypeCustom of OutputType * seq&lt;OutputCustom&gt;<br />&#160;&#160;| Num_threads of int<br />&#160;&#160;| Max_Hits of int<br /><br />Full name: BioFSharp.IO.BlastNCBI.Parameters.BlastParams</div>
+<div class="tip" id="fs31">union case OutputCustom.Subject_Title: OutputCustom</div>
+<div class="tip" id="fs32">union case OutputCustom.Subject_SeqId: OutputCustom</div>
+<div class="tip" id="fs33">union case OutputCustom.AlignmentLength: OutputCustom</div>
+<div class="tip" id="fs34">union case OutputCustom.MismatchCount: OutputCustom</div>
+<div class="tip" id="fs35">union case OutputCustom.IdentityCount: OutputCustom</div>
+<div class="tip" id="fs36">union case OutputCustom.RawScore: OutputCustom</div>
+<div class="tip" id="fs37">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs38">val toSeq : list:&#39;T list -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.List.toSeq</div>
+<div class="tip" id="fs39">val customOutputFormat : BlastParams<br /><br />Full name: BlastWrapper.customOutputFormat<br /><em><br /><br />The final output format</em></div>
+<div class="tip" id="fs40">union case BlastParams.OutputTypeCustom: OutputType * seq&lt;OutputCustom&gt; -&gt; BlastParams</div>
+<div class="tip" id="fs41">val outputPath : string<br /><br />Full name: BlastWrapper.outputPath<br /><em><br /><br />output file of the BLAST search</em></div>
+<div class="tip" id="fs42">type BlastParams =<br />&#160;&#160;| SearchDB of string<br />&#160;&#160;| Query of string<br />&#160;&#160;| Output of string<br />&#160;&#160;| OutputType of OutputType<br />&#160;&#160;| OutputTypeCustom of OutputType * seq&lt;OutputCustom&gt;<br />&#160;&#160;| Num_threads of int<br />&#160;&#160;| Max_Hits of int<br /><br />Full name: BioFSharp.IO.BlastNCBI.Parameters.BlastParams</div>
+<div class="tip" id="fs43">val queryResults : CBlastResult []<br /><br />Full name: BlastWrapper.queryResults</div>
+<div class="tip" id="fs44">val readCustomBlastResult : cAttributes:seq&lt;OutputCustom&gt; -&gt; separator:char -&gt; filePath:string -&gt; seq&lt;CBlastResult&gt;<br /><br />Full name: BioFSharp.IO.BlastNCBI.readCustomBlastResult</div>
+<div class="tip" id="fs45">module Array<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs46">val ofSeq : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Array.ofSeq</div>
 
         </div>
         <div class="span3" >
@@ -304,6 +364,7 @@ done otherwise</em></p>
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
                 <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
                 <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
@@ -335,7 +396,8 @@ done otherwise</em></p>
                 <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
                 <li class="nav-header">Biovisualization</li>
                 <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
-                
+                <li class="nav-header">GPU Computing</li>
+                <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
                 <li class="nav-header">Documentation</li>
                 <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
 

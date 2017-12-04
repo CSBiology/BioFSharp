@@ -1,5 +1,6 @@
 
 table.pre {
+	border: hidden;
 	overflow-x: auto;
     white-space: nowrap;
 	display:block;

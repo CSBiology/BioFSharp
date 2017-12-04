@@ -11,8 +11,8 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
+     <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -162,7 +162,7 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 </code></pre></td>
 </tr>
 </table>
-<p>The result will be of type <code>Option&lt;float*float&gt;</code>. The first float is the pH, the second one is the according charge.</p>
+<p>The resulting pH will be of type <code>Option&lt;float&gt;</code>.</p>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">module AminoProperties<br /><br />from BioFSharp</div>
@@ -193,8 +193,8 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 <div class="tip" id="fs27">module IsoelectricPoint<br /><br />from BioFSharp</div>
 <div class="tip" id="fs28">val getpKr : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)<br /><br />Full name: BioFSharp.IsoelectricPoint.getpKr</div>
 <div class="tip" id="fs29">val acc : float<br /><br />Full name: AminoProperties.acc</div>
-<div class="tip" id="fs30">val pI : (float * float) option<br /><br />Full name: AminoProperties.pI</div>
-<div class="tip" id="fs31">val tryFind : pKrFunc:(AminoAcidSymbols.AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; (float * float) option<br /><br />Full name: BioFSharp.IsoelectricPoint.tryFind</div>
+<div class="tip" id="fs30">val pI : float option<br /><br />Full name: AminoProperties.pI</div>
+<div class="tip" id="fs31">val tryFind : pKrFunc:(AminoAcidSymbols.AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; float option<br /><br />Full name: BioFSharp.IsoelectricPoint.tryFind</div>
 
         </div>
         <div class="span3" >
@@ -215,6 +215,7 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
                 <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                 <li class="nav-header">Algorithm</li>
                 <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
                 <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
                 <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
                 <li>
@@ -246,7 +247,8 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
                 <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
                 <li class="nav-header">Biovisualization</li>
                 <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
-                
+                <li class="nav-header">GPU Computing</li>
+                <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
                 <li class="nav-header">Documentation</li>
                 <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
 
