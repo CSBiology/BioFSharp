@@ -378,7 +378,7 @@ Target "Release" (fun _ ->
 )
 
 Target "Raw" (fun _ -> 
-    let tempDocsDir = "temp/gh-pages"
+    let tempDocsDir = "temp"
     CleanDir tempDocsDir)
 
 Target "BuildPackage" DoNothing
