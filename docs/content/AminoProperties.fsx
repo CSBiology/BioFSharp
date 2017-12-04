@@ -94,5 +94,5 @@ let acc = 0.5
 let pI = IsoelectricPoint.tryFind pKrFunction acc myProteinForPI
 
 (**
-The result will be of type `Option<float*float>`. The first float is the pH, the second one is the according charge.
+The resulting pH will be of type `Option<float>`.
 *)

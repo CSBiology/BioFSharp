@@ -11,15 +11,8 @@ open BioArray
 ///Contains functions for evaluating the best possible alignments for 2 Sequences
 module PairwiseAlignment =
     
-     //Introduction!
+     //Introduction
      //This page contains functions for evaluating the best possible alignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
-
-    
-    //In this module are the typedefinitons. There is also the runGeneric-Function. It is the skeleton-function for creating the Backtrace-matrix. As parameters it takes the 2 sequences and the operation-cost-functions ( opcs) and basically just creates a loop, enabling the opcs to evaluate the values of the cells. There also is the backtrace-function. It creates the alignment from the matrix and the 2 initial sequences.
-    //The NW-Module and the SW-module
-    //The two modules contain the opcs. The difference in these two is, that the SW-opcs check if the value is 0 or below. Also the backtrace does not start with the last cell of the matrix but at the one with the biggest value. This leads to the alignment being restrained to a local area, where there are the most matches.
-
-
 
     ///Represents one element of the matrix, contains direction for backtracing and score
     type private TraceScore =     
