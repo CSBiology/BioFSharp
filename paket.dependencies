@@ -1,5 +1,6 @@
 source https://nuget.org/api/v2
 
+nuget Alea
 nuget FSharp.Core redirects: force
 nuget Newtonsoft.Json
 nuget System.Data.SQLite
