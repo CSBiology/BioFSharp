@@ -1,5 +1,8 @@
 ﻿namespace BioFSharp.Parallel
 open System
+open BioFSharp.BioArray
+open BioFSharp
+open Nucleotides
 open Alea
 open Alea.FSharp
 
@@ -228,9 +231,14 @@ module PairwiseAlignment =
             matrix
 
     module SmithWaterman =
-        let run (fstSeq:string) (sndSeq:string) =
+        let run (fstSeq:BioArray<Nucleotides.Nucleotide>) (sndSeq:BioArray<Nucleotides.Nucleotide>) =
+
+            let fstSeq = BioArray.toString fstSeq
+            let sndSeq = BioArray.toString sndSeq
+
             let fstSeqPrim = fstSeq |> stringToCharInts
             let sndSeqPrim = sndSeq |> stringToCharInts
+
             let cell_matrix = ParallelMatrix.gpuCellMatrix fstSeqPrim sndSeqPrim
             let i, j = indexOfMaxInMatrix cell_matrix
 
