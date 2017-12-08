@@ -215,7 +215,6 @@ module PairwiseAlignment =
         let transformKernel = <@ kernel @> |> Compiler.makeKernel
 
 
-
         let gpuCellMatrix (fstSeq:int[]) (sndSeq:int[]) (openCost:int) (continueCost:int) =
             let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
             let dMax = rows + cols - 1
@@ -245,11 +244,14 @@ module PairwiseAlignment =
             matrix
 
     module SmithWaterman =
-        let run (fstSeq:BioArray<Nucleotides.Nucleotide>) (sndSeq:BioArray<Nucleotides.Nucleotide>) openCost continueCost =
+        let run (costs:Costs<Nucleotide>) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
             // Primitivze
             let fstSeqPrim = fstSeq |> BioArray.toString |> Conversion.stringToCharInts
             let sndSeqPrim = sndSeq |> BioArray.toString |> Conversion.stringToCharInts
             
+            let openCost = costs.Open
+            let continueCost = costs.Continuation
+
             // Generate cell matrix
             let cellMatrix = ParallelMatrix.gpuCellMatrix fstSeqPrim sndSeqPrim openCost continueCost
 

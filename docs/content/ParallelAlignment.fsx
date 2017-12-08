@@ -32,10 +32,10 @@ let executeSequential nucCosts seq1 seq2 =
     printfn "execution time of sequential: %A" t.Elapsed
     (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
 
-let executeParallel seq1 seq2 openCost continueCost =
+let executeParallel nucCosts seq1 seq2 =
     let t = System.Diagnostics.Stopwatch.StartNew()
-    let parallelAlignment = PairwiseAlignment.SmithWaterman.run seq1 seq2 openCost continueCost
-    t.Stop() 
+    let parallelAlignment = PairwiseAlignment.SmithWaterman.run nucCosts seq1 seq2
+    t.Stop()
     printfn "execution time of parallel: %A" t.Elapsed
     parallelAlignment
 
@@ -51,7 +51,7 @@ let seq1 = randomSequence 500 |> BioArray.ofNucleotideString
 let seq2 = randomSequence 500 |> BioArray.ofNucleotideString
 
 let sequentialAlignment = executeSequential nucCosts seq1 seq2
-let parallelAlignment = executeParallel seq1 seq2 -5 -1
+let parallelAlignment = executeParallel nucCosts seq1 seq2
 
 printfn "sequential: %A" sequentialAlignment
 printfn "parallel: %A" parallelAlignment
