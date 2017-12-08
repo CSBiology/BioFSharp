@@ -23,34 +23,36 @@ let randomSequence length =
         [|'A'; 'C'; 'G'; 'T'|].[random.Next(4)]
     System.String [| for i in 0..length-1 -> randomNucleotide () |]
 
-let executeSequential seq1 seq2 =
+let executeSequential nucCosts seq1 seq2 =
     let nucConversion (nucs:Nucleotides.Nucleotide list) =
         nucs |> List.map (fun element -> if string element = "Gap" then "-" else string element) |> String.Concat
-    let nucScoring = ScoringMatrix.getScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
-    let nucCosts = {
-        Open = -5
-        Continuation = -1
-        Similarity = nucScoring 
-        }
     let t = System.Diagnostics.Stopwatch.StartNew()
     let sequentialAlignment = PairwiseAlignment.SmithWaterman.runNucleotide nucCosts seq1 seq2
     t.Stop()
     printfn "execution time of sequential: %A" t.Elapsed
     (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
 
-let executeParallel seq1 seq2 =
+let executeParallel seq1 seq2 openCost continueCost =
     let t = System.Diagnostics.Stopwatch.StartNew()
-    let parallelAlignment = PairwiseAlignment.SmithWaterman.run seq1 seq2
-    t.Stop()    
+    let parallelAlignment = PairwiseAlignment.SmithWaterman.run seq1 seq2 openCost continueCost
+    t.Stop() 
     printfn "execution time of parallel: %A" t.Elapsed
     parallelAlignment
 
-let seq1 = randomSequence 1000 |> BioArray.ofNucleotideString
-let seq2 = randomSequence 1000 |> BioArray.ofNucleotideString
+let nucScoring = ScoringMatrix.getScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
 
-let parallelAlignment = executeParallel seq1 seq2
-let sequentialAlignment = executeSequential seq1 seq2
+let nucCosts = {
+    Open = -5
+    Continuation = -1
+    Similarity = nucScoring 
+    }
 
-printfn "parallel: %A" parallelAlignment
+let seq1 = randomSequence 500 |> BioArray.ofNucleotideString
+let seq2 = randomSequence 500 |> BioArray.ofNucleotideString
+
+let sequentialAlignment = executeSequential nucCosts seq1 seq2
+let parallelAlignment = executeParallel seq1 seq2 -5 -1
+
 printfn "sequential: %A" sequentialAlignment
+printfn "parallel: %A" parallelAlignment
 printfn "alignments equal: %A" (parallelAlignment = sequentialAlignment)

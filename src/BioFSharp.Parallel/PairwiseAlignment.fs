@@ -1,51 +1,52 @@
 ﻿namespace BioFSharp.Parallel
 open System
 open BioFSharp.BioArray
+open BioFSharp.Algorithm.PairwiseAlignment
+open BioFSharp.Algorithm.ScoringMatrix
 open BioFSharp
 open Nucleotides
 open Alea
 open Alea.FSharp
 
-module PairwiseAlignment =
-
-    // Conversion functions
-
+ module private Conversion =
     /// Character array to integer array
-    let private charsToInts (chars:char[]) =
+    let charsToInts (chars:char[]) =
         Array.map (fun c -> int c) chars
 
     /// Character array to string
-    let private implode (chars:char[]) =
+    let implode (chars:char[]) =
         chars |> System.String
 
     /// String to character array
-    let private explode (my_string:string) =
+    let explode (my_string:string) =
         [| for i in 0..my_string.Length-1 -> char my_string.[i] |]
 
     /// Integer array to character array. Note how I convert my -1's to hyphens.
-    let private intsToChars (ints:int[]) =
+    let intsToChars (ints:int[]) =
         Array.map (fun myInt -> if myInt = -1 then '-' else char myInt) ints
 
     /// String to integer array.
-    let private stringToCharInts (my_string:string) =
+    let stringToCharInts (my_string:string) =
         let exploded = explode my_string
         exploded |> charsToInts    
-            
 
-    // Alignment functions
+
+
+module PairwiseAlignment =
+
+
 
     /// Primitive version of TraceScore.
+    /// TraceType Legend:
+    /// 0 : NoTrace
+    /// 1 : Diagonal
+    /// 2 : Horizontal
+    /// 3 : Vertical
     [<Struct>]
     type TraceScore =
         val Value : int
         val TraceType : byte
 
-        // TraceType LEGEND:
-        // 0 : NoTrace
-        // 1 : Diagonal
-        // 2 : Horizontal
-        // 3 : Vertical
-        
         [<ReflectedDefinition>]
         new (value, traceType) = {Value = value; TraceType = traceType}
 
@@ -59,43 +60,54 @@ module PairwiseAlignment =
         [<ReflectedDefinition>]
         new (m, x, y) = {M = m; X = x; Y = y}
 
-    /// Primitive version of AddFloatToTrace
+    /// Primitive version of addFloatToTrace
     [<ReflectedDefinition>]
-    let private AddFloatToTrace (ts:TraceScore) (opc:int) =
+    let private addFloatToTrace (ts:TraceScore) (opc:int) =
         ts.Value + opc
 
-    /// Primitive version of DiagonalCost
+    /////creates a scoring function for nucleotides out of a scoring matrix
+    //let getScoringMatrixNucleotide (scoringMatrixType:ScoringMatrixNucleotide) =
+    //    let resourceName = ScoringMatrixNucleotide.toFileName scoringMatrixType
+    //    let scm = readScoringMatrix resourceName
+
+    //    (fun  (n1:int) (n2:int) -> 
+    //        scm.[n1 - 42].[n2 - 42])
+
+
+    /// Primitive version of diagonalCost
     [<ReflectedDefinition>]
     let private diagonalCost (cell:Cell) (item1:int) (item2:int) =
         let sim' = if item1 = item2 then 5 else -4
-        let mM = AddFloatToTrace cell.M sim' 
-        let mY = AddFloatToTrace cell.Y sim' 
-        let mX = AddFloatToTrace cell.X sim'             
+        let mM = addFloatToTrace cell.M sim' 
+        let mY = addFloatToTrace cell.Y sim' 
+        let mX = addFloatToTrace cell.X sim'             
         max mM mY |> max mX |> max 0
 
-    /// Primitive version of HorizontalCost
+    /// Primitive version of horizontalCost
     [<ReflectedDefinition>]
-    let private horizontalCost (cell:Cell) = 
-        let xM = AddFloatToTrace cell.M -5
-        let xX = AddFloatToTrace cell.X -1
+    let private horizontalCost (cell:Cell) (openCost:int) (continueCost:int) = 
+        //printfn "cunt %A" openCost
+        let xM = addFloatToTrace cell.M openCost
+        let xX = addFloatToTrace cell.X continueCost
         max xM xX |> max 0
 
-    /// Primitive version of VerticalCost
+    /// Primitive version of verticalCost
     [<ReflectedDefinition>]
-    let private verticalCost (cell:Cell) =
-        let yM = AddFloatToTrace cell.M -5
-        let yY = AddFloatToTrace cell.Y -1
+    let private verticalCost (cell:Cell) (openCost:int) (continueCost:int) =
+        let yM = addFloatToTrace cell.M openCost
+        let yY = addFloatToTrace cell.Y continueCost
         max yM yY |> max 0
+
 
     /// Primitive function for calculating the best cost.
     [<ReflectedDefinition>]
-    let private bestTrace m x y seq1Char seq2Char =
+    let private bestTrace m x y seq1Char seq2Char openCost continueCost =
         let mCost = diagonalCost m seq1Char seq2Char
 
-        let xCost = horizontalCost x
+        let xCost = horizontalCost x openCost continueCost
         let x' = new TraceScore(xCost, 2uy)
 
-        let yCost = verticalCost y
+        let yCost = verticalCost y openCost continueCost
         let y' = new TraceScore(yCost, 3uy)
 
         let mutable bestCost = xCost
@@ -129,7 +141,7 @@ module PairwiseAlignment =
 
         i_best, j_best
 
-    /// Primitive version of TraceBackZerovalue. Note how I represent a gap with a "-1"
+    /// Primitive version of TraceBackZerovalue. Note that a gap is represented with a "-1"
     let rec private traceBackPrimitive (fstSeq:int[]) (sndSeq:int[]) (i:int) (j:int) (acc1:int list) (acc2:int list) (matrix:Cell[,]) =
         match matrix.[i,j].M.TraceType with
         |0uy -> acc1, acc2
@@ -137,9 +149,7 @@ module PairwiseAlignment =
         |2uy -> traceBackPrimitive fstSeq sndSeq (i)   (j-1) (-1::acc1)            (sndSeq.[j-1]::acc2) matrix
         |3uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)            matrix
 
-
     module ParallelMatrix =
-
         [<ReflectedDefinition>]
         let maxDiagCell (d:int) (rows:int) (cols:int) =
             let mutable l = 0
@@ -176,7 +186,7 @@ module PairwiseAlignment =
             (initialJ d maxRow) + m
 
         [<ReflectedDefinition>]
-        let kernel (matrix:(Cell)[,]) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) =
+        let kernel (matrix:(Cell)[,]) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) (openCost:int) (continueCost:int) =
 
             let start = blockIdx.x * blockDim.x + threadIdx.x
             let stride = gridDim.x * blockDim.x
@@ -196,8 +206,7 @@ module PairwiseAlignment =
 
                     // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
                     if i <> 0 && j <> 0 then
-                        matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] 
-
+                        matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] openCost continueCost
                     m <- m + stride
                 __syncthreads()
             __syncthreads()
@@ -205,48 +214,51 @@ module PairwiseAlignment =
 
         let transformKernel = <@ kernel @> |> Compiler.makeKernel
 
-        let gpuCellMatrix (fst_seq:int[]) (snd_seq:int[]) =
-            let rows, cols = fst_seq.Length + 1, snd_seq.Length + 1
 
-            let d_max = rows + cols - 1
-            let d_maxs = [|for d in 0..d_max -> d|]
-            let m_maxs = d_maxs |> Array.map (fun d -> maxDiagCell d rows cols)
+
+        let gpuCellMatrix (fstSeq:int[]) (sndSeq:int[]) (openCost:int) (continueCost:int) =
+            let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
+            let dMax = rows + cols - 1
+            let dMaxs = [|for d in 0..dMax -> d|]
+            let mMaxs = dMaxs |> Array.map (fun d -> maxDiagCell d rows cols)
 
             let gpu = Gpu.Default
-            let fstSeqGpu = gpu.Allocate(fst_seq)
-            let sndSeqGpu = gpu.Allocate(snd_seq)
-            let mMaxsGpu = gpu.Allocate(m_maxs)
+
+            //let openGpu = gpu.Allocate<int32>(openCost)
+            //let continueGpu = gpu.Allocate<int32>(continueCost)
+            let fstSeqGpu = gpu.Allocate(fstSeq)
+            let sndSeqGpu = gpu.Allocate(sndSeq)
+            let mMaxsGpu = gpu.Allocate(mMaxs)
             let matrixGpu = gpu.Allocate<Cell>(rows, cols)
 
             let lp = LaunchParam(1, 512)
-            gpu.Launch transformKernel lp matrixGpu fstSeqGpu sndSeqGpu mMaxsGpu
-
+            gpu.Launch transformKernel lp matrixGpu fstSeqGpu sndSeqGpu mMaxsGpu openCost continueCost
             let matrix = Gpu.CopyToHost(matrixGpu)
 
             Gpu.Free(fstSeqGpu)
             Gpu.Free(sndSeqGpu)
             Gpu.Free(mMaxsGpu)
             Gpu.Free(matrixGpu)
-
+            //Gpu.Free(openGpu)
+            Gpu.Free(matrixGpu)
+            
             matrix
 
     module SmithWaterman =
-        let run (fstSeq:BioArray<Nucleotides.Nucleotide>) (sndSeq:BioArray<Nucleotides.Nucleotide>) =
+        let run (fstSeq:BioArray<Nucleotides.Nucleotide>) (sndSeq:BioArray<Nucleotides.Nucleotide>) openCost continueCost =
+            // Primitivze
+            let fstSeqPrim = fstSeq |> BioArray.toString |> Conversion.stringToCharInts
+            let sndSeqPrim = sndSeq |> BioArray.toString |> Conversion.stringToCharInts
+            
+            // Generate cell matrix
+            let cellMatrix = ParallelMatrix.gpuCellMatrix fstSeqPrim sndSeqPrim openCost continueCost
 
-            let fstSeq = BioArray.toString fstSeq
-            let sndSeq = BioArray.toString sndSeq
+            // Get alignment from cell matrix
+            let i, j = indexOfMaxInMatrix cellMatrix
+            let alignment = traceBackPrimitive fstSeqPrim sndSeqPrim i j List.Empty List.Empty cellMatrix
 
-            let fstSeqPrim = fstSeq |> stringToCharInts
-            let sndSeqPrim = sndSeq |> stringToCharInts
-
-            let cell_matrix = ParallelMatrix.gpuCellMatrix fstSeqPrim sndSeqPrim
-            let i, j = indexOfMaxInMatrix cell_matrix
-
-            let alignment = traceBackPrimitive fstSeqPrim sndSeqPrim i j List.Empty List.Empty cell_matrix
-
+            // Package alignment
             let a1 = fst alignment
             let a2 = snd alignment
-
-            let intConversion chars = chars |> List.toArray |> intsToChars |> implode
-
+            let intConversion chars = chars |> List.toArray |> Conversion.intsToChars |> Conversion.implode
             (a1 |> intConversion, a2 |> intConversion)
