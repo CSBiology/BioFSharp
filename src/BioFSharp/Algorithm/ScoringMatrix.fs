@@ -81,3 +81,13 @@ module ScoringMatrix =
         (fun  (n1:Nucleotides.Nucleotide) (n2:Nucleotides.Nucleotide) -> 
             scm.[int n1 - 42].[int n2 - 42])
 
+    ///creates a scoring function for nucleotides out of a scoring matrix
+    let getScoringMatrixNucleotidePrim (scoringMatrixType:ScoringMatrixNucleotide) =
+        let resourceName = ScoringMatrixNucleotide.toFileName scoringMatrixType
+        let scm = readScoringMatrix resourceName
+
+        scm
+        //(<@ fun (n1:int) (n2:int) -> scm.[n1 - 42].[n2 - 42] @>)
+        //(fun  (n1:int) (n2:Nucleotides.Nucleotide) -> 
+            //scm.[int n1 - 42].[int n2 - 42])
+

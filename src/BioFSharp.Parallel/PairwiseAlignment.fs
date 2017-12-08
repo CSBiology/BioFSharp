@@ -3,6 +3,7 @@ open System
 open BioFSharp.BioArray
 open BioFSharp.Algorithm.PairwiseAlignment
 open BioFSharp.Algorithm.ScoringMatrix
+open Microsoft.FSharp.Quotations
 open BioFSharp
 open Nucleotides
 open Alea
@@ -13,22 +14,20 @@ open Alea.FSharp
     let charsToInts (chars:char[]) =
         Array.map (fun c -> int c) chars
 
-    /// Character array to string
-    let implode (chars:char[]) =
-        chars |> System.String
-
     /// String to character array
-    let explode (myString:string) =
-        [| for i in 0..myString.Length-1 -> char myString.[i] |]
-
-    /// Integer array to character array. Note how I convert my -1's to hyphens.
-    let intsToChars (ints:int[]) =
-        Array.map (fun myInt -> if myInt = -1 then '-' else char myInt) ints
+    let explode (string:String) =
+        [| for i in 0..string.Length-1 -> char string.[i] |]
 
     /// String to integer array.
-    let stringToCharInts (my_string:string) =
-        let exploded = explode my_string
-        exploded |> charsToInts
+    let stringToInts (string:String) =
+        string |> explode |> charsToInts
+
+    /// Integer array to character array. Note how -1s are converted to hyphens.
+    let intsToChars (ints:int[]) =
+        Array.map (fun x -> if x = -1 then '-' else char x) ints
+
+    let packageAlignment (alignment) =
+        (fst alignment |> List.toArray |> intsToChars |> String, snd alignment |> List.toArray |> intsToChars |> String)
 
 module PairwiseAlignment =
     /// Primitive version of TraceScore.
@@ -60,28 +59,20 @@ module PairwiseAlignment =
     let private addFloatToTrace (ts:TraceScore) (opc:int) =
         ts.Value + opc
 
-
     [<Struct>]
     type CostsPrim =
         val Open : int
         val Continuation : int
-        val Same : int
-        val NotSame : int
+        val Similarity : int[][]
 
         [<ReflectedDefinition>]
-        new (o, c, s, n) = {Open = o; Continuation = c; Same = s; NotSame = n} 
-
-    //let getScoringMatrixNucleotide (scoringMatrixType:ScoringMatrixNucleotide) =
-    //    let resourceName = ScoringMatrixNucleotide.toFileName scoringMatrixType
-    //    let scm = readScoringMatrix resourceName
-
-    //    (fun  (n1:int) (n2:int) -> 
-    //        scm.[n1 - 42].[n2 - 42])
+        new (o, c, s) = {Open = o; Continuation = c; Similarity = s} 
 
     /// Primitive version of diagonalCost
     [<ReflectedDefinition>]
-    let private diagonalCost (cell:Cell) (item1:int) (item2:int) (costs:CostsPrim) =
-        let sim' = if item1 = item2 then costs.Same else costs.NotSame
+    let private diagonalCost (cell:Cell) (item1:int) (item2:int) (costs:CostsPrim) (*(op)*) =
+        //let sim' = if item1 = item2 then costs.Same else costs.NotSame
+        let sim' = costs.Similarity.[item1-42].[item2-42] (*op item1 item2*)
         let mM = addFloatToTrace cell.M sim' 
         let mY = addFloatToTrace cell.Y sim' 
         let mX = addFloatToTrace cell.X sim'             
@@ -104,8 +95,8 @@ module PairwiseAlignment =
 
     /// Primitive function for calculating the best cost.
     [<ReflectedDefinition>]
-    let private bestTrace m x y seq1Char seq2Char costs =
-        let mCost = diagonalCost m seq1Char seq2Char costs
+    let private bestTrace m x y seq1Char seq2Char costs op =
+        let mCost = diagonalCost m seq1Char seq2Char costs(*op*)
 
         let xCost = horizontalCost x costs
         let x' = new TraceScore(xCost, 2uy)
@@ -149,10 +140,10 @@ module PairwiseAlignment =
         match matrix.[i,j].M.TraceType with
         |0uy -> acc1, acc2
         |1uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j-1) (fstSeq.[i-1]::acc1) (sndSeq.[j-1]::acc2) matrix
-        |2uy -> traceBackPrimitive fstSeq sndSeq (i)   (j-1) (-1::acc1)            (sndSeq.[j-1]::acc2) matrix
-        |3uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)            matrix
+        |2uy -> traceBackPrimitive fstSeq sndSeq (i)   (j-1) (-1::acc1)           (sndSeq.[j-1]::acc2) matrix
+        |3uy -> traceBackPrimitive fstSeq sndSeq (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)           matrix
 
-    module ParallelMatrix =
+    module Matrix =
         [<ReflectedDefinition>]
         let maxDiagCell (d:int) (rows:int) (cols:int) =
             let mutable l = 0
@@ -188,37 +179,37 @@ module PairwiseAlignment =
         let getJ d m maxRow = 
             (initialJ d maxRow) + m
 
-        [<ReflectedDefinition>]
-        let kernel (matrix:(Cell)[,]) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) (costsPrim:CostsPrim) =
+        let kernel (op:Expr<int -> int -> int>) =
+            <@ fun (matrix:Cell[,]) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) (costsPrim:CostsPrim) ->
 
-            let start = blockIdx.x * blockDim.x + threadIdx.x
-            let stride = gridDim.x * blockDim.x
+                let start = blockIdx.x * blockDim.x + threadIdx.x
+                let stride = gridDim.x * blockDim.x
 
-            let rows = matrix.GetLength(0)
-            let cols = matrix.GetLength(1)
+                let rows = matrix.GetLength(0)
+                let cols = matrix.GetLength(1)
 
-            let dMax = rows + cols
+                let dMax = rows + cols
 
-            __syncthreads()
-            for d in 0..dMax do
-                let mMax = mMaxs.[d]
-                let mutable m = start
-                while m <= mMax do
-                    let i = getI d m (rows - 1)
-                    let j = getJ d m (rows - 1)
-
-                    // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
-                    if i <> 0 && j <> 0 then
-                        matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costsPrim
-                    m <- m + stride
                 __syncthreads()
-            __syncthreads()
+                for d in 0..dMax do
+                    let mMax = mMaxs.[d]
+                    let mutable m = start
+                    while m <= mMax do
+                        let i = getI d m (rows - 1)
+                        let j = getJ d m (rows - 1)
 
+                        // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
+                        if i <> 0 && j <> 0 then
+                            matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costsPrim (%op)
+                        m <- m + stride
+                    __syncthreads()
+                __syncthreads()
+            @>
 
-        let transformKernel = <@ kernel @> |> Compiler.makeKernel
+        let createCellMatrix (costs:CostsPrim) op (fstSeq:int[]) (sndSeq:int[]) =
+            let kernelAddI32 : KernelDef<Cell[,] -> int[] -> int[] -> int[] -> CostsPrim -> unit> =
+                kernel (*costs.Similarity*)op |> Compiler.makeKernel
 
-        let gpuCellMatrix (costs:CostsPrim) (fstSeq:int[]) (sndSeq:int[]) =
-            
             let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
             let dMax = rows + cols - 1
             let dMaxs = [|for d in 0..dMax -> d|]
@@ -231,7 +222,7 @@ module PairwiseAlignment =
             let matrixGpu = gpu.Allocate<Cell>(rows, cols)
 
             let lp = LaunchParam(1, 512)
-            gpu.Launch transformKernel lp matrixGpu fstSeqGpu sndSeqGpu mMaxsGpu costs
+            gpu.Launch kernelAddI32 lp matrixGpu fstSeqGpu sndSeqGpu mMaxsGpu costs
             let matrix = Gpu.CopyToHost(matrixGpu)
 
             Gpu.Free(fstSeqGpu)
@@ -243,20 +234,17 @@ module PairwiseAlignment =
             matrix
 
     module SmithWaterman =
-        let run (costs:CostsPrim) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
+        let run (costs:CostsPrim) op (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
             // Primitivze
-            let fstSeqPrim = fstSeq |> BioArray.toString |> Conversion.stringToCharInts
-            let sndSeqPrim = sndSeq |> BioArray.toString |> Conversion.stringToCharInts
+            let fstSeqPrim = fstSeq |> BioArray.toString |> Conversion.stringToInts
+            let sndSeqPrim = sndSeq |> BioArray.toString |> Conversion.stringToInts
 
             // Generate cell matrix
-            let cellMatrix = ParallelMatrix.gpuCellMatrix costs fstSeqPrim sndSeqPrim
+            let cellMatrix = Matrix.createCellMatrix costs op fstSeqPrim sndSeqPrim
 
             // Get alignment from cell matrix
             let i, j = indexOfMaxInMatrix cellMatrix
             let alignment = traceBackPrimitive fstSeqPrim sndSeqPrim i j List.Empty List.Empty cellMatrix
 
-            // Package alignment
-            let a1 = fst alignment
-            let a2 = snd alignment
-            let intConversion chars = chars |> List.toArray |> Conversion.intsToChars |> Conversion.implode
-            (a1 |> intConversion, a2 |> intConversion)
+            // Package alignment            
+            alignment |> Conversion.packageAlignment
