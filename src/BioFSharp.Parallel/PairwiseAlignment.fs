@@ -137,10 +137,8 @@ module PairwiseAlignment =
 
         let rows = matrix.GetLength(0)
         let cols = matrix.GetLength(1)
-
         let dMax = rows + cols
 
-        __syncthreads()
         for d in 0..dMax do
             let mMax = mMaxs.[d]
             let mutable m = start
@@ -153,7 +151,6 @@ module PairwiseAlignment =
                     matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costs
                 m <- m + stride
             __syncthreads()
-        __syncthreads()
 
     let createCellMatrix (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) =
         let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
