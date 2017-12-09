@@ -165,7 +165,7 @@ module PairwiseAlignment =
                 __syncthreads()
         @>
 
-    let createCellMatrix (initMatrix:Cell[,] -> Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (negativeScoring:Expr<int->int>) =
+    let createCellMatrix (initMatrix:Cell[,] -> Cell[,]) (negativeScoring:Expr<int->int>) (costs:Costs) (fstSeq:int[]) (sndSeq:int[])  =
         let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
         let dMax = rows + cols - 1
         let dMaxs = [|for d in 0..dMax -> d|]
@@ -193,48 +193,31 @@ module PairwiseAlignment =
             
         matrix
 
+    let runGeneric partialCreateCellMatrix index costs fstSeq sndSeq =
+        let fstSeq = fstSeq |> BioArray.toString |> Conversion.stringToInts
+        let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
+        let matrix = partialCreateCellMatrix costs fstSeq sndSeq 
+        let i, j = index matrix
+        let alignment = traceBack fstSeq sndSeq i j matrix
+        alignment |> Conversion.packageAlignment
+
     module NeedlemanWunsch =
         let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
-            // Primitivze
-            let fstSeq = fstSeq |> BioArray.toString |> Conversion.stringToInts
-            let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
-
-            ///In this step the Cells (i=0) and (j=0) of the matrix get filled with the gap-Values
             let initFirstRowCol (matrix: Cell[,]) =
                 let len1 = Array2D.length1 matrix
                 let len2 = Array2D.length2 matrix
-                // init first col (only vertical trace)
                 for i=1 to len1-1 do 
                     let currentTrace = new TraceScore(costs.Open + (costs.Continuation * int (i-1)), 3uy)
                     matrix.[i,0] <- new Cell(currentTrace, currentTrace, currentTrace)
-                // init first row (only horizontal trace)
                 for j=1 to len2-1 do 
                     let currentTrace = new TraceScore(costs.Open + (costs.Continuation * int (j-1)), 2uy)
                     matrix.[0,j] <- new Cell(currentTrace, currentTrace, currentTrace)
                 matrix
 
-            // Generate cell matrix
-            let matrix = createCellMatrix initFirstRowCol costs fstSeq sndSeq <@id@>
-
-            // Get alignment from cell matrix
-            let i, j = Array2D.length1 matrix - 1, Array2D.length2 matrix - 1
-            let alignment = traceBack fstSeq sndSeq i j matrix
-
-            // Package alignment            
-            alignment |> Conversion.packageAlignment
+            let index = fun matrix -> Array2D.length1 matrix - 1, Array2D.length2 matrix - 1
+            runGeneric (createCellMatrix initFirstRowCol <@id@>) index costs fstSeq sndSeq
 
     module SmithWaterman =
         let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
-            // Primitivze
-            let fstSeq = fstSeq |> BioArray.toString |> Conversion.stringToInts
-            let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
-
-            // Generate cell matrix
-            let matrix = createCellMatrix id costs fstSeq sndSeq <@ fun x -> max x 0 @>
-
-            // Get alignment from cell matrix
-            let i, j = Array2D.indexMaxBy (fun (c:Cell) -> c.M.Value) matrix
-            let alignment = traceBack fstSeq sndSeq i j matrix
-
-            // Package alignment            
-            alignment |> Conversion.packageAlignment
+            let index = fun matrix -> Array2D.indexMaxBy (fun (c:Cell) -> c.M.Value) matrix
+            runGeneric (createCellMatrix id <@ fun x -> max x 0 @>) index costs fstSeq sndSeq
