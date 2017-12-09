@@ -28,14 +28,30 @@ let nucCostsPrimitive = new BioFSharp.Parallel.PairwiseAlignment.Costs(-5, -1, S
 
 [<Test>]
 let ``SmithWaterman: sequential equals parallel`` () =
+    let t = System.Diagnostics.Stopwatch.StartNew()
     let sequentialAlignment = PairwiseAlignment.SmithWaterman.runNucleotide nucCosts seq1 seq2
     let sequentialAlignment = (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
+    t.Stop()
+    printfn "execution time of sequential: %A" t.Elapsed
+    
+    let t = System.Diagnostics.Stopwatch.StartNew()
     let parallelAlignment = PairwiseAlignment.SmithWaterman.run nucCostsPrimitive seq1 seq2
+    t.Stop()
+    printfn "execution time of parallel: %A" t.Elapsed
+    
     Assert.AreEqual(sequentialAlignment, parallelAlignment)
 
 [<Test>]
 let ``NeedlemanWunsch: sequential equals parallel`` () =
+    let t = System.Diagnostics.Stopwatch.StartNew()
     let sequentialAlignment = PairwiseAlignment.NeedlemanWunsch.runNucleotide nucCosts seq1 seq2
     let sequentialAlignment = (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
+    t.Stop()
+    printfn "execution time of sequential: %A" t.Elapsed
+    
+    let t = System.Diagnostics.Stopwatch.StartNew()
     let parallelAlignment = PairwiseAlignment.NeedlemanWunsch.run nucCostsPrimitive seq1 seq2
+    t.Stop()
+    printfn "execution time of parallel: %A" t.Elapsed
+    
     Assert.AreEqual(sequentialAlignment, parallelAlignment)
