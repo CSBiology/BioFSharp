@@ -1,5 +1,6 @@
 ﻿namespace BioFSharp.Parallel
 open System
+open FSharp.Care.Collections
 open BioFSharp.BioArray
 open BioFSharp.Algorithm.PairwiseAlignment
 open BioFSharp.Algorithm.ScoringMatrix
@@ -186,7 +187,6 @@ module PairwiseAlignment =
         let sndSeqGpu = gpu.Allocate(sndSeq)
         let mMaxsGpu = gpu.Allocate(mMaxs)
         let matrixGpu = gpu.Allocate<Cell>(matrix)
-        //let matrixGpu = gpu.Allocate<Cell>(rows, cols)
 
         let lp = LaunchParam(1, 512)
         let transformKernel = <@ kernel @> |> Compiler.makeKernel
@@ -200,22 +200,6 @@ module PairwiseAlignment =
         Gpu.Free(matrixGpu)
             
         matrix
-
-    /// Primitive function for calculating the max cell in a matrix.
-
-    // Can refactor this using Array2D.indexMaxBy?
-    let indexOfMaxInMatrix (matrix:(Cell)[,]) =
-        let mutable val_best = 0
-        let mutable i_best = 0
-        let mutable j_best = 0
-        for i in 0..(matrix.GetLength(0)-1) do
-            for j in 0..(matrix.GetLength(1)-1) do
-                let value = matrix.[i,j].M.Value
-                if value >= val_best then
-                    val_best <- value
-                    i_best <- i
-                    j_best <- j
-        i_best, j_best
 
     module NeedlemanWunsch =
         let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
@@ -257,7 +241,7 @@ module PairwiseAlignment =
             let matrix = createCellMatrix id costs fstSeq sndSeq true
 
             // Get alignment from cell matrix
-            let i, j = indexOfMaxInMatrix matrix
+            let i, j = Array2D.indexMaxBy (fun (c:Cell) -> c.M.Value) matrix
             let alignment = traceBack fstSeq sndSeq i j matrix
 
             // Package alignment            
