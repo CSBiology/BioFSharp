@@ -5,15 +5,17 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>07d1ff79-e2d9-46db-bf05-92acd1469187</ProjectGuid>
+    <ProjectGuid>{d72c9a08-64ce-4e57-8902-64965a155684}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>BioFSharp.Tests</RootNamespace>
-    <AssemblyName>BioFSharp.Tests</AssemblyName>
+    <RootNamespace>BioFSharp.Parallel.Tests</RootNamespace>
+    <AssemblyName>BioFSharp.Parallel.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
-    <Name>BioFSharp.Tests</Name>
+    <Name>BioFSharp.Parallel.Tests</Name>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,13 +71,28 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Alea">
+      <HintPath>..\..\packages\Alea.3.0.4\lib\net45\Alea.dll</HintPath>
+    </Reference>
+    <Reference Include="Alea.IL">
+      <HintPath>..\..\packages\Alea.3.0.4\lib\net45\Alea.IL.dll</HintPath>
+    </Reference>
+    <Reference Include="Alea.Parallel">
+      <HintPath>..\..\packages\Alea.3.0.4\lib\net45\Alea.Parallel.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <ProjectReference Include="..\..\src\BioFSharp.Parallel\BioFSharp.Parallel.fsproj">
+      <Name>BioFSharp.Parallel</Name>
+      <Project>{95c1ba58-a351-4ab9-990f-0f0e5f25ac1f}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\BioFSharp\BioFSharp.fsproj">
       <Name>BioFSharp</Name>
       <Project>{2a955278-f002-4ebd-ae86-8b548ebf1209}</Project>
@@ -1309,4 +1326,11 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Import Project="..\..\packages\Alea.3.0.4\build\Alea.targets" Condition="Exists('..\..\packages\Alea.3.0.4\build\Alea.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Alea.3.0.4\build\Alea.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Alea.3.0.4\build\Alea.targets'))" />
+  </Target>
 </Project>
