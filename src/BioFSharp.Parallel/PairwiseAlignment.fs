@@ -78,32 +78,23 @@ module PairwiseAlignment =
 
     /// Calculates a new best cell based on the three previous adjacent cells, the current sequence characters, and the costs.
     [<ReflectedDefinition>]
-    let private bestTrace (m:Cell) (x:Cell) (y:Cell) (seq1Char:int) (seq2Char:int) (costs:Costs) (local:bool) =
+    let private bestTrace (m:Cell) (x:Cell) (y:Cell) (seq1Char:int) (seq2Char:int) (costs:Costs) (negativeScoring:int->int) =
         let diagonalCost (cell:Cell) =
             let sim' = costs.ScoringMatrix.[seq1Char - 42].[seq2Char - 42]
             let mM = cell.M.Value + sim' 
             let mY = cell.Y.Value + sim' 
             let mX = cell.X.Value + sim'
-            if local then
-                max mM mY |> max mX |> max 0
-            else 
-                max mX mY |> max mM 
+            max mX mY |> max mM |> negativeScoring 
 
         let horizontalCost (cell:Cell) = 
             let xM = cell.M.Value + costs.Open
             let xX = cell.X.Value + costs.Continuation
-            if local then
-                max xM xX |> max 0
-            else
-                max xX xM
+            max xX xM |> negativeScoring
 
         let verticalCost (cell:Cell) =
             let yM = cell.M.Value + costs.Open
             let yY = cell.Y.Value + costs.Continuation
-            if local then
-                max yM yY |> max 0
-            else
-                max yY yM
+            max yY yM |> negativeScoring
 
         let mCost = diagonalCost m
         let xCost = horizontalCost x
@@ -152,27 +143,29 @@ module PairwiseAlignment =
         let initialJ = if d < maxRow then 0 else d - maxRow
         initialJ + m
 
-    let private kernel (matrix:Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) (local:bool)  = 
-        let start = blockIdx.x * blockDim.x + threadIdx.x
-        let stride = gridDim.x * blockDim.x
+    let private kernel (negativeScoring:Expr<int -> int>) =
+        <@ fun (matrix:Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) ->
+            let start = blockIdx.x * blockDim.x + threadIdx.x
+            let stride = gridDim.x * blockDim.x
 
-        let rows = matrix.GetLength(0)
-        let cols = matrix.GetLength(1)
+            let rows = matrix.GetLength(0)
+            let cols = matrix.GetLength(1)
 
-        for d in 0..(rows + cols) do
-            let mMax = mMaxs.[d]
-            let mutable m = start
-            while m <= mMax do
-                let i = getI d m (rows - 1)
-                let j = getJ d m (rows - 1)
+            for d in 0..(rows + cols) do
+                let mMax = mMaxs.[d]
+                let mutable m = start
+                while m <= mMax do
+                    let i = getI d m (rows - 1)
+                    let j = getJ d m (rows - 1)
 
-                // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
-                if i <> 0 && j <> 0 then
-                    matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costs local
-                m <- m + stride
-            __syncthreads()
+                    // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
+                    if i <> 0 && j <> 0 then
+                        matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costs (%negativeScoring)
+                    m <- m + stride
+                __syncthreads()
+        @>
 
-    let createCellMatrix (initMatrix:Cell[,] -> Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (local:bool) =
+    let createCellMatrix (initMatrix:Cell[,] -> Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (negativeScoring:Expr<int->int>) =
         let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
         let dMax = rows + cols - 1
         let dMaxs = [|for d in 0..dMax -> d|]
@@ -189,8 +182,7 @@ module PairwiseAlignment =
         let matrixGpu = gpu.Allocate<Cell>(matrix)
 
         let lp = LaunchParam(1, 512)
-        let transformKernel = <@ kernel @> |> Compiler.makeKernel
-        gpu.Launch transformKernel lp matrixGpu costs fstSeqGpu sndSeqGpu mMaxsGpu local
+        gpu.Launch (kernel negativeScoring |> Compiler.makeKernel) lp matrixGpu costs fstSeqGpu sndSeqGpu mMaxsGpu
 
         let matrix = Gpu.CopyToHost(matrixGpu)
         Gpu.Free(fstSeqGpu)
@@ -222,7 +214,7 @@ module PairwiseAlignment =
                 matrix
 
             // Generate cell matrix
-            let matrix = createCellMatrix initFirstRowCol costs fstSeq sndSeq false
+            let matrix = createCellMatrix initFirstRowCol costs fstSeq sndSeq <@id@>
 
             // Get alignment from cell matrix
             let i, j = Array2D.length1 matrix - 1, Array2D.length2 matrix - 1
@@ -238,7 +230,7 @@ module PairwiseAlignment =
             let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
 
             // Generate cell matrix
-            let matrix = createCellMatrix id costs fstSeq sndSeq true
+            let matrix = createCellMatrix id costs fstSeq sndSeq <@ fun x -> max x 0 @>
 
             // Get alignment from cell matrix
             let i, j = Array2D.indexMaxBy (fun (c:Cell) -> c.M.Value) matrix
