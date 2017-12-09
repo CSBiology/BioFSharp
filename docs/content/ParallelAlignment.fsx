@@ -40,8 +40,8 @@ let randomSequence length =
         [|'A'; 'C'; 'G'; 'T'|].[random.Next(4)]
     System.String [| for i in 0..length-1 -> randomNucleotide () |]
 
-let seq1 = randomSequence 5 |> BioArray.ofNucleotideString
-let seq2 = randomSequence 5 |> BioArray.ofNucleotideString
+let seq1 = randomSequence 2000 |> BioArray.ofNucleotideString
+let seq2 = randomSequence 2000 |> BioArray.ofNucleotideString
 
 let nucCosts =
     {
@@ -52,9 +52,10 @@ let nucCosts =
 
 let nucCostsPrim = new BioFSharp.Parallel.PairwiseAlignment.Costs(-5, -1, ScoringMatrix.getPrimitiveScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA)
 
-let sequentialAlignment = executeSequential nucCosts seq1 seq2
 let parallelAlignment = executeParallel nucCostsPrim seq1 seq2
+let sequentialAlignment = executeSequential nucCosts seq1 seq2
 
-printfn "sequential: %A" sequentialAlignment
+
 printfn "parallel: %A" parallelAlignment
+printfn "sequential: %A" sequentialAlignment
 printfn "alignments equal: %A" (parallelAlignment = sequentialAlignment)

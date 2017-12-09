@@ -64,25 +64,45 @@ module PairwiseAlignment =
         [<ReflectedDefinition>]
         new (openCost, continuationCost, scoringMatrix) = {Open = openCost; Continuation = continuationCost; ScoringMatrix = scoringMatrix} 
     
+    /// Primitive version of TraceBackZerovalue. Note that a gap is represented with a "-1"
+    let traceBack (fstSeq:int[]) (sndSeq:int[]) (i:int) (j:int) (matrix:Cell[,]) =
+        let rec recursiveTraceBack (i:int) (j:int) (acc1:int list) (acc2:int list) =
+            match matrix.[i,j].M.TraceType with
+            |0uy -> acc1, acc2
+            |1uy -> recursiveTraceBack (i-1) (j-1) (fstSeq.[i-1]::acc1) (sndSeq.[j-1]::acc2)
+            |2uy -> recursiveTraceBack (i)   (j-1) (-1::acc1)           (sndSeq.[j-1]::acc2)
+            |3uy -> recursiveTraceBack (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)
+
+        recursiveTraceBack i j List.Empty List.Empty
+
     /// Calculates a new best cell based on the three previous adjacent cells, the current sequence characters, and the costs.
     [<ReflectedDefinition>]
-    let private bestTrace (m:Cell) (x:Cell) (y:Cell) (seq1Char:int) (seq2Char:int) (costs:Costs) =
+    let private bestTrace (m:Cell) (x:Cell) (y:Cell) (seq1Char:int) (seq2Char:int) (costs:Costs) (local:bool) =
         let diagonalCost (cell:Cell) =
             let sim' = costs.ScoringMatrix.[seq1Char - 42].[seq2Char - 42]
             let mM = cell.M.Value + sim' 
             let mY = cell.Y.Value + sim' 
-            let mX = cell.X.Value + sim'             
-            max mM mY |> max mX |> max 0
+            let mX = cell.X.Value + sim'
+            if local then
+                max mM mY |> max mX |> max 0
+            else 
+                max mX mY |> max mM 
 
         let horizontalCost (cell:Cell) = 
             let xM = cell.M.Value + costs.Open
             let xX = cell.X.Value + costs.Continuation
-            max xM xX |> max 0
+            if local then
+                max xM xX |> max 0
+            else
+                max xX xM
 
         let verticalCost (cell:Cell) =
             let yM = cell.M.Value + costs.Open
             let yY = cell.Y.Value + costs.Continuation
-            max yM yY |> max 0
+            if local then
+                max yM yY |> max 0
+            else
+                max yY yM
 
         let mCost = diagonalCost m
         let xCost = horizontalCost x
@@ -131,15 +151,14 @@ module PairwiseAlignment =
         let initialJ = if d < maxRow then 0 else d - maxRow
         initialJ + m
 
-    let private kernel (matrix:Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[])  = 
+    let private kernel (matrix:Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (mMaxs:int[]) (local:bool)  = 
         let start = blockIdx.x * blockDim.x + threadIdx.x
         let stride = gridDim.x * blockDim.x
 
         let rows = matrix.GetLength(0)
         let cols = matrix.GetLength(1)
-        let dMax = rows + cols
 
-        for d in 0..dMax do
+        for d in 0..(rows + cols) do
             let mMax = mMaxs.[d]
             let mutable m = start
             while m <= mMax do
@@ -148,25 +167,30 @@ module PairwiseAlignment =
 
                 // Avoid the first row and first column of the matrix because they are reserved for the sequences in the form of 0s.
                 if i <> 0 && j <> 0 then
-                    matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costs
+                    matrix.[i,j] <- bestTrace matrix.[i-1,j-1] matrix.[i,j-1] matrix.[i-1,j] fstSeq.[i-1] sndSeq.[j-1] costs local
                 m <- m + stride
             __syncthreads()
 
-    let createCellMatrix (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) =
+    let createCellMatrix (initMatrix:Cell[,] -> Cell[,]) (costs:Costs) (fstSeq:int[]) (sndSeq:int[]) (local:bool) =
         let rows, cols = fstSeq.Length + 1, sndSeq.Length + 1
         let dMax = rows + cols - 1
         let dMaxs = [|for d in 0..dMax -> d|]
         let mMaxs = dMaxs |> Array.map (fun d -> maxDiagCell d rows cols)
 
+        let emptyTrace = new TraceScore(0, 0uy)
+        let emptyCell = new Cell(emptyTrace, emptyTrace, emptyTrace)
+        let matrix = (Array2D.create rows cols emptyCell) |> initMatrix
+
         let gpu = Gpu.Default
         let fstSeqGpu = gpu.Allocate(fstSeq)
         let sndSeqGpu = gpu.Allocate(sndSeq)
         let mMaxsGpu = gpu.Allocate(mMaxs)
-        let matrixGpu = gpu.Allocate<Cell>(rows, cols)
+        let matrixGpu = gpu.Allocate<Cell>(matrix)
+        //let matrixGpu = gpu.Allocate<Cell>(rows, cols)
 
         let lp = LaunchParam(1, 512)
         let transformKernel = <@ kernel @> |> Compiler.makeKernel
-        gpu.Launch transformKernel lp matrixGpu costs fstSeqGpu sndSeqGpu mMaxsGpu 
+        gpu.Launch transformKernel lp matrixGpu costs fstSeqGpu sndSeqGpu mMaxsGpu local
 
         let matrix = Gpu.CopyToHost(matrixGpu)
         Gpu.Free(fstSeqGpu)
@@ -178,43 +202,63 @@ module PairwiseAlignment =
         matrix
 
     /// Primitive function for calculating the max cell in a matrix.
+
+    // Can refactor this using Array2D.indexMaxBy?
     let indexOfMaxInMatrix (matrix:(Cell)[,]) =
         let mutable val_best = 0
         let mutable i_best = 0
         let mutable j_best = 0
         for i in 0..(matrix.GetLength(0)-1) do
             for j in 0..(matrix.GetLength(1)-1) do
-
-                let value = (*prim_get_trace_score_value*) matrix.[i,j].M.Value
+                let value = matrix.[i,j].M.Value
                 if value >= val_best then
                     val_best <- value
                     i_best <- i
                     j_best <- j
-
         i_best, j_best
 
-    module SmithWaterman =
-        /// Primitive version of TraceBackZerovalue. Note that a gap is represented with a "-1"
-        let traceBack (fstSeq:int[]) (sndSeq:int[]) (matrix:Cell[,]) =
-            let rec recursiveTraceBack (i:int) (j:int) (acc1:int list) (acc2:int list) =
-                match matrix.[i,j].M.TraceType with
-                |0uy -> acc1, acc2
-                |1uy -> recursiveTraceBack (i-1) (j-1) (fstSeq.[i-1]::acc1) (sndSeq.[j-1]::acc2)
-                |2uy -> recursiveTraceBack (i)   (j-1) (-1::acc1)           (sndSeq.[j-1]::acc2)
-                |3uy -> recursiveTraceBack (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)
-            let i, j = indexOfMaxInMatrix matrix
-            recursiveTraceBack i j List.Empty List.Empty
+    module NeedlemanWunsch =
+        let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
+            // Primitivze
+            let fstSeq = fstSeq |> BioArray.toString |> Conversion.stringToInts
+            let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
 
+            ///In this step the Cells (i=0) and (j=0) of the matrix get filled with the gap-Values
+            let initFirstRowCol (matrix: Cell[,]) =
+                let len1 = Array2D.length1 matrix
+                let len2 = Array2D.length2 matrix
+                // init first col (only vertical trace)
+                for i=1 to len1-1 do 
+                    let currentTrace = new TraceScore(costs.Open + (costs.Continuation * int (i-1)), 3uy)
+                    matrix.[i,0] <- new Cell(currentTrace, currentTrace, currentTrace)
+                // init first row (only horizontal trace)
+                for j=1 to len2-1 do 
+                    let currentTrace = new TraceScore(costs.Open + (costs.Continuation * int (j-1)), 2uy)
+                    matrix.[0,j] <- new Cell(currentTrace, currentTrace, currentTrace)
+                matrix
+
+            // Generate cell matrix
+            let matrix = createCellMatrix initFirstRowCol costs fstSeq sndSeq false
+
+            // Get alignment from cell matrix
+            let i, j = Array2D.length1 matrix - 1, Array2D.length2 matrix - 1
+            let alignment = traceBack fstSeq sndSeq i j matrix
+
+            // Package alignment            
+            alignment |> Conversion.packageAlignment
+
+    module SmithWaterman =
         let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =
             // Primitivze
             let fstSeq = fstSeq |> BioArray.toString |> Conversion.stringToInts
             let sndSeq = sndSeq |> BioArray.toString |> Conversion.stringToInts
 
             // Generate cell matrix
-            let matrix = createCellMatrix costs fstSeq sndSeq
+            let matrix = createCellMatrix id costs fstSeq sndSeq true
 
             // Get alignment from cell matrix
-            let alignment = traceBack fstSeq sndSeq matrix
+            let i, j = indexOfMaxInMatrix matrix
+            let alignment = traceBack fstSeq sndSeq i j matrix
 
             // Package alignment            
             alignment |> Conversion.packageAlignment
