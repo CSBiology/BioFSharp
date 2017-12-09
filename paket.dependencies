@@ -7,7 +7,6 @@ nuget System.Data.SQLite
 nuget FSharp.Data.TypeProviders
 nuget SwaggerProvider
 
-
 group Build
   source https://nuget.org/api/v2
   
@@ -22,5 +21,5 @@ group Build
 group Test
   source https://nuget.org/api/v2
   
-  nuget NUnit ~> 2
-  nuget NUnit.Runners ~> 2
+  nuget NUnit.Runners
+  nuget NUnit
