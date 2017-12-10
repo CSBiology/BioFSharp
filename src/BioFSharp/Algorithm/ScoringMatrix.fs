@@ -37,7 +37,7 @@ module ScoringMatrix =
             | Default   -> "Default.txt"
             
     
-    let readScoringMatrix resourceName =
+    let private readScoringMatrix resourceName =
         let assembly = Assembly.GetExecutingAssembly()
         //let resourceName = ScoringMatrixType.toFileName scoringMatrixType
         use stream = assembly.GetManifestResourceStream(resourceName)
@@ -63,6 +63,7 @@ module ScoringMatrix =
             scm.[header.[i]] <- av)
 
         scm
+        
 
     ///creates a scoring function for amino acids out of a scoring matrix
     let getScoringMatrixAminoAcid (scoringMatrixType:ScoringMatrixAminoAcid) =
