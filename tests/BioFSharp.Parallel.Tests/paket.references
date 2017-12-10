@@ -1,6 +1,0 @@
-FSharp.Core
-Alea
-
-group Test
-  NUnit
-  NUnit.Runners
