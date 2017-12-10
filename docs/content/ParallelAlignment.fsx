@@ -23,5 +23,9 @@ let seq2 = randomSequence 10 |> BioArray.ofNucleotideString
 let nucCostsPrimitive = new BioFSharp.Parallel.PairwiseAlignment.Costs(-5, -1, ScoringMatrix.getPrimitiveScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA)
 
 // Calculate the alignment
-let alignment = Parallel.PairwiseAlignment.NeedlemanWunsch.run nucCostsPrimitive seq1 seq2
-printfn "%A" alignment
+let alignmentSW = Parallel.PairwiseAlignment.SmithWaterman.run nucCostsPrimitive seq1 seq2
+printfn "%A" alignmentSW
+
+// Also works with Needleman Wunsch
+let alignmentNM = Parallel.PairwiseAlignment.NeedlemanWunsch.run nucCostsPrimitive seq1 seq2
+printfn "%A" alignmentNM
