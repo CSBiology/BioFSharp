@@ -166,7 +166,7 @@ done otherwise_
 ///output file of the BLAST search
 let outputPath = (__SOURCE_DIRECTORY__ + "/data/blastTestOutput.csv") 
 
-BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
+//BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
 
 (**
 If written in csv (seperator char is ',') or tabular (seperator char is '\t') format, we can youe the built in `readCustomBlastResult` function to parse our result. 
