@@ -63,7 +63,7 @@ module ScoringMatrix =
             scm.[header.[i]] <- av)
 
         scm
-
+        
 
     ///creates a scoring function for amino acids out of a scoring matrix
     let getScoringMatrixAminoAcid (scoringMatrixType:ScoringMatrixAminoAcid) =
@@ -81,3 +81,8 @@ module ScoringMatrix =
         (fun  (n1:Nucleotides.Nucleotide) (n2:Nucleotides.Nucleotide) -> 
             scm.[int n1 - 42].[int n2 - 42])
 
+    let getPrimitiveScoringMatrixNucleotide (scoringMatrixType:ScoringMatrixNucleotide) =
+        let resourceName = ScoringMatrixNucleotide.toFileName scoringMatrixType
+        let scm = readScoringMatrix resourceName
+
+        scm
