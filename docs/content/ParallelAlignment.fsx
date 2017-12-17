@@ -5,62 +5,27 @@
 #r "BioFSharp.dll"
 
 open System
-
-// sequential
 open BioFSharp
 open BioFSharp.Algorithm
-open BioFSharp.Algorithm.PairwiseAlignment
-
-// parallel
-open Alea
 open BioFSharp.Parallel
 Alea.Settings.Instance.Resource.AssemblyPath <- __SOURCE_DIRECTORY__ + @"\..\..\packages\Alea\tools\"
 Alea.Settings.Instance.Resource.Path <- __SOURCE_DIRECTORY__ + @"..\..\bin"
 
+// Generate some random nucleotide sequences.
 let random = System.Random()
 let randomSequence length =
-    let random_nucleotide () =
-        [|'A'; 'C'; 'G'; 'T'|].[random.Next(4)]
-    System.String [| for i in 0..length-1 -> random_nucleotide () |]
+    System.String [| for i in 0..length-1 -> [|'A'; 'C'; 'G'; 'T'|].[random.Next(4)] |]
 
-let executeSequential seq1 seq2 =
-    let nucConversion (nucs:Nucleotides.Nucleotide list) =
-        nucs |> List.map (fun element -> if string element = "Gap" then "-" else string element) |> String.Concat
+let seq1 = randomSequence 10 |> BioArray.ofNucleotideString
+let seq2 = randomSequence 10 |> BioArray.ofNucleotideString
 
-    let nucScoring = ScoringMatrix.getScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
-    let nucCosts = {
-        Open = -5
-        Continuation = -1
-        Similarity = nucScoring 
-        }
+// Set the open and continuation costs, and the scoring matrix.
+let nucCostsPrimitive = new BioFSharp.Parallel.PairwiseAlignment.Costs(-5, -1, ScoringMatrix.getPrimitiveScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA)
 
-    let seq1 = seq1 |> BioArray.ofNucleotideString
-    let seq2 = seq2 |> BioArray.ofNucleotideString
+// Calculate the alignment
+let alignmentSW = Parallel.PairwiseAlignment.SmithWaterman.run nucCostsPrimitive seq1 seq2
+printfn "%A" alignmentSW
 
-    let t = System.Diagnostics.Stopwatch.StartNew()
-    let sequentialAlignment = PairwiseAlignment.SmithWaterman.runNucleotide nucCosts seq1 seq2
-    t.Stop()
-   
-    printfn "execution time of sequential: %A" t.Elapsed
-    (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
-
-let executeParallel seq1 seq2 =
-    let t = System.Diagnostics.Stopwatch.StartNew()
-    let parallelAlignment = PairwiseAlignment.SmithWaterman.run seq1 seq2
-    t.Stop()
-    
-    printfn "execution time of parallel: %A" t.Elapsed
-    parallelAlignment
-
-
-let seq1 = randomSequence 10
-let seq2 = randomSequence 10
-
-let parallelAlignment = executeParallel seq1 seq2
-let sequentialAlignment = executeSequential seq1 seq2
-
-
-printfn "parallel: %A" parallelAlignment
-printfn "sequential: %A" sequentialAlignment
-
-printfn "alignments equal: %A" (parallelAlignment = sequentialAlignment)
+// Also works with Needleman Wunsch
+let alignmentNM = Parallel.PairwiseAlignment.NeedlemanWunsch.run nucCostsPrimitive seq1 seq2
+printfn "%A" alignmentNM
