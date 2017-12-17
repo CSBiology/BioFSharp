@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Newick - BioFSharp</title>
+    <title>Costs - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,61 +37,98 @@
 
 
 
-<h1>Newick</h1>
+<h1>Costs</h1>
 <p>
-  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Namespace: BioFSharp.Parallel</span><br />
+  <span>Parent Module: <a href="biofsharp-parallel-pairwisealignment.html">PairwiseAlignment</a></span>
 </p>
 <div class="xmldoc">
-<p>Contains functions for parsing phylogenetic trees in the Newick format</p>
-
 </div>
-
-<!-- Render nested types and modules, if there are any -->
-
-  <h3>Functions and values</h3>
+  <h3>Record Fields</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Function or value</td><td>Description</td></tr>
+      <tr><td>Record Field</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '467', 467)" onmouseover="showTip(event, '467', 467)">
-            ofFile converter path
+          <code onmouseout="hideTip(event, '1038', 1038)" onmouseover="showTip(event, '1038', 1038)">
+            Continuation
           </code>
-          <div class="tip" id="467">
-            <strong>Signature:</strong> converter:(string -&gt; &#39;Distance) -&gt; path:string -&gt; Node&lt;string * &#39;Distance&gt;<br />
-                          <strong>Type parameters:</strong> 'Distance          </div>
+          <div class="tip" id="1038">
+            <strong>Signature:</strong> int<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L120-120" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L67-67" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Returns a PhylTree of file. Converter is used to create a distancevalue of a string</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '468', 468)" onmouseover="showTip(event, '468', 468)">
-            toFile nodeConverter path tree
+          <code onmouseout="hideTip(event, '1039', 1039)" onmouseover="showTip(event, '1039', 1039)">
+            Open
           </code>
-          <div class="tip" id="468">
-            <strong>Signature:</strong> nodeConverter:(&#39;T -&gt; string * string) -&gt; path:string -&gt; tree:Node&lt;&#39;T&gt; -&gt; unit<br />
-                          <strong>Type parameters:</strong> 'T          </div>
+          <div class="tip" id="1039">
+            <strong>Signature:</strong> int<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L129-129" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L66-66" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Creates a NewickTree file of PhylTree. nodeConverter is used to split the distanceInfo and the name of a node, because they are parsed separately. First result of the tuple is name, second is distance.</p>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
 
+          <code onmouseout="hideTip(event, '1040', 1040)" onmouseover="showTip(event, '1040', 1040)">
+            ScoringMatrix
+          </code>
+          <div class="tip" id="1040">
+            <strong>Signature:</strong> int [] []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
 
+          <code onmouseout="hideTip(event, '1041', 1041)" onmouseover="showTip(event, '1041', 1041)">
+            new(...)
+          </code>
+          <div class="tip" id="1041">
+            <strong>Signature:</strong> (openCost:int * continuationCost:int * scoringMatrix:int [] []) -&gt; Costs<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L71-71" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>.ctor</code></p>
         </td>
       </tr>
     </tbody>

@@ -62,9 +62,20 @@
         </tr>
         <tr>
           <td class="type-name">
+            <a href="biofsharp-parallel-pairwisealignment-costs.html">Costs</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
             <a href="biofsharp-parallel-pairwisealignment-tracescore.html">TraceScore</a>
           </td>
-          <td class="xmldoc"><p>Primitive version of TraceScore.</p>
+          <td class="xmldoc"><p>Primitive version of TraceScore.
+TraceType Legend:
+0 : NoTrace
+1 : Diagonal
+2 : Horizontal
+3 : Vertical</p>
 
 </td>
         </tr>
@@ -77,7 +88,7 @@
     <tbody>
         <tr>
           <td class="module-name">
-            <a href="biofsharp-parallel-pairwisealignment-parallelmatrix.html">ParallelMatrix</a>
+            <a href="biofsharp-parallel-pairwisealignment-needlemanwunsch.html">NeedlemanWunsch</a>
           </td>
           <td class="xmldoc"></td>
         </tr>
@@ -92,6 +103,70 @@
 
   </div>
 
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '474', 474)" onmouseover="showTip(event, '474', 474)">
+            createCellMatrix (...)
+          </code>
+          <div class="tip" id="474">
+            <strong>Signature:</strong> initMatrix:(Cell [,] -&gt; Cell [,]) -&gt; negativeScoring:Expr&lt;(int -&gt; int)&gt; -&gt; costs:Costs -&gt; fstSeq:int [] -&gt; sndSeq:int [] -&gt; Cell [,]<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L174-174" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '475', 475)" onmouseover="showTip(event, '475', 475)">
+            runGeneric (...)
+          </code>
+          <div class="tip" id="475">
+            <strong>Signature:</strong> partialCreateCellMatrix:(&#39;?9107 -&gt; int [] -&gt; int [] -&gt; Cell [,]) -&gt; index:(Cell [,] -&gt; int * int) -&gt; costs:&#39;?9107 -&gt; fstSeq:BioArray&lt;&#39;?9108&gt; -&gt; sndSeq:BioArray&lt;&#39;?9109&gt; -&gt; Alignment&lt;Nucleotide list,int&gt;<br />
+                          <strong>Type parameters:</strong> '?9107, '?9108, '?9109          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L202-202" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '476', 476)" onmouseover="showTip(event, '476', 476)">
+            traceBack fstSeq sndSeq i j matrix
+          </code>
+          <div class="tip" id="476">
+            <strong>Signature:</strong> fstSeq:int [] -&gt; sndSeq:int [] -&gt; i:int -&gt; j:int -&gt; matrix:Cell [,] -&gt; int [] * int []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L74-74" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Primitive version of TraceBackZerovalue. Note that a gap is represented with a "-1"</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
         </div>
         <div class="span3" >

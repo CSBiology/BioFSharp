@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Newick - BioFSharp</title>
+    <title>NeedlemanWunsch - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,13 +37,12 @@
 
 
 
-<h1>Newick</h1>
+<h1>NeedlemanWunsch</h1>
 <p>
-  <span>Namespace: BioFSharp.IO</span><br />
+  <span>Namespace: BioFSharp.Parallel</span><br />
+  <span>Parent Module: <a href="biofsharp-parallel-pairwisealignment.html">PairwiseAlignment</a></span>
 </p>
 <div class="xmldoc">
-<p>Contains functions for parsing phylogenetic trees in the Newick format</p>
-
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -57,41 +56,19 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '467', 467)" onmouseover="showTip(event, '467', 467)">
-            ofFile converter path
+          <code onmouseout="hideTip(event, '477', 477)" onmouseover="showTip(event, '477', 477)">
+            run costs fstSeq sndSeq
           </code>
-          <div class="tip" id="467">
-            <strong>Signature:</strong> converter:(string -&gt; &#39;Distance) -&gt; path:string -&gt; Node&lt;string * &#39;Distance&gt;<br />
-                          <strong>Type parameters:</strong> 'Distance          </div>
+          <div class="tip" id="477">
+            <strong>Signature:</strong> costs:Costs -&gt; fstSeq:BioArray&lt;Nucleotide&gt; -&gt; sndSeq:BioArray&lt;Nucleotide&gt; -&gt; Alignment&lt;Nucleotide list,int&gt;<br />
+                      </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L120-120" class="github-link">
+            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Parallel/PairwiseAlignment.fs#L211-211" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Returns a PhylTree of file. Converter is used to create a distancevalue of a string</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '468', 468)" onmouseover="showTip(event, '468', 468)">
-            toFile nodeConverter path tree
-          </code>
-          <div class="tip" id="468">
-            <strong>Signature:</strong> nodeConverter:(&#39;T -&gt; string * string) -&gt; path:string -&gt; tree:Node&lt;&#39;T&gt; -&gt; unit<br />
-                          <strong>Type parameters:</strong> 'T          </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/Newick.fs#L129-129" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Creates a NewickTree file of PhylTree. nodeConverter is used to split the distanceInfo and the name of a node, because they are parsed separately. First result of the tuple is name, second is distance.</p>
-
-
+          
         </td>
       </tr>
     </tbody>

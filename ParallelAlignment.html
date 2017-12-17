@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Smith-Waterman
-</title>
+    <title>ParallelAlignment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,7 +34,13 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Smith-Waterman" class="anchor" href="#Smith-Waterman">Smith-Waterman</a></h1>
+<table class="HeadAPI">
+<td class="Head"><h1>Parallel Pairwise Alignment</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-parallel-pairwisealignment.html" >&#128194;View module documentation</a>
+</td>
+</table>
+Pairwise Sequence alignment may be performed by making usage of the GPUs parallel compuatation capacities. Functions for this are located at `BioFSharp.Parallel`. The gapvalues are evaluated using the <b>affine</b> gap-score-model.
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -50,113 +55,49 @@
 <span class="l">12: </span>
 <span class="l">13: </span>
 <span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-<span class="l">24: </span>
-<span class="l">25: </span>
-<span class="l">26: </span>
-<span class="l">27: </span>
-<span class="l">28: </span>
-<span class="l">29: </span>
-<span class="l">30: </span>
-<span class="l">31: </span>
-<span class="l">32: </span>
-<span class="l">33: </span>
-<span class="l">34: </span>
-<span class="l">35: </span>
-<span class="l">36: </span>
-<span class="l">37: </span>
-<span class="l">38: </span>
-<span class="l">39: </span>
-<span class="l">40: </span>
-<span class="l">41: </span>
-<span class="l">42: </span>
-<span class="l">43: </span>
-<span class="l">44: </span>
-<span class="l">45: </span>
-<span class="l">46: </span>
-<span class="l">47: </span>
-<span class="l">48: </span>
-<span class="l">49: </span>
-<span class="l">50: </span>
-<span class="l">51: </span>
-<span class="l">52: </span>
-<span class="l">53: </span>
-<span class="l">54: </span>
-<span class="l">55: </span>
-<span class="l">56: </span>
-<span class="l">57: </span>
-<span class="l">58: </span>
-<span class="l">59: </span>
-<span class="l">60: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">System</span>
-
-<span class="c">// sequential</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">BioFSharp</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">Algorithm</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="i">Algorithm</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">PairwiseAlignment</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="i">Parallel</span>
+<span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="i">Alea</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="t">Settings</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">Instance</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">Resource</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">AssemblyPath</span> <span class="o">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\..\..\packages\Alea\tools\&quot;</span>
+<span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="i">Alea</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="t">Settings</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 14)" onmouseover="showTip(event, 'fs7', 14)" class="i">Instance</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="i">Resource</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="i">Path</span> <span class="o">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;..\..\bin&quot;</span>
 
-<span class="c">// parallel</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">Alea</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 9)" onmouseover="showTip(event, 'fs2', 9)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="i">Parallel</span>
-<span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="i">Alea</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="t">Settings</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">Instance</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">Resource</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">AssemblyPath</span> <span class="o">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\..\..\packages\Alea\tools\&quot;</span>
-<span onmouseout="hideTip(event, 'fs5', 16)" onmouseover="showTip(event, 'fs5', 16)" class="i">Alea</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 17)" onmouseover="showTip(event, 'fs7', 17)" class="t">Settings</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="i">Instance</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="i">Resource</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="i">Path</span> <span class="o">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;..\..\bin&quot;</span>
+<span class="c">// Generate some random nucleotide sequences.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">random</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 18)" onmouseover="showTip(event, 'fs1', 18)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="t">Random</span>()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="f">randomSequence</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="i">length</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs1', 22)" onmouseover="showTip(event, 'fs1', 22)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="t">String</span> [| <span class="k">for</span> <span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="i">i</span> <span class="k">in</span> <span class="n">0..</span><span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="i">length</span><span class="o">-</span><span class="n">1</span> <span class="k">-&gt;</span> [|<span class="s">&#39;A&#39;</span>; <span class="s">&#39;C&#39;</span>; <span class="s">&#39;G&#39;</span>; <span class="s">&#39;T&#39;</span>|]<span class="o">.</span>[<span onmouseout="hideTip(event, 'fs11', 26)" onmouseover="showTip(event, 'fs11', 26)" class="i">random</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="f">Next</span>(<span class="n">4</span>)] |]
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="i">random</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 22)" onmouseover="showTip(event, 'fs1', 22)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="t">Random</span>()
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="f">randomSequence</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="i">length</span> <span class="o">=</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="f">random_nucleotide</span> () <span class="o">=</span>
-        [|<span class="s">&#39;A&#39;</span>; <span class="s">&#39;C&#39;</span>; <span class="s">&#39;G&#39;</span>; <span class="s">&#39;T&#39;</span>|]<span class="o">.</span>[<span onmouseout="hideTip(event, 'fs12', 27)" onmouseover="showTip(event, 'fs12', 27)" class="i">random</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="f">Next</span>(<span class="n">4</span>)]
-    <span onmouseout="hideTip(event, 'fs1', 29)" onmouseover="showTip(event, 'fs1', 29)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="t">String</span> [| <span class="k">for</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="i">i</span> <span class="k">in</span> <span class="n">0..</span><span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="i">length</span><span class="o">-</span><span class="n">1</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="f">random_nucleotide</span> () |]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="i">seq1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 29)" onmouseover="showTip(event, 'fs13', 29)" class="f">randomSequence</span> <span class="n">10</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="f">ofNucleotideString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="i">seq2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 33)" onmouseover="showTip(event, 'fs13', 33)" class="f">randomSequence</span> <span class="n">10</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="f">ofNucleotideString</span>
+</code></pre></td>
+</tr>
+</table>
+<p>First the costs for gaps and the score for matches/mismatches has to be set.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Set the open and continuation costs, and the scoring matrix.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="i">nucCostsPrimitive</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs2', 37)" onmouseover="showTip(event, 'fs2', 37)" class="i">BioFSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 38)" onmouseover="showTip(event, 'fs4', 38)" class="i">Parallel</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 39)" onmouseover="showTip(event, 'fs23', 39)" class="t">PairwiseAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 40)" onmouseover="showTip(event, 'fs24', 40)" class="t">Costs</span>(<span class="o">-</span><span class="n">5</span>, <span class="o">-</span><span class="n">1</span>, <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="f">getPrimitiveScoringMatrixNucleotide</span>  <span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 44)" onmouseover="showTip(event, 'fs27', 44)" class="t">ScoringMatrixNucleotide</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="p">EDNA</span>)
+</code></pre></td>
+</tr>
+</table>
+<p>The alignment can then be performed with the following functions:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Calculate the alignment</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="i">alignmentSW</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 47)" onmouseover="showTip(event, 'fs4', 47)" class="i">Parallel</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 48)" onmouseover="showTip(event, 'fs23', 48)" class="t">PairwiseAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs31', 50)" onmouseover="showTip(event, 'fs31', 50)" class="f">run</span> <span onmouseout="hideTip(event, 'fs22', 51)" onmouseover="showTip(event, 'fs22', 51)" class="i">nucCostsPrimitive</span> <span onmouseout="hideTip(event, 'fs18', 52)" onmouseover="showTip(event, 'fs18', 52)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs21', 53)" onmouseover="showTip(event, 'fs21', 53)" class="i">seq2</span>
+<span onmouseout="hideTip(event, 'fs32', 54)" onmouseover="showTip(event, 'fs32', 54)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="i">alignmentSW</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="f">executeSequential</span> <span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="i">seq2</span> <span class="o">=</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="f">nucConversion</span> (<span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="i">nucs</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="t">Nucleotides</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="t">Nucleotide</span> <span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="t">list</span>) <span class="o">=</span>
-        <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="i">nucs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 43)" onmouseover="showTip(event, 'fs28', 43)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="i">element</span> <span class="k">-&gt;</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="f">string</span> <span onmouseout="hideTip(event, 'fs30', 47)" onmouseover="showTip(event, 'fs30', 47)" class="i">element</span> <span class="o">=</span> <span class="s">&quot;Gap&quot;</span> <span class="k">then</span> <span class="s">&quot;-&quot;</span> <span class="k">else</span> <span onmouseout="hideTip(event, 'fs31', 48)" onmouseover="showTip(event, 'fs31', 48)" class="f">string</span> <span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="i">element</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 50)" onmouseover="showTip(event, 'fs18', 50)" class="t">String</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 51)" onmouseover="showTip(event, 'fs32', 51)" class="f">Concat</span>
-
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 52)" onmouseover="showTip(event, 'fs33', 52)" class="f">nucScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 53)" onmouseover="showTip(event, 'fs34', 53)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="f">getScoringMatrixNucleotide</span>  <span onmouseout="hideTip(event, 'fs34', 55)" onmouseover="showTip(event, 'fs34', 55)" class="t">ScoringMatrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="t">ScoringMatrixNucleotide</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="p">EDNA</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 58)" onmouseover="showTip(event, 'fs38', 58)" class="i">nucCosts</span> <span class="o">=</span> {
-        <span class="i">Open</span> <span class="o">=</span> <span class="o">-</span><span class="n">5</span>
-        <span class="i">Continuation</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span>
-        <span class="i">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 59)" onmouseover="showTip(event, 'fs33', 59)" class="f">nucScoring</span> 
-        }
-
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 60)" onmouseover="showTip(event, 'fs39', 60)" class="i">seq1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 61)" onmouseover="showTip(event, 'fs39', 61)" class="i">seq1</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 62)" onmouseover="showTip(event, 'fs40', 62)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 63)" onmouseover="showTip(event, 'fs41', 63)" class="f">ofNucleotideString</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 64)" onmouseover="showTip(event, 'fs42', 64)" class="i">seq2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs42', 65)" onmouseover="showTip(event, 'fs42', 65)" class="i">seq2</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 66)" onmouseover="showTip(event, 'fs40', 66)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 67)" onmouseover="showTip(event, 'fs41', 67)" class="f">ofNucleotideString</span>
-
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 68)" onmouseover="showTip(event, 'fs43', 68)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 69)" onmouseover="showTip(event, 'fs1', 69)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 70)" onmouseover="showTip(event, 'fs44', 70)" class="i">Diagnostics</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 71)" onmouseover="showTip(event, 'fs45', 71)" class="t">Stopwatch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 72)" onmouseover="showTip(event, 'fs46', 72)" class="f">StartNew</span>()
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 73)" onmouseover="showTip(event, 'fs47', 73)" class="i">sequentialAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs48', 74)" onmouseover="showTip(event, 'fs48', 74)" class="t">PairwiseAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 75)" onmouseover="showTip(event, 'fs49', 75)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs50', 76)" onmouseover="showTip(event, 'fs50', 76)" class="f">runNucleotide</span> <span onmouseout="hideTip(event, 'fs38', 77)" onmouseover="showTip(event, 'fs38', 77)" class="i">nucCosts</span> <span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs42', 79)" onmouseover="showTip(event, 'fs42', 79)" class="i">seq2</span>
-    <span onmouseout="hideTip(event, 'fs43', 80)" onmouseover="showTip(event, 'fs43', 80)" class="i">t</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs51', 81)" onmouseover="showTip(event, 'fs51', 81)" class="f">Stop</span>()
-   
-    <span onmouseout="hideTip(event, 'fs52', 82)" onmouseover="showTip(event, 'fs52', 82)" class="f">printfn</span> <span class="s">&quot;execution time of sequential: </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs43', 83)" onmouseover="showTip(event, 'fs43', 83)" class="i">t</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 84)" onmouseover="showTip(event, 'fs53', 84)" class="i">Elapsed</span>
-    (<span onmouseout="hideTip(event, 'fs47', 85)" onmouseover="showTip(event, 'fs47', 85)" class="i">sequentialAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 86)" onmouseover="showTip(event, 'fs54', 86)" class="i">AlignedSequences</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 87)" onmouseover="showTip(event, 'fs23', 87)" class="f">nucConversion</span>, <span onmouseout="hideTip(event, 'fs47', 88)" onmouseover="showTip(event, 'fs47', 88)" class="i">sequentialAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 89)" onmouseover="showTip(event, 'fs54', 89)" class="i">AlignedSequences</span><span class="o">.</span>[<span class="n">1</span>] <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 90)" onmouseover="showTip(event, 'fs23', 90)" class="f">nucConversion</span>)
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 91)" onmouseover="showTip(event, 'fs55', 91)" class="f">executeParallel</span> <span onmouseout="hideTip(event, 'fs56', 92)" onmouseover="showTip(event, 'fs56', 92)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs57', 93)" onmouseover="showTip(event, 'fs57', 93)" class="i">seq2</span> <span class="o">=</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 94)" onmouseover="showTip(event, 'fs43', 94)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 95)" onmouseover="showTip(event, 'fs1', 95)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 96)" onmouseover="showTip(event, 'fs44', 96)" class="i">Diagnostics</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 97)" onmouseover="showTip(event, 'fs45', 97)" class="t">Stopwatch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 98)" onmouseover="showTip(event, 'fs46', 98)" class="f">StartNew</span>()
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 99)" onmouseover="showTip(event, 'fs58', 99)" class="i">parallelAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs48', 100)" onmouseover="showTip(event, 'fs48', 100)" class="t">PairwiseAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 101)" onmouseover="showTip(event, 'fs49', 101)" class="t">SmithWaterman</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs59', 102)" onmouseover="showTip(event, 'fs59', 102)" class="f">run</span> <span onmouseout="hideTip(event, 'fs56', 103)" onmouseover="showTip(event, 'fs56', 103)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs57', 104)" onmouseover="showTip(event, 'fs57', 104)" class="i">seq2</span>
-    <span onmouseout="hideTip(event, 'fs43', 105)" onmouseover="showTip(event, 'fs43', 105)" class="i">t</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs51', 106)" onmouseover="showTip(event, 'fs51', 106)" class="f">Stop</span>()
-    
-    <span onmouseout="hideTip(event, 'fs52', 107)" onmouseover="showTip(event, 'fs52', 107)" class="f">printfn</span> <span class="s">&quot;execution time of parallel: </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs43', 108)" onmouseover="showTip(event, 'fs43', 108)" class="i">t</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 109)" onmouseover="showTip(event, 'fs53', 109)" class="i">Elapsed</span>
-    <span onmouseout="hideTip(event, 'fs58', 110)" onmouseover="showTip(event, 'fs58', 110)" class="i">parallelAlignment</span>
-
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 111)" onmouseover="showTip(event, 'fs60', 111)" class="i">seq1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 112)" onmouseover="showTip(event, 'fs14', 112)" class="f">randomSequence</span> <span class="n">10</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 113)" onmouseover="showTip(event, 'fs61', 113)" class="i">seq2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 114)" onmouseover="showTip(event, 'fs14', 114)" class="f">randomSequence</span> <span class="n">10</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 115)" onmouseover="showTip(event, 'fs62', 115)" class="i">parallelAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 116)" onmouseover="showTip(event, 'fs55', 116)" class="f">executeParallel</span> <span onmouseout="hideTip(event, 'fs60', 117)" onmouseover="showTip(event, 'fs60', 117)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs61', 118)" onmouseover="showTip(event, 'fs61', 118)" class="i">seq2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 119)" onmouseover="showTip(event, 'fs63', 119)" class="i">sequentialAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 120)" onmouseover="showTip(event, 'fs20', 120)" class="f">executeSequential</span> <span onmouseout="hideTip(event, 'fs60', 121)" onmouseover="showTip(event, 'fs60', 121)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs61', 122)" onmouseover="showTip(event, 'fs61', 122)" class="i">seq2</span>
-
-
-<span onmouseout="hideTip(event, 'fs52', 123)" onmouseover="showTip(event, 'fs52', 123)" class="f">printfn</span> <span class="s">&quot;parallel: </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs62', 124)" onmouseover="showTip(event, 'fs62', 124)" class="i">parallelAlignment</span>
-<span onmouseout="hideTip(event, 'fs52', 125)" onmouseover="showTip(event, 'fs52', 125)" class="f">printfn</span> <span class="s">&quot;sequential: </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs63', 126)" onmouseover="showTip(event, 'fs63', 126)" class="i">sequentialAlignment</span>
-
-<span onmouseout="hideTip(event, 'fs52', 127)" onmouseover="showTip(event, 'fs52', 127)" class="f">printfn</span> <span class="s">&quot;alignments equal: </span><span class="pf">%A</span><span class="s">&quot;</span> (<span onmouseout="hideTip(event, 'fs62', 128)" onmouseover="showTip(event, 'fs62', 128)" class="i">parallelAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs63', 129)" onmouseover="showTip(event, 'fs63', 129)" class="i">sequentialAlignment</span>)
+<span class="c">// Also works with Needleman Wunsch</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 56)" onmouseover="showTip(event, 'fs33', 56)" class="i">alignmentNM</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="i">Parallel</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 58)" onmouseover="showTip(event, 'fs23', 58)" class="t">PairwiseAlignment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 59)" onmouseover="showTip(event, 'fs34', 59)" class="t">NeedlemanWunsch</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs35', 60)" onmouseover="showTip(event, 'fs35', 60)" class="f">run</span> <span onmouseout="hideTip(event, 'fs22', 61)" onmouseover="showTip(event, 'fs22', 61)" class="i">nucCostsPrimitive</span> <span onmouseout="hideTip(event, 'fs18', 62)" onmouseover="showTip(event, 'fs18', 62)" class="i">seq1</span> <span onmouseout="hideTip(event, 'fs21', 63)" onmouseover="showTip(event, 'fs21', 63)" class="i">seq2</span>
+<span onmouseout="hideTip(event, 'fs32', 64)" onmouseover="showTip(event, 'fs32', 64)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs33', 65)" onmouseover="showTip(event, 'fs33', 65)" class="i">alignmentNM</span>
 </code></pre></td>
 </tr>
 </table>
@@ -164,66 +105,38 @@
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace BioFSharp</div>
 <div class="tip" id="fs3">namespace BioFSharp.Algorithm</div>
-<div class="tip" id="fs4">module PairwiseAlignment<br /><br />from BioFSharp.Algorithm</div>
+<div class="tip" id="fs4">namespace BioFSharp.Parallel</div>
 <div class="tip" id="fs5">namespace Alea</div>
-<div class="tip" id="fs6">namespace BioFSharp.Parallel</div>
-<div class="tip" id="fs7">Multiple items<br />type Settings =<br />&#160;&#160;inherit ConfigurationSection<br />&#160;&#160;new : unit -&gt; Settings<br />&#160;&#160;member CUBLAS : CULibElement<br />&#160;&#160;member CUDADriver : CUDADriverElement<br />&#160;&#160;member CUDNN : CULibElement<br />&#160;&#160;member CURAND : CULibElement<br />&#160;&#160;member Diagnostics : DiagnosticsElement<br />&#160;&#160;member JITCompile : JITCompileElement<br />&#160;&#160;member License : LicenseElement<br />&#160;&#160;member Memory : MemoryElement<br />&#160;&#160;...<br /><br />Full name: Alea.Settings<br /><br />--------------------<br />new : unit -&gt; Alea.Settings</div>
-<div class="tip" id="fs8">property Alea.Settings.Instance: Alea.Settings</div>
-<div class="tip" id="fs9">property Alea.Settings.Resource: Alea.SettingElements.ResourceElement</div>
-<div class="tip" id="fs10">property Alea.SettingElements.ResourceElement.AssemblyPath: string</div>
-<div class="tip" id="fs11">property Alea.SettingElements.ResourceElement.Path: string</div>
-<div class="tip" id="fs12">val random : Random<br /><br />Full name: ParallelAlignment.random</div>
-<div class="tip" id="fs13">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />Full name: System.Random<br /><br />--------------------<br />Random() : unit<br />Random(Seed: int) : unit</div>
-<div class="tip" id="fs14">val randomSequence : length:int -&gt; String<br /><br />Full name: ParallelAlignment.randomSequence</div>
-<div class="tip" id="fs15">val length : int</div>
-<div class="tip" id="fs16">val random_nucleotide : (unit -&gt; char)</div>
+<div class="tip" id="fs6">Multiple items<br />type Settings =<br />&#160;&#160;inherit ConfigurationSection<br />&#160;&#160;new : unit -&gt; Settings<br />&#160;&#160;member CUBLAS : CULibElement<br />&#160;&#160;member CUDADriver : CUDADriverElement<br />&#160;&#160;member CUDNN : CULibElement<br />&#160;&#160;member CURAND : CULibElement<br />&#160;&#160;member Diagnostics : DiagnosticsElement<br />&#160;&#160;member JITCompile : JITCompileElement<br />&#160;&#160;member License : LicenseElement<br />&#160;&#160;member Memory : MemoryElement<br />&#160;&#160;...<br /><br />Full name: Alea.Settings<br /><br />--------------------<br />new : unit -&gt; Alea.Settings</div>
+<div class="tip" id="fs7">property Alea.Settings.Instance: Alea.Settings</div>
+<div class="tip" id="fs8">property Alea.Settings.Resource: Alea.SettingElements.ResourceElement</div>
+<div class="tip" id="fs9">property Alea.SettingElements.ResourceElement.AssemblyPath: string</div>
+<div class="tip" id="fs10">property Alea.SettingElements.ResourceElement.Path: string</div>
+<div class="tip" id="fs11">val random : Random<br /><br />Full name: ParallelAlignment.random</div>
+<div class="tip" id="fs12">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />Full name: System.Random<br /><br />--------------------<br />Random() : unit<br />Random(Seed: int) : unit</div>
+<div class="tip" id="fs13">val randomSequence : length:int -&gt; String<br /><br />Full name: ParallelAlignment.randomSequence</div>
+<div class="tip" id="fs14">val length : int</div>
+<div class="tip" id="fs15">Multiple items<br />type String =<br />&#160;&#160;new : value:char -&gt; string + 7 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 2 overloads<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.String<br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : unit<br />String(value: nativeptr&lt;sbyte&gt;) : unit<br />String(value: char []) : unit<br />String(c: char, count: int) : unit<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : unit<br />String(value: char [], startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : unit</div>
+<div class="tip" id="fs16">val i : int</div>
 <div class="tip" id="fs17">Random.Next() : int<br />Random.Next(maxValue: int) : int<br />Random.Next(minValue: int, maxValue: int) : int</div>
-<div class="tip" id="fs18">Multiple items<br />type String =<br />&#160;&#160;new : value:char -&gt; string + 7 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 2 overloads<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.String<br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : unit<br />String(value: nativeptr&lt;sbyte&gt;) : unit<br />String(value: char []) : unit<br />String(c: char, count: int) : unit<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : unit<br />String(value: char [], startIndex: int, length: int) : unit<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : unit</div>
-<div class="tip" id="fs19">val i : int</div>
-<div class="tip" id="fs20">val executeSequential : seq1:seq&lt;char&gt; -&gt; seq2:seq&lt;char&gt; -&gt; string * string<br /><br />Full name: ParallelAlignment.executeSequential</div>
-<div class="tip" id="fs21">val seq1 : seq&lt;char&gt;</div>
-<div class="tip" id="fs22">val seq2 : seq&lt;char&gt;</div>
-<div class="tip" id="fs23">val nucConversion : (Nucleotides.Nucleotide list -&gt; string)</div>
-<div class="tip" id="fs24">val nucs : Nucleotides.Nucleotide list</div>
-<div class="tip" id="fs25">module Nucleotides<br /><br />from BioFSharp</div>
-<div class="tip" id="fs26">type Nucleotide =<br />&#160;&#160;| A<br />&#160;&#160;| T<br />&#160;&#160;| G<br />&#160;&#160;| C<br />&#160;&#160;| U<br />&#160;&#160;| I<br />&#160;&#160;| Gap<br />&#160;&#160;| Ter<br />&#160;&#160;| R<br />&#160;&#160;| Y<br />&#160;&#160;...<br />&#160;&#160;interface IBioItem<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; int<br />&#160;&#160;static member op_Explicit : value:#IBioItem -&gt; byte<br /><br />Full name: BioFSharp.Nucleotides.Nucleotide</div>
-<div class="tip" id="fs27">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
-<div class="tip" id="fs28">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs29">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
-<div class="tip" id="fs30">val element : Nucleotides.Nucleotide</div>
-<div class="tip" id="fs31">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs32">String.Concat([&lt;ParamArray&gt;] values: string []) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(values: Collections.Generic.IEnumerable&lt;string&gt;) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat&lt;&#39;T&gt;(values: Collections.Generic.IEnumerable&lt;&#39;T&gt;) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat([&lt;ParamArray&gt;] args: obj []) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(arg0: obj) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(str0: string, str1: string) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(arg0: obj, arg1: obj) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(str0: string, str1: string, str2: string) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(arg0: obj, arg1: obj, arg2: obj) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />String.Concat(str0: string, str1: string, str2: string, str3: string) : string<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
-<div class="tip" id="fs33">val nucScoring : (Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide -&gt; int)</div>
-<div class="tip" id="fs34">module ScoringMatrix<br /><br />from BioFSharp.Algorithm</div>
-<div class="tip" id="fs35">val getScoringMatrixNucleotide : scoringMatrixType:ScoringMatrix.ScoringMatrixNucleotide -&gt; (Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide -&gt; int)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.getScoringMatrixNucleotide</div>
-<div class="tip" id="fs36">type ScoringMatrixNucleotide =<br />&#160;&#160;| EDNA<br />&#160;&#160;| Default<br />&#160;&#160;static member toFileName : (ScoringMatrixNucleotide -&gt; string)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.ScoringMatrixNucleotide</div>
-<div class="tip" id="fs37">union case ScoringMatrix.ScoringMatrixNucleotide.EDNA: ScoringMatrix.ScoringMatrixNucleotide</div>
-<div class="tip" id="fs38">val nucCosts : Costs&lt;Nucleotides.Nucleotide&gt;</div>
-<div class="tip" id="fs39">val seq1 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;</div>
-<div class="tip" id="fs40">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs41">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioArray.ofNucleotideString</div>
-<div class="tip" id="fs42">val seq2 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;</div>
-<div class="tip" id="fs43">val t : Diagnostics.Stopwatch</div>
-<div class="tip" id="fs44">namespace System.Diagnostics</div>
-<div class="tip" id="fs45">Multiple items<br />type Stopwatch =<br />&#160;&#160;new : unit -&gt; Stopwatch<br />&#160;&#160;member Elapsed : TimeSpan<br />&#160;&#160;member ElapsedMilliseconds : int64<br />&#160;&#160;member ElapsedTicks : int64<br />&#160;&#160;member IsRunning : bool<br />&#160;&#160;member Reset : unit -&gt; unit<br />&#160;&#160;member Restart : unit -&gt; unit<br />&#160;&#160;member Start : unit -&gt; unit<br />&#160;&#160;member Stop : unit -&gt; unit<br />&#160;&#160;static val Frequency : int64<br />&#160;&#160;...<br /><br />Full name: System.Diagnostics.Stopwatch<br /><br />--------------------<br />Diagnostics.Stopwatch() : unit</div>
-<div class="tip" id="fs46">Diagnostics.Stopwatch.StartNew() : Diagnostics.Stopwatch</div>
-<div class="tip" id="fs47">val sequentialAlignment : Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;</div>
-<div class="tip" id="fs48">Multiple items<br />module PairwiseAlignment<br /><br />from BioFSharp.Parallel<br /><br />--------------------<br />module PairwiseAlignment<br /><br />from BioFSharp.Algorithm</div>
-<div class="tip" id="fs49">Multiple items<br />module SmithWaterman<br /><br />from BioFSharp.Parallel.PairwiseAlignment<br /><br />--------------------<br />module SmithWaterman<br /><br />from BioFSharp.Algorithm.PairwiseAlignment</div>
-<div class="tip" id="fs50">val runNucleotide : costs:Costs&lt;Nucleotides.Nucleotide&gt; -&gt; fstSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; sndSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; Alignment.Alignment&lt;Nucleotides.Nucleotide list,Score&gt;<br /><br />Full name: BioFSharp.Algorithm.PairwiseAlignment.SmithWaterman.runNucleotide</div>
-<div class="tip" id="fs51">Diagnostics.Stopwatch.Stop() : unit</div>
-<div class="tip" id="fs52">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
-<div class="tip" id="fs53">property Diagnostics.Stopwatch.Elapsed: TimeSpan</div>
-<div class="tip" id="fs54">Alignment.Alignment.AlignedSequences: Nucleotides.Nucleotide list list</div>
-<div class="tip" id="fs55">val executeParallel : seq1:string -&gt; seq2:string -&gt; String * String<br /><br />Full name: ParallelAlignment.executeParallel</div>
-<div class="tip" id="fs56">val seq1 : string</div>
-<div class="tip" id="fs57">val seq2 : string</div>
-<div class="tip" id="fs58">val parallelAlignment : String * String</div>
-<div class="tip" id="fs59">val run : fstSeq:string -&gt; sndSeq:string -&gt; String * String<br /><br />Full name: BioFSharp.Parallel.PairwiseAlignment.SmithWaterman.run</div>
-<div class="tip" id="fs60">val seq1 : String<br /><br />Full name: ParallelAlignment.seq1</div>
-<div class="tip" id="fs61">val seq2 : String<br /><br />Full name: ParallelAlignment.seq2</div>
-<div class="tip" id="fs62">val parallelAlignment : String * String<br /><br />Full name: ParallelAlignment.parallelAlignment</div>
-<div class="tip" id="fs63">val sequentialAlignment : string * string<br /><br />Full name: ParallelAlignment.sequentialAlignment</div>
+<div class="tip" id="fs18">val seq1 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: ParallelAlignment.seq1</div>
+<div class="tip" id="fs19">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs20">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: BioFSharp.BioArray.ofNucleotideString</div>
+<div class="tip" id="fs21">val seq2 : BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;<br /><br />Full name: ParallelAlignment.seq2</div>
+<div class="tip" id="fs22">val nucCostsPrimitive : PairwiseAlignment.Costs<br /><br />Full name: ParallelAlignment.nucCostsPrimitive</div>
+<div class="tip" id="fs23">module PairwiseAlignment<br /><br />from BioFSharp.Parallel</div>
+<div class="tip" id="fs24">Multiple items<br />type Costs =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;new : openCost:int * continuationCost:int * scoringMatrix:int [] [] -&gt; Costs<br />&#160;&#160;&#160;&#160;val Open: int<br />&#160;&#160;&#160;&#160;val Continuation: int<br />&#160;&#160;&#160;&#160;val ScoringMatrix: int [] []<br />&#160;&#160;end<br /><br />Full name: BioFSharp.Parallel.PairwiseAlignment.Costs<br /><br />--------------------<br />PairwiseAlignment.Costs()<br />new : openCost:int * continuationCost:int * scoringMatrix:int [] [] -&gt; PairwiseAlignment.Costs</div>
+<div class="tip" id="fs25">module ScoringMatrix<br /><br />from BioFSharp.Algorithm</div>
+<div class="tip" id="fs26">val getPrimitiveScoringMatrixNucleotide : scoringMatrixType:ScoringMatrix.ScoringMatrixNucleotide -&gt; int [] []<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.getPrimitiveScoringMatrixNucleotide</div>
+<div class="tip" id="fs27">type ScoringMatrixNucleotide =<br />&#160;&#160;| EDNA<br />&#160;&#160;| Default<br />&#160;&#160;static member toFileName : (ScoringMatrixNucleotide -&gt; string)<br /><br />Full name: BioFSharp.Algorithm.ScoringMatrix.ScoringMatrixNucleotide</div>
+<div class="tip" id="fs28">union case ScoringMatrix.ScoringMatrixNucleotide.EDNA: ScoringMatrix.ScoringMatrixNucleotide</div>
+<div class="tip" id="fs29">val alignmentSW : Alignment.Alignment&lt;Nucleotides.Nucleotide list,int&gt;<br /><br />Full name: ParallelAlignment.alignmentSW</div>
+<div class="tip" id="fs30">module SmithWaterman<br /><br />from BioFSharp.Parallel.PairwiseAlignment</div>
+<div class="tip" id="fs31">val run : costs:PairwiseAlignment.Costs -&gt; fstSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; sndSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; Alignment.Alignment&lt;Nucleotides.Nucleotide list,int&gt;<br /><br />Full name: BioFSharp.Parallel.PairwiseAlignment.SmithWaterman.run</div>
+<div class="tip" id="fs32">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+<div class="tip" id="fs33">val alignmentNM : Alignment.Alignment&lt;Nucleotides.Nucleotide list,int&gt;<br /><br />Full name: ParallelAlignment.alignmentNM</div>
+<div class="tip" id="fs34">module NeedlemanWunsch<br /><br />from BioFSharp.Parallel.PairwiseAlignment</div>
+<div class="tip" id="fs35">val run : costs:PairwiseAlignment.Costs -&gt; fstSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; sndSeq:BioArray.BioArray&lt;Nucleotides.Nucleotide&gt; -&gt; Alignment.Alignment&lt;Nucleotides.Nucleotide list,int&gt;<br /><br />Full name: BioFSharp.Parallel.PairwiseAlignment.NeedlemanWunsch.run</div>
 
         </div>
         <div class="span3" >
