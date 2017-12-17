@@ -2,6 +2,7 @@
 open System
 open FSharp.Care.Collections
 open BioFSharp.BioArray
+open BioFSharp.Alignment
 open BioFSharp.Algorithm.PairwiseAlignment
 open BioFSharp.Algorithm.ScoringMatrix
 open Microsoft.FSharp.Quotations
@@ -23,13 +24,17 @@ open Alea.FSharp
     let stringToInts (string:String) =
         string |> explode |> charsToInts
 
-    /// Integer array to character array. Note how -1s are converted to hyphens.
-    let intsToChars (ints:int[]) =
-        Array.map (fun x -> if x = -1 then '-' else char x) ints
+    /// Converts a primitive sequence (an integer array) to a string. Note how -1s are converted to hyphens.
+    let primitiveSequenceToString (primitiveSequence:int[]) =
+        (Array.map (fun x -> if x = -1 then '-' else char x) primitiveSequence) |> String
 
     /// Packages an alignment into standard form.
-    let packageAlignment (alignment) =
-        (fst alignment |> List.toArray |> intsToChars |> String, snd alignment |> List.toArray |> intsToChars |> String)
+    let packageAlignment (score) (alignment) =
+        {
+            AlignedSequences = [(fst alignment) |> primitiveSequenceToString |> BioArray.ofNucleotideString |> Array.toList;
+                                (snd alignment) |> primitiveSequenceToString |> BioArray.ofNucleotideString |> Array.toList];
+            MetaData = score
+        }
 
 module PairwiseAlignment =
     /// Primitive version of TraceScore.
@@ -74,7 +79,8 @@ module PairwiseAlignment =
             |2uy -> recursiveTraceBack (i)   (j-1) (-1::acc1)           (sndSeq.[j-1]::acc2)
             |3uy -> recursiveTraceBack (i-1) (j)   (fstSeq.[i-1]::acc1) (-1::acc2)
 
-        recursiveTraceBack i j List.Empty List.Empty
+        let alignment = recursiveTraceBack i j List.Empty List.Empty
+        (fst alignment |> List.toArray, snd alignment |> List.toArray)
 
     /// Calculates a new best cell based on the three previous adjacent cells, the current sequence characters, and the costs.
     [<ReflectedDefinition>]
@@ -199,7 +205,7 @@ module PairwiseAlignment =
         let matrix = partialCreateCellMatrix costs fstSeq sndSeq 
         let i, j = index matrix
         let alignment = traceBack fstSeq sndSeq i j matrix
-        alignment |> Conversion.packageAlignment
+        Conversion.packageAlignment (matrix.[fstSeq.Length, sndSeq.Length].M.Value) (alignment) 
 
     module NeedlemanWunsch =
         let run (costs:Costs) (fstSeq:BioArray<Nucleotide>) (sndSeq:BioArray<Nucleotide>) =

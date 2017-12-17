@@ -19,9 +19,6 @@ let randomSequence length =
 let seq1 = randomSequence 2500 |> BioArray.ofNucleotideString
 let seq2 = randomSequence 1750 |> BioArray.ofNucleotideString
 
-let nucConversion (nucs:Nucleotides.Nucleotide list) =
-    nucs |> List.map (fun element -> if string element = "Gap" then "-" else string element) |> String.Concat
-
 let nucCosts =
     {
         Open = -5
@@ -37,7 +34,6 @@ let SW () =
 
     let t = System.Diagnostics.Stopwatch.StartNew()
     let sequentialAlignment = PairwiseAlignment.SmithWaterman.runNucleotide nucCosts seq1 seq2
-    let sequentialAlignment = (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
     t.Stop()
     printfn "execution time of sequential: %A" t.Elapsed
     
@@ -55,7 +51,6 @@ let NW () =
 
     let t = System.Diagnostics.Stopwatch.StartNew()
     let sequentialAlignment = PairwiseAlignment.NeedlemanWunsch.runNucleotide nucCosts seq1 seq2
-    let sequentialAlignment = (sequentialAlignment.AlignedSequences.[0] |> nucConversion, sequentialAlignment.AlignedSequences.[1] |> nucConversion)
     t.Stop()
     printfn "execution time of sequential: %A" t.Elapsed
     
