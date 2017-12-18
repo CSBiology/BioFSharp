@@ -88,4 +88,3 @@ module IsoelectricPoint =
                         AminoSymbolSetNegCharged
                 posChargeState - negChargeState
             tryFindRoot f accuracy 0. 14. 50
-            |> Option.map (fun pH -> pH, f pH)
