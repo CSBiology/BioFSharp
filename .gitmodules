@@ -1,0 +1,6 @@
+[submodule "FSharp.Stats"]
+	path = FSharp.Stats
+	url = https://github.com/CSBiology/FSharp.Stats
+[submodule "FSharp.Care"]
+	path = FSharp.Care
+	url = https://github.com/CSBiology/FSharp.Care
