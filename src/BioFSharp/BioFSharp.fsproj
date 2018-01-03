@@ -82,6 +82,7 @@
     <Compile Include="Digestion.fs" />
     <Compile Include="PhylTree.fs" />
     <Compile Include="Alignment.fs" />
+    <Compile Include="WorkflowLanguage.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />
