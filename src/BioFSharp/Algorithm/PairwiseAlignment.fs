@@ -72,11 +72,7 @@ module PairwiseAlignment =
         HorizontalCost : Cell -> int
         VerticalCost   : Cell -> int
         }
-    
-    ///Evaluates the bigger of two values (x y) after converting them with a function f
-    let private maxBy2 f x y =
-        if f x < f y then y else x
- 
+
     /// Creates an jagged array matrix and fills it with Backtracing Information (Cells)
     let private runGeneric (initArray: Cell[,] -> Cell[,]) (fstSeq : 'a[]) (sndSeq : 'a[]) (opc:OperationCosts<'a>) = 
     
@@ -96,11 +92,16 @@ module PairwiseAlignment =
             for j in 1..len2 do            
                 let m' = opc.DiagonalCost   array.[i-1,j-1] fstSeq.[i-1] sndSeq.[j-1] |> Diagonal
                 let x' = opc.HorizontalCost array.[i,j-1] |> Horizontal
-                let y' = opc.VerticalCost   array.[i-1,j] |> Vertical            
-            
-                let currentTrace = 
-                    createCell (maxBy2 getTraceScoreValue y' m'|> maxBy2 getTraceScoreValue x')
-                            x' y'
+                let y' = opc.VerticalCost   array.[i-1,j] |> Vertical
+                //TODO: Check performance with maxBy2 as an inline function
+                /////Evaluates the bigger of two values (x y) after converting them with a function f
+                //let inline maxBy2 f x y =
+                //    if f x < f y then y else x
+                //let currentTrace = 
+                //     createCell (maxBy2 getTraceScoreValue y' m'|> maxBy2 getTraceScoreValue x')
+                //            x' y'
+                let best = List.maxBy (fun trace -> getTraceScoreValue trace) [m'; x'; y']
+                let currentTrace = createCell best x' y'
             
                 array.[i,j] <- currentTrace   
         //The finished array/matrix gets returned

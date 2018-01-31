@@ -52,15 +52,16 @@
   <ItemGroup>
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
+    <Compile Include="Clustal.fs" />
     <Compile Include="FastA.fs" />
+    <Compile Include="FastQ.fs" />
+    <Compile Include="GenBank.fs" />
+    <Compile Include="GFF3.fs" />
     <Compile Include="Mgf.fs" />
+    <Compile Include="Newick.fs" />
     <Compile Include="Obo.fs" />
     <Compile Include="OrthoMCL.fs" />
-    <Compile Include="FastQ.fs" />
-    <Compile Include="GFF3Parser.fs" />
-    <Compile Include="Newick.fs" />
-    <Compile Include="Clustal.fs" />
-    <Compile Include="GenBank.fs" />
+    <Compile Include="ClustalOWrapper.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

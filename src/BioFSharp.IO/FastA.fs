@@ -57,7 +57,7 @@ module FastA =
         |> fromFileEnumerator converter
 
 
-    /// Writes FastaItem to file. Converter determines type of sequence by converting seq<char> -> type
+    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char
     let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
         let toChunks (w:System.IO.StreamWriter) (length:int) (source: seq<'T>) =    
             use ie = source.GetEnumerator()
@@ -88,7 +88,7 @@ module FastA =
                                 toChunks sWriter 80 i.Sequence)   
 
 
-    /// Converts FastaItem to string. Converter determines type of sequence by converting type -> seq<char>
+    /// Converts FastaItem to string. Converter determines type of sequence by converting type -> char
     let toString (toString:'T -> char) (data:seq<FastaItem<#seq<'T>>>) =
         let toChunks (length:int) (source: seq<'T>) (head:string)=    
             let ie = source.GetEnumerator()

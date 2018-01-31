@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp
 
-///Phyologenetic Tree
+///Phyologenetic Tree and functions
 module PhylTree =
     
     ///Recursive type representing a phylogenetic tree

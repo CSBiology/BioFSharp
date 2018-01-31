@@ -9,12 +9,12 @@
 
 (** 
 
-# Newick format
-<a id="SourceCode" href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp.IO/Newick.fs">&lt;/&gt;view source code</a>
-<a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-newick.html" >&#128194;View module documentation</a>
-<a id="Author" href="https://github.com/HLWeil">&#128366;view author of this tutorial</a>
-<br><br>
-
+<table class="HeadAPI">
+<td class="Head"><h1>Newick format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-newick.html" >&#128194;View module documentation</a>
+</td>
+</table>
 The newick format is a simple, strictly symbolised format representing phylogenetic trees. It is the standard tree format used by the Clustal tool.  
 In general, internal nodes (nodes with a least one descendant) are opened with `(` and closed with `)`. The childnodes within those internals are separated by `,`. After every node, there can be, but most not be information about its name and the distance from its parent. Name and distance are separated by `:`. Every full tree has a `;` at its end.  
 These key characters are not allowed to be used within the given names or distances. This restriction allows a wide range of possible trees as can be seen by the following list of example trees:  

@@ -12,8 +12,12 @@ open FSharp.Plotly
 
 
 (**
-FastA format
-================
+<table class="HeadAPI">
+<td class="Head"><h1>FastA format</h1></td>
+<td class="API">
+    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html" >&#128194;View module documentation</a>
+</td>
+</table>
 One of the various biology-associated file formats that can be manipulated using BioFSharp is the FastA format.
 The FastA format can be used to represent sequences of amino acids or nucleotides written in single-letter code.
 <br>
@@ -45,7 +49,7 @@ Analogously it is possible to directly read compressed fastA files:
 *)
 let sequences2 = 
     fileDir + "Chlamy_Cp.gz"
-    |> FastA.fromFile BioArray.ofAminoAcidString
+    |> FastA.fromGzipFile BioArray.ofAminoAcidString
 
 (**
 

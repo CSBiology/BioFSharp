@@ -164,6 +164,7 @@ module Digestion =
             |> Array.ofList
 
     ///Contains frequently needed proteases
+    //TODO: switch to better list system
     module Table = 
         ///Possible inputs: "Trypsin", "Lys-C"
         let getProteaseBy name = 
