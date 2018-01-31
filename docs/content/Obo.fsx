@@ -6,14 +6,25 @@
 #r "../../bin/BioFSharp.IO.dll"
 #r "../../bin/FSharp.Care.dll"
 #r "../../bin/FSharp.Care.IO.dll"
-(** Work in progress *)
+(**
+OBO format is a popular ontology file format. It can express a subset of the description logic language
+OWL-DL 2.0 but in addition has standard syntax for representing important classes of meta-data including
+as synonyms, references to publications and deprecated IDs. It is designed to be human readable and 
+editable.
+
+Reading Obo files
+-------------------
+*)
+
 
 open FSharp.Care.IO
 open BioFSharp.IO
 
-let test = 
-    Seq.fromFile "Psi-MS.txt"
+let fileDir = __SOURCE_DIRECTORY__ + "/data/"  
+
+let psiMs = 
+    Seq.fromFile (fileDir + "Psi-MS.obo")
     |> Obo.parseOboTerms
     |> Seq.toArray
 
-test.[test.Length-1]
+
