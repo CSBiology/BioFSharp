@@ -17,7 +17,5 @@ More indepth explanations, tutorials and general information about the project c
 The documentation and tutorials for this library are automatically generated (using the F# Formatting) from *.fsx and *.md files in the docs folder. If you find a typo, please submit a pull request!
 
 
-Library license
-===============
 
-The library is available under Apache 2.0. For more information see the License file in the GitHub repository.
+

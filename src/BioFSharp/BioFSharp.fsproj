@@ -17,8 +17,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <Tailcalls>false</Tailcalls>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
     <OutputPath>.\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
@@ -83,6 +83,7 @@
     <Compile Include="PhylTree.fs" />
     <Compile Include="Alignment.fs" />
     <Compile Include="WorkflowLanguage.fs" />
+    <Compile Include="PetideClassification.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />
