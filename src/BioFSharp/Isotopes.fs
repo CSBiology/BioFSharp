@@ -24,7 +24,7 @@ module Isotopes =
         let H2   = create "D" 1 2 2.0141017778  0.000115 1.007947
         let H3   = create "T" 1 3 3.0160492777  nan      1.007947
         // Carbon
-        let C12  = create "C" 6 12 12.0000000    0.98938 12.01078
+        let C12  = create "C" 6 12 12.    0.98938 12.01078
         let C13  = create "C" 6 13 13.0033548378 0.01078 12.01078 
         let C14  = create "C" 6 14 14.0032419894 nan     12.01078
         // Nitrogen

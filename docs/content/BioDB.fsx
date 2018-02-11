@@ -24,7 +24,7 @@ UniProt's Proteins REST API online access
 
 (**
 The Proteins REST API provides access to key biological data from UniProt and data from Large Scale Studies data mapped to UniProt. 
-The services provide sequence feature annotations from UniProtKB, variation data from UniProtKB and mapped from Large Scale data sources (1000 Genomes, ExAC and COSMIC), 
+The services provide sequence feature annotations from UniProtKB, variation data from UniProtKB and mapped from Large Scale data sources (1 Genomes, ExAC and COSMIC), 
 proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) and genome coordinate mappings
 
 *)

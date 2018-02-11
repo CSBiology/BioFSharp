@@ -151,6 +151,12 @@ module BioArray =
         compVec    
 
 
+    ///Creates an array with information about the abundacies of the distinct BioItems by converting the symbol of the BioItem to an integer and incrementing the given integer. To decrease the size of the resulting array by still having a fast performance, all indices are shifted by 65. Therefore to call the abundancy of a given BioItem, use "Resultcompositionvector.[(BioItem.symbol bioitem) - 65]"
+    let toRelCompositionVector (input:BioArray<_>)  =
+        toCompositionVector input
+        |> Array.map (fun i -> float i / float input.Length)
+
+
     let initSampleBy (rnd:System.Random) (compositionVector:int[]) =
         if compositionVector.Length < 26 then failwith "Amino acid composition vector must have length 26 "
         let normalize (arr:int[]) =

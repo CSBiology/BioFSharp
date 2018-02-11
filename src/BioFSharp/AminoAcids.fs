@@ -351,6 +351,31 @@ module AminoAcids =
                 AminoAcid.Glu
                 AminoAcid.Cys
                 AminoAcid.Tyr ]
+
+    ///Set of all AminoAcids with polar sidechain
+    let AminoAcidSetPolar =
+            set [
+                AminoAcid.Gln
+                AminoAcid.Asn
+                AminoAcid.His
+                AminoAcid.Ser
+                AminoAcid.Thr
+                AminoAcid.Tyr
+                AminoAcid.Cys
+                AminoAcid.Trp ]
+
+    ///Set of all AminoAcids with hydrophobic sidechain
+    let AminoAcidSetHydrophobic =
+            set [
+                AminoAcid.Ala
+                AminoAcid.Ile
+                AminoAcid.Leu
+                AminoAcid.Met
+                AminoAcid.Phe
+                AminoAcid.Val
+                AminoAcid.Pro
+                AminoAcid.Gly ]
+
  
     /// Returns the name of AminoAcid
     let name (aa:AminoAcid) =
@@ -399,5 +424,12 @@ module AminoAcids =
     /// Returns true, if the AminoAcid has an acidic side chain
     let isNegCharged (aa:AminoAcid) =
         AminoAcidSetNegCharged.Contains aa 
-    
+
+    /// Returns true, if the AminoAcid has a polar side chain
+    let isPolar (aa:AminoAcid) = 
+        AminoAcidSetPolar.Contains aa
+
+    /// Returns true, if the AminoAcid has a hydrophobic side chain
+    let isHydrophobic (aa:AminoAcid) = 
+        AminoAcidSetHydrophobic.Contains aa    
         
