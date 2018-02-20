@@ -2,11 +2,11 @@
 
 open System
 
-open FSharp.Care
-open FSharp.Care.IO
-open FSharp.Care.IO.SchemaReader
-open FSharp.Care.IO.SchemaReader.Csv
-open FSharp.Care.IO.SchemaReader.Attribute
+open FSharpAux
+open FSharpAux.IO
+open FSharpAux.IO.SchemaReader
+open FSharpAux.IO.SchemaReader.Csv
+open FSharpAux.IO.SchemaReader.Attribute
    
 
 module AgilentRaw =

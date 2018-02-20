@@ -4,7 +4,8 @@
 module BioItemsConverter =
     
     
-    open FSharp.Care
+    open FSharpAux
+
     ///Contains Functionalities for trying to parse Bioitems
     module OptionConverter =  
         

@@ -4,7 +4,7 @@
 
 module PetideClassification =
     
-    open FSharp.Care.Collections
+    open FSharpAux
     open System.Collections.Generic
 
     type StrandDirection =

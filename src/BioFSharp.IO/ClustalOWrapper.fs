@@ -3,6 +3,9 @@
 ///Wrapper and its helpers for Clustal Omega multiple alignment tools
 module ClustalOWrapper =
 
+    open BioFSharp.IO
+    open FSharpAux
+
     ///Contains modifier parameter type for Clustal Omega wrapper
     module Parameters = 
     
@@ -222,8 +225,8 @@ module ClustalOWrapper =
             | Limits s -> iterCustom stringOfLimits s
             | Miscallaneous s -> iterCustom stringOfMiscallaneous s
 
-    open Parameters
-    open BioFSharp.IO
+    open Parameters                
+
     ///Specify the type of input and assign file path
     type Input = 
         ///Use this option to make a multiple alignment from a set of sequences. A sequence file must contain more than one sequence (at least two sequences).
@@ -274,7 +277,7 @@ module ClustalOWrapper =
                 if File.Exists r then r
                 else failwith "clustalo file could not be found for given rootPath"
             | None -> 
-                let defaultPath = __SOURCE_DIRECTORY__ |> FSharp.Care.String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
+                let defaultPath = __SOURCE_DIRECTORY__ |> String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
                 printfn "try %s" defaultPath
                 if File.Exists defaultPath then defaultPath
                 else failwith "Default clustalo file could not be found, define rootPath argument."

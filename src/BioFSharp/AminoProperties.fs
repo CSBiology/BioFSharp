@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp
 
-open FSharp.Care.Collections
+open FSharpAux
 
 ///Contains functionalities for obtaining included literary data on key amino acid properties
 module AminoProperties =

@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp
 
-open FSharp.Care
+open FSharpAux
 
 ///Contains the AminoAcid type and its according functions. The AminoAcid type is a complex presentation of amino acids, allowing modifications
 module AminoAcids =

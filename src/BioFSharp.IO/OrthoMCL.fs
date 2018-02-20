@@ -1,17 +1,18 @@
 ﻿namespace BioFSharp.IO
 
 module OrthoMCL =
-    
-    open FSharp.Care.IO
-    open FSharp.Care.IO.SchemaReader
-    open FSharp.Care.IO.SchemaReader.Attribute
+
+    open FSharpAux    
+    open FSharpAux.IO
+    open FSharpAux.IO.SchemaReader
+    open FSharpAux.IO.SchemaReader.Attribute
 
     type EvalueConverter() = 
         inherit ConverterAttribute()
         override this.convertToObj = 
             Converter.Collection(fun (strs : seq<string>) -> 
                 (
-                    FSharp.Care.String.tryParseFloatDefault nan (String.concat "e" strs)
+                    String.tryParseFloatDefault nan (String.concat "e" strs)
                  )
                 |> box)
 

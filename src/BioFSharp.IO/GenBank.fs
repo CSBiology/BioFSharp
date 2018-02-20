@@ -4,13 +4,9 @@
 module GenBank =
       
     open System
-    open FSharp.Care
-    open FSharp.Care.IO
-    open FSharp.Care.Regex
+    open FSharpAux
+    open FSharpAux.IO    
     open System.Collections.Generic
-    open System.Text
-    open FSharp.Care.Collections
-    open FSharp.Care.String
     open BioFSharp
     open BioFSharp.IO
     
@@ -74,12 +70,12 @@ module GenBank =
     let private parseFeatureQualifier (s: string) =
         if s.Contains "=" then
             match s with 
-            |RegexGroups featureRegexPattern qual -> (qual.[0].["qualifierName"].Value),(qual.[0].["qualifierValue"].Value)
-            |_ -> ".","."
+            | Regex.Active.RegexGroups featureRegexPattern qual -> (qual.[0].["qualifierName"].Value),(qual.[0].["qualifierValue"].Value)
+            | _ -> ".","."
         else
             match s with 
-            |RegexGroups featureRegexPattern2 qual -> (qual.[0].["qualifierName"].Value),"."
-            |_ -> ".","."
+            | Regex.Active.RegexGroups featureRegexPattern2 qual -> (qual.[0].["qualifierName"].Value),"."
+            | _ -> ".","."
     
     ///contains prebuilt converters for origin sequences in a gb file for both reading and writing
     module OriginConverters =
@@ -266,8 +262,8 @@ module GenBank =
                                 -> match nextToken with
                                    |Member (k',v')
                                         ->  loop nextSec k' v' ref refList featType featBs featQual qname featQualList feat (origin+v) false
-                                   |_ ->dict.Add("ORIGIN",GenBankItem.Sequence((toCharArray (origin+v)) |> originConverter))
-                            |_  ->  dict.Add("ORIGIN",GenBankItem.Sequence((toCharArray (origin+v)) |> originConverter))
+                                   |_ ->dict.Add("ORIGIN",GenBankItem.Sequence((String.toCharArray (origin+v)) |> originConverter))
+                            |_  ->  dict.Add("ORIGIN",GenBankItem.Sequence((String.toCharArray (origin+v)) |> originConverter))
                     |_ -> ()
             if en.MoveNext() then
                 match (snd en.Current) with
@@ -320,7 +316,7 @@ module GenBank =
                 else List.rev (line::lineList)
         
             let splitSeq = 
-                [|for i=0 to split-1 do yield ' '|] |> fromCharArray
+                [|for i=0 to split-1 do yield ' '|] |> String.fromCharArray
             
             let k' = key.PadLeft(key.Length+ident)
             let k = k'.PadRight(split)
@@ -331,17 +327,17 @@ module GenBank =
             elif not (value.Contains " ") && not (value.Contains ",") then
                 let x = 
                     value 
-                    |> toCharArray
+                    |> String.toCharArray
                     |> Seq.chunkBySize (79-split) 
-                    |> Seq.mapi (fun i x -> if i=0 then k+(fromCharArray x) else splitSeq + (fromCharArray x))
+                    |> Seq.mapi (fun i x -> if i=0 then k+(String.fromCharArray x) else splitSeq + (String.fromCharArray x))
                 x
             else 
                 let words = 
                     value 
-                    |> toCharArray
+                    |> String.toCharArray
                     |> Seq.groupAfter (fun x -> if x = ' ' || x = ',' then true else false)
                     |> Seq.toArray
-                    |> Array.map (fun x -> List.toArray x |> fromCharArray)
+                    |> Array.map (fun x -> List.toArray x |> String.fromCharArray)
                 seq{ yield! loop 0 splitSeq words k []}
         
 
@@ -376,7 +372,7 @@ module GenBank =
                                     originConverter o
                                     |> Seq.chunkBySize 60
                                     |> Seq.map (fun x -> Seq.chunkBySize 10 x)
-                                    |> Seq.map (fun x -> x |> Seq.foldi (fun i acc elem -> if not (i=5) then acc + (fromCharArray elem) + " " else  acc + (fromCharArray elem)) "")
+                                    |> Seq.map (fun x -> x |> Seq.foldi (fun i acc elem -> if not (i=5) then acc + (String.fromCharArray elem) + " " else  acc + (String.fromCharArray elem)) "")
                                     |> Seq.mapi (fun i x -> let k = string ((i*60) + 1)
                                                             let k' = k.PadLeft(9)
                                                             k' + " " + x)

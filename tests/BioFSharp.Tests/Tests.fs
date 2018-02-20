@@ -1,6 +1,5 @@
 module BioFSharp.Tests
 
-open BioFSharp
 open NUnit.Framework
 
 [<Test>]

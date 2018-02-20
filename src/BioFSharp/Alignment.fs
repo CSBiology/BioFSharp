@@ -2,7 +2,7 @@
 
 ///Basic structure and functionality for sequence alignments. Alignment functions can be found in the BioFSharp.Algorithm namespace.
 module Alignment = 
-        open BioID.FastA
+        
         
         ///General Alignment type used throughout BioFSharp
         type Alignment<'Sequence,'Metadata> =                

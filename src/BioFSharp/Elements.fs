@@ -2,8 +2,8 @@
 
 
 //open MathNet.Numerics
-open FSharp.Care
-open FSharp.Care.Math
+open FSharpAux
+open FSharpAux.Math
 open Isotopes
     
 ///Contains chemical elements represented as a mixture of their stable isotopes and functionality for building them

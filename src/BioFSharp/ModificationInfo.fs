@@ -7,7 +7,6 @@
 /// Functionality for creating formula modifications
 module ModificationInfo =
     
-    open FSharp.Care.Collections
     
     /// Specifier for location of modification
     type ModLocation = | Residual = 0 | Cterm = 1 | Nterm = 2 | ProteinCterm = 3 | ProteinNterm = 4 | Isotopic = 5 

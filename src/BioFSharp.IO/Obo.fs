@@ -4,8 +4,8 @@
 /// Module to parse obo files to AdjacencyGraph
 module Obo =
     open System
-    open FSharp.Care
-    open FSharp.Care.IO
+    open FSharpAux
+    open FSharpAux.IO
 
 
     /// obo term record type

@@ -1,7 +1,7 @@
 ﻿namespace BioFSharp
 
 open System.Text.RegularExpressions
-open FSharp.Care
+open FSharpAux
 
 ///Contains functionality for working with molecules as a formula of their elements and formulas of biologically relevant molecules
 module Formula =

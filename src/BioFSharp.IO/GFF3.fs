@@ -3,8 +3,8 @@
 module GFF3 =
 
     open BioFSharp.IO
-    open FSharp.Care.Regex
-    open FSharp.Care.IO
+    open FSharpAux
+    open FSharpAux.IO
     open System.Collections.Generic
     
     ///represents fields of one GFF3 entry line
@@ -43,7 +43,7 @@ module GFF3 =
         ///Regex for separation of key and values
         let tryMatchKeyValues str =
             match str with
-                | RegexGroups @"(?<key>[^=]+)={1}((?<values>[^,]+),?)*" g -> 
+                | Regex.Active.RegexGroups @"(?<key>[^=]+)={1}((?<values>[^,]+),?)*" g -> 
                     let tmp =
                         g |> List.map (fun a -> a.["key"].Value, [for c in a.["values"].Captures -> c.Value]) |> List.head
                     Some tmp

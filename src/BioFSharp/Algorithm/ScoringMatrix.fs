@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp.Algorithm
 
-open FSharp.Care.Collections
+open FSharpAux
 
 ///Contains functions for using the included similarity matrices. These assign a score to every pair of aminoacids/nucleotides and therefore rate the probability of their substitution. The Scoring Matrices are generally used for alignments.
 module ScoringMatrix =

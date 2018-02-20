@@ -3,7 +3,7 @@
 ///This module contains the BioArray type and its according functions. The BioArray type is an array of objects using the IBioItem interface
 module BioArray =
     
-    open FSharp.Care
+    open FSharpAux
     open BioItemsConverter
 
     ///Array of objects using the IBioItem interface

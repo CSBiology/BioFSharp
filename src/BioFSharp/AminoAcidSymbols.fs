@@ -1,6 +1,6 @@
 namespace BioFSharp
 
-open FSharp.Care
+open FSharpAux
 
 ///Contains the AminoAcidSymbol type and its according functions. The AminoAcidSymbol type is a lightweight, efficient presentation of amino acids
 module AminoAcidSymbols =
