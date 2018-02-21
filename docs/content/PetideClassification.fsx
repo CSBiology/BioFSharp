@@ -5,10 +5,11 @@
 open FSharp.Plotly
 
 #I "../../bin"
+#r "netstandard.dll"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
-#r "FSharp.Care.dll"
-#r "FSharp.Care.IO.dll"
+#r "FSharpAux.dll"
+//#r "FSharpAux.IO.dll"
 
 
 (**
@@ -35,6 +36,7 @@ Reading FastA files
 
 open BioFSharp
 open BioFSharp.IO
+open FSharpAux
 
 //let fileDir = __SOURCE_DIRECTORY__ + "/data/"  //FASTAExample1.fasta"
 
@@ -87,3 +89,13 @@ let classified =
     |> Array.map (fun peptide ->  
         let proteinInfo = (ppRelationModel.TryGetByKey peptide).Value
         PetideClassification.classify spliceVariantCount (peptide, (ppRelationModel.TryGetByKey peptide).Value))
+
+
+//let sequence = BioArray.ofAminoAcidString "IDEKTLASLIDEKTLASL"
+//let sequence' = BioArray.ofAminoAcidSymbolString "IDEKTLASL"
+
+//Digestion.BioArray.digest (Digestion.Table.getProteaseBy "Trypsin") 0 sequence
+//|> Digestion.BioArray.concernMissCleavages 0 3
+
+//Digestion.CleavageScore.calculateCleavageScore sequence'
+

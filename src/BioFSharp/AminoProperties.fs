@@ -146,7 +146,7 @@ module AminoProperties =
 
     let private initAminoPropertyLookUp () =
         let assembly = Assembly.GetExecutingAssembly()
-        let resourceName = "AminoAcidProperties.txt"
+        let resourceName = "BioFSharp.Resources.AminoAcidProperties.txt"
         use stream = assembly.GetManifestResourceStream(resourceName)
         use reader = new System.IO.StreamReader(stream)
         

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,5 +31,9 @@
       <HintPath>..\..\lib\FSharpAux\FSharpAux.IO.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y &quot;$(TargetDir)*.dll&quot;  &quot;$(SolutionDir)bin\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)*.xml&quot; &quot;$(SolutionDir)bin\&quot;" />
+  </Target>
 
 </Project>
