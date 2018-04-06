@@ -1,6 +1,6 @@
 namespace BioFSharp
 
-open FSharp.Care
+open FSharpAux
 
 ///Contains the AminoAcidSymbol type and its according functions. The AminoAcidSymbol type is a lightweight, efficient presentation of amino acids
 module AminoAcidSymbols =
@@ -108,45 +108,40 @@ module AminoAcidSymbols =
             //Amino acid formulas minus H20  
             member this.Formula  = 
                 let formula' (aa:AminoAcidSymbol) =
-                    printfn "outer"
                     match aa with                    
-                    | x when x = AminoAcidSymbol.Ala -> 
-                        printfn "Formula.Table.Ala"
-                        Map.empty
-                        //Formula.emptyFormula //Formula.Table.Ala
-                    | _ -> failwithf "Alarm"
-//                    | Field AminoAcidSymbol.Cys -> Formula.Table.Cys
-//                    | Field AminoAcidSymbol.Asp -> Formula.Table.Asp
-//                    | Field AminoAcidSymbol.Glu -> Formula.Table.Glu
-//                    | Field AminoAcidSymbol.Phe -> Formula.Table.Phe
-//                    | Field AminoAcidSymbol.Gly -> Formula.Table.Gly
-//                    | Field AminoAcidSymbol.His -> Formula.Table.His
-//                    | Field AminoAcidSymbol.Ile -> Formula.Table.Ile
-//                    | Field AminoAcidSymbol.Lys -> Formula.Table.Lys
-//                    | Field AminoAcidSymbol.Leu -> Formula.Table.Leu
-//                    | Field AminoAcidSymbol.Met -> Formula.Table.Met
-//                    | Field AminoAcidSymbol.Asn -> Formula.Table.Asn
-//                    | Field AminoAcidSymbol.Pyl -> Formula.Table.Pyl // Pyrrolysine
-//                    | Field AminoAcidSymbol.Pro -> Formula.Table.Pro
-//                    | Field AminoAcidSymbol.Gln -> Formula.Table.Gln
-//                    | Field AminoAcidSymbol.Arg -> Formula.Table.Arg
-//                    | Field AminoAcidSymbol.Ser -> Formula.Table.Ser
-//                    | Field AminoAcidSymbol.Thr -> Formula.Table.Thr
-//                    | Field AminoAcidSymbol.Sel -> Formula.Table.Sel // Selenocysteine
-//                    | Field AminoAcidSymbol.Val -> Formula.Table.Val
-//                    | Field AminoAcidSymbol.Trp -> Formula.Table.Trp
-//                    | Field AminoAcidSymbol.Tyr -> Formula.Table.Tyr
-//                                                                    
-//                    | Field AminoAcidSymbol.Xaa -> Formula.Table.Xaa  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
-//                    | Field AminoAcidSymbol.Xle -> Formula.Table.Xle
-//                    | Field AminoAcidSymbol.Glx -> Formula.Table.Glx
-//                    | Field AminoAcidSymbol.Asx -> Formula.Table.Asx
-//                                               
-//                    | Field AminoAcidSymbol.Gap -> Formula.emptyFormula
-//                    | Field AminoAcidSymbol.Ter -> Formula.emptyFormula
-//                    | _                         -> Formula.emptyFormula
+                    | x when x = AminoAcidSymbol.Ala -> Formula.Table.Ala
+                    | x when x = AminoAcidSymbol.Cys -> Formula.Table.Cys
+                    | x when x = AminoAcidSymbol.Asp -> Formula.Table.Asp
+                    | x when x = AminoAcidSymbol.Glu -> Formula.Table.Glu
+                    | x when x = AminoAcidSymbol.Phe -> Formula.Table.Phe
+                    | x when x = AminoAcidSymbol.Gly -> Formula.Table.Gly
+                    | x when x = AminoAcidSymbol.His -> Formula.Table.His
+                    | x when x = AminoAcidSymbol.Ile -> Formula.Table.Ile
+                    | x when x = AminoAcidSymbol.Lys -> Formula.Table.Lys
+                    | x when x = AminoAcidSymbol.Leu -> Formula.Table.Leu
+                    | x when x = AminoAcidSymbol.Met -> Formula.Table.Met
+                    | x when x = AminoAcidSymbol.Asn -> Formula.Table.Asn
+                    | x when x = AminoAcidSymbol.Pyl -> Formula.Table.Pyl // Pyrrolysine
+                    | x when x = AminoAcidSymbol.Pro -> Formula.Table.Pro
+                    | x when x = AminoAcidSymbol.Gln -> Formula.Table.Gln
+                    | x when x = AminoAcidSymbol.Arg -> Formula.Table.Arg
+                    | x when x = AminoAcidSymbol.Ser -> Formula.Table.Ser
+                    | x when x = AminoAcidSymbol.Thr -> Formula.Table.Thr
+                    | x when x = AminoAcidSymbol.Sel -> Formula.Table.Sel // Selenocysteine
+                    | x when x = AminoAcidSymbol.Val -> Formula.Table.Val
+                    | x when x = AminoAcidSymbol.Trp -> Formula.Table.Trp
+                    | x when x = AminoAcidSymbol.Tyr -> Formula.Table.Tyr
+                                  
+                    | x when x = AminoAcidSymbol.Xaa -> Formula.Table.Xaa  // Averagine Model -> C4.9384 H7.7583 N1.3577 O1.4773 S0.0417
+                    | x when x = AminoAcidSymbol.Xle -> Formula.Table.Xle
+                    | x when x = AminoAcidSymbol.Glx -> Formula.Table.Glx
+                    | x when x = AminoAcidSymbol.Asx -> Formula.Table.Asx
+                                      
+                    | x when x = AminoAcidSymbol.Gap -> Formula.emptyFormula
+                    | x when x = AminoAcidSymbol.Ter -> Formula.emptyFormula
+                    | _                              -> Formula.emptyFormula
 
-                formula' AminoAcidSymbol.Ala 
+                formula' this
 
             /// Returns the name of AminoAcidSymbol as string
             member this.Name =                   
@@ -280,6 +275,30 @@ module AminoAcidSymbols =
             AminoAcidSymbol.Cys
             AminoAcidSymbol.Tyr ]
 
+    ///Set of all AminoAcids with polar sidechain
+    let AminoAcidSetPolar =
+        set [
+            AminoAcidSymbol.Gln
+            AminoAcidSymbol.Asn
+            AminoAcidSymbol.His
+            AminoAcidSymbol.Ser
+            AminoAcidSymbol.Thr
+            AminoAcidSymbol.Tyr
+            AminoAcidSymbol.Cys
+            AminoAcidSymbol.Trp ]
+
+    ///Set of all AminoAcids with hydrophobic sidechain
+    let AminoAcidSetHydrophobic =
+        set [
+            AminoAcidSymbol.Ala
+            AminoAcidSymbol.Ile
+            AminoAcidSymbol.Leu
+            AminoAcidSymbol.Met
+            AminoAcidSymbol.Phe
+            AminoAcidSymbol.Val
+            AminoAcidSymbol.Pro
+            AminoAcidSymbol.Gly ]
+
     /// Returns the name of AminoAcidSymbol
     let name (aa:AminoAcidSymbol) =
         BioItem.name aa
@@ -327,4 +346,12 @@ module AminoAcidSymbols =
     /// Returns true, if the AminoAcidSymbol has an acidic side chain
     let isNegCharged (aa:AminoAcidSymbol) = 
         AminoSymbolSetNegCharged.Contains aa
+
+    /// Returns true, if the AminoAcidSymbol has a polar side chain
+    let isPolar (aa:AminoAcidSymbol) = 
+        AminoAcidSetPolar.Contains aa
+
+    /// Returns true, if the AminoAcidSymbol has a hydrophobic side chain
+    let isHydrophobic (aa:AminoAcidSymbol) = 
+        AminoAcidSetHydrophobic.Contains aa
 

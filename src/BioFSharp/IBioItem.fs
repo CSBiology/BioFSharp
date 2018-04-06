@@ -1,7 +1,7 @@
 ﻿namespace BioFSharp
 
 open System
-open FSharp.Care
+open FSharpAux
 
 ///Marker interface for BioItem base.
 //[<StructuralEquality;StructuralComparison>]

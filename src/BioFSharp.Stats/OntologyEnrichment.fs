@@ -2,8 +2,8 @@
 
 open System
 open System.Collections.Generic
-open FSharp.Care
-open FSharp.Care.Collections
+open FSharpAux
+
 
 module OntologyEnrichment =
 

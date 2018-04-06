@@ -6,8 +6,8 @@
 module Mgf = 
 
     open System
-    open FSharp.Care
-    open FSharp.Care.IO
+    open FSharpAux
+    open FSharpAux.IO
 
     /// Represents 
     type MgfEntry = {   
@@ -42,7 +42,7 @@ module Mgf =
                 int digit
 
         match str with
-            | Regex.RegexGroups @"(?<digit>\d*)(?<sign>[+-])" l -> Some (l |> List.map (fun g -> subParse (g.["digit"].Value,g.["sign"].Value)))
+            | Regex.Active.RegexGroups @"(?<digit>\d*)(?<sign>[+-])" l -> Some (l |> List.map (fun g -> subParse (g.["digit"].Value,g.["sign"].Value)))
             | _ -> None
         
     /// Returns the precursor mass. Returns None if the information can't be optained
@@ -63,7 +63,7 @@ module Mgf =
     /// Returns the retention time and precursor intensity from 'mgf-title' string. Returns None if title does not contain the information
     let tryParseTitle title =
         match title with
-            | Regex.RegexValues @"[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?" [ ret; intens; ] -> Some( float ret, float intens )
+            | Regex.Active.RegexValues @"[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?" [ ret; intens; ] -> Some( float ret, float intens )
             | _ -> None
 
 

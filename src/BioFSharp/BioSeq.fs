@@ -3,7 +3,7 @@
 ///This module contains the BioSeq type and its according functions. The BioSeq type is a sequence of objects using the IBioItem interface
 module BioSeq =
 
-    open FSharp.Care
+    open FSharpAux
     open BioFSharp.BioItemsConverter
 
     ///Sequence of objects using the IBioItem interface

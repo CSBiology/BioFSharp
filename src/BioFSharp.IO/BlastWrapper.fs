@@ -205,9 +205,9 @@ module BlastNCBI =
 
 
     open Parameters
-    open FSharp.Care.IO
-    open FSharp.Care.IO.SchemaReader
-    open FSharp.Care.IO.SchemaReader.Attribute
+    open FSharpAux.IO
+    open FSharpAux.IO.SchemaReader
+    open FSharpAux.IO.SchemaReader.Attribute
 
 
     let ncbiPath = "../../lib/ncbi-blast/bin"

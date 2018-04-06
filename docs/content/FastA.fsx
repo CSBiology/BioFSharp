@@ -42,7 +42,7 @@ let fileDir = __SOURCE_DIRECTORY__ + "/data/"  //FASTAExample1.fasta"
 let sequences = 
     fileDir + "Chlamy_Cp.fastA"
     |> FastA.fromFile BioArray.ofAminoAcidString
-
+    |> Seq.toArray
 
 (** 
 Analogously it is possible to directly read compressed fastA files:
@@ -50,6 +50,7 @@ Analogously it is possible to directly read compressed fastA files:
 let sequences2 = 
     fileDir + "Chlamy_Cp.gz"
     |> FastA.fromGzipFile BioArray.ofAminoAcidString
+    
 
 (**
 

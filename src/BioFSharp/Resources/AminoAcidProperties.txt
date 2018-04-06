@@ -1,14 +1,1097 @@
 Hydrophobicity index (Argos et al., 1982)
 A:0.61 R:0.6 N:0.06 D:0.46 C:1.07 Q:0 E:0.47 G:0.07 H:0.61 I:2.22 L:1.53 K:1.15 M:1.18 F:2.02 P:1.95 S:0.05 T:0.05 W:2.65 Y:1.88 V:1.32
-Normalized frequency of beta-sheet (Crawford et al., 1973)
-A:1 R:0.74 N:0.75 D:0.89 C:0.99 Q:0.87 E:0.37 G:0.56 H:0.36 I:1.75 L:1.53 K:1.18 M:1.4 F:1.26 P:0.36 S:0.65 T:1.15 W:0.84 Y:1.41 V:1.61
-Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
-A:1.1 R:0.95 N:0.8 D:0.65 C:0.95 Q:1 E:1 G:0.6 H:0.85 I:1.1 L:1.25 K:1 M:1.15 F:1.1 P:0.1 S:0.75 T:0.75 W:1.1 Y:1.1 V:0.95
-Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)
-A:-0.04 R:-0.3 N:0.25 D:0.27 C:0.57 Q:-0.02 E:-0.33 G:1.24 H:-0.11 I:-0.26 L:-0.38 K:-0.18 M:-0.09 F:-0.01 P:0 S:0.15 T:0.39 W:0.21 Y:0.05 V:-0.06
-PRIFT index (Cornette et al., 1987)
-A:-0.96 R:0.75 N:-1.94 D:-5.68 C:4.54 Q:-5.3 E:-3.86 G:-1.28 H:-0.62 I:5.54 L:6.81 K:-5.62 M:4.76 F:5.06 P:-4.47 S:-1.92 T:-3.99 W:0.21 Y:3.34 V:5.39
 Hydrophobicity index (Fasman, 1989)
 A:-0.21 R:2.11 N:0.96 D:1.36 C:-6.04 Q:1.52 E:2.3 G:0 H:-1.23 I:-4.81 L:-4.68 K:3.88 M:-3.66 F:-4.65 P:0.75 S:1.74 T:0.78 W:-3.32 Y:-1.01 V:-3.5
+Melting point (Fasman, 1976)
+A:297.00 R:238.00 N:236.00 D:270.00 C:178.00 Q:185.00 E:249.00 G:290.00 H:277.00 I:284.00 L:337.00 K:224.00 M:283.00 F:284.00 P:222.00 S:228.00 T:253.00 W:282.00 Y:344.00 V:293.0
+Optical rotation (Fasman, 1976)
+A:1.80 R:12.50 N:-5.60 D:5.05 C:-16.50 Q:6.30 E:12.00 G:0.00 H:-38.50 I:12.40 L:-11.00 K:14.60 M:-10.00 F:-34.50 P:-86.20 S:-7.50 T:-28.00 W:-33.70 Y:-10.00 V:5.63
+pK-N (Fasman, 1976)
+A:9.69 R:8.99 N:8.80 D:9.60 C:8.35 Q:9.13 E:9.67 G:9.78 H:9.17 I:9.68 L:9.60 K:9.18 M:9.21 F:9.18 P:10.64 S:9.21 T:9.10 W:9.44 Y:9.11 V:9.62
+pK-C (Fasman, 1976)
+A:2.34 R:1.82 N:2.02 D:1.88 C:1.92 Q:2.17 E:2.10 G:2.35 H:1.82 I:2.36 L:2.36 K:2.16 M:2.28 F:2.16 P:1.95 S:2.19 T:2.09 W:2.43 Y:2.20 V:2.32
+Normalized frequency of beta-sheet (Crawford et al., 1973)
+A:1 R:0.74 N:0.75 D:0.89 C:0.99 Q:0.87 E:0.37 G:0.56 H:0.36 I:1.75 L:1.53 K:1.18 M:1.4 F:1.26 P:0.36 S:0.65 T:1.15 W:0.84 Y:1.41 V:1.61
+Normalized frequency of middle helix (Crawford et al., 1973)
+A:1.33 R:0.79 N:0.72 D:0.97 C:0.93 Q:1.42 E:1.66 G:0.58 H:1.49 I:0.99 L:1.29 K:1.03 M:1.40 F:1.15 P:0.49 S:0.83 T:0.94 W:1.33 Y:0.49 V:0.96
+Normalized frequency of turn (Crawford et al., 1973)
+A:0.60 R:0.79 N:1.42 D:1.24 C:1.29 Q:0.92 E:0.64 G:1.38 H:0.95 I:0.67 L:0.70 K:1.10 M:0.67 F:1.05 P:1.47 S:1.26 T:1.05 W:1.23 Y:1.35 V:0.48
+Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
+A:1.1 R:0.95 N:0.8 D:0.65 C:0.95 Q:1 E:1 G:0.6 H:0.85 I:1.1 L:1.25 K:1 M:1.15 F:1.1 P:0.1 S:0.75 T:0.75 W:1.1 Y:1.1 V:0.95
+Beta-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
+A:1.0 R:0.7 N:0.6 D:0.5 C:1.90 Q:1.00 E:0.70 G:0.30 H:0.80 I:4.00 L:2.00 K:0.70 M:1.90 F:3.10 P:0.20 S:0.90 T:1.70 W:2.20 Y:2.80 V:4.0
+Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)
+A:-0.04 R:-0.3 N:0.25 D:0.27 C:0.57 Q:-0.02 E:-0.33 G:1.24 H:-0.11 I:-0.26 L:-0.38 K:-0.18 M:-0.09 F:-0.01 P:0 S:0.15 T:0.39 W:0.21 Y:0.05 V:-0.06
+Beta-sheet propensity derived from designed sequences (Koehl-Levitt, 1999)
+A:-0.12 R:0.34 N:1.05 D:1.12 C:-0.63 Q:1.67 E:0.91 G:0.76 H:1.34 I:-0.77 L:0.15 K:0.29 M:-0.71 F:-0.67 P:0.00 S:1.45 T:-0.70 W:-0.14 Y:-0.49 V:-0.7
+PRIFT index (Cornette et al., 1987)
+A:-0.96 R:0.75 N:-1.94 D:-5.68 C:4.54 Q:-5.3 E:-3.86 G:-1.28 H:-0.62 I:5.54 L:6.81 K:-5.62 M:4.76 F:5.06 P:-4.47 S:-1.92 T:-3.99 W:0.21 Y:3.34 V:5.39
 pKr (Christen, Jaussi, Benoit 2016)
 A:0.0 R:12. N:0.0 D:3.95 C:9.25 Q:0.0 E:4.4 G:0.0 H:6.5 I:0.0 L:0.0 K:10.75 M:0.0 F:0.0 P:0.0 S:0.0 T:0.0 W:0.0 Y:10.15 V:0.0
+NNEIG index (Cornette et al., 1987)
+A:50.76 R:48.66 N:45.80 D:43.17 C:58.74 Q:46.09 E:43.48 G:50.27 H:49.33 I:57.30 L:53.89 K:42.92 M:52.75 F:53.45 P:45.39 S:47.24 T:49.26 W:53.59 Y:51.79 V:56.12
+SWEIG index (Cornette et al., 1987)
+A:-0.414 R:-0.584 N:-0.916 D:-1.31 C:0.162 Q:-0.905 E:-1.218 G:-0.684 H:-0.63 I:1.237 L:1.215 K:-0.67 M:1.02 F:1.938 P:-0.503 S:-0.563 T:-0.289 W:0.514 Y:1.699 V:0.899
+PRIFT index (Cornette et al., 1987)
+A:-0.96 R:0.75 N:-1.94 D:-5.68 C:4.54 Q:-5.30 E:-3.86 G:-1.28 H:-0.62 I:5.54 L:6.81 K:-5.62 M:4.76 F:5.06 P:-4.47 S:-1.92 T:-3.99 W:0.21 Y:3.34 V:5.39
+PRILS index (Cornette et al., 1987)
+A:-0.26 R:0.08 N:-0.46 D:-1.30 C:0.83 Q:-0.83 E:-0.73 G:-0.40 H:-0.18 I:1.10 L:1.52 K:-1.01 M:1.09 F:1.09 P:-0.62 S:-0.55 T:-0.71 W:-0.13 Y:0.69 V:1.15
+ALTFT index (Cornette et al., 1987)
+A:-0.73 R:-1.03 N:-5.29 D:-6.13 C:0.64 Q:-0.96 E:-2.90 G:-2.67 H:3.03 I:5.04 L:4.91 K:-5.99 M:3.34 F:5.20 P:-4.32 S:-3.00 T:-1.91 W:0.51 Y:2.87 V:3.98
+ALTLS index (Cornette et al., 1987)
+A:-1.35 R:-3.89 N:-10.96 D:-11.88 C:4.37 Q:-1.34 E:-4.56 G:-5.82 H:6.54 I:10.93 L:9.88 K:-11.92 M:7.47 F:11.35 P:-10.86 S:-6.21 T:-4.83 W:1.80 Y:7.61 V:8.2
+TOTFT index (Cornette et al., 1987)
+A:-0.56 R:-0.26 N:-2.87 D:-4.31 C:1.78 Q:-2.31 E:-2.35 G:-1.35 H:0.81 I:3.83 L:4.09 K:-4.08 M:3.11 F:3.67 P:-3.22 S:-1.85 T:-1.97 W:-0.11 Y:2.17 V:3.31
+TOTLS index (Cornette et al., 1987)
+A:1.37 R:1.33 N:6.29 D:8.93 C:-4.47 Q:3.88 E:4.04 G:3.39 H:-1.65 I:-7.92 L:-8.68 K:7.70 M:-7.13 F:-7.96 P:6.25 S:4.08 T:4.02 W:0.79 Y:-4.73 V:-6.94
+## for peptide flyer prediciton
+Activation Gibbs energy of unfolding, pH9.0 (Yutani et al., 1987)
+A:18.56 R:0.00 N:18.24 D:17.94 C:17.84 Q:18.51 E:17.97 G:18.57 H:18.64 I:19.21 L:19.01 K:18.36 M:18.49 F:17.95 P:18.77 S:18.06 T:17.71 W:16.87 Y:18.23 V:18.98
+AA composition of MEM of single-spanning proteins (Nakashima-Nishikawa, 1992)
+A:9.90 R:0.09 N:0.94 D:0.35 C:2.55 Q:0.87 E:0.08 G:8.14 H:0.20 I:15.25 L:22.28 K:0.16 M:1.85 F:6.47 P:2.38 S:4.17 T:4.33 W:2.21 Y:3.42 V:14.34
+Principal component I (Sneath, 1966)
+A:0.239 R:0.211 N:0.249 D:0.171 C:0.22 Q:0.26 E:0.187 G:0.16 H:0.205 I:0.273 L:0.281 K:0.228 M:0.253 F:0.234 P:0.165 S:0.236 T:0.213 W:0.183 Y:0.193 V:0.255
+Principal component II (Sneath, 1966)
+A:0.33 R:-0.176 N:-0.233 D:-0.371 C:0.074 Q:-0.254 E:-0.409 G:0.37 H:-0.078 I:0.149 L:0.129 K:-0.075 M:-0.092 F:-0.011 P:0.37 S:0.022 T:0.136 W:-0.011 Y:-0.138 V:0.245
+Principal component III (Sneath, 1966)
+A:-0.11 R:0.079 N:-0.136 D:-0.285 C:-0.184 Q:-0.067 E:-0.246 G:-0.073 H:0.32 I:0.001 L:-0.008 K:0.049 M:-0.041 F:0.438 P:-0.016 S:-0.153 T:-0.208 W:0.493 Y:0.381 V:-0.155
+Principal component IV (Sneath, 1966)
+A:-0.062 R:-0.167 N:0.166 D:-0.079 C:0.38 Q:-0.025 E:-0.184 G:-0.017 H:0.056 I:-0.309 L:-0.264 K:-0.371 M:0.077 F:0.074 P:-0.036 S:0.47 T:0.348 W:0.05 Y:0.22 V:-0.212
+Hydration potential (Wolfenden et al., 1981)
+A:1.94 R:-19.92 N:-9.68 D:-10.95 C:-1.24 Q:-9.38 E:-10.20 G:2.39 H:-10.27 I:2.15 L:2.28 K:-9.52 M:-1.48 F:-0.76 P:-3.68 S:-5.06 T:-4.88 W:-5.88 Y:-6.11 V:1.99
+Hydrophobicity index (Wolfenden et al., 1979)
+A:1.12 R:-2.55 N:-0.83 D:-0.83 C:0.59 Q:-0.78 E:-0.92 G:1.20 H:-0.93 I:1.16 L:1.18 K:-0.80 M:0.55 F:0.67 P:0.54 S:-0.05 T:-0.02 W:-0.19 Y:-0.23 V:1.13
+The Chou-Fasman parameter of the coil conformation (Charton-Charton, 1983)
+A:0.71 R:1.06 N:1.37 D:1.21 C:1.19 Q:0.87 E:0.84 G:1.52 H:1.07 I:0.66 L:0.69 K:0.99 M:0.59 F:0.71 P:1.61 S:1.34 T:1.08 W:0.76 Y:1.07 V:0.63
+Average number of surrounding residues (Ponnuswamy et al., 1980)
+A:6.05 R:5.70 N:5.04 D:4.95 C:7.86 Q:5.45 E:5.10 G:6.16 H:5.80 I:7.51 L:7.37 K:4.88 M:6.39 F:6.62 P:5.65 S:5.53 T:5.81 W:6.98 Y:6.73 V:7.62
+Interior composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:10.98 R:3.26 N:2.85 D:3.37 C:1.47 Q:2.30 E:3.51 G:7.48 H:2.20 I:9.74 L:12.79 K:2.54 M:3.10 F:4.97 P:3.42 S:4.93 T:5.55 W:1.28 Y:3.55 V:10.69
+Weights for alpha-helix at the window position of -3 (Qian-Sejnowski, 1988)
+A:0.29 R:-0.03 N:-0.04 D:0.11 C:-0.05 Q:0.26 E:0.28 G:-0.67 H:-0.26 I:0.00 L:0.47 K:-0.19 M:0.27 F:0.24 P:-0.34 S:-0.17 T:-0.20 W:0.25 Y:-0.30 V:-0.01
+Helix formation parameters (delta delta G) (O'Neil-DeGrado, 1990)
+A:-0.77 R:-0.68 N:-0.07 D:-0.15 C:-0.23 Q:-0.33 E:-0.27 G:0.00 H:-0.06 I:-0.23 L:-0.62 K:-0.65 M:-0.50 F:-0.41 P:3.00 S:-0.35 T:-0.11 W:-0.45 Y:-0.17 V:-0.14
+Free energy in alpha-helical region (Munoz-Serrano, 1994)
+A:0.619 R:0.753 N:1.089 D:0.932 C:1.107 Q:0.77 E:0.675 G:1.361 H:1.034 I:0.876 L:0.74 K:0.784 M:0.736 F:0.968 P:1.78 S:0.969 T:1.053 W:0.91 Y:1.009 V:0.939
+Average relative fractional occurrence in EL(i) (Rackovsky-Scheraga, 1982)
+A:0.78 R:1.75 N:1.32 D:1.25 C:3.14 Q:0.93 E:0.94 G:1.13 H:1.03 I:1.26 L:0.91 K:0.85 M:0.41 F:1.07 P:1.73 S:1.31 T:1.57 W:0.98 Y:1.31 V:1.11
+Composition of amino acids in extracellular proteins (percent) (Cedano et al., 1997)
+A:8.60 R:4.20 N:4.60 D:4.90 C:2.90 Q:4.00 E:5.10 G:7.80 H:2.10 I:4.60 L:8.80 K:6.30 M:2.50 F:3.70 P:4.90 S:7.30 T:6.00 W:1.40 Y:3.60 V:6.7
+###################################
+###################################
+## New nor yet integrated
+Unfolding Gibbs energy in water, pH7.0 (Yutani et al., 1987)
+A:8.50 R:0.00 N:8.20 D:8.50 C:11.00 Q:6.30 E:8.80 G:7.10 H:10.10 I:16.80 L:15.00 K:7.90 M:13.30 F:11.20 P:8.20 S:7.40 T:8.80 W:9.90 Y:8.80 V:12.000000
+Unfolding Gibbs energy in water, pH9.0 (Yutani et al., 1987)
+A:6.80 R:0.00 N:6.20 D:7.00 C:8.30 Q:8.50 E:4.90 G:6.40 H:9.20 I:10.00 L:12.20 K:7.50 M:8.40 F:8.30 P:6.90 S:8.00 T:7.00 W:5.70 Y:6.80 V:9.400000
+Activation Gibbs energy of unfolding, pH7.0 (Yutani et al., 1987)
+A:18.08 R:0.00 N:17.47 D:17.36 C:18.17 Q:17.93 E:18.16 G:18.24 H:18.49 I:18.62 L:18.60 K:17.96 M:18.11 F:17.30 P:18.16 S:17.57 T:17.54 W:17.19 Y:17.99 V:18.300000
+AA composition of total proteins (Nakashima et al., 1990)
+A:7.99 R:5.86 N:4.33 D:5.14 C:1.81 Q:3.98 E:6.10 G:6.91 H:2.17 I:5.48 L:9.16 K:6.01 M:2.50 F:3.83 P:4.95 S:6.84 T:5.77 W:1.34 Y:3.15 V:6.650000
+SD of AA composition of total proteins (Nakashima et al., 1990)
+A:3.73 R:3.34 N:2.33 D:2.23 C:2.30 Q:2.36 E:3.00 G:3.36 H:1.55 I:2.52 L:3.40 K:3.36 M:1.37 F:1.94 P:3.18 S:2.83 T:2.63 W:1.15 Y:1.76 V:2.530000
+AA composition of mt-proteins (Nakashima et al., 1990)
+A:5.74 R:1.92 N:5.25 D:2.11 C:1.03 Q:2.30 E:2.63 G:5.66 H:2.30 I:9.12 L:15.36 K:3.20 M:5.30 F:6.51 P:4.79 S:7.55 T:7.51 W:2.51 Y:4.08 V:5.120000
+Normalized composition of mt-proteins (Nakashima et al., 1990)
+A:-0.60 R:-1.18 N:0.39 D:-1.36 C:-0.34 Q:-0.71 E:-1.16 G:-0.37 H:0.08 I:1.44 L:1.82 K:-0.84 M:2.04 F:1.38 P:-0.05 S:0.25 T:0.66 W:1.02 Y:0.53 V:-0.600000
+AA composition of mt-proteins from animal (Nakashima et al., 1990)
+A:5.88 R:1.54 N:4.38 D:1.70 C:1.11 Q:2.30 E:2.60 G:5.29 H:2.33 I:8.78 L:16.52 K:2.58 M:6.00 F:6.58 P:5.29 S:7.68 T:8.38 W:2.89 Y:3.51 V:4.660000
+Normalized composition from animal (Nakashima et al., 1990)
+A:-0.57 R:-1.29 N:0.02 D:-1.54 C:-0.30 Q:-0.71 E:-1.17 G:-0.48 H:0.10 I:1.31 L:2.16 K:-1.02 M:2.55 F:1.42 P:0.11 S:0.30 T:0.99 W:1.35 Y:0.20 V:-0.790000
+AA composition of mt-proteins from fungi and plant (Nakashima et al., 1990)
+A:5.39 R:2.81 N:7.31 D:3.07 C:0.86 Q:2.31 E:2.70 G:6.52 H:2.23 I:9.94 L:12.64 K:4.67 M:3.68 F:6.34 P:3.62 S:7.24 T:5.44 W:1.64 Y:5.42 V:6.180000
+Normalized composition from fungi and plant (Nakashima et al., 1990)
+A:-0.70 R:-0.91 N:1.28 D:-0.93 C:-0.41 Q:-0.71 E:-1.13 G:-0.12 H:0.04 I:1.77 L:1.02 K:-0.40 M:0.86 F:1.29 P:-0.42 S:0.14 T:-0.13 W:0.26 Y:1.29 V:-0.190000
+AA composition of membrane proteins (Nakashima et al., 1990)
+A:9.25 R:3.96 N:3.71 D:3.89 C:1.07 Q:3.17 E:4.80 G:8.51 H:1.88 I:6.47 L:10.94 K:3.50 M:3.14 F:6.36 P:4.36 S:6.26 T:5.66 W:2.22 Y:3.28 V:7.550000
+Normalized composition of membrane proteins (Nakashima et al., 1990)
+A:0.34 R:-0.57 N:-0.27 D:-0.56 C:-0.32 Q:-0.34 E:-0.43 G:0.48 H:-0.19 I:0.39 L:0.52 K:-0.75 M:0.47 F:1.30 P:-0.19 S:-0.20 T:-0.04 W:0.77 Y:0.07 V:0.360000
+Transmembrane regions of non-mt-proteins (Nakashima et al., 1990)
+A:10.17 R:1.21 N:1.36 D:1.18 C:1.48 Q:1.57 E:1.15 G:8.87 H:1.07 I:10.91 L:16.22 K:1.04 M:4.12 F:9.60 P:2.24 S:5.38 T:5.61 W:2.67 Y:2.68 V:11.440000
+Transmembrane regions of mt-proteins (Nakashima et al., 1990)
+A:6.61 R:0.41 N:1.84 D:0.59 C:0.83 Q:1.20 E:1.63 G:4.88 H:1.14 I:12.91 L:21.66 K:1.15 M:7.17 F:7.76 P:3.51 S:6.84 T:8.89 W:2.11 Y:2.57 V:6.300000
+Ratio of average and computed composition (Nakashima et al., 1990)
+A:1.61 R:0.40 N:0.73 D:0.75 C:0.37 Q:0.61 E:1.50 G:3.12 H:0.46 I:1.61 L:1.37 K:0.62 M:1.59 F:1.24 P:0.67 S:0.68 T:0.92 W:1.63 Y:0.67 V:1.300000
+AA composition of CYT of single-spanning proteins (Nakashima-Nishikawa, 1992)
+A:8.63 R:6.75 N:4.18 D:6.24 C:1.03 Q:4.76 E:7.82 G:6.80 H:2.70 I:3.48 L:8.44 K:6.25 M:2.14 F:2.73 P:6.28 S:8.53 T:4.43 W:0.80 Y:2.54 V:5.440000
+1992) AA composition of CYT2 of single-spanning proteins (Nakashima-Nishikawa,
+A:10.88 R:6.01 N:5.75 D:6.13 C:0.69 Q:4.68 E:9.34 G:7.72 H:2.15 I:1.80 L:8.03 K:6.11 M:3.79 F:2.93 P:7.21 S:7.25 T:3.51 W:0.47 Y:1.01 V:4.570000
+AA composition of EXT of single-spanning proteins (Nakashima-Nishikawa, 1992)
+A:5.15 R:4.38 N:4.81 D:5.75 C:3.24 Q:4.45 E:7.05 G:6.38 H:2.69 I:4.40 L:8.11 K:5.25 M:1.60 F:3.52 P:5.65 S:8.04 T:7.41 W:1.68 Y:3.42 V:7.000000
+AA composition of EXT2 of single-spanning proteins (Nakashima-Nishikawa, 1992)
+A:5.04 R:3.73 N:5.94 D:5.26 C:2.20 Q:4.50 E:6.07 G:7.09 H:2.99 I:4.32 L:9.88 K:6.31 M:1.85 F:3.72 P:6.22 S:8.05 T:5.20 W:2.10 Y:3.32 V:6.190000
+AA composition of CYT of multi-spanning proteins (Nakashima-Nishikawa, 1992)
+A:6.69 R:6.65 N:4.49 D:4.97 C:1.70 Q:5.39 E:7.76 G:6.32 H:2.11 I:4.51 L:8.23 K:8.36 M:2.46 F:3.59 P:5.20 S:7.40 T:5.18 W:1.06 Y:2.75 V:5.270000
+AA composition of EXT of multi-spanning proteins (Nakashima-Nishikawa, 1992)
+A:5.08 R:4.75 N:5.75 D:5.96 C:2.95 Q:4.24 E:6.04 G:8.20 H:2.10 I:4.95 L:8.03 K:4.93 M:2.61 F:4.36 P:4.84 S:6.41 T:5.87 W:2.31 Y:4.55 V:6.070000
+AA composition of MEM of multi-spanning proteins (Nakashima-Nishikawa, 1992)
+A:9.36 R:0.27 N:2.31 D:0.94 C:2.56 Q:1.14 E:0.94 G:6.17 H:0.47 I:13.73 L:16.64 K:0.58 M:3.93 F:10.99 P:1.96 S:5.58 T:4.68 W:2.20 Y:3.13 V:12.430000
+Polarizability parameter (Charton-Charton, 1982)
+A:0.046 R:0.291 N:0.134 D:0.105 C:0.128 Q:0.18 E:0.151 G:0.00 H:0.23 I:0.186 L:0.186 K:0.219 M:0.221 F:0.29 P:0.131 S:0.062 T:0.108 W:0.409 Y:0.298 V:0.140000
+Free energy of solution in water, kcal/mole (Charton-Charton, 1982)
+A:-0.368 R:-1.03 N:0.00 D:2.06 C:4.53 Q:0.731 E:1.77 G:-0.525 H:0.00 I:0.791 L:1.07 K:0.00 M:0.656 F:1.06 P:-2.24 S:-0.524 T:0.00 W:1.60 Y:4.91 V:0.401000
+the Chou-Fasman parameter of beta-sheet (Charton-Charton, 1983) A parameter defined from the residuals obtained from the best correlation of
+A:-0.118 R:0.124 N:0.289 D:0.048 C:0.083 Q:-0.105 E:-0.245 G:0.104 H:0.138 I:0.23 L:-0.052 K:0.032 M:-0.258 F:0.015 P:0.00 S:0.225 T:0.166 W:0.158 Y:0.094 V:0.513000
+The number of atoms in the side chain labelled 1+1 (Charton-Charton, 1983)
+A:0.00 R:1.00 N:1.00 D:1.00 C:1.00 Q:1.00 E:1.00 G:0.00 H:1.00 I:2.00 L:1.00 K:1.00 M:1.00 F:1.00 P:0.00 S:1.00 T:2.00 W:1.00 Y:1.00 V:2.000000
+The number of atoms in the side chain labelled 2+1 (Charton-Charton, 1983)
+A:0.00 R:1.00 N:1.00 D:1.00 C:0.00 Q:1.00 E:1.00 G:0.00 H:1.00 I:1.00 L:2.00 K:1.00 M:1.00 F:1.00 P:0.00 S:0.00 T:0.00 W:1.00 Y:1.00 V:0.000000
+The number of atoms in the side chain labelled 3+1 (Charton-Charton, 1983)
+A:0.00 R:1.00 N:0.00 D:0.00 C:0.00 Q:1.00 E:1.00 G:0.00 H:1.00 I:0.00 L:0.00 K:1.00 M:1.00 F:1.00 P:0.00 S:0.00 T:0.00 W:1.50 Y:1.00 V:0.000000
+The number of bonds in the longest chain (Charton-Charton, 1983)
+A:0.00 R:5.00 N:2.00 D:2.00 C:1.00 Q:3.00 E:3.00 G:0.00 H:3.00 I:2.00 L:2.00 K:4.00 M:3.00 F:4.00 P:0.00 S:1.00 T:1.00 W:5.00 Y:5.00 V:1.000000
+A parameter of charge transfer capability (Charton-Charton, 1983)
+A:0.00 R:0.00 N:1.00 D:1.00 C:0.00 Q:0.00 E:1.00 G:1.00 H:0.00 I:0.00 L:0.00 K:0.00 M:0.00 F:0.00 P:0.00 S:0.00 T:0.00 W:0.00 Y:0.00 V:0.000000
+A parameter of charge transfer donor capability (Charton-Charton, 1983)
+A:0.00 R:1.00 N:1.00 D:0.00 C:1.00 Q:1.00 E:0.00 G:0.00 H:1.00 I:0.00 L:0.00 K:1.00 M:1.00 F:1.00 P:0.00 S:0.00 T:0.00 W:1.00 Y:1.00 V:0.000000
+Average flexibility indices (Bhaskaran-Ponnuswamy, 1988)
+A:0.357 R:0.529 N:0.463 D:0.511 C:0.346 Q:0.493 E:0.497 G:0.544 H:0.323 I:0.462 L:0.365 K:0.466 M:0.295 F:0.314 P:0.509 S:0.507 T:0.444 W:0.305 Y:0.42 V:0.386000
+###################################
+###################################
+## for later
+alpha-CH chemical shifts (Andersen et al., 1992)
+A:4.35 R:4.38 N:4.75 D:4.76 C:4.65 Q:4.37 E:4.29 G:3.97 H:4.63 I:3.95 L:4.17 K:4.36 M:4.52 F:4.66 P:4.44 S:4.50 T:4.35 W:4.70 Y:4.60 V:3.950000
+Signal sequence helical potential (Argos et al., 1982)
+A:1.18 R:0.20 N:0.23 D:0.05 C:1.89 Q:0.72 E:0.11 G:0.49 H:0.31 I:1.45 L:3.23 K:0.06 M:2.67 F:1.96 P:0.76 S:0.97 T:0.84 W:0.77 Y:0.39 V:1.080000
+Membrane-buried preference parameters (Argos et al., 1982)
+A:1.56 R:0.45 N:0.27 D:0.14 C:1.23 Q:0.51 E:0.23 G:0.62 H:0.29 I:1.67 L:2.93 K:0.15 M:2.96 F:2.03 P:0.76 S:0.81 T:0.91 W:1.08 Y:0.68 V:1.140000
+Conformational parameter of inner helix (Beghin-Dirkx, 1975)
+A:1.00 R:0.52 N:0.35 D:0.44 C:0.06 Q:0.44 E:0.73 G:0.35 H:0.60 I:0.73 L:1.00 K:0.60 M:1.00 F:0.60 P:0.06 S:0.35 T:0.44 W:0.73 Y:0.44 V:0.820000
+Conformational parameter of beta-structure (Beghin-Dirkx, 1975)
+A:0.77 R:0.72 N:0.55 D:0.65 C:0.65 Q:0.72 E:0.55 G:0.65 H:0.83 I:0.98 L:0.83 K:0.55 M:0.98 F:0.98 P:0.55 S:0.55 T:0.83 W:0.77 Y:0.83 V:0.980000
+Conformational parameter of beta-turn (Beghin-Dirkx, 1975)
+A:0.37 R:0.84 N:0.97 D:0.97 C:0.84 Q:0.64 E:0.53 G:0.97 H:0.75 I:0.37 L:0.53 K:0.75 M:0.64 F:0.53 P:0.97 S:0.84 T:0.75 W:0.97 Y:0.84 V:0.370000
+Residue volume (Bigelow, 1967)
+A:52.60 R:109.10 N:75.70 D:68.40 C:68.30 Q:89.70 E:84.70 G:36.30 H:91.90 I:102.00 L:102.00 K:105.10 M:97.70 F:113.90 P:73.60 S:54.90 T:71.20 W:135.40 Y:116.20 V:85.100000
+Information value for accessibility; average fraction 35% (Biou et al., 1988)
+A:16.00 R:-70.00 N:-74.00 D:-78.00 C:168.00 Q:-73.00 E:-106.00 G:-13.00 H:50.00 I:151.00 L:145.00 K:-141.00 M:124.00 F:189.00 P:-20.00 S:-70.00 T:-38.00 W:145.00 Y:53.00 V:123.000000
+Information value for accessibility; average fraction 23% (Biou et al., 1988)
+A:44.00 R:-68.00 N:-72.00 D:-91.00 C:90.00 Q:-117.00 E:-139.00 G:-8.00 H:47.00 I:100.00 L:108.00 K:-188.00 M:121.00 F:148.00 P:-36.00 S:-60.00 T:-54.00 W:163.00 Y:22.00 V:117.000000
+Retention coefficient in TFA (Browne et al., 1982)
+A:7.30 R:-3.60 N:-5.70 D:-2.90 C:-9.20 Q:-0.30 E:-7.10 G:-1.20 H:-2.10 I:6.60 L:20.00 K:-3.70 M:5.60 F:19.20 P:5.10 S:-4.10 T:0.80 W:16.30 Y:5.90 V:3.500000
+Retention coefficient in HFBA (Browne et al., 1982)
+A:3.90 R:3.20 N:-2.80 D:-2.80 C:-14.30 Q:1.80 E:-7.50 G:-2.30 H:2.00 I:11.00 L:15.00 K:-2.50 M:4.10 F:14.70 P:5.60 S:-3.50 T:1.10 W:17.80 Y:3.80 V:2.100000
+Transfer free energy to surface (Bull-Breese, 1974)
+A:-0.20 R:-0.12 N:0.08 D:-0.20 C:-0.45 Q:0.16 E:-0.30 G:0.00 H:-0.12 I:-2.26 L:-2.46 K:-0.35 M:-1.47 F:-2.33 P:-0.98 S:-0.39 T:-0.52 W:-2.01 Y:-2.24 V:-1.560000
+Apparent partial specific volume (Bull-Breese, 1974)
+A:0.691 R:0.728 N:0.596 D:0.558 C:0.624 Q:0.649 E:0.632 G:0.592 H:0.646 I:0.809 L:0.842 K:0.767 M:0.709 F:0.756 P:0.73 S:0.594 T:0.655 W:0.743 Y:0.743 V:0.777000
+alpha-NH chemical shifts (Bundi-Wuthrich, 1979)
+A:8.249 R:8.274 N:8.747 D:8.41 C:8.312 Q:8.411 E:8.368 G:8.391 H:8.415 I:8.195 L:8.423 K:8.408 M:8.418 F:8.228 P:0.00 S:8.38 T:8.236 W:8.094 Y:8.183 V:8.436000
+alpha-CH chemical shifts (Bundi-Wuthrich, 1979)
+A:4.349 R:4.396 N:4.755 D:4.765 C:4.686 Q:4.373 E:4.295 G:3.972 H:4.63 I:4.224 L:4.385 K:4.358 M:4.513 F:4.663 P:4.471 S:4.498 T:4.346 W:4.702 Y:4.604 V:4.184000
+Spin-spin coupling constants 3JHalpha-NH (Bundi-Wuthrich, 1979)
+A:6.50 R:6.90 N:7.50 D:7.00 C:7.70 Q:6.00 E:7.00 G:5.60 H:8.00 I:7.00 L:6.50 K:6.50 M:0.00 F:9.40 P:0.00 S:6.50 T:6.90 W:0.00 Y:6.80 V:7.000000
+Normalized frequency of alpha-helix (Burgess et al., 1974)
+A:0.486 R:0.262 N:0.193 D:0.288 C:0.20 Q:0.418 E:0.538 G:0.12 H:0.40 I:0.37 L:0.42 K:0.402 M:0.417 F:0.318 P:0.208 S:0.20 T:0.272 W:0.462 Y:0.161 V:0.379000
+Normalized frequency of extended structure (Burgess et al., 1974)
+A:0.288 R:0.362 N:0.229 D:0.271 C:0.533 Q:0.327 E:0.262 G:0.312 H:0.20 I:0.411 L:0.40 K:0.265 M:0.375 F:0.318 P:0.34 S:0.354 T:0.388 W:0.231 Y:0.429 V:0.495000
+Steric parameter (Charton, 1981)
+A:0.52 R:0.68 N:0.76 D:0.76 C:0.62 Q:0.68 E:0.68 G:0.00 H:0.70 I:1.02 L:0.98 K:0.68 M:0.78 F:0.70 P:0.36 S:0.53 T:0.50 W:0.70 Y:0.70 V:0.760000
+Average volume of buried residue (Chothia, 1975)
+A:91.50 R:202.00 N:135.20 D:124.50 C:117.70 Q:161.10 E:155.10 G:66.40 H:167.30 I:168.80 L:167.90 K:171.30 M:170.80 F:203.40 P:129.30 S:99.10 T:122.10 W:237.60 Y:203.60 V:141.700000
+Residue accessible surface area in tripeptide (Chothia, 1976)
+A:115.00 R:225.00 N:160.00 D:150.00 C:135.00 Q:180.00 E:190.00 G:75.00 H:195.00 I:175.00 L:170.00 K:200.00 M:185.00 F:210.00 P:145.00 S:115.00 T:140.00 W:255.00 Y:230.00 V:155.000000
+Residue accessible surface area in folded protein (Chothia, 1976)
+A:25.00 R:90.00 N:63.00 D:50.00 C:19.00 Q:71.00 E:49.00 G:23.00 H:43.00 I:18.00 L:23.00 K:97.00 M:31.00 F:24.00 P:50.00 S:44.00 T:47.00 W:32.00 Y:60.00 V:18.000000
+Proportion of residues 95% buried (Chothia, 1976)
+A:0.38 R:0.01 N:0.12 D:0.15 C:0.45 Q:0.07 E:0.18 G:0.36 H:0.17 I:0.60 L:0.45 K:0.03 M:0.40 F:0.50 P:0.18 S:0.22 T:0.23 W:0.27 Y:0.15 V:0.540000
+Proportion of residues 100% buried (Chothia, 1976)
+A:0.20 R:0.00 N:0.03 D:0.04 C:0.22 Q:0.01 E:0.03 G:0.18 H:0.02 I:0.19 L:0.16 K:0.00 M:0.11 F:0.14 P:0.04 S:0.08 T:0.08 W:0.04 Y:0.03 V:0.180000
+Normalized frequency of beta-turn (Chou-Fasman, 1978a)
+A:0.66 R:0.95 N:1.56 D:1.46 C:1.19 Q:0.98 E:0.74 G:1.56 H:0.95 I:0.47 L:0.59 K:1.01 M:0.60 F:0.60 P:1.52 S:1.43 T:0.96 W:0.96 Y:1.14 V:0.500000
+Normalized frequency of alpha-helix (Chou-Fasman, 1978b)
+A:1.42 R:0.98 N:0.67 D:1.01 C:0.70 Q:1.11 E:1.51 G:0.57 H:1.00 I:1.08 L:1.21 K:1.16 M:1.45 F:1.13 P:0.57 S:0.77 T:0.83 W:1.08 Y:0.69 V:1.060000
+Normalized frequency of beta-sheet (Chou-Fasman, 1978b)
+A:0.83 R:0.93 N:0.89 D:0.54 C:1.19 Q:1.10 E:0.37 G:0.75 H:0.87 I:1.60 L:1.30 K:0.74 M:1.05 F:1.38 P:0.55 S:0.75 T:1.19 W:1.37 Y:1.47 V:1.700000
+Normalized frequency of beta-turn (Chou-Fasman, 1978b)
+A:0.74 R:1.01 N:1.46 D:1.52 C:0.96 Q:0.96 E:0.95 G:1.56 H:0.95 I:0.47 L:0.50 K:1.19 M:0.60 F:0.66 P:1.56 S:1.43 T:0.98 W:0.60 Y:1.14 V:0.590000
+Normalized frequency of N-terminal helix (Chou-Fasman, 1978b)
+A:1.29 R:0.44 N:0.81 D:2.02 C:0.66 Q:1.22 E:2.44 G:0.76 H:0.73 I:0.67 L:0.58 K:0.66 M:0.71 F:0.61 P:2.01 S:0.74 T:1.08 W:1.47 Y:0.68 V:0.610000
+Normalized frequency of C-terminal helix (Chou-Fasman, 1978b)
+A:1.20 R:1.25 N:0.59 D:0.61 C:1.11 Q:1.22 E:1.24 G:0.42 H:1.77 I:0.98 L:1.13 K:1.83 M:1.57 F:1.10 P:0.00 S:0.96 T:0.75 W:0.40 Y:0.73 V:1.250000
+Normalized frequency of N-terminal non helical region (Chou-Fasman, 1978b)
+A:0.70 R:0.34 N:1.42 D:0.98 C:0.65 Q:0.75 E:1.04 G:1.41 H:1.22 I:0.78 L:0.85 K:1.01 M:0.83 F:0.93 P:1.10 S:1.55 T:1.09 W:0.62 Y:0.99 V:0.750000
+Normalized frequency of C-terminal non helical region (Chou-Fasman, 1978b)
+A:0.52 R:1.24 N:1.64 D:1.06 C:0.94 Q:0.70 E:0.59 G:1.64 H:1.86 I:0.87 L:0.84 K:1.49 M:0.52 F:1.04 P:1.58 S:0.93 T:0.86 W:0.16 Y:0.96 V:0.320000
+Normalized frequency of N-terminal beta-sheet (Chou-Fasman, 1978b)
+A:0.86 R:0.90 N:0.66 D:0.38 C:0.87 Q:1.65 E:0.35 G:0.63 H:0.54 I:1.94 L:1.30 K:1.00 M:1.43 F:1.50 P:0.66 S:0.63 T:1.17 W:1.49 Y:1.07 V:1.690000
+Normalized frequency of C-terminal beta-sheet (Chou-Fasman, 1978b)
+A:0.75 R:0.90 N:1.21 D:0.85 C:1.11 Q:0.65 E:0.55 G:0.74 H:0.90 I:1.35 L:1.27 K:0.74 M:0.95 F:1.50 P:0.40 S:0.79 T:0.75 W:1.19 Y:1.96 V:1.790000
+Normalized frequency of N-terminal non beta region (Chou-Fasman, 1978b)
+A:0.67 R:0.89 N:1.86 D:1.39 C:1.34 Q:1.09 E:0.92 G:1.46 H:0.78 I:0.59 L:0.46 K:1.09 M:0.52 F:0.30 P:1.58 S:1.41 T:1.09 W:0.48 Y:1.23 V:0.420000
+Normalized frequency of C-terminal non beta region (Chou-Fasman, 1978b)
+A:0.74 R:1.05 N:1.13 D:1.32 C:0.53 Q:0.77 E:0.85 G:1.68 H:0.96 I:0.53 L:0.59 K:0.82 M:0.85 F:0.44 P:1.69 S:1.49 T:1.16 W:1.59 Y:1.01 V:0.590000
+Frequency of the 1st residue in turn (Chou-Fasman, 1978b)
+A:0.06 R:0.07 N:0.161 D:0.147 C:0.149 Q:0.074 E:0.056 G:0.102 H:0.14 I:0.043 L:0.061 K:0.055 M:0.068 F:0.059 P:0.102 S:0.12 T:0.086 W:0.077 Y:0.082 V:0.062000
+Frequency of the 2nd residue in turn (Chou-Fasman, 1978b)
+A:0.076 R:0.106 N:0.083 D:0.11 C:0.053 Q:0.098 E:0.06 G:0.085 H:0.047 I:0.034 L:0.025 K:0.115 M:0.082 F:0.041 P:0.301 S:0.139 T:0.108 W:0.013 Y:0.065 V:0.048000
+Frequency of the 3rd residue in turn (Chou-Fasman, 1978b)
+A:0.035 R:0.099 N:0.191 D:0.179 C:0.117 Q:0.037 E:0.077 G:0.19 H:0.093 I:0.013 L:0.036 K:0.072 M:0.014 F:0.065 P:0.034 S:0.125 T:0.065 W:0.064 Y:0.114 V:0.028000
+Frequency of the 4th residue in turn (Chou-Fasman, 1978b)
+A:0.058 R:0.085 N:0.091 D:0.081 C:0.128 Q:0.098 E:0.064 G:0.152 H:0.054 I:0.056 L:0.07 K:0.095 M:0.055 F:0.065 P:0.068 S:0.106 T:0.079 W:0.167 Y:0.125 V:0.053000
+Normalized frequency of the 2nd and 3rd residues in turn (Chou-Fasman, 1978b)
+A:0.64 R:1.05 N:1.56 D:1.61 C:0.92 Q:0.84 E:0.80 G:1.63 H:0.77 I:0.29 L:0.36 K:1.13 M:0.51 F:0.62 P:2.04 S:1.52 T:0.98 W:0.48 Y:1.08 V:0.430000
+Normalized hydrophobicity scales for alpha-proteins (Cid et al., 1992)
+A:-0.45 R:-0.24 N:-0.20 D:-1.52 C:0.79 Q:-0.99 E:-0.80 G:-1.00 H:1.07 I:0.76 L:1.29 K:-0.36 M:1.37 F:1.48 P:-0.12 S:-0.98 T:-0.70 W:1.38 Y:1.49 V:1.260000
+Normalized hydrophobicity scales for beta-proteins (Cid et al., 1992)
+A:-0.08 R:-0.09 N:-0.70 D:-0.71 C:0.76 Q:-0.40 E:-1.31 G:-0.84 H:0.43 I:1.39 L:1.24 K:-0.09 M:1.27 F:1.53 P:-0.01 S:-0.93 T:-0.59 W:2.25 Y:1.53 V:1.090000
+Normalized hydrophobicity scales for alpha+beta-proteins (Cid et al., 1992)
+A:0.36 R:-0.52 N:-0.90 D:-1.09 C:0.70 Q:-1.05 E:-0.83 G:-0.82 H:0.16 I:2.17 L:1.18 K:-0.56 M:1.21 F:1.01 P:-0.06 S:-0.60 T:-1.20 W:1.31 Y:1.05 V:1.210000
+Normalized hydrophobicity scales for alpha/beta-proteins (Cid et al., 1992)
+A:0.17 R:-0.70 N:-0.90 D:-1.05 C:1.24 Q:-1.20 E:-1.19 G:-0.57 H:-0.25 I:2.06 L:0.96 K:-0.62 M:0.60 F:1.29 P:-0.21 S:-0.83 T:-0.62 W:1.51 Y:0.66 V:1.210000
+Normalized average hydrophobicity scales (Cid et al., 1992)
+A:0.02 R:-0.42 N:-0.77 D:-1.04 C:0.77 Q:-1.10 E:-1.14 G:-0.80 H:0.26 I:1.81 L:1.14 K:-0.41 M:1.00 F:1.35 P:-0.09 S:-0.97 T:-0.77 W:1.71 Y:1.11 V:1.130000
+Partial specific volume (Cohn-Edsall, 1943)
+A:0.75 R:0.70 N:0.61 D:0.60 C:0.61 Q:0.67 E:0.66 G:0.64 H:0.67 I:0.90 L:0.90 K:0.82 M:0.75 F:0.77 P:0.76 S:0.68 T:0.70 W:0.74 Y:0.71 V:0.860000
+Size (Dawson, 1972)
+A:2.50 R:7.50 N:5.00 D:2.50 C:3.00 Q:6.00 E:5.00 G:0.50 H:6.00 I:5.50 L:5.50 K:7.00 M:6.00 F:6.50 P:5.50 S:3.00 T:5.00 W:7.00 Y:7.00 V:5.000000
+Amino acid composition (Dayhoff et al., 1978a)
+A:8.60 R:4.90 N:4.30 D:5.50 C:2.90 Q:3.90 E:6.00 G:8.40 H:2.00 I:4.50 L:7.40 K:6.60 M:1.70 F:3.60 P:5.20 S:7.00 T:6.10 W:1.30 Y:3.40 V:6.600000
+Relative mutability (Dayhoff et al., 1978b)
+A:100.00 R:65.00 N:134.00 D:106.00 C:20.00 Q:93.00 E:102.00 G:49.00 H:66.00 I:96.00 L:40.00 K:56.00 M:94.00 F:41.00 P:56.00 S:120.00 T:97.00 W:18.00 Y:41.00 V:74.000000
+Membrane preference for cytochrome b: MPH89 (Degli Esposti et al., 1990)
+A:1.56 R:0.59 N:0.51 D:0.23 C:1.80 Q:0.39 E:0.19 G:1.03 H:1.00 I:1.27 L:1.38 K:0.15 M:1.93 F:1.42 P:0.27 S:0.96 T:1.11 W:0.91 Y:1.10 V:1.580000
+Average membrane preference: AMP07 (Degli Esposti et al., 1990)
+A:1.26 R:0.38 N:0.59 D:0.27 C:1.60 Q:0.39 E:0.23 G:1.08 H:1.00 I:1.44 L:1.36 K:0.33 M:1.52 F:1.46 P:0.54 S:0.98 T:1.01 W:1.06 Y:0.89 V:1.330000
+Consensus normalized hydrophobicity scale (Eisenberg, 1984)
+A:0.25 R:-1.76 N:-0.64 D:-0.72 C:0.04 Q:-0.69 E:-0.62 G:0.16 H:-0.40 I:0.73 L:0.53 K:-1.10 M:0.26 F:0.61 P:-0.07 S:-0.26 T:-0.18 W:0.37 Y:0.02 V:0.540000
+Solvation free energy (Eisenberg-McLachlan, 1986)
+A:0.67 R:-2.10 N:-0.60 D:-1.20 C:0.38 Q:-0.22 E:-0.76 G:0.00 H:0.64 I:1.90 L:1.90 K:-0.57 M:2.40 F:2.30 P:1.20 S:0.01 T:0.52 W:2.60 Y:1.60 V:1.500000
+Atom-based hydrophobic moment (Eisenberg-McLachlan, 1986)
+A:0.00 R:10.00 N:1.30 D:1.90 C:0.17 Q:1.90 E:3.00 G:0.00 H:0.99 I:1.20 L:1.00 K:5.70 M:1.90 F:1.10 P:0.18 S:0.73 T:1.50 W:1.60 Y:1.80 V:0.480000
+Direction of hydrophobic moment (Eisenberg-McLachlan, 1986)
+A:0.00 R:-0.96 N:-0.86 D:-0.98 C:0.76 Q:-1.00 E:-0.89 G:0.00 H:-0.75 I:0.99 L:0.89 K:-0.99 M:0.94 F:0.92 P:0.22 S:-0.67 T:0.09 W:0.67 Y:-0.93 V:0.840000
+Hydrophobic parameter pi (Fauchere-Pliska, 1983)
+A:0.31 R:-1.01 N:-0.60 D:-0.77 C:1.54 Q:-0.22 E:-0.64 G:0.00 H:0.13 I:1.80 L:1.70 K:-0.99 M:1.23 F:1.79 P:0.72 S:-0.04 T:0.26 W:2.25 Y:0.96 V:1.220000
+Graph shape index (Fauchere et al., 1988)
+A:1.28 R:2.34 N:1.60 D:1.60 C:1.77 Q:1.56 E:1.56 G:0.00 H:2.99 I:4.19 L:2.59 K:1.89 M:2.35 F:2.94 P:2.67 S:1.31 T:3.03 W:3.21 Y:2.94 V:3.670000
+Smoothed upsilon steric parameter (Fauchere et al., 1988)
+A:0.53 R:0.69 N:0.58 D:0.59 C:0.66 Q:0.71 E:0.72 G:0.00 H:0.64 I:0.96 L:0.92 K:0.78 M:0.77 F:0.71 P:0.00 S:0.55 T:0.63 W:0.84 Y:0.71 V:0.890000
+Normalized van der Waals volume (Fauchere et al., 1988)
+A:1.00 R:6.13 N:2.95 D:2.78 C:2.43 Q:3.95 E:3.78 G:0.00 H:4.66 I:4.00 L:4.00 K:4.77 M:4.43 F:5.89 P:2.72 S:1.60 T:2.60 W:8.08 Y:6.47 V:3.000000
+STERIMOL length of the side chain (Fauchere et al., 1988)
+A:2.87 R:7.82 N:4.58 D:4.74 C:4.47 Q:6.11 E:5.97 G:2.06 H:5.23 I:4.92 L:4.92 K:6.89 M:6.36 F:4.62 P:4.11 S:3.97 T:4.11 W:7.68 Y:4.73 V:4.110000
+STERIMOL minimum width of the side chain (Fauchere et al., 1988)
+A:1.52 R:1.52 N:1.52 D:1.52 C:1.52 Q:1.52 E:1.52 G:1.00 H:1.52 I:1.90 L:1.52 K:1.52 M:1.52 F:1.52 P:1.52 S:1.52 T:1.73 W:1.52 Y:1.52 V:1.900000
+STERIMOL maximum width of the side chain (Fauchere et al., 1988)
+A:2.04 R:6.24 N:4.37 D:3.78 C:3.41 Q:3.53 E:3.31 G:1.00 H:5.66 I:3.49 L:4.45 K:4.87 M:4.80 F:6.02 P:4.31 S:2.70 T:3.17 W:5.90 Y:6.72 V:3.170000
+N.m.r. chemical shift of alpha-carbon (Fauchere et al., 1988)
+A:7.30 R:11.10 N:8.00 D:9.20 C:14.40 Q:10.60 E:11.40 G:0.00 H:10.20 I:16.10 L:10.10 K:10.90 M:10.40 F:13.90 P:17.80 S:13.10 T:16.70 W:13.20 Y:13.90 V:17.200000
+Localized electrical effect (Fauchere et al., 1988)
+A:-0.01 R:0.04 N:0.06 D:0.15 C:0.12 Q:0.05 E:0.07 G:0.00 H:0.08 I:-0.01 L:-0.01 K:0.00 M:0.04 F:0.03 P:0.00 S:0.11 T:0.04 W:0.00 Y:0.03 V:0.010000
+Number of hydrogen bond donors (Fauchere et al., 1988)
+A:0.00 R:4.00 N:2.00 D:1.00 C:0.00 Q:2.00 E:1.00 G:0.00 H:1.00 I:0.00 L:0.00 K:2.00 M:0.00 F:0.00 P:0.00 S:1.00 T:1.00 W:1.00 Y:1.00 V:0.000000
+Number of full nonbonding orbitals (Fauchere et al., 1988)
+A:0.00 R:3.00 N:3.00 D:4.00 C:0.00 Q:3.00 E:4.00 G:0.00 H:1.00 I:0.00 L:0.00 K:1.00 M:0.00 F:0.00 P:0.00 S:2.00 T:2.00 W:0.00 Y:2.00 V:0.000000
+Positive charge (Fauchere et al., 1988)
+A:0.00 R:1.00 N:0.00 D:0.00 C:0.00 Q:0.00 E:0.00 G:0.00 H:1.00 I:0.00 L:0.00 K:1.00 M:0.00 F:0.00 P:0.00 S:0.00 T:0.00 W:0.00 Y:0.00 V:0.000000
+Negative charge (Fauchere et al., 1988)
+A:0.00 R:0.00 N:0.00 D:1.00 C:0.00 Q:0.00 E:1.00 G:0.00 H:0.00 I:0.00 L:0.00 K:0.00 M:0.00 F:0.00 P:0.00 S:0.00 T:0.00 W:0.00 Y:0.00 V:0.000000
+pK-a(RCOOH) (Fauchere et al., 1988)
+A:4.76 R:4.30 N:3.64 D:5.69 C:3.67 Q:4.54 E:5.48 G:3.77 H:2.84 I:4.81 L:4.79 K:4.27 M:4.25 F:4.31 P:0.00 S:3.83 T:3.87 W:4.75 Y:4.30 V:4.860000
+Helix-coil equilibrium constant (Finkelstein-Ptitsyn, 1977)
+A:1.08 R:1.05 N:0.85 D:0.85 C:0.95 Q:0.95 E:1.15 G:0.55 H:1.00 I:1.05 L:1.25 K:1.15 M:1.15 F:1.10 P:0.71 S:0.75 T:0.75 W:1.10 Y:1.10 V:0.950000
+Helix initiation parameter at posision i-1 (Finkelstein et al., 1991)
+A:1.00 R:0.70 N:1.70 D:3.20 C:1.00 Q:1.00 E:1.70 G:1.00 H:1.00 I:0.60 L:1.00 K:0.70 M:1.00 F:1.00 P:1.00 S:1.70 T:1.70 W:1.00 Y:1.00 V:0.600000
+Helix initiation parameter at posision i,i+1,i+2 (Finkelstein et al., 1991)
+A:1.00 R:0.70 N:1.00 D:1.70 C:1.00 Q:1.00 E:1.70 G:1.30 H:1.00 I:1.00 L:1.00 K:0.70 M:1.00 F:1.00 P:13.00 S:1.00 T:1.00 W:1.00 Y:1.00 V:1.000000
+Helix termination parameter at posision j-2,j-1,j (Finkelstein et al., 1991)
+A:1.20 R:1.70 N:1.20 D:0.70 C:1.00 Q:1.00 E:0.70 G:0.80 H:1.20 I:0.80 L:1.00 K:1.70 M:1.00 F:1.00 P:1.00 S:1.50 T:1.00 W:1.00 Y:1.00 V:0.800000
+Helix termination parameter at posision j+1 (Finkelstein et al., 1991)
+A:1.00 R:1.70 N:1.00 D:0.70 C:1.00 Q:1.00 E:0.70 G:1.50 H:1.00 I:1.00 L:1.00 K:1.70 M:1.00 F:1.00 P:0.10 S:1.00 T:1.00 W:1.00 Y:1.00 V:1.000000
+Partition coefficient (Garel et al., 1973)
+A:0.28 R:0.10 N:0.25 D:0.21 C:0.28 Q:0.35 E:0.33 G:0.17 H:0.21 I:0.82 L:1.00 K:0.09 M:0.74 F:2.18 P:0.39 S:0.12 T:0.21 W:5.70 Y:1.26 V:0.600000
+Alpha-helix indices (Geisow-Roberts, 1980)
+A:1.29 R:1.00 N:0.81 D:1.10 C:0.79 Q:1.07 E:1.49 G:0.63 H:1.33 I:1.05 L:1.31 K:1.33 M:1.54 F:1.13 P:0.63 S:0.78 T:0.77 W:1.18 Y:0.71 V:0.810000
+Alpha-helix indices for alpha-proteins (Geisow-Roberts, 1980)
+A:1.13 R:1.09 N:1.06 D:0.94 C:1.32 Q:0.93 E:1.20 G:0.83 H:1.09 I:1.05 L:1.13 K:1.08 M:1.23 F:1.01 P:0.82 S:1.01 T:1.17 W:1.32 Y:0.88 V:1.130000
+Alpha-helix indices for beta-proteins (Geisow-Roberts, 1980)
+A:1.55 R:0.20 N:1.20 D:1.55 C:1.44 Q:1.13 E:1.67 G:0.59 H:1.21 I:1.27 L:1.25 K:1.20 M:1.37 F:0.40 P:0.21 S:1.01 T:0.55 W:1.86 Y:1.08 V:0.640000
+Alpha-helix indices for alpha/beta-proteins (Geisow-Roberts, 1980)
+A:1.19 R:1.00 N:0.94 D:1.07 C:0.95 Q:1.32 E:1.64 G:0.60 H:1.03 I:1.12 L:1.18 K:1.27 M:1.49 F:1.02 P:0.68 S:0.81 T:0.85 W:1.18 Y:0.77 V:0.740000
+Beta-strand indices (Geisow-Roberts, 1980)
+A:0.84 R:1.04 N:0.66 D:0.59 C:1.27 Q:1.02 E:0.57 G:0.94 H:0.81 I:1.29 L:1.10 K:0.86 M:0.88 F:1.15 P:0.80 S:1.05 T:1.20 W:1.15 Y:1.39 V:1.560000
+Beta-strand indices for beta-proteins (Geisow-Roberts, 1980)
+A:0.86 R:1.15 N:0.60 D:0.66 C:0.91 Q:1.11 E:0.37 G:0.86 H:1.07 I:1.17 L:1.28 K:1.01 M:1.15 F:1.34 P:0.61 S:0.91 T:1.14 W:1.13 Y:1.37 V:1.310000
+Beta-strand indices for alpha/beta-proteins (Geisow-Roberts, 1980)
+A:0.91 R:0.99 N:0.72 D:0.74 C:1.12 Q:0.90 E:0.41 G:0.91 H:1.01 I:1.29 L:1.23 K:0.86 M:0.96 F:1.26 P:0.65 S:0.93 T:1.05 W:1.15 Y:1.21 V:1.580000
+Aperiodic indices (Geisow-Roberts, 1980)
+A:0.91 R:1.00 N:1.64 D:1.40 C:0.93 Q:0.94 E:0.97 G:1.51 H:0.90 I:0.65 L:0.59 K:0.82 M:0.58 F:0.72 P:1.66 S:1.23 T:1.04 W:0.67 Y:0.92 V:0.600000
+Aperiodic indices for alpha-proteins (Geisow-Roberts, 1980)
+A:0.80 R:0.96 N:1.10 D:1.60 C:0.00 Q:1.60 E:0.40 G:2.00 H:0.96 I:0.85 L:0.80 K:0.94 M:0.39 F:1.20 P:2.10 S:1.30 T:0.60 W:0.00 Y:1.80 V:0.800000
+Aperiodic indices for beta-proteins (Geisow-Roberts, 1980)
+A:1.10 R:0.93 N:1.57 D:1.41 C:1.05 Q:0.81 E:1.40 G:1.30 H:0.85 I:0.67 L:0.52 K:0.94 M:0.69 F:0.60 P:1.77 S:1.13 T:0.88 W:0.62 Y:0.41 V:0.580000
+Aperiodic indices for alpha/beta-proteins (Geisow-Roberts, 1980)
+A:0.93 R:1.01 N:1.36 D:1.22 C:0.92 Q:0.83 E:1.05 G:1.45 H:0.96 I:0.58 L:0.59 K:0.91 M:0.60 F:0.71 P:1.67 S:1.25 T:1.08 W:0.68 Y:0.98 V:0.620000
+Hydrophobicity factor (Goldsack-Chalifoux, 1973)
+A:0.75 R:0.75 N:0.69 D:0.00 C:1.00 Q:0.59 E:0.00 G:0.00 H:0.00 I:2.95 L:2.40 K:1.50 M:1.30 F:2.65 P:2.60 S:0.00 T:0.45 W:3.00 Y:2.85 V:1.700000
+Residue volume (Goldsack-Chalifoux, 1973)
+A:88.30 R:181.20 N:125.10 D:110.80 C:112.40 Q:148.70 E:140.50 G:60.00 H:152.60 I:168.50 L:168.50 K:175.60 M:162.20 F:189.00 P:122.20 S:88.70 T:118.20 W:227.00 Y:193.00 V:141.400000
+Composition (Grantham, 1974)
+A:0.00 R:0.65 N:1.33 D:1.38 C:2.75 Q:0.89 E:0.92 G:0.74 H:0.58 I:0.00 L:0.00 K:0.33 M:0.00 F:0.00 P:0.39 S:1.42 T:0.71 W:0.13 Y:0.20 V:0.000000
+Polarity (Grantham, 1974)
+A:8.10 R:10.50 N:11.60 D:13.00 C:5.50 Q:10.50 E:12.30 G:9.00 H:10.40 I:5.20 L:4.90 K:11.30 M:5.70 F:5.20 P:8.00 S:9.20 T:8.60 W:5.40 Y:6.20 V:5.900000
+Volume (Grantham, 1974)
+A:31.00 R:124.00 N:56.00 D:54.00 C:55.00 Q:85.00 E:83.00 G:3.00 H:96.00 I:111.00 L:111.00 K:119.00 M:105.00 F:132.00 P:32.50 S:32.00 T:61.00 W:170.00 Y:136.00 V:84.000000
+Partition energy (Guy, 1985)
+A:0.10 R:1.91 N:0.48 D:0.78 C:-1.42 Q:0.95 E:0.83 G:0.33 H:-0.50 I:-1.13 L:-1.18 K:1.40 M:-1.59 F:-2.12 P:0.73 S:0.52 T:0.07 W:-0.51 Y:-0.21 V:-1.270000
+Hydration number (Hopfinger, 1971), Cited by Charton-Charton (1982)
+A:1.00 R:2.30 N:2.20 D:6.50 C:0.10 Q:2.10 E:6.20 G:1.10 H:2.80 I:0.80 L:0.80 K:5.30 M:0.70 F:1.40 P:0.90 S:1.70 T:1.50 W:1.90 Y:2.10 V:0.900000
+Hydrophilicity value (Hopp-Woods, 1981)
+A:-0.50 R:3.00 N:0.20 D:3.00 C:-1.00 Q:0.20 E:3.00 G:0.00 H:-0.50 I:-1.80 L:-1.80 K:3.00 M:-1.30 F:-2.50 P:0.00 S:0.30 T:-0.40 W:-3.40 Y:-2.30 V:-1.500000
+Heat capacity (Hutchens, 1970)
+A:29.22 R:26.37 N:38.30 D:37.09 C:50.70 Q:44.02 E:41.84 G:23.71 H:59.64 I:45.00 L:48.03 K:57.10 M:69.32 F:48.52 P:36.13 S:32.40 T:35.20 W:56.92 Y:51.73 V:40.350000
+Absolute entropy (Hutchens, 1970)
+A:30.88 R:68.43 N:41.70 D:40.66 C:53.83 Q:46.62 E:44.98 G:24.74 H:65.99 I:49.71 L:50.62 K:63.21 M:55.32 F:51.06 P:39.21 S:35.65 T:36.50 W:60.00 Y:51.15 V:42.750000
+Entropy of formation (Hutchens, 1970)
+A:154.33 R:341.01 N:207.90 D:194.91 C:219.79 Q:235.51 E:223.16 G:127.90 H:242.54 I:233.21 L:232.30 K:300.46 M:202.65 F:204.74 P:179.93 S:174.06 T:205.80 W:237.01 Y:229.15 V:207.600000
+Normalized relative frequency of alpha-helix (Isogai et al., 1980)
+A:1.53 R:1.17 N:0.60 D:1.00 C:0.89 Q:1.27 E:1.63 G:0.44 H:1.03 I:1.07 L:1.32 K:1.26 M:1.66 F:1.22 P:0.25 S:0.65 T:0.86 W:1.05 Y:0.70 V:0.930000
+Normalized relative frequency of extended structure (Isogai et al., 1980)
+A:0.86 R:0.98 N:0.74 D:0.69 C:1.39 Q:0.89 E:0.66 G:0.70 H:1.06 I:1.31 L:1.01 K:0.77 M:1.06 F:1.16 P:1.16 S:1.09 T:1.24 W:1.17 Y:1.28 V:1.400000
+Normalized relative frequency of bend (Isogai et al., 1980)
+A:0.78 R:1.06 N:1.56 D:1.50 C:0.60 Q:0.78 E:0.97 G:1.73 H:0.83 I:0.40 L:0.57 K:1.01 M:0.30 F:0.67 P:1.55 S:1.19 T:1.09 W:0.74 Y:1.14 V:0.440000
+Normalized relative frequency of bend R (Isogai et al., 1980)
+A:1.09 R:0.97 N:1.14 D:0.77 C:0.50 Q:0.83 E:0.92 G:1.25 H:0.67 I:0.66 L:0.44 K:1.25 M:0.45 F:0.50 P:2.96 S:1.21 T:1.33 W:0.62 Y:0.94 V:0.560000
+Normalized relative frequency of bend S (Isogai et al., 1980)
+A:0.35 R:0.75 N:2.12 D:2.16 C:0.50 Q:0.73 E:0.65 G:2.40 H:1.19 I:0.12 L:0.58 K:0.83 M:0.22 F:0.89 P:0.43 S:1.24 T:0.85 W:0.62 Y:1.44 V:0.430000
+Normalized relative frequency of helix end (Isogai et al., 1980)
+A:1.09 R:1.07 N:0.88 D:1.24 C:1.04 Q:1.09 E:1.14 G:0.27 H:1.07 I:0.97 L:1.30 K:1.20 M:0.55 F:0.80 P:1.78 S:1.20 T:0.99 W:1.03 Y:0.69 V:0.770000
+Normalized relative frequency of double bend (Isogai et al., 1980)
+A:1.34 R:2.78 N:0.92 D:1.77 C:1.44 Q:0.79 E:2.54 G:0.95 H:0.00 I:0.52 L:1.05 K:0.79 M:0.00 F:0.43 P:0.37 S:0.87 T:1.14 W:1.79 Y:0.73 V:0.000000
+Normalized relative frequency of coil (Isogai et al., 1980)
+A:0.47 R:0.52 N:2.16 D:1.15 C:0.41 Q:0.95 E:0.64 G:3.03 H:0.89 I:0.62 L:0.53 K:0.98 M:0.68 F:0.61 P:0.63 S:1.03 T:0.39 W:0.63 Y:0.83 V:0.760000
+Average accessible surface area (Janin et al., 1978)
+A:27.80 R:94.70 N:60.10 D:60.60 C:15.50 Q:68.70 E:68.20 G:24.50 H:50.70 I:22.80 L:27.60 K:103.00 M:33.50 F:25.50 P:51.50 S:42.00 T:45.00 W:34.70 Y:55.20 V:23.700000
+Percentage of buried residues (Janin et al., 1978)
+A:51.00 R:5.00 N:22.00 D:19.00 C:74.00 Q:16.00 E:16.00 G:52.00 H:34.00 I:66.00 L:60.00 K:3.00 M:52.00 F:58.00 P:25.00 S:35.00 T:30.00 W:49.00 Y:24.00 V:64.000000
+Percentage of exposed residues (Janin et al., 1978)
+A:15.00 R:67.00 N:49.00 D:50.00 C:5.00 Q:56.00 E:55.00 G:10.00 H:34.00 I:13.00 L:16.00 K:85.00 M:20.00 F:10.00 P:45.00 S:32.00 T:32.00 W:17.00 Y:41.00 V:14.000000
+Ratio of buried and accessible molar fractions (Janin, 1979)
+A:1.70 R:0.10 N:0.40 D:0.40 C:4.60 Q:0.30 E:0.30 G:1.80 H:0.80 I:3.10 L:2.40 K:0.05 M:1.90 F:2.20 P:0.60 S:0.80 T:0.70 W:1.60 Y:0.50 V:2.900000
+Transfer free energy (Janin, 1979)
+A:0.30 R:-1.40 N:-0.50 D:-0.60 C:0.90 Q:-0.70 E:-0.70 G:0.30 H:-0.10 I:0.70 L:0.50 K:-1.80 M:0.40 F:0.50 P:-0.30 S:-0.10 T:-0.20 W:0.30 Y:-0.40 V:0.600000
+Hydrophobicity (Jones, 1975)
+A:0.87 R:0.85 N:0.09 D:0.66 C:1.52 Q:0.00 E:0.67 G:0.10 H:0.87 I:3.15 L:2.17 K:1.64 M:1.67 F:2.87 P:2.77 S:0.07 T:0.07 W:3.77 Y:2.67 V:1.870000
+pK (-COOH) (Jones, 1975)
+A:2.34 R:1.18 N:2.02 D:2.01 C:1.65 Q:2.17 E:2.19 G:2.34 H:1.82 I:2.36 L:2.36 K:2.18 M:2.28 F:1.83 P:1.99 S:2.21 T:2.10 W:2.38 Y:2.20 V:2.320000
+Relative frequency of occurrence (Jones et al., 1992)
+A:0.077 R:0.051 N:0.043 D:0.052 C:0.02 Q:0.041 E:0.062 G:0.074 H:0.023 I:0.053 L:0.091 K:0.059 M:0.024 F:0.04 P:0.051 S:0.069 T:0.059 W:0.014 Y:0.032 V:0.066000
+Relative mutability (Jones et al., 1992)
+A:100.00 R:83.00 N:104.00 D:86.00 C:44.00 Q:84.00 E:77.00 G:50.00 H:91.00 I:103.00 L:54.00 K:72.00 M:93.00 F:51.00 P:58.00 S:117.00 T:107.00 W:25.00 Y:50.00 V:98.000000
+Amino acid distribution (Jukes et al., 1975)
+A:5.30 R:2.60 N:3.00 D:3.60 C:1.30 Q:2.40 E:3.30 G:4.80 H:1.40 I:3.10 L:4.70 K:4.10 M:1.10 F:2.30 P:2.50 S:4.50 T:3.70 W:0.80 Y:2.30 V:4.200000
+Sequence frequency (Jungck, 1978)
+A:685.00 R:382.00 N:397.00 D:400.00 C:241.00 Q:313.00 E:427.00 G:707.00 H:155.00 I:394.00 L:581.00 K:575.00 M:132.00 F:303.00 P:366.00 S:593.00 T:490.00 W:99.00 Y:292.00 V:553.000000
+Average relative probability of helix (Kanehisa-Tsong, 1980)
+A:1.36 R:1.00 N:0.89 D:1.04 C:0.82 Q:1.14 E:1.48 G:0.63 H:1.11 I:1.08 L:1.21 K:1.22 M:1.45 F:1.05 P:0.52 S:0.74 T:0.81 W:0.97 Y:0.79 V:0.940000
+Average relative probability of beta-sheet (Kanehisa-Tsong, 1980)
+A:0.81 R:0.85 N:0.62 D:0.71 C:1.17 Q:0.98 E:0.53 G:0.88 H:0.92 I:1.48 L:1.24 K:0.77 M:1.05 F:1.20 P:0.61 S:0.92 T:1.18 W:1.18 Y:1.23 V:1.660000
+Average relative probability of inner helix (Kanehisa-Tsong, 1980)
+A:1.45 R:1.15 N:0.64 D:0.91 C:0.70 Q:1.14 E:1.29 G:0.53 H:1.13 I:1.23 L:1.56 K:1.27 M:1.83 F:1.20 P:0.21 S:0.48 T:0.77 W:1.17 Y:0.74 V:1.100000
+Average relative probability of inner beta-sheet (Kanehisa-Tsong, 1980)
+A:0.75 R:0.79 N:0.33 D:0.31 C:1.46 Q:0.75 E:0.46 G:0.83 H:0.83 I:1.87 L:1.56 K:0.66 M:0.86 F:1.37 P:0.52 S:0.82 T:1.36 W:0.79 Y:1.08 V:2.000000
+Flexibility parameter for no rigid neighbors (Karplus-Schulz, 1985)
+A:1.041 R:1.038 N:1.117 D:1.033 C:0.96 Q:1.165 E:1.094 G:1.142 H:0.982 I:1.002 L:0.967 K:1.093 M:0.947 F:0.93 P:1.055 S:1.169 T:1.073 W:0.925 Y:0.961 V:0.982000
+Flexibility parameter for one rigid neighbor (Karplus-Schulz, 1985)
+A:0.946 R:1.028 N:1.006 D:1.089 C:0.878 Q:1.025 E:1.036 G:1.042 H:0.952 I:0.892 L:0.961 K:1.082 M:0.862 F:0.912 P:1.085 S:1.048 T:1.051 W:0.917 Y:0.93 V:0.927000
+Flexibility parameter for two rigid neighbors (Karplus-Schulz, 1985)
+A:0.892 R:0.901 N:0.93 D:0.932 C:0.925 Q:0.885 E:0.933 G:0.923 H:0.894 I:0.872 L:0.921 K:1.057 M:0.804 F:0.914 P:0.932 S:0.923 T:0.934 W:0.803 Y:0.837 V:0.913000
+The Kerr-constant increments (Khanarian-Moore, 1980)
+A:49.10 R:133.00 N:-3.60 D:0.00 C:0.00 Q:20.00 E:0.00 G:64.60 H:75.70 I:18.90 L:15.60 K:0.00 M:6.80 F:54.70 P:43.80 S:44.40 T:31.00 W:70.50 Y:0.00 V:29.500000
+Net charge (Klein et al., 1984)
+A:0.00 R:1.00 N:0.00 D:-1.00 C:0.00 Q:0.00 E:-1.00 G:0.00 H:0.00 I:0.00 L:0.00 K:1.00 M:0.00 F:0.00 P:0.00 S:0.00 T:0.00 W:0.00 Y:0.00 V:0.000000
+Side chain interaction parameter (Krigbaum-Rubin, 1971)
+A:4.60 R:6.50 N:5.90 D:5.70 C:-1.00 Q:6.10 E:5.60 G:7.60 H:4.50 I:2.60 L:3.25 K:7.90 M:1.40 F:3.20 P:7.00 S:5.25 T:4.80 W:4.00 Y:4.35 V:3.400000
+Side chain interaction parameter (Krigbaum-Komoriya, 1979)
+A:4.32 R:6.55 N:6.24 D:6.04 C:1.73 Q:6.13 E:6.17 G:6.09 H:5.66 I:2.31 L:3.93 K:7.92 M:2.44 F:2.59 P:7.19 S:5.37 T:5.16 W:2.78 Y:3.58 V:3.310000
+Fraction of site occupied by water (Krigbaum-Komoriya, 1979)
+A:0.28 R:0.34 N:0.31 D:0.33 C:0.11 Q:0.39 E:0.37 G:0.28 H:0.23 I:0.12 L:0.16 K:0.59 M:0.08 F:0.10 P:0.46 S:0.27 T:0.26 W:0.15 Y:0.25 V:0.220000
+Side chain volume (Krigbaum-Komoriya, 1979)
+A:27.50 R:105.00 N:58.70 D:40.00 C:44.60 Q:80.70 E:62.00 G:0.00 H:79.00 I:93.50 L:93.50 K:100.00 M:94.10 F:115.50 P:41.90 S:29.30 T:51.30 W:145.50 Y:117.30 V:71.500000
+Hydropathy index (Kyte-Doolittle, 1982)
+A:1.80 R:-4.50 N:-3.50 D:-3.50 C:2.50 Q:-3.50 E:-3.50 G:-0.40 H:-3.20 I:4.50 L:3.80 K:-3.90 M:1.90 F:2.80 P:-1.60 S:-0.80 T:-0.70 W:-0.90 Y:-1.30 V:4.200000
+Transfer free energy, CHP/water (Lawson et al., 1984)
+A:-0.48 R:-0.06 N:-0.87 D:-0.75 C:-0.32 Q:-0.32 E:-0.71 G:0.00 H:-0.51 I:0.81 L:1.02 K:-0.09 M:0.81 F:1.03 P:2.03 S:0.05 T:-0.35 W:0.66 Y:1.24 V:0.560000
+Hydrophobic parameter (Levitt, 1976)
+A:-0.50 R:3.00 N:0.20 D:2.50 C:-1.00 Q:0.20 E:2.50 G:0.00 H:-0.50 I:-1.80 L:-1.80 K:3.00 M:-1.30 F:-2.50 P:-1.40 S:0.30 T:-0.40 W:-3.40 Y:-2.30 V:-1.500000
+Distance between C-alpha and centroid of side chain (Levitt, 1976)
+A:0.77 R:3.72 N:1.98 D:1.99 C:1.38 Q:2.58 E:2.63 G:0.00 H:2.76 I:1.83 L:2.08 K:2.94 M:2.34 F:2.97 P:1.42 S:1.28 T:1.43 W:3.58 Y:3.36 V:1.490000
+Side chain angle theta(AAR) (Levitt, 1976)
+A:121.90 R:121.40 N:117.50 D:121.20 C:113.70 Q:118.00 E:118.20 G:0.00 H:118.20 I:118.90 L:118.10 K:122.00 M:113.10 F:118.20 P:81.90 S:117.90 T:117.10 W:118.40 Y:110.00 V:121.700000
+Side chain torsion angle phi(AAAR) (Levitt, 1976)
+A:243.20 R:206.60 N:207.10 D:215.00 C:209.40 Q:205.40 E:213.60 G:300.00 H:219.90 I:217.90 L:205.60 K:210.90 M:204.00 F:203.70 P:237.40 S:232.00 T:226.70 W:203.70 Y:195.60 V:220.300000
+Radius of gyration of side chain (Levitt, 1976)
+A:0.77 R:2.38 N:1.45 D:1.43 C:1.22 Q:1.75 E:1.77 G:0.58 H:1.78 I:1.56 L:1.54 K:2.08 M:1.80 F:1.90 P:1.25 S:1.08 T:1.24 W:2.21 Y:2.13 V:1.290000
+van der Waals parameter R0 (Levitt, 1976)
+A:5.20 R:6.00 N:5.00 D:5.00 C:6.10 Q:6.00 E:6.00 G:4.20 H:6.00 I:7.00 L:7.00 K:6.00 M:6.80 F:7.10 P:6.20 S:4.90 T:5.00 W:7.60 Y:7.10 V:6.400000
+van der Waals parameter epsilon (Levitt, 1976)
+A:0.025 R:0.20 N:0.10 D:0.10 C:0.10 Q:0.10 E:0.10 G:0.025 H:0.10 I:0.19 L:0.19 K:0.20 M:0.19 F:0.39 P:0.17 S:0.025 T:0.10 W:0.56 Y:0.39 V:0.150000
+Normalized frequency of alpha-helix, with weights (Levitt, 1978)
+A:1.29 R:0.96 N:0.90 D:1.04 C:1.11 Q:1.27 E:1.44 G:0.56 H:1.22 I:0.97 L:1.30 K:1.23 M:1.47 F:1.07 P:0.52 S:0.82 T:0.82 W:0.99 Y:0.72 V:0.910000
+Normalized frequency of beta-sheet, with weights (Levitt, 1978)
+A:0.90 R:0.99 N:0.76 D:0.72 C:0.74 Q:0.80 E:0.75 G:0.92 H:1.08 I:1.45 L:1.02 K:0.77 M:0.97 F:1.32 P:0.64 S:0.95 T:1.21 W:1.14 Y:1.25 V:1.490000
+Normalized frequency of reverse turn, with weights (Levitt, 1978)
+A:0.77 R:0.88 N:1.28 D:1.41 C:0.81 Q:0.98 E:0.99 G:1.64 H:0.68 I:0.51 L:0.58 K:0.96 M:0.41 F:0.59 P:1.91 S:1.32 T:1.04 W:0.76 Y:1.05 V:0.470000
+Normalized frequency of alpha-helix, unweighted (Levitt, 1978)
+A:1.32 R:0.98 N:0.95 D:1.03 C:0.92 Q:1.10 E:1.44 G:0.61 H:1.31 I:0.93 L:1.31 K:1.25 M:1.39 F:1.02 P:0.58 S:0.76 T:0.79 W:0.97 Y:0.73 V:0.930000
+Normalized frequency of beta-sheet, unweighted (Levitt, 1978)
+A:0.86 R:0.97 N:0.73 D:0.69 C:1.04 Q:1.00 E:0.66 G:0.89 H:0.85 I:1.47 L:1.04 K:0.77 M:0.93 F:1.21 P:0.68 S:1.02 T:1.27 W:1.26 Y:1.31 V:1.430000
+Normalized frequency of reverse turn, unweighted (Levitt, 1978)
+A:0.79 R:0.90 N:1.25 D:1.47 C:0.79 Q:0.92 E:1.02 G:1.67 H:0.81 I:0.50 L:0.57 K:0.99 M:0.51 F:0.77 P:1.78 S:1.30 T:0.97 W:0.79 Y:0.93 V:0.460000
+Frequency of occurrence in beta-bends (Lewis et al., 1971)
+A:0.22 R:0.28 N:0.42 D:0.73 C:0.20 Q:0.26 E:0.08 G:0.58 H:0.14 I:0.22 L:0.19 K:0.27 M:0.38 F:0.08 P:0.46 S:0.55 T:0.49 W:0.43 Y:0.46 V:0.080000
+Conformational preference for all beta-strands (Lifson-Sander, 1979)
+A:0.92 R:0.93 N:0.60 D:0.48 C:1.16 Q:0.95 E:0.61 G:0.61 H:0.93 I:1.81 L:1.30 K:0.70 M:1.19 F:1.25 P:0.40 S:0.82 T:1.12 W:1.54 Y:1.53 V:1.810000
+Conformational preference for parallel beta-strands (Lifson-Sander, 1979)
+A:1.00 R:0.68 N:0.54 D:0.50 C:0.91 Q:0.28 E:0.59 G:0.79 H:0.38 I:2.60 L:1.42 K:0.59 M:1.49 F:1.30 P:0.35 S:0.70 T:0.59 W:0.89 Y:1.08 V:2.630000
+Conformational preference for antiparallel beta-strands (Lifson-Sander, 1979)
+A:0.90 R:1.02 N:0.62 D:0.47 C:1.24 Q:1.18 E:0.62 G:0.56 H:1.12 I:1.54 L:1.26 K:0.74 M:1.09 F:1.23 P:0.42 S:0.87 T:1.30 W:1.75 Y:1.68 V:1.530000
+Average surrounding hydrophobicity (Manavalan-Ponnuswamy, 1978)
+A:12.97 R:11.72 N:11.42 D:10.85 C:14.63 Q:11.76 E:11.89 G:12.43 H:12.16 I:15.67 L:14.90 K:11.36 M:14.39 F:14.00 P:11.37 S:11.23 T:11.69 W:13.93 Y:13.42 V:15.710000
+Normalized frequency of alpha-helix (Maxfield-Scheraga, 1976)
+A:1.43 R:1.18 N:0.64 D:0.92 C:0.94 Q:1.22 E:1.67 G:0.46 H:0.98 I:1.04 L:1.36 K:1.27 M:1.53 F:1.19 P:0.49 S:0.70 T:0.78 W:1.01 Y:0.69 V:0.980000
+Normalized frequency of extended structure (Maxfield-Scheraga, 1976)
+A:0.86 R:0.94 N:0.74 D:0.72 C:1.17 Q:0.89 E:0.62 G:0.97 H:1.06 I:1.24 L:0.98 K:0.79 M:1.08 F:1.16 P:1.22 S:1.04 T:1.18 W:1.07 Y:1.25 V:1.330000
+Normalized frequency of zeta R (Maxfield-Scheraga, 1976)
+A:0.64 R:0.62 N:3.14 D:1.92 C:0.32 Q:0.80 E:1.01 G:0.63 H:2.05 I:0.92 L:0.37 K:0.89 M:1.07 F:0.86 P:0.50 S:1.01 T:0.92 W:1.00 Y:1.31 V:0.870000
+Normalized frequency of left-handed alpha-helix (Maxfield-Scheraga, 1976)
+A:0.17 R:0.76 N:2.62 D:1.08 C:0.95 Q:0.91 E:0.28 G:5.02 H:0.57 I:0.26 L:0.21 K:1.17 M:0.00 F:0.28 P:0.12 S:0.57 T:0.23 W:0.00 Y:0.97 V:0.240000
+Normalized frequency of zeta L (Maxfield-Scheraga, 1976)
+A:1.13 R:0.48 N:1.11 D:1.18 C:0.38 Q:0.41 E:1.02 G:3.84 H:0.30 I:0.40 L:0.65 K:1.13 M:0.00 F:0.45 P:0.00 S:0.81 T:0.71 W:0.93 Y:0.38 V:0.480000
+Normalized frequency of alpha region (Maxfield-Scheraga, 1976)
+A:1.00 R:1.18 N:0.87 D:1.39 C:1.09 Q:1.13 E:1.04 G:0.46 H:0.71 I:0.68 L:1.01 K:1.05 M:0.36 F:0.65 P:1.95 S:1.56 T:1.23 W:1.10 Y:0.87 V:0.580000
+Refractivity (McMeekin et al., 1964), Cited by Jones (1975)
+A:4.34 R:26.66 N:13.28 D:12.00 C:35.77 Q:17.56 E:17.26 G:0.00 H:21.81 I:19.06 L:18.78 K:21.29 M:21.64 F:29.40 P:10.93 S:6.35 T:11.01 W:42.53 Y:31.53 V:13.920000
+Retention coefficient in HPLC, pH7.4 (Meek, 1980)
+A:0.50 R:0.80 N:0.80 D:-8.20 C:-6.80 Q:-4.80 E:-16.90 G:0.00 H:-3.50 I:13.90 L:8.80 K:0.10 M:4.80 F:13.20 P:6.10 S:1.20 T:2.70 W:14.90 Y:6.10 V:2.700000
+Retention coefficient in HPLC, pH2.1 (Meek, 1980)
+A:-0.10 R:-4.50 N:-1.60 D:-2.80 C:-2.20 Q:-2.50 E:-7.50 G:-0.50 H:0.80 I:11.80 L:10.00 K:-3.20 M:7.10 F:13.90 P:8.00 S:-3.70 T:1.50 W:18.10 Y:8.20 V:3.300000
+Retention coefficient in NaClO4 (Meek-Rossetti, 1981)
+A:1.10 R:-0.40 N:-4.20 D:-1.60 C:7.10 Q:-2.90 E:0.70 G:-0.20 H:-0.70 I:8.50 L:11.00 K:-1.90 M:5.40 F:13.40 P:4.40 S:-3.20 T:-1.70 W:17.10 Y:7.40 V:5.900000
+Retention coefficient in NaH2PO4 (Meek-Rossetti, 1981)
+A:1.00 R:-2.00 N:-3.00 D:-0.50 C:4.60 Q:-2.00 E:1.10 G:0.20 H:-2.20 I:7.00 L:9.60 K:-3.00 M:4.00 F:12.60 P:3.10 S:-2.90 T:-0.60 W:15.10 Y:6.70 V:4.600000
+Average reduced distance for C-alpha (Meirovitch et al., 1980)
+A:0.93 R:0.98 N:0.98 D:1.01 C:0.88 Q:1.02 E:1.02 G:1.01 H:0.89 I:0.79 L:0.85 K:1.05 M:0.84 F:0.78 P:1.00 S:1.02 T:0.99 W:0.83 Y:0.93 V:0.810000
+Average reduced distance for side chain (Meirovitch et al., 1980)
+A:0.94 R:1.09 N:1.04 D:1.08 C:0.84 Q:1.11 E:1.12 G:1.01 H:0.92 I:0.76 L:0.82 K:1.23 M:0.83 F:0.73 P:1.04 S:1.04 T:1.02 W:0.87 Y:1.03 V:0.810000
+Average side chain orientation angle (Meirovitch et al., 1980)
+A:87.00 R:81.00 N:70.00 D:71.00 C:104.00 Q:66.00 E:72.00 G:90.00 H:90.00 I:105.00 L:104.00 K:65.00 M:100.00 F:108.00 P:78.00 S:83.00 T:83.00 W:94.00 Y:83.00 V:94.000000
+Effective partition energy (Miyazawa-Jernigan, 1985)
+A:2.36 R:1.92 N:1.70 D:1.67 C:3.36 Q:1.75 E:1.74 G:2.06 H:2.41 I:4.17 L:3.93 K:1.23 M:4.22 F:4.37 P:1.89 S:1.81 T:2.04 W:3.82 Y:2.91 V:3.490000
+Normalized frequency of alpha-helix (Nagano, 1973)
+A:1.29 R:0.83 N:0.77 D:1.00 C:0.94 Q:1.10 E:1.54 G:0.72 H:1.29 I:0.94 L:1.23 K:1.23 M:1.23 F:1.23 P:0.70 S:0.78 T:0.87 W:1.06 Y:0.63 V:0.970000
+Normalized frequency of bata-structure (Nagano, 1973)
+A:0.96 R:0.67 N:0.72 D:0.90 C:1.13 Q:1.18 E:0.33 G:0.90 H:0.87 I:1.54 L:1.26 K:0.81 M:1.29 F:1.37 P:0.75 S:0.77 T:1.23 W:1.13 Y:1.07 V:1.410000
+Normalized frequency of coil (Nagano, 1973)
+A:0.72 R:1.33 N:1.38 D:1.04 C:1.01 Q:0.81 E:0.75 G:1.35 H:0.76 I:0.80 L:0.63 K:0.84 M:0.62 F:0.58 P:1.43 S:1.34 T:1.03 W:0.87 Y:1.35 V:0.830000
+8 A contact number (Nishikawa-Ooi, 1980)
+A:0.23 R:-0.26 N:-0.94 D:-1.13 C:1.78 Q:-0.57 E:-0.75 G:-0.07 H:0.11 I:1.19 L:1.03 K:-1.05 M:0.66 F:0.48 P:-0.76 S:-0.67 T:-0.36 W:0.90 Y:0.59 V:1.240000
+14 A contact number (Nishikawa-Ooi, 1986)
+A:-0.22 R:-0.93 N:-2.65 D:-4.12 C:4.66 Q:-2.76 E:-3.64 G:-1.62 H:1.28 I:5.58 L:5.01 K:-4.18 M:3.51 F:5.27 P:-3.03 S:-2.84 T:-1.20 W:5.20 Y:2.15 V:4.450000
+Transfer energy, organic solvent/water (Nozaki-Tanford, 1971)
+A:0.50 R:0.00 N:0.00 D:0.00 C:0.00 Q:0.00 E:0.00 G:0.00 H:0.50 I:1.80 L:1.80 K:0.00 M:1.30 F:2.50 P:0.00 S:0.00 T:0.40 W:3.40 Y:2.30 V:1.500000
+Average non-bonded energy per atom (Oobatake-Ooi, 1977)
+A:-1.895 R:-1.475 N:-1.56 D:-1.518 C:-2.035 Q:-1.521 E:-1.535 G:-1.898 H:-1.755 I:-1.951 L:-1.966 K:-1.374 M:-1.963 F:-1.864 P:-1.699 S:-1.753 T:-1.767 W:-1.869 Y:-1.686 V:-1.981000
+Short and medium range non-bonded energy per atom (Oobatake-Ooi, 1977)
+A:-1.404 R:-0.921 N:-1.178 D:-1.162 C:-1.365 Q:-1.116 E:-1.163 G:-1.364 H:-1.215 I:-1.189 L:-1.315 K:-1.074 M:-1.303 F:-1.135 P:-1.236 S:-1.297 T:-1.252 W:-1.03 Y:-1.03 V:-1.254000
+Long range non-bonded energy per atom (Oobatake-Ooi, 1977)
+A:-0.491 R:-0.554 N:-0.382 D:-0.356 C:-0.67 Q:-0.405 E:-0.371 G:-0.534 H:-0.54 I:-0.762 L:-0.65 K:-0.30 M:-0.659 F:-0.729 P:-0.463 S:-0.455 T:-0.515 W:-0.839 Y:-0.656 V:-0.728000
+Average non-bonded energy per residue (Oobatake-Ooi, 1977)
+A:-9.475 R:-16.225 N:-12.48 D:-12.144 C:-12.21 Q:-13.689 E:-13.815 G:-7.592 H:-17.55 I:-15.608 L:-15.728 K:-12.366 M:-15.704 F:-20.504 P:-11.893 S:-10.518 T:-12.369 W:-26.166 Y:-20.232 V:-13.867000
+Short and medium range non-bonded energy per residue (Oobatake-Ooi, 1977)
+A:-7.02 R:-10.131 N:-9.424 D:-9.296 C:-8.19 Q:-10.044 E:-10.467 G:-5.456 H:-12.15 I:-9.512 L:-10.52 K:-9.666 M:-10.424 F:-12.485 P:-8.652 S:-7.782 T:-8.764 W:-14.42 Y:-12.36 V:-8.778000
+Optimized beta-structure-coil equilibrium constant (Oobatake et al., 1985)
+A:2.01 R:0.84 N:0.03 D:-2.05 C:1.98 Q:1.02 E:0.93 G:0.12 H:-0.14 I:3.70 L:2.73 K:2.55 M:1.75 F:2.68 P:0.41 S:1.47 T:2.39 W:2.49 Y:2.23 V:3.500000
+Optimized propensity to form reverse turn (Oobatake et al., 1985)
+A:1.34 R:0.95 N:2.49 D:3.32 C:1.07 Q:1.49 E:2.20 G:2.07 H:1.27 I:0.66 L:0.54 K:0.61 M:0.70 F:0.80 P:2.12 S:0.94 T:1.09 W:-4.65 Y:-0.17 V:1.320000
+Optimized transfer energy parameter (Oobatake et al., 1985)
+A:0.46 R:-1.54 N:1.31 D:-0.33 C:0.20 Q:-1.12 E:0.48 G:0.64 H:-1.31 I:3.28 L:0.43 K:-1.71 M:0.15 F:0.52 P:-0.58 S:-0.83 T:-1.52 W:1.25 Y:-2.21 V:0.540000
+Optimized average non-bonded energy per atom (Oobatake et al., 1985)
+A:-2.49 R:2.55 N:2.27 D:8.86 C:-3.13 Q:1.79 E:4.04 G:-0.56 H:4.22 I:-10.87 L:-7.16 K:-9.97 M:-4.96 F:-6.64 P:5.19 S:-1.60 T:-4.75 W:-17.84 Y:9.25 V:-3.970000
+Optimized side chain interaction parameter (Oobatake et al., 1985)
+A:4.55 R:5.97 N:5.56 D:2.85 C:-0.78 Q:4.15 E:5.16 G:9.14 H:4.48 I:2.10 L:3.24 K:10.68 M:2.18 F:4.37 P:5.14 S:6.78 T:8.60 W:1.97 Y:2.40 V:3.810000
+Normalized frequency of alpha-helix from LG (Palau et al., 1981)
+A:1.30 R:0.93 N:0.90 D:1.02 C:0.92 Q:1.04 E:1.43 G:0.63 H:1.33 I:0.87 L:1.30 K:1.23 M:1.32 F:1.09 P:0.63 S:0.78 T:0.80 W:1.03 Y:0.71 V:0.950000
+Normalized frequency of alpha-helix from CF (Palau et al., 1981)
+A:1.32 R:1.04 N:0.74 D:0.97 C:0.70 Q:1.25 E:1.48 G:0.59 H:1.06 I:1.01 L:1.22 K:1.13 M:1.47 F:1.10 P:0.57 S:0.77 T:0.86 W:1.02 Y:0.72 V:1.050000
+Normalized frequency of beta-sheet from LG (Palau et al., 1981)
+A:0.81 R:1.03 N:0.81 D:0.71 C:1.12 Q:1.03 E:0.59 G:0.94 H:0.85 I:1.47 L:1.03 K:0.77 M:0.96 F:1.13 P:0.75 S:1.02 T:1.19 W:1.24 Y:1.35 V:1.440000
+Normalized frequency of beta-sheet from CF (Palau et al., 1981)
+A:0.90 R:0.75 N:0.82 D:0.75 C:1.12 Q:0.95 E:0.44 G:0.83 H:0.86 I:1.59 L:1.24 K:0.75 M:0.94 F:1.41 P:0.46 S:0.70 T:1.20 W:1.28 Y:1.45 V:1.730000
+Normalized frequency of turn from LG (Palau et al., 1981)
+A:0.84 R:0.91 N:1.48 D:1.28 C:0.69 Q:1.00 E:0.78 G:1.76 H:0.53 I:0.55 L:0.49 K:0.95 M:0.52 F:0.88 P:1.47 S:1.29 T:1.05 W:0.88 Y:1.28 V:0.510000
+Normalized frequency of turn from CF (Palau et al., 1981)
+A:0.65 R:0.93 N:1.45 D:1.47 C:1.43 Q:0.94 E:0.75 G:1.53 H:0.96 I:0.57 L:0.56 K:0.95 M:0.71 F:0.72 P:1.51 S:1.46 T:0.96 W:0.90 Y:1.12 V:0.550000
+Normalized frequency of alpha-helix in all-alpha class (Palau et al., 1981)
+A:1.08 R:0.93 N:1.05 D:0.86 C:1.22 Q:0.95 E:1.09 G:0.85 H:1.02 I:0.98 L:1.04 K:1.01 M:1.11 F:0.96 P:0.91 S:0.95 T:1.15 W:1.17 Y:0.80 V:1.030000
+Normalized frequency of alpha-helix in alpha+beta class (Palau et al., 1981)
+A:1.34 R:0.91 N:0.83 D:1.06 C:1.27 Q:1.13 E:1.69 G:0.47 H:1.11 I:0.84 L:1.39 K:1.08 M:0.90 F:1.02 P:0.48 S:1.05 T:0.74 W:0.64 Y:0.73 V:1.180000
+Normalized frequency of alpha-helix in alpha/beta class (Palau et al., 1981)
+A:1.15 R:1.06 N:0.87 D:1.00 C:1.03 Q:1.43 E:1.37 G:0.64 H:0.95 I:0.99 L:1.22 K:1.20 M:1.45 F:0.92 P:0.72 S:0.84 T:0.97 W:1.11 Y:0.72 V:0.820000
+Normalized frequency of beta-sheet in all-beta class (Palau et al., 1981)
+A:0.89 R:1.06 N:0.67 D:0.71 C:1.04 Q:1.06 E:0.72 G:0.87 H:1.04 I:1.14 L:1.02 K:1.00 M:1.41 F:1.32 P:0.69 S:0.86 T:1.15 W:1.06 Y:1.35 V:1.660000
+Normalized frequency of beta-sheet in alpha+beta class (Palau et al., 1981)
+A:0.82 R:0.99 N:1.27 D:0.98 C:0.71 Q:1.01 E:0.54 G:0.94 H:1.26 I:1.67 L:0.94 K:0.73 M:1.30 F:1.56 P:0.69 S:0.65 T:0.98 W:1.25 Y:1.26 V:1.220000
+Normalized frequency of beta-sheet in alpha/beta class (Palau et al., 1981)
+A:0.98 R:1.03 N:0.66 D:0.74 C:1.01 Q:0.63 E:0.59 G:0.90 H:1.17 I:1.38 L:1.05 K:0.83 M:0.82 F:1.23 P:0.73 S:0.98 T:1.20 W:1.26 Y:1.23 V:1.620000
+Normalized frequency of turn in all-alpha class (Palau et al., 1981)
+A:0.69 R:0.00 N:1.52 D:2.42 C:0.00 Q:1.44 E:0.63 G:2.64 H:0.22 I:0.43 L:0.00 K:1.18 M:0.88 F:2.20 P:1.34 S:1.43 T:0.28 W:0.00 Y:1.53 V:0.140000
+Normalized frequency of turn in all-beta class (Palau et al., 1981)
+A:0.87 R:1.30 N:1.36 D:1.24 C:0.83 Q:1.06 E:0.91 G:1.69 H:0.91 I:0.27 L:0.67 K:0.66 M:0.00 F:0.47 P:1.54 S:1.08 T:1.12 W:1.24 Y:0.54 V:0.690000
+Normalized frequency of turn in alpha+beta class (Palau et al., 1981)
+A:0.91 R:0.77 N:1.32 D:0.90 C:0.50 Q:1.06 E:0.53 G:1.61 H:1.08 I:0.36 L:0.77 K:1.27 M:0.76 F:0.37 P:1.62 S:1.34 T:0.87 W:1.10 Y:1.24 V:0.520000
+Normalized frequency of turn in alpha/beta class (Palau et al., 1981)
+A:0.92 R:0.90 N:1.57 D:1.22 C:0.62 Q:0.66 E:0.92 G:1.61 H:0.39 I:0.79 L:0.50 K:0.86 M:0.50 F:0.96 P:1.30 S:1.40 T:1.11 W:0.57 Y:1.78 V:0.500000
+HPLC parameter (Parker et al., 1986)
+A:2.10 R:4.20 N:7.00 D:10.00 C:1.40 Q:6.00 E:7.80 G:5.70 H:2.10 I:-8.00 L:-9.20 K:5.70 M:-4.20 F:-9.20 P:2.10 S:6.50 T:5.20 W:-10.00 Y:-1.90 V:-3.700000
+Partition coefficient (Pliska et al., 1981)
+A:-2.89 R:-3.30 N:-3.41 D:-3.38 C:-2.49 Q:-3.15 E:-2.94 G:-3.25 H:-2.84 I:-1.72 L:-1.61 K:-3.31 M:-1.84 F:-1.63 P:-2.50 S:-3.30 T:-2.91 W:-1.75 Y:-2.42 V:-2.080000
+Surrounding hydrophobicity in folded form (Ponnuswamy et al., 1980)
+A:12.28 R:11.49 N:11.00 D:10.97 C:14.93 Q:11.28 E:11.19 G:12.01 H:12.84 I:14.77 L:14.10 K:10.80 M:14.33 F:13.43 P:11.19 S:11.26 T:11.65 W:12.95 Y:13.29 V:15.070000
+Average gain in surrounding hydrophobicity (Ponnuswamy et al., 1980)
+A:7.62 R:6.81 N:6.17 D:6.18 C:10.93 Q:6.67 E:6.38 G:7.31 H:7.85 I:9.99 L:9.37 K:5.72 M:9.83 F:8.99 P:6.64 S:6.93 T:7.08 W:8.41 Y:8.53 V:10.380000
+Average gain ratio in surrounding hydrophobicity (Ponnuswamy et al., 1980)
+A:2.63 R:2.45 N:2.27 D:2.29 C:3.36 Q:2.45 E:2.31 G:2.55 H:2.57 I:3.08 L:2.98 K:2.12 M:3.18 F:3.02 P:2.46 S:2.60 T:2.55 W:2.85 Y:2.79 V:3.210000
+Surrounding hydrophobicity in alpha-helix (Ponnuswamy et al., 1980)
+A:13.65 R:11.28 N:12.24 D:10.98 C:14.49 Q:11.30 E:12.55 G:15.36 H:11.59 I:14.63 L:14.01 K:11.96 M:13.40 F:14.08 P:11.51 S:11.26 T:13.00 W:12.06 Y:12.64 V:12.880000
+Surrounding hydrophobicity in beta-sheet (Ponnuswamy et al., 1980)
+A:14.60 R:13.24 N:11.79 D:13.78 C:15.90 Q:12.02 E:13.59 G:14.18 H:15.35 I:14.10 L:16.49 K:13.28 M:16.23 F:14.18 P:14.10 S:13.36 T:14.50 W:13.90 Y:14.76 V:16.300000
+Surrounding hydrophobicity in turn (Ponnuswamy et al., 1980)
+A:10.67 R:11.05 N:10.85 D:10.21 C:14.15 Q:11.71 E:11.71 G:10.95 H:12.07 I:12.95 L:13.07 K:9.93 M:15.00 F:13.27 P:10.62 S:11.18 T:10.53 W:11.41 Y:11.52 V:13.860000
+Accessibility reduction ratio (Ponnuswamy et al., 1980)
+A:3.70 R:2.53 N:2.12 D:2.60 C:3.03 Q:2.70 E:3.30 G:3.13 H:3.57 I:7.69 L:5.88 K:1.79 M:5.21 F:6.60 P:2.12 S:2.43 T:2.60 W:6.25 Y:3.03 V:7.140000
+Intercept in regression analysis (Prabhakaran-Ponnuswamy, 1982)
+A:0.305 R:0.227 N:0.322 D:0.335 C:0.339 Q:0.306 E:0.282 G:0.352 H:0.215 I:0.278 L:0.262 K:0.391 M:0.28 F:0.195 P:0.346 S:0.326 T:0.251 W:0.291 Y:0.293 V:0.291000
+Slope in regression analysis x 1.0E1 (Prabhakaran-Ponnuswamy, 1982)
+A:0.175 R:0.083 N:0.09 D:0.14 C:0.074 Q:0.093 E:0.135 G:0.201 H:0.125 I:0.10 L:0.104 K:0.058 M:0.054 F:0.104 P:0.136 S:0.155 T:0.152 W:0.092 Y:0.081 V:0.096000
+Correlation coefficient in regression analysis (Prabhakaran-Ponnuswamy, 1982)
+A:0.687 R:0.59 N:0.489 D:0.632 C:0.263 Q:0.527 E:0.669 G:0.67 H:0.594 I:0.564 L:0.541 K:0.407 M:0.328 F:0.577 P:0.60 S:0.692 T:0.713 W:0.632 Y:0.495 V:0.529000
+Hydrophobicity (Prabhakaran, 1990)
+A:-6.70 R:51.50 N:20.10 D:38.50 C:-8.40 Q:17.20 E:34.30 G:-4.20 H:12.60 I:-13.00 L:-11.70 K:36.80 M:-14.20 F:-15.50 P:0.80 S:-2.50 T:-5.00 W:-7.90 Y:2.90 V:-10.900000
+Relative frequency in alpha-helix (Prabhakaran, 1990)
+A:1.29 R:0.96 N:0.90 D:1.04 C:1.11 Q:1.27 E:1.44 G:0.56 H:1.22 I:0.97 L:1.30 K:1.23 M:1.47 F:1.07 P:0.52 S:0.82 T:0.82 W:0.99 Y:0.72 V:0.910000
+Relative frequency in beta-sheet (Prabhakaran, 1990)
+A:0.90 R:0.99 N:0.76 D:0.72 C:0.74 Q:0.80 E:0.75 G:0.92 H:1.08 I:1.45 L:1.02 K:0.77 M:0.97 F:1.32 P:0.64 S:0.95 T:1.21 W:1.14 Y:1.25 V:1.490000
+Relative frequency in reverse-turn (Prabhakaran, 1990)
+A:0.78 R:0.88 N:1.28 D:1.41 C:0.80 Q:0.97 E:1.00 G:1.64 H:0.69 I:0.51 L:0.59 K:0.96 M:0.39 F:0.58 P:1.91 S:1.33 T:1.03 W:0.75 Y:1.05 V:0.470000
+Weights for alpha-helix at the window position of -6 (Qian-Sejnowski, 1988)
+A:0.12 R:0.04 N:-0.10 D:0.01 C:-0.25 Q:-0.03 E:-0.02 G:-0.02 H:-0.06 I:-0.07 L:0.05 K:0.26 M:0.00 F:0.05 P:-0.19 S:-0.19 T:-0.04 W:-0.06 Y:-0.14 V:-0.030000
+Weights for alpha-helix at the window position of -5 (Qian-Sejnowski, 1988)
+A:0.26 R:-0.14 N:-0.03 D:0.15 C:-0.15 Q:-0.13 E:0.21 G:-0.37 H:0.10 I:-0.03 L:-0.02 K:0.12 M:0.00 F:0.12 P:-0.08 S:0.01 T:-0.34 W:-0.01 Y:-0.29 V:0.020000
+Weights for alpha-helix at the window position of -4 (Qian-Sejnowski, 1988)
+A:0.64 R:-0.10 N:0.09 D:0.33 C:0.03 Q:-0.23 E:0.51 G:-0.09 H:-0.23 I:-0.22 L:0.41 K:-0.17 M:0.13 F:-0.03 P:-0.43 S:-0.10 T:-0.07 W:-0.02 Y:-0.38 V:-0.010000
+Weights for alpha-helix at the window position of -2 (Qian-Sejnowski, 1988)
+A:0.68 R:-0.22 N:-0.09 D:-0.02 C:-0.15 Q:-0.15 E:0.44 G:-0.73 H:-0.14 I:-0.08 L:0.61 K:0.03 M:0.39 F:0.06 P:-0.76 S:-0.26 T:-0.10 W:0.20 Y:-0.04 V:0.120000
+Weights for alpha-helix at the window position of -1 (Qian-Sejnowski, 1988)
+A:0.34 R:0.22 N:-0.33 D:0.06 C:-0.18 Q:0.01 E:0.20 G:-0.88 H:-0.09 I:-0.03 L:0.20 K:-0.11 M:0.43 F:0.15 P:-0.81 S:-0.35 T:-0.37 W:0.07 Y:-0.31 V:0.130000
+Weights for alpha-helix at the window position of 0 (Qian-Sejnowski, 1988)
+A:0.57 R:0.23 N:-0.36 D:-0.46 C:-0.15 Q:0.15 E:0.26 G:-0.71 H:-0.05 I:0.00 L:0.48 K:0.16 M:0.41 F:0.03 P:-1.12 S:-0.47 T:-0.54 W:-0.10 Y:-0.35 V:0.310000
+Weights for alpha-helix at the window position of 1 (Qian-Sejnowski, 1988)
+A:0.33 R:0.10 N:-0.19 D:-0.44 C:-0.03 Q:0.19 E:0.21 G:-0.46 H:0.27 I:-0.33 L:0.57 K:0.23 M:0.79 F:0.48 P:-1.86 S:-0.23 T:-0.33 W:0.15 Y:-0.19 V:0.240000
+Weights for alpha-helix at the window position of 2 (Qian-Sejnowski, 1988)
+A:0.13 R:0.08 N:-0.07 D:-0.71 C:-0.09 Q:0.12 E:0.13 G:-0.39 H:0.32 I:0.00 L:0.50 K:0.37 M:0.63 F:0.15 P:-1.40 S:-0.28 T:-0.21 W:0.02 Y:-0.10 V:0.170000
+Weights for alpha-helix at the window position of 3 (Qian-Sejnowski, 1988)
+A:0.31 R:0.18 N:-0.10 D:-0.81 C:-0.26 Q:0.41 E:-0.06 G:-0.42 H:0.51 I:-0.15 L:0.56 K:0.47 M:0.58 F:0.10 P:-1.33 S:-0.49 T:-0.44 W:0.14 Y:-0.08 V:-0.010000
+Weights for alpha-helix at the window position of 4 (Qian-Sejnowski, 1988)
+A:0.21 R:0.07 N:-0.04 D:-0.58 C:-0.12 Q:0.13 E:-0.23 G:-0.15 H:0.37 I:0.31 L:0.70 K:0.28 M:0.61 F:-0.06 P:-1.03 S:-0.28 T:-0.25 W:0.21 Y:0.16 V:0.000000
+Weights for alpha-helix at the window position of 5 (Qian-Sejnowski, 1988)
+A:0.18 R:0.21 N:-0.03 D:-0.32 C:-0.29 Q:-0.27 E:-0.25 G:-0.40 H:0.28 I:-0.03 L:0.62 K:0.41 M:0.21 F:0.05 P:-0.84 S:-0.05 T:-0.16 W:0.32 Y:0.11 V:0.060000
+Weights for alpha-helix at the window position of 6 (Qian-Sejnowski, 1988)
+A:-0.08 R:0.05 N:-0.08 D:-0.24 C:-0.25 Q:-0.28 E:-0.19 G:-0.10 H:0.29 I:-0.01 L:0.28 K:0.45 M:0.11 F:0.00 P:-0.42 S:0.07 T:-0.33 W:0.36 Y:0.00 V:-0.130000
+Weights for beta-sheet at the window position of -6 (Qian-Sejnowski, 1988)
+A:-0.18 R:-0.13 N:0.28 D:0.05 C:-0.26 Q:0.21 E:-0.06 G:0.23 H:0.24 I:-0.42 L:-0.23 K:0.03 M:-0.42 F:-0.18 P:-0.13 S:0.41 T:0.33 W:-0.10 Y:-0.10 V:-0.070000
+Weights for beta-sheet at the window position of -5 (Qian-Sejnowski, 1988)
+A:-0.01 R:0.02 N:0.41 D:-0.09 C:-0.27 Q:0.01 E:0.09 G:0.13 H:0.22 I:-0.27 L:-0.25 K:0.08 M:-0.57 F:-0.12 P:0.26 S:0.44 T:0.35 W:-0.15 Y:0.15 V:-0.090000
+Weights for beta-sheet at the window position of -4 (Qian-Sejnowski, 1988)
+A:-0.19 R:0.03 N:0.02 D:-0.06 C:-0.29 Q:0.02 E:-0.10 G:0.19 H:-0.16 I:-0.08 L:-0.42 K:-0.09 M:-0.38 F:-0.32 P:0.05 S:0.25 T:0.22 W:-0.19 Y:0.05 V:-0.150000
+Weights for beta-sheet at the window position of -3 (Qian-Sejnowski, 1988)
+A:-0.14 R:0.14 N:-0.27 D:-0.10 C:-0.64 Q:-0.11 E:-0.39 G:0.46 H:-0.04 I:0.16 L:-0.57 K:0.04 M:0.24 F:0.08 P:0.02 S:-0.12 T:0.00 W:-0.10 Y:0.18 V:0.290000
+Weights for beta-sheet at the window position of -2 (Qian-Sejnowski, 1988)
+A:-0.31 R:0.25 N:-0.53 D:-0.54 C:-0.06 Q:0.07 E:-0.52 G:0.37 H:-0.32 I:0.57 L:0.09 K:-0.29 M:0.29 F:0.24 P:-0.31 S:0.11 T:0.03 W:0.15 Y:0.29 V:0.480000
+Weights for beta-sheet at the window position of -1 (Qian-Sejnowski, 1988)
+A:-0.10 R:0.19 N:-0.89 D:-0.89 C:0.13 Q:-0.04 E:-0.34 G:-0.45 H:-0.34 I:0.95 L:0.32 K:-0.46 M:0.43 F:0.36 P:-0.91 S:-0.12 T:0.49 W:0.34 Y:0.42 V:0.760000
+Weights for beta-sheet at the window position of 0 (Qian-Sejnowski, 1988)
+A:-0.25 R:-0.02 N:-0.77 D:-1.01 C:0.13 Q:-0.12 E:-0.62 G:-0.72 H:-0.16 I:1.10 L:0.23 K:-0.59 M:0.32 F:0.48 P:-1.24 S:-0.31 T:0.17 W:0.45 Y:0.77 V:0.690000
+Weights for beta-sheet at the window position of 1 (Qian-Sejnowski, 1988)
+A:-0.26 R:-0.09 N:-0.34 D:-0.55 C:0.47 Q:-0.33 E:-0.75 G:-0.56 H:-0.04 I:0.94 L:0.25 K:-0.55 M:-0.05 F:0.20 P:-1.28 S:-0.28 T:0.08 W:0.22 Y:0.53 V:0.670000
+Weights for beta-sheet at the window position of 2 (Qian-Sejnowski, 1988)
+A:0.05 R:-0.11 N:-0.40 D:-0.11 C:0.36 Q:-0.67 E:-0.35 G:0.14 H:0.02 I:0.47 L:0.32 K:-0.51 M:-0.10 F:0.20 P:-0.79 S:0.03 T:-0.15 W:0.09 Y:0.34 V:0.580000
+Weights for beta-sheet at the window position of 3 (Qian-Sejnowski, 1988)
+A:-0.44 R:-0.13 N:0.05 D:-0.20 C:0.13 Q:-0.58 E:-0.28 G:0.08 H:0.09 I:-0.04 L:-0.12 K:-0.33 M:-0.21 F:-0.13 P:-0.48 S:0.27 T:0.47 W:-0.22 Y:-0.11 V:0.060000
+Weights for beta-sheet at the window position of 4 (Qian-Sejnowski, 1988)
+A:-0.31 R:-0.10 N:0.06 D:0.13 C:-0.11 Q:-0.47 E:-0.05 G:0.45 H:-0.06 I:-0.25 L:-0.44 K:-0.44 M:-0.28 F:-0.04 P:-0.29 S:0.34 T:0.27 W:-0.08 Y:0.06 V:0.110000
+Weights for beta-sheet at the window position of 5 (Qian-Sejnowski, 1988)
+A:-0.02 R:0.04 N:0.03 D:0.11 C:-0.02 Q:-0.17 E:0.10 G:0.38 H:-0.09 I:-0.48 L:-0.26 K:-0.39 M:-0.14 F:-0.03 P:-0.04 S:0.41 T:0.36 W:-0.01 Y:-0.08 V:-0.180000
+Weights for beta-sheet at the window position of 6 (Qian-Sejnowski, 1988)
+A:-0.06 R:0.02 N:0.10 D:0.24 C:-0.19 Q:-0.04 E:-0.04 G:0.17 H:0.19 I:-0.20 L:-0.46 K:-0.43 M:-0.52 F:-0.33 P:0.37 S:0.43 T:0.50 W:-0.32 Y:0.35 V:0.000000
+Weights for coil at the window position of -6 (Qian-Sejnowski, 1988)
+A:-0.05 R:0.06 N:0.00 D:0.15 C:0.30 Q:-0.08 E:-0.02 G:-0.14 H:-0.07 I:0.26 L:0.04 K:-0.42 M:0.25 F:0.09 P:0.31 S:-0.11 T:-0.06 W:0.19 Y:0.33 V:0.040000
+Weights for coil at the window position of -5 (Qian-Sejnowski, 1988)
+A:-0.19 R:0.17 N:-0.38 D:0.09 C:0.41 Q:0.04 E:-0.20 G:0.28 H:-0.19 I:-0.06 L:0.34 K:-0.20 M:0.45 F:0.07 P:0.04 S:-0.23 T:-0.02 W:0.16 Y:0.22 V:0.050000
+Weights for coil at the window position of -4 (Qian-Sejnowski, 1988)
+A:-0.43 R:0.06 N:0.00 D:-0.31 C:0.19 Q:0.14 E:-0.41 G:-0.21 H:0.21 I:0.29 L:-0.10 K:0.33 M:-0.01 F:0.25 P:0.28 S:-0.23 T:-0.26 W:0.15 Y:0.09 V:-0.100000
+Weights for coil at the window position of -3 (Qian-Sejnowski, 1988)
+A:-0.19 R:-0.07 N:0.17 D:-0.27 C:0.42 Q:-0.29 E:-0.22 G:0.17 H:0.17 I:-0.34 L:-0.22 K:0.00 M:-0.53 F:-0.31 P:0.14 S:0.22 T:0.10 W:-0.15 Y:-0.02 V:-0.330000
+Weights for coil at the window position of -2 (Qian-Sejnowski, 1988)
+A:-0.25 R:0.12 N:0.61 D:0.60 C:0.18 Q:0.09 E:-0.12 G:0.09 H:0.42 I:-0.54 L:-0.55 K:0.14 M:-0.47 F:-0.29 P:0.89 S:0.24 T:0.16 W:-0.44 Y:-0.19 V:-0.450000
+Weights for coil at the window position of -1 (Qian-Sejnowski, 1988)
+A:-0.27 R:-0.40 N:0.71 D:0.54 C:0.00 Q:-0.08 E:-0.12 G:1.14 H:0.18 I:-0.74 L:-0.54 K:0.45 M:-0.76 F:-0.47 P:1.40 S:0.40 T:-0.10 W:-0.46 Y:-0.05 V:-0.860000
+Weights for coil at the window position of 0 (Qian-Sejnowski, 1988)
+A:-0.42 R:-0.23 N:0.81 D:0.95 C:-0.18 Q:-0.01 E:-0.09 G:1.24 H:0.05 I:-1.17 L:-0.69 K:0.09 M:-0.86 F:-0.39 P:1.77 S:0.63 T:0.29 W:-0.37 Y:-0.41 V:-1.320000
+Weights for coil at the window position of 1 (Qian-Sejnowski, 1988)
+A:-0.24 R:-0.04 N:0.45 D:0.65 C:-0.38 Q:0.01 E:0.07 G:0.85 H:-0.21 I:-0.65 L:-0.80 K:0.17 M:-0.71 F:-0.61 P:2.27 S:0.33 T:0.13 W:-0.44 Y:-0.49 V:-0.990000
+Weights for coil at the window position of 2 (Qian-Sejnowski, 1988)
+A:-0.14 R:0.21 N:0.35 D:0.66 C:-0.09 Q:0.11 E:0.06 G:0.36 H:-0.31 I:-0.51 L:-0.80 K:-0.14 M:-0.56 F:-0.25 P:1.59 S:0.32 T:0.21 W:-0.17 Y:-0.35 V:-0.700000
+Weights for coil at the window position of 3 (Qian-Sejnowski, 1988)
+A:0.01 R:-0.13 N:-0.11 D:0.78 C:-0.31 Q:-0.13 E:0.09 G:0.14 H:-0.56 I:-0.09 L:-0.81 K:-0.43 M:-0.49 F:-0.20 P:1.14 S:0.13 T:-0.02 W:-0.20 Y:0.10 V:-0.110000
+Weights for coil at the window position of 4 (Qian-Sejnowski, 1988)
+A:-0.30 R:-0.09 N:-0.12 D:0.44 C:0.03 Q:0.24 E:0.18 G:-0.12 H:-0.20 I:-0.07 L:-0.18 K:0.06 M:-0.44 F:0.11 P:0.77 S:-0.09 T:-0.27 W:-0.09 Y:-0.25 V:-0.060000
+Weights for coil at the window position of 5 (Qian-Sejnowski, 1988)
+A:-0.23 R:-0.20 N:0.06 D:0.34 C:0.19 Q:0.47 E:0.28 G:0.14 H:-0.22 I:0.42 L:-0.36 K:-0.15 M:-0.19 F:-0.02 P:0.78 S:-0.29 T:-0.30 W:-0.18 Y:0.07 V:0.290000
+Weights for coil at the window position of 6 (Qian-Sejnowski, 1988)
+A:0.08 R:-0.01 N:-0.06 D:0.04 C:0.37 Q:0.48 E:0.36 G:-0.02 H:-0.45 I:0.09 L:0.24 K:-0.27 M:0.16 F:0.34 P:0.16 S:-0.35 T:-0.04 W:-0.06 Y:-0.20 V:0.180000
+Average reduced distance for C-alpha (Rackovsky-Scheraga, 1977)
+A:0.934 R:0.962 N:0.986 D:0.994 C:0.90 Q:1.047 E:0.986 G:1.015 H:0.882 I:0.766 L:0.825 K:1.04 M:0.804 F:0.773 P:1.047 S:1.056 T:1.008 W:0.848 Y:0.931 V:0.825000
+Average reduced distance for side chain (Rackovsky-Scheraga, 1977)
+A:0.941 R:1.112 N:1.038 D:1.071 C:0.866 Q:1.15 E:1.10 G:1.055 H:0.911 I:0.742 L:0.798 K:1.232 M:0.781 F:0.723 P:1.093 S:1.082 T:1.043 W:0.867 Y:1.05 V:0.817000
+Side chain orientational preference (Rackovsky-Scheraga, 1977)
+A:1.16 R:1.72 N:1.97 D:2.66 C:0.50 Q:3.87 E:2.40 G:1.63 H:0.86 I:0.57 L:0.51 K:3.90 M:0.40 F:0.43 P:2.04 S:1.61 T:1.48 W:0.75 Y:1.72 V:0.590000
+Average relative fractional occurrence in A0(i) (Rackovsky-Scheraga, 1982)
+A:0.85 R:2.02 N:0.88 D:1.50 C:0.90 Q:1.71 E:1.79 G:1.54 H:1.59 I:0.67 L:1.03 K:0.88 M:1.17 F:0.85 P:1.47 S:1.50 T:1.96 W:0.83 Y:1.34 V:0.890000
+Average relative fractional occurrence in AR(i) (Rackovsky-Scheraga, 1982)
+A:1.58 R:1.14 N:0.77 D:0.98 C:1.04 Q:1.24 E:1.49 G:0.66 H:0.99 I:1.09 L:1.21 K:1.27 M:1.41 F:1.00 P:1.46 S:1.05 T:0.87 W:1.23 Y:0.68 V:0.880000
+Average relative fractional occurrence in AL(i) (Rackovsky-Scheraga, 1982)
+A:0.82 R:2.60 N:2.07 D:2.64 C:0.00 Q:0.00 E:2.62 G:1.63 H:0.00 I:2.32 L:0.00 K:2.86 M:0.00 F:0.00 P:0.00 S:1.23 T:2.48 W:0.00 Y:1.90 V:1.620000
+Average relative fractional occurrence in E0(i) (Rackovsky-Scheraga, 1982)
+A:0.88 R:0.99 N:1.02 D:1.16 C:1.14 Q:0.93 E:1.01 G:0.70 H:1.87 I:1.61 L:1.09 K:0.83 M:1.71 F:1.52 P:0.87 S:1.14 T:0.96 W:1.96 Y:1.68 V:1.560000
+Average relative fractional occurrence in ER(i) (Rackovsky-Scheraga, 1982)
+A:0.30 R:0.90 N:2.73 D:1.26 C:0.72 Q:0.97 E:1.33 G:3.09 H:1.33 I:0.45 L:0.96 K:0.71 M:1.89 F:1.20 P:0.83 S:1.16 T:0.97 W:1.58 Y:0.86 V:0.640000
+Average relative fractional occurrence in A0(i-1) (Rackovsky-Scheraga, 1982)
+A:0.40 R:1.20 N:1.24 D:1.59 C:2.98 Q:0.50 E:1.26 G:1.89 H:2.71 I:1.31 L:0.57 K:0.87 M:0.00 F:1.27 P:0.38 S:0.92 T:1.38 W:1.53 Y:1.79 V:0.950000
+Average relative fractional occurrence in AR(i-1) (Rackovsky-Scheraga, 1982)
+A:1.48 R:1.02 N:0.99 D:1.19 C:0.86 Q:1.42 E:1.43 G:0.46 H:1.27 I:1.12 L:1.33 K:1.36 M:1.41 F:1.30 P:0.25 S:0.89 T:0.81 W:1.27 Y:0.91 V:0.930000
+Average relative fractional occurrence in AL(i-1) (Rackovsky-Scheraga, 1982)
+A:0.00 R:0.00 N:4.14 D:2.15 C:0.00 Q:0.00 E:0.00 G:6.49 H:0.00 I:0.00 L:0.00 K:0.00 M:0.00 F:2.11 P:1.99 S:0.00 T:1.24 W:0.00 Y:1.90 V:0.000000
+Average relative fractional occurrence in EL(i-1) (Rackovsky-Scheraga, 1982)
+A:1.02 R:1.00 N:1.31 D:1.76 C:1.05 Q:1.05 E:0.83 G:2.39 H:0.40 I:0.83 L:1.06 K:0.94 M:1.33 F:0.41 P:2.73 S:1.18 T:0.77 W:1.22 Y:1.09 V:0.880000
+Average relative fractional occurrence in E0(i-1) (Rackovsky-Scheraga, 1982)
+A:0.93 R:1.52 N:0.92 D:0.60 C:1.08 Q:0.94 E:0.73 G:0.78 H:1.08 I:1.74 L:1.03 K:1.00 M:1.31 F:1.51 P:1.37 S:0.97 T:1.38 W:1.12 Y:1.65 V:1.700000
+Average relative fractional occurrence in ER(i-1) (Rackovsky-Scheraga, 1982)
+A:0.99 R:1.19 N:1.15 D:1.18 C:2.32 Q:1.52 E:1.36 G:1.40 H:1.06 I:0.81 L:1.26 K:0.91 M:1.00 F:1.25 P:0.00 S:1.50 T:1.18 W:1.33 Y:1.09 V:1.010000
+Value of theta(i) (Rackovsky-Scheraga, 1982)
+A:17.05 R:21.25 N:34.81 D:19.27 C:28.84 Q:15.42 E:20.12 G:38.14 H:23.07 I:16.66 L:10.89 K:16.46 M:20.61 F:16.26 P:23.94 S:19.95 T:18.92 W:23.36 Y:26.49 V:17.060000
+Value of theta(i-1) (Rackovsky-Scheraga, 1982)
+A:14.53 R:17.82 N:13.59 D:19.78 C:30.57 Q:22.18 E:18.19 G:37.16 H:22.63 I:20.28 L:14.30 K:14.07 M:20.61 F:19.61 P:52.63 S:18.56 T:21.09 W:19.78 Y:26.36 V:21.870000
+Transfer free energy from chx to wat (Radzicka-Wolfenden, 1988)
+A:1.81 R:-14.92 N:-6.64 D:-8.72 C:1.28 Q:-5.54 E:-6.81 G:0.94 H:-4.66 I:4.92 L:4.92 K:-5.55 M:2.35 F:2.98 P:0.00 S:-3.40 T:-2.57 W:2.33 Y:-0.14 V:4.040000
+Transfer free energy from oct to wat (Radzicka-Wolfenden, 1988)
+A:0.52 R:-1.32 N:-0.01 D:0.00 C:0.00 Q:-0.07 E:-0.79 G:0.00 H:0.95 I:2.04 L:1.76 K:0.08 M:1.32 F:2.09 P:0.00 S:0.04 T:0.27 W:2.51 Y:1.63 V:1.180000
+Transfer free energy from vap to chx (Radzicka-Wolfenden, 1988)
+A:0.13 R:-5.00 N:-3.04 D:-2.23 C:-2.52 Q:-3.84 E:-3.43 G:1.45 H:-5.61 I:-2.77 L:-2.64 K:-3.97 M:-3.83 F:-3.74 P:0.00 S:-1.66 T:-2.31 W:-8.21 Y:-5.97 V:-2.050000
+Transfer free energy from chx to oct (Radzicka-Wolfenden, 1988)
+A:1.29 R:-13.60 N:-6.63 D:0.00 C:0.00 Q:-5.47 E:-6.02 G:0.94 H:-5.61 I:2.88 L:3.16 K:-5.63 M:1.03 F:0.89 P:0.00 S:-3.44 T:-2.84 W:-0.18 Y:-1.77 V:2.860000
+Transfer free energy from vap to oct (Radzicka-Wolfenden, 1988)
+A:1.42 R:-18.60 N:-9.67 D:0.00 C:0.00 Q:-9.31 E:-9.45 G:2.39 H:-11.22 I:0.11 L:0.52 K:-9.60 M:-2.80 F:-2.85 P:0.00 S:-5.10 T:-5.15 W:-8.39 Y:-7.74 V:0.810000
+Accessible surface area (Radzicka-Wolfenden, 1988)
+A:93.70 R:250.40 N:146.30 D:142.60 C:135.20 Q:177.70 E:182.90 G:52.60 H:188.10 I:182.20 L:173.70 K:215.20 M:197.60 F:228.60 P:0.00 S:109.50 T:142.10 W:271.60 Y:239.90 V:157.200000
+Energy transfer from out to in(95%buried) (Radzicka-Wolfenden, 1988)
+A:-0.29 R:-2.71 N:-1.18 D:-1.02 C:0.00 Q:-1.53 E:-0.90 G:-0.34 H:-0.94 I:0.24 L:-0.12 K:-2.05 M:-0.24 F:0.00 P:0.00 S:-0.75 T:-0.71 W:-0.59 Y:-1.02 V:0.090000
+Mean polarity (Radzicka-Wolfenden, 1988)
+A:-0.06 R:-0.84 N:-0.48 D:-0.80 C:1.36 Q:-0.73 E:-0.77 G:-0.41 H:0.49 I:1.31 L:1.21 K:-1.18 M:1.27 F:1.27 P:0.00 S:-0.50 T:-0.27 W:0.88 Y:0.33 V:1.090000
+Relative preference value at N"" (Richardson-Richardson, 1988)
+A:0.70 R:0.40 N:1.20 D:1.40 C:0.60 Q:1.00 E:1.00 G:1.60 H:1.20 I:0.90 L:0.90 K:1.00 M:0.30 F:1.20 P:0.70 S:1.60 T:0.30 W:1.10 Y:1.90 V:0.700000
+Relative preference value at N' (Richardson-Richardson, 1988)
+A:0.70 R:0.40 N:1.20 D:1.40 C:0.60 Q:1.00 E:1.00 G:1.60 H:1.20 I:0.90 L:0.90 K:1.00 M:0.30 F:1.20 P:0.70 S:1.60 T:0.30 W:1.10 Y:1.90 V:0.700000
+Relative preference value at N-cap (Richardson-Richardson, 1988)
+A:0.50 R:0.40 N:3.50 D:2.10 C:0.60 Q:0.40 E:0.40 G:1.80 H:1.10 I:0.20 L:0.20 K:0.70 M:0.80 F:0.20 P:0.80 S:2.30 T:1.60 W:0.30 Y:0.80 V:0.100000
+Relative preference value at N1 (Richardson-Richardson, 1988)
+A:1.20 R:0.70 N:0.70 D:0.80 C:0.80 Q:0.70 E:2.20 G:0.30 H:0.70 I:0.90 L:0.90 K:0.60 M:0.30 F:0.50 P:2.60 S:0.70 T:0.80 W:2.10 Y:1.80 V:1.100000
+Relative preference value at N2 (Richardson-Richardson, 1988)
+A:1.60 R:0.90 N:0.70 D:2.60 C:1.20 Q:0.80 E:2.00 G:0.90 H:0.70 I:0.70 L:0.30 K:1.00 M:1.00 F:0.90 P:0.50 S:0.80 T:0.70 W:1.70 Y:0.40 V:0.600000
+Relative preference value at N3 (Richardson-Richardson, 1988)
+A:1.00 R:0.40 N:0.70 D:2.20 C:0.60 Q:1.50 E:3.30 G:0.60 H:0.70 I:0.40 L:0.60 K:0.80 M:1.00 F:0.60 P:0.40 S:0.40 T:1.00 W:1.40 Y:1.20 V:1.100000
+Relative preference value at N4 (Richardson-Richardson, 1988)
+A:1.10 R:1.50 N:0.00 D:0.30 C:1.10 Q:1.30 E:0.50 G:0.40 H:1.50 I:1.10 L:2.60 K:0.80 M:1.70 F:1.90 P:0.10 S:0.40 T:0.50 W:3.10 Y:0.60 V:1.500000
+Relative preference value at N5 (Richardson-Richardson, 1988)
+A:1.40 R:1.20 N:1.20 D:0.60 C:1.60 Q:1.40 E:0.90 G:0.60 H:0.90 I:0.90 L:1.10 K:1.90 M:1.70 F:1.00 P:0.30 S:1.10 T:0.60 W:1.40 Y:0.20 V:0.800000
+Relative preference value at Mid (Richardson-Richardson, 1988)
+A:1.80 R:1.30 N:0.90 D:1.00 C:0.70 Q:1.30 E:0.80 G:0.50 H:1.00 I:1.20 L:1.20 K:1.10 M:1.50 F:1.30 P:0.30 S:0.60 T:1.00 W:1.50 Y:0.80 V:1.200000
+Relative preference value at C5 (Richardson-Richardson, 1988)
+A:1.80 R:1.00 N:0.60 D:0.70 C:0.00 Q:1.00 E:1.10 G:0.50 H:2.40 I:1.30 L:1.20 K:1.40 M:2.70 F:1.90 P:0.30 S:0.50 T:0.50 W:1.10 Y:1.30 V:0.400000
+Relative preference value at C4 (Richardson-Richardson, 1988)
+A:1.30 R:0.80 N:0.60 D:0.50 C:0.70 Q:0.20 E:0.70 G:0.50 H:1.90 I:1.60 L:1.40 K:1.00 M:2.80 F:2.90 P:0.00 S:0.50 T:0.60 W:2.10 Y:0.80 V:1.400000
+Relative preference value at C3 (Richardson-Richardson, 1988)
+A:0.70 R:0.80 N:0.80 D:0.60 C:0.20 Q:1.30 E:1.60 G:0.10 H:1.10 I:1.40 L:1.90 K:2.20 M:1.00 F:1.80 P:0.00 S:0.60 T:0.70 W:0.40 Y:1.10 V:1.300000
+Relative preference value at C2 (Richardson-Richardson, 1988)
+A:1.40 R:2.10 N:0.90 D:0.70 C:1.20 Q:1.60 E:1.70 G:0.20 H:1.80 I:0.40 L:0.80 K:1.90 M:1.30 F:0.30 P:0.20 S:1.60 T:0.90 W:0.40 Y:0.30 V:0.700000
+Relative preference value at C1 (Richardson-Richardson, 1988)
+A:1.10 R:1.00 N:1.20 D:0.40 C:1.60 Q:2.10 E:0.80 G:0.20 H:3.40 I:0.70 L:0.70 K:2.00 M:1.00 F:0.70 P:0.00 S:1.70 T:1.00 W:0.00 Y:1.20 V:0.700000
+Relative preference value at C-cap (Richardson-Richardson, 1988)
+A:0.80 R:0.90 N:1.60 D:0.70 C:0.40 Q:0.90 E:0.30 G:3.90 H:1.30 I:0.70 L:0.70 K:1.30 M:0.80 F:0.50 P:0.70 S:0.80 T:0.30 W:0.00 Y:0.80 V:0.200000
+Relative preference value at C' (Richardson-Richardson, 1988)
+A:1.00 R:1.40 N:0.90 D:1.40 C:0.80 Q:1.40 E:0.80 G:1.20 H:1.20 I:1.10 L:0.90 K:1.20 M:0.80 F:0.10 P:1.90 S:0.70 T:0.80 W:0.40 Y:0.90 V:0.600000
+Relative preference value at C"" (Richardson-Richardson, 1988)
+A:0.70 R:1.10 N:1.50 D:1.40 C:0.40 Q:1.10 E:0.70 G:0.60 H:1.00 I:0.70 L:0.50 K:1.30 M:0.00 F:1.20 P:1.50 S:0.90 T:2.10 W:2.70 Y:0.50 V:1.000000
+Information measure for alpha-helix (Robson-Suzuki, 1976)
+A:6.50 R:-0.90 N:-5.10 D:0.50 C:-1.30 Q:1.00 E:7.80 G:-8.60 H:1.20 I:0.60 L:3.20 K:2.30 M:5.30 F:1.60 P:-7.70 S:-3.90 T:-2.60 W:1.20 Y:-4.50 V:1.400000
+Information measure for N-terminal helix (Robson-Suzuki, 1976)
+A:2.30 R:-5.20 N:0.30 D:7.40 C:0.80 Q:-0.70 E:10.30 G:-5.20 H:-2.80 I:-4.00 L:-2.10 K:-4.10 M:-3.50 F:-1.10 P:8.10 S:-3.50 T:2.30 W:-0.90 Y:-3.70 V:-4.400000
+Information measure for middle helix (Robson-Suzuki, 1976)
+A:6.70 R:0.30 N:-6.10 D:-3.10 C:-4.90 Q:0.60 E:2.20 G:-6.80 H:-1.00 I:3.20 L:5.50 K:0.50 M:7.20 F:2.80 P:-22.80 S:-3.00 T:-4.00 W:4.00 Y:-4.60 V:2.500000
+Information measure for C-terminal helix (Robson-Suzuki, 1976)
+A:2.30 R:1.40 N:-3.30 D:-4.40 C:6.10 Q:2.70 E:2.50 G:-8.30 H:5.90 I:-0.50 L:0.10 K:7.30 M:3.50 F:1.60 P:-24.40 S:-1.90 T:-3.70 W:-0.90 Y:-0.60 V:2.300000
+Information measure for extended (Robson-Suzuki, 1976)
+A:-2.30 R:0.40 N:-4.10 D:-4.40 C:4.40 Q:1.20 E:-5.00 G:-4.20 H:-2.50 I:6.70 L:2.30 K:-3.30 M:2.30 F:2.60 P:-1.80 S:-1.70 T:1.30 W:-1.00 Y:4.00 V:6.800000
+Information measure for pleated-sheet (Robson-Suzuki, 1976)
+A:-2.70 R:0.40 N:-4.20 D:-4.40 C:3.70 Q:0.80 E:-8.10 G:-3.90 H:-3.00 I:7.70 L:3.70 K:-2.90 M:3.70 F:3.00 P:-6.60 S:-2.40 T:1.70 W:0.30 Y:3.30 V:7.100000
+Information measure for extended without H-bond (Robson-Suzuki, 1976)
+A:0.00 R:1.10 N:-2.00 D:-2.60 C:5.40 Q:2.40 E:3.10 G:-3.40 H:0.80 I:-0.10 L:-3.70 K:-3.10 M:-2.10 F:0.70 P:7.40 S:1.30 T:0.00 W:-3.40 Y:4.80 V:2.700000
+Information measure for turn (Robson-Suzuki, 1976)
+A:-5.00 R:2.10 N:4.20 D:3.10 C:4.40 Q:0.40 E:-4.70 G:5.70 H:-0.30 I:-4.60 L:-5.60 K:1.00 M:-4.80 F:-1.80 P:2.60 S:2.60 T:0.30 W:3.40 Y:2.90 V:-6.000000
+Information measure for N-terminal turn (Robson-Suzuki, 1976)
+A:-3.30 R:0.00 N:5.40 D:3.90 C:-0.30 Q:-0.40 E:-1.80 G:-1.20 H:3.00 I:-0.50 L:-2.30 K:-1.20 M:-4.30 F:0.80 P:6.50 S:1.80 T:-0.70 W:-0.80 Y:3.10 V:-3.500000
+Information measure for middle turn (Robson-Suzuki, 1976)
+A:-4.70 R:2.00 N:3.90 D:1.90 C:6.20 Q:-2.00 E:-4.20 G:5.70 H:-2.60 I:-7.00 L:-6.20 K:2.80 M:-4.80 F:-3.70 P:3.60 S:2.10 T:0.60 W:3.30 Y:3.80 V:-6.200000
+Information measure for C-terminal turn (Robson-Suzuki, 1976)
+A:-3.70 R:1.00 N:-0.60 D:-0.60 C:4.00 Q:3.40 E:-4.30 G:5.90 H:-0.80 I:-0.50 L:-2.80 K:1.30 M:-1.60 F:1.60 P:-6.00 S:1.50 T:1.20 W:6.50 Y:1.30 V:-4.600000
+Information measure for coil (Robson-Suzuki, 1976)
+A:-2.50 R:-1.20 N:4.60 D:0.00 C:-4.70 Q:-0.50 E:-4.40 G:4.90 H:1.60 I:-3.30 L:-2.00 K:-0.80 M:-4.10 F:-4.10 P:5.80 S:2.50 T:1.70 W:1.20 Y:-0.60 V:-3.500000
+Information measure for loop (Robson-Suzuki, 1976)
+A:-5.10 R:2.60 N:4.70 D:3.10 C:3.80 Q:0.20 E:-5.20 G:5.60 H:-0.90 I:-4.50 L:-5.40 K:1.00 M:-5.30 F:-2.40 P:3.50 S:3.20 T:0.00 W:2.90 Y:3.20 V:-6.300000
+Hydration free energy (Robson-Osguthorpe, 1979)
+A:-1.00 R:0.30 N:-0.70 D:-1.20 C:2.10 Q:-0.10 E:-0.70 G:0.30 H:1.10 I:4.00 L:2.00 K:-0.90 M:1.80 F:2.80 P:0.40 S:-1.20 T:-0.50 W:3.00 Y:2.10 V:1.400000
+Mean area buried on transfer (Rose et al., 1985)
+A:86.60 R:162.20 N:103.30 D:97.80 C:132.30 Q:119.20 E:113.90 G:62.90 H:155.80 I:158.00 L:164.10 K:115.50 M:172.90 F:194.10 P:92.90 S:85.60 T:106.50 W:224.60 Y:177.70 V:141.000000
+Mean fractional area loss (Rose et al., 1985)
+A:0.74 R:0.64 N:0.63 D:0.62 C:0.91 Q:0.62 E:0.62 G:0.72 H:0.78 I:0.88 L:0.85 K:0.52 M:0.85 F:0.88 P:0.64 S:0.66 T:0.70 W:0.85 Y:0.76 V:0.860000
+Side chain hydropathy, uncorrected for solvation (Roseman, 1988)
+A:-0.67 R:12.10 N:7.23 D:8.72 C:-0.34 Q:6.39 E:7.35 G:0.00 H:3.82 I:-3.02 L:-3.02 K:6.13 M:-1.30 F:-3.24 P:-1.75 S:4.35 T:3.86 W:-2.86 Y:0.98 V:-2.180000
+Side chain hydropathy, corrected for solvation (Roseman, 1988)
+A:-0.67 R:3.89 N:2.27 D:1.57 C:-2.00 Q:2.12 E:1.78 G:0.00 H:1.09 I:-3.02 L:-3.02 K:2.46 M:-1.67 F:-3.24 P:-1.75 S:0.10 T:-0.42 W:-2.86 Y:0.98 V:-2.180000
+Loss of Side chain hydropathy by helix formation (Roseman, 1988)
+A:0.40 R:0.30 N:0.90 D:0.80 C:0.50 Q:0.70 E:1.30 G:0.00 H:1.00 I:0.40 L:0.60 K:0.40 M:0.30 F:0.70 P:0.90 S:0.40 T:0.40 W:0.60 Y:1.20 V:0.400000
+Transfer free energy (Simon, 1976), Cited by Charton-Charton (1982)
+A:0.73 R:0.73 N:-0.01 D:0.54 C:0.70 Q:-0.10 E:0.55 G:0.00 H:1.10 I:2.97 L:2.49 K:1.50 M:1.30 F:2.65 P:2.60 S:0.04 T:0.44 W:3.00 Y:2.97 V:1.690000
+Zimm-Bragg parameter s at 20 C (Sueki et al., 1984)
+A:1.071 R:1.033 N:0.784 D:0.68 C:0.922 Q:0.977 E:0.97 G:0.591 H:0.85 I:1.14 L:1.14 K:0.939 M:1.20 F:1.086 P:0.659 S:0.76 T:0.817 W:1.107 Y:1.02 V:0.950000
+Zimm-Bragg parameter sigma x 1.0E4 (Sueki et al., 1984)
+A:8.00 R:0.10 N:0.10 D:70.00 C:26.00 Q:33.00 E:6.00 G:0.10 H:0.10 I:55.00 L:33.00 K:1.00 M:54.00 F:18.00 P:42.00 S:0.10 T:0.10 W:77.00 Y:66.00 V:0.100000
+Optimal matching hydrophobicity (Sweet-Eisenberg, 1983)
+A:-0.40 R:-0.59 N:-0.92 D:-1.31 C:0.17 Q:-0.91 E:-1.22 G:-0.67 H:-0.64 I:1.25 L:1.22 K:-0.67 M:1.02 F:1.92 P:-0.49 S:-0.55 T:-0.28 W:0.50 Y:1.67 V:0.910000
+Normalized frequency of alpha-helix (Tanaka-Scheraga, 1977)
+A:1.42 R:1.06 N:0.71 D:1.01 C:0.73 Q:1.02 E:1.63 G:0.50 H:1.20 I:1.12 L:1.29 K:1.24 M:1.21 F:1.16 P:0.65 S:0.71 T:0.78 W:1.05 Y:0.67 V:0.990000
+Normalized frequency of isolated helix (Tanaka-Scheraga, 1977)
+A:0.946 R:1.128 N:0.432 D:1.311 C:0.481 Q:1.615 E:0.698 G:0.36 H:2.168 I:1.283 L:1.192 K:1.203 M:0.00 F:0.963 P:2.093 S:0.523 T:1.961 W:1.925 Y:0.802 V:0.409000
+Normalized frequency of extended structure (Tanaka-Scheraga, 1977)
+A:0.79 R:1.087 N:0.832 D:0.53 C:1.268 Q:1.038 E:0.643 G:0.725 H:0.864 I:1.361 L:1.111 K:0.735 M:1.092 F:1.052 P:1.249 S:1.093 T:1.214 W:1.114 Y:1.34 V:1.428000
+Normalized frequency of chain reversal R (Tanaka-Scheraga, 1977)
+A:1.194 R:0.795 N:0.659 D:1.056 C:0.678 Q:1.29 E:0.928 G:1.015 H:0.611 I:0.603 L:0.595 K:1.06 M:0.831 F:0.377 P:3.159 S:1.444 T:1.172 W:0.452 Y:0.816 V:0.640000
+Normalized frequency of chain reversal S (Tanaka-Scheraga, 1977)
+A:0.497 R:0.677 N:2.072 D:1.498 C:1.348 Q:0.711 E:0.651 G:1.848 H:1.474 I:0.471 L:0.656 K:0.932 M:0.425 F:1.348 P:0.179 S:1.151 T:0.749 W:1.283 Y:1.283 V:0.654000
+Normalized frequency of chain reversal D (Tanaka-Scheraga, 1977)
+A:0.937 R:1.725 N:1.08 D:1.64 C:1.004 Q:1.078 E:0.679 G:0.901 H:1.085 I:0.178 L:0.808 K:1.254 M:0.886 F:0.803 P:0.748 S:1.145 T:1.487 W:0.803 Y:1.227 V:0.625000
+Normalized frequency of left-handed helix (Tanaka-Scheraga, 1977)
+A:0.289 R:1.38 N:3.169 D:0.917 C:1.767 Q:2.372 E:0.285 G:4.259 H:1.061 I:0.262 L:0.00 K:1.288 M:0.00 F:0.393 P:0.00 S:0.16 T:0.218 W:0.00 Y:0.654 V:0.167000
+Normalized frequency of zeta R (Tanaka-Scheraga, 1977)
+A:0.328 R:2.088 N:1.498 D:3.379 C:0.00 Q:0.00 E:0.00 G:0.50 H:1.204 I:2.078 L:0.414 K:0.835 M:0.982 F:1.336 P:0.415 S:1.089 T:1.732 W:1.781 Y:0.00 V:0.946000
+Normalized frequency of coil (Tanaka-Scheraga, 1977)
+A:0.945 R:0.364 N:1.202 D:1.315 C:0.932 Q:0.704 E:1.014 G:2.355 H:0.525 I:0.673 L:0.758 K:0.947 M:1.028 F:0.622 P:0.579 S:1.14 T:0.863 W:0.777 Y:0.907 V:0.561000
+Normalized frequency of chain reversal (Tanaka-Scheraga, 1977)
+A:0.842 R:0.936 N:1.352 D:1.366 C:1.032 Q:0.998 E:0.758 G:1.349 H:1.079 I:0.459 L:0.665 K:1.045 M:0.668 F:0.881 P:1.385 S:1.257 T:1.055 W:0.881 Y:1.101 V:0.643000
+Relative population of conformational state A (Vasquez et al., 1983)
+A:0.135 R:0.296 N:0.196 D:0.289 C:0.159 Q:0.236 E:0.184 G:0.051 H:0.223 I:0.173 L:0.215 K:0.17 M:0.239 F:0.087 P:0.151 S:0.01 T:0.10 W:0.166 Y:0.066 V:0.285000
+Relative population of conformational state C (Vasquez et al., 1983)
+A:0.507 R:0.459 N:0.287 D:0.223 C:0.592 Q:0.383 E:0.445 G:0.39 H:0.31 I:0.111 L:0.619 K:0.559 M:0.431 F:0.077 P:0.739 S:0.689 T:0.785 W:0.16 Y:0.06 V:0.356000
+Relative population of conformational state E (Vasquez et al., 1983)
+A:0.159 R:0.194 N:0.385 D:0.283 C:0.187 Q:0.236 E:0.206 G:0.049 H:0.233 I:0.581 L:0.083 K:0.159 M:0.198 F:0.682 P:0.366 S:0.15 T:0.074 W:0.463 Y:0.737 V:0.301000
+Electron-ion interaction potential (Veljkovic et al., 1985)
+A:3731.00 R:9593.00 N:359.00 D:12630.00 C:8292.00 Q:7606.00 E:580.00 G:499.00 H:2415.00 I:0.00 L:0.00 K:3710.00 M:8226.00 F:9460.00 P:1979.00 S:8292.00 T:9408.00 W:5481.00 Y:5159.00 V:569.000000
+Bitterness (Venanzi, 1984)
+A:0.00 R:0.00 N:0.00 D:0.00 C:0.00 Q:0.00 E:0.00 G:0.00 H:0.00 I:1.00 L:1.00 K:0.00 M:0.00 F:1.00 P:0.00 S:0.00 T:0.00 W:1.00 Y:1.00 V:1.000000
+Transfer free energy to lipophilic phase (von Heijne-Blomberg, 1979)
+A:-12.04 R:39.23 N:4.25 D:23.22 C:3.95 Q:2.16 E:16.81 G:-7.85 H:6.28 I:-18.32 L:-17.79 K:9.71 M:-8.86 F:-21.98 P:5.82 S:-1.54 T:-4.15 W:-16.19 Y:-1.51 V:-16.220000
+Average interactions per side chain atom (Warme-Morgan, 1978)
+A:10.04 R:6.18 N:5.63 D:5.76 C:8.89 Q:5.41 E:5.37 G:7.99 H:7.49 I:8.72 L:8.79 K:4.40 M:9.15 F:7.98 P:7.79 S:7.08 T:7.00 W:8.07 Y:6.90 V:8.880000
+RF value in high salt chromatography (Weber-Lacey, 1978)
+A:0.89 R:0.88 N:0.89 D:0.87 C:0.85 Q:0.82 E:0.84 G:0.92 H:0.83 I:0.76 L:0.73 K:0.97 M:0.74 F:0.52 P:0.82 S:0.96 T:0.92 W:0.20 Y:0.49 V:0.850000
+Propensity to be buried inside (Wertz-Scheraga, 1978)
+A:0.52 R:0.49 N:0.42 D:0.37 C:0.83 Q:0.35 E:0.38 G:0.41 H:0.70 I:0.79 L:0.77 K:0.31 M:0.76 F:0.87 P:0.35 S:0.49 T:0.38 W:0.86 Y:0.64 V:0.720000
+Free energy change of epsilon(i) to epsilon(ex) (Wertz-Scheraga, 1978)
+A:0.16 R:-0.20 N:1.03 D:-0.24 C:-0.12 Q:-0.55 E:-0.45 G:-0.16 H:-0.18 I:-0.19 L:-0.44 K:-0.12 M:-0.79 F:-0.25 P:-0.59 S:-0.01 T:0.05 W:-0.33 Y:-0.42 V:-0.460000
+Free energy change of alpha(Ri) to alpha(Rh) (Wertz-Scheraga, 1978)
+A:0.15 R:-0.37 N:0.69 D:-0.22 C:-0.19 Q:-0.06 E:0.14 G:0.36 H:-0.25 I:0.02 L:0.06 K:-0.16 M:0.11 F:1.18 P:0.11 S:0.13 T:0.28 W:-0.12 Y:0.19 V:-0.080000
+Free energy change of epsilon(i) to alpha(Rh) (Wertz-Scheraga, 1978)
+A:-0.07 R:-0.40 N:-0.57 D:-0.80 C:0.17 Q:-0.26 E:-0.63 G:0.27 H:-0.49 I:0.06 L:-0.17 K:-0.45 M:0.03 F:0.40 P:-0.47 S:-0.11 T:0.09 W:-0.61 Y:-0.61 V:-0.110000
+Polar requirement (Woese, 1973)
+A:7.00 R:9.10 N:10.00 D:13.00 C:5.50 Q:8.60 E:12.50 G:7.90 H:8.40 I:4.90 L:4.90 K:10.10 M:5.30 F:5.00 P:6.60 S:7.50 T:6.60 W:5.30 Y:5.70 V:5.600000
+Principal property value z1 (Wold et al., 1987)
+A:0.07 R:2.88 N:3.22 D:3.64 C:0.71 Q:2.18 E:3.08 G:2.23 H:2.41 I:-4.44 L:-4.19 K:2.84 M:-2.49 F:-4.92 P:-1.22 S:1.96 T:0.92 W:-4.75 Y:-1.39 V:-2.690000
+Principal property value z2 (Wold et al., 1987)
+A:-1.73 R:2.52 N:1.45 D:1.13 C:-0.97 Q:0.53 E:0.39 G:-5.36 H:1.74 I:-1.68 L:-1.03 K:1.41 M:-0.27 F:1.30 P:0.88 S:-1.63 T:-2.09 W:3.65 Y:2.32 V:-2.530000
+Principal property value z3 (Wold et al., 1987)
+A:0.09 R:-3.44 N:0.84 D:2.36 C:4.13 Q:-1.14 E:-0.07 G:0.30 H:1.11 I:-1.03 L:-0.98 K:-3.14 M:-0.41 F:0.45 P:2.23 S:0.57 T:-1.40 W:0.85 Y:0.01 V:-1.290000
+Dependence of partition coefficient on ionic strength (Zaslavsky et al., 1982)
+A:-0.152 R:-0.089 N:-0.203 D:-0.355 C:0.00 Q:-0.181 E:-0.411 G:-0.19 H:0.00 I:-0.086 L:-0.102 K:-0.062 M:-0.107 F:0.001 P:-0.181 S:-0.203 T:-0.17 W:0.275 Y:0.00 V:-0.125000
+Hydrophobicity (Zimmerman et al., 1968)
+A:0.83 R:0.83 N:0.09 D:0.64 C:1.48 Q:0.00 E:0.65 G:0.10 H:1.10 I:3.07 L:2.52 K:1.60 M:1.40 F:2.75 P:2.70 S:0.14 T:0.54 W:0.31 Y:2.97 V:1.790000
+Bulkiness (Zimmerman et al., 1968)
+A:11.50 R:14.28 N:12.82 D:11.68 C:13.46 Q:14.45 E:13.57 G:3.40 H:13.69 I:21.40 L:21.40 K:15.71 M:16.25 F:19.80 P:17.43 S:9.47 T:15.77 W:21.67 Y:18.03 V:21.570000
+Polarity (Zimmerman et al., 1968)
+A:0.00 R:52.00 N:3.38 D:49.70 C:1.48 Q:3.53 E:49.90 G:0.00 H:51.60 I:0.13 L:0.13 K:49.50 M:1.43 F:0.35 P:1.58 S:1.67 T:1.66 W:2.10 Y:1.61 V:0.130000
+Isoelectric point (Zimmerman et al., 1968)
+A:6.00 R:10.76 N:5.41 D:2.77 C:5.05 Q:5.65 E:3.22 G:5.97 H:7.59 I:6.02 L:5.98 K:9.74 M:5.74 F:5.48 P:6.30 S:5.68 T:5.66 W:5.89 Y:5.66 V:5.960000
+RF rank (Zimmerman et al., 1968)
+A:9.90 R:4.60 N:5.40 D:2.80 C:2.80 Q:9.00 E:3.20 G:5.60 H:8.20 I:17.10 L:17.60 K:3.50 M:14.90 F:18.80 P:14.80 S:6.90 T:9.50 W:17.10 Y:15.00 V:14.300000
+Normalized positional residue frequency at helix termini N4'(Aurora-Rose, 1998) 
+A:0.94 R:1.15 N:0.79 D:1.19 C:0.60 Q:0.94 E:1.41 G:1.18 H:1.15 I:1.07 L:0.95 K:1.03 M:0.88 F:1.06 P:1.18 S:0.69 T:0.87 W:0.91 Y:1.04 V:0.900000
+Normalized positional residue frequency at helix termini N (Aurora-Rose, 1998)
+A:0.98 R:1.14 N:1.05 D:1.05 C:0.41 Q:0.90 E:1.04 G:1.25 H:1.01 I:0.88 L:0.80 K:1.06 M:1.12 F:1.12 P:1.31 S:1.02 T:0.80 W:0.90 Y:1.12 V:0.870000
+Normalized positional residue frequency at helix termini N (Aurora-Rose, 1998)
+A:1.05 R:0.81 N:0.91 D:1.39 C:0.60 Q:0.87 E:1.11 G:1.26 H:1.43 I:0.95 L:0.96 K:0.97 M:0.99 F:0.95 P:1.05 S:0.96 T:1.03 W:1.06 Y:0.94 V:0.620000
+Normalized positional residue frequency at helix termini N (Aurora-Rose, 1998)
+A:0.75 R:0.90 N:1.24 D:1.72 C:0.66 Q:1.08 E:1.10 G:1.14 H:0.96 I:0.80 L:1.01 K:0.66 M:1.02 F:0.88 P:1.33 S:1.20 T:1.13 W:0.68 Y:0.80 V:0.580000
+Normalized positional residue frequency at helix termini Nc (Aurora-Rose, 1998)
+A:0.67 R:0.76 N:1.28 D:1.58 C:0.37 Q:1.05 E:0.94 G:0.98 H:0.83 I:0.78 L:0.79 K:0.84 M:0.98 F:0.96 P:1.12 S:1.25 T:1.41 W:0.94 Y:0.82 V:0.670000
+1998) Normalized positional residue frequency at helix termini N1 (Aurora-Rose,
+A:1.10 R:1.05 N:0.72 D:1.14 C:0.26 Q:1.31 E:2.30 G:0.55 H:0.83 I:1.06 L:0.84 K:1.08 M:0.90 F:0.90 P:1.67 S:0.81 T:0.77 W:1.26 Y:0.99 V:0.760000
+1998) Normalized positional residue frequency at helix termini N2 (Aurora-Rose,
+A:1.39 R:0.95 N:0.67 D:1.64 C:0.52 Q:1.60 E:2.07 G:0.65 H:1.36 I:0.64 L:0.91 K:0.80 M:1.10 F:1.00 P:0.94 S:0.69 T:0.92 W:1.10 Y:0.73 V:0.700000
+1998) Normalized positional residue frequency at helix termini N3 (Aurora-Rose,
+A:1.43 R:1.33 N:0.55 D:0.90 C:0.52 Q:1.43 E:1.70 G:0.56 H:0.66 I:1.18 L:1.52 K:0.82 M:1.68 F:1.10 P:0.15 S:0.61 T:0.75 W:1.68 Y:0.65 V:1.140000
+1998) Normalized positional residue frequency at helix termini N4 (Aurora-Rose,
+A:1.55 R:1.39 N:0.60 D:0.61 C:0.59 Q:1.43 E:1.34 G:0.37 H:0.89 I:1.47 L:1.36 K:1.27 M:2.13 F:1.39 P:0.03 S:0.44 T:0.65 W:1.10 Y:0.93 V:1.180000
+1998) Normalized positional residue frequency at helix termini N5 (Aurora-Rose,
+A:1.80 R:1.73 N:0.73 D:0.90 C:0.55 Q:0.97 E:1.73 G:0.32 H:0.46 I:1.09 L:1.47 K:1.24 M:1.64 F:0.96 P:0.15 S:0.67 T:0.70 W:0.68 Y:0.91 V:0.810000
+1998) Normalized positional residue frequency at helix termini C5 (Aurora-Rose,
+A:1.52 R:1.49 N:0.58 D:1.04 C:0.26 Q:1.41 E:1.76 G:0.30 H:0.83 I:1.25 L:1.26 K:1.10 M:1.14 F:1.14 P:0.44 S:0.66 T:0.73 W:0.68 Y:1.04 V:1.030000
+1998) Normalized positional residue frequency at helix termini C4 (Aurora-Rose,
+A:1.49 R:1.41 N:0.67 D:0.94 C:0.37 Q:1.52 E:1.55 G:0.29 H:0.96 I:1.04 L:1.40 K:1.17 M:1.84 F:0.86 P:0.20 S:0.68 T:0.79 W:1.52 Y:1.06 V:0.940000
+1998) Normalized positional residue frequency at helix termini C3 (Aurora-Rose,
+A:1.73 R:1.24 N:0.70 D:0.68 C:0.63 Q:0.88 E:1.16 G:0.32 H:0.76 I:1.15 L:1.80 K:1.22 M:2.21 F:1.35 P:0.07 S:0.65 T:0.46 W:1.57 Y:1.10 V:0.940000
+1998) Normalized positional residue frequency at helix termini C2 (Aurora-Rose,
+A:1.33 R:1.39 N:0.64 D:0.60 C:0.44 Q:1.37 E:1.43 G:0.20 H:1.02 I:1.58 L:1.63 K:1.71 M:1.76 F:1.22 P:0.07 S:0.42 T:0.57 W:1.00 Y:1.02 V:1.080000
+1998) Normalized positional residue frequency at helix termini C1 (Aurora-Rose,
+A:1.87 R:1.66 N:0.70 D:0.91 C:0.33 Q:1.24 E:1.88 G:0.33 H:0.89 I:0.90 L:1.65 K:1.63 M:1.35 F:0.67 P:0.03 S:0.71 T:0.50 W:1.00 Y:0.73 V:0.510000
+1998) Normalized positional residue frequency at helix termini Cc (Aurora-Rose,
+A:1.19 R:1.45 N:1.33 D:0.72 C:0.44 Q:1.43 E:1.27 G:0.74 H:1.55 I:0.61 L:1.36 K:1.45 M:1.35 F:1.20 P:0.10 S:1.02 T:0.82 W:0.58 Y:1.06 V:0.460000
+1998) Normalized positional residue frequency at helix termini C' (Aurora-Rose,
+A:0.77 R:1.11 N:1.39 D:0.79 C:0.44 Q:0.95 E:0.92 G:2.74 H:1.65 I:0.64 L:0.66 K:1.19 M:0.74 F:1.04 P:0.66 S:0.64 T:0.82 W:0.58 Y:0.93 V:0.530000
+1998) Normalized positional residue frequency at helix termini C"" (Aurora-Rose,
+A:0.93 R:0.96 N:0.82 D:1.15 C:0.67 Q:1.02 E:1.07 G:1.08 H:1.40 I:1.14 L:1.16 K:1.27 M:1.11 F:1.05 P:1.01 S:0.71 T:0.84 W:1.06 Y:1.15 V:0.740000
+1998) Normalized positional residue frequency at helix termini C""' (Aurora-Rose,
+A:1.09 R:1.29 N:1.03 D:1.17 C:0.26 Q:1.08 E:1.31 G:0.97 H:0.88 I:0.97 L:0.87 K:1.13 M:0.96 F:0.84 P:2.01 S:0.76 T:0.79 W:0.91 Y:0.64 V:0.770000
+1998) Normalized positional residue frequency at helix termini C4' (Aurora-Rose,
+A:0.71 R:1.09 N:0.95 D:1.43 C:0.65 Q:0.87 E:1.19 G:1.07 H:1.13 I:1.05 L:0.84 K:1.10 M:0.80 F:0.95 P:1.70 S:0.65 T:86.00 W:1.25 Y:0.85 V:1.120000
+Delta G values for the peptides extrapolated to 0 M urea (O'Neil-DeGrado, 1990)
+A:13.40 R:13.30 N:12.00 D:11.70 C:11.60 Q:12.80 E:12.20 G:11.30 H:11.60 I:12.00 L:13.00 K:13.00 M:12.80 F:12.10 P:6.50 S:12.20 T:11.70 W:12.40 Y:12.10 V:11.900000
+Normalized flexibility parameters (B-values), average (Vihinen et al., 1994)
+A:0.984 R:1.008 N:1.048 D:1.068 C:0.906 Q:1.037 E:1.094 G:1.031 H:0.95 I:0.927 L:0.935 K:1.102 M:0.952 F:0.915 P:1.049 S:1.046 T:0.997 W:0.904 Y:0.929 V:0.931000
+none rigid neighbours (Vihinen et al., 1994) Normalized flexibility parameters (B-values) for each residue surrounded by
+A:1.315 R:1.31 N:1.38 D:1.372 C:1.196 Q:1.342 E:1.376 G:1.382 H:1.279 I:1.241 L:1.234 K:1.367 M:1.269 F:1.247 P:1.342 S:1.381 T:1.324 W:1.186 Y:1.199 V:1.235000
+one rigid neighbours (Vihinen et al., 1994) Normalized flexibility parameters (B-values) for each residue surrounded by
+A:0.994 R:1.026 N:1.022 D:1.022 C:0.939 Q:1.041 E:1.052 G:1.018 H:0.967 I:0.977 L:0.982 K:1.029 M:0.963 F:0.934 P:1.05 S:1.025 T:0.998 W:0.938 Y:0.981 V:0.968000
+two rigid neighbours (Vihinen et al., 1994) Normalized flexibility parameters (B-values) for each residue surrounded by
+A:0.783 R:0.807 N:0.799 D:0.822 C:0.785 Q:0.817 E:0.826 G:0.784 H:0.777 I:0.776 L:0.783 K:0.834 M:0.806 F:0.774 P:0.809 S:0.811 T:0.795 W:0.796 Y:0.788 V:0.781000
+Free energy in alpha-helical conformation (Munoz-Serrano, 1994)
+A:0.423 R:0.503 N:0.906 D:0.87 C:0.877 Q:0.594 E:0.167 G:1.162 H:0.802 I:0.566 L:0.494 K:0.615 M:0.444 F:0.706 P:1.945 S:0.928 T:0.884 W:0.69 Y:0.778 V:0.706000
+Free energy in beta-strand conformation (Munoz-Serrano, 1994)
+A:1.08 R:0.976 N:1.197 D:1.266 C:0.733 Q:1.05 E:1.085 G:1.104 H:0.906 I:0.583 L:0.789 K:1.026 M:0.812 F:0.685 P:1.412 S:0.987 T:0.784 W:0.755 Y:0.665 V:0.546000
+Free energy in beta-strand region (Munoz-Serrano, 1994)
+A:0.978 R:0.784 N:0.915 D:1.038 C:0.573 Q:0.863 E:0.962 G:1.405 H:0.724 I:0.502 L:0.766 K:0.841 M:0.729 F:0.585 P:2.613 S:0.784 T:0.569 W:0.671 Y:0.56 V:0.444000
+water (Wimley-White, 1996) Free energies of transfer of AcWl-X-LL peptides from bilayer interface to
+A:4.08 R:3.91 N:3.83 D:3.02 C:4.49 Q:3.67 E:2.23 G:4.24 H:4.08 I:4.52 L:4.81 K:3.77 M:4.48 F:5.38 P:3.80 S:4.12 T:4.11 W:6.10 Y:5.19 V:4.180000
+Thermodynamic beta sheet propensity (Kim-Berg, 1993)
+A:-0.35 R:-0.44 N:-0.38 D:-0.41 C:-0.47 Q:-0.40 E:-0.41 G:0.00 H:-0.46 I:-0.56 L:-0.48 K:-0.41 M:-0.46 F:-0.55 P:-0.23 S:-0.39 T:-0.48 W:-0.48 Y:-0.50 V:-0.530000
+Turn propensity scale for transmembrane helices (Monne et al., 1999)
+A:0.50 R:1.70 N:1.70 D:1.60 C:0.60 Q:1.60 E:1.60 G:1.30 H:1.60 I:0.60 L:0.40 K:1.60 M:0.50 F:0.40 P:1.70 S:0.70 T:0.40 W:0.70 Y:0.60 V:0.500000
+Alpha helix propensity of position 44 in T4 lysozyme (Blaber et al., 1993)
+A:0.96 R:0.77 N:0.39 D:0.42 C:0.42 Q:0.80 E:0.53 G:0.00 H:0.57 I:0.84 L:0.92 K:0.73 M:0.86 F:0.59 P:-2.50 S:0.53 T:0.54 W:0.58 Y:0.72 V:0.630000
+(Parthasarathy-Murthy, 2000) p-Values of mesophilic proteins based on the distributions of B values
+A:0.343 R:0.353 N:0.409 D:0.429 C:0.319 Q:0.395 E:0.405 G:0.389 H:0.307 I:0.296 L:0.287 K:0.429 M:0.293 F:0.292 P:0.432 S:0.416 T:0.362 W:0.268 Y:0.22 V:0.307000
+(Parthasarathy-Murthy, 2000) p-Values of thermophilic proteins based on the distributions of B values
+A:0.32 R:0.327 N:0.384 D:0.424 C:0.198 Q:0.436 E:0.514 G:0.374 H:0.299 I:0.306 L:0.34 K:0.446 M:0.313 F:0.314 P:0.354 S:0.376 T:0.339 W:0.291 Y:0.287 V:0.294000
+thermophilic proteins (Kumar et al., 2000) Distribution of amino acid residues in the 18 non-redundant families of
+A:8.90 R:4.60 N:4.40 D:6.30 C:0.60 Q:2.80 E:6.90 G:9.40 H:2.20 I:7.00 L:7.40 K:6.10 M:2.30 F:3.30 P:4.20 S:4.00 T:5.70 W:1.30 Y:4.50 V:8.200000
+mesophilic proteins (Kumar et al., 2000) Distribution of amino acid residues in the 18 non-redundant families of
+A:9.20 R:3.60 N:5.10 D:6.00 C:1.00 Q:2.90 E:6.00 G:9.40 H:2.10 I:6.00 L:7.70 K:6.50 M:2.40 F:3.40 P:4.20 S:5.50 T:5.70 W:1.20 Y:3.70 V:8.200000
+proteins (Kumar et al., 2000) Distribution of amino acid residues in the alpha-helices in thermophilic
+A:14.10 R:5.50 N:3.20 D:5.70 C:0.10 Q:3.70 E:8.80 G:4.10 H:2.00 I:7.10 L:9.10 K:7.70 M:3.30 F:5.00 P:0.70 S:3.90 T:4.40 W:1.20 Y:4.50 V:5.900000
+proteins (Kumar et al., 2000) Distribution of amino acid residues in the alpha-helices in mesophilic
+A:13.40 R:3.90 N:3.70 D:4.60 C:0.80 Q:4.80 E:7.80 G:4.60 H:3.30 I:6.50 L:10.60 K:7.50 M:3.00 F:4.50 P:1.30 S:3.80 T:4.60 W:1.00 Y:3.30 V:7.100000
+Side-chain contribution to protein stability (kJ/mol) (Takano-Yutani, 2001)
+A:9.80 R:7.30 N:3.60 D:4.90 C:3.00 Q:2.40 E:4.40 G:0.00 H:11.90 I:17.20 L:17.00 K:10.50 M:11.90 F:23.00 P:15.00 S:2.60 T:6.90 W:24.20 Y:17.20 V:15.300000
+Propensity of amino acids within pi-helices (Fodje-Al-Karadaghi, 2002)
+A:0.70 R:0.95 N:1.47 D:0.87 C:1.17 Q:0.73 E:0.96 G:0.64 H:1.39 I:1.29 L:1.44 K:0.91 M:0.91 F:1.34 P:0.12 S:0.84 T:0.74 W:1.80 Y:1.68 V:1.200000
+Hydropathy scale based on self-information values in the two-state model (5% accessibility) (Naderi-Manesh et al., 2001)
+A:58.00 R:-184.00 N:-93.00 D:-97.00 C:116.00 Q:-139.00 E:-131.00 G:-11.00 H:-73.00 I:107.00 L:95.00 K:-24.00 M:78.00 F:92.00 P:-79.00 S:-34.00 T:-7.00 W:59.00 Y:-11.00 V:100.000000
+Hydropathy scale based on self-information values in the two-state model (9% accessibility) (Naderi-Manesh et al., 2001)
+A:51.00 R:-144.00 N:-84.00 D:-78.00 C:137.00 Q:-128.00 E:-115.00 G:-13.00 H:-55.00 I:106.00 L:103.00 K:-205.00 M:73.00 F:108.00 P:-79.00 S:-26.00 T:-3.00 W:69.00 Y:11.00 V:108.000000
+Hydropathy scale based on self-information values in the two-state model (16% accessibility) (Naderi-Manesh et al., 2001)
+A:41.00 R:-109.00 N:-74.00 D:-47.00 C:169.00 Q:-104.00 E:-90.00 G:-18.00 H:-35.00 I:104.00 L:103.00 K:-148.00 M:77.00 F:128.00 P:-81.00 S:-31.00 T:10.00 W:102.00 Y:36.00 V:116.000000
+Hydropathy scale based on self-information values in the two-state model (20% accessibility) (Naderi-Manesh et al., 2001)
+A:32.00 R:-95.00 N:-73.00 D:-29.00 C:182.00 Q:-95.00 E:-74.00 G:-22.00 H:-25.00 I:106.00 L:104.00 K:-124.00 M:82.00 F:132.00 P:-82.00 S:-34.00 T:20.00 W:118.00 Y:44.00 V:113.000000
+Hydropathy scale based on self-information values in the two-state model (25% accessibility) (Naderi-Manesh et al., 2001)
+A:24.00 R:-79.00 N:-76.00 D:0.00 C:194.00 Q:-87.00 E:-57.00 G:-28.00 H:-31.00 I:102.00 L:103.00 K:-9.00 M:90.00 F:131.00 P:-85.00 S:-36.00 T:34.00 W:116.00 Y:43.00 V:111.000000
+Hydropathy scale based on self-information values in the two-state model (36% accessibility) (Naderi-Manesh et al., 2001)
+A:5.00 R:-57.00 N:-77.00 D:45.00 C:224.00 Q:-67.00 E:-8.00 G:-47.00 H:-50.00 I:83.00 L:82.00 K:-38.00 M:83.00 F:117.00 P:-103.00 S:-41.00 T:79.00 W:130.00 Y:27.00 V:117.000000
+Hydropathy scale based on self-information values in the two-state model (50% accessibility) (Naderi-Manesh et al., 2001)
+A:-2.00 R:-41.00 N:-97.00 D:248.00 C:329.00 Q:-37.00 E:117.00 G:-66.00 H:-70.00 I:28.00 L:36.00 K:115.00 M:62.00 F:120.00 P:-132.00 S:-52.00 T:174.00 W:179.00 Y:-7.00 V:114.000000
+Averaged turn propensities in a transmembrane helix (Monne et al., 1999)
+A:0.40 R:1.50 N:1.60 D:1.50 C:0.70 Q:1.40 E:1.30 G:1.10 H:1.40 I:0.50 L:0.30 K:1.40 M:0.50 F:0.30 P:1.60 S:0.90 T:0.70 W:0.90 Y:0.90 V:0.400000
+Composition of amino acids in anchored proteins (percent) (Cedano et al., 1997)
+A:7.60 R:5.00 N:4.40 D:5.20 C:2.20 Q:4.10 E:6.20 G:6.90 H:2.10 I:5.10 L:9.40 K:5.80 M:2.10 F:4.00 P:5.40 S:7.20 T:6.10 W:1.40 Y:3.20 V:6.700000
+Composition of amino acids in membrane proteins (percent) (Cedano et al., 1997)
+A:8.10 R:4.60 N:3.70 D:3.80 C:2.00 Q:3.10 E:4.60 G:7.00 H:2.00 I:6.70 L:11.00 K:4.40 M:2.80 F:5.60 P:4.70 S:7.30 T:5.60 W:1.80 Y:3.30 V:7.700000
+Composition of amino acids in intracellular proteins (percent) (Cedano et al., 1997)
+A:7.90 R:4.90 N:4.00 D:5.50 C:1.90 Q:4.40 E:7.10 G:7.10 H:2.10 I:5.20 L:8.60 K:6.70 M:2.40 F:3.90 P:5.30 S:6.60 T:5.30 W:1.20 Y:3.10 V:6.800000
+Composition of amino acids in nuclear proteins (percent) (Cedano et al., 1997)
+A:8.30 R:8.70 N:3.70 D:4.70 C:1.60 Q:4.70 E:6.50 G:6.30 H:2.10 I:3.70 L:7.40 K:7.90 M:2.30 F:2.70 P:6.90 S:8.80 T:5.10 W:0.70 Y:2.40 V:5.300000
+Surface composition of amino acids in intracellular proteins of thermophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:4.47 R:8.48 N:3.89 D:7.05 C:0.29 Q:2.87 E:16.56 G:8.29 H:1.74 I:3.30 L:5.06 K:12.98 M:1.71 F:2.32 P:5.41 S:4.27 T:3.83 W:0.67 Y:2.75 V:4.050000
+Surface composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:6.77 R:6.87 N:5.50 D:8.57 C:0.31 Q:5.24 E:12.93 G:7.95 H:2.80 I:2.72 L:4.43 K:10.20 M:1.87 F:1.92 P:4.79 S:5.41 T:5.36 W:0.54 Y:2.26 V:3.570000
+Surface composition of amino acids in extracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:7.43 R:4.51 N:9.12 D:8.71 C:0.42 Q:5.42 E:5.86 G:9.40 H:1.49 I:1.76 L:2.74 K:9.67 M:0.60 F:1.18 P:5.60 S:9.60 T:8.95 W:1.18 Y:3.26 V:3.100000
+Surface composition of amino acids in nuclear proteins (percent) (Fukuchi-Nishikawa, 2001)
+A:5.22 R:7.30 N:6.06 D:7.91 C:1.01 Q:6.00 E:10.66 G:5.81 H:2.27 I:2.36 L:4.52 K:12.68 M:1.85 F:1.68 P:5.70 S:6.99 T:5.16 W:0.56 Y:2.16 V:4.100000
+Interior composition of amino acids in intracellular proteins of thermophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:9.88 R:3.71 N:2.35 D:3.50 C:1.12 Q:1.66 E:4.02 G:6.88 H:1.88 I:10.08 L:13.21 K:3.39 M:2.44 F:5.27 P:3.80 S:4.10 T:4.98 W:1.11 Y:4.07 V:12.530000
+Interior composition of amino acids in extracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:9.95 R:3.05 N:4.84 D:4.46 C:1.30 Q:2.64 E:2.58 G:8.87 H:1.99 I:7.73 L:9.66 K:2.00 M:2.45 F:5.41 P:3.20 S:6.03 T:5.62 W:2.60 Y:6.15 V:9.460000
+Interior composition of amino acids in nuclear proteins (percent) (Fukuchi-Nishikawa, 2001)
+A:8.26 R:2.80 N:2.54 D:2.80 C:2.67 Q:2.86 E:2.67 G:5.62 H:1.98 I:8.95 L:16.46 K:1.89 M:2.67 F:7.32 P:3.30 S:6.00 T:5.00 W:2.01 Y:3.96 V:10.240000
+Entire chain composition of amino acids in intracellular proteins of thermophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:7.39 R:5.91 N:3.06 D:5.14 C:0.74 Q:2.22 E:9.80 G:7.53 H:1.82 I:6.96 L:9.45 K:7.81 M:2.10 F:3.91 P:4.54 S:4.18 T:4.45 W:0.90 Y:3.46 V:8.620000
+Entire chain composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:9.07 R:4.90 N:4.05 D:5.73 C:0.95 Q:3.63 E:7.77 G:7.69 H:2.47 I:6.56 L:9.00 K:6.01 M:2.54 F:3.59 P:4.04 S:5.15 T:5.46 W:0.95 Y:2.96 V:7.470000
+Entire chain composition of amino acids in extracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+A:8.82 R:3.71 N:6.77 D:6.38 C:0.90 Q:3.89 E:4.05 G:9.11 H:1.77 I:5.05 L:6.54 K:5.45 M:1.62 F:3.51 P:4.28 S:7.64 T:7.12 W:1.96 Y:4.85 V:6.600000
+Entire chain compositino of amino acids in nuclear proteins (percent) (Fukuchi-Nishikawa, 2001)
+A:6.65 R:5.17 N:4.40 D:5.50 C:1.79 Q:4.52 E:6.89 G:5.72 H:2.13 I:5.47 L:10.15 K:7.59 M:2.24 F:4.34 P:4.56 S:6.52 T:5.08 W:1.24 Y:3.01 V:7.000000
+Screening coefficients gamma, local (Avbelj, 2000)
+A:0.163 R:0.22 N:0.124 D:0.212 C:0.316 Q:0.274 E:0.212 G:0.08 H:0.315 I:0.474 L:0.315 K:0.255 M:0.356 F:0.41 P:NaN S:0.29 T:0.412 W:0.325 Y:0.354 V:0.515000
+Screening coefficients gamma, non-local (Avbelj, 2000)
+A:0.236 R:0.233 N:0.189 D:0.168 C:0.259 Q:0.314 E:0.306 G:-0.17 H:0.256 I:0.391 L:0.293 K:0.231 M:0.367 F:0.328 P:NaN S:0.202 T:0.308 W:0.197 Y:0.223 V:0.436000
+Slopes tripeptide, FDPB VFF neutral (Avbelj, 2000)
+A:-0.49 R:-0.429 N:-0.387 D:-0.375 C:-0.352 Q:-0.422 E:-0.382 G:-0.647 H:-0.357 I:-0.268 L:-0.45 K:-0.409 M:-0.375 F:-0.309 P:NaN S:-0.426 T:-0.24 W:-0.325 Y:-0.288 V:-0.220000
+Slopes tripeptides, LD VFF neutral (Avbelj, 2000)
+A:-0.871 R:-0.727 N:-0.741 D:-0.737 C:-0.666 Q:-0.728 E:-0.773 G:-0.822 H:-0.685 I:-0.617 L:-0.798 K:-0.715 M:-0.717 F:-0.649 P:NaN S:-0.679 T:-0.629 W:-0.669 Y:-0.655 V:-0.599000
+Slopes tripeptide, FDPB VFF noside (Avbelj, 2000)
+A:-0.393 R:-0.317 N:-0.268 D:-0.247 C:-0.222 Q:-0.291 E:-0.26 G:-0.57 H:-0.244 I:-0.144 L:-0.281 K:-0.294 M:-0.274 F:-0.189 P:NaN S:-0.28 T:-0.152 W:-0.206 Y:-0.155 V:-0.080000
+Slopes tripeptide FDPB VFF all (Avbelj, 2000)
+A:-0.378 R:-0.369 N:-0.245 D:-0.113 C:-0.206 Q:-0.29 E:-0.165 G:-0.56 H:-0.295 I:-0.134 L:-0.266 K:-0.335 M:-0.26 F:-0.187 P:NaN S:-0.251 T:-0.093 W:-0.188 Y:-0.147 V:-0.084000
+Slopes tripeptide FDPB PARSE neutral (Avbelj, 2000)
+A:-0.729 R:-0.535 N:-0.597 D:-0.545 C:-0.408 Q:-0.492 E:-0.532 G:-0.86 H:-0.519 I:-0.361 L:-0.462 K:-0.508 M:-0.518 F:-0.454 P:NaN S:-0.278 T:-0.367 W:-0.455 Y:-0.439 V:-0.323000
+Slopes dekapeptide, FDPB VFF neutral (Avbelj, 2000)
+A:-0.623 R:-0.567 N:-0.619 D:-0.626 C:-0.571 Q:-0.559 E:-0.572 G:-0.679 H:-0.508 I:-0.199 L:-0.527 K:-0.581 M:-0.571 F:-0.461 P:NaN S:-0.458 T:-0.233 W:-0.327 Y:-0.451 V:-0.263000
+Slopes proteins, FDPB VFF neutral (Avbelj, 2000)
+A:-0.376 R:-0.28 N:-0.403 D:-0.405 C:-0.441 Q:-0.362 E:-0.362 G:-0.392 H:-0.345 I:-0.194 L:-0.317 K:-0.412 M:-0.312 F:-0.237 P:NaN S:-0.374 T:-0.243 W:-0.111 Y:-0.171 V:-0.355000
+Side-chain conformation by gaussian evolutionary method (Yang et al., 2002)
+A:NaN R:0.62 N:0.76 D:0.66 C:0.83 Q:0.59 E:0.73 G:NaN H:0.92 I:0.88 L:0.89 K:0.77 M:0.77 F:0.92 P:0.94 S:0.58 T:0.73 W:0.86 Y:0.93 V:0.880000
+Amphiphilicity index (Mitaku et al., 2002)
+A:0.00 R:2.45 N:0.00 D:0.00 C:0.00 Q:1.25 E:1.27 G:0.00 H:1.45 I:0.00 L:0.00 K:3.67 M:0.00 F:0.00 P:0.00 S:0.00 T:0.00 W:6.93 Y:5.06 V:0.000000
+Volumes including the crystallographic waters using the ProtOr (Tsai et al., 1999)
+A:89.30 R:190.30 N:122.40 D:114.40 C:102.50 Q:146.90 E:138.80 G:63.80 H:157.50 I:163.00 L:163.10 K:165.10 M:165.80 F:190.80 P:121.60 S:94.20 T:119.60 W:226.40 Y:194.60 V:138.200000
+Volumes not including the crystallographic waters using the ProtOr (Tsai et al., 1999)
+A:90.00 R:194.00 N:124.70 D:117.30 C:103.30 Q:149.40 E:142.20 G:64.90 H:160.00 I:163.90 L:164.00 K:167.30 M:167.00 F:191.90 P:122.90 S:95.40 T:121.50 W:228.20 Y:197.00 V:139.000000
+Electron-ion interaction potential values (Cosic, 1994)
+A:0.037300 R:0.095900 N:0.003600 D:0.126300 C:0.082900 Q:0.076100 E:0.005800 G:0.005 H:0.024200 I:0.00 L:0.00 K:0.037100 M:0.082300 F:0.094600 P:0.019800 S:0.082900 T:0.094100 W:0.054800 Y:0.051600 V:0.005700
+Hydrophobicity scales (Ponnuswamy, 1993)
+A:0.85 R:0.20 N:-0.48 D:-1.10 C:2.10 Q:-0.42 E:-0.79 G:0.00 H:0.22 I:3.14 L:1.99 K:-1.19 M:1.42 F:1.69 P:-1.14 S:-0.52 T:-0.08 W:1.76 Y:1.37 V:2.530000
+Hydrophobicity coefficient in RP-HPLC, C18 with 0.1%TFA/MeCN/H2O (Wilce et al. 1995)
+A:0.06 R:-0.85 N:0.25 D:-0.20 C:0.49 Q:0.31 E:-0.10 G:0.21 H:-2.24 I:3.48 L:3.50 K:-1.62 M:0.21 F:4.80 P:0.71 S:-0.62 T:0.65 W:2.29 Y:1.89 V:1.590000
+Hydrophobicity coefficient in RP-HPLC, C8 with 0.1%TFA/MeCN/H2O (Wilce et al. 1995)
+A:2.62 R:1.26 N:-1.27 D:-2.84 C:0.73 Q:-1.69 E:-0.45 G:-1.15 H:-0.74 I:4.38 L:6.57 K:-2.78 M:-3.12 F:9.14 P:-0.12 S:-1.39 T:1.81 W:5.91 Y:1.39 V:2.300000
+Hydrophobicity coefficient in RP-HPLC, C4 with 0.1%TFA/MeCN/H2O (Wilce et al. 1995)
+A:-1.64 R:-3.28 N:0.83 D:0.70 C:9.30 Q:-0.04 E:1.18 G:-1.85 H:7.17 I:3.02 L:0.83 K:-2.36 M:4.26 F:-1.36 P:3.12 S:1.59 T:2.31 W:2.61 Y:2.37 V:0.520000
+Hydrophobicity coefficient in RP-HPLC, C18 with 0.1%TFA/2-PrOH/MeCN/H2O (Wilce et al. 1995)
+A:-2.34 R:1.60 N:2.81 D:-0.48 C:5.03 Q:0.16 E:1.30 G:-1.06 H:-3.00 I:7.26 L:1.09 K:1.56 M:0.62 F:2.57 P:-0.15 S:1.93 T:0.19 W:3.59 Y:-2.58 V:2.060000
+Hydrophilicity scale (Kuhn et al., 1995)
+A:0.78 R:1.58 N:1.20 D:1.35 C:0.55 Q:1.19 E:1.45 G:0.68 H:0.99 I:0.47 L:0.56 K:1.10 M:0.66 F:0.47 P:0.69 S:1.00 T:1.05 W:0.70 Y:1.00 V:0.510000
+Retention coefficient at pH 2 (Guo et al., 1986)
+A:25.00 R:-7.00 N:-7.00 D:2.00 C:32.00 Q:0.00 E:14.00 G:-2.00 H:-26.00 I:91.00 L:100.00 K:-26.00 M:68.00 F:100.00 P:25.00 S:-2.00 T:7.00 W:109.00 Y:56.00 V:62.000000
+Modified Kyte-Doolittle hydrophobicity scale (Juretic et al., 1998)
+A:1.10 R:-5.10 N:-3.50 D:-3.60 C:2.50 Q:-3.68 E:-3.20 G:-0.64 H:-3.20 I:4.50 L:3.80 K:-4.11 M:1.90 F:2.80 P:-1.90 S:-0.50 T:-0.70 W:-0.46 Y:-1.30 V:4.200000
+Interactivity scale obtained from the contact matrix (Bastolla et al., 2005)
+A:0.136600 R:0.036300 N:-0.034500 D:-0.123300 C:0.274500 Q:0.032500 E:-0.048400 G:-0.046400 H:0.054900 I:0.417200 L:0.425100 K:-0.010100 M:0.174700 F:0.407600 P:0.001900 S:-0.043300 T:0.058900 W:0.236200 Y:0.316700 V:0.408400
+coefficient over single-domain globular proteins (Bastolla et al., 2005) Interactivity scale obtained by maximizing the mean of correlation
+A:0.072800 R:0.039400 N:-0.039 D:-0.055200 C:0.355700 Q:0.012600 E:-0.029500 G:-0.058900 H:0.087400 I:0.380500 L:0.381900 K:-0.005300 M:0.161300 F:0.420100 P:-0.049200 S:-0.028200 T:0.023900 W:0.411400 Y:0.311300 V:0.294700
+al., 2005) coefficient over pairs of sequences sharing the TIM barrel fold (Bastolla et  Interactivity scale obtained by maximizing the mean of correlation
+A:0.151 R:-0.010300 N:0.038100 D:0.004700 C:0.322200 Q:0.024600 E:-0.063900 G:0.024800 H:0.133500 I:0.423800 L:0.392600 K:-0.015800 M:0.216 F:0.345500 P:0.084400 S:0.004 T:0.146200 W:0.265700 Y:0.299800 V:0.399700
+Linker propensity index (Suyama-Ohara, 2003)
+A:-0.058 R:0.00 N:0.027 D:0.016 C:0.447 Q:-0.073 E:-0.128 G:0.331 H:0.195 I:0.06 L:0.138 K:-0.112 M:0.275 F:0.24 P:-0.478 S:-0.177 T:-0.163 W:0.564 Y:0.322 V:-0.052000
+Knowledge-based membrane-propensity scale from 1D_Helix in MPtopo databases (Punta-Maritan, 2003)
+A:-0.17 R:0.37 N:0.18 D:0.37 C:-0.06 Q:0.26 E:0.15 G:0.01 H:-0.02 I:-0.28 L:-0.28 K:0.32 M:-0.26 F:-0.41 P:0.13 S:0.05 T:0.02 W:-0.15 Y:-0.09 V:-0.170000
+Knowledge-based membrane-propensity scale from 3D_Helix in MPtopo databases (Punta-Maritan, 2003)
+A:-0.15 R:0.32 N:0.22 D:0.41 C:-0.15 Q:0.03 E:0.30 G:0.08 H:0.06 I:-0.29 L:-0.36 K:0.24 M:-0.19 F:-0.22 P:0.15 S:0.16 T:-0.08 W:-0.28 Y:-0.03 V:-0.240000
+Linker propensity from all dataset (George-Heringa, 2003)
+A:0.964 R:1.143 N:0.944 D:0.916 C:0.778 Q:1.047 E:1.051 G:0.835 H:1.014 I:0.922 L:1.085 K:0.944 M:1.032 F:1.119 P:1.299 S:0.947 T:1.017 W:0.895 Y:1.00 V:0.955000
+Linker propensity from 1-linker dataset (George-Heringa, 2003)
+A:0.974 R:1.129 N:0.988 D:0.892 C:0.972 Q:1.092 E:1.054 G:0.845 H:0.949 I:0.928 L:1.11 K:0.946 M:0.923 F:1.122 P:1.362 S:0.932 T:1.023 W:0.879 Y:0.902 V:0.923000
+Linker propensity from 2-linker dataset (George-Heringa, 2003)
+A:0.938 R:1.137 N:0.902 D:0.857 C:0.685600 Q:0.916 E:1.139 G:0.892 H:1.109 I:0.986 L:1.00 K:0.952 M:1.077 F:1.11 P:1.266 S:0.956 T:1.018 W:0.971 Y:1.157 V:0.959000
+Linker propensity from 3-linker dataset (George-Heringa, 2003)
+A:1.042 R:1.069 N:0.828 D:0.97 C:0.50 Q:1.111 E:0.992 G:0.743 H:1.034 I:0.852 L:1.193 K:0.979 M:0.998 F:0.981 P:1.332 S:0.984 T:0.992 W:0.96 Y:1.12 V:1.001000
+Linker propensity from small dataset (linker length is less than six residues) (George-Heringa, 2003)
+A:1.065 R:1.131 N:0.762 D:0.836 C:1.015 Q:0.861 E:0.736 G:1.022 H:0.973 I:1.189 L:1.192 K:0.478 M:1.369 F:1.368 P:1.241 S:1.097 T:0.822 W:1.017 Y:0.836 V:1.140000
+Linker propensity from medium dataset (linker length is between six and 14 residues) (George-Heringa, 2003)
+A:0.99 R:1.132 N:0.873 D:0.915 C:0.644 Q:0.999 E:1.053 G:0.785 H:1.054 I:0.95 L:1.106 K:1.003 M:1.093 F:1.121 P:1.314 S:0.911 T:0.988 W:0.939 Y:1.09 V:0.957000
+Linker propensity from long dataset (linker length is greater than 14 residues) (George-Heringa, 2003)
+A:0.892 R:1.154 N:1.144 D:0.925 C:1.035 Q:1.20 E:1.115 G:0.917 H:0.992 I:0.817 L:0.994 K:0.944 M:0.782 F:1.058 P:1.309 S:0.986 T:1.11 W:0.841 Y:0.866 V:0.900000
+Linker propensity from helical (annotated by DSSP) dataset (George-Heringa, 2003)
+A:1.092 R:1.239 N:0.927 D:0.919 C:0.662 Q:1.124 E:1.199 G:0.698 H:1.012 I:0.912 L:1.276 K:1.008 M:1.171 F:1.09 P:0.80 S:0.886 T:0.832 W:0.981 Y:1.075 V:0.908000
+Linker propensity from non-helical (annotated by DSSP) dataset (George-Heringa, 2003)
+A:0.843 R:1.038 N:0.956 D:0.906 C:0.896 Q:0.968 E:0.90 G:0.978 H:1.05 I:0.946 L:0.885 K:0.893 M:0.878 F:1.151 P:1.816 S:1.003 T:1.189 W:0.852 Y:0.945 V:0.999000
+The stability scale from the knowledge-based atom-atom potential (Zhou-Zhou, 2004)
+A:2.18 R:2.71 N:1.85 D:1.75 C:3.89 Q:2.16 E:1.89 G:1.17 H:2.51 I:4.50 L:4.71 K:2.12 M:3.63 F:5.88 P:2.09 S:1.66 T:2.18 W:6.46 Y:5.01 V:3.770000
+The relative stability scale extracted from mutation experiments (Zhou-Zhou, 2004)
+A:1.79 R:3.20 N:2.83 D:2.33 C:2.22 Q:2.37 E:2.52 G:0.70 H:3.06 I:4.59 L:4.72 K:2.50 M:3.91 F:4.84 P:2.45 S:1.82 T:2.45 W:5.64 Y:4.46 V:3.670000
+Buriability (Zhou-Zhou, 2004)
+A:13.40 R:8.50 N:7.60 D:8.20 C:22.60 Q:8.50 E:7.30 G:7.00 H:11.30 I:20.30 L:20.80 K:6.10 M:15.70 F:23.90 P:9.90 S:8.20 T:10.30 W:24.50 Y:19.50 V:19.500000
+Linker index (Bae et al., 2005)
+A:0.016600 R:-0.076200 N:-0.078600 D:-0.127800 C:0.572400 Q:-0.105100 E:-0.179400 G:-0.044200 H:0.164300 I:0.275800 L:0.252300 K:-0.213400 M:0.019700 F:0.356100 P:-0.418800 S:-0.162900 T:-0.070100 W:0.383600 Y:0.25 V:0.178200
+Mean volumes of residues buried in protein interiors (Harpaz et al., 1994)
+A:90.10 R:192.80 N:127.50 D:117.10 C:113.20 Q:149.40 E:140.80 G:63.80 H:159.30 I:164.90 L:164.60 K:170.00 M:167.70 F:193.50 P:123.10 S:94.20 T:120.00 W:197.10 Y:231.70 V:139.100000
+Average volumes of residues (Pontius et al., 1996)
+A:91.50 R:196.10 N:138.30 D:135.20 C:114.40 Q:156.40 E:154.60 G:67.50 H:163.20 I:162.60 L:163.40 K:162.50 M:165.90 F:198.80 P:123.40 S:102.00 T:126.00 W:209.80 Y:237.20 V:138.400000
+Hydrostatic pressure asymmetry index, PAI (Di Giulio, 2005)
+A:1.076 R:1.361 N:1.056 D:1.29 C:0.753 Q:0.729 E:1.118 G:1.346 H:0.985 I:0.926 L:1.054 K:1.105 M:0.974 F:0.869 P:0.82 S:1.342 T:0.871 W:0.666 Y:0.531 V:1.131000
+Average internal preferences (Olsen, 1980)
+A:1.38 R:0.00 N:0.37 D:0.52 C:1.43 Q:0.22 E:0.71 G:1.34 H:0.66 I:2.32 L:1.47 K:0.15 M:1.78 F:1.72 P:0.85 S:0.86 T:0.89 W:0.82 Y:0.47 V:1.990000
+Hydrophobicity-related index (Kidera et al., 1985)
+A:-0.27 R:1.87 N:0.81 D:0.81 C:-1.05 Q:1.10 E:1.17 G:-0.16 H:0.28 I:-0.77 L:-1.10 K:1.70 M:-0.73 F:-1.43 P:-0.75 S:0.42 T:0.63 W:-1.57 Y:-0.56 V:-0.400000
+Apparent partition energies calculated from Wertz-Scheraga index (Guy, 1985)
+A:0.05 R:0.12 N:0.29 D:0.41 C:-0.84 Q:0.46 E:0.38 G:0.31 H:-0.41 I:-0.69 L:-0.62 K:0.57 M:-0.38 F:-0.45 P:0.46 S:0.12 T:0.38 W:-0.98 Y:-0.25 V:-0.460000
+1985) Apparent partition energies calculated from Robson-Osguthorpe index (Guy,
+A:0.54 R:-0.16 N:0.38 D:0.65 C:-1.13 Q:0.05 E:0.38 G:NaN H:-0.59 I:-2.15 L:-1.08 K:0.48 M:-0.97 F:-1.51 P:-0.22 S:0.65 T:0.27 W:-1.61 Y:-1.13 V:-0.750000
+Apparent partition energies calculated from Janin index (Guy, 1985)
+A:-0.31 R:1.30 N:0.49 D:0.58 C:-0.87 Q:0.70 E:0.68 G:-0.33 H:0.13 I:-0.66 L:-0.53 K:1.79 M:-0.38 F:-0.45 P:0.34 S:0.10 T:0.21 W:-0.27 Y:0.40 V:-0.620000
+Apparent partition energies calculated from Chothia index (Guy, 1985)
+A:-0.27 R:2.00 N:0.61 D:0.50 C:-0.23 Q:1.00 E:0.33 G:-0.22 H:0.37 I:-0.80 L:-0.44 K:1.17 M:-0.31 F:-0.55 P:0.36 S:0.17 T:0.18 W:0.05 Y:0.48 V:-0.650000
+Hydropathies of amino acid side chains, neutral form (Roseman, 1988)
+A:0.39 R:NaN N:-1.91 D:-0.71 C:0.25 Q:-1.30 E:-0.18 G:0.00 H:-0.60 I:1.82 L:1.82 K:0.32 M:0.96 F:2.27 P:NaN S:-1.24 T:-1.00 W:2.13 Y:1.47 V:1.300000
+Hydropathies of amino acid side chains, pi-values in pH 7.0 (Roseman, 1988)
+A:0.39 R:-3.95 N:-1.91 D:-3.81 C:0.25 Q:-1.30 E:-2.91 G:0.00 H:-0.64 I:1.82 L:1.82 K:-2.77 M:0.96 F:2.27 P:NaN S:-1.24 T:-1.00 W:2.13 Y:1.47 V:1.300000
+Weights from the IFH scale (Jacobs-White, 1989)
+A:0.18 R:-5.40 N:-1.30 D:-2.36 C:0.27 Q:-1.22 E:-2.10 G:0.09 H:-1.48 I:0.37 L:0.41 K:-2.53 M:0.44 F:0.50 P:-0.20 S:-0.40 T:-0.34 W:-0.01 Y:-0.08 V:0.320000
+Hydrophobicity index, 3.0 pH (Cowan-Whittaker, 1990)
+A:0.42 R:-1.56 N:-1.03 D:-0.51 C:0.84 Q:-0.96 E:-0.37 G:0.00 H:-2.28 I:1.81 L:1.80 K:-2.03 M:1.18 F:1.74 P:0.86 S:-0.64 T:-0.26 W:1.46 Y:0.51 V:1.340000
+Scaled side chain hydrophobicity values (Black-Mould, 1991)
+A:0.616 R:0.00 N:0.236 D:0.028 C:0.68 Q:0.251 E:0.043 G:0.501 H:0.165 I:0.943 L:0.943 K:0.283 M:0.738 F:1.00 P:0.711 S:0.359 T:0.45 W:0.878 Y:0.88 V:0.825000
+Hydrophobicity scale from native protein structures (Casari-Sippl, 1992)
+A:0.20 R:-0.70 N:-0.50 D:-1.40 C:1.90 Q:-1.10 E:-1.30 G:-0.10 H:0.40 I:1.40 L:0.50 K:-1.60 M:0.50 F:1.00 P:-1.00 S:-0.70 T:-0.40 W:1.60 Y:0.50 V:0.700000
+(Miyazawa-Jernigan, 1999) Relative partition energies derived by the Bethe approximation
+A:-0.02 R:0.44 N:0.63 D:0.72 C:-0.96 Q:0.56 E:0.74 G:0.38 H:0.00 I:-1.89 L:-2.29 K:1.01 M:-1.36 F:-2.22 P:0.47 S:0.55 T:0.25 W:-1.28 Y:-0.88 V:-1.340000
+Optimized relative partition energies - method A (Miyazawa-Jernigan, 1999)
+A:0.00 R:0.07 N:0.10 D:0.12 C:-0.16 Q:0.09 E:0.12 G:0.06 H:0.00 I:-0.31 L:-0.37 K:0.17 M:-0.22 F:-0.36 P:0.08 S:0.09 T:0.04 W:-0.21 Y:-0.14 V:-0.220000
+Optimized relative partition energies - method B (Miyazawa-Jernigan, 1999)
+A:-0.03 R:0.09 N:0.13 D:0.17 C:-0.36 Q:0.13 E:0.23 G:0.09 H:-0.04 I:-0.33 L:-0.38 K:0.32 M:-0.30 F:-0.34 P:0.20 S:0.10 T:0.01 W:-0.24 Y:-0.23 V:-0.290000
+Optimized relative partition energies - method C (Miyazawa-Jernigan, 1999)
+A:-0.04 R:0.07 N:0.13 D:0.19 C:-0.38 Q:0.14 E:0.23 G:0.09 H:-0.04 I:-0.34 L:-0.37 K:0.33 M:-0.30 F:-0.38 P:0.19 S:0.12 T:0.03 W:-0.33 Y:-0.29 V:-0.290000
+Optimized relative partition energies - method D (Miyazawa-Jernigan, 1999)
+A:-0.02 R:0.08 N:0.10 D:0.19 C:-0.32 Q:0.15 E:0.21 G:-0.02 H:-0.02 I:-0.28 L:-0.32 K:0.30 M:-0.25 F:-0.33 P:0.11 S:0.11 T:0.05 W:-0.27 Y:-0.23 V:-0.230000
+Hydrophobicity index (Engelman et al., 1986)
+A:-1.60 R:12.30 N:4.80 D:9.20 C:-2.00 Q:4.10 E:8.20 G:-1.00 H:3.00 I:-3.10 L:-2.80 K:8.80 M:-3.40 F:-3.70 P:0.20 S:-0.60 T:-1.20 W:-1.90 Y:0.70 V:-2.600000
+Hydrophobicity index (Fasman, 1989)
+A:-0.21 R:2.11 N:0.96 D:1.36 C:-6.04 Q:1.52 E:2.30 G:0.00 H:-1.23 I:-4.81 L:-4.68 K:3.88 M:-3.66 F:-4.65 P:0.75 S:1.74 T:0.78 W:-3.32 Y:-1.01 V:-3.500000

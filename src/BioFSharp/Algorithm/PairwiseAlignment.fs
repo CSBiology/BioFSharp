@@ -2,7 +2,7 @@ namespace BioFSharp.Algorithm
 
 open BioFSharp
 open Alignment
-open FSharp.Care.Collections
+open FSharpAux
 open AminoAcidSymbols
 open AminoAcids
 open Nucleotides

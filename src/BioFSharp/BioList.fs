@@ -4,7 +4,7 @@
 module BioList =
 
     open System
-    open FSharp.Care
+    open FSharpAux
     open BioFSharp.BioItemsConverter
     open AminoAcids
     open ModificationInfo

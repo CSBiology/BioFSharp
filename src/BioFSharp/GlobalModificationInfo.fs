@@ -1,10 +1,7 @@
 ﻿namespace BioFSharp
 
 module GlobalModificationInfo =    
-    
-    open FSharp.Care
-    open FSharp.Care.Collections
-    open System.Text.RegularExpressions
+        
     
     type GlobalModificator = AminoAcids.AminoAcid -> float
 

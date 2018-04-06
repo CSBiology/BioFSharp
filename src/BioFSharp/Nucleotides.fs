@@ -3,7 +3,7 @@
 ///Contains the Nucleotide type and its according functions.
 module Nucleotides =
     
-    open FSharp.Care
+    open FSharpAux
     open AminoAcids
 
     /// Nucleotide Codes

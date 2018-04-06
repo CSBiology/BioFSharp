@@ -1,9 +1,8 @@
 ﻿namespace BioFSharp.IO
 
 open System
-open FSharp.Care
-open FSharp.Care.Collections
-open FSharp.Care.IO
+open FSharpAux
+open FSharpAux.IO
     
 module FastA =
             

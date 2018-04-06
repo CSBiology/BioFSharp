@@ -4,8 +4,8 @@
 /// Module to parse obo files to AdjacencyGraph
 module Obo =
     open System
-    open FSharp.Care
-    open FSharp.Care.IO
+    open FSharpAux
+    open FSharpAux.IO
 
 
     /// obo term record type
@@ -134,7 +134,10 @@ module Obo =
             | _                 -> parseSingleOboTerm en  id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
                                      xrefAnalog comment isObsolete replaced_by consider altId disjointFrom subset intersectionOf xref propertyValue
         else
-            failwithf "Unexcpected end of file."
+            // Maybe check if id is empty
+            createOboTerm id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
+                xrefAnalog comment isObsolete replaced_by consider altId disjointFrom subset intersectionOf xref propertyValue  
+            //failwithf "Unexcpected end of file."
 
     //parseTermDef
     let rec private parseSingleTermDef (en:Collections.Generic.IEnumerator<string>) id name isTransitive isCyclic =     
@@ -151,7 +154,9 @@ module Obo =
                       
             | _               -> parseSingleTermDef en id name isTransitive isCyclic
         else
-            failwithf "Unexcpected end of file."
+            // Maybe check if id is empty
+            createOboTermDef id name isTransitive isCyclic
+            //failwithf "Unexcpected end of file."
 
 
     /// Parse Obo Terms [Term] from seq<string>

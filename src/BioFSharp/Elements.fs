@@ -2,8 +2,8 @@
 
 
 //open MathNet.Numerics
-open FSharp.Care
-open FSharp.Care.Math
+open FSharpAux
+open FSharpAux.Math
 open Isotopes
     
 ///Contains chemical elements represented as a mixture of their stable isotopes and functionality for building them
@@ -158,7 +158,7 @@ module Elements =
                                   ((cv * r0c**(- l)) + (cv * r1c**(- l))).Real
         | Multi {X = x} -> nan
 
-    
+   
     let getSinglePhiM (elem:Element) (v:float) (l:float) =
         match elem with
         | Mono  {Root = r; X = x}           -> v * (x.NatAbundance*x.Mass)**(- l)
@@ -172,7 +172,9 @@ module Elements =
                                   ((cv * r0c**(- l)) + (cv * r1c**(- l))).Real
         | Multi {X = x} -> nan
 
-
+    ///Returns the atomic symbol of the given element
+    let getAtomicSymbol (elem:Element) =
+        (getMainIsotope elem).AtomicSymbol
 
 //    let getIsotopePattern (elem:Element) (count:int) =
 //        match elem with

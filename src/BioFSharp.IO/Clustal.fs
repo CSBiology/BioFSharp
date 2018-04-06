@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp.IO
 
-open FSharp.Care.Collections
+open FSharpAux
 open System.Text
 open System.IO
 open BioFSharp.Alignment

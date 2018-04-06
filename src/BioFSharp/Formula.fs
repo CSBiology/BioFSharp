@@ -1,7 +1,7 @@
 ﻿namespace BioFSharp
 
 open System.Text.RegularExpressions
-open FSharp.Care
+open FSharpAux
 
 ///Contains functionality for working with molecules as a formula of their elements and formulas of biologically relevant molecules
 module Formula =
@@ -67,6 +67,20 @@ module Formula =
             |> Map.ofSeq
         result.Add(labled,number)
     
+    ///If the Formula contains the given element, the count of the element in the formula is returned. Else returns a key not found error.
+    let getNumberOfElements (f:Formula) (ele:string) =
+        f 
+        |> Map.pick (fun e num -> 
+            if ele = Elements.getAtomicSymbol e then Some num
+            else None)
+
+    //If the Formula contains the given element, the count of the element in the formula is returned as Some. Else returns None.
+    let tryGetNumberOfElements (f:Formula) (ele:string) =
+        f 
+        |> Map.tryPick (fun e num -> 
+            if ele = Elements.getAtomicSymbol e then Some num
+            else None)
+
     // TODO: (NO)2 
     /// Parse formula string and returns formula type
     let parseFormulaString (strFormula:string) =
