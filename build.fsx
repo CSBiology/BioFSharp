@@ -390,17 +390,16 @@ Target "BuildPackage" DoNothing
 Target "All" DoNothing
 
 
-"All"
- ==> "ReleaseLocal"
 
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
+  ==> "All"
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
-  ==> "All"
+  ==> "ReleaseLocal"
   =?> ("ReleaseDocs",isLocalBuild)
 
 "Clean"

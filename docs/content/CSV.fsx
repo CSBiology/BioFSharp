@@ -7,8 +7,9 @@ open FSharp.Plotly
 #I "../../bin"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
-#r "FSharp.Care.dll"
-#r "FSharp.Care.IO.dll"
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
+#r "netstandard.dll"
 
 
 (**
@@ -22,10 +23,10 @@ The CSV reader is a straightforward, modular tool for reading tabular data.
 As a first step the input type has to be modelled. This type should represent the information of one line of the given file. The fields have to be marked as `FieldAttribute`s with the according column header, or if with the according line numbers. 
 
 *)
-open FSharp.Care.IO
-open FSharp.Care.IO.SchemaReader
-open FSharp.Care.IO.SchemaReader.Csv
-open FSharp.Care.IO.SchemaReader.Attribute
+open FSharpAux.IO
+open FSharpAux.IO.SchemaReader
+open FSharpAux.IO.SchemaReader.Csv
+open FSharpAux.IO.SchemaReader.Attribute
 
 type irisItem = 
     {
@@ -275,7 +276,7 @@ type DoubleArrayConverter() =
         Converter.Collection(fun (strs : seq<string>) -> 
             (strs
              |> Seq.map 
-                    (fun s -> FSharp.Care.String.tryParseFloatDefault nan s)
+                    (fun s -> FSharpAux.String.tryParseFloatDefault nan s)
              |> Seq.toArray)
             |> box)
 

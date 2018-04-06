@@ -17,6 +17,11 @@
     <Compile Include="Obo.fs" />
     <Compile Include="OrthoMCL.fs" />
     <Compile Include="ClustalOWrapper.fs" />
+    <Compile Include="WorkflowLanguage.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
