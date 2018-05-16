@@ -1,7 +1,7 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin"
+#I "../../bin/BioFSharp/net461"
 #r "../../packages/build/FSharp.Plotly/lib/net45/Fsharp.Plotly.dll"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"

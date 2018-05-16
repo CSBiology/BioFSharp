@@ -1,42 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <ProjectGuid>5a448a45-8238-467f-b60f-eb1a6bb8dbbc</ProjectGuid>
+    <RootNamespace>BioFSharp.Stats</RootNamespace>
+    <AssemblyName>BioFSharp.Stats</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="OntologyEnrichment.fs" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\FSharp.Stats.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\FSharpAux.dll</HintPath>
-    </Reference>
+    <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FSharp.Care\src\FSharp.Care\FSharp.Care.fsproj">
-      <Name>FSharp.Care</Name>
-      <Project>{dd7886a9-5c35-45ad-952c-4394a8af2306}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\FSharp.Stats\src\FSharp.Stats\FSharp.Stats.fsproj">
-      <Name>FSharp.Stats</Name>
-      <Project>{820c8407-795a-4dbf-ab4f-9f7852ce8ef4}</Project>
-      <Private>True</Private>
-    </ProjectReference>
+    <ProjectReference Include="..\..\..\FSharp.Stats\src\FSharp.Stats\FSharp.Stats.fsproj" />
+    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
   </ItemGroup>
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)*.dll"  "$(SolutionDir)bin\"
-xcopy /Y "$(TargetDir)*.xml" "$(SolutionDir)bin\"</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

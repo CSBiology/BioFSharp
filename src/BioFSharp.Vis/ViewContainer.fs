@@ -1,4 +1,4 @@
-﻿namespace BioFSharp.Vis
+namespace BioFSharp.Vis
 
 //module internal FsJVis.ViewContainer
 module ViewContainer =

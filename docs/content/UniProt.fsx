@@ -1,9 +1,11 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin"
+#I "../../bin/BioFSharp.BioDB/net461"
+#I "../../bin/BioFSharp.IO/net461"
+
 #r "BioFSharp.dll"
-#r "FSharp.Care.dll"
+#r "FSharpAux.dll"
 #r @"../../packages\build\FSharp.Plotly\lib\net45\FSharp.Plotly.dll"
 #r "BioFSharp.IO.dll"
 #r "BioFSharp.BioDB.dll"
@@ -11,11 +13,9 @@
 
 open BioFSharp.BioDB
 open FSharp.Plotly
-open FSharp.Care.Collections
 open BioFSharp
 open BioFSharp.Algorithm
-open FSharp.Care
-open FSharp.Care.Colors
+open FSharpAux
 open BioFSharp.Formula.Table
 
 (**

@@ -1,6 +1,6 @@
-﻿namespace BioFSharp.Parallel
+namespace BioFSharp.Parallel
 open System
-open FSharp.Care.Collections
+open FSharpAux
 open BioFSharp.BioArray
 open BioFSharp.Alignment
 open BioFSharp.Algorithm.PairwiseAlignment

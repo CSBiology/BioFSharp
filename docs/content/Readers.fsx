@@ -1,14 +1,15 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin"
-#r "../../bin/BioFSharp.dll"
-#r "../../bin/BioFSharp.IO.dll"
-#r "../../bin/FSharp.Care.dll"
-#r "../../bin/FSharp.Care.IO.dll"
+#I "../../bin/BioFSharp.IO/net461"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
+
 open BioFSharp
 open BioFSharp.IO
-open FSharp.Care.IO
+open FSharpAux.IO
 
 (**
 
@@ -90,7 +91,7 @@ let exampleFromGzipFile  = FastA.fromGzipFile BioList.ofAminoAcidString filepath
 3. To convert `seq<string>` to `seq<FastaItem>` you can use the following function.
 *)
 
-open FSharp.Care.IO
+open FSharpAux.IO
 
 let stringSequence = FileIO.readFile(filepathFASTA)
 

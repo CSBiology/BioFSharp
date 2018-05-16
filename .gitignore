@@ -20,6 +20,7 @@ build/
 [Bb]in/
 [Oo]bj/
 
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -170,11 +171,10 @@ $RECYCLE.BIN/
 packages/
 
 # Generated documentation folder
-docs/output/
+docs/formatted/
 
 #ignore local docs
 docs/local/
-docs/content/data/outputTree.txt
 
 # Temp folder used for publishing docs
 temp/
@@ -189,19 +189,7 @@ release.sh
 localpackages/
 paket-files
 *.orig
-.paket/paket.exe
-.paket/Paket.Restore.Targets
 docs/content/license.md
 docs/content/release-notes.md
 .fake
 docs/tools/FSharp.Formatting.svclog
-docs/content/data/Output.txt
-docs/content/data/gffExampleWrite.gff
-docs/content/data/testQuery.fastA
-docs/content/data/Chlamy_Cp.fastA.phr
-docs/content/data/Chlamy_Cp.fastA.pin
-docs/content/data/Chlamy_Cp.fastA.psq
-/docs/content/data/FASTAExample3.fasta
-/docs/content/data/sequenceTestWrite1.gb
-/docs/content/data/sequenceTestWrite2.gb
-/docs/content/data/blastTestOutput.csv

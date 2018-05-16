@@ -1,7 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <ProjectGuid>4e235ddd-1b59-4a93-abe9-2feef18b09a1</ProjectGuid>
+    <RootNamespace>BioFSharp</RootNamespace>
+    <AssemblyName>BioFSharp</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,16 +54,11 @@
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\FSharpAux.dll</HintPath>
-    </Reference>
+    <Content Include="App.config" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /Y &quot;$(TargetDir)*.dll&quot;  &quot;$(SolutionDir)bin\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)*.xml&quot; &quot;$(SolutionDir)bin\&quot;" />
-  </Target>
-
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

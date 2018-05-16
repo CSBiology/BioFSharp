@@ -1,6 +1,6 @@
 (*** hide ***)
 #r "System.Configuration.dll"
-#I "../../bin"
+#I "../../bin/BioFSharp.Parallel/net461"
 #r "Alea.dll"
 #r "BioFSharp.Parallel.dll"
 #r "BioFSharp.dll"
