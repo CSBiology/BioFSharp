@@ -58,7 +58,15 @@ module PairwiseAlignment =
         Continuation : int
         Similarity : 'a -> 'a -> int
         }
-    
+
+    ///Creates a costs element used for alignment.
+    let createCosts opening continuation similarityScoring =
+        {
+        Open = opening 
+        Continuation = continuation
+        Similarity  = similarityScoring
+        }
+
     ///Carries the functions for evaluating the Tracescores
     type private OperationCosts<'a> = {
         DiagonalCost   : Cell -> 'a -> 'a -> int
