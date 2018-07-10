@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <ProjectGuid>4e235ddd-1b59-4a93-abe9-2feef18b09a1</ProjectGuid>
+    <ProjectGuid>b899f5d0-fd6a-420e-acf5-cd35f3ec7210</ProjectGuid>
     <RootNamespace>BioFSharp</RootNamespace>
     <AssemblyName>BioFSharp</AssemblyName>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,8 +36,8 @@
     <Compile Include="Digestion.fs" />
     <Compile Include="PhylTree.fs" />
     <Compile Include="Alignment.fs" />
+    <Compile Include="PeptideClassification.fs" />
     <Compile Include="WorkflowLanguage.fs" />
-    <Compile Include="PetideClassification.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />
