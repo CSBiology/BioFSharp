@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="OntologyEnrichment.fs" />
+    <Compile Include="SurprisalAnalysisEmpiricalPermutationTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
