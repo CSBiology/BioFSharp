@@ -1,13 +1,16 @@
-﻿(*** hide ***)
+(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#r "../../bin/BioFSharp.dll"
-#r "../../bin/BioFSharp.IO.dll"
-#r "../../bin/FSharp.Care.IO.dll"
+#I "../../bin/BioFSharp.IO/net461"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
+
 open System
 open BioFSharp
 open BioFSharp.IO
-open FSharp.Care.IO
+open FSharpAux.IO
 open AminoAcids
 open Nucleotides
 open AminoAcidSymbols

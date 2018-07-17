@@ -1,7 +1,12 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin"
+#I "../../bin/BioFSharp.Vis/net461"
+#I "../../bin/BioFSharp.IO/net461"
+#r "FSharpAux.dll"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+#r "BioFSharp.Vis.dll"
 
 (**
 BioFSharp
@@ -10,14 +15,9 @@ BioFSharp
 
 *)
 
-#r "FSharp.Care.dll"
-
-open FSharp.Care
 
 
-#r "BioFSharp.dll"
-#r "BioFSharp.IO.dll"
-#r "BioFSharp.Vis.dll"
+open FSharpAux
 open BioFSharp
 open BioFSharp.Vis
 

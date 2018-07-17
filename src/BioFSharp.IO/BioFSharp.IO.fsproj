@@ -1,9 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <ProjectGuid>bc61517c-9dd1-4847-8512-0b00434216d7</ProjectGuid>
+    <RootNamespace>BioFSharp.IO</RootNamespace>
+    <AssemblyName>BioFSharp.IO</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
@@ -19,26 +23,19 @@
     <Compile Include="ClustalOWrapper.fs" />
     <Compile Include="WorkflowLanguage.fs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <Content Include="App.config" />
   </ItemGroup>
-
   <ItemGroup>
+    <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux.IO\FSharpAux.IO.fsproj" />
+    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\FSharpAux.IO.dll</HintPath>
-    </Reference>
+    <PackageReference Update="FSharp.Core" Version="4.5.0" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /Y &quot;$(TargetDir)*.dll&quot;  &quot;$(SolutionDir)bin\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)*.xml&quot; &quot;$(SolutionDir)bin\&quot;" />
-  </Target>
-
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

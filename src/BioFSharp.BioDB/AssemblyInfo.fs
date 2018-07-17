@@ -7,6 +7,7 @@ open System.Reflection
 [<assembly: AssemblyDescriptionAttribute("BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.")>]
 [<assembly: AssemblyVersionAttribute("0.0.1")>]
 [<assembly: AssemblyFileVersionAttribute("0.0.1")>]
+[<assembly: AssemblyConfigurationAttribute("Release")>]
 do ()
 
 module internal AssemblyVersionInformation =
@@ -15,3 +16,4 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyDescription = "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."
     let [<Literal>] AssemblyVersion = "0.0.1"
     let [<Literal>] AssemblyFileVersion = "0.0.1"
+    let [<Literal>] AssemblyConfiguration = "Release"

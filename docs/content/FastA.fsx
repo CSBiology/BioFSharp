@@ -4,11 +4,11 @@
 #r "../../packages/build/FSharp.Plotly/lib/net45/Fsharp.Plotly.dll"
 open FSharp.Plotly
 
-#I "../../bin"
+#I "../../bin/BioFSharp.IO/net461"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
-#r "FSharp.Care.dll"
-#r "FSharp.Care.IO.dll"
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
 
 
 (**
@@ -82,11 +82,11 @@ let sequencesLength =
     |> FastA.fromFile BioArray.ofAminoAcidString
     |> Seq.map (fun item -> item.Sequence.Length)
 
-(*** define-output:lengthHisto1 ***)
+(*** define:lengthHisto1 ***)
 Chart.Histogram sequencesLength
 |> Chart.withX_AxisStyle("length")
 |> Chart.withY_AxisStyle("#count")
-(*** include-it:lengthHisto1 ***)
+(*** include-value:lengthHisto1 ***)
 
 
 

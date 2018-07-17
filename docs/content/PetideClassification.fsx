@@ -4,11 +4,12 @@
 #r "../../packages/build/FSharp.Plotly/lib/net45/Fsharp.Plotly.dll"
 open FSharp.Plotly
 
-#I "../../bin"
-#r "netstandard.dll"
+#I "../../bin/BioFSharp.IO/net461"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
 #r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
+
 //#r "FSharpAux.IO.dll"
 
 

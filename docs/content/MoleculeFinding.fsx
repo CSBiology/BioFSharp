@@ -1,7 +1,10 @@
 //(*** hide ***)
-//#r "../../bin/BioFSharp.dll"
-//#r "../../bin/BioFSharp.Mz.dll"
-//#r "../../packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll"
+#I "../../bin/BioFSharp.IO/net461"
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
+
 
 //(**
 //#Molecule Finding

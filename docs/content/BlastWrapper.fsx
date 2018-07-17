@@ -1,6 +1,8 @@
 (*** hide ***)
-#r "../../bin/BioFSharp.dll"
-#r "../../bin/BioFSharp.IO.dll"
+#I "../../bin/BioFSharp.IO/net461"
+
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
 
 (**
 <table class="HeadAPI">
@@ -9,15 +11,16 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
 </td>
 </table>
+
 BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
 It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
-output parameter for creating a custom output format.
-Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690).
+output parameters for creating a custom output format.
+Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690/) .
 
-For the purpose of this tutorial, we will build a protein database using a `.fastA` file containing chloroplast proteins
-of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data. 
+For the purpose of this tutorial, we will build a protein database using a `.fastA` file containing the aminoacid sequences of chloroplast encoded proteins
+of Chlamydomonas reinhardtii (take a look at the file [here](https://github.com/CSBiology/BioFSharp/blob/master/docs/content/data/Chlamy_Cp.fastA)). 
 
-Our query protein for the subsequent BLAST search will be the [photosystem II protein D1](http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta) from Arabidopsis thaliana chloroplast.
+Our query protein for the subsequent BLAST search will be the [photosystem II protein D1](http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta/) from Arabidopsis thaliana chloroplast.
 
 How to use BlastWrapper
 =======================
@@ -26,7 +29,7 @@ Creation of a BLAST database
 ----------------------------
 We will use the minimal amount of parameters needed to create a BLAST database from an input file. 
 The created database files will have the same name as the input file and will be located in the same folder. 
-However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual](http://www.ncbi.nlm.nih.gov/books/NBK279675/) for more information.
+However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual](http://www.ncbi.nlm.nih.gov/books/NBK279690/) for more information.
 
 First, lets specify the path of our input and the type of our database. Use a string for the input path and the provided `MakeDbParams` type
 for every other parameter.
@@ -36,6 +39,7 @@ open BioFSharp
 open BioFSharp.IO
 open BlastNCBI
 open Parameters
+
 
 ///path and name of the input file/output database. 
 let inputFile = (__SOURCE_DIRECTORY__ + "/data/Chlamy_Cp.fastA")
@@ -119,7 +123,7 @@ _Note: when not specified otherwise, the output type will be `pairwise`_
 *)
 
 ///overall outline of the output 
-let outputType = OutputType.TabularWithComments
+let outputType = OutputType.CSV
 
 (**
 We have a large selection of parameters that we can include in the output.  
@@ -130,15 +134,12 @@ let outputFormat=
     
     [   
         OutputCustom.Query_SeqId; 
+        OutputCustom.Subject_Title
         OutputCustom.Subject_SeqId;
-        OutputCustom.Query_Length;
-        OutputCustom.Subject_Length;
         OutputCustom.AlignmentLength;
         OutputCustom.MismatchCount;
         OutputCustom.IdentityCount;
-        OutputCustom.PositiveScoringMatchCount;
-        OutputCustom.Evalue;
-        OutputCustom.Bitscore;
+        OutputCustom.RawScore
     ] 
         |> List.toSeq
 
@@ -165,13 +166,74 @@ _Note: in this case we can use the string `inputFile` that we used above for cre
 done otherwise_
 *)
 ///output file of the BLAST search
-let outputPath = (__SOURCE_DIRECTORY__ + "/data/Output.txt") 
+let outputPath = (__SOURCE_DIRECTORY__ + "/data/blastTestOutput.csv") 
 
-BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
+//BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
 
+(**
+If written in csv (seperator char is ',') or tabular (seperator char is '\t') format, we can youe the built in `readCustomBlastResult` function to parse our result. 
+note that this function will fill all output parameters that we didnt use with default values. it may be beneficial to create a new record type for the result if this is not wanted.
+head [here](https://csbiology.github.io/BioFSharp/CSV.html) to see a example how to parse comma-/tab-seperated files
+*)
 
+let queryResults = readCustomBlastResult outputFormat ',' outputPath |> Array.ofSeq
 
+(**
+<br>
+The result can be seen here:  
+<button type="button" class="btn" data-toggle="collapse" data-target="#blastResultExample">Show/Hide result</button>
+<div id="blastResultExample" class="collapse blastResultExample ">
+<pre>
+val queryResults : CBlastResult [] =
+   [|{Query_SeqId = ">gi|7525013|ref|NP_051039.1|";
+     Query_GI = "";
+     Query_Accesion = "";
+     Query_Accesion_Version = "";
+     Query_Length = -1;
+     Subject_SeqId = "sp|P19547|";
+     Subject_All_SeqIds = "";
+     Subject_GI = "";
+     Subject_All_GIs = "";
+     Subject_Accession = "";
+     Subject_Accession_Version = "";
+     Subject_All_Accession = "";
+     Subject_Length = -1;
+     Query_StartOfAlignment = "";
+     Query_EndOfAlignment = "";
+     Subject_StartOfAlignment = "";
+     Subject_EndOfAlignment = "";
+     Query_AlignedPartOf = "";
+     Subject_AlignedPartOf = "";
+     Evalue = nan;
+     Bitscore = nan;
+     RawScore = 1664.0;
+     AlignmentLength = 346;
+     Identity = nan;
+     IdentityCount = 326;
+     MismatchCount = 20;
+     PositiveScoringMatchCount = -1;
+     GapOpeningCount = -1;
+     GapCount = -1;
+     PositiveScoringMatch = nan;
+     Frames = "";
+     Query_Frames = "";
+     Subject_Frames = "";
+     BTOP = "";
+     Subject_TaxonomyIDs = "";
+     Subject_Scientific_Names = "";
+     Subject_Common_Names = "";
+     Subject_Blast_Names = "";
+     Subject_Super_Kingdoms = "";
+     Subject_Title =
+      "sp|P19547| photosystem II protein D1 GN=psbA.2 PE=psbA.p01.2";
+     Subject_All_Titles = "";
+     Subject_Strand = "";
+     Query_CoveragePerSubject = "";
+     Query_CoveragePerHSP = "";}; ...|]
 
+ </pre>
 
+<button type="button" class="btn" data-toggle="collapse" data-target="#blastResultExample">Hide again</button>  
+</div>
 
-
+*)

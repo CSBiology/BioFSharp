@@ -257,20 +257,29 @@ module ClustalOWrapper =
     /// A wrapper to perform Clustal Omega alignment tasks    
     type ClustalOWrapper (?rootPath: string) =
         
-        //isLinux = System.Environment.OSVersion.Platform = System.PlatformID.Unix
-        #if INTERACTIVE
+        ////isLinux = System.Environment.OSVersion.Platform = System.PlatformID.Unix
+        //#if Mono
         
-        let rootPath = 
-            match rootPath with
-            | Some r -> 
-                if File.Exists r then r
-                else failwith "clustalo file could not be found for given rootPath"
-            | None -> 
-                let defaultPath = __SOURCE_DIRECTORY__ |> FSharp.Care.String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
-                printfn "try %s" defaultPath
-                if File.Exists defaultPath then defaultPath
-                else failwith "Default clustalo file could not be found, define rootPath argument."
-        #else
+        //let rootPath = 
+        //    match rootPath with
+        //    | Some r -> 
+        //        if File.Exists r then r
+        //        else failwith "clustalo file could not be found for given rootPath"
+        //    | None -> 
+        //        failwith "Default clustalo file not supported in MONO, define rootPath argument."
+        //let runProcess rootPath arg name =           
+        //    let beginTime = DateTime.UtcNow
+        //    printfn "Starting %s..." name
+        //    let p = 
+        //        new ProcessStartInfo
+        //            (FileName = rootPath, UseShellExecute = false, Arguments = arg, 
+        //            RedirectStandardError = false, CreateNoWindow = true, 
+        //            RedirectStandardOutput = false, RedirectStandardInput = true) 
+        //        |> Process.Start
+        //    p.WaitForExit()
+        //    printfn "%s done." name
+        //    printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
+        //#else
         let rootPath = 
             match rootPath with
             | Some r -> 
@@ -293,7 +302,7 @@ module ClustalOWrapper =
             p.WaitForExit()
             printfn "%s done." name
             printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
-        #endif
+        //#endif
         ///Runs clustalo tool with given input file paths and parameters and creates output file for given path
         member this.AlignFromFile((inputPath:Input),(outputPath:string),(parameters:seq<Parameters.ClustalParams>),(?name:string)) = 
             let out = sprintf "-o %s " outputPath

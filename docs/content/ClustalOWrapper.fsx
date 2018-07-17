@@ -1,6 +1,9 @@
 (*** hide ***)
-#r "../../bin/BioFSharp.dll"
-#r "../../bin/BioFSharp.IO.dll"
+
+#I "../../bin/BioFSharp.IO/net461"
+
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
 
 (**
 <table class="HeadAPI">

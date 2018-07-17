@@ -1,5 +1,5 @@
-﻿(*** hide ***)
-#I "../../bin"
+(*** hide ***)
+#I "../../bin/BioFSharp/net461"
 (**
 
 <table class="HeadAPI">

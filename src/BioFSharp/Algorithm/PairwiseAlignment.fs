@@ -11,15 +11,8 @@ open BioArray
 ///Contains functions for evaluating the best possible alignments for 2 Sequences
 module PairwiseAlignment =
     
-     //Introduction!
+     //Introduction
      //This page contains functions for evaluating the best possible alignments for 2 Sequences. Both the NeedlemanWunsch(NW)- and the SmithWaterman(SW)-algorithm are implemented by using an affine gapPenalty. For Understaning this Implementation, it is necessary to know about the basic operation of either the NW- or SW-algorithm and have an understanding of the Affine-Gap-penalty (3-submatrix-matrix)
-
-    
-    //In this module are the typedefinitons. There is also the runGeneric-Function. It is the skeleton-function for creating the Backtrace-matrix. As parameters it takes the 2 sequences and the operation-cost-functions ( opcs) and basically just creates a loop, enabling the opcs to evaluate the values of the cells. There also is the backtrace-function. It creates the alignment from the matrix and the 2 initial sequences.
-    //The NW-Module and the SW-module
-    //The two modules contain the opcs. The difference in these two is, that the SW-opcs check if the value is 0 or below. Also the backtrace does not start with the last cell of the matrix but at the one with the biggest value. This leads to the alignment being restrained to a local area, where there are the most matches.
-
-
 
     ///Represents one element of the matrix, contains direction for backtracing and score
     type private TraceScore =     
@@ -65,7 +58,15 @@ module PairwiseAlignment =
         Continuation : int
         Similarity : 'a -> 'a -> int
         }
-    
+
+    ///Creates a costs element used for alignment.
+    let createCosts opening continuation similarityScoring =
+        {
+        Open = opening 
+        Continuation = continuation
+        Similarity  = similarityScoring
+        }
+
     ///Carries the functions for evaluating the Tracescores
     type private OperationCosts<'a> = {
         DiagonalCost   : Cell -> 'a -> 'a -> int
@@ -93,15 +94,12 @@ module PairwiseAlignment =
                 let m' = opc.DiagonalCost   array.[i-1,j-1] fstSeq.[i-1] sndSeq.[j-1] |> Diagonal
                 let x' = opc.HorizontalCost array.[i,j-1] |> Horizontal
                 let y' = opc.VerticalCost   array.[i-1,j] |> Vertical
-                //TODO: Check performance with maxBy2 as an inline function
-                /////Evaluates the bigger of two values (x y) after converting them with a function f
-                //let inline maxBy2 f x y =
-                //    if f x < f y then y else x
-                //let currentTrace = 
-                //     createCell (maxBy2 getTraceScoreValue y' m'|> maxBy2 getTraceScoreValue x')
-                //            x' y'
-                let best = List.maxBy (fun trace -> getTraceScoreValue trace) [m'; x'; y']
-                let currentTrace = createCell best x' y'
+
+                let inline maxBy2 f x y =
+                    if f x < f y then y else x
+                let currentTrace = 
+                     createCell (maxBy2 getTraceScoreValue y' m'|> maxBy2 getTraceScoreValue x')
+                            x' y'
             
                 array.[i,j] <- currentTrace   
         //The finished array/matrix gets returned

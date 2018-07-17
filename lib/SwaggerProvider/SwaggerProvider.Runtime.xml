@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>SwaggerProvider.Runtime</name></assembly>
+<members>
+<member name="T:SwaggerProvider.Internal.OptionConverter">
+<summary>
+ Serializer for serializing the F# option types.
+</summary>
+</member>
+</members>
+</doc>

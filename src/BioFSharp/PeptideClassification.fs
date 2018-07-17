@@ -1,8 +1,7 @@
-﻿namespace BioFSharp
+namespace BioFSharp
 
-
-
-module PetideClassification =
+///Contains functions to classify peptides by their 
+module PeptideClassification =
     
     open FSharpAux
     open System.Collections.Generic
@@ -11,6 +10,7 @@ module PetideClassification =
         | Forward = 0
         | Reverse = 1
 
+    
     type ProteinModelInfo<'id,'chromosomeId,'geneLocus when 'id: comparison and 'chromosomeId: comparison and 'geneLocus: comparison> = {
         Id              : 'id
         ChromosomeId    : 'chromosomeId
@@ -21,7 +21,7 @@ module PetideClassification =
         Orthologs       : Set< ProteinModelInfo<'id,'chromosomeId,'geneLocus> >
         }
 
-    let creatProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
+    let createProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
         Id               = id
         ChromosomeId     = chromosomeId
         Strand           = strand
@@ -29,9 +29,7 @@ module PetideClassification =
         SpliceVariantId  = spliceVariantId
         SeqEquivalent    = Set.ofSeq seqEquivalents
         Orthologs        = Set.ofSeq orthologs
-        }
-
-
+        }       
 
     type ProteinModel<'id,'chromosomeId,'geneLocus,'sequence when 'id: comparison and 'chromosomeId: comparison and 'geneLocus: comparison and 'sequence: comparison> = {
         ProteinModelInfo : ProteinModelInfo<'id,'chromosomeId,'geneLocus>

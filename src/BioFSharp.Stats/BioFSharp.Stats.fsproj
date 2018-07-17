@@ -1,20 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <ProjectGuid>5a448a45-8238-467f-b60f-eb1a6bb8dbbc</ProjectGuid>
+    <RootNamespace>BioFSharp.Stats</RootNamespace>
+    <AssemblyName>BioFSharp.Stats</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="OntologyEnrichment.fs" />
+    <Compile Include="SurprisalAnalysisEmpiricalPermutationTest.fs" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\FSharp.Stats.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\FSharpAux.dll</HintPath>
-    </Reference>
+    <Content Include="App.config" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FSharp.Stats\src\FSharp.Stats\FSharp.Stats.fsproj" />
+    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
