@@ -34,5 +34,8 @@
     <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.5.0" />
+  </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
