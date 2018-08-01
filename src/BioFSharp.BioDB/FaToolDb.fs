@@ -1,4 +1,4 @@
-﻿namespace BioFSharp.BioDB
+namespace BioFSharp.BioDB
 open FSharp.Data.TypeProviders
 open System.Data.Services.Client
 
@@ -74,11 +74,11 @@ module FaToolDb =
             }
 
 
-        ///returns a map containing the ids of OntologyTermQueryResults mapping to themselfes with an option to change the formatting of the id string
-        let createOntologyMapFromQueryResults (stringFormattingConverter: string -> string) (input: OntologyTermQueryResult array) =
+        ///returns a map mapping the ontology results to the query ids with an option to change the formatting of the id string
+        let createOntologyMapFromQueryResults (stringFormattingConverter: string -> string) (input: OntologyTermQueryResult []) =
             input 
             |> Array.filter (fun x -> not x.isEmpty)
-            |> Array.map (fun x -> ((stringFormattingConverter x.Id),x))
+            |> Array.map (fun x -> ((stringFormattingConverter x.Id),x.OntologyGroups |> Array.ofList))
             |> Map.ofArray
 
 
