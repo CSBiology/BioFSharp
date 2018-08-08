@@ -1,4 +1,4 @@
-﻿namespace BioFSharp.Stats
+namespace BioFSharp.Stats
 
 open System
 open System.Collections.Generic
@@ -37,7 +37,7 @@ module OntologyEnrichment =
             NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUnivers = totalUnivers; PValue = pValue}
 
 
-    /// Splites OntologyEntry with conacat TermId
+    /// Splits multiple OntologyEntries concatenated by a separator
     /// Attention: Also parses string to int to get rit of 0 - terms
     let splitMapManOntologyItems (separator:char) (data:seq<OntologyItem<'a>>) =
         let splitTerm (termId:string) (separator:char) =

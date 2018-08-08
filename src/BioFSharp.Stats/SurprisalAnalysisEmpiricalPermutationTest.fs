@@ -41,32 +41,37 @@ module Sailent =
                 resultList |> Array.ofList
         loop 1 []
 
+    ///get all ontology items of one specific term in the dataset
     let private getBins (term:string) (cons:OntologyItem<float> array) =
         [for ann in cons do 
             if ann.OntologyTerm = term then yield ann
         ]
-    
+
+    ///get all ontology items of one specific term in the dataset that have a negative weight
     let private getNegativeBins (term:string) (cons:OntologyItem<float> array) =
         [for ann in cons do 
             if ann.OntologyTerm = term && ann.Item<0. then yield ann
         ]
-    
+
+    ///get all ontology items of one specific term in the dataset that have a positive weight
     let private getPositiveBins (term:string) (cons:OntologyItem<float> array) =
         [for ann in cons do 
             if ann.OntologyTerm = term && ann.Item>0. then yield ann
         ]
 
+    /// calculate the empirical pvalue for enrichment of one bin given the observed weight sum and bootstrapped test distributions
     let private getEmpiricalPvalue (testDistributions: Map<int,Map<float,int>>) (weightSum:float) (binSize:int) =
         match Map.tryFind binSize testDistributions with
         |Some dist ->   let testDist = dist
                         float (testDist |> Map.fold (fun acc key value -> if abs key > abs weightSum then acc + value else acc) 0) / (float (testDist |> Map.fold (fun acc key value -> acc + value) 0))
         |_ -> 10000000.
 
+    /// 
     let private assignPValues (testDistributions:Map<int,Map<float,int>>) (testTargets:(string*int*float)list)=
         testTargets 
         |> List.map (fun (name,binSize,weightSum) -> createSailentCharacterization name (getEmpiricalPvalue testDistributions weightSum binSize) binSize weightSum)
     
-    ///utility function to prepare a dataset column for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module. 
+    ///utility function to prepare a dataset column for SAILENT characterization using MapMan annotations. The ontology map can be created by using the BioFSharp.BioDB module. 
     let prepareDataColumn (ontologyMap:Map<string,(string*string)list>) (identifiers: string []) (rawData:float []) =
 
         if rawData.Length <> identifiers.Length then
@@ -85,11 +90,13 @@ module Sailent =
                                                           
             |> Array.map (fun (identifier,annotation,indx,value) -> createOntologyItem identifier annotation indx value)
 
-    ///utility function to prepare a dataset (in column major form) for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module.
+    ///utility function to prepare a dataset (in column major form) for SAILENT characterization using MapMan annotations. The ontology map can be created by using the BioFSharp.BioDB module.
     let prepareDataset (ontologyMap:Map<string,(string*string)list>) (identifiers: string []) (rawDataset:float [] []) =
         rawDataset
         |> Array.map (prepareDataColumn ontologyMap identifiers)
 
+    ///computes SAILENT (Surprisal Analysis Empirical Permutation Test) characterization for a given set of functionally annotated data.
+    ///For every ontology bin, theoretical distributions are simulated which are used to assign how likely it is to see a weight sum that extreme for the respective bin
     let compute (bootstrapIterations:int) (data: OntologyItem<float> array) =
 
         printfn "starting SAILENT characterization"
@@ -98,6 +105,7 @@ module Sailent =
         let distinctGroups = getDistinctGroups data
 
         // allocate test targets from the dataset
+        // all ontology bins regardless of sign
         let absoluteTestTargets = 
             distinctGroups
             |> List.map (fun (termName)
@@ -105,6 +113,7 @@ module Sailent =
                                 termName,tmp.Length,tmp |> List.sumBy (fun x -> abs x.Item))
             |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
 
+        // all ontology bins with positive signs
         let positiveTestTargets =
             distinctGroups
             |> List.map (fun (termName)
@@ -112,6 +121,7 @@ module Sailent =
                                 termName,tmp.Length,tmp |> List.sumBy (fun x -> x.Item))
             |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
 
+        // all ontology bins with negative signs
         let negativeTestTargets =
             distinctGroups
             |> List.map (fun (termName)

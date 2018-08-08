@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp", "src\BioFSharp\BioFSharp.fsproj", "{4E235DDD-1B59-4A93-ABE9-2FEEF18B09A1}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp", "src\BioFSharp\BioFSharp.fsproj", "{B899F5D0-FD6A-420E-ACF5-CD35F3EC7210}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\GenBank.fsx = docs\content\GenBank.fsx
 		docs\content\GESA.fsx = docs\content\GESA.fsx
 		docs\content\GFF3.fsx = docs\content\GFF3.fsx
+		docs\content\GSEA.fsx = docs\content\GSEA.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\Introduction.fsx = docs\content\Introduction.fsx
 		docs\content\license.md = docs\content\license.md
@@ -55,6 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docs\content\PetideClassification.fsx = docs\content\PetideClassification.fsx
 		docs\content\Readers.fsx = docs\content\Readers.fsx
 		docs\content\release-notes.md = docs\content\release-notes.md
+		docs\content\SAILENT.fsx = docs\content\SAILENT.fsx
 		docs\content\StringMatching.fsx = docs\content\StringMatching.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
 		docs\content\UniProt.fsx = docs\content\UniProt.fsx
@@ -87,10 +89,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E235DDD-1B59-4A93-ABE9-2FEEF18B09A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E235DDD-1B59-4A93-ABE9-2FEEF18B09A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E235DDD-1B59-4A93-ABE9-2FEEF18B09A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E235DDD-1B59-4A93-ABE9-2FEEF18B09A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B899F5D0-FD6A-420E-ACF5-CD35F3EC7210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B899F5D0-FD6A-420E-ACF5-CD35F3EC7210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B899F5D0-FD6A-420E-ACF5-CD35F3EC7210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B899F5D0-FD6A-420E-ACF5-CD35F3EC7210}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12CFF99C-5660-42FE-9370-9085A6558F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12CFF99C-5660-42FE-9370-9085A6558F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CFF99C-5660-42FE-9370-9085A6558F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
