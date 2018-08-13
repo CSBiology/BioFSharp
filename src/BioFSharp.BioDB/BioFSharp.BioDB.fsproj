@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
-    <ProjectGuid>c005af19-b61c-484f-9e3a-28b497b19c17</ProjectGuid>
+    <TargetFrameworks>net45;net47</TargetFrameworks>
     <RootNamespace>BioFSharp.BioDB</RootNamespace>
     <AssemblyName>BioFSharp.BioDB</AssemblyName>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net461|AnyCPU'">
-    <DefineConstants>TRACE</DefineConstants>
+    <Name>BioFSharp.BioDB</Name>
+    <OutputType>Library</OutputType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="FaToolDb.fs" />
     <Compile Include="EbiAPI.fs" />
     <None Include="paket.references" />
@@ -22,25 +23,8 @@
     <EmbeddedResource Include="Resources\ebiProteinsAPIswagger.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\lib\SwaggerProvider\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SwaggerProvider">
-      <HintPath>..\..\lib\SwaggerProvider\SwaggerProvider.dll</HintPath>
-    </Reference>
-    <Reference Include="SwaggerProvider.DesignTime">
-      <HintPath>..\..\lib\SwaggerProvider\SwaggerProvider.DesignTime.dll</HintPath>
-    </Reference>
-    <Reference Include="SwaggerProvider.Runtime">
-      <HintPath>..\..\lib\SwaggerProvider\SwaggerProvider.Runtime.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data.Services" />
     <Reference Include="System.Data.Services.Client" />
-    <Reference Include="YamlDotNet">
-      <HintPath>..\..\lib\SwaggerProvider\YamlDotNet.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+  </ItemGroup>  
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

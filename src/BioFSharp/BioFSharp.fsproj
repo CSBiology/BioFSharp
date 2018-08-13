@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <ProjectGuid>b899f5d0-fd6a-420e-acf5-cd35f3ec7210</ProjectGuid>
+    <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
     <RootNamespace>BioFSharp</RootNamespace>
     <AssemblyName>BioFSharp</AssemblyName>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
+    <Name>BioFSharp</Name>
+    <OutputType>Library</OutputType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
-    <!-- Core -->
+   <!-- Core -->
     <Compile Include="PhysicalConstants.fs" />
     <Compile Include="BioID.fs" />
     <Compile Include="Isotopes.fs" />
@@ -53,15 +54,54 @@
     <EmbeddedResource Include="Resources\PAM70.txt" />
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />
+    <None Include="paket.references" />
+    <None Include="paket.template" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
+
+  <!-- Placeholder -->
+  <!-- common NuGet package refs that affect all projects -->
+  <!-- Placeholder -->
+
+  <!-- .NET45 references, compilation flags and build options -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="FSharpAux">
+      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpAux.IO">
+      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.IO.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\FSharpAux\src\FSharpAux\FSharpAux.fsproj" />
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <!-- .NET45 references references, compilation flags and build options -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+    <Reference Include="FSharpAux">
+      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpAux.IO">
+      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.IO.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.5.0" />  
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <DefineConstants>NET47;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <Reference Include="FSharpAux">
+      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpAux.IO">
+      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.IO.dll</HintPath>
+    </Reference>
   </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

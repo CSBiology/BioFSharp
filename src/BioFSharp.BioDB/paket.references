@@ -1,5 +1,5 @@
 FSharp.Core
-
+SwaggerProvider
+Newtonsoft.Json
+YamlDotNet
 FSharp.Data.TypeProviders
-
-
