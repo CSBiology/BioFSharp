@@ -1,11 +1,11 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-
-#I "../../bin/BioFSharp.IO/net45"
+#I "../../bin/BioFSharp.IO/net461"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
-
+#r "FSharpAux.dll"
+#r "FSharpAux.IO.dll"
 (**
 BioFSharp
 =========
@@ -14,7 +14,6 @@ BioFSharp aims to be a user-friendly functional library for bioinformatics writt
 nucleotides based on chemical formulas and chemical elements. BioFSharp facilitate working with sequences in a strongly typed way and is designed to work well with F# Interactive. 
 It provide a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.
 *)
-
 
 open BioFSharp
 (**
@@ -38,12 +37,15 @@ Nucleotides.G |> Nucleotides.antiparallel
 AminoAcids.Arg |> AminoAcids.monoisoMass
 
 
+
+
 (**
 Different file reader in BioFSharp help to easyly retrieve inforamtion and write  various biology-associated file formats like for example FastA:
 *)
 open BioFSharp.IO
 
-let filepathFastaA = (__SOURCE_DIRECTORY__ + "/data/FASTAExample3.fasta")
+
+let filepathFastaA = (__SOURCE_DIRECTORY__ + "/data/FASTAExample1.fasta")
 //reads from file to an array of FastaItems.
 FastA.fromFile BioArray.ofAminoAcidString filepathFastaA
 

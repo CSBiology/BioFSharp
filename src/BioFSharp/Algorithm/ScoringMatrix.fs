@@ -39,8 +39,9 @@ module ScoringMatrix =
     
     let private readScoringMatrix resourceName =
         let assembly = Assembly.GetExecutingAssembly()
+        printfn "%A" (assembly.GetManifestResourceNames())
         //let resourceName = ScoringMatrixType.toFileName scoringMatrixType
-        use stream = assembly.GetManifestResourceStream(resourceName)
+        use stream = assembly.GetManifestResourceStream("BioFSharp.Resources." + resourceName)
         use reader = new System.IO.StreamReader(stream)
         
         let scmName = reader.ReadLine()

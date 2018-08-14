@@ -11,6 +11,7 @@ nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
 nuget Expecto.VisualStudio.TestAdapter version_in_path: true
 nuget FSharp.Data.TypeProviders
+nuget FSharp.Plotly
 nuget Microsoft.Xaml
 nuget SwaggerProvider
 nuget YamlDotNet
