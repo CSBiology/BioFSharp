@@ -9,7 +9,7 @@ module Chord =
     let private chord2 () =
         let assembly = Assembly.GetExecutingAssembly()
         let resourceName = "chord2.js"
-        let stream = assembly.GetManifestResourceStream("Bio" + resourceName)
+        let stream = assembly.GetManifestResourceStream("BioFSharp.Vis.Resources." + resourceName)
         let reader = new System.IO.StreamReader(stream)
         reader.ReadToEnd()
 
