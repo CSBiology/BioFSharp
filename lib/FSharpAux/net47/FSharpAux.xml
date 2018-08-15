@@ -62,6 +62,97 @@ Creates a new empty bidirectional dictionary
  The bidirectional dictionary allows effective search of keys and values
 </summary>
 </member>
+<member name="P:FSharpAux.Colors.Color.B">
+<summary>
+ The blue component value of this Color structure.
+</summary>
+</member>
+<member name="P:FSharpAux.Colors.Color.G">
+<summary>
+ The green component value of this Color structure.
+</summary>
+</member>
+<member name="P:FSharpAux.Colors.Color.R">
+<summary>
+ The red component value of this Color structure.
+</summary>
+</member>
+<member name="P:FSharpAux.Colors.Color.A">
+<summary>
+ The alpha component value of this Color structure.
+</summary>
+</member>
+<member name="T:FSharpAux.Colors.Color">
+<summary>
+ Color structure
+</summary>
+</member>
+<member name="T:FSharpAux.Colors.ColorComponent">
+<summary>
+ Color component ARGB
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.toString(FSharpAux.Colors.Color)">
+<summary>
+ Converts this Color structure to a human-readable string.
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.fromWebColor(System.String)">
+<summary>
+ Gets color from web color (#FFFFFF)
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.toWebColor(FSharpAux.Colors.Color)">
+<summary>
+ Gets the web color representataion (#FFFFFF)
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.fromHex(System.String)">
+<summary>
+ Gets color from hex representataion (FFFFFF) or (0xFFFFFF)
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.toHex(System.Boolean,FSharpAux.Colors.Color)">
+<summary>
+ Gets the hex representataion (FFFFFF) of a color (with valid prefix &quot;0xFFFFFF&quot;)
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.toArgb(FSharpAux.Colors.Color)">
+<summary>
+ Gets the 32-bit ARGB value of this Color structure.
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.getSaturation(FSharpAux.Colors.Color)">
+<summary>
+ Gets the hue-saturation-brightness (HSB) saturation value for this Color structure.
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.getHue(FSharpAux.Colors.Color)">
+<summary>
+ Gets the hue-saturation-brightness (HSB) hue value, in degrees, for this Color structure.
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.fromRgb(System.Int32,System.Int32,System.Int32)">
+<summary>
+ Creates a Color structure from the specified color values (red, green, and blue).
+ The alpha value is implicitly 255 (fully opaque). 
+</summary>
+</member>
+<member name="M:FSharpAux.Colors.fromArgb(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Creates a Color structure from the four ARGB component (alpha, red, green, and blue) values.
+</summary>
+</member>
+<member name="T:FSharpAux.Colors.Table.Office">
+<summary>
+ Color palette from Microsoft office 2016
+</summary>
+</member>
+<member name="T:FSharpAux.Colors">
+<summary>
+ Represents an ARGB (alpha, red, green, blue) color
+</summary>
+</member>
 <member name="T:FSharpAux.Graph.AdjacencyGraph`3">
 <summary>
  A Graph is a Vertex list.  The nextNode allows for consistent addressing of nodes
