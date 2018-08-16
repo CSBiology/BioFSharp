@@ -1,4 +1,5 @@
-FSharp.Core
+group BioDB
+FSharp.Core framework:net45
 SwaggerProvider
 Newtonsoft.Json
 YamlDotNet

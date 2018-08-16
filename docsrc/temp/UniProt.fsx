@@ -1,22 +1,23 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/BioFSharp.BioDB/net461"
-#I "../../bin/BioFSharp.IO/net461"
-
-#r "BioFSharp.dll"
-#r "FSharpAux.dll"
-#r "../../packages/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
-#r "BioFSharp.IO.dll"
+#I "../../bin/BioFSharp.BioDB/net45"
 #r "BioFSharp.BioDB.dll"
-#r "SwaggerProvider.Runtime.dll"
-
 open BioFSharp.BioDB
-open FSharp.Plotly
+#I "../../bin/BioFSharp.IO/net47"
+
+#r "BioFSharp.IO.dll"
+#r "FSharpAux.dll"
+#r "BioFSharp.dll"
+//#r "SwaggerProvider.Runtime.dll"
+#r "../../packages/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
+
 open BioFSharp
+open FSharp.Plotly
 open BioFSharp.Algorithm
 open FSharpAux
 open BioFSharp.Formula.Table
+open BioFSharp.IO
 
 (**
 Accessing online databases
@@ -38,6 +39,9 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 In this tutorial I want to show you how to access data from UniProt and give examples for what might be done with it. As a first step we will retreive data about the Copper-transporting ATPase 2 of different species. 
 
 *)
+
+
+let x = FastA.fromFile id ""
 
 let mouse = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64446"
 let rat = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64535"

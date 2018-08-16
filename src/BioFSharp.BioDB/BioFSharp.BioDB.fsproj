@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net47</TargetFrameworks>
+    <TargetFrameworks>net45</TargetFrameworks>
     <RootNamespace>BioFSharp.BioDB</RootNamespace>
     <AssemblyName>BioFSharp.BioDB</AssemblyName>
     <Name>BioFSharp.BioDB</Name>

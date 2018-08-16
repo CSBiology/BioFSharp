@@ -37,15 +37,15 @@ NUGET
       System.Runtime (>= 4.1.0-rc2-24027) - restriction: || (&& (== net45) (>= netstandard1.5)) (== net47) (== netstandard2.0)
       System.Runtime.Extensions (>= 4.1.0-rc2-24027) - restriction: || (&& (== net45) (>= netstandard1.5)) (== net47) (== netstandard2.0)
     dotnet-fake (5.4) - clitool: true
-    Expecto (8.2.1)
+    Expecto (8.2.2)
       Argu (>= 5.1) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
       Mono.Cecil (>= 0.10) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
       System.Diagnostics.FileVersionInfo (>= 4.3) - restriction: || (&& (== net45) (>= netstandard2.0)) (&& (== net47) (< net461) (>= netstandard2.0)) (== netstandard2.0)
-    Expecto.BenchmarkDotNet (8.2.1)
+    Expecto.BenchmarkDotNet (8.2.2)
       BenchmarkDotNet (>= 0.10.14) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netcoreapp2.0)) (== net47) (&& (== netstandard2.0) (>= net461)) (&& (== netstandard2.0) (>= netcoreapp2.0))
       FSharp.Core (>= 4.3.4) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netcoreapp2.0)) (== net47) (&& (== netstandard2.0) (>= net461)) (&& (== netstandard2.0) (>= netcoreapp2.0))
-    Expecto.FsCheck (8.2.1)
-      Expecto (>= 8.2.1) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
+    Expecto.FsCheck (8.2.2)
+      Expecto (>= 8.2.2) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
       FsCheck (>= 2.10.4) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
     Expecto.VisualStudio.TestAdapter (9.0.0) - version_in_path: true
       Expecto (>= 8.0 < 9.0) - restriction: || (&& (== net45) (>= net461)) (== net47) (&& (== netstandard2.0) (>= net461))
@@ -261,6 +261,32 @@ NUGET
     System.Xml.XPath.XmlDocument (4.3) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netcoreapp2.0)) (== net47) (&& (== netstandard2.0) (>= net461)) (&& (== netstandard2.0) (>= netcoreapp2.0))
       System.Xml.XmlDocument (>= 4.3) - restriction: || (&& (== net45) (>= net46)) (&& (== net45) (>= netstandard1.3)) (== net47) (== netstandard2.0)
       System.Xml.XPath (>= 4.3) - restriction: || (&& (== net45) (>= net46)) (&& (== net45) (>= netstandard1.3)) (== net47) (== netstandard2.0)
+    YamlDotNet (5.0.1)
+
+GROUP BioDB
+RESTRICTION: == net45
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Alea (3.0.4)
+    Argu (5.1)
+      FSharp.Core (>= 4.0.0.1)
+    Expecto (8.2.2)
+    Expecto.BenchmarkDotNet (8.2.2)
+    Expecto.FsCheck (8.2.2)
+    Expecto.VisualStudio.TestAdapter (9.0.0) - version_in_path: true
+    FSharp.Core (4.1.17)
+      System.ValueTuple (>= 4.3)
+    FSharp.Data.TypeProviders (5.0.0.6)
+      FSharp.Core (>= 3.1.2.5)
+    FSharp.Plotly (1.1.1)
+      FSharp.Core
+      Newtonsoft.Json
+    Microsoft.Xaml (4.0.0.1)
+    Newtonsoft.Json (11.0.2)
+    SwaggerProvider (0.8.2)
+      FSharp.Core (>= 4.0)
+      Newtonsoft.Json (>= 10.0)
+    System.ValueTuple (4.5)
     YamlDotNet (5.0.1)
 
 GROUP FakeBuild
