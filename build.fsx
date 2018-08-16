@@ -384,6 +384,18 @@ Target.create "Release" (fun _ ->
 Target.create "BuildPackage" ignore
 Target.create "GenerateDocs" ignore
 
+Target.create "GitReleaseNuget" (fun _ ->
+    let tempNugetDir = "temp/nuget"
+    Shell.cleanDir tempNugetDir |> ignore
+    Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "nuget" tempNugetDir
+    let files = Directory.EnumerateFiles bin 
+    Shell.copy tempNugetDir files
+    Git.Staging.stageAll tempNugetDir
+    Git.Commit.exec tempNugetDir (sprintf "Update git nuget packages for version %s" release.NugetVersion)
+    Git.Branches.push tempNugetDir
+    Shell.copy tempNugetDir files
+)
+
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
@@ -413,4 +425,12 @@ Target.create "All" ignore
   ==> "PublishNuget"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "All"
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
+  ==> "CopyBinaries"
+  ==> "RunTests"
+  ==> "NuGet"
+  ==> "GitReleaseNuget"
+
+Target.runOrDefault "All"
