@@ -406,20 +406,22 @@ module IsotopicDistribution =
     
 
         /// normalizes istopic distribution probabilities to sum up to 1.
-        let normalizeByProbSum (pols: Polynomial list) = 
+        let normalizeByProbSum minProb (pols: Polynomial list) = 
             let sum = 
                 pols
+                |> List.filter (fun x -> x > minProb)
                 |> List.sumBy (fun x -> x.Probability)
             pols 
             |> List.map (fun x -> {x with Probability = x.Probability/sum})
 
         /// normalizes istopic distribution probabilities to sum up to 1.
-        let normalizeByMaxProb (pols: Polynomial list) = 
+        let normalizeByMaxProb minProb (pols: Polynomial list) = 
             let max = 
                 pols
                 |> List.maxBy (fun x -> x.Probability)
                 |> fun x -> x.Probability
             pols 
+            |> List.filter (fun x -> x.Probability > minProb)
             |> List.map (fun x -> {x with Probability = x.Probability/max})
 
 
@@ -432,7 +434,7 @@ module IsotopicDistribution =
                 |> List.map (fun x -> x.Power * mwResolution,x.Probability )
             else 
                 pols 
-                |> List.map (fun x ->x.Power * mwResolution / (charge |> float |> abs),x.Probability )
+                |> List.map (fun x -> x.Power * mwResolution / (charge |> float |> abs),x.Probability )
     
     
         /// Generates the distribution of the isotopic abundancy using MIDAs polynomial based algorithm (MIDAs_a)
@@ -443,5 +445,5 @@ module IsotopicDistribution =
                 setResolution resolution
             multiplyFineGrainedPolynomial resolution' minProb charge fml
             |> mergeFinePolynomial (mergeResolution)
-            |> normF
+            |> (normF minProb)
             |> powerToMw charge
