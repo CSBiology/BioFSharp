@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;net47</TargetFrameworks>
     <RootNamespace>BioFSharp.ImgP</RootNamespace>
     <AssemblyName>BioFSharp.ImgP</AssemblyName>
     <Name>BioFSharp.ImgP</Name>
@@ -14,7 +14,8 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="Centroid.fs" />
+    <Compile Include="Trace.fs" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>
@@ -54,21 +55,5 @@
     <DefineConstants>NET47;NETFULL</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET Standard 2.0 references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\netstandard2.0\FSharp.Stats.dll</HintPath>
-    </Reference>		
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
-  
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
