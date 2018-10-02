@@ -1,0 +1,29 @@
+type file
+id BioFSharp.ImgP
+title
+    BioFSharp.ImgP
+owners
+    gresgsr
+authors 
+    gresgsr
+projectUrl
+    serfes/wadawd/BioFSharp.ImgP
+iconUrl
+    asfwa/wadawd/BioFSharp.ImgP/master/docs/files/img/logo.png
+licenseUrl
+    serfes/wadawd/BioFSharp.ImgP/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+language
+    F#
+copyright
+    Copyright 2017
+tags
+    rdhdr
+summary
+    dawdf
+description
+    frdt
+
+files
+	../../bin/BioFSharp.ImgP ==> lib

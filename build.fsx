@@ -340,6 +340,17 @@ Target.create "ReleaseDocs" (fun _ ->
     Git.Branches.push tempDocsDir
 )
 
+Target.create "ReleaseLocal" (fun _ ->
+    let tempDocsDir = "temp/gh-pages"
+    Shell.cleanDir tempDocsDir |> ignore
+    Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
+
+    Shell.copyRecursive "docs" tempDocsDir true |> printfn "%A"
+    Git.Staging.stageAll tempDocsDir
+    Git.Commit.exec tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+    Git.Branches.push tempDocsDir
+)
+
 Target.create "Release" (fun _ ->
     // not fully converted from  FAKE 4
 
