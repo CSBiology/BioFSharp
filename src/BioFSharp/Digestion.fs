@@ -20,23 +20,23 @@ module Digestion =
 
     /// Digested peptide
     // TODO: type of ProteinID to 'a; rename "missCleavageStart" to "cleavageStart"; Same for ..End..
-    type DigestedPeptide = {
+    type DigestedPeptide<'a> = {
         ///Identifier of protein
-        ProteinID: int
+        ProteinID: 'a
         ///
         MissCleavages: int
-        MissCleavageStart:int
-        MissCleavageEnd: int
+        CleavageStart:int
+        CleavageEnd: int
         ///Sequence of peptide
         PepSequence: AminoAcid list
         }
 
     ///Creates digested peptide from given information
-    let createDigestedPeptide proteinID missCleavages missCleavageStart missCleavageEnd pepSequence = {
+    let createDigestedPeptide proteinID missCleavages cleavageStart cleavageEnd pepSequence = {
          ProteinID=proteinID
          MissCleavages=missCleavages
-         MissCleavageStart=missCleavageStart
-         MissCleavageEnd=missCleavageEnd
+         CleavageStart=cleavageStart
+         CleavageEnd=cleavageEnd
          PepSequence=pepSequence
          }
    
@@ -125,10 +125,10 @@ module Digestion =
             if aasLength = 0 then [||]
             else
             let rec groupAfter f acc lowercounter counter (aasWithOption: (AminoAcid*'a []) []) =
-                if counter = aasLength-1 then (createDigestedPeptide proteinID 0 (lowercounter+1) (counter+1) (aas.[lowercounter.. counter]|> Array.toList))::acc |> List.rev 
+                if counter = aasLength-1 then (createDigestedPeptide proteinID 0 (lowercounter) (counter) (aas.[lowercounter.. counter]|> Array.toList))::acc |> List.rev 
                 else 
                     match (f aasWithOption.[counter]) with
-                    | true  -> groupAfter f ((createDigestedPeptide proteinID 0 (lowercounter+1) (counter+1) (aas.[lowercounter.. counter]|> Array.toList))::acc) (counter+1) (counter+1) aasWithOption 
+                    | true  -> groupAfter f ((createDigestedPeptide proteinID 0 (lowercounter) (counter) (aas.[lowercounter.. counter]|> Array.toList))::acc) (counter+1) (counter+1) aasWithOption 
                     | false -> groupAfter f acc lowercounter (counter+1) aasWithOption
             aas 
             |> motivy 3 2 
@@ -138,12 +138,12 @@ module Digestion =
 
 
         /// Takes Array of DigestedPeptides and and returns Array of DigestedPeptides including those resulting of one or more Misscleavage events
-        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptidesA:(DigestedPeptide) []) =
+        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptidesA:(DigestedPeptide<'a>) []) =
             if digestedPeptidesA = [||] then [||]
             else
             let lengthOfPeptideL = digestedPeptidesA.Length
             let minToMaxMissCleavagesL = [minMissCleavages.. maxMisscleavages]
-            let rec connectDigestedPeptides acc (digestedPeptidesA: DigestedPeptide []) (fstPepIdx:int)  (lastPepIdx:int) currentMissCleavages =
+            let rec connectDigestedPeptides acc (digestedPeptidesA: DigestedPeptide<'a> []) (fstPepIdx:int)  (lastPepIdx:int) currentMissCleavages =
                 if lengthOfPeptideL < lastPepIdx then acc
                 else
                 match lastPepIdx with
@@ -154,8 +154,8 @@ module Digestion =
                         |> Array.map (fun digpep -> digpep.PepSequence) 
                         |> List.concat
                     let currentPeptide = 
-                        createDigestedPeptide digestedPeptidesA.[0].ProteinID (currentMissCleavages) digestedPeptidesA.[fstPepIdx].MissCleavageStart 
-                            digestedPeptidesA.[lastPepIdx].MissCleavageEnd currentPeptideSeq
+                        createDigestedPeptide digestedPeptidesA.[0].ProteinID (currentMissCleavages) digestedPeptidesA.[fstPepIdx].CleavageStart 
+                            digestedPeptidesA.[lastPepIdx].CleavageEnd currentPeptideSeq
                     
                     connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) (lastPepIdx+1) currentMissCleavages
         
@@ -167,27 +167,27 @@ module Digestion =
     ///Contains frequently needed proteases
     //TODO: switch to better list system
     module Table = 
-        ///Possible inputs: "Trypsin", "Lys-C"
-        let getProteaseBy name = 
-            match name with
-            | "Trypsin" ->
-                createProtease "Trypsin" (let _p1 = [AminoAcid.Lys;AminoAcid.Arg] |> Set.ofList 
-                                          fun p4 p3 p2 p1 p1' p2' -> 
-                                          match p1,p1' with
-                                          | Some a1,Some a1' -> _p1.Contains(a1) && not (a1' = AminoAcid.Pro)
-                                          | _   -> false                     
-                                         )       
+
+        let Trypsin =
+            createProtease "Trypsin" (let _p1 = [AminoAcid.Lys;AminoAcid.Arg] |> Set.ofList 
+                                      fun p4 p3 p2 p1 p1' p2' -> 
+                                      match p1,p1' with
+                                      | Some a1,Some a1' -> _p1.Contains(a1) && not (a1' = AminoAcid.Pro)
+                                      | _   -> false                     
+                                      )       
                  
-                   
-            | "Lys-C"  ->
-                createProtease "Lys-C" (let _p1 = [AminoAcid.Lys] |> Set.ofList
-                                        fun p4 p3 p2 p1 p1' p2' -> 
-                                        match p1 with
-                                        | Some a1 -> _p1.Contains(a1)
-                                        | _ -> false
-                                       )    
+        let Lys_C =             
+            createProtease "Lys-C" (let _p1 = [AminoAcid.Lys] |> Set.ofList
+                                    fun p4 p3 p2 p1 p1' p2' -> 
+                                    match p1 with
+                                    | Some a1 -> _p1.Contains(a1)
+                                    | _ -> false
+                                    )    
 
-
+        let getProteaseBy name = 
+            match name with 
+            | "Trypsin" -> Trypsin 
+            | "Lys-C"   -> Lys_C
     
     
     // Implementation of CleavageScore [ref: Prediction of Missed Cleavage Sites in Tryptic Peptides Aids Protein Identification in Proteomics

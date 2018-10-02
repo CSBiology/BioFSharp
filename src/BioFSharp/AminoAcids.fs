@@ -221,11 +221,10 @@ module AminoAcids =
         | _           -> []
 
     /// Gets amino acid without the modifications 
-    //TODO: Function is wrong
     let getAminoAcidWithoutMod (aa:AminoAcid) =
         match aa with
-        | Mod (_,mds) -> mds
-        | _           -> []
+        | Mod (aa',_)  -> aa'
+        | _            -> aa
 
 
     /// Gets amino acid modifications 
