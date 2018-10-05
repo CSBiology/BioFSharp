@@ -1,7 +1,7 @@
 ﻿namespace BioFSharp
 
 open FSharpAux
-
+open ModificationInfo
 ///Contains the AminoAcid type and its according functions. The AminoAcid type is a complex presentation of amino acids, allowing modifications
 module AminoAcids =
 
@@ -144,8 +144,14 @@ module AminoAcids =
                             | AminoAcid.Gap -> (Formula.emptyFormula)
                             | AminoAcid.Ter -> (Formula.emptyFormula)
 
-                            | AminoAcid.Mod (aa,mds) -> Seq.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) (formula aa) mds
-                    
+                            | AminoAcid.Mod (aa,mds) -> 
+                                let isoMods     = List.filter (fun (md:Modification) -> md.Location = ModLocation.Isotopic) mds     
+                                let bioMods     = List.filter (fun (md:Modification) -> md.Location <> ModificationInfo.ModLocation.Isotopic && md.IsBiological) mds     
+                                let nonBioMods  = List.filter (fun (md:Modification) -> md.Location <> ModificationInfo.ModLocation.Isotopic && not md.IsBiological) mds     
+                                List.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) (formula aa) bioMods
+                                |> fun f -> List.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) f isoMods
+                                |> fun f -> List.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) f nonBioMods
+                                //List.fold (fun acc (md:ModificationInfo.Modification) -> md.Modify acc ) (formula aa) mds
                     formula this
                 ///Returns true if the AminoAcid is a Terminator, otherwise returns false
                 member this.isTerminator = match this with
@@ -309,7 +315,6 @@ module AminoAcids =
             AminoAcid.Lys
             AminoAcid.Leu
             AminoAcid.Met
-            AminoAcid.Ala
             AminoAcid.Asn
             AminoAcid.Pyl
             AminoAcid.Pro

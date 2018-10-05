@@ -15,6 +15,7 @@ module ModificationInfo =
     [<CustomEquality; CustomComparison>]
     type Modification = {
          Name     : string
+         IsBiological: bool
          Location : ModLocation
          // Labeled Atom
          Modify   : Formula.Formula -> Formula.Formula 
@@ -46,16 +47,16 @@ module ModificationInfo =
                             member this.Formula  = this.Modify Formula.emptyFormula
 
     /// Create modification, where molecule will be modified by application of given modifier
-    let createModification name location modifier =
-        { Name = name; Location = location; Modify = modifier}           
+    let createModification name isBiological location modifier =
+        { Name = name; IsBiological = isBiological; Location = location; Modify = modifier}           
 
     /// Create modification, where elements of given formula will be added to molecule
-    let createModificationWithAdd name location formula =
-        createModification name location (Formula.add (Formula.parseFormulaString formula))            
+    let createModificationWithAdd name isBiological location formula =
+        createModification name isBiological location (Formula.add (Formula.parseFormulaString formula))            
 
     /// Create modification, where elements of given formula will be substracted molecule
-    let createModificationWithSubstract name location formula =
-        createModification name location (Formula.substract (Formula.parseFormulaString formula))    
+    let createModificationWithSubstract name isBiological location formula =
+        createModification name isBiological location (Formula.substract (Formula.parseFormulaString formula))    
 
     /// Returns modification name as string
     let toString (md:Modification) =
@@ -86,8 +87,9 @@ module ModificationInfo =
     ///Contains frequent modifications
     module Table = 
         
-        let N15    = createModification "#N15" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let N15NH3 = createModification "#N15 NH3" ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let NH3    = createModificationWithAdd "NH3" ModLocation.Nterm "NH3"
-        let H2O    = createModificationWithAdd "H2O" ModLocation.Nterm "H2O"
+        let N15    = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15'   = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15NH3 = createModification "#N15 NH3" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let NH3    = createModificationWithAdd "NH3" true ModLocation.Nterm "NH3"
+        let H2O    = createModificationWithAdd "H2O" true ModLocation.Nterm "H2O"
         

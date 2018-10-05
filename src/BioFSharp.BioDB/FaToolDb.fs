@@ -28,8 +28,8 @@ module FaToolDb =
         static member toString = function
             | SubCellularLocalisationOntology   -> "FaToolSubCellLoc"
             | FaToolObjectAttributeOntology     -> "FTOATTR"
-            | HomologyOntology                  -> "GO"
-            | GeneOntology                      -> "Homology"
+            | HomologyOntology                  -> "Homology"
+            | GeneOntology                      -> "GO"
             | MapManOntology                    -> "MapMan"
             | NCBIOrganismalTaxonomyOntology    -> "NcbiTaxonomy"
             | PSIMSOntology                     -> "PSI-MS"
