@@ -13,46 +13,162 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
 
     <link type="text/css" rel="stylesheet" href="@Root/content/style.css" /> <!--@Root-->
+i	<link type="text/css" rel="stylesheet" href="@Root/style/CSBstyle.css" /> <!--@Root-->
     <script type="text/javascript" src="@Root/content/tips.js"></script> <!--@Root-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="@Properties["project-github"]">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="@Root/index.html">@Properties["project-name"]</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          @RenderBody()
-        </div>
-        <div class="span3">
-          <img src="@Root/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">@Properties["project-name"]</li>
-            <li><a href="@Root/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
-            <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
-            <li><a href="@Root/license.html">License</a></li>
-            <li><a href="@Root/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="@Root/tutorial.html">Sample tutorial</a></li>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="@Properties["project-github"]">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="@Root/index.html">@Properties["project-name"]</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  @RenderBody()
+			</div>
+			<div class="span3" >
+			  <img src="@Root/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">@Properties["project-name"]</li>
+					<li><a href="@Root/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="@Root/Introduction.html">Getting started</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="@Root/reference/index.html">API Reference</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a href="@Properties["project-github"]"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					@*<li class="divider"></li>
+					<li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
+					<li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
+					<li><a href="@Root/license.html">License</a></li>
+					<li><a href="@Root/release-notes.html">Release Notes</a></li>
+					<li class="divider"></li>*@
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="@Root/Formula.html">Formula</a></li>
+					<li>
+						<a href="@Root/BioItem.html">BioItems</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("IBioItem.fsx"))
+						{
+							<ul class="nav nav-list">
+								<li><a href="@Root/IBioItem.html#Nucleotides">Nucleotides</a></li>
+								<li><a href="@Root/IBioItem.html#Aminoacids">Aminoacids</a></li>
+								<li><a href="@Root/IBioItem.html#Converter">BioItem converter</a></li>
+							</ul>
+						}
+					</li>
+					<li><a href="@Root/BioCollections.html">BioCollections</a></li>
+					<li><a href="@Root/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="@Root/Alignment.html">Alignment</a></li>
+					<li><a href="@Root/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="@Root/MotiveSearch.html">Motive search</a></li>
+					<li><a href="@Root/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="@Root/StringMatching.html">Pattern Queries</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("StringMatching.fsx"))
+						{
+							<ul class="nav nav-list">
+								<li><a href="@Root/StringMatching.html#The-Naive-Algorithm">Naive</a></li>
+								<li><a href="@Root/StringMatching.html#Knuth-Morris-Pratt">KnuthMorrisPratt</a></li>
+								<li><a href="@Root/StringMatching.html#Rabin-Karp">RabinKarp</a></li>
+								<li><a href="@Root/StringMatching.html#Boyer-Moore">BoyerMoore</a></li>
+							</ul>
+						}
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="@Root/Clustal.html">Clustal</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Clustal.fsx"))
+						{
+						<ul class="nav nav-list">
+							<li><a href="@Root/Clustal.html#Clustal-format">Format</a></li>
+							<li><a href="@Root/Clustal.html#Reading-Clustal-files">Reading</a></li>
+							<li><a href="@Root/Clustal.html#Writing-Clustal-files">Writing</a></li>
+						</ul>
+						}
+					</li>
+					<li><a href="@Root/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="@Root/FastA.html">FastA</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("FastA.fsx"))
+						{
+						<ul class="nav nav-list">
+							<li><a href="@Root/FastA.html#FastA-format">Format</a></li>
+							<li><a href="@Root/FastA.html#Reading-FastA-files">Reading</a></li>
+							<li><a href="@Root/FastA.html#Writing-FastA-files">Writing</a></li>
+						</ul>
+						}
+					</li>   
+					<li><a href="@Root/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="@Root/GenBank.html">GenBank</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("GenBank.fsx"))
+						{
+						<ul class="nav nav-list">
+							<li><a href="@Root/GenBank.html#GenBank-format">Format</a></li>
+							<li><a href="@Root/GenBank.html#Reading-GenBank-files">Reading</a></li>
+							<li><a href="@Root/GenBank.html#Writing-GenBank-files">Writing</a></li>
+						</ul>
+						}
+					</li>  
+					<li>
+						<a href="@Root/GFF3.html">GFF3</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("GFF3.fsx"))
+						{
+						<ul class="nav nav-list">
+							<li><a href="@Root/GFF3.html#GFF3-format">Format</a></li>
+							<li><a href="@Root/GFF3.html#Reading-GFF3-files">Reading</a></li>
+							<li><a href="@Root/GFF3.html#Writing-GFF3-files">Writing</a></li>
+						</ul>
+						}
+					</li>    
+					<li>
+						<a href="@Root/Newick.html">Newick</a>
+						@if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("Newick.fsx"))
+						{
+						<ul class="nav nav-list">
+							<li><a href="@Root/Newick.html#Newick-format">Format</a></li>
+							<li><a href="@Root/Newick.html#Reading-Newick-files">Reading</a></li>
+							<li><a href="@Root/Newick.html#Writing-Newick-files">Writing</a></li>
+						</ul>
+						}
+					</li>                
+					<li><a href="@Root/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="@Root/UniProt.html">UniProt</a></li>
+					<li><a href="@Root/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="@Root/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="@Root/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="@Root/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="@Root/reference/index.html">API Reference</a></li>
+
+
+					@*<li class="nav-header">Statistics</li>
+					<li><a href="@Root/StatisticalMeasures.html">Common measures</a></li>
+					<li><a href="@Root/Distributions.html">Distributions</a></li>
+					<li><a href="@Root/StatisticalTests.html">Statistical Tests</a></li>
+					<li class="nav-header">Charting & Visualization</li>
+					<li><a href="@Root/Plotly.html">Charting with Plotly</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="@Root/reference/index.html">API Reference</a></li>
+					<li class="nav-header">Our other projects</li>
+					<li><a href="https://github.com/CSBiology/FSharp.Stats">FSharp.Stats</a></li>
+					<li><a href="https://github.com/CSBiology/FSharp.Care">FSharp.Care</a></li>
+					<li><a href="https://github.com/CSBiology/FSharp.FGL">FSharp.FGL</a></li>
+					<li><a href="https://github.com/CSBiology/BioFSharp.Mz">BioFSharp.Mz</a></li>*@
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="@Properties["project-github"]"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>

@@ -340,6 +340,17 @@ Target.create "ReleaseDocs" (fun _ ->
     Git.Branches.push tempDocsDir
 )
 
+Target.create "ReleaseLocal" (fun _ ->
+    let tempDocsDir = "temp/gh-pages"
+    Shell.cleanDir tempDocsDir |> ignore
+    Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
+
+    Shell.copyRecursive "docs" tempDocsDir true |> printfn "%A"
+    Git.Staging.stageAll tempDocsDir
+    Git.Commit.exec tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+    Git.Branches.push tempDocsDir
+)
+
 Target.create "Release" (fun _ ->
     // not fully converted from  FAKE 4
 
@@ -384,6 +395,18 @@ Target.create "Release" (fun _ ->
 Target.create "BuildPackage" ignore
 Target.create "GenerateDocs" ignore
 
+Target.create "GitReleaseNuget" (fun _ ->
+    let tempNugetDir = "temp/nuget"
+    Shell.cleanDir tempNugetDir |> ignore
+    Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "nuget" tempNugetDir
+    let files = Directory.EnumerateFiles bin 
+    Shell.copy tempNugetDir files
+    Git.Staging.stageAll tempNugetDir
+    Git.Commit.exec tempNugetDir (sprintf "Update git nuget packages for version %s" release.NugetVersion)
+    Git.Branches.push tempNugetDir
+    Shell.copy tempNugetDir files
+)
+
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
@@ -412,5 +435,13 @@ Target.create "All" ignore
 "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
+  ==> "CopyBinaries"
+  ==> "RunTests"
+  ==> "NuGet"
+  ==> "GitReleaseNuget"
 
 Target.runOrDefaultWithArguments "All"
