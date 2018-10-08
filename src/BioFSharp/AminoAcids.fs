@@ -436,4 +436,9 @@ module AminoAcids =
     /// Returns true, if the AminoAcid has a hydrophobic side chain
     let isHydrophobic (aa:AminoAcid) = 
         AminoAcidSetHydrophobic.Contains aa    
-        
+
+    /// Returns true if AminoAcid contains a modification
+    let isModified (aa:AminoAcid) =
+        match aa with
+        | Mod _ -> true
+        | _ -> false        

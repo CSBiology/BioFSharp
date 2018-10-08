@@ -87,9 +87,13 @@ module ModificationInfo =
     ///Contains frequent modifications
     module Table = 
         
-        let N15    = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let N15'   = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let N15NH3 = createModification "#N15 NH3" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let NH3    = createModificationWithAdd "NH3" true ModLocation.Nterm "NH3"
-        let H2O    = createModificationWithAdd "H2O" true ModLocation.Nterm "H2O"
-        
+        let N15         = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15'        = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15NH3      = createModification "#N15 NH3" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let H2O         = createModificationWithAdd "H2O" true ModLocation.Nterm "H2O"
+        let CO          = createModificationWithAdd "CO addition" true ModLocation.Cterm "CO"
+        let NH3         = createModificationWithAdd "NH3 addition" true ModLocation.Nterm "NH3"
+        let CO_loss     = createModificationWithSubstract "CO-loss" true ModLocation.Cterm "CO"
+        let NH3_loss    = createModificationWithSubstract "NH3-loss" true ModLocation.Nterm "NH3"
+        let H2O_loss    = createModificationWithSubstract "H2O-loss" true ModLocation.Residual "H2O" 
+  
