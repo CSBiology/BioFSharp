@@ -18,56 +18,6 @@ module BioList =
         s
         |> Seq.choose converter
         |> Seq.toList
-
-    /// Generates amino acid sequence of one-letter-code string containing modified AminoAcids indicated by 2 lowercase digits per modification. 
-    let ofRevModAminoAcidString (converter: OptionConverter.AminoAcidOptionConverter) (converter': 'b -> Modification ) (xModToSearchMod: Map<string,'b>) (aaStr: string) : BioList<_>  =
-        let aaStrL = aaStr.Length
-        let rec loop count (modAcc: 'b list) acc (converter:OptionConverter.AminoAcidOptionConverter) (xModToSearchMod: Map<string,'b>)  (aaStr: string) = 
-            if count = aaStrL then 
-                 acc
-            else 
-                 let currentC = aaStr.[count]
-                 if  (currentC |> Char.IsUpper = true) && modAcc = [] then 
-                     loop (count+1) modAcc ((converter currentC).Value::acc) converter xModToSearchMod aaStr 
-                 elif 
-                     ((currentC |> Char.IsUpper) = true) then
-                     let modList =
-                           List.map converter' modAcc
-                     let tmpAa = setModifications modList (converter currentC).Value
-                     loop (count+1) [] (tmpAa::acc) converter xModToSearchMod aaStr
-                 else 
-                     match Map.tryFind aaStr.[count.. count+1] xModToSearchMod with
-                     | Some modi -> loop (count+1) (modi::modAcc) acc converter xModToSearchMod aaStr
-                     | None      -> loop (count+1) modAcc acc converter xModToSearchMod aaStr 
-        
-        loop 0 [] [] converter xModToSearchMod aaStr
-
-
-    /// Generates amino acid sequence of one-letter-code string containing modified AminoAcids indicated by 2 lowercase digits per modification. 
-    let ofRevModAminoAcidStringWithIsoMod (converter: OptionConverter.AminoAcidOptionConverter) (converter': 'b -> Modification ) (isotopMod: Modification list option) (xModToSearchMod: Map<string,'b>) (aaStr: string) : BioList<_>  =
-        let aaStrL = aaStr.Length
-        let rec loopWithGlobal count (modAcc: 'b list) acc (converter:OptionConverter.AminoAcidOptionConverter) (xModToSearchMod: Map<string,'b>)  (aaStr: string) = 
-            if count = aaStrL then 
-                 acc
-            else 
-                 let currentC = aaStr.[count]
-                 if  (currentC |> Char.IsUpper = true) && modAcc = [] then 
-                     let currentA = (converter currentC).Value 
-                                    |> setModifications isotopMod.Value
-                     loopWithGlobal (count+1) [] (currentA::acc) converter xModToSearchMod aaStr 
-                 elif 
-                     ((currentC |> Char.IsUpper) = true) then
-                     let modList = List.map converter' (modAcc)
-                     let tmpAa = setModifications (isotopMod.Value@modList) (converter currentC).Value
-                     loopWithGlobal (count+1) [] (tmpAa::acc) converter xModToSearchMod aaStr
-                 else 
-                     match Map.tryFind aaStr.[count.. count+1] xModToSearchMod with
-                     | Some modi -> loopWithGlobal (count+1) (modi::modAcc) acc converter xModToSearchMod aaStr
-                     | None      -> loopWithGlobal (count+1) modAcc acc converter xModToSearchMod aaStr                 
-        match isotopMod.IsSome with
-        | true  -> loopWithGlobal 0 [] [] converter xModToSearchMod aaStr
-        | false -> ofRevModAminoAcidString converter converter' xModToSearchMod aaStr
-
         
     /// Generates amino acid sequence of one-letter-code raw string
     let ofAminoAcidString (s:#seq<char>) : BioList<_> =          
