@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
     <RootNamespace>BioFSharp.Stats</RootNamespace>
@@ -20,57 +20,6 @@
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>
-
-
-  <!-- .NET45 references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\net45\FSharp.Stats.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET47 references references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\net47\FSharp.Stats.dll</HintPath>
-    </Reference>	
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47'">
-    <DefineConstants>NET47;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET Standard 2.0 references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Stats">
-      <HintPath>..\..\lib\FSharp.Stats\netstandard2.0\FSharp.Stats.dll</HintPath>
-    </Reference>		
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

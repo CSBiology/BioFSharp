@@ -17,6 +17,14 @@ nuget Microsoft.Xaml
 nuget SwaggerProvider
 nuget YamlDotNet
 
+git https://github.com/CSBiology/FSharpAux.git nuget Packages: /
+nuget FSharpAux
+nuget FSharpAux.IO
+
+git https://github.com/CSBiology/FSharp.Stats.git nuget Packages: /
+nuget FSharp.Stats
+nuget FSharp.Stats.MSF
+
 
 clitool dotnet-fake
 

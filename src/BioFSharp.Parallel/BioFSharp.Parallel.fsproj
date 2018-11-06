@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45;net47</TargetFrameworks>
     <RootNamespace>BioFSharp.Parallel</RootNamespace>
@@ -22,46 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
-  <!-- .NET45 references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\net45\FSharpAux.IO.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET45 references references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
-    <Reference Include="FSharpAux">
-      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpAux.IO">
-      <HintPath>..\..\lib\FSharpAux\net47\FSharpAux.IO.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47'">
-    <DefineConstants>NET47;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET Standard 2.0 references, compilation flags and build options -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Reference Include="netstandard2.0">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.dll</HintPath>
-    </Reference>
-    <Reference Include="netstandard2.0">
-      <HintPath>..\..\lib\FSharpAux\netstandard2.0\FSharpAux.IO.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

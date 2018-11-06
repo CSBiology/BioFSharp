@@ -1,1 +1,4 @@
 FSharp.Core
+FSharpAux
+FSharpAux.IO
+FSharp.Stats
