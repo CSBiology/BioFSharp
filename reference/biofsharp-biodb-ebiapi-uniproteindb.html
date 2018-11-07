@@ -11,27 +11,29 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
 
 
 
@@ -54,10 +56,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '744', 744)" onmouseover="showTip(event, '744', 744)">
+          <code onmouseout="hideTip(event, '807', 807)" onmouseover="showTip(event, '807', 807)">
             new()
           </code>
-          <div class="tip" id="744">
+          <div class="tip" id="807">
             <strong>Signature:</strong> unit -&gt; UniProteinDB<br />
                                   </div>
         </td>
@@ -81,10 +83,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '745', 745)" onmouseover="showTip(event, '745', 745)">
+          <code onmouseout="hideTip(event, '808', 808)" onmouseover="showTip(event, '808', 808)">
             UniProteinDB.getAntigen(accession)
           </code>
-          <div class="tip" id="745">
+          <div class="tip" id="808">
             <strong>Signature:</strong> accession:string -&gt; ProteinFeatureInfo<br />
                                   </div>
         </td>
@@ -101,10 +103,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '746', 746)" onmouseover="showTip(event, '746', 746)">
+          <code onmouseout="hideTip(event, '809', 809)" onmouseover="showTip(event, '809', 809)">
             UniProteinDB.getGenomicCoordinates(...)
           </code>
-          <div class="tip" id="746">
+          <div class="tip" id="809">
             <strong>Signature:</strong> accession:string -&gt; GnEntry<br />
                                   </div>
         </td>
@@ -121,10 +123,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '747', 747)" onmouseover="showTip(event, '747', 747)">
+          <code onmouseout="hideTip(event, '810', 810)" onmouseover="showTip(event, '810', 810)">
             UniProteinDB.getProteinSeqFeature(...)
           </code>
-          <div class="tip" id="747">
+          <div class="tip" id="810">
             <strong>Signature:</strong> (accession:string * categories:string [] option * types:string [] option) -&gt; ProteinFeatureInfo<br />
                                   </div>
         </td>
@@ -141,10 +143,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '748', 748)" onmouseover="showTip(event, '748', 748)">
+          <code onmouseout="hideTip(event, '811', 811)" onmouseover="showTip(event, '811', 811)">
             UniProteinDB.getProteomicsPeptide(...)
           </code>
-          <div class="tip" id="748">
+          <div class="tip" id="811">
             <strong>Signature:</strong> accession:string -&gt; ProteinFeatureInfo<br />
                                   </div>
         </td>
@@ -161,10 +163,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '749', 749)" onmouseover="showTip(event, '749', 749)">
+          <code onmouseout="hideTip(event, '812', 812)" onmouseover="showTip(event, '812', 812)">
             UniProteinDB.getUniProtEntry(accession)
           </code>
-          <div class="tip" id="749">
+          <div class="tip" id="812">
             <strong>Signature:</strong> accession:string -&gt; Entry<br />
                                   </div>
         </td>
@@ -181,10 +183,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '750', 750)" onmouseover="showTip(event, '750', 750)">
+          <code onmouseout="hideTip(event, '813', 813)" onmouseover="showTip(event, '813', 813)">
             UniProteinDB.searchAntigens(...)
           </code>
-          <div class="tip" id="750">
+          <div class="tip" id="813">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * antigenSequence:string option * antigenID:string option * ensemblIDs:string option * matchscore:int option) -&gt; ProteinFeatureInfo []<br />
                                   </div>
         </td>
@@ -201,10 +203,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '751', 751)" onmouseover="showTip(event, '751', 751)">
+          <code onmouseout="hideTip(event, '814', 814)" onmouseover="showTip(event, '814', 814)">
             UniProteinDB.searchEntries(...)
           </code>
-          <div class="tip" id="751">
+          <div class="tip" id="814">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * reviewed:string option * isoforms:int option * goterms:string option * keywords:string option * ec:string option * gene:string option * protein:string option * organism:string option * taxid:string option * pubmed:string option) -&gt; Entry []<br />
                                   </div>
         </td>
@@ -221,10 +223,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '752', 752)" onmouseover="showTip(event, '752', 752)">
+          <code onmouseout="hideTip(event, '815', 815)" onmouseover="showTip(event, '815', 815)">
             UniProteinDB.searchGenomicCoordinates(...)
           </code>
-          <div class="tip" id="752">
+          <div class="tip" id="815">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * chromosome:string option * ensembl:string option * gene:string option * protein:string option * taxid:string option * location:string option) -&gt; GnEntry []<br />
                                   </div>
         </td>
@@ -241,10 +243,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '753', 753)" onmouseover="showTip(event, '753', 753)">
+          <code onmouseout="hideTip(event, '816', 816)" onmouseover="showTip(event, '816', 816)">
             UniProteinDB.searchNaturalVariants(...)
           </code>
-          <div class="tip" id="753">
+          <div class="tip" id="816">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * taxid:string option * sourcetype:string option * consequencetype:string option * wildtype:string option * alternativesequence:string option * location:string option * disease:string option * omim:string option * evidence:string option) -&gt; ProteinFeatureInfo []<br />
                                   </div>
         </td>
@@ -261,10 +263,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '754', 754)" onmouseover="showTip(event, '754', 754)">
+          <code onmouseout="hideTip(event, '817', 817)" onmouseover="showTip(event, '817', 817)">
             UniProteinDB.searchProteinSeqFeature(...)
           </code>
-          <div class="tip" id="754">
+          <div class="tip" id="817">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * reviewed:string option * gene:string option * protein:string option * organism:string option * taxid:string option * categories:string option * types:string option) -&gt; ProteinFeatureInfo []<br />
                                   </div>
         </td>
@@ -281,10 +283,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '755', 755)" onmouseover="showTip(event, '755', 755)">
+          <code onmouseout="hideTip(event, '818', 818)" onmouseover="showTip(event, '818', 818)">
             UniProteinDB.searchProteomes(...)
           </code>
-          <div class="tip" id="755">
+          <div class="tip" id="818">
             <strong>Signature:</strong> (offset:int option * size:int option * upid:string option * name:string option * taxid:string option * keyword:string option * xref:string option * genomeAcc:string option * isRefProteome:string option * isRedundant:string option) -&gt; Proteome<br />
                                   </div>
         </td>
@@ -301,10 +303,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '756', 756)" onmouseover="showTip(event, '756', 756)">
+          <code onmouseout="hideTip(event, '819', 819)" onmouseover="showTip(event, '819', 819)">
             UniProteinDB.searchProteomicsPeptides(...)
           </code>
-          <div class="tip" id="756">
+          <div class="tip" id="819">
             <strong>Signature:</strong> (offset:int option * size:int option * accession:string option * taxid:string option * upid:string option * datasource:string option * peptide:string option * unique:string option) -&gt; ProteinFeatureInfo []<br />
                                   </div>
         </td>
@@ -321,27 +323,68 @@
     </tbody>
   </table>
 
-        </div>
-        <div class="span3">
-          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="https://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">BioFSharp</li>
+					<li><a href="/BioFSharp/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
+					<li>
+						<a href="/BioFSharp/BioItem.html">BioItems</a>
+					</li>
+					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="/BioFSharp/Clustal.html">Clustal</a>
+					</li>
+					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="/BioFSharp/FastA.html">FastA</a>
+					</li>   
+					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="/BioFSharp/GenBank.html">GenBank</a>
+					</li>  
+					<li>
+						<a href="/BioFSharp/GFF3.html">GFF3</a>
+					</li>    
+					<li>
+						<a href="/BioFSharp/Newick.html">Newick</a>
+					</li>                
+					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+					
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>

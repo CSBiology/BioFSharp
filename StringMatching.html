@@ -5,36 +5,36 @@
     <title>The Naive Algorithm
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the successor official of FSharpBio."/>
+    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" />
-     <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" />
-    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/CSBiology/BioFSharp">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
 <table class="HeadAPI">
 <td class="Head"><h1>String matching algorithms</h1></td>
 <td class="API">
@@ -64,10 +64,10 @@ However, the nature of the specific algorithm may impose additional restrictions
 <span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///source containing the query pattern at positions 0,10 and 17 </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="i">source</span> <span class="o">=</span> <span class="s">&quot;AAABBBBBBBAAABBBBAAA&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="f">ofAminoAcidString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">source</span> <span class="o">=</span> <span class="s">&quot;AAABBBBBBBAAABBBBAAA&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="id">ofAminoAcidString</span>
 
 <span class="c">///query pattern to find in the source</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="i">queryPattern</span> <span class="o">=</span> <span class="s">&quot;AAA&quot;</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="t">BioArray</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="f">ofAminoAcidString</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="id">queryPattern</span> <span class="o">=</span> <span class="s">&quot;AAA&quot;</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">ofAminoAcidString</span>
 </code></pre></td>
 </tr>
 </table>
@@ -88,13 +88,13 @@ While being inefficient, it may be beneficial to use it in cases where the speed
 <span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//returns [0;10;17]</span>
-<span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="t">Naive</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="m">Naive</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">findAll</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 22)" onmouseover="showTip(event, 'fs11', 22)" class="id">source</span>
 
 <span class="c">//returns 0</span>
-<span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="t">Naive</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="f">find</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 27)" onmouseover="showTip(event, 'fs12', 27)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="m">Naive</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="id">find</span> <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 26)" onmouseover="showTip(event, 'fs11', 26)" class="id">source</span>
 
 <span class="c">//returns 17</span>
-<span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="t">Naive</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="f">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs15', 30)" onmouseover="showTip(event, 'fs15', 30)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 31)" onmouseover="showTip(event, 'fs12', 31)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="m">Naive</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="id">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 30)" onmouseover="showTip(event, 'fs11', 30)" class="id">source</span>
 </code></pre></td>
 </tr>
 </table>
@@ -122,16 +122,16 @@ To achieve that, a prefix table (or failure function) of the pattern needs to be
 <span class="l">11: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///prefix table computed from the query pattern</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="i">prefixTable</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="t">KnuthMorrisPratt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="f">createPrefixTable</span> <span onmouseout="hideTip(event, 'fs15', 35)" onmouseover="showTip(event, 'fs15', 35)" class="i">queryPattern</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="id">prefixTable</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="m">KnuthMorrisPratt</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="id">createPrefixTable</span> <span onmouseout="hideTip(event, 'fs14', 34)" onmouseover="showTip(event, 'fs14', 34)" class="id">queryPattern</span>
 
 <span class="c">//returns [0;10;17]</span>
-<span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="t">KnuthMorrisPratt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs20', 38)" onmouseover="showTip(event, 'fs20', 38)" class="i">prefixTable</span> <span onmouseout="hideTip(event, 'fs15', 39)" onmouseover="showTip(event, 'fs15', 39)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 40)" onmouseover="showTip(event, 'fs12', 40)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="m">KnuthMorrisPratt</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">findAll</span> <span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="id">prefixTable</span> <span onmouseout="hideTip(event, 'fs14', 38)" onmouseover="showTip(event, 'fs14', 38)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 39)" onmouseover="showTip(event, 'fs11', 39)" class="id">source</span>
 
 <span class="c">//returns 0</span>
-<span onmouseout="hideTip(event, 'fs21', 41)" onmouseover="showTip(event, 'fs21', 41)" class="t">KnuthMorrisPratt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="f">find</span> <span onmouseout="hideTip(event, 'fs20', 43)" onmouseover="showTip(event, 'fs20', 43)" class="i">prefixTable</span> <span onmouseout="hideTip(event, 'fs15', 44)" onmouseover="showTip(event, 'fs15', 44)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 45)" onmouseover="showTip(event, 'fs12', 45)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs20', 40)" onmouseover="showTip(event, 'fs20', 40)" class="m">KnuthMorrisPratt</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 41)" onmouseover="showTip(event, 'fs23', 41)" class="id">find</span> <span onmouseout="hideTip(event, 'fs19', 42)" onmouseover="showTip(event, 'fs19', 42)" class="id">prefixTable</span> <span onmouseout="hideTip(event, 'fs14', 43)" onmouseover="showTip(event, 'fs14', 43)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 44)" onmouseover="showTip(event, 'fs11', 44)" class="id">source</span>
 
 <span class="c">//returns 17</span>
-<span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="t">KnuthMorrisPratt</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 47)" onmouseover="showTip(event, 'fs25', 47)" class="f">findFrom</span> <span onmouseout="hideTip(event, 'fs20', 48)" onmouseover="showTip(event, 'fs20', 48)" class="i">prefixTable</span> <span onmouseout="hideTip(event, 'fs15', 49)" onmouseover="showTip(event, 'fs15', 49)" class="i">queryPattern</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs12', 50)" onmouseover="showTip(event, 'fs12', 50)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs20', 45)" onmouseover="showTip(event, 'fs20', 45)" class="m">KnuthMorrisPratt</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="id">findFrom</span> <span onmouseout="hideTip(event, 'fs19', 47)" onmouseover="showTip(event, 'fs19', 47)" class="id">prefixTable</span> <span onmouseout="hideTip(event, 'fs14', 48)" onmouseover="showTip(event, 'fs14', 48)" class="id">queryPattern</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs11', 49)" onmouseover="showTip(event, 'fs11', 49)" class="id">source</span>
 </code></pre></td>
 </tr>
 </table>
@@ -165,13 +165,13 @@ Using large query patterns is problematic, as the combined hash may exceed the s
 <span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//returns [0;10;17]</span>
-<span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 52)" onmouseover="showTip(event, 'fs27', 52)" class="t">RKStandard</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs15', 54)" onmouseover="showTip(event, 'fs15', 54)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 55)" onmouseover="showTip(event, 'fs12', 55)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="m">RKStandard</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 52)" onmouseover="showTip(event, 'fs16', 52)" class="id">findAll</span> <span onmouseout="hideTip(event, 'fs14', 53)" onmouseover="showTip(event, 'fs14', 53)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 54)" onmouseover="showTip(event, 'fs11', 54)" class="id">source</span>
 
 <span class="c">//returns 0</span>
-<span onmouseout="hideTip(event, 'fs26', 56)" onmouseover="showTip(event, 'fs26', 56)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 57)" onmouseover="showTip(event, 'fs27', 57)" class="t">RKStandard</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs29', 58)" onmouseover="showTip(event, 'fs29', 58)" class="f">find</span> <span onmouseout="hideTip(event, 'fs15', 59)" onmouseover="showTip(event, 'fs15', 59)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 60)" onmouseover="showTip(event, 'fs12', 60)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 56)" onmouseover="showTip(event, 'fs26', 56)" class="m">RKStandard</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 57)" onmouseover="showTip(event, 'fs17', 57)" class="id">find</span> <span onmouseout="hideTip(event, 'fs14', 58)" onmouseover="showTip(event, 'fs14', 58)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 59)" onmouseover="showTip(event, 'fs11', 59)" class="id">source</span>
 
 <span class="c">//returns 17</span>
-<span onmouseout="hideTip(event, 'fs26', 61)" onmouseover="showTip(event, 'fs26', 61)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 62)" onmouseover="showTip(event, 'fs27', 62)" class="t">RKStandard</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 63)" onmouseover="showTip(event, 'fs30', 63)" class="f">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs15', 64)" onmouseover="showTip(event, 'fs15', 64)" class="i">queryPattern</span> <span onmouseout="hideTip(event, 'fs12', 65)" onmouseover="showTip(event, 'fs12', 65)" class="i">source</span>
+<span onmouseout="hideTip(event, 'fs25', 60)" onmouseover="showTip(event, 'fs25', 60)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 61)" onmouseover="showTip(event, 'fs26', 61)" class="m">RKStandard</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 62)" onmouseover="showTip(event, 'fs18', 62)" class="id">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs14', 63)" onmouseover="showTip(event, 'fs14', 63)" class="id">queryPattern</span> <span onmouseout="hideTip(event, 'fs11', 64)" onmouseover="showTip(event, 'fs11', 64)" class="id">source</span>
 </code></pre></td>
 </tr>
 </table>
@@ -193,19 +193,19 @@ Using large query patterns is problematic, as the combined hash may exceed the s
 <span class="l">14: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///source converted to char array </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 66)" onmouseover="showTip(event, 'fs31', 66)" class="i">source&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 67)" onmouseover="showTip(event, 'fs12', 67)" class="i">source</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 68)" onmouseover="showTip(event, 'fs32', 68)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 69)" onmouseover="showTip(event, 'fs33', 69)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="i">x</span> <span class="k">-&gt;</span> (<span onmouseout="hideTip(event, 'fs34', 71)" onmouseover="showTip(event, 'fs34', 71)" class="i">x</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs35', 72)" onmouseover="showTip(event, 'fs35', 72)" class="t">IBioItem</span>)<span class="o">.</span><span class="i">Symbol</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 65)" onmouseover="showTip(event, 'fs27', 65)" class="id">source&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 66)" onmouseover="showTip(event, 'fs11', 66)" class="id">source</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 67)" onmouseover="showTip(event, 'fs28', 67)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 68)" onmouseover="showTip(event, 'fs29', 68)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs30', 69)" onmouseover="showTip(event, 'fs30', 69)" class="id">x</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs30', 70)" onmouseover="showTip(event, 'fs30', 70)" class="id">x</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs31', 71)" onmouseover="showTip(event, 'fs31', 71)" class="if">IBioItem</span><span class="pn">)</span><span class="pn">.</span><span class="id">Symbol</span><span class="pn">)</span>
 
 <span class="c">///query pattern converted to char array</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 73)" onmouseover="showTip(event, 'fs36', 73)" class="i">queryPattern&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 74)" onmouseover="showTip(event, 'fs15', 74)" class="i">queryPattern</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs32', 75)" onmouseover="showTip(event, 'fs32', 75)" class="t">Array</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs33', 76)" onmouseover="showTip(event, 'fs33', 76)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs34', 77)" onmouseover="showTip(event, 'fs34', 77)" class="i">x</span> <span class="k">-&gt;</span> (<span onmouseout="hideTip(event, 'fs34', 78)" onmouseover="showTip(event, 'fs34', 78)" class="i">x</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs35', 79)" onmouseover="showTip(event, 'fs35', 79)" class="t">IBioItem</span>)<span class="o">.</span><span class="i">Symbol</span>)
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 72)" onmouseover="showTip(event, 'fs32', 72)" class="id">queryPattern&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 73)" onmouseover="showTip(event, 'fs14', 73)" class="id">queryPattern</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 74)" onmouseover="showTip(event, 'fs28', 74)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 75)" onmouseover="showTip(event, 'fs29', 75)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs30', 76)" onmouseover="showTip(event, 'fs30', 76)" class="id">x</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs30', 77)" onmouseover="showTip(event, 'fs30', 77)" class="id">x</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs31', 78)" onmouseover="showTip(event, 'fs31', 78)" class="if">IBioItem</span><span class="pn">)</span><span class="pn">.</span><span class="id">Symbol</span><span class="pn">)</span>
 
 <span class="c">//returns [0;10;17]</span>
-<span onmouseout="hideTip(event, 'fs26', 80)" onmouseover="showTip(event, 'fs26', 80)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 81)" onmouseover="showTip(event, 'fs37', 81)" class="t">CP</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 82)" onmouseover="showTip(event, 'fs38', 82)" class="f">findAll</span> <span onmouseout="hideTip(event, 'fs36', 83)" onmouseover="showTip(event, 'fs36', 83)" class="i">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs31', 84)" onmouseover="showTip(event, 'fs31', 84)" class="i">source&#39;</span>
+<span onmouseout="hideTip(event, 'fs25', 79)" onmouseover="showTip(event, 'fs25', 79)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 80)" onmouseover="showTip(event, 'fs33', 80)" class="m">CP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 81)" onmouseover="showTip(event, 'fs34', 81)" class="id">findAll</span> <span onmouseout="hideTip(event, 'fs32', 82)" onmouseover="showTip(event, 'fs32', 82)" class="id">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs27', 83)" onmouseover="showTip(event, 'fs27', 83)" class="id">source&#39;</span>
 
 <span class="c">//returns 0</span>
-<span onmouseout="hideTip(event, 'fs26', 85)" onmouseover="showTip(event, 'fs26', 85)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 86)" onmouseover="showTip(event, 'fs37', 86)" class="t">CP</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 87)" onmouseover="showTip(event, 'fs39', 87)" class="f">find</span> <span onmouseout="hideTip(event, 'fs36', 88)" onmouseover="showTip(event, 'fs36', 88)" class="i">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs31', 89)" onmouseover="showTip(event, 'fs31', 89)" class="i">source&#39;</span>
+<span onmouseout="hideTip(event, 'fs25', 84)" onmouseover="showTip(event, 'fs25', 84)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 85)" onmouseover="showTip(event, 'fs33', 85)" class="m">CP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 86)" onmouseover="showTip(event, 'fs35', 86)" class="id">find</span> <span onmouseout="hideTip(event, 'fs32', 87)" onmouseover="showTip(event, 'fs32', 87)" class="id">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs27', 88)" onmouseover="showTip(event, 'fs27', 88)" class="id">source&#39;</span>
 
 <span class="c">//returns 17</span>
-<span onmouseout="hideTip(event, 'fs26', 90)" onmouseover="showTip(event, 'fs26', 90)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 91)" onmouseover="showTip(event, 'fs37', 91)" class="t">CP</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 92)" onmouseover="showTip(event, 'fs40', 92)" class="f">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs36', 93)" onmouseover="showTip(event, 'fs36', 93)" class="i">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs31', 94)" onmouseover="showTip(event, 'fs31', 94)" class="i">source&#39;</span>
+<span onmouseout="hideTip(event, 'fs25', 89)" onmouseover="showTip(event, 'fs25', 89)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 90)" onmouseover="showTip(event, 'fs33', 90)" class="m">CP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 91)" onmouseover="showTip(event, 'fs36', 91)" class="id">findFrom</span> <span class="n">12</span> <span onmouseout="hideTip(event, 'fs32', 92)" onmouseover="showTip(event, 'fs32', 92)" class="id">queryPattern&#39;</span> <span onmouseout="hideTip(event, 'fs27', 93)" onmouseover="showTip(event, 'fs27', 93)" class="id">source&#39;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -222,8 +222,8 @@ In fact the two provided algorithms are built the same way:</p>
 <span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///RabinKarp.CP.findAll built by functional composition</span>
-<span class="k">let</span> <span class="k">inline</span> <span onmouseout="hideTip(event, 'fs41', 95)" onmouseover="showTip(event, 'fs41', 95)" class="f">findAll</span> (<span onmouseout="hideTip(event, 'fs42', 96)" onmouseover="showTip(event, 'fs42', 96)" class="i">pattern</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs43', 97)" onmouseover="showTip(event, 'fs43', 97)" class="t">array</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span>) (<span onmouseout="hideTip(event, 'fs44', 98)" onmouseover="showTip(event, 'fs44', 98)" class="i">s</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs43', 99)" onmouseover="showTip(event, 'fs43', 99)" class="t">array</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span>) <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs26', 100)" onmouseover="showTip(event, 'fs26', 100)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 101)" onmouseover="showTip(event, 'fs45', 101)" class="f">findAllGeneric</span> (<span onmouseout="hideTip(event, 'fs26', 102)" onmouseover="showTip(event, 'fs26', 102)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 103)" onmouseover="showTip(event, 'fs37', 103)" class="t">CP</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 104)" onmouseover="showTip(event, 'fs46', 104)" class="f">updateHash</span> <span onmouseout="hideTip(event, 'fs42', 105)" onmouseover="showTip(event, 'fs42', 105)" class="i">pattern</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 106)" onmouseover="showTip(event, 'fs47', 106)" class="i">Length</span>) (<span onmouseout="hideTip(event, 'fs26', 107)" onmouseover="showTip(event, 'fs26', 107)" class="t">RabinKarp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 108)" onmouseover="showTip(event, 'fs37', 108)" class="t">CP</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs48', 109)" onmouseover="showTip(event, 'fs48', 109)" class="f">blockHash</span>) <span onmouseout="hideTip(event, 'fs42', 110)" onmouseover="showTip(event, 'fs42', 110)" class="i">pattern</span> <span onmouseout="hideTip(event, 'fs44', 111)" onmouseover="showTip(event, 'fs44', 111)" class="i">s</span> 
+<span class="k">let</span> <span class="k">inline</span> <span onmouseout="hideTip(event, 'fs37', 94)" onmouseover="showTip(event, 'fs37', 94)" class="fn">findAll</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs38', 95)" onmouseover="showTip(event, 'fs38', 95)" class="id">pattern</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 96)" onmouseover="showTip(event, 'fs39', 96)" class="rt">array</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 97)" onmouseover="showTip(event, 'fs40', 97)" class="id">s</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 98)" onmouseover="showTip(event, 'fs39', 98)" class="rt">array</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs25', 99)" onmouseover="showTip(event, 'fs25', 99)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 100)" onmouseover="showTip(event, 'fs41', 100)" class="id">findAllGeneric</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 101)" onmouseover="showTip(event, 'fs25', 101)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 102)" onmouseover="showTip(event, 'fs33', 102)" class="m">CP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 103)" onmouseover="showTip(event, 'fs42', 103)" class="id">updateHash</span> <span onmouseout="hideTip(event, 'fs38', 104)" onmouseover="showTip(event, 'fs38', 104)" class="id">pattern</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 105)" onmouseover="showTip(event, 'fs43', 105)" class="id">Length</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 106)" onmouseover="showTip(event, 'fs25', 106)" class="m">RabinKarp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 107)" onmouseover="showTip(event, 'fs33', 107)" class="m">CP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 108)" onmouseover="showTip(event, 'fs44', 108)" class="id">blockHash</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs38', 109)" onmouseover="showTip(event, 'fs38', 109)" class="id">pattern</span> <span onmouseout="hideTip(event, 'fs40', 110)" onmouseover="showTip(event, 'fs40', 110)" class="id">s</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -243,120 +243,116 @@ In fact the two provided algorithms are built the same way:</p>
 <div class="tip" id="fs1">namespace System</div>
 <div class="tip" id="fs2">namespace BioFSharp</div>
 <div class="tip" id="fs3">namespace BioFSharp.IO</div>
-<div class="tip" id="fs4">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs5">namespace FSharp.Care</div>
-<div class="tip" id="fs6">namespace FSharp.Care.IO</div>
-<div class="tip" id="fs7">module AminoAcids<br /><br />from BioFSharp</div>
-<div class="tip" id="fs8">module Nucleotides<br /><br />from BioFSharp</div>
-<div class="tip" id="fs9">module AminoAcidSymbols<br /><br />from BioFSharp</div>
-<div class="tip" id="fs10">namespace BioFSharp.Algorithm</div>
-<div class="tip" id="fs11">module StringMatching<br /><br />from BioFSharp.Algorithm</div>
-<div class="tip" id="fs12">val source : BioArray.BioArray&lt;AminoAcid&gt;<br /><br />Full name: StringMatching.source<br /><em><br /><br />source containing the query pattern at positions 0,10 and 17 </em></div>
-<div class="tip" id="fs13">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs14">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcid&gt;<br /><br />Full name: BioFSharp.BioArray.ofAminoAcidString</div>
-<div class="tip" id="fs15">val queryPattern : BioArray.BioArray&lt;AminoAcid&gt;<br /><br />Full name: StringMatching.queryPattern<br /><em><br /><br />query pattern to find in the source</em></div>
-<div class="tip" id="fs16">module Naive<br /><br />from BioFSharp.Algorithm.StringMatching</div>
-<div class="tip" id="fs17">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.Naive.findAll</div>
-<div class="tip" id="fs18">val find : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.Naive.find</div>
-<div class="tip" id="fs19">val findFrom : startPos:int -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.Naive.findFrom</div>
-<div class="tip" id="fs20">val prefixTable : int []<br /><br />Full name: StringMatching.prefixTable<br /><em><br /><br />prefix table computed from the query pattern</em></div>
-<div class="tip" id="fs21">module KnuthMorrisPratt<br /><br />from BioFSharp.Algorithm.StringMatching</div>
-<div class="tip" id="fs22">val createPrefixTable : pattern:&#39;a array -&gt; int [] (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.KnuthMorrisPratt.createPrefixTable</div>
-<div class="tip" id="fs23">val findAll : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.KnuthMorrisPratt.findAll</div>
-<div class="tip" id="fs24">val find : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.KnuthMorrisPratt.find</div>
-<div class="tip" id="fs25">val findFrom : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; startPos:int -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.KnuthMorrisPratt.findFrom</div>
-<div class="tip" id="fs26">module RabinKarp<br /><br />from BioFSharp.Algorithm.StringMatching</div>
-<div class="tip" id="fs27">module RKStandard<br /><br />from BioFSharp.Algorithm.StringMatching.RabinKarp</div>
-<div class="tip" id="fs28">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.RKStandard.findAll</div>
-<div class="tip" id="fs29">val find : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.RKStandard.find</div>
-<div class="tip" id="fs30">val findFrom : startPos:int -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.RKStandard.findFrom</div>
-<div class="tip" id="fs31">val source&#39; : char []<br /><br />Full name: StringMatching.source&#39;<br /><em><br /><br />source converted to char array </em></div>
-<div class="tip" id="fs32">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
-<div class="tip" id="fs33">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>
-<div class="tip" id="fs34">val x : AminoAcid</div>
-<div class="tip" id="fs35">type IBioItem =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;abstract member Formula : Formula<br />&#160;&#160;&#160;&#160;abstract member Name : string<br />&#160;&#160;&#160;&#160;abstract member Symbol : char<br />&#160;&#160;&#160;&#160;abstract member isGap : bool<br />&#160;&#160;&#160;&#160;abstract member isTerminator : bool<br />&#160;&#160;end<br /><br />Full name: BioFSharp.IBioItem</div>
-<div class="tip" id="fs36">val queryPattern&#39; : char []<br /><br />Full name: StringMatching.queryPattern&#39;<br /><em><br /><br />query pattern converted to char array</em></div>
-<div class="tip" id="fs37">module CP<br /><br />from BioFSharp.Algorithm.StringMatching.RabinKarp</div>
-<div class="tip" id="fs38">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.findAll</div>
-<div class="tip" id="fs39">val find : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.find</div>
-<div class="tip" id="fs40">val findFrom : startPos:int -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires member op_Explicit and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.findFrom</div>
-<div class="tip" id="fs41">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires member op_Explicit and equality)<br /><br />Full name: StringMatching.findAll<br /><em><br /><br />RabinKarp.CP.findAll built by functional composition</em></div>
-<div class="tip" id="fs42">val pattern : &#39;a array (requires member op_Explicit and equality)</div>
-<div class="tip" id="fs43">type &#39;T array = &#39;T []<br /><br />Full name: Microsoft.FSharp.Core.array&lt;_&gt;</div>
-<div class="tip" id="fs44">val s : &#39;a array (requires member op_Explicit and equality)</div>
-<div class="tip" id="fs45">val findAllGeneric : updateHash:(&#39;c -&gt; &#39;a -&gt; &#39;a -&gt; &#39;c) -&gt; blockHash:(&#39;a array -&gt; &#39;c) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality and equality)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.findAllGeneric</div>
-<div class="tip" id="fs46">val updateHash : pLength:int32 -&gt; hs:uint64 -&gt; inchar:&#39;b -&gt; outchar:&#39;c -&gt; uint64 (requires member op_Explicit and member op_Explicit)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.updateHash</div>
-<div class="tip" id="fs47">property Array.Length: int</div>
-<div class="tip" id="fs48">val blockHash : pattern:&#39;a array -&gt; uint64 (requires member op_Explicit)<br /><br />Full name: BioFSharp.Algorithm.StringMatching.RabinKarp.CP.blockHash</div>
+<div class="tip" id="fs4">namespace FSharpAux</div>
+<div class="tip" id="fs5">namespace FSharpAux.IO</div>
+<div class="tip" id="fs6">module AminoAcids<br /><br />from BioFSharp</div>
+<div class="tip" id="fs7">module Nucleotides<br /><br />from BioFSharp</div>
+<div class="tip" id="fs8">module AminoAcidSymbols<br /><br />from BioFSharp</div>
+<div class="tip" id="fs9">namespace BioFSharp.Algorithm</div>
+<div class="tip" id="fs10">module StringMatching<br /><br />from BioFSharp.Algorithm</div>
+<div class="tip" id="fs11">val source : BioArray.BioArray&lt;AminoAcid&gt;<br /><em><br /><br />source containing the query pattern at positions 0,10 and 17 </em></div>
+<div class="tip" id="fs12">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs13">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcid&gt;</div>
+<div class="tip" id="fs14">val queryPattern : BioArray.BioArray&lt;AminoAcid&gt;<br /><em><br /><br />query pattern to find in the source</em></div>
+<div class="tip" id="fs15">module Naive<br /><br />from BioFSharp.Algorithm.StringMatching</div>
+<div class="tip" id="fs16">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality)</div>
+<div class="tip" id="fs17">val find : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)</div>
+<div class="tip" id="fs18">val findFrom : startPos:int -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)</div>
+<div class="tip" id="fs19">val prefixTable : int []<br /><em><br /><br />prefix table computed from the query pattern</em></div>
+<div class="tip" id="fs20">module KnuthMorrisPratt<br /><br />from BioFSharp.Algorithm.StringMatching</div>
+<div class="tip" id="fs21">val createPrefixTable : pattern:&#39;a array -&gt; int [] (requires equality)</div>
+<div class="tip" id="fs22">val findAll : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality)</div>
+<div class="tip" id="fs23">val find : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires equality)</div>
+<div class="tip" id="fs24">val findFrom : prefixTable:int [] -&gt; pattern:&#39;a array -&gt; startPos:int -&gt; s:&#39;a array -&gt; int (requires equality)</div>
+<div class="tip" id="fs25">module RabinKarp<br /><br />from BioFSharp.Algorithm.StringMatching</div>
+<div class="tip" id="fs26">module RKStandard<br /><br />from BioFSharp.Algorithm.StringMatching.RabinKarp</div>
+<div class="tip" id="fs27">val source&#39; : char []<br /><em><br /><br />source converted to char array </em></div>
+<div class="tip" id="fs28">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...</div>
+<div class="tip" id="fs29">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
+<div class="tip" id="fs30">val x : AminoAcid</div>
+<div class="tip" id="fs31">type IBioItem =<br />&#160;&#160;interface<br />&#160;&#160;&#160;&#160;abstract member Formula : Formula<br />&#160;&#160;&#160;&#160;abstract member Name : string<br />&#160;&#160;&#160;&#160;abstract member Symbol : char<br />&#160;&#160;&#160;&#160;abstract member isGap : bool<br />&#160;&#160;&#160;&#160;abstract member isTerminator : bool<br />&#160;&#160;end</div>
+<div class="tip" id="fs32">val queryPattern&#39; : char []<br /><em><br /><br />query pattern converted to char array</em></div>
+<div class="tip" id="fs33">module CP<br /><br />from BioFSharp.Algorithm.StringMatching.RabinKarp</div>
+<div class="tip" id="fs34">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires member op_Explicit and equality)</div>
+<div class="tip" id="fs35">val find : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires member op_Explicit and equality)</div>
+<div class="tip" id="fs36">val findFrom : startPos:int -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int (requires member op_Explicit and equality)</div>
+<div class="tip" id="fs37">val findAll : pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires member op_Explicit and equality)<br /><em><br /><br />RabinKarp.CP.findAll built by functional composition</em></div>
+<div class="tip" id="fs38">val pattern : &#39;a array (requires member op_Explicit and equality)</div>
+<div class="tip" id="fs39">type &#39;T array = &#39;T []</div>
+<div class="tip" id="fs40">val s : &#39;a array (requires member op_Explicit and equality)</div>
+<div class="tip" id="fs41">val findAllGeneric : updateHash:(&#39;c -&gt; &#39;a -&gt; &#39;a -&gt; &#39;c) -&gt; blockHash:(&#39;a array -&gt; &#39;c) -&gt; pattern:&#39;a array -&gt; s:&#39;a array -&gt; int list (requires equality and equality)</div>
+<div class="tip" id="fs42">val updateHash : pLength:int32 -&gt; hs:uint64 -&gt; inchar:&#39;b -&gt; outchar:&#39;c -&gt; uint64 (requires member op_Explicit and member op_Explicit)</div>
+<div class="tip" id="fs43">property Array.Length: int</div>
+<div class="tip" id="fs44">val blockHash : pattern:&#39;a array -&gt; uint64 (requires member op_Explicit)</div>
 
-        </div>
-        <div class="span3" >
-          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-            <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                <li class="nav-header">BioFSharp</li>
-                <li><a href="/BioFSharp/index.html">Home page</a></li>
-                <li class="divider"></li>
-                <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">BioFSharp</li>
+					<li><a href="/BioFSharp/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-                
-                <li class="nav-header">BioFSharp core</li>
-                <li><a href="/BioFSharp/Formula.html">Formula</a></li>
-                <li>
-                    <a href="/BioFSharp/BioItem.html">BioItems</a>
-                </li>
-                <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-                <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
-                <li class="nav-header">Algorithm</li>
-                <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-                <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-                <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
-                <li>
-                    <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
-                        <ul class="nav nav-list">
-                            <li><a href="/BioFSharp/StringMatching.html#The-Naive-Algorithm">Naive</a></li>
-                            <li><a href="/BioFSharp/StringMatching.html#Knuth-Morris-Pratt">KnuthMorrisPratt</a></li>
-                            <li><a href="/BioFSharp/StringMatching.html#Rabin-Karp">RabinKarp</a></li>
-                            <li><a href="/BioFSharp/StringMatching.html#Boyer-Moore">BoyerMoore</a></li>
-                        </ul>
-                </li>
-                <li class="nav-header">File I/O</li>
-                <li>
-                    <a href="/BioFSharp/Clustal.html">Clustal</a>
-                </li>
-                <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
-                <li>
-                    <a href="/BioFSharp/FastA.html">FastA</a>
-                </li>   
-                <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-                <li>
-                    <a href="/BioFSharp/GenBank.html">GenBank</a>
-                </li>  
-                <li>
-                    <a href="/BioFSharp/GFF3.html">GFF3</a>
-                </li>    
-                <li>
-                    <a href="/BioFSharp/Newick.html">Newick</a>
-                </li>                
-                <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-                <li class="nav-header">Web I/O</li>
-                <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-                <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
-                <li class="nav-header">Biostatistics</li>
-                <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
-                <li class="nav-header">Biovisualization</li>
-                <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
-                <li class="nav-header">GPU Computing</li>
-                <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
-                <li class="nav-header">Documentation</li>
-                <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+					
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
+					<li>
+						<a href="/BioFSharp/BioItem.html">BioItems</a>
+					</li>
+					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+							<ul class="nav nav-list">
+								<li><a href="/BioFSharp/StringMatching.html#The-Naive-Algorithm">Naive</a></li>
+								<li><a href="/BioFSharp/StringMatching.html#Knuth-Morris-Pratt">KnuthMorrisPratt</a></li>
+								<li><a href="/BioFSharp/StringMatching.html#Rabin-Karp">RabinKarp</a></li>
+								<li><a href="/BioFSharp/StringMatching.html#Boyer-Moore">BoyerMoore</a></li>
+							</ul>
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="/BioFSharp/Clustal.html">Clustal</a>
+					</li>
+					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="/BioFSharp/FastA.html">FastA</a>
+					</li>   
+					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="/BioFSharp/GenBank.html">GenBank</a>
+					</li>  
+					<li>
+						<a href="/BioFSharp/GFF3.html">GFF3</a>
+					</li>    
+					<li>
+						<a href="/BioFSharp/Newick.html">Newick</a>
+					</li>                
+					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
 
 
-                
-            </ul>
-        </div>
-      </div>
-    </div>
-    <a href="http://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>

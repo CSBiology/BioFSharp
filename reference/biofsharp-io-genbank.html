@@ -11,27 +11,29 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
 
 
 
@@ -135,10 +137,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '430', 430)" onmouseover="showTip(event, '430', 430)">
+          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
             createFeature t bs qual
           </code>
-          <div class="tip" id="430">
+          <div class="tip" id="437">
             <strong>Signature:</strong> t:string -&gt; bs:string -&gt; qual:FeatureQualifier list -&gt; Feature<br />
                                   </div>
         </td>
@@ -153,10 +155,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '431', 431)" onmouseover="showTip(event, '431', 431)">
+          <code onmouseout="hideTip(event, '438', 438)" onmouseover="showTip(event, '438', 438)">
             createFeatureQualifier name value
           </code>
-          <div class="tip" id="431">
+          <div class="tip" id="438">
             <strong>Signature:</strong> name:string -&gt; value:string -&gt; FeatureQualifier<br />
                                   </div>
         </td>
@@ -171,10 +173,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '432', 432)" onmouseover="showTip(event, '432', 432)">
+          <code onmouseout="hideTip(event, '439', 439)" onmouseover="showTip(event, '439', 439)">
             getFeatures(gb)
           </code>
-          <div class="tip" id="432">
+          <div class="tip" id="439">
             <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; Feature list<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -191,10 +193,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '433', 433)" onmouseover="showTip(event, '433', 433)">
+          <code onmouseout="hideTip(event, '440', 440)" onmouseover="showTip(event, '440', 440)">
             getFeaturesWithType featureType gb
           </code>
-          <div class="tip" id="433">
+          <div class="tip" id="440">
             <strong>Signature:</strong> featureType:string -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; Feature list<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -211,10 +213,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '434', 434)" onmouseover="showTip(event, '434', 434)">
+          <code onmouseout="hideTip(event, '441', 441)" onmouseover="showTip(event, '441', 441)">
             getOrigin(gb)
           </code>
-          <div class="tip" id="434">
+          <div class="tip" id="441">
             <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; &#39;a<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -231,10 +233,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '435', 435)" onmouseover="showTip(event, '435', 435)">
+          <code onmouseout="hideTip(event, '442', 442)" onmouseover="showTip(event, '442', 442)">
             getReferences(gb)
           </code>
-          <div class="tip" id="435">
+          <div class="tip" id="442">
             <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; (string * string) list list<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -251,10 +253,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '436', 436)" onmouseover="showTip(event, '436', 436)">
+          <code onmouseout="hideTip(event, '443', 443)" onmouseover="showTip(event, '443', 443)">
             getValues(gb)
           </code>
-          <div class="tip" id="436">
+          <div class="tip" id="443">
             <strong>Signature:</strong> gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; (string * string) list<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -271,10 +273,10 @@ Information about genes and gene products, as well as regions of biological sign
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
+          <code onmouseout="hideTip(event, '444', 444)" onmouseover="showTip(event, '444', 444)">
             tryGetItem key gb
           </code>
-          <div class="tip" id="437">
+          <div class="tip" id="444">
             <strong>Signature:</strong> key:string -&gt; gb:Dictionary&lt;string,GenBankItem&lt;&#39;a&gt;&gt; -&gt; GenBankItem&lt;&#39;a&gt; option<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -291,27 +293,68 @@ Information about genes and gene products, as well as regions of biological sign
     </tbody>
   </table>
 
-        </div>
-        <div class="span3">
-          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="https://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">BioFSharp</li>
+					<li><a href="/BioFSharp/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
+					<li>
+						<a href="/BioFSharp/BioItem.html">BioItems</a>
+					</li>
+					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="/BioFSharp/Clustal.html">Clustal</a>
+					</li>
+					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="/BioFSharp/FastA.html">FastA</a>
+					</li>   
+					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="/BioFSharp/GenBank.html">GenBank</a>
+					</li>  
+					<li>
+						<a href="/BioFSharp/GFF3.html">GFF3</a>
+					</li>    
+					<li>
+						<a href="/BioFSharp/Newick.html">Newick</a>
+					</li>                
+					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+					
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>

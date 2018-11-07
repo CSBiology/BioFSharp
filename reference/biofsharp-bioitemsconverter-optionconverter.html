@@ -11,27 +11,29 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
 
 
 
@@ -87,10 +89,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
+          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
             charToOptionAminoAcid(aac)
           </code>
-          <div class="tip" id="91">
+          <div class="tip" id="92">
             <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
                                   </div>
         </td>
@@ -107,10 +109,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
             charToOptionAminoAcidWithoutGapTer(aac)
           </code>
-          <div class="tip" id="92">
+          <div class="tip" id="93">
             <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
                                   </div>
         </td>
@@ -128,10 +130,10 @@ Ignores Gap and Ter</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
             charToOptionNucleotid(nuc)
           </code>
-          <div class="tip" id="93">
+          <div class="tip" id="94">
             <strong>Signature:</strong> nuc:char -&gt; Nucleotide option<br />
                                   </div>
         </td>
@@ -148,10 +150,10 @@ Ignores Gap and Ter</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
             charToOptionStandardAminoAcid(aac)
           </code>
-          <div class="tip" id="94">
+          <div class="tip" id="95">
             <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
                                   </div>
         </td>
@@ -168,10 +170,10 @@ Ignores Gap and Ter</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
             charToOptionStandardAminoAcidWithoutGapTer(...)
           </code>
-          <div class="tip" id="95">
+          <div class="tip" id="96">
             <strong>Signature:</strong> aac:char -&gt; AminoAcid option<br />
                                   </div>
         </td>
@@ -189,10 +191,10 @@ Ignores Gap and Ter</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
             charToOptionStandardNucleotid(nuc)
           </code>
-          <div class="tip" id="96">
+          <div class="tip" id="97">
             <strong>Signature:</strong> nuc:char -&gt; Nucleotide option<br />
                                   </div>
         </td>
@@ -209,27 +211,68 @@ Ignores Gap and Ter</p>
     </tbody>
   </table>
 
-        </div>
-        <div class="span3">
-          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="https://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">BioFSharp</li>
+					<li><a href="/BioFSharp/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
+					<li>
+						<a href="/BioFSharp/BioItem.html">BioItems</a>
+					</li>
+					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="/BioFSharp/Clustal.html">Clustal</a>
+					</li>
+					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="/BioFSharp/FastA.html">FastA</a>
+					</li>   
+					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="/BioFSharp/GenBank.html">GenBank</a>
+					</li>  
+					<li>
+						<a href="/BioFSharp/GFF3.html">GFF3</a>
+					</li>    
+					<li>
+						<a href="/BioFSharp/Newick.html">Newick</a>
+					</li>                
+					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+					
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>

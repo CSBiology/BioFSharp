@@ -11,27 +11,29 @@
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
     <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
 
 
 
@@ -86,10 +88,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '419', 419)" onmouseover="showTip(event, '419', 419)">
+          <code onmouseout="hideTip(event, '426', 426)" onmouseover="showTip(event, '426', 426)">
             createGFFEntry(...)
           </code>
-          <div class="tip" id="419">
+          <div class="tip" id="426">
             <strong>Signature:</strong> seqid:string -&gt; source:string -&gt; feature:string -&gt; startPos:string -&gt; endPos:string -&gt; score:string -&gt; strand:string -&gt; phase:string -&gt; attributes:string -&gt; supplement:string -&gt; GFFEntry<br />
                                   </div>
         </td>
@@ -106,10 +108,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '420', 420)" onmouseover="showTip(event, '420', 420)">
+          <code onmouseout="hideTip(event, '427', 427)" onmouseover="showTip(event, '427', 427)">
             fromFile fastAconverter filepath
           </code>
-          <div class="tip" id="420">
+          <div class="tip" id="427">
             <strong>Signature:</strong> fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFFLine&lt;&#39;a&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -126,10 +128,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '421', 421)" onmouseover="showTip(event, '421', 421)">
+          <code onmouseout="hideTip(event, '428', 428)" onmouseover="showTip(event, '428', 428)">
             fromFileWithoutFasta(filepath)
           </code>
-          <div class="tip" id="421">
+          <div class="tip" id="428">
             <strong>Signature:</strong> filepath:string -&gt; seq&lt;GFFLine&lt;seq&lt;char&gt;&gt;&gt;<br />
                                   </div>
         </td>
@@ -146,12 +148,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '422', 422)" onmouseover="showTip(event, '422', 422)">
+          <code onmouseout="hideTip(event, '429', 429)" onmouseover="showTip(event, '429', 429)">
             getSequence gFFFile cDSfeature
           </code>
-          <div class="tip" id="422">
-            <strong>Signature:</strong> gFFFile:seq&lt;GFFLine&lt;&#39;?9568&gt;&gt; -&gt; cDSfeature:GFFEntry -&gt; seq&lt;&#39;a&gt;<br />
-                          <strong>Type parameters:</strong> '?9568, 'a                      </div>
+          <div class="tip" id="429">
+            <strong>Signature:</strong> gFFFile:seq&lt;GFFLine&lt;&#39;?9974&gt;&gt; -&gt; cDSfeature:GFFEntry -&gt; seq&lt;&#39;a&gt;<br />
+                          <strong>Type parameters:</strong> '?9974, 'a                      </div>
         </td>
         <td class="xmldoc">
                       <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L334-334" class="github-link">
@@ -166,10 +168,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '423', 423)" onmouseover="showTip(event, '423', 423)">
+          <code onmouseout="hideTip(event, '430', 430)" onmouseover="showTip(event, '430', 430)">
             gFFEntrytoString(g)
           </code>
-          <div class="tip" id="423">
+          <div class="tip" id="430">
             <strong>Signature:</strong> g:GFFEntry -&gt; string<br />
                                   </div>
         </td>
@@ -186,10 +188,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '424', 424)" onmouseover="showTip(event, '424', 424)">
+          <code onmouseout="hideTip(event, '431', 431)" onmouseover="showTip(event, '431', 431)">
             parseStrToGFFEntry(str)
           </code>
-          <div class="tip" id="424">
+          <div class="tip" id="431">
             <strong>Signature:</strong> str:string -&gt; GFFEntry<br />
                                   </div>
         </td>
@@ -206,10 +208,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '425', 425)" onmouseover="showTip(event, '425', 425)">
+          <code onmouseout="hideTip(event, '432', 432)" onmouseover="showTip(event, '432', 432)">
             relationshipSearch gffList searchterm
           </code>
-          <div class="tip" id="425">
+          <div class="tip" id="432">
             <strong>Signature:</strong> gffList:seq&lt;GFFLine&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFFEntry&gt;<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -226,10 +228,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '426', 426)" onmouseover="showTip(event, '426', 426)">
+          <code onmouseout="hideTip(event, '433', 433)" onmouseover="showTip(event, '433', 433)">
             sanityCheck(filepath)
           </code>
-          <div class="tip" id="426">
+          <div class="tip" id="433">
             <strong>Signature:</strong> filepath:string -&gt; unit<br />
                                   </div>
         </td>
@@ -244,10 +246,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '427', 427)" onmouseover="showTip(event, '427', 427)">
+          <code onmouseout="hideTip(event, '434', 434)" onmouseover="showTip(event, '434', 434)">
             sanityCheckWithSOTerm(...)
           </code>
-          <div class="tip" id="427">
+          <div class="tip" id="434">
             <strong>Signature:</strong> so_TermsPath:string -&gt; filepath:string -&gt; unit<br />
                                   </div>
         </td>
@@ -264,12 +266,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '428', 428)" onmouseover="showTip(event, '428', 428)">
+          <code onmouseout="hideTip(event, '435', 435)" onmouseover="showTip(event, '435', 435)">
             toString input converter path
           </code>
-          <div class="tip" id="428">
-            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?9561&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:&#39;?9563 -&gt; seq&lt;string&gt;<br />
-                          <strong>Type parameters:</strong> '?9561, 'a, '?9563                      </div>
+          <div class="tip" id="435">
+            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?9967&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:&#39;?9969 -&gt; seq&lt;string&gt;<br />
+                          <strong>Type parameters:</strong> '?9967, 'a, '?9969                      </div>
         </td>
         <td class="xmldoc">
                       <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L313-313" class="github-link">
@@ -284,12 +286,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '429', 429)" onmouseover="showTip(event, '429', 429)">
+          <code onmouseout="hideTip(event, '436', 436)" onmouseover="showTip(event, '436', 436)">
             write input converter path
           </code>
-          <div class="tip" id="429">
-            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?9565&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br />
-                          <strong>Type parameters:</strong> '?9565, 'a                      </div>
+          <div class="tip" id="436">
+            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?9971&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br />
+                          <strong>Type parameters:</strong> '?9971, 'a                      </div>
         </td>
         <td class="xmldoc">
                       <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L328-328" class="github-link">
@@ -304,27 +306,68 @@
     </tbody>
   </table>
 
-        </div>
-        <div class="span3">
-          <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">BioFSharp</li>
-            <li><a href="/BioFSharp/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="http://nuget.org/packages/BioFSharp">Get Library via NuGet</a></li>
-            <li><a href="https://github.com/CSBiology/BioFSharp">Source Code on GitHub</a></li>
-            <li><a href="/BioFSharp/license.html">License</a></li>
-            <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="/BioFSharp/tutorial.html">Sample tutorial</a></li>
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+					<li class="nav-header">BioFSharp</li>
+					<li><a href="/BioFSharp/index.html">Home page</a></li>
+					<li class="divider"></li>
+					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
-  </body>
+					
+					<li class="nav-header">BioFSharp core</li>
+					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
+					<li>
+						<a href="/BioFSharp/BioItem.html">BioItems</a>
+					</li>
+					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+					<li class="nav-header">Algorithm</li>
+					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+					<li>
+						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+					</li>
+					<li class="nav-header">File I/O</li>
+					<li>
+						<a href="/BioFSharp/Clustal.html">Clustal</a>
+					</li>
+					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+					<li>
+						<a href="/BioFSharp/FastA.html">FastA</a>
+					</li>   
+					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+					<li>
+						<a href="/BioFSharp/GenBank.html">GenBank</a>
+					</li>  
+					<li>
+						<a href="/BioFSharp/GFF3.html">GFF3</a>
+					</li>    
+					<li>
+						<a href="/BioFSharp/Newick.html">Newick</a>
+					</li>                
+					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+					<li class="nav-header">Web I/O</li>
+					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+					<li class="nav-header">Biostatistics</li>
+					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+					<li class="nav-header">Biovisualization</li>
+					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+					<li class="nav-header">GPU Computing</li>
+					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+					<li class="nav-header">Documentation</li>
+					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+					
+				</ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
   </html>
