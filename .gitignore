@@ -182,3 +182,4 @@ paket-files
 .fake
 docsrc/tools/FSharp.Formatting.svclog
 docs
+/temp

@@ -1,7 +1,6 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-
 #I @"../../bin/BioFSharp/net47/"
 #I @"../../bin/BioFSharp.BioDB/net45/"
 #I @"../../bin/BioFSharp.ImgP/net47"
@@ -10,8 +9,6 @@
 #I @"../../bin/BioFSharp.Stats/net47/"
 #I @"../../bin/BioFSharp.Vis/net47/"
 #r @"../../lib/Formatting/FSharp.Plotly.dll"
-#r "BioFSharp.dll"
-#r "BioFSharp.IO.dll"
 
 (**
 BioFSharp
@@ -22,7 +19,8 @@ nucleotides based on chemical formulas and chemical elements. BioFSharp facilita
 It provide a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.
 *)
 
-
+#r "BioFSharp.dll"
+#r "BioFSharp.IO.dll"
 open BioFSharp
 (**
 Example
@@ -45,12 +43,15 @@ Nucleotides.G |> Nucleotides.antiparallel
 AminoAcids.Arg |> AminoAcids.monoisoMass
 
 
+
+
 (**
 Different file reader in BioFSharp help to easyly retrieve inforamtion and write  various biology-associated file formats like for example FastA:
 *)
 open BioFSharp.IO
 
-let filepathFastaA = (__SOURCE_DIRECTORY__ + "/data/FASTAExample3.fasta")
+
+let filepathFastaA = (__SOURCE_DIRECTORY__ + "/data/FASTAExample1.fasta")
 //reads from file to an array of FastaItems.
 FastA.fromFile BioArray.ofAminoAcidString filepathFastaA
 

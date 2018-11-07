@@ -26,8 +26,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D5255-776D-4B61-85F9-73C37AA1FB9A}"
 	ProjectSection(SolutionItems) = preProject
+		docsrc\content\Alignment.fsx = docsrc\content\Alignment.fsx
+		docsrc\content\AminoProperties.fsx = docsrc\content\AminoProperties.fsx
+		docsrc\content\BioCollections.fsx = docsrc\content\BioCollections.fsx
+		docsrc\content\BioDB.fsx = docsrc\content\BioDB.fsx
+		docsrc\content\BioID.fsx = docsrc\content\BioID.fsx
+		docsrc\content\BioItem.fsx = docsrc\content\BioItem.fsx
+		docsrc\content\BlastWrapper.fsx = docsrc\content\BlastWrapper.fsx
+		docsrc\content\Clustal.fsx = docsrc\content\Clustal.fsx
+		docsrc\content\ClustalOWrapper.fsx = docsrc\content\ClustalOWrapper.fsx
+		docsrc\content\CSV.fsx = docsrc\content\CSV.fsx
+		docsrc\content\FastA.fsx = docsrc\content\FastA.fsx
+		docsrc\content\FastQ.fsx = docsrc\content\FastQ.fsx
+		docsrc\content\Formula.fsx = docsrc\content\Formula.fsx
+		docsrc\content\GenBank.fsx = docsrc\content\GenBank.fsx
+		docsrc\content\GESA.fsx = docsrc\content\GESA.fsx
+		docsrc\content\GFF3.fsx = docsrc\content\GFF3.fsx
 		docsrc\content\index.fsx = docsrc\content\index.fsx
+		docsrc\content\Introduction.fsx = docsrc\content\Introduction.fsx
+		docsrc\content\MoleculeFinding.fsx = docsrc\content\MoleculeFinding.fsx
+		docsrc\content\MotiveSearch.fsx = docsrc\content\MotiveSearch.fsx
+		docsrc\content\Newick.fsx = docsrc\content\Newick.fsx
+		docsrc\content\Obo.fsx = docsrc\content\Obo.fsx
+		docsrc\content\PetideClassification.fsx = docsrc\content\PetideClassification.fsx
+		docsrc\content\Readers.fsx = docsrc\content\Readers.fsx
+		docsrc\content\StringMatching.fsx = docsrc\content\StringMatching.fsx
 		docsrc\content\tutorial.fsx = docsrc\content\tutorial.fsx
+		docsrc\content\UniProt.fsx = docsrc\content\UniProt.fsx
+		docsrc\content\WebLogo.fsx = docsrc\content\WebLogo.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
