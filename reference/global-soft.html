@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Workflow<'a> - BioFSharp</title>
+    <title>SOFT - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,36 +37,116 @@
 
 
 
-<h1>Workflow<'a></h1>
+<h1>SOFT</h1>
 <p>
-
-    <span>Namespace: BioFSharp</span><br />
-        <span>Parent Module: <a href="biofsharp-workflowlanguage-definition.html">Definition</a></span><br />
-    </p>
+  <span>Namespace: global</span><br />
+  </p>
 <div class="xmldoc">
 </div>
-  <h3>Record Fields</h3>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="soft-platforminfos.html">PlatformInfos</a>
+          </td>
+          <td class="xmldoc">
+          <p>Type Representation of SOFT <code>^Platforms</code> Entities</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="soft-softsamplespecifications.html">SOFTSampleSpecifications</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="soft-softseriesspecifications.html">SOFTSeriesSpecifications</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="soft-sampleinfos.html">SampleInfos</a>
+          </td>
+          <td class="xmldoc">
+          <p>Type representation of SOFT <code>^SAMPLE</code> Entities</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="soft-seriesinfos.html">SeriesInfos</a>
+          </td>
+          <td class="xmldoc">
+          <p>Type Representation of SOFT <code>^Series</code> Entities</p>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '785', 785)" onmouseover="showTip(event, '785', 785)">
-            Processes
+          <code onmouseout="hideTip(event, '562', 562)" onmouseover="showTip(event, '562', 562)">
+            fromSeriesFile(path)
           </code>
-          <div class="tip" id="785">
-            <strong>Signature:</strong> Operation&lt;&#39;a&gt; list<br />
+          <div class="tip" id="562">
+            <strong>Signature:</strong> path:string -&gt; SeriesInfos<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/WorkflowLanguage.fs#L24-24" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L288-288" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Read SOFT SeriesInfo from a SOFT series file</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '563', 563)" onmouseover="showTip(event, '563', 563)">
+            fromSeriesFileEnumerator(fileEnumerator)
+          </code>
+          <div class="tip" id="563">
+            <strong>Signature:</strong> fileEnumerator:seq&lt;string&gt; -&gt; SeriesInfos<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L294-294" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Read SOFT SeriesInfo from a string representing a SOFT Series file</p>
+
+
         </td>
       </tr>
     </tbody>

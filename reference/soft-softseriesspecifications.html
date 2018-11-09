@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>OutputType - BioFSharp</title>
+    <title>SOFTSeriesSpecifications - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,303 +37,300 @@
 
 
 
-<h1>OutputType</h1>
+<h1>SOFTSeriesSpecifications</h1>
 <p>
 
-    <span>Namespace: BioFSharp.IO</span><br />
-        <span>Parent Module: <a href="biofsharp-io-blastncbi-parameters.html">Parameters</a></span><br />
+    <span>Namespace: global</span><br />
+        <span>Parent Module: <a href="global-soft.html">SOFT</a></span><br />
     </p>
 <div class="xmldoc">
 </div>
-  <h3>Record Fields</h3>
+  <h3>Union Cases</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Union Case</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '903', 903)" onmouseover="showTip(event, '903', 903)">
-            BinaryASN1
+          <code onmouseout="hideTip(event, '1114', 1114)" onmouseover="showTip(event, '1114', 1114)">
+            SERIES(string)
           </code>
-          <div class="tip" id="903">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1114">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L48-48" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L10-10" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Provide an identifier for this entity. This identifier is used only as an internal reference within a given file. The identifier will not appear on final GEO records.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '904', 904)" onmouseover="showTip(event, '904', 904)">
-            BLAST_ArchiveFormat
+          <code onmouseout="hideTip(event, '1115', 1115)" onmouseover="showTip(event, '1115', 1115)">
+            Series_contributor(string)
           </code>
-          <div class="tip" id="904">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1115">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L50-50" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L22-22" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"List all people associated with this study.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '905', 905)" onmouseover="showTip(event, '905', 905)">
-            CSV
+          <code onmouseout="hideTip(event, '1116', 1116)" onmouseover="showTip(event, '1116', 1116)">
+            Series_geo_accession(string)
           </code>
-          <div class="tip" id="905">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1116">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L49-49" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L39-39" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Only use for performing�updates�to existing GEO records.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '906', 906)" onmouseover="showTip(event, '906', 906)">
-            JSON_Blast
+          <code onmouseout="hideTip(event, '1117', 1117)" onmouseover="showTip(event, '1117', 1117)">
+            Series_overall_design(string)
           </code>
-          <div class="tip" id="906">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1117">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L52-52" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L16-16" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Provide a description of the experimental design. Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '907', 907)" onmouseover="showTip(event, '907', 907)">
-            JSON_Seqalign
+          <code onmouseout="hideTip(event, '1118', 1118)" onmouseover="showTip(event, '1118', 1118)">
+            Series_pubmed_id(string)
           </code>
-          <div class="tip" id="907">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1118">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L51-51" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L18-18" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Specify a valid PubMed identifier (PMID) that references a published article describing this study. Most commonly, this information is not available at the time of submission - it can be added later once the data are published."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '908', 908)" onmouseover="showTip(event, '908', 908)">
-            Pairwise
+          <code onmouseout="hideTip(event, '1119', 1119)" onmouseover="showTip(event, '1119', 1119)">
+            Series_repeats(int,string)
           </code>
-          <div class="tip" id="908">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1119">
+            <strong>Signature:</strong> int * string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L39-39" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L30-30" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Indicate the repeat type(s), e.g.,"!Series<em>repeats</em>1 = biological replicate�!Series<em>repeats</em>2 = biological replicate"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '909', 909)" onmouseover="showTip(event, '909', 909)">
-            Query_anchored
+          <code onmouseout="hideTip(event, '1120', 1120)" onmouseover="showTip(event, '1120', 1120)">
+            Series_repeats_sample_list(int,string)
           </code>
-          <div class="tip" id="909">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1120">
+            <strong>Signature:</strong> int * string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L40-40" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L34-34" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"List which Samples belong to each group, e.g.,�""!Series<em>repeats</em>sample<em>list</em>1 = samA, samB""!Series<em>repeats</em>sample<em>list</em>2 = samC, samD""NOTE - this information is optional and does not appear in Series
+records or downloads, but will be used to assemble corresponding GEO</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '910', 910)" onmouseover="showTip(event, '910', 910)">
-            Query_anchored_Flat
+          <code onmouseout="hideTip(event, '1121', 1121)" onmouseover="showTip(event, '1121', 1121)">
+            Series_sample_id(string)
           </code>
-          <div class="tip" id="910">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1121">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L42-42" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L37-37" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Reference the Samples that make up this experiment. Reference the Sample accession numbers (GSMxxx) if the Samples already exists in GEO, or reference the ^Sample identifiers if they are being submitted
+in the same file."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '911', 911)" onmouseover="showTip(event, '911', 911)">
-            Query_anchored_Flat_NoIdentities
+          <code onmouseout="hideTip(event, '1122', 1122)" onmouseover="showTip(event, '1122', 1122)">
+            Series_summary(string)
           </code>
-          <div class="tip" id="911">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1122">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L43-43" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L14-14" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Summarize the goals and objectives of this study. The abstract from the associated publication may be suitable. You can include as much text as you need to thoroughly describe the study.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '912', 912)" onmouseover="showTip(event, '912', 912)">
-            Query_anchored_NoIdentities
+          <code onmouseout="hideTip(event, '1123', 1123)" onmouseover="showTip(event, '1123', 1123)">
+            Series_title(string)
           </code>
-          <div class="tip" id="912">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1123">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L41-41" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L12-12" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Provide a unique title that describes the overall study.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '913', 913)" onmouseover="showTip(event, '913', 913)">
-            Tabular
+          <code onmouseout="hideTip(event, '1124', 1124)" onmouseover="showTip(event, '1124', 1124)">
+            Series_variable(int,string)
           </code>
-          <div class="tip" id="913">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1124">
+            <strong>Signature:</strong> int * string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L45-45" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L24-24" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Indicate the variable type(s) investigated in this study, e.g. !Series<em>variable</em>1 = age�!Series<em>variable</em>2 = age�"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '914', 914)" onmouseover="showTip(event, '914', 914)">
-            TabularWithComments
+          <code onmouseout="hideTip(event, '1125', 1125)" onmouseover="showTip(event, '1125', 1125)">
+            Series_variable_description(int,string)
           </code>
-          <div class="tip" id="914">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1125">
+            <strong>Signature:</strong> int * string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L46-46" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L26-26" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"Describe each variable, e.g.,"!Series<em>variable</em>description<em>1 = 2 months !Series</em>variable<em>description</em>2 = 12 months"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '915', 915)" onmouseover="showTip(event, '915', 915)">
-            TextASN1
+          <code onmouseout="hideTip(event, '1126', 1126)" onmouseover="showTip(event, '1126', 1126)">
+            Series_variable_sample_list(int,string)
           </code>
-          <div class="tip" id="915">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1126">
+            <strong>Signature:</strong> int * string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L47-47" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L28-28" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>"List which Samples belong to each group, e.g.,""!Series<em>variable</em>sample<em>list</em>1 = samA, samB�""!Series<em>variable</em>sample<em>list</em>2 = samC, samD�""NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '916', 916)" onmouseover="showTip(event, '916', 916)">
-            XML
+          <code onmouseout="hideTip(event, '1127', 1127)" onmouseover="showTip(event, '1127', 1127)">
+            Series_web_link(string)
           </code>
-          <div class="tip" id="916">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
+          <div class="tip" id="1127">
+            <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L44-44" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L20-20" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>Specify a Web link that directs users to supplementary information about the study. Please restrict to Web sites that you know are stable.</p>
 
-          <code onmouseout="hideTip(event, '917', 917)" onmouseover="showTip(event, '917', 917)">
-            XML2_Blast
-          </code>
-          <div class="tip" id="917">
-            <strong>Signature:</strong> OutputType<br />
-              <strong>Modifiers:</strong> static<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/BlastWrapper.fs#L53-53" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
+
         </td>
       </tr>
     </tbody>
