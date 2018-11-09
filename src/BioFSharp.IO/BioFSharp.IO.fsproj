@@ -27,6 +27,7 @@
     <Compile Include="Obo.fs" />
     <Compile Include="OrthoMCL.fs" />
     <Compile Include="ClustalOWrapper.fs" />
+    <Compile Include="SOFT.fs" />
     <Compile Include="WorkflowLanguage.fs" />
     <None Include="paket.references" />
   </ItemGroup>
