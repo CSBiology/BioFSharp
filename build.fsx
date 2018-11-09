@@ -107,7 +107,13 @@ let tags = "bioinformatics F# fsharp"
 let solutionFile  = "BioFSharp.sln"
 
 // Default target configuration
-let configuration = "Release"
+let configuration = 
+    if Environment.isMono then
+        printfn "Using Build configuration for Mono"
+        "Mono"
+    else 
+        printfn "Using Release configuration"
+        "Release"
 
 // Pattern specifying assemblies to be tested using Expecto
 let testAssemblies = "tests/**/bin" </> configuration </> "**" </> "*Tests.exe"
