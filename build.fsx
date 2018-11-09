@@ -108,7 +108,7 @@ let solutionFile  = "BioFSharp.sln"
 
 // Default target configuration
 let configuration = 
-    if Environment.isMono then
+    if not Environment.isWindows then
         printfn "Using Build configuration for Mono"
         "Mono"
     else 
