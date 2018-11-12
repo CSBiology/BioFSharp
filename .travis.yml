@@ -9,14 +9,12 @@ before_install:
 
  - dotnet restore build.proj
 
-install:
-   # workaround for missing .net 4.5 targing pack
-   - export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
 
 script:
- - dotnet fake -v build
+ - dotnet fake build --target Linux
 
 branches:
   except:
     - gh-pages
+    - developer
     
