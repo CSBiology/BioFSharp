@@ -178,7 +178,7 @@ Target.create "CopyBinaries" (fun _ ->
     let targets = 
         !! "src/**/*.??proj"
         -- "src/**/*.shproj"
-        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "Mono", "bin" </> (Path.GetFileNameWithoutExtension f)))
     for i in targets do printfn "%A" i
     targets
     |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
