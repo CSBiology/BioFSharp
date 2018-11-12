@@ -2,8 +2,12 @@ language: csharp
 #sudo: required
 sudo: false
 dist: trusty # Ubuntu 14.04
-mono: latest
-dotnet : 2.1.403
+
+matrix:
+  include:
+    - dotnet: 2.1.403
+      mono: none
+    - mono: latest
 
 before_install:
 
@@ -11,9 +15,10 @@ before_install:
 
 
 script:
- - dotnet fake build --target BuildLinux
+ - dotnet fake build --target Linux
 
 branches:
   except:
     - gh-pages
+    - developer
     
