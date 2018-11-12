@@ -184,11 +184,13 @@ Target.create "CopyBinaries" (fun _ ->
         printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
         !! "src/**/*.??proj"
         -- "src/**/*.shproj"
-        -- "src/BioFSharp.BioDb/"
+        -- "src/BioFSharp.BioDb/**"
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
-        |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+        |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
+                                                Shell.copyDir toDir fromDir (fun _ -> true))
+                                                
     else 
-        printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/")
+        printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/**")
         !! "src/**/*.??proj"
         -- "src/**/*.shproj"
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
