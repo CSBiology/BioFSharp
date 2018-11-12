@@ -107,11 +107,6 @@ let solutionFile  = "BioFSharp.sln"
 
 // Default target configuration
 let configuration = 
-    if not Environment.isWindows then
-        printfn "Using Build configuration for Mono"
-        "Mono"
-    else 
-        printfn "Using Release configuration"
         "Release"
 
 // Pattern specifying assemblies to be tested using Expecto
@@ -179,30 +174,30 @@ Target.create "AssemblyInfo" (fun _ ->
 // But keeps a subdirectory structure for each project in the
 // src folder to support multiple project outputs
 Target.create "CopyBinaries" (fun _ ->
-    if not Environment.isWindows then
-        printfn "excluding the biodb project for mono builds"
-        printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
-        let targets = 
-            !! "src/**/*.??proj"
-            -- "src/**/*.shproj"
-            -- "src/BioFSharp.BioDB/bin/Release"
-            -- "bin/BioFSharp.BioDB"
-            |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
-        for i in targets do printfn "%A" i
-        targets
-        |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
-                                                Shell.copyDir toDir fromDir (fun _ -> true))
-                                                
-    else 
-        printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/**")
-        let targets = 
-            !! "src/**/*.??proj"
-            -- "src/**/*.shproj"
-            |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
-        for i in targets do printfn "%A" i
-        targets
-        |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/**")
+    let targets = 
+        !! "src/**/*.??proj"
+        -- "src/**/*.shproj"
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+    for i in targets do printfn "%A" i
+    targets
+    |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
 )
+
+Target.create "CopyBinariesLinux" (fun _ ->
+    printfn "excluding the biodb project for mono builds"
+    printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
+    let targets = 
+        !! "src/**/*.??proj"
+        -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
+        -- "src/**/*.shproj"
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+    for i in targets do printfn "%A" i
+    targets
+    |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
+                                            Shell.copyDir toDir fromDir (fun _ -> true))
+)
+
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -244,6 +239,24 @@ Target.create "Build" (fun _ ->
     MSBuild.build setParams solutionFile
 )
 
+Target.create "BuildLinux" (fun _ ->
+    (*solutionFile
+    |> DotNet.build (fun p ->
+        { p with
+            Configuration = buildConfiguration })*)
+    let setParams (defaults:MSBuildParams) =
+        { defaults with
+            Verbosity = Some(Quiet)
+            Targets = ["Build"]
+            Properties =
+                [
+                    "Optimize", "True"
+                    "DebugSymbols", "True"
+                    "Configuration", "Mono"
+                ]
+         }
+    MSBuild.build setParams solutionFile
+)
 
 
 // --------------------------------------------------------------------------------------
@@ -497,7 +510,14 @@ Target.create "GitReleaseNuget" (fun _ ->
 
 Target.create "All" ignore
 
-Target.create "BuildLinux" ignore
+Target.create "Linux" ignore
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Restore"
+  ==> "BuildLinux"
+  ==> "CopyBinariesLinux"
+  ==> "Linux"
 
 "Clean"
   ==> "AssemblyInfo"
@@ -509,13 +529,6 @@ Target.create "BuildLinux" ignore
   ==> "NuGet"
   ==> "All"
 
-"Clean"
-  ==> "AssemblyInfo"
-  ==> "Restore"
-  ==> "Build"
-  ==> "CopyBinaries"
-  ==> "RunTests"
-  ==> "BuildLinux"
 
 "RunTests" ?=> "CleanDocs"
 
