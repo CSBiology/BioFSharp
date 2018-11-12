@@ -182,18 +182,25 @@ Target.create "CopyBinaries" (fun _ ->
     if not Environment.isWindows then
         printfn "excluding the biodb project for mono builds"
         printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
-        !! "src/**/*.??proj"
-        -- "src/**/*.shproj"
-        -- "src/BioFSharp.BioDb/**"
-        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+        let targets = 
+            !! "src/**/*.??proj"
+            -- "src/**/*.shproj"
+            -- "src/BioFSharp.BioDB/bin/Release"
+            -- "bin/BioFSharp.BioDB"
+            |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+        for i in targets do printfn "%A" i
+        targets
         |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
                                                 Shell.copyDir toDir fromDir (fun _ -> true))
                                                 
     else 
         printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/**")
-        !! "src/**/*.??proj"
-        -- "src/**/*.shproj"
-        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+        let targets = 
+            !! "src/**/*.??proj"
+            -- "src/**/*.shproj"
+            |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+        for i in targets do printfn "%A" i
+        targets
         |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
 )
 
