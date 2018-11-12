@@ -11,7 +11,7 @@ before_install:
 
 
 script:
- - dotnet fake build --target LinuxBuild
+ - dotnet fake build --target BuildLinux
 
 branches:
   except:
