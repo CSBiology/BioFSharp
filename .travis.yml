@@ -2,12 +2,8 @@ language: csharp
 #sudo: required
 sudo: false
 dist: trusty # Ubuntu 14.04
-
-matrix:
-  include:
-    - dotnet: 2.1.403
-      mono: none
-    - mono: latest
+mono: latest
+dotnet : 2.1.403
 
 before_install:
 
