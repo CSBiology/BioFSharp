@@ -2,18 +2,13 @@
 
 module GEO =
 
-    open System
     open System.IO
     open System.Net
-    open System.Net.Security
 
     [<Literal>]
     let rootGEOAdress = @"ftp://ftp.ncbi.nlm.nih.gov/geo"
 
     module private FTPHelpers = 
-
-        let constructFTPAdress (additionalPath: string) =
-            sprintf "%s/%s" rootGEOAdress additionalPath
 
         let getFileSize (filePath:string) = 
             let req  = WebRequest.Create(filePath) //:?> FtpWebRequest
@@ -64,6 +59,7 @@ module GEO =
 
     open FTPHelpers
 
+    ///Model of a file in the GEO FTP server structure
     type GEODataFile = {
         FileName: string
         FullPath: string
@@ -73,6 +69,12 @@ module GEO =
 
     let private createGEODataFile fn fp s dm = {FileName=fn;FullPath=fp;Size=s;DateModified=dm}
 
+    ///construct the adress for a file on the GEO FTP server structure.
+    ///Appends the path to the root server address
+    let constructFTPAdress (additionalPath: string) =
+        sprintf "%s/%s" rootGEOAdress additionalPath
+
+    ///Get a List of files in a folder on the GEO FTP server structure.
     let getFTPDirectoryContents (path:string) =
 
         let fileNameRequest = FtpWebRequest.Create(path) :?> FtpWebRequest
@@ -100,6 +102,7 @@ module GEO =
         fileNames
         |> Array.mapi (fun i fileName -> createGEODataFile fileName (sprintf "%s%s" path fileName) fileSizes.[i] datesModified.[i])
 
+    ///Download a file from the GEO FTP server. Can be either uncompressed or binary.
     let downloadGEOFile (file:GEODataFile) (savePath:string) =
         let binaryExtensions = [|".zip";".gz";".rar"|]
         if Array.contains (Path.GetExtension file.FullPath) binaryExtensions then 
@@ -107,7 +110,7 @@ module GEO =
         else
             downloadFile file.FullPath savePath
         
-
+    ///List the directories in a given path on the GEO FTP server structure.
     let listDirectories (path:string) =
         let req = FtpWebRequest.Create(path) :?> FtpWebRequest
         req.Method <- WebRequestMethods.Ftp.ListDirectoryDetails
