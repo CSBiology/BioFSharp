@@ -41,7 +41,6 @@ module TemporaryDocumentationHelpers =
 
     let createDocs p =
         let toolPath = Tools.findToolInSubPath "fsformatting.exe" (Directory.GetCurrentDirectory() @@ "lib/Formatting")
-        printfn "ToolPath : %s" toolPath
 
         let defaultLiterateArguments =
             { ToolPath = toolPath
@@ -233,6 +232,8 @@ Target.create "Build" (fun _ ->
          }
     MSBuild.build setParams solutionFile
 )
+
+
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
@@ -485,6 +486,8 @@ Target.create "GitReleaseNuget" (fun _ ->
 
 Target.create "All" ignore
 
+Target.create "BuildLinux" ignore
+
 "Clean"
   ==> "AssemblyInfo"
   ==> "Restore"
@@ -494,6 +497,14 @@ Target.create "All" ignore
   ==> "GenerateDocs"
   ==> "NuGet"
   ==> "All"
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Restore"
+  ==> "Build"
+  ==> "CopyBinaries"
+  ==> "RunTests"
+  ==> "BuildLinux"
 
 "RunTests" ?=> "CleanDocs"
 
