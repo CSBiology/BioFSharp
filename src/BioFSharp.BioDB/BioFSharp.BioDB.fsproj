@@ -12,8 +12,10 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GEO.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="FaToolDb.fs" />
     <Compile Include="EbiAPI.fs" />

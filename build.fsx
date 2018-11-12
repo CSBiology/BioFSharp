@@ -41,7 +41,6 @@ module TemporaryDocumentationHelpers =
 
     let createDocs p =
         let toolPath = Tools.findToolInSubPath "fsformatting.exe" (Directory.GetCurrentDirectory() @@ "lib/Formatting")
-        printfn "ToolPath : %s" toolPath
 
         let defaultLiterateArguments =
             { ToolPath = toolPath
@@ -107,7 +106,8 @@ let tags = "bioinformatics F# fsharp"
 let solutionFile  = "BioFSharp.sln"
 
 // Default target configuration
-let configuration = "Release"
+let configuration = 
+        "Release"
 
 // Pattern specifying assemblies to be tested using Expecto
 let testAssemblies = "tests/**/bin" </> configuration </> "**" </> "*Tests.exe"
@@ -174,11 +174,30 @@ Target.create "AssemblyInfo" (fun _ ->
 // But keeps a subdirectory structure for each project in the
 // src folder to support multiple project outputs
 Target.create "CopyBinaries" (fun _ ->
-    !! "src/**/*.??proj"
-    -- "src/**/*.shproj"
-    |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+    printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb/**")
+    let targets = 
+        !! "src/**/*.??proj"
+        -- "src/**/*.shproj"
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f)))
+    for i in targets do printfn "%A" i
+    targets
     |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
 )
+
+Target.create "CopyBinariesLinux" (fun _ ->
+    printfn "excluding the biodb project for mono builds"
+    printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
+    let targets = 
+        !! "src/**/*.??proj"
+        -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
+        -- "src/**/*.shproj"
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "Mono", "bin" </> (Path.GetFileNameWithoutExtension f)))
+    for i in targets do printfn "%A" i
+    targets
+    |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
+                                            Shell.copyDir toDir fromDir (fun _ -> true))
+)
+
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -219,6 +238,26 @@ Target.create "Build" (fun _ ->
          }
     MSBuild.build setParams solutionFile
 )
+
+Target.create "BuildLinux" (fun _ ->
+    (*solutionFile
+    |> DotNet.build (fun p ->
+        { p with
+            Configuration = buildConfiguration })*)
+    let setParams (defaults:MSBuildParams) =
+        { defaults with
+            Verbosity = Some(Quiet)
+            Targets = ["Build"]
+            Properties =
+                [
+                    "Optimize", "True"
+                    "DebugSymbols", "True"
+                    "Configuration", "Mono"
+                ]
+         }
+    MSBuild.build setParams solutionFile
+)
+
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
@@ -471,6 +510,15 @@ Target.create "GitReleaseNuget" (fun _ ->
 
 Target.create "All" ignore
 
+Target.create "Linux" ignore
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Restore"
+  ==> "BuildLinux"
+  ==> "CopyBinariesLinux"
+  ==> "Linux"
+
 "Clean"
   ==> "AssemblyInfo"
   ==> "Restore"
@@ -480,6 +528,7 @@ Target.create "All" ignore
   ==> "GenerateDocs"
   ==> "NuGet"
   ==> "All"
+
 
 "RunTests" ?=> "CleanDocs"
 
