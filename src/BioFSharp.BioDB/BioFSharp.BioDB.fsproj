@@ -14,6 +14,7 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GEO.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="FaToolDb.fs" />
     <Compile Include="EbiAPI.fs" />
