@@ -69,10 +69,17 @@ module GEO =
 
     let private createGEODataFile fn fp s dm = {FileName=fn;FullPath=fp;Size=s;DateModified=dm}
 
-    ///construct the adress for a file on the GEO FTP server structure.
-    ///Appends the path to the root server address
+    ///construct a ftp address based on the GEO FTP root adress 
+    ///Appends the given path to the root server address
     let constructFTPAdress (additionalPath: string) =
         sprintf "%s/%s" rootGEOAdress additionalPath
+
+    ///extend the given GEO FTP address by the given path
+    let extendFTPAdress (baseAdr:string) (extension:string) =
+        if (not (baseAdr.Contains(rootGEOAdress))) then
+            failwithf "Incorrect path. GEO root path (%s) not contained in %s" rootGEOAdress baseAdr
+        else 
+            sprintf "%s/%s" baseAdr extension
 
     ///Get a List of files in a folder on the GEO FTP server structure.
     let getFTPDirectoryContents (path:string) =
@@ -100,7 +107,7 @@ module GEO =
                                             getDateModified fullPath)
 
         fileNames
-        |> Array.mapi (fun i fileName -> createGEODataFile fileName (sprintf "%s%s" path fileName) fileSizes.[i] datesModified.[i])
+        |> Array.mapi (fun i fileName -> createGEODataFile fileName (sprintf "%s/%s" path fileName) fileSizes.[i] datesModified.[i])
 
     ///Download a file from the GEO FTP server. Can be either uncompressed or binary.
     let downloadGEOFile (file:GEODataFile) (savePath:string) =
@@ -110,7 +117,7 @@ module GEO =
         else
             downloadFile file.FullPath savePath
         
-    ///List the directories in a given path on the GEO FTP server structure.
+    ///List the name of files and directories on the given path on the GEO FTP server structure.
     let listDirectories (path:string) =
         let req = FtpWebRequest.Create(path) :?> FtpWebRequest
         req.Method <- WebRequestMethods.Ftp.ListDirectoryDetails
