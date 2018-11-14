@@ -18,7 +18,7 @@ The IO namespace aims to make data available and ease further processing. It con
 BioDB functionality
 -------------------
 
-The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our [workgroup](link) for querying functional annotations of? proteins.
+The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our workgroup for querying functional annotations of? proteins.
 
 Documentation
 -------------

@@ -323,7 +323,7 @@ let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
 let info =
   [ "project-name", "BioFSharp"
     "project-author", "Timo Mühlhaus"
-    "project-summary", "BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."
+    "project-summary", "An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"
     "project-github", githubLink
     "project-nuget", "http://nuget.org/packages/BioFSharp" ]
 
