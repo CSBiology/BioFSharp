@@ -97,8 +97,6 @@ let exampleFromGzipFile  = FastA.fromGzipFile BioList.ofAminoAcidString filepath
 3. To convert `seq<string>` to `seq<FastaItem>` you can use the following function.
 *)
 
-open FSharp.Care.IO
-
 let stringSequence = FileIO.readFile(filepathFASTA)
 
 //reads seq<string> to sequence of FastaItems
@@ -113,6 +111,7 @@ To write a `seq<FastaItem>` into a file use the following function.
 let seqFastaItem = seq [exampleFasta]
 
 //writes a sequence of FastaItems into a .fasta file
+(*** do-not-eval ***)
 FastA.write BioItem.symbol (__SOURCE_DIRECTORY__ + "/data/FASTAExample3.fasta") seqFastaItem 
 
 

@@ -100,6 +100,7 @@ _Note: The order of key value pairs in field 9 (attributes) may be changed._
 
 
 ///Takes a seq<GFF<'a>>, a FASTA converter and a destination filepath and writes it into a .gff. Hint: Use converter = id if no FastA sequence is included.
+(*** do-not-eval ***)
 let gffExampleWrite = GFF3.write features BioItem.symbol (__SOURCE_DIRECTORY__ + "/data/gffExampleWrite.gff")
 
 (**

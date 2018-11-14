@@ -132,4 +132,5 @@ For writing clustal files you can use the `toFile` function. It takes a path and
 *)
 let outputPath = fileDir + "clustalOutputExample.asn"
 
+(*** do-not-eval ***)
 Clustal.toFileWithOverWrite outputPath clustalAlignment

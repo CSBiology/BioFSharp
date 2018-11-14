@@ -73,6 +73,8 @@ Writing FastA files
 In order to write a collection of sequences (`FastaItem<_>`) into a file use the following function.
 
 *)
+
+(*** do-not-eval ***)
 sequences
 |> FastA.write BioItem.symbol (fileDir + "FASTAExample3.fasta")  
 

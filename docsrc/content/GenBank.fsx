@@ -263,6 +263,8 @@ let outputPath1 = __SOURCE_DIRECTORY__ + @"\data\sequenceTestWrite1.gb"
 let outputPath2 = __SOURCE_DIRECTORY__ + @"\data\sequenceTestWrite2.gb"
 let outputConverter = GenBank.OriginConverters.Output.bioItemConverter
 
+(*** do-not-eval ***)
 parsedGBFile |> GenBank.Write.toFile outputPath1
 
+(*** do-not-eval ***)
 parsedGBFile' |> GenBank.Write.toFileWithOriginConverter outputPath2 outputConverter

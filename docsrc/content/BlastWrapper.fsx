@@ -107,7 +107,7 @@ let queryFastaItem = FastA.createFastaItem header querySequence
 To create our `.fastA` file, we need to use the `BioItem.symbol` converter, which will convert the 3 letter code of the aminoacids in our biosequence
 to the one letter symbol (eg. Met -> M)
 *)
-
+(*** do-not-eval ***)
 FastA.write BioItem.symbol queryFastaPath [queryFastaItem;] 
 
 (**
@@ -175,6 +175,7 @@ done otherwise_
 ///output file of the BLAST search
 let outputPath = (__SOURCE_DIRECTORY__ + "/data/Output.txt") 
 
+(*** do-not-eval ***)
 BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
 
 
