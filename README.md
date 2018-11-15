@@ -4,10 +4,11 @@ BioFSharp
 An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
 
 Build status:
+
 |Branch|Ubuntu(latest)|Windows|
 |---|---|---|
-|master|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp)|[![Build status](https://ci.appveyor.com/api/projects/status/looi9vwrkacyah1w/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master?svg=true)|
-| developer|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp)|[![Build status](https://ci.appveyor.com/api/projects/status/looi9vwrkacyah1w/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer?svg=true)|
+| master|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
+| developer|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
 
 Core functionality
 ------------------
