@@ -55,173 +55,172 @@ module Nucleotides =
     | N
 
         interface IBioItem with            
-                
-                ///Returns the one letter code of the nucleotide as a char
-                member this.Symbol   = 
-                    let rec symbol (nuc:Nucleotide) =
-                            match nuc with
-                            // ´Standard Nucleotide Codes
-                            /// A : Adenine
-                            | A   -> 'A'
-                            /// T : Thymidine (only DNA)
-                            | T   -> 'T'
-                            /// G : Guanine
-                            | G   -> 'G'
-                            /// C : Cytosine
-                            | C   -> 'C'
-                            /// U : Uracil    (only RNA)
-                            | U   -> 'U'
-                            /// I : Inosine   (only RNA)
-                            | I   -> 'I'
-                            /// - : Gap
-                            | Gap -> '-'
-                            /// * : Terminator
-                            | Ter -> '*'
+            ///Returns the one letter code of the nucleotide as a char
+            member this.Symbol   = 
+                let rec symbol (nuc:Nucleotide) =
+                        match nuc with
+                        // ´Standard Nucleotide Codes
+                        /// A : Adenine
+                        | A   -> 'A'
+                        /// T : Thymidine (only DNA)
+                        | T   -> 'T'
+                        /// G : Guanine
+                        | G   -> 'G'
+                        /// C : Cytosine
+                        | C   -> 'C'
+                        /// U : Uracil    (only RNA)
+                        | U   -> 'U'
+                        /// I : Inosine   (only RNA)
+                        | I   -> 'I'
+                        /// - : Gap
+                        | Gap -> '-'
+                        /// * : Terminator
+                        | Ter -> '*'
         
-                            // 'Ambiguous Nucleotide Codes: double base codes
-                            /// R : G or A = puRine
-                            | R   -> 'R'
-                            /// Y : U/T or C = pYrimidine
-                            | Y   -> 'Y'
-                            /// K : G or U = Keto
-                            | K   -> 'K'
-                            /// M : A or C = aMino
-                            | M   -> 'M'
-                            /// S : G or C = Strong base pair
-                            | S   -> 'S'
-                            /// W : A or U = Weak base pair 
-                            | W   -> 'W'
-        
-                            // 'Ambiguous Nucleotide Codes: triple base codes
-                            /// B : G or U or C = not A
-                            | B   -> 'B'
-                            /// D : G or A or U = not C
-                            | D   -> 'D'
-                            /// H : A or C or U = not G
-                            | H   -> 'H'
-                            /// V : G or V or A = not T/U
-                            | V   -> 'V'
+                        // 'Ambiguous Nucleotide Codes: double base codes
+                        /// R : G or A = puRine
+                        | R   -> 'R'
+                        /// Y : U/T or C = pYrimidine
+                        | Y   -> 'Y'
+                        /// K : G or U = Keto
+                        | K   -> 'K'
+                        /// M : A or C = aMino
+                        | M   -> 'M'
+                        /// S : G or C = Strong base pair
+                        | S   -> 'S'
+                        /// W : A or U = Weak base pair 
+                        | W   -> 'W'
 
-                            // 'Ambiguous Nucleotide Codes
-                            /// N : A or G or U or C.
-                            | N   -> 'N' 
-                    symbol this
+                        // 'Ambiguous Nucleotide Codes: triple base codes
+                        /// B : G or U or C = not A
+                        | B   -> 'B'
+                        /// D : G or A or U = not C
+                        | D   -> 'D'
+                        /// H : A or C or U = not G
+                        | H   -> 'H'
+                        /// V : G or V or A = not T/U
+                        | V   -> 'V'
+
+                        // 'Ambiguous Nucleotide Codes
+                        /// N : A or G or U or C.
+                        | N   -> 'N' 
+                symbol this
                 
-                /// Returns the formula of the nucleotide
-                member this.Formula  = 
-                    //Amino acid formulas minus H20   
-                    let rec formula (nuc:Nucleotide) =
+            /// Returns the formula of the nucleotide
+            member this.Formula  = 
+                //Amino acid formulas minus H20   
+                let rec formula (nuc:Nucleotide) =
                             
-                        match nuc with
-                        // ´Standard Nucleotide Codes
-                        /// A : Adenine
-                        | A   -> Formula.Table.A
-                        /// T : Thymidine (only DNA)
-                        | T   -> Formula.Table.T
-                        /// G : Guanine
-                        | G   -> Formula.Table.G
-                        /// C : Cytosine
-                        | C   -> Formula.Table.C
-                        /// U : Uracil    (only RNA)
-                        | U   -> Formula.Table.U
-                        /// I : Inosine   (only RNA)
-                        | I   -> Formula.Table.I
-                        /// - : Gap
-                        | Gap -> (Formula.emptyFormula)
-                        /// * : Terminator
-                        | Ter -> (Formula.emptyFormula)
+                    match nuc with
+                    // ´Standard Nucleotide Codes
+                    /// A : Adenine
+                    | A   -> Formula.Table.A
+                    /// T : Thymidine (only DNA)
+                    | T   -> Formula.Table.T
+                    /// G : Guanine
+                    | G   -> Formula.Table.G
+                    /// C : Cytosine
+                    | C   -> Formula.Table.C
+                    /// U : Uracil    (only RNA)
+                    | U   -> Formula.Table.U
+                    /// I : Inosine   (only RNA)
+                    | I   -> Formula.Table.I
+                    /// - : Gap
+                    | Gap -> (Formula.emptyFormula)
+                    /// * : Terminator
+                    | Ter -> (Formula.emptyFormula)
         
-                        // 'Ambiguous Nucleotide Codes: double base codes
-                        /// R : G or A = puRine
-                        | R   -> (Formula.emptyFormula)
-                        /// Y : U/T or C = pYrimidine
-                        | Y   -> (Formula.emptyFormula)
-                        /// K : G or U = Keto
-                        | K   -> (Formula.emptyFormula)
-                        /// M : A or C = aMino
-                        | M   -> (Formula.emptyFormula)
-                        /// S : G or C = Strong base pair
-                        | S   -> (Formula.emptyFormula)
-                        /// W : A or U = Weak base pair 
-                        | W   -> (Formula.emptyFormula)
+                    // 'Ambiguous Nucleotide Codes: double base codes
+                    /// R : G or A = puRine
+                    | R   -> (Formula.emptyFormula)
+                    /// Y : U/T or C = pYrimidine
+                    | Y   -> (Formula.emptyFormula)
+                    /// K : G or U = Keto
+                    | K   -> (Formula.emptyFormula)
+                    /// M : A or C = aMino
+                    | M   -> (Formula.emptyFormula)
+                    /// S : G or C = Strong base pair
+                    | S   -> (Formula.emptyFormula)
+                    /// W : A or U = Weak base pair 
+                    | W   -> (Formula.emptyFormula)
         
-                        // 'Ambiguous Nucleotide Codes: triple base codes
-                        /// B : G or U or C = not A
-                        | B   -> (Formula.emptyFormula)
-                        /// D : G or A or U = not C
-                        | D   -> (Formula.emptyFormula)
-                        /// H : A or C or U = not G
-                        | H   -> (Formula.emptyFormula)
-                        /// V : G or V or A = not T/U
-                        | V   -> (Formula.emptyFormula)
+                    // 'Ambiguous Nucleotide Codes: triple base codes
+                    /// B : G or U or C = not A
+                    | B   -> (Formula.emptyFormula)
+                    /// D : G or A or U = not C
+                    | D   -> (Formula.emptyFormula)
+                    /// H : A or C or U = not G
+                    | H   -> (Formula.emptyFormula)
+                    /// V : G or V or A = not T/U
+                    | V   -> (Formula.emptyFormula)
 
-                        // 'Ambiguous Nucleotide Codes
-                        /// N : A or G or U or C.
-                        | N   -> (Formula.emptyFormula)
+                    // 'Ambiguous Nucleotide Codes
+                    /// N : A or G or U or C.
+                    | N   -> (Formula.emptyFormula)
                     
-                    formula this
+                formula this
                 
-                ///Returns true, if the nucleotide is a terminator, otherwise returns false
-                member this.isTerminator = match this with
-                                           | Nucleotide.Ter -> true
-                                           | _             -> false
-                ///Returns true, if the nucleotide is a gap, otherwise returns false
-                member this.isGap        = match this with
-                                           | Nucleotide.Gap -> true
-                                           | _             -> false
+            ///Returns true, if the nucleotide is a terminator, otherwise returns false
+            member this.isTerminator = match this with
+                                        | Nucleotide.Ter -> true
+                                        | _             -> false
+            ///Returns true, if the nucleotide is a gap, otherwise returns false
+            member this.isGap        = match this with
+                                        | Nucleotide.Gap -> true
+                                        | _             -> false
 
-                ///Returns the full name of the nucleotide as a string
-                member this.Name = 
-                    // Nucleotide names
-                    let name (nuc:Nucleotide) =
-                        match nuc with
-                        // ´Standard Nucleotide Codes
-                        /// A : Adenine
-                        | A   -> "Adenine"
-                        /// T : Thymidine (only DNA)
-                        | T   -> "Thymidine"
-                        /// G : Guanine
-                        | G   -> "Guanine"
-                        /// C : Cytosine
-                        | C   -> "Cytosine"
-                        /// U : Uracil    (only RNA)
-                        | U   -> "Uracil"
-                        /// I : Inosine   (only RNA)
-                        | I   -> "Inosine"
-                        /// - : Gap
-                        | Gap -> "Gap"
-                        /// * : Terminator
-                        | Ter -> "Ter"
+            ///Returns the full name of the nucleotide as a string
+            member this.Name = 
+                // Nucleotide names
+                let name (nuc:Nucleotide) =
+                    match nuc with
+                    // ´Standard Nucleotide Codes
+                    /// A : Adenine
+                    | A   -> "Adenine"
+                    /// T : Thymidine (only DNA)
+                    | T   -> "Thymidine"
+                    /// G : Guanine
+                    | G   -> "Guanine"
+                    /// C : Cytosine
+                    | C   -> "Cytosine"
+                    /// U : Uracil    (only RNA)
+                    | U   -> "Uracil"
+                    /// I : Inosine   (only RNA)
+                    | I   -> "Inosine"
+                    /// - : Gap
+                    | Gap -> "Gap"
+                    /// * : Terminator
+                    | Ter -> "Ter"
         
-                        // 'Ambiguous Nucleotide Codes: double base codes
-                        /// R : G or A = puRine
-                        | R   ->  "puRine"
-                        /// Y : U/T or C = pYrimidine
-                        | Y   ->  "pYrimidine"
-                        /// K : G or U = Keto
-                        | K   ->  "Keto"
-                        /// M : A or C = aMino
-                        | M   -> "aMino"
-                        /// S : G or C = Strong base pair
-                        | S   ->  "Strong base pair"
-                        /// W : A or U = Weak base pair 
-                        | W   ->  "Weak base pair"
+                    // 'Ambiguous Nucleotide Codes: double base codes
+                    /// R : G or A = puRine
+                    | R   ->  "puRine"
+                    /// Y : U/T or C = pYrimidine
+                    | Y   ->  "pYrimidine"
+                    /// K : G or U = Keto
+                    | K   ->  "Keto"
+                    /// M : A or C = aMino
+                    | M   -> "aMino"
+                    /// S : G or C = Strong base pair
+                    | S   ->  "Strong base pair"
+                    /// W : A or U = Weak base pair 
+                    | W   ->  "Weak base pair"
         
-                        // 'Ambiguous Nucleotide Codes: triple base codes
-                        /// B : G or U or C = not A
-                        | B   ->  "not A"
-                        /// D : G or A or U = not C
-                        | D   ->  "not C"
-                        /// H : A or C or U = not G
-                        | H   ->  "not G"
-                        /// V : G or V or A = not T/U
-                        | V   ->  "not T/U"
+                    // 'Ambiguous Nucleotide Codes: triple base codes
+                    /// B : G or U or C = not A
+                    | B   ->  "not A"
+                    /// D : G or A or U = not C
+                    | D   ->  "not C"
+                    /// H : A or C or U = not G
+                    | H   ->  "not G"
+                    /// V : G or V or A = not T/U
+                    | V   ->  "not T/U"
 
-                        // 'Ambiguous Nucleotide Codes
-                        /// N : A or G or U or C.
-                        | N   ->  "Unspecified"  
+                    // 'Ambiguous Nucleotide Codes
+                    /// N : A or G or U or C.
+                    | N   ->  "Unspecified"  
                         
-                    name this               
+                name this               
 
         //static member op_Explicit (value) = (byte value)
         static member op_Explicit (value:#IBioItem) : byte = byte value.Symbol

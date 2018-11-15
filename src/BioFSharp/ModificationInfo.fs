@@ -13,38 +13,39 @@ module ModificationInfo =
 
     /// Modification consisting of name, location specifier and a formula modifier
     [<CustomEquality; CustomComparison>]
-    type Modification = {
-         Name     : string
-         IsBiological: bool
-         Location : ModLocation
-         // Labeled Atom
-         Modify   : Formula.Formula -> Formula.Formula 
-                        }
-                        ///Returns true if both modifications have the same name, else returns false
-                        override x.Equals(yobj) =
-                            match yobj with
-                            | :? Modification as y -> (x.Name = y.Name)
-                            | _ -> false
-                        ///Returns hash code of name of modification
-                        override x.GetHashCode() = hash x.Name
+    type Modification =
+        {
+            Name     : string
+            IsBiological: bool
+            Location : ModLocation
+            // Labeled Atom
+            Modify   : Formula.Formula -> Formula.Formula 
+        }
+        ///Returns true if both modifications have the same name, else returns false
+        override x.Equals(yobj) =
+            match yobj with
+            | :? Modification as y -> (x.Name = y.Name)
+            | _ -> false
+        ///Returns hash code of name of modification
+        override x.GetHashCode() = hash x.Name
                         
-                        interface System.IComparable with
-                            member x.CompareTo yobj =
-                                match yobj with
-                                | :? Modification as y -> compare x.Name y.Name
-                                | _ -> invalidArg "yobj" "cannot compare values of different types"
+        interface System.IComparable with
+            member x.CompareTo yobj =
+                match yobj with
+                | :? Modification as y -> compare x.Name y.Name
+                | _ -> invalidArg "yobj" "cannot compare values of different types"
 
-                        interface IBioItem with
-                            ///Returns name of modification
-                            member this.Name = this.Name
-                            ///Returns '#'
-                            member this.Symbol = '#'         
-                            ///Returns false 
-                            member this.isTerminator = false
-                            ///Returns false 
-                            member this.isGap        = false
-                            ///Returns formula of modification
-                            member this.Formula  = this.Modify Formula.emptyFormula
+        interface IBioItem with
+            ///Returns name of modification
+            member this.Name = this.Name
+            ///Returns '#'
+            member this.Symbol = '#'         
+            ///Returns false 
+            member this.isTerminator = false
+            ///Returns false 
+            member this.isGap        = false
+            ///Returns formula of modification
+            member this.Formula  = this.Modify Formula.emptyFormula
 
     /// Create modification, where molecule will be modified by application of given modifier
     let createModification name isBiological location modifier =
@@ -62,7 +63,6 @@ module ModificationInfo =
     let toString (md:Modification) =
         md.Name
 
-                                                    
     /// Returns then display name of a modification
     let name (md:Modification) =
         BioItem.name md
@@ -70,7 +70,6 @@ module ModificationInfo =
     /// Returns then symbol of a modification
     let symbol (md:Modification) =
         BioItem.symbol md
-
 
     /// Returns then byteCode of a modification
     let formula (md:Modification) =

@@ -3,17 +3,17 @@ BioFSharp
 
 An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
 
-Build status:
-
 |Branch|Ubuntu(latest)|Windows|
 |---|---|---|
-| master|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
-| developer|[![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
+| master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
+| developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
 
 Core functionality
 ------------------
 
 In its core namespace, BioFSharp contains the basic data structures for common biological objects and their modification. Our type modeling starts at chemical elements, abstracts those to form formulas, and finally molecules of high biological relevance such as amino acids and nucleotides. Sequences of these molecules are modelled by BioCollections, which provide extensive functionality for investigating their real life counterparts.
+
+![Data model](https://i.imgur.com/LXBvhmi.png)
 
 Additionally, core algorithms for biological sequences such as alignments and pattern matching algorithms are implemented.
 
