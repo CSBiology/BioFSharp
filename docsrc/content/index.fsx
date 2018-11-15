@@ -18,8 +18,10 @@ BioFSharp
 =========
 
 BioFSharp aims to be a user-friendly functional library for bioinformatics written in F#. It contains the basic data structures for common biological objects like amino acids and 
-nucleotides based on chemical formulas and chemical elements. BioFSharp facilitate working with sequences in a strongly typed way and is designed to work well with F# Interactive. 
-It provide a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.
+nucleotides based on chemical formulas and chemical elements. 
+
+BioFSharp facilitates working with sequences in a strongly typed way and is designed to work well with F# Interactive. 
+It provides a variety of parsers for many biological file formats and a variety of algorithms suited for bioinformatic workflows.
 *)
 
 
