@@ -61,7 +61,7 @@ let ncbiPath = (__SOURCE_DIRECTORY__ + "/../../lib/ncbi-blast/bin")
 (**
 We now provide the wrapper our ncbi path, the input path and a sequence of parameters (containing just one parameter in this case, the database type).
 *)
-
+(*** do-not-eval ***)
 BlastWrapper(ncbiPath).makeblastdb inputFile ([typeOfDatabase;] |> seq<Parameters.MakeDbParams>)
 
 (**

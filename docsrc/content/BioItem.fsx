@@ -38,7 +38,7 @@ let t = Nucleotides.T
 let gap = Nucleotides.Gap
 
 (**
-Many functions are similar for AminoAcids and Nucleotides
+Many functions are similar for AminoAcids and Nucleotides, like for example:
 *)
 (***hide***)
 let alaName = AminoAcids.name ala 
@@ -46,19 +46,20 @@ let gName = Nucleotides.name g
 let lysFormula = AminoAcids.formula lys |> Formula.toString 
 let tFormula =  Nucleotides.formula t |> Formula.toString 
 
+(**Accessing the full name:*)
 (***do-not-eval***)
 AminoAcids.name ala 
 (*** include-value:alaName ***)
 Nucleotides.name g 
 (*** include-value:gName ***)
-
+(**or the underlying chemical formula:*)
 AminoAcids.formula lys |> Formula.toString 
 (*** include-value:lysFormula ***)
 Nucleotides.formula t |> Formula.toString 
 (*** include-value:tFormula ***)
 
 (**
-Nucleotides and AminoAcids in FSharp are represented as Union cases. This makes applying functions selectively very easy. 
+Nucleotides and AminoAcids in BioFSharp are represented as Union cases. This makes applying functions selectively very easy. 
 *)
 let filterLysine aa = 
     match aa with
@@ -97,12 +98,20 @@ let giveMePositiveAAs aminoAcid =
 
     | _ -> printfn "Just strolling around, minding my own business."
 
+(**Alanine is usually not charged:*)
+
 (*** define-output:out1 ***)
 giveMePositiveAAs ala
 (*** include-output:out1 ***)
+
+(**Lysine is usually positively charged:*)
+
 (*** define-output:out2 ***)
 giveMePositiveAAs lys
 (*** include-output:out2 ***)
+
+(**Glutamic acid is usually negatively charged:*)
+
 (*** define-output:out3 ***)
 giveMePositiveAAs glu
 (*** include-output:out3 ***)
@@ -171,14 +180,20 @@ let phosphoSerine = AminoAcids.setModification phosphorylation hydroSerine
 (***hide***)
 let getF3 = getF phosphoSerine
 (***do-not-eval***)
-getF phosphoSerine //val it : string = "P1.00 C3.00 H6.00 N1.00 O6.00 "
+getF phosphoSerine 
 (***include-value:getF3***)
 
 (**
 As you can see the Serine is phosphorylated just as we wanted. Our inital aim was to check the mass, this can be done quite easily:
 *)
-AminoAcids.averageMass mySerine //val it : float = 87.077575
-AminoAcids.averageMass phosphoSerine //val it : float = 183.056884
+(***hide***)
+let m1 = AminoAcids.averageMass mySerine
+let m2 = AminoAcids.averageMass phosphoSerine
+(***do-not-eval***)
+AminoAcids.averageMass mySerine
+(***include-value:m1***)
+AminoAcids.averageMass phosphoSerine
+(***include-value:m2***)
 (**
 <table class="HeadAPI">
 <td class="Head"><h2>Nucleotides</h2></td>
@@ -186,11 +201,12 @@ AminoAcids.averageMass phosphoSerine //val it : float = 183.056884
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-nucleotides.html" >&#128194;View module documentation</a>
 <td>
 </table>
-As working with nucleotides is usually focused on the sequence of the bases, rather than how they actually look like, the list of nucleotide specific functions would be quite short. But there are some helper like: 
+As working with nucleotides is usually focused on the sequence of the bases, rather than how they actually look like, the list of nucleotide specific functions would be quite short. Here are some of the basic helper functions: 
 *)
 
-let myAdenine = Nucleotides.A // val myAdenine : Nucleotides.Nucleotide = A
-let myThymine = Nucleotides.complement myAdenine // val myThymine : Nucleotides.Nucleotide = T
+let myAdenine = Nucleotides.A 
+let myThymine = Nucleotides.complement myAdenine 
+(***include-value:myThymine***)
 
 Nucleotides.replaceTbyU myAdenine // val it : Nucleotides.Nucleotide = A
 Nucleotides.replaceTbyU myThymine // val it : Nucleotides.Nucleotide = U
