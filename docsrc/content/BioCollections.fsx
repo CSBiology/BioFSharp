@@ -27,7 +27,7 @@ Analogous to the build-in collections BioFSharp provides BioSeq, BioList and Bio
 "PEPTIDE" |> BioSeq.ofAminoAcidString 
 ///Peptide represented as a BioList
 "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
-///Peptide represented as a BioArray
+///Nucleotide sequence represented as a BioArray
 "TAGCAT" |> BioArray.ofNucleotideString 
 
 (**
@@ -37,9 +37,15 @@ Some functions which might be needed regularly are defined to work with nucleoti
 
 let myPeptide = "PEPTIDE" |> BioSeq.ofAminoAcidString 
 
-BioSeq.toFormula myPeptide |> Formula.toString // val it : string = "C34.00 H51.00 N7.00 O14.00 "
+(*** include-value:myPeptide ***)
 
-BioSeq.toAverageMass myPeptide // val it : string = "C34.00 H51.00 N7.00 O14.00"
+let myPeptideFormula = BioSeq.toFormula myPeptide |> Formula.toString 
+
+(*** include-value:myPeptideFormula ***)
+
+let myPeptideMass = BioSeq.toAverageMass myPeptide 
+
+(*** include-value:myPeptideMass ***)
 
 (**
 ##AminoAcids
@@ -452,17 +458,25 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 Let's imagine you have a given gene sequence and want to find out what the according protein might look like.
 *)
 let myGene = BioSeq.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
+
+(*** include-value:myGene ***)
+
 (**
 Yikes! Unfortunately we got the 5'-3' strand. For proper transcription we should get the complementary strand first:
 *)
 let myProperGene = Seq.map Nucleotides.complement myGene
 
+(*** include-value:myProperGene ***)
+
 (**
 Now let's transcribe and translate it:
 *)
 
-myProperGene
-|> BioSeq.transcribeTemplateStrand
-|> BioSeq.translate 0
-|> Seq.toList //val it : AminoAcids.AminoAcid list = [Met; Ala; Arg; Ser; Ile; Asp; Arg; Leu; Thr; Ter]
+let myTranslatedGene = 
+    myProperGene
+    |> BioSeq.transcribeTemplateStrand
+    |> BioSeq.translate 0
+    |> Seq.toList 
+
+(*** include-value:myTranslatedGene ***)
 

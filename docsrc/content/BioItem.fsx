@@ -40,14 +40,23 @@ let gap = Nucleotides.Gap
 (**
 Many functions are similar for AminoAcids and Nucleotides
 *)
-AminoAcids.name ala // val it : string = "Alanin"
-Nucleotides.name g // val it : string = "Guanine"
+(***hide***)
+let alaName = AminoAcids.name ala 
+let gName = Nucleotides.name g 
+let lysFormula = AminoAcids.formula lys |> Formula.toString 
+let tFormula =  Nucleotides.formula t |> Formula.toString 
 
-AminoAcids.formula lys |> Formula.toString // val it : string = "C6.00 H12.00 N2.00 O1.00 "
-Nucleotides.formula t |> Formula.toString // val it : string = "C10.00 H14.00 N2.00 O5.00 "
+(***do-not-eval***)
+AminoAcids.name ala 
+(*** include-value:alaName ***)
+Nucleotides.name g 
+(*** include-value:gName ***)
 
-AminoAcids.isTerminator glu // val it : bool = false
-AminoAcids.isTerminator ter // val it : bool = true
+AminoAcids.formula lys |> Formula.toString 
+(*** include-value:lysFormula ***)
+Nucleotides.formula t |> Formula.toString 
+(*** include-value:tFormula ***)
+
 (**
 Nucleotides and AminoAcids in FSharp are represented as Union cases. This makes applying functions selectively very easy. 
 *)
@@ -56,8 +65,16 @@ let filterLysine aa =
     | AminoAcids.Lys -> AminoAcids.Gap
     | _ -> aa
 
+(*** hide ***)
+let f1 = filterLysine ala
+let f2 = filterLysine lys
+
+(***do-not-eval***)
 filterLysine ala // val it : AminoAcids.AminoAcid = Ala
+(*** include-value:f1 ***)
 filterLysine lys // val it : AminoAcids.AminoAcid = Gap
+(*** include-value:f2 ***)
+
 (**
 Of course some functions like these are already defined. Let's use a predefined function to find charged amino acids.
 
@@ -80,20 +97,18 @@ let giveMePositiveAAs aminoAcid =
 
     | _ -> printfn "Just strolling around, minding my own business."
 
+(*** define-output:out1 ***)
 giveMePositiveAAs ala
+(*** include-output:out1 ***)
+(*** define-output:out2 ***)
 giveMePositiveAAs lys
+(*** include-output:out2 ***)
+(*** define-output:out3 ***)
 giveMePositiveAAs glu
+(*** include-output:out3 ***)
+
 
 (**
-
-<pre>
-Just strolling around, minding my own business.
-val it : unit = ()
-Hey, how are you? I am Lysine, but my friends call me K. I'm usually in a positive mood
-val it : unit = ()
-I am Glutamic Acid, short: E. I'm usually in a negative mood
-val it : unit = ()
-</pre>  
 <table class="HeadAPI">
 <td class="Head"><h2>Amino Acids</h2></td>
 <td class="API">
@@ -117,16 +132,26 @@ let getF (aa:AminoAcids.AminoAcid) = AminoAcids.formula aa |> Formula.toString
 ///Serine -H20
 let mySerine = AminoAcids.AminoAcid.Ser
 
-getF mySerine //val it : string = "C3.00 H5.00 N1.00 O2.00 "
+(***hide***)
+let getF1 = getF mySerine
+
+(***do-not-eval***)
+getF mySerine
+(***include-value:getF1***)
 
 (**
 As you can see by the formula. Our Serine is missing two H and an O. In BioFSharp, all Amino Acids are dehydrolysed by default, because it is assumed that the user will use collections representing a peptide, rather than single Amino Acids. For our cause we want serine in hydrolysed form. An easy way to achieve this is to modify it. An addition of H2O is quite common and therefore premade: 
 *)
 
 ///Hydrolysed serine
+
 let hydroSerine = AminoAcids.setModification ModificationInfo.Table.H2O mySerine
 
-getF hydroSerine //val it : string = "C3.00 H7.00 N1.00 O3.00 "
+(***hide***)
+let getF2 = getF hydroSerine
+(***do-not-eval***)
+getF hydroSerine 
+(***include-value:getF2***)
 
 (**
 So far so good. Now let's add the phosphate. For this we first create a function which alters the formula of a given molecule in the way a phosphorylation would. In the second step we create a modification resembling a phosphorylation of a residual. At last we modify our Serine with this modification.
@@ -143,7 +168,11 @@ let phosphorylation = ModificationInfo.createModification "Phosphorylation" fals
 ///phosphorylated Serine
 let phosphoSerine = AminoAcids.setModification phosphorylation hydroSerine
 
+(***hide***)
+let getF3 = getF phosphoSerine
+(***do-not-eval***)
 getF phosphoSerine //val it : string = "P1.00 C3.00 H6.00 N1.00 O6.00 "
+(***include-value:getF3***)
 
 (**
 As you can see the Serine is phosphorylated just as we wanted. Our inital aim was to check the mass, this can be done quite easily:
