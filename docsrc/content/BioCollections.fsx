@@ -11,8 +11,11 @@
 #r @"../../lib/Formatting/FSharp.Plotly.dll"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
+#r "FSharpAux.dll"
 open BioFSharp
 open FSharp.Plotly
+open FSharpAux
+
 (**
 <table class="HeadAPI">
 <td class="Head"><h1>BioCollections</h1></td>
@@ -23,12 +26,29 @@ open FSharp.Plotly
 Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the ofBioItemString-functions
 *)
 
+
+(***define-output:testPrint***)
+let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
+let s2 = "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
+let s3 = "TAGCAT" |> BioArray.ofNucleotideString 
+
+(** TestPrint: *)
+(***include-output:testPrint***)
+
+(***do-not-eval***)
 ///Peptide represented as a Bioseq
 "PEPTIDE" |> BioSeq.ofAminoAcidString 
 ///Peptide represented as a BioList
 "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
 ///Nucleotide sequence represented as a BioArray
 "TAGCAT" |> BioArray.ofNucleotideString 
+
+(**Resulting BioSeq containing our peptide:*)
+(*** include-value:s1 ***)
+(**Resulting BioList containing our peptide:*)
+(*** include-value:s2 ***)
+(**Resulting BioArray containing our oligonucleotide:*)
+(*** include-value:s3 ***)
 
 (**
 ##Basics
@@ -57,7 +77,7 @@ In the first step, we define our input sequence and the protease we want to use.
 let RBCS = 
     """MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP
     PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR
-    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFTG""" 
+    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT""" 
     |> BioArray.ofAminoAcidString
 
 let trypsin = Digestion.Table.getProteaseBy "Trypsin"
