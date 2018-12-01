@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Clustal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -145,12 +145,14 @@ val clustalAlignment :
 <h2><a name="Writing-Clustal-files" class="anchor" href="#Writing-Clustal-files">Writing Clustal files</a></h2>
 <p>For writing clustal files you can use the <code>toFile</code> function. It takes a path and the alignment. The type of alignment is the same as the result of the reading function. You can see this above.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">outputPath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 11)" onmouseover="showTip(event, 'fs3', 11)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;clustalOutputExample.asn&quot;</span>
-
-<span onmouseout="hideTip(event, 'fs6', 12)" onmouseover="showTip(event, 'fs6', 12)" class="m">Clustal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="id">toFileWithOverWrite</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="id">outputPath</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="id">clustalAlignment</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 12)" onmouseover="showTip(event, 'fs6', 12)" class="m">Clustal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="id">toFileWithOverWrite</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="id">outputPath</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="id">clustalAlignment</span>
 </code></pre></td>
 </tr>
 </table>

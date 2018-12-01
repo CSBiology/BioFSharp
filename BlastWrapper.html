@@ -5,7 +5,7 @@
     <title>How to use BlastWrapper
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -228,13 +228,15 @@ just create a <code>BlastParam</code> of type <code>OutputType</code>.</em></p>
 done otherwise</em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///output file of the BLAST search</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="id">outputPath</span> <span class="o">=</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Output.txt&quot;</span><span class="pn">)</span> 
-
-<span onmouseout="hideTip(event, 'fs11', 70)" onmouseover="showTip(event, 'fs11', 70)" class="rt">BlastWrapper</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 71)" onmouseover="showTip(event, 'fs10', 71)" class="id">ncbiPath</span><span class="pn">)</span><span class="pn">.</span><span class="id">blastP</span> <span onmouseout="hideTip(event, 'fs5', 72)" onmouseover="showTip(event, 'fs5', 72)" class="id">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 73)" onmouseover="showTip(event, 'fs18', 73)" class="id">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs44', 74)" onmouseover="showTip(event, 'fs44', 74)" class="id">outputPath</span> <span class="pn">(</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs42', 75)" onmouseover="showTip(event, 'fs42', 75)" class="id">customOutputFormat</span><span class="pn">;</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 76)" onmouseover="showTip(event, 'fs12', 76)" class="k">seq</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs45', 77)" onmouseover="showTip(event, 'fs45', 77)" class="rt">BlastParams</span><span class="pn">&gt;</span><span class="pn">)</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs11', 70)" onmouseover="showTip(event, 'fs11', 70)" class="rt">BlastWrapper</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 71)" onmouseover="showTip(event, 'fs10', 71)" class="id">ncbiPath</span><span class="pn">)</span><span class="pn">.</span><span class="id">blastP</span> <span onmouseout="hideTip(event, 'fs5', 72)" onmouseover="showTip(event, 'fs5', 72)" class="id">inputFile</span> <span onmouseout="hideTip(event, 'fs18', 73)" onmouseover="showTip(event, 'fs18', 73)" class="id">queryFastaPath</span> <span onmouseout="hideTip(event, 'fs44', 74)" onmouseover="showTip(event, 'fs44', 74)" class="id">outputPath</span> <span class="pn">(</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs42', 75)" onmouseover="showTip(event, 'fs42', 75)" class="id">customOutputFormat</span><span class="pn">;</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 76)" onmouseover="showTip(event, 'fs12', 76)" class="k">seq</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs45', 77)" onmouseover="showTip(event, 'fs45', 77)" class="rt">BlastParams</span><span class="pn">&gt;</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>

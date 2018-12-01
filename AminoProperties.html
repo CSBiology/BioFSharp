@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>AminoProperties</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -43,30 +43,34 @@
 <h2><a name="General" class="anchor" href="#General">General</a></h2>
 <p>BioFSharp comes equipped with a range of numerical values for important amino acid properties. To access them in an easy fashion, you can use the <code>initGetAminoProperty</code> function in the following way. The result is a mapping function, which assigns a value to each compatible amino acid.<br />
 In this tutorial our aim is to find out the hydrophobicity of a peptide. We start by calling the aforementioned function.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">BioFSharp</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">AminoProperties</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="fn">getHydrophobicityIndex</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">initGetAminoProperty</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="rt">AminoProperty</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">HydrophobicityIndex</span>
 
-<span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="fn">getHydrophobicityIndex</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="vt">AminoAcidSymbol</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">Ala</span> 
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">getHydrophobicityIndexZ</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">initGetAminoPropertyZnorm</span> <span onmouseout="hideTip(event, 'fs5', 13)" onmouseover="showTip(event, 'fs5', 13)" class="rt">AminoProperty</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="id">HydrophobicityIndex</span>
-
-<span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="fn">getHydrophobicityIndexZ</span> <span onmouseout="hideTip(event, 'fs7', 16)" onmouseover="showTip(event, 'fs7', 16)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="vt">AminoAcidSymbol</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">Ala</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">hIAla</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 8)" onmouseover="showTip(event, 'fs3', 8)" class="fn">getHydrophobicityIndex</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="vt">AminoAcidSymbol</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="id">Ala</span> 
 </code></pre></td>
 </tr>
 </table>
+<table class="pre"><tr><td><pre><code>0.61</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">getHydrophobicityIndexZ</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="fn">initGetAminoPropertyZnorm</span> <span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="rt">AminoProperty</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 15)" onmouseover="showTip(event, 'fs6', 15)" class="id">HydrophobicityIndex</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">hIZAla</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="fn">getHydrophobicityIndexZ</span> <span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 19)" onmouseover="showTip(event, 'fs9', 19)" class="vt">AminoAcidSymbol</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="id">Ala</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>-0.4813502112</code></pre></td></tr></table>
 <p>With this function you might easily estimate the hydrophobictiy of our peptide by calling it on every element with a map. Usually close amino acids in a peptide influence each other. To cover this you can use the <code>ofWindowedBioArray</code> function. It also takes a window size and calculates the value of the property of every amino acid in the chain with regards to the effect of the adjacent amino acids in this window.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -74,61 +78,53 @@ In this tutorial our aim is to find out the hydrophobicity of a peptide. We star
 <span class="l">4: </span>
 <span class="l">5: </span>
 <span class="l">6: </span>
-<span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="id">peptide</span> <span class="o">=</span> 
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="id">peptide</span> <span class="o">=</span> 
     <span class="s">&quot;REYAHMIGMEYDTVQK&quot;</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="id">ofAminoAcidString</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="id">map</span> <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 25)" onmouseover="showTip(event, 'fs17', 25)" class="id">aminoAcidSymbol</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="id">ofAminoAcidString</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="id">map</span> <span onmouseout="hideTip(event, 'fs8', 26)" onmouseover="showTip(event, 'fs8', 26)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="id">aminoAcidSymbol</span>
 
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">peptidehydrophobicites</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 27)" onmouseover="showTip(event, 'fs12', 27)" class="id">peptide</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="id">map</span> <span onmouseout="hideTip(event, 'fs3', 30)" onmouseover="showTip(event, 'fs3', 30)" class="fn">getHydrophobicityIndex</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="id">peptidehydrophobicites</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="id">peptide</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="id">map</span> <span onmouseout="hideTip(event, 'fs3', 32)" onmouseover="showTip(event, 'fs3', 32)" class="fn">getHydrophobicityIndex</span>
 </code></pre></td>
 </tr>
 </table>
-<pre>
-val peptidehydrophobicites : float [] =
-  [|0.6; 0.47; 1.88; 0.61; 0.61; 1.18; 2.22; 0.07; 1.18; 0.47; 1.88; 0.46;
-    0.05; 1.32; 0.0; 1.15|]
-</pre>
+<table class="pre"><tr><td><pre><code>[|0.6; 0.47; 1.88; 0.61; 0.61; 1.18; 2.22; 0.07; 1.18; 0.47; 1.88; 0.46; 0.05;
+  1.32; 0.0; 1.15|]</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="id">peptidehydrophobicites&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 32)" onmouseover="showTip(event, 'fs12', 32)" class="id">peptide</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 33)" onmouseover="showTip(event, 'fs2', 33)" class="m">AminoProperties</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="id">ofWindowedBioArray</span> <span class="n">3</span> <span onmouseout="hideTip(event, 'fs3', 35)" onmouseover="showTip(event, 'fs3', 35)" class="fn">getHydrophobicityIndex</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="id">peptidehydrophobicites&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 34)" onmouseover="showTip(event, 'fs14', 34)" class="id">peptide</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 35)" onmouseover="showTip(event, 'fs2', 35)" class="m">AminoProperties</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">ofWindowedBioArray</span> <span class="n">3</span> <span onmouseout="hideTip(event, 'fs3', 37)" onmouseover="showTip(event, 'fs3', 37)" class="fn">getHydrophobicityIndex</span>
 </code></pre></td>
 </tr>
 </table>
-<pre>
-val peptidehydrophobicites' : float [] =
-  [|0.89; 0.834; 0.8916666667; 1.081428571; 1.005714286; 1.107142857;
-    0.9057142857; 1.087142857; 1.065714286; 0.9042857143; 0.7757142857;
-    0.7657142857; 0.7614285714; 0.81; 0.596; 0.63|]
-</pre>  
-In the last step you can then just sum or average over the values to get a summary value of the hydrophobicity, depending on wether you want a length dependent or independent value.
+<table class="pre"><tr><td><pre><code>[|0.89; 0.834; 0.8916666667; 1.081428571; 1.005714286; 1.107142857; 0.9057142857;
+  1.087142857; 1.065714286; 0.9042857143; 0.7757142857; 0.7657142857;
+  0.7614285714; 0.81; 0.596; 0.63|]</code></pre></td></tr></table>
+<p>In the last step you can then just sum or average over the values to get a summary value of the hydrophobicity, depending on wether you want a length dependent or independent value.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 36)" onmouseover="showTip(event, 'fs15', 36)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="id">peptidehydrophobicites</span> <span class="c">// val it : float = 14.15</span>
-<span onmouseout="hideTip(event, 'fs15', 39)" onmouseover="showTip(event, 'fs15', 39)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs19', 41)" onmouseover="showTip(event, 'fs19', 41)" class="id">peptidehydrophobicites&#39;</span> <span class="c">// val it : float = 14.11166667</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 38)" onmouseover="showTip(event, 'fs17', 38)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 39)" onmouseover="showTip(event, 'fs23', 39)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs20', 40)" onmouseover="showTip(event, 'fs20', 40)" class="id">peptidehydrophobicites</span> <span class="c">// val it : float = 14.15</span>
+<span onmouseout="hideTip(event, 'fs17', 41)" onmouseover="showTip(event, 'fs17', 41)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs21', 43)" onmouseover="showTip(event, 'fs21', 43)" class="id">peptidehydrophobicites&#39;</span> <span class="c">// val it : float = 14.11166667</span>
 
-<span onmouseout="hideTip(event, 'fs15', 42)" onmouseover="showTip(event, 'fs15', 42)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 43)" onmouseover="showTip(event, 'fs22', 43)" class="id">average</span> <span onmouseout="hideTip(event, 'fs18', 44)" onmouseover="showTip(event, 'fs18', 44)" class="id">peptidehydrophobicites</span> <span class="c">// val it : float = 0.884375</span>
-<span onmouseout="hideTip(event, 'fs15', 45)" onmouseover="showTip(event, 'fs15', 45)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 46)" onmouseover="showTip(event, 'fs22', 46)" class="id">average</span> <span onmouseout="hideTip(event, 'fs19', 47)" onmouseover="showTip(event, 'fs19', 47)" class="id">peptidehydrophobicites&#39;</span> <span class="c">// val it : float = 0.8819791667</span>
+<span onmouseout="hideTip(event, 'fs17', 44)" onmouseover="showTip(event, 'fs17', 44)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 45)" onmouseover="showTip(event, 'fs24', 45)" class="id">average</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="id">peptidehydrophobicites</span> <span class="c">// val it : float = 0.884375</span>
+<span onmouseout="hideTip(event, 'fs17', 47)" onmouseover="showTip(event, 'fs17', 47)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 48)" onmouseover="showTip(event, 'fs24', 48)" class="id">average</span> <span onmouseout="hideTip(event, 'fs21', 49)" onmouseover="showTip(event, 'fs21', 49)" class="id">peptidehydrophobicites&#39;</span> <span class="c">// val it : float = 0.8819791667</span>
 </code></pre></td>
 </tr>
 </table>
 <h2><a name="Isoelectric-Point" class="anchor" href="#Isoelectric-Point">Isoelectric Point</a></h2>
 <p>The isoelectric point (pI) of a protein is the point at which it carries as many positive as negative charges.
 Therefore the overall charge is zero. Knowing this value can e.g. be useful for isolation of single proteins in a voltage gradient.<br />
-The implementation is based on: "<a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf"><a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf">http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf</a></a>".
+The implementation is based on: <a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf">this document</a>.
 In principle, the distinct amino acids in the protein are counted.
 By using the <a href="https://en.wikipedia.org/wiki/Henderson-Hasselbalch_equation">Henderson-Hasselbalch equation</a> and the pKr values, the theoretic charge states of the amino acids for a specific pH can be calculated.
 Multiplying those charge states with the count of the associated amino acids and adding those products together then gives the overall charge of the protein. This is only done with the amino acids, which might be charged (basic, acidic).
 The isoelectric point is the pH value for which this function returns zero. It is found by <a href="https://en.wikipedia.org/wiki/Bisection_method">bisection</a> (also called Binary Search).<br />
-Disclaimer: Keep in mind, that this algorithm ignores post-translational modifications and interactions of the amino acids with each other. Therefore it is only intented to be a rough approximation and should be used as such.
-<br>
-The function for finding the isoelectric point is found in the <code>IsoelectricPoint</code> module.</p>
+Disclaimer: Keep in mind, that this algorithm ignores post-translational modifications and interactions of the amino acids with each other. Therefore it is only intented to be a rough approximation and should be used as such.</p>
+</br>
+<p>The function for finding the isoelectric point is found in the <code>IsoelectricPoint</code> module.</p>
 <ul>
 <li>Besides the peptide sequence in form of a <code>AminoAcidSymbol</code> Seq, it takes</li>
 <li>a mapping function, which maps an <code>AminoAcidSymbol</code> to a float representing the pKr and</li>
@@ -148,21 +144,21 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 <span class="l">12: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//AA sequence</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 48)" onmouseover="showTip(event, 'fs23', 48)" class="id">myProteinForPI</span> <span class="o">=</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="id">myProteinForPI</span> <span class="o">=</span> 
     <span class="s">&quot;ATPIIEMNYPWTMNIKLSSDACMTNWWPNCMTLKIIA&quot;</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 49)" onmouseover="showTip(event, 'fs24', 49)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="id">map</span> <span onmouseout="hideTip(event, 'fs7', 51)" onmouseover="showTip(event, 'fs7', 51)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 52)" onmouseover="showTip(event, 'fs17', 52)" class="id">aminoAcidSymbol</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 52)" onmouseover="showTip(event, 'fs27', 52)" class="id">map</span> <span onmouseout="hideTip(event, 'fs8', 53)" onmouseover="showTip(event, 'fs8', 53)" class="m">AminoAcidSymbols</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 54)" onmouseover="showTip(event, 'fs19', 54)" class="id">aminoAcidSymbol</span>
 
 <span class="c">//default function for pKr of charged aminoacids</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 53)" onmouseover="showTip(event, 'fs26', 53)" class="fn">pKrFunction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 54)" onmouseover="showTip(event, 'fs27', 54)" class="m">IsoelectricPoint</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 55)" onmouseover="showTip(event, 'fs28', 55)" class="id">getpKr</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 55)" onmouseover="showTip(event, 'fs28', 55)" class="fn">pKrFunction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 56)" onmouseover="showTip(event, 'fs29', 56)" class="m">IsoelectricPoint</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 57)" onmouseover="showTip(event, 'fs30', 57)" class="id">getpKr</span>
 
 <span class="c">//accuracy in z</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 56)" onmouseover="showTip(event, 'fs29', 56)" class="id">acc</span> <span class="o">=</span> <span class="n">0.5</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 58)" onmouseover="showTip(event, 'fs31', 58)" class="id">acc</span> <span class="o">=</span> <span class="n">0.5</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 57)" onmouseover="showTip(event, 'fs30', 57)" class="id">pI</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="m">IsoelectricPoint</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 59)" onmouseover="showTip(event, 'fs31', 59)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs26', 60)" onmouseover="showTip(event, 'fs26', 60)" class="fn">pKrFunction</span> <span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="id">acc</span> <span onmouseout="hideTip(event, 'fs23', 62)" onmouseover="showTip(event, 'fs23', 62)" class="id">myProteinForPI</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 59)" onmouseover="showTip(event, 'fs32', 59)" class="id">pI</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 60)" onmouseover="showTip(event, 'fs29', 60)" class="m">IsoelectricPoint</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 61)" onmouseover="showTip(event, 'fs33', 61)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs28', 62)" onmouseover="showTip(event, 'fs28', 62)" class="fn">pKrFunction</span> <span onmouseout="hideTip(event, 'fs31', 63)" onmouseover="showTip(event, 'fs31', 63)" class="id">acc</span> <span onmouseout="hideTip(event, 'fs25', 64)" onmouseover="showTip(event, 'fs25', 64)" class="id">myProteinForPI</span>
 </code></pre></td>
 </tr>
 </table>
-<p>The result will be of type <code>Option&lt;float*float&gt;</code>. The first float is the pH, the second one is the according charge.</p>
+<table class="pre"><tr><td><pre><code>Some 7.0</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">module AminoProperties<br /><br />from BioFSharp</div>
@@ -170,31 +166,33 @@ The function for finding the isoelectric point is found in the <code>Isoelectric
 <div class="tip" id="fs4">val initGetAminoProperty : property:AminoProperty -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
 <div class="tip" id="fs5">type AminoProperty =<br />&#160;&#160;| HydrophobicityIndex<br />&#160;&#160;| HydrophobicityFasman<br />&#160;&#160;| MeltingPointFasman<br />&#160;&#160;| OpticalRotationFasman<br />&#160;&#160;| PK_NFasman<br />&#160;&#160;| PK_CFasman<br />&#160;&#160;| NormalizedBetaSheet<br />&#160;&#160;| NormalizedHelix<br />&#160;&#160;| NormalizedTurn<br />&#160;&#160;| HelixCoil<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member toString : (AminoProperty -&gt; string)</div>
 <div class="tip" id="fs6">union case AminoProperty.HydrophobicityIndex: AminoProperty</div>
-<div class="tip" id="fs7">module AminoAcidSymbols<br /><br />from BioFSharp</div>
-<div class="tip" id="fs8">type AminoAcidSymbol =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;interface IBioItem<br />&#160;&#160;&#160;&#160;interface IComparable<br />&#160;&#160;&#160;&#160;private new : value:byte -&gt; AminoAcidSymbol<br />&#160;&#160;&#160;&#160;override Equals : other:obj -&gt; bool<br />&#160;&#160;&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;&#160;&#160;member private Value : byte<br />&#160;&#160;&#160;&#160;static member Ala : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Arg : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Asn : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end</div>
-<div class="tip" id="fs9">property AminoAcidSymbols.AminoAcidSymbol.Ala: AminoAcidSymbols.AminoAcidSymbol</div>
-<div class="tip" id="fs10">val getHydrophobicityIndexZ : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
-<div class="tip" id="fs11">val initGetAminoPropertyZnorm : property:AminoProperty -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
-<div class="tip" id="fs12">val peptide : AminoAcidSymbols.AminoAcidSymbol []</div>
-<div class="tip" id="fs13">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs14">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs15">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs16">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
-<div class="tip" id="fs17">val aminoAcidSymbol : a:&#39;a -&gt; AminoAcidSymbols.AminoAcidSymbol (requires member op_Explicit)</div>
-<div class="tip" id="fs18">val peptidehydrophobicites : float []</div>
-<div class="tip" id="fs19">val peptidehydrophobicites&#39; : float []</div>
-<div class="tip" id="fs20">val ofWindowedBioArray : n:int -&gt; pf:(&#39;a -&gt; float) -&gt; source:BioArray.BioArray&lt;&#39;a&gt; -&gt; float [] (requires &#39;a :&gt; IBioItem)</div>
-<div class="tip" id="fs21">val sum : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member get_Zero)</div>
-<div class="tip" id="fs22">val average : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member DivideByInt and member get_Zero)</div>
-<div class="tip" id="fs23">val myProteinForPI : seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt;</div>
-<div class="tip" id="fs24">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs25">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;</div>
-<div class="tip" id="fs26">val pKrFunction : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
-<div class="tip" id="fs27">module IsoelectricPoint<br /><br />from BioFSharp</div>
-<div class="tip" id="fs28">val getpKr : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
-<div class="tip" id="fs29">val acc : float</div>
-<div class="tip" id="fs30">val pI : float option</div>
-<div class="tip" id="fs31">val tryFind : pKrFunc:(AminoAcidSymbols.AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; float option</div>
+<div class="tip" id="fs7">val hIAla : float</div>
+<div class="tip" id="fs8">module AminoAcidSymbols<br /><br />from BioFSharp</div>
+<div class="tip" id="fs9">type AminoAcidSymbol =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;interface IBioItem<br />&#160;&#160;&#160;&#160;interface IComparable<br />&#160;&#160;&#160;&#160;private new : value:byte -&gt; AminoAcidSymbol<br />&#160;&#160;&#160;&#160;override Equals : other:obj -&gt; bool<br />&#160;&#160;&#160;&#160;override GetHashCode : unit -&gt; int<br />&#160;&#160;&#160;&#160;override ToString : unit -&gt; string<br />&#160;&#160;&#160;&#160;member private Value : byte<br />&#160;&#160;&#160;&#160;static member Ala : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Arg : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;static member Asn : AminoAcidSymbol<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end</div>
+<div class="tip" id="fs10">property AminoAcidSymbols.AminoAcidSymbol.Ala: AminoAcidSymbols.AminoAcidSymbol</div>
+<div class="tip" id="fs11">val getHydrophobicityIndexZ : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
+<div class="tip" id="fs12">val initGetAminoPropertyZnorm : property:AminoProperty -&gt; (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
+<div class="tip" id="fs13">val hIZAla : float</div>
+<div class="tip" id="fs14">val peptide : AminoAcidSymbols.AminoAcidSymbol []</div>
+<div class="tip" id="fs15">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs16">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs17">module Array<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs18">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
+<div class="tip" id="fs19">val aminoAcidSymbol : a:&#39;a -&gt; AminoAcidSymbols.AminoAcidSymbol (requires member op_Explicit)</div>
+<div class="tip" id="fs20">val peptidehydrophobicites : float []</div>
+<div class="tip" id="fs21">val peptidehydrophobicites&#39; : float []</div>
+<div class="tip" id="fs22">val ofWindowedBioArray : n:int -&gt; pf:(&#39;a -&gt; float) -&gt; source:BioArray.BioArray&lt;&#39;a&gt; -&gt; float [] (requires &#39;a :&gt; IBioItem)</div>
+<div class="tip" id="fs23">val sum : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member get_Zero)</div>
+<div class="tip" id="fs24">val average : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member DivideByInt and member get_Zero)</div>
+<div class="tip" id="fs25">val myProteinForPI : seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt;</div>
+<div class="tip" id="fs26">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs27">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;</div>
+<div class="tip" id="fs28">val pKrFunction : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
+<div class="tip" id="fs29">module IsoelectricPoint<br /><br />from BioFSharp</div>
+<div class="tip" id="fs30">val getpKr : (AminoAcidSymbols.AminoAcidSymbol -&gt; float)</div>
+<div class="tip" id="fs31">val acc : float</div>
+<div class="tip" id="fs32">val pI : float option</div>
+<div class="tip" id="fs33">val tryFind : pKrFunc:(AminoAcidSymbols.AminoAcidSymbol -&gt; float) -&gt; accuracy:float -&gt; aaSeq:seq&lt;AminoAcidSymbols.AminoAcidSymbol&gt; -&gt; float option</div>
 
 			</div>
 			<div class="span3" >

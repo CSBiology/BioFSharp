@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Newick</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -177,7 +177,6 @@ Branch
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 <span class="l">11: </span>
-<span class="l">12: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Tree with distancevalue wrapped as option</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">myOptionalTree</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="m">Newick</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="id">ofFile</span> <span onmouseout="hideTip(event, 'fs8', 29)" onmouseover="showTip(event, 'fs8', 29)" class="fn">floatMappingOptional</span> <span onmouseout="hideTip(event, 'fs15', 30)" onmouseover="showTip(event, 'fs15', 30)" class="id">path</span>
@@ -190,7 +189,12 @@ Branch
     <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs14', 40)" onmouseover="showTip(event, 'fs14', 40)" class="uc">None</span>      <span class="k">-&gt;</span> <span class="s">&quot;&quot;</span> 
 
 <span class="c">//write our original tree to path</span>
-<span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="m">Newick</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="id">toFile</span> <span onmouseout="hideTip(event, 'fs19', 43)" onmouseover="showTip(event, 'fs19', 43)" class="fn">converter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs3', 44)" onmouseover="showTip(event, 'fs3', 44)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;outputTree.txt&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs18', 45)" onmouseover="showTip(event, 'fs18', 45)" class="id">myOptionalTree</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="m">Newick</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="id">toFile</span> <span onmouseout="hideTip(event, 'fs19', 43)" onmouseover="showTip(event, 'fs19', 43)" class="fn">converter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs3', 44)" onmouseover="showTip(event, 'fs3', 44)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;outputTree.txt&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs18', 45)" onmouseover="showTip(event, 'fs18', 45)" class="id">myOptionalTree</span>
 </code></pre></td>
 </tr>
 </table>

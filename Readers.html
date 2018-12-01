@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Readers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -132,15 +132,11 @@ or <a href="https://github.com/CSBiology/BioFSharp/blob/master/src/BioFSharp/Bio
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="id">FSharp</span><span class="pn">.</span><span class="id">Care</span><span class="pn">.</span><span class="id">IO</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="id">stringSequence</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="m">FileIO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="id">readFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 32)" onmouseover="showTip(event, 'fs10', 32)" class="id">filepathFASTA</span><span class="pn">)</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="id">stringSequence</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="m">FileIO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="id">readFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 31)" onmouseover="showTip(event, 'fs10', 31)" class="id">filepathFASTA</span><span class="pn">)</span>
 
 <span class="c">//reads seq&lt;string&gt; to sequence of FastaItems</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">exampleFromFileEnumerator</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 34)" onmouseover="showTip(event, 'fs5', 34)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="id">fromFileEnumerator</span> <span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="id">ofAminoAcidString</span> <span onmouseout="hideTip(event, 'fs19', 38)" onmouseover="showTip(event, 'fs19', 38)" class="id">stringSequence</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="id">exampleFromFileEnumerator</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 33)" onmouseover="showTip(event, 'fs5', 33)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="id">fromFileEnumerator</span> <span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="id">ofAminoAcidString</span> <span onmouseout="hideTip(event, 'fs18', 37)" onmouseover="showTip(event, 'fs18', 37)" class="id">stringSequence</span>
 </code></pre></td>
 </tr>
 </table>
@@ -149,12 +145,16 @@ To write a `seq<FastaItem>` into a file use the following function.
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
-<span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="id">seqFastaItem</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 40)" onmouseover="showTip(event, 'fs27', 40)" class="k">seq</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs6', 41)" onmouseover="showTip(event, 'fs6', 41)" class="id">exampleFasta</span><span class="pn">]</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 38)" onmouseover="showTip(event, 'fs25', 38)" class="id">seqFastaItem</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="k">seq</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs6', 40)" onmouseover="showTip(event, 'fs6', 40)" class="id">exampleFasta</span><span class="pn">]</span>
 
 <span class="c">//writes a sequence of FastaItems into a .fasta file</span>
-<span onmouseout="hideTip(event, 'fs5', 42)" onmouseover="showTip(event, 'fs5', 42)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 43)" onmouseover="showTip(event, 'fs28', 43)" class="id">write</span> <span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="m">BioItem</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="id">symbol</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/FASTAExample3.fasta&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs26', 46)" onmouseover="showTip(event, 'fs26', 46)" class="id">seqFastaItem</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 41)" onmouseover="showTip(event, 'fs5', 41)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 42)" onmouseover="showTip(event, 'fs27', 42)" class="id">write</span> <span onmouseout="hideTip(event, 'fs28', 43)" onmouseover="showTip(event, 'fs28', 43)" class="m">BioItem</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 44)" onmouseover="showTip(event, 'fs29', 44)" class="id">symbol</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/FASTAExample3.fasta&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs25', 45)" onmouseover="showTip(event, 'fs25', 45)" class="id">seqFastaItem</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -176,19 +176,18 @@ To write a `seq<FastaItem>` into a file use the following function.
 <div class="tip" id="fs15">val fromGzipFile : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filePath:string -&gt; seq&lt;FastaItem&lt;&#39;a&gt;&gt;</div>
 <div class="tip" id="fs16">module BioList<br /><br />from BioFSharp</div>
 <div class="tip" id="fs17">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioList.BioList&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs18">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs19">val stringSequence : seq&lt;string&gt;</div>
-<div class="tip" id="fs20">module FileIO<br /><br />from FSharpAux.IO</div>
-<div class="tip" id="fs21">val readFile : file:string -&gt; seq&lt;string&gt;</div>
-<div class="tip" id="fs22">val exampleFromFileEnumerator : seq&lt;FastaItem&lt;BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
-<div class="tip" id="fs23">val fromFileEnumerator : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastaItem&lt;&#39;a&gt;&gt;</div>
-<div class="tip" id="fs24">module BioSeq<br /><br />from BioFSharp</div>
-<div class="tip" id="fs25">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs26">val seqFastaItem : seq&lt;FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
-<div class="tip" id="fs27">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;</div>
-<div class="tip" id="fs28">val write : toString:(&#39;T -&gt; char) -&gt; filePath:string -&gt; data:seq&lt;FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit</div>
-<div class="tip" id="fs29">module BioItem<br /><br />from BioFSharp</div>
-<div class="tip" id="fs30">val symbol : bItem:#IBioItem -&gt; char</div>
+<div class="tip" id="fs18">val stringSequence : seq&lt;string&gt;</div>
+<div class="tip" id="fs19">module FileIO<br /><br />from FSharpAux.IO</div>
+<div class="tip" id="fs20">val readFile : file:string -&gt; seq&lt;string&gt;</div>
+<div class="tip" id="fs21">val exampleFromFileEnumerator : seq&lt;FastaItem&lt;BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
+<div class="tip" id="fs22">val fromFileEnumerator : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; fileEnumerator:seq&lt;string&gt; -&gt; seq&lt;FastaItem&lt;&#39;a&gt;&gt;</div>
+<div class="tip" id="fs23">module BioSeq<br /><br />from BioFSharp</div>
+<div class="tip" id="fs24">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs25">val seqFastaItem : seq&lt;FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
+<div class="tip" id="fs26">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;</div>
+<div class="tip" id="fs27">val write : toString:(&#39;T -&gt; char) -&gt; filePath:string -&gt; data:seq&lt;FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit</div>
+<div class="tip" id="fs28">module BioItem<br /><br />from BioFSharp</div>
+<div class="tip" id="fs29">val symbol : bItem:#IBioItem -&gt; char</div>
 
 			</div>
 			<div class="span3" >

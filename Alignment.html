@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Alignment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio."/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo Mühlhaus"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -40,31 +40,26 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-algorithm-pairwisealignment.html" >&#128194;View module documentation</a>
 </td>
 </table>
-<p>In this short tutorial, the usage of the Pairwise alignment-implementation is demonstrated.
-For global alignments, the <b>NeedlemanWunsch</b>-algorithm is used. For local alignments, the <b>SmithWaterman</b>-algorithm is used.
-For both implementations, the gapvalues are evaluated using the <b>affine</b> gapscoremodel.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;BioFSharp.dll&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">BioFSharp</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="id">Algorithm</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="id">PairwiseAlignment</span>
-</code></pre></td>
-</tr>
-</table>
-<div class="box">
+<p>In this short tutorial, the usage of the pairwise alignment implementation is demonstrated.
+For global alignments, the <strong>NeedlemanWunsch</strong> algorithm is used. For local alignments, the <strong>SmithWaterman</strong> algorithm is used.</p>
+<p>For both implementations, the gapvalues are evaluated using the <strong>affine</strong> gapscoremodel.</p>
 <h2><a name="Aligning-aminoacid-and-nucleotide-sequences" class="anchor" href="#Aligning-aminoacid-and-nucleotide-sequences">Aligning aminoacid- and nucleotide-sequences</a></h2>
-<p>For defining the scores of matching and missmatching characters, the <b>scoring</b>-function is defined. In the case of Aminoacid- or Nucleotide-sequence-alignments, the integrated substitution-matrices can be used.</p>
+<p>For defining the scores of matching and missmatching characters, the <strong>scoring</strong> function is defined. In the case of amino acid or nucleotide sequence alignments, the integrated substitution-matrices can be used.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">BioFSharp</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="id">Algorithm</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="id">PairwiseAlignment</span>
+
+<span class="c">//For aminoacids</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="fn">aaScoring</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="m">ScoringMatrix</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">getScoringMatrixAminoAcid</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="m">ScoringMatrix</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="rt">ScoringMatrixAminoAcid</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">BLOSUM62</span>
 
 <span class="c">//For nucleotides</span>
@@ -72,8 +67,8 @@ For both implementations, the gapvalues are evaluated using the <b>affine</b> ga
 </code></pre></td>
 </tr>
 </table>
-<p>In order to align two sequences, not only the values for substitutions, but also the <b>costs</b> for gaps are needed. In this implementation, an affine gap-penalty is realized. An affine gap penalty weights continuations of gaps different than the opening of a gap.
-The scoring function (in this case a substitution matrix) and the two gap penalty values are combined into the <b>Costs</b>-type.</p>
+<p>In order to align two sequences, not only the values for substitutions, but also the <strong>costs</strong> for gaps are needed. In this implementation, an affine gap-penalty is realized. An affine gap penalty weights continuations of gaps different than the opening of a gap.
+The scoring function (in this case a substitution matrix) and the two gap penalty values are combined into the <code>Costs</code> type.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -104,58 +99,60 @@ The scoring function (in this case a substitution matrix) and the two gap penalt
 </code></pre></td>
 </tr>
 </table>
-<p>The alignment functions use <b>Arrays</b> as input. The Elements can be of any type, but require type equality. Also they need to have type equality with the input of the scoring function.
+<p>The alignment functions use <code>Arrays</code> as input. The Elements can be of any type, but require type equality. Also they need to have type equality with the input of the scoring function.
 Both the global and local alignment algorithms take the same parameters (costs,firstSequence,secondSequence) and return the same format.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
-<span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For aminoacids</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="id">aaSeq1</span> <span class="o">=</span> <span class="s">&quot;ACDM&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="id">ofAminoAcidSymbolString</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="id">aaSeq2</span> <span class="o">=</span> <span class="s">&quot;MAACEDM&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="id">ofAminoAcidSymbolString</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="id">globalAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="m">NeedlemanWunsch</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="id">runAminoAcidSymbol</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="id">aaCosts</span> <span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="id">aaSeq1</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="id">aaSeq2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">localAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="id">runAminoAcidSymbol</span> <span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="id">aaCosts</span> <span onmouseout="hideTip(event, 'fs15', 37)" onmouseover="showTip(event, 'fs15', 37)" class="id">aaSeq1</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="id">aaSeq2</span>
 </code></pre></td>
 </tr>
 </table>
-<p>This returns:<br />
-<em>The field MetaData carries the score of the alignment</em>
-<pre></p>
-<p>val globalAAAlignment :
-Alignment.Alignment<AminoAcidSymbols.AminoAcidSymbol list,Score> =
-{MetaData = 12;
-AlignedSequences = [[-; -; A; C; -; D; M]; [M; A; A; C; E; D; M]];}</p>
-<p>val localAAAlignment :
-Alignment.Alignment<AminoAcidSymbols.AminoAcidSymbol list,Score> =
-{MetaData = 19;
-AlignedSequences = [[A; C; -; D; M]; [A; C; E; D; M]];}
-</pre></p>
+<table class="pre"><tr><td><pre><code>{MetaData = 12;
+ AlignedSequences = [[-; -; A; C; -; D; M]; [M; A; A; C; E; D; M]];}</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">localAAAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="id">runAminoAcidSymbol</span> <span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="id">aaCosts</span> <span onmouseout="hideTip(event, 'fs15', 37)" onmouseover="showTip(event, 'fs15', 37)" class="id">aaSeq1</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="id">aaSeq2</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>{MetaData = 19;
+ AlignedSequences = [[A; C; -; D; M]; [A; C; E; D; M]];}</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
-<span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//For nucleotides</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 39)" onmouseover="showTip(event, 'fs24', 39)" class="id">nucSeq1</span> <span class="o">=</span> <span class="s">&quot;ATGA&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 40)" onmouseover="showTip(event, 'fs16', 40)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="id">ofNucleotideString</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="id">nucSeq2</span> <span class="o">=</span> <span class="s">&quot;BATVAWG&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 43)" onmouseover="showTip(event, 'fs16', 43)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="id">ofNucleotideString</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 45)" onmouseover="showTip(event, 'fs27', 45)" class="id">globalNucAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="m">NeedlemanWunsch</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 47)" onmouseover="showTip(event, 'fs28', 47)" class="id">runNucleotide</span> <span onmouseout="hideTip(event, 'fs14', 48)" onmouseover="showTip(event, 'fs14', 48)" class="id">nucCosts</span> <span onmouseout="hideTip(event, 'fs24', 49)" onmouseover="showTip(event, 'fs24', 49)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">nucSeq2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="id">localNucAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 52)" onmouseover="showTip(event, 'fs23', 52)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="id">runNucleotide</span> <span onmouseout="hideTip(event, 'fs14', 54)" onmouseover="showTip(event, 'fs14', 54)" class="id">nucCosts</span> <span onmouseout="hideTip(event, 'fs24', 55)" onmouseover="showTip(event, 'fs24', 55)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 56)" onmouseover="showTip(event, 'fs26', 56)" class="id">nucSeq2</span>
 </code></pre></td>
 </tr>
 </table>
-</div>
-<div class="box">
+<table class="pre"><tr><td><pre><code>{MetaData = 9;
+ AlignedSequences = [[Gap; A; T; G; A; Gap; Gap]; [B; A; T; V; A; W; G]];}</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="id">localNucAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 52)" onmouseover="showTip(event, 'fs23', 52)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="id">runNucleotide</span> <span onmouseout="hideTip(event, 'fs14', 54)" onmouseover="showTip(event, 'fs14', 54)" class="id">nucCosts</span> <span onmouseout="hideTip(event, 'fs24', 55)" onmouseover="showTip(event, 'fs24', 55)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 56)" onmouseover="showTip(event, 'fs26', 56)" class="id">nucSeq2</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>{MetaData = 11;
+ AlignedSequences = [[A; T; G; A]; [A; T; V; A]];}</code></pre></td></tr></table>
 <h2><a name="Aligning-anything-else" class="anchor" href="#Aligning-anything-else">Aligning anything else</a></h2>
 <p>This implementation was aimed to be as generic as possible. To achieve this, the scoring function can be designed at will, the only constraints being the need for two input variables and the type equality.<br />
 Also besides the alignment functions which only take BioItems as input and represent the gaps by the appropriate gaps of type BioItem. There is also a generic alignment function <code>runGeneric</code> which returns <code>lists of options</code>, where None represents gaps. Therefore any input type can be used, given it matches the cost function.</p>
-<p>For example, one could use a simple "if else" equality function to match nucleotides</p>
+<p>For example, one could use a simple <code>if .. then .. else</code> equality function to match nucleotides</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -167,8 +164,6 @@ Also besides the alignment functions which only take BioItems as input and repre
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 <span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 57)" onmouseover="showTip(event, 'fs30', 57)" class="fn">scoring</span> <span onmouseout="hideTip(event, 'fs31', 58)" onmouseover="showTip(event, 'fs31', 58)" class="id">a</span> <span onmouseout="hideTip(event, 'fs32', 59)" onmouseover="showTip(event, 'fs32', 59)" class="id">b</span> <span class="o">=</span> 
     <span class="k">if</span> <span onmouseout="hideTip(event, 'fs31', 60)" onmouseover="showTip(event, 'fs31', 60)" class="id">a</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 61)" onmouseover="showTip(event, 'fs32', 61)" class="id">b</span> <span class="k">then</span> <span class="n">2</span>
@@ -180,42 +175,49 @@ Also besides the alignment functions which only take BioItems as input and repre
     <span class="fn">Similarity</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 63)" onmouseover="showTip(event, 'fs30', 63)" class="fn">scoring</span>
     <span class="pn">}</span>
 
-
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 64)" onmouseover="showTip(event, 'fs34', 64)" class="id">globalAlignmentNuc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 65)" onmouseover="showTip(event, 'fs20', 65)" class="m">NeedlemanWunsch</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 66)" onmouseover="showTip(event, 'fs35', 66)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 67)" onmouseover="showTip(event, 'fs33', 67)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs24', 68)" onmouseover="showTip(event, 'fs24', 68)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 69)" onmouseover="showTip(event, 'fs26', 69)" class="id">nucSeq2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 70)" onmouseover="showTip(event, 'fs36', 70)" class="id">localAlignmentNuc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 71)" onmouseover="showTip(event, 'fs23', 71)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 72)" onmouseover="showTip(event, 'fs35', 72)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 73)" onmouseover="showTip(event, 'fs33', 73)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs24', 74)" onmouseover="showTip(event, 'fs24', 74)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 75)" onmouseover="showTip(event, 'fs26', 75)" class="id">nucSeq2</span>
 </code></pre></td>
 </tr>
 </table>
-<p>This returns:<br />
-<pre></p>
-<p>val globalAlignmentNuc :
-Alignment.Alignment<Nucleotides.Nucleotide option list,Score> =
-{MetaData = -1;
-AlignedSequences =
-[[None; Some A; Some T; Some G; Some A; None; None];
-[Some B; Some A; Some T; Some V; Some A; Some W; Some G]];}</p>
-<p>val localAlignmentNuc :
-Alignment.Alignment<Nucleotides.Nucleotide option list,Score> =
-{MetaData = 1;
-AlignedSequences =
-[[Some A; Some T; Some G; Some A]; [Some A; Some T; Some V; Some A]];}
-</pre></p>
+<table class="pre"><tr><td><pre><code>{MetaData = -1;
+ AlignedSequences =
+  [[None; Some A; Some T; Some G; Some A; None; None];
+   [Some B; Some A; Some T; Some V; Some A; Some W; Some G]];}</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 70)" onmouseover="showTip(event, 'fs36', 70)" class="id">localAlignmentNuc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 71)" onmouseover="showTip(event, 'fs23', 71)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 72)" onmouseover="showTip(event, 'fs35', 72)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 73)" onmouseover="showTip(event, 'fs33', 73)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs24', 74)" onmouseover="showTip(event, 'fs24', 74)" class="id">nucSeq1</span> <span onmouseout="hideTip(event, 'fs26', 75)" onmouseover="showTip(event, 'fs26', 75)" class="id">nucSeq2</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>{MetaData = 1;
+ AlignedSequences =
+  [[Some A; Some T; Some G; Some A]; [Some A; Some T; Some V; Some A]];}</code></pre></td></tr></table>
 <p>or also Integers:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 76)" onmouseover="showTip(event, 'fs37', 76)" class="id">intSeq1</span> <span class="o">=</span> <span class="pn">[|</span><span class="n">1</span><span class="pn">;</span><span class="n">2</span><span class="pn">;</span><span class="n">3</span><span class="pn">;</span><span class="n">4</span><span class="pn">;</span><span class="n">5</span><span class="pn">|]</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 77)" onmouseover="showTip(event, 'fs38', 77)" class="id">intSeq2</span> <span class="o">=</span> <span class="pn">[|</span><span class="n">1</span><span class="pn">;</span><span class="n">1</span><span class="pn">;</span><span class="n">2</span><span class="pn">;</span><span class="n">4</span><span class="pn">;</span><span class="n">6</span><span class="pn">;</span><span class="n">7</span><span class="pn">;</span><span class="pn">|]</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="id">globalAlignmentInt</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 79)" onmouseover="showTip(event, 'fs20', 79)" class="m">NeedlemanWunsch</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 80)" onmouseover="showTip(event, 'fs35', 80)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 81)" onmouseover="showTip(event, 'fs33', 81)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs37', 82)" onmouseover="showTip(event, 'fs37', 82)" class="id">intSeq1</span> <span onmouseout="hideTip(event, 'fs38', 83)" onmouseover="showTip(event, 'fs38', 83)" class="id">intSeq2</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 84)" onmouseover="showTip(event, 'fs40', 84)" class="id">localAlignmentInt</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 85)" onmouseover="showTip(event, 'fs23', 85)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 86)" onmouseover="showTip(event, 'fs35', 86)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 87)" onmouseover="showTip(event, 'fs33', 87)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs37', 88)" onmouseover="showTip(event, 'fs37', 88)" class="id">intSeq1</span> <span onmouseout="hideTip(event, 'fs38', 89)" onmouseover="showTip(event, 'fs38', 89)" class="id">intSeq2</span>
 </code></pre></td>
 </tr>
 </table>
-</div>
+<table class="pre"><tr><td><pre><code>{MetaData = -2;
+ AlignedSequences =
+  [[Some 1; None; Some 2; Some 3; Some 4; Some 5; None];
+   [Some 1; Some 1; Some 2; None; Some 4; Some 6; Some 7]];}</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 84)" onmouseover="showTip(event, 'fs40', 84)" class="id">localAlignmentInt</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 85)" onmouseover="showTip(event, 'fs23', 85)" class="m">SmithWaterman</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 86)" onmouseover="showTip(event, 'fs35', 86)" class="id">runGeneric</span> <span onmouseout="hideTip(event, 'fs33', 87)" onmouseover="showTip(event, 'fs33', 87)" class="id">costs</span> <span onmouseout="hideTip(event, 'fs37', 88)" onmouseover="showTip(event, 'fs37', 88)" class="id">intSeq1</span> <span onmouseout="hideTip(event, 'fs38', 89)" onmouseover="showTip(event, 'fs38', 89)" class="id">intSeq2</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>{MetaData = 0;
+ AlignedSequences =
+  [[Some 1; Some 2; Some 3; Some 4]; [Some 1; Some 2; None; Some 4]];}</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.Algorithm</div>
