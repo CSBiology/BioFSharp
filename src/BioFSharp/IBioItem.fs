@@ -6,10 +6,15 @@ open FSharpAux
 ///Marker interface for BioItem base.
 //[<StructuralEquality;StructuralComparison>]
 type IBioItem =    
+    ///Display name of the bio item, e.g. "Alanine"
     abstract member Name     : string
+    ///Symbol of the bio item, e.g. 'A' for alanine
     abstract member Symbol   : char    
+    ///Chemical formula of the bio item represented as Formula
     abstract member Formula  : Formula.Formula    
+    ///Indicator wether the bio item represents a sequence terminator
     abstract member isTerminator : bool         
+    ///Indicator the bio item represents a sequence gap
     abstract member isGap        : bool    
 
 ///Lexer Tags for parsing BioItems
@@ -22,16 +27,16 @@ type NcbiParsingType =
 /// Basic functions on IBioItems interface
 module BioItem = 
 
-    /// Returns then display name of the bio item
+    /// Returns the display name of the bio item
     let inline name (bItem:#IBioItem) =
         bItem.Name
     
-    /// Returns then symbol of the bio item
+    /// Returns the symbol of the bio item
     let inline symbol (bItem:#IBioItem) =
         bItem.Symbol
 
 
-    /// Returns then formula of the bio item
+    /// Returns the formula of the bio item
     let inline formula  (bItem:#IBioItem) =
         bItem.Formula
 

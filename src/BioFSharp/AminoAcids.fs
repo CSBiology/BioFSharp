@@ -8,65 +8,65 @@ module AminoAcids =
     /// Amino acid Codes
     [<StructuralEquality;StructuralComparison>]
     type AminoAcid =
-        /// A  *Alanin
+        /// 'A'  *Alanin
         | Ala        
-        /// C  *Cysteine
+        /// 'C'  *Cysteine
         | Cys
-        /// D  *Aspartic Acid
+        /// 'D'  *Aspartic Acid
         | Asp
-        /// E  *Glutamic Acid
+        /// 'E'  *Glutamic Acid
         | Glu 
-        /// F  *Glutamic Acid
+        /// 'F'  *Glutamic Acid
         | Phe
-        /// G  *Glycine
+        /// 'G'  *Glycine
         | Gly
-        /// H  *Histidine
+        /// 'H'  *Histidine
         | His
-        /// I  *Isoleucine
+        /// 'I'  *Isoleucine
         | Ile
-        /// K  *Lysine
+        /// 'K'  *Lysine
         | Lys
-        /// L  *Leucine
+        /// 'L'  *Leucine
         | Leu
-        /// M  *Methionine
+        /// 'M'  *Methionine
         | Met
-        /// N  *Asparagine
+        /// 'N'  *Asparagine
         | Asn
-        /// O  *Pyrrolysine
+        /// 'O'  *Pyrrolysine
         | Pyl
-        /// P  *Proline
+        /// 'P'  *Proline
         | Pro        
-        /// Q  *Glutamine
+        /// 'Q'  *Glutamine
         | Gln
-        /// R  *Arginine
+        /// 'R'  *Arginine
         | Arg
-        /// S  *Serine
+        /// 'S'  *Serine
         | Ser        
-        /// T  *Threonine
+        /// 'T'  *Threonine
         | Thr
-        /// U  *Selenocysteine
+        /// 'U'  *Selenocysteine
         | Sel
-        /// V  *Valine
+        /// 'V'  *Valine
         | Val
-        /// W  *Tryptophan
+        /// 'W'  *Tryptophan
         | Trp
-        /// Y  *Tyrosine
+        /// 'Y'  *Tyrosine
         | Tyr
 
-        /// X  *Unspecified
+        /// 'X'  *Unspecified
         | Xaa        
-        /// J  *Leucine/Isoleucine
+        /// 'J'  *Leucine/Isoleucine
         | Xle
-        /// Z  *Glutamine/glutamic acid
+        /// 'Z'  *Glutamine/glutamic acid
         | Glx
-        /// B  *Asparagine/aspartic acid
+        /// 'B'  *Asparagine/aspartic acid
         | Asx
 
-        /// -  *Gap 
+        /// '-'  *Gap 
         | Gap
-        /// *  *Termination
+        /// '*'  *Termination
         | Ter
-
+        /// Modified AminoAcid
         | Mod of AminoAcid * ModificationInfo.Modification list
         
 

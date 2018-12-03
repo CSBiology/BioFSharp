@@ -1,6 +1,6 @@
 ﻿namespace BioFSharp
 
-// 
+///Parsing Library for common biological ID formats like Cre(C.reinhardtii) or YeastId
 module BioID =
 
     open System

@@ -8,7 +8,9 @@ module Digestion =
 
     /// p4 p3 p2 p1 || p1' p2'
     type Protease = {
+        ///
         Name : string
+        ///
         Expression : AminoAcid option -> AminoAcid option
                   -> AminoAcid option -> AminoAcid option
                   -> AminoAcid option-> AminoAcid option -> bool    

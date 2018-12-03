@@ -10,81 +10,81 @@ module AminoProperties =
 
     ///Union case of amino acid properties, referencing the according included information in this library. Use "initGetAminoProperty" function to obtain a simple mapping function
     type AminoProperty =
-        // Hydrophobicity index (Argos et al., 1982)
+        /// Hydrophobicity index (Argos et al., 1982)
         | HydrophobicityIndex
-        // Hydrophobicity index (Fasman, 1989)
+        /// Hydrophobicity index (Fasman, 1989)
         | HydrophobicityFasman  
-        // Melting point (Fasman, 1976)
+        /// Melting point (Fasman, 1976)
         | MeltingPointFasman    
-        // Optical rotation (Fasman, 1976)
+        /// Optical rotation (Fasman, 1976)
         | OpticalRotationFasman 
-        // pK-N (Fasman, 1976)
+        /// pK-N (Fasman, 1976)
         | PK_NFasman            
-        // pK-C (Fasman, 1976)
+        /// pK-C (Fasman, 1976)
         | PK_CFasman            
-        // Normalized frequency of beta-sheet (Crawford et al., 1973)
+        /// Normalized frequency of beta-sheet (Crawford et al., 1973)
         | NormalizedBetaSheet 
-        // Normalized frequency of middle helix (Crawford et al., 1973)
+        /// Normalized frequency of middle helix (Crawford et al., 1973)
         | NormalizedHelix     
-        // Normalized frequency of turn (Crawford et al., 1973)
+        /// Normalized frequency of turn (Crawford et al., 1973)
         | NormalizedTurn      
-        // Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
+        /// Helix-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
         | HelixCoil 
-        // Beta-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
+        /// Beta-coil equilibrium constant (Ptitsyn-Finkelstein, 1983)
         | BetaCoil
-        //Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)
+        /// Alpha-helix propensity derived from designed sequences (Koehl-Levitt, 1999)
         | Helicity
-        // Beta-sheet propensity derived from designed sequences (Koehl-Levitt, 1999)
+        /// Beta-sheet propensity derived from designed sequences (Koehl-Levitt, 1999)
         | BetaSheetPropensity
-        // PRIFT index (Cornette et al., 1987)
+        /// PRIFT index (Cornette et al., 1987)
         | Amphiphilicity      
-        // NNEIG index (Cornette et al., 1987)
+        /// NNEIG index (Cornette et al., 1987)
         | NNEIG
-        // SWEIG index (Cornette et al., 1987)
+        /// SWEIG index (Cornette et al., 1987)
         | SWEIG
-        // PRILS index (Cornette et al., 1987)
+        /// PRILS index (Cornette et al., 1987)
         | PRILS
-        // ALTFT index (Cornette et al., 1987)
+        /// ALTFT index (Cornette et al., 1987)
         | ALTFT
-        // ALTLS index (Cornette et al., 1987)
+        /// ALTLS index (Cornette et al., 1987)
         | ALTLS
-        // TOTFT index (Cornette et al., 1987)
+        /// TOTFT index (Cornette et al., 1987)
         | TOTFT
-        // TOTLS index (Cornette et al., 1987)
+        /// TOTLS index (Cornette et al., 1987)
         | TOTLS
-        // pKr (Christen, Jaussi, Benoit 2016)
+        /// pKr (Christen, Jaussi, Benoit 2016)
         | PKr
-        // Activation Gibbs energy of unfolding, pH9.0 (Yutani et al., 1987)
+        /// Activation Gibbs energy of unfolding, pH9.0 (Yutani et al., 1987)
         | ActivationGibbsEnergy9
-        // AA composition of MEM of single-spanning proteins (Nakashima-Nishikawa, 1992)
+        /// AA composition of MEM of single-spanning proteins (Nakashima-Nishikawa, 1992)
         | MEMofSingleSpanning  
-        // Principal component I (Sneath, 1966)
+        /// Principal component I (Sneath, 1966)
         | PrincipalComponentI
-        // Principal component II (Sneath, 1966)
+        /// Principal component II (Sneath, 1966)
         | PrincipalComponentII
-        // Principal component III (Sneath, 1966)
+        /// Principal component III (Sneath, 1966)
         | PrincipalComponentIII
-        // Principal component IV (Sneath, 1966)
+        /// Principal component IV (Sneath, 1966)
         | PrincipalComponentIV
-        // Hydration potential (Wolfenden et al., 1981)
+        /// Hydration potential (Wolfenden et al., 1981)
         | HydrationPotential
-        // Hydrophobicity index (Wolfenden et al., 1979)
+        /// Hydrophobicity index (Wolfenden et al., 1979)
         | HydrophobicityIndex2 
-        // The Chou-Fasman parameter of the coil conformation (Charton-Charton, 1983)
+        /// The Chou-Fasman parameter of the coil conformation (Charton-Charton, 1983)
         | ChouFasmanCoil
-        // Average number of surrounding residues (Ponnuswamy et al., 1980)
+        /// Average number of surrounding residues (Ponnuswamy et al., 1980)
         | AverageNumberSurroundingResidues
-        // Interior composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
+        /// Interior composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)
         | CompositionIntracellular
-        // Composition of amino acids in extracellular proteins (percent) (Cedano et al., 1997)
+        /// Composition of amino acids in extracellular proteins (percent) (Cedano et al., 1997)
         | CompositionExtracellular
-        // Weights for alpha-helix at the window position of -3 (Qian-Sejnowski, 1988)
+        /// Weights for alpha-helix at the window position of -3 (Qian-Sejnowski, 1988)
         | WeightsHelixMinus3
-        // Helix formation parameters (delta delta G) (O'Neil-DeGrado, 1990)
+        /// Helix formation parameters (delta delta G) (O'Neil-DeGrado, 1990)
         | HelixFormationParameters
-        // Free energy in alpha-helical region (Munoz-Serrano, 1994)
+        /// Free energy in alpha-helical region (Munoz-Serrano, 1994)
         | FreeEnergyHelicalRegion
-        // Average relative fractional occurrence in EL(i) (Rackovsky-Scheraga, 1982)
+        /// Average relative fractional occurrence in EL(i) (Rackovsky-Scheraga, 1982)
         | ELi
 
 
@@ -135,7 +135,7 @@ module AminoProperties =
 
 
 
-
+    ///
     let private ofPropteryString propertyName (str:string) = 
         // TODO: validation
         str.Split(' ')
@@ -144,6 +144,7 @@ module AminoProperties =
             | _,Some ac -> ac, float v.[2..] 
             | _ -> failwithf "Error in AminoAcid code at given property: %s" propertyName )
 
+    ///
     let private initAminoPropertyLookUp () =
         let assembly = Assembly.GetExecutingAssembly()
         let resourceName = "BioFSharp.Resources.AminoAcidProperties.txt"

@@ -27,6 +27,6 @@ module FSIPrinters =
                                         |> Seq.fold (fun acc elem -> sprintf "%s %s" acc (elem |> Seq.map printBioItem |> String.concat "")) "" 
                                     sprintf "%s%i %s" ([for x in 1 .. (10 - (string lineIndex).Length) do yield " "] |> String.concat "") lineIndex line )
         |> String.concat "\r\n"
-        |> (fun prnt -> sprintf "\r\n%s" prnt)
+        |> (fun prnt -> sprintf "\r\n%s\r\n" prnt)
 
     

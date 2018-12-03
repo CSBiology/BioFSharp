@@ -12,7 +12,7 @@ module Alignment =
                 ///List of aligned Sequences
                 AlignedSequences    : list<'Sequence>;
                 }
-        
+        ///mapping function for aligned sequences, keeping the associated metadata.
         let mapSequences (mapping: 'Sequence -> 'mSequence) (alignment: Alignment<'Sequence,_>) =       
             {MetaData = alignment.MetaData;
             AlignedSequences = List.map (mapping) alignment.AlignedSequences}

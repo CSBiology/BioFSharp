@@ -13,64 +13,64 @@ module AminoAcidSymbols =
     /// Symbols of all amino acids (including Gap + Term) 
     type AminoAcidSymbol internal(value:byte) =    
         member private this.Value = value
-        /// A  *Alanin
+        /// 'A'  *Alanin
         static member Ala = AminoAcidSymbol (byte 'A')
-        /// C  *Cysteine
+        /// 'C'  *Cysteine
         static member Cys = AminoAcidSymbol (byte 'C')
-        /// D  *Aspartic Acid
+        /// 'D'  *Aspartic Acid
         static member Asp = AminoAcidSymbol (byte 'D')
-        /// E  *Glutamic Acid
+        /// 'E'  *Glutamic Acid
         static member Glu = AminoAcidSymbol (byte 'E')
-        /// F  *Glutamic Acid
+        /// 'F'  *Glutamic Acid
         static member Phe = AminoAcidSymbol (byte 'F')
-        /// G  *Glycine
+        /// 'G'  *Glycine
         static member Gly = AminoAcidSymbol (byte 'G')
-        /// H  *Histidine
+        /// 'H'  *Histidine
         static member His = AminoAcidSymbol (byte 'H')
-        /// I  *Isoleucine
+        /// 'I'  *Isoleucine
         static member Ile = AminoAcidSymbol (byte 'I')
-        /// K  *Lysine
+        /// 'K'  *Lysine
         static member Lys = AminoAcidSymbol (byte 'K')
-        /// L  *Leucine
+        /// 'L'  *Leucine
         static member Leu = AminoAcidSymbol (byte 'L')
-        /// M  *Methionine
+        /// 'M'  *Methionine
         static member Met = AminoAcidSymbol (byte 'M')
-        /// N  *Asparagine
+        /// 'N'  *Asparagine
         static member Asn = AminoAcidSymbol (byte 'N')
-        /// P  *Proline
+        /// 'P'  *Proline
         static member Pro = AminoAcidSymbol (byte 'P')
-        /// Q  *Glutamine
+        /// 'Q'  *Glutamine
         static member Gln = AminoAcidSymbol (byte 'Q')
-        /// R  *Arginine
+        /// 'R'  *Arginine
         static member Arg = AminoAcidSymbol (byte 'R')
-        /// S  *Serine
+        /// 'S'  *Serine
         static member Ser = AminoAcidSymbol (byte 'S')
-        /// T  *Threonine
+        /// 'T'  *Threonine
         static member Thr = AminoAcidSymbol (byte 'T')
-        /// V  *Valine
+        /// 'V'  *Valine
         static member Val = AminoAcidSymbol (byte 'V')
-        /// W  *Tryptophan
+        /// 'W'  *Tryptophan
         static member Trp = AminoAcidSymbol (byte 'W')
-        /// Y  *Tyrosine
+        /// 'Y'  *Tyrosine
         static member Tyr = AminoAcidSymbol (byte 'Y')
     
-        /// O  *Pyrrolysine   
+        /// 'O'  *Pyrrolysine   
         static member Pyl = AminoAcidSymbol (byte 'O')
-        /// U  *Selenocysteine
+        /// 'U'  *Selenocysteine
         static member Sel = AminoAcidSymbol (byte 'U')
                                                
-        /// X  *Unspecified
+        /// 'X'  *Unspecified
         static member Xaa = AminoAcidSymbol (byte 'X')
-        /// J  *Leucine/Isoleucine
+        /// 'J'  *Leucine/Isoleucine
         static member Xle = AminoAcidSymbol (byte 'J')
-        /// Z  *Glutamine/glutamic acid
+        /// 'Z'  *Glutamine/glutamic acid
         static member Glx = AminoAcidSymbol (byte 'Z')
-        /// B  *Asparagine/aspartic acid
+        /// 'B'  *Asparagine/aspartic acid
         static member Asx = AminoAcidSymbol (byte 'B')
                                            
-        /// -  *Gap 
+        /// '-'  *Gap 
         static member Gap = AminoAcidSymbol (byte '-')
-        /// *  *Termination
+        /// '*'  *Termination
         static member Ter = AminoAcidSymbol (byte '*')
 
         static member op_Explicit (value) = AminoAcidSymbol(byte value)
@@ -183,6 +183,7 @@ module AminoAcidSymbols =
     /// Maps input to AminoAcidSymbol if possible
     let inline aminoAcidSymbol a = AminoAcidSymbol.op_Explicit(int a)
 
+    ///Returns the corresponding AminoAcidSymbol for the input character
     let inline parseChar (c:char) =
         match System.Char.ToUpper c with                                    
         | 'A' ->  NcbiParsingType.StandardCodes, Some AminoAcidSymbol.Ala            
