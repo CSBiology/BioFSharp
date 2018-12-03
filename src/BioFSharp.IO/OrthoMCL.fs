@@ -35,7 +35,7 @@ module OrthoMCL =
     let no_Orthomcl_group = "NO_GROUP"
 
     let readOrthoMCL filePath =
-        let csvReader = SchemaReader.Csv.CsvReader<OrthoMCL>(schemaMode=SchemaReader.Csv.Exact)
+        let csvReader = SchemaReader.Csv.CsvReader<OrthoMCL>(SchemaMode=SchemaReader.Csv.Exact)
         csvReader.ReadFile(filePath,'\t',false)
 
 

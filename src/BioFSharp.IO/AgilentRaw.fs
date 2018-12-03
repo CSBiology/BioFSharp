@@ -31,7 +31,7 @@ module AgilentRaw =
 
 
     let readGalProbeDescription separator (hasHeader:bool) path = 
-        let reader = new CsvReader<GalProbeDescription>(schemaMode=SchemaMode.Fill)
+        let reader = new CsvReader<GalProbeDescription>(SchemaMode=Csv.Fill)
         reader.ReadFile(path, separator, hasHeader) |> Seq.toList
 
     let galProbeDescriptiontoMapping (input: GalProbeDescription seq) =
@@ -154,8 +154,8 @@ module AgilentRaw =
 
     /// Reads agilent raw data from file
     let readAgilentDataRaw path =    
-        let reader = new CsvReader<AgilentDataRaw>(schemaMode = SchemaMode.Fill)
-        reader.ReadFile(path, '\t', true,skipLinesBeforeHeader = 9)
+        let reader = new CsvReader<AgilentDataRaw>(SchemaMode = Csv.Fill)
+        reader.ReadFile(path, '\t', true,SkipLinesBeforeHeader = 9)
 
     
 

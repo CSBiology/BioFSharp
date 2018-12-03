@@ -309,6 +309,6 @@ module BlastNCBI =
 
     let readCustomBlastResult (cAttributes:seq<OutputCustom>) separator filePath =
         let lineHasHeader = cAttributes |> Seq.map stringOfOutputCustom |> String.concat (separator.ToString())
-        let csvReader = SchemaReader.Csv.CsvReader<CBlastResult>(schemaMode=SchemaReader.Csv.Fill)
+        let csvReader = SchemaReader.Csv.CsvReader<CBlastResult>(SchemaMode=SchemaReader.Csv.Fill)
         csvReader.ReadFile(filePath,separator,lineHasHeader)
 
