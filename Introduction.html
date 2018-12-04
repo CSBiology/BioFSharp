@@ -36,15 +36,17 @@
 			<div class="span9" id="main">
 			  
 <h1><a name="Introduction" class="anchor" href="#Introduction">Introduction</a></h1>
-<p>After you have downloaded and set up BioFSharp (as described <a href="index.html#Setting-up-BioFSharp">here</a>), it is time to see it in action. Since we are programmers, let's say 'Hello World' !</p>
+<p>After you have downloaded and set up BioFSharp (as described <a href="index.html#Installation">here</a>), it is time to see it in action. Since we are programmers, let's say 'Hello World' !</p>
 <p>The focus of this brief tutorial lies on introducing you to the BioFSharp workflow. We will build a protein from a raw string and look at some of it's properties.
 Detailed information about the functions used can be either found in the specific tutorials in the sidebar or the API reference.</p>
 <p>First, we reference and open BioFSharp.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
+<span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span><span class="s">&quot;BioFSharp.dll&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Your path may differ</span>
+<span class="pp">#r</span><span class="s">&quot;BioFSharp.dll&quot;</span>
 
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">BioFSharp</span>
 </code></pre></td>
@@ -60,7 +62,7 @@ Detailed information about the functions used can be either found in the specifi
 </code></pre></td>
 </tr>
 </table>
-<p>BioFSharp comes with various data structures for biological objects such as aminoacids. As you most likely know, you can abbreviate a
+<p>BioFSharp comes with various data structures for biological objects such as amino acids. As you most likely know, you can abbreviate a
 sequence of aminoacids with a three or oneletter code for each single aminoacid. We can convert a character to an aminoacid by using the
 <code>charToOptionAminoAcid</code> function from the <code>BioItemsConverter</code> library. This will return us an option type, being either an aminoacid or <code>None</code>
 if the caracter is not coding for an aminoacid.</p>
@@ -68,20 +70,102 @@ if the caracter is not coding for an aminoacid.</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="id">BioItemsConverter</span>
 
 <span class="c">///valid character </span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="id">valid</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="m">OptionConverter</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">charToOptionAminoAcid</span> <span class="s">&#39;A&#39;</span>
-<span class="c">///invalid character</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>Some Ala</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///invalid character</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">invalid</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="m">OptionConverter</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="id">charToOptionAminoAcid</span> <span class="s">&#39;?&#39;</span>
 </code></pre></td>
 </tr>
 </table>
+<pre>None<\pre>
 <p>Which results in 'A' being recognized as <code>Some Ala</code> and '?' as <code>None</code>.</p>
-<p>To parse our entire string, we can use any of the BioCollections' <code>ofAminoAcidString</code> functions. For more information about BioSeq, BioList and BioArray go <a href="Biosequences.html">here</a></p>
+<p>To parse our entire string, we can use any of the BioCollections' <code>ofAminoAcidString</code> functions, which use this converter internally. For more information about BioSeq, BioList and BioArray go <a href="BioCollections.html">here</a></p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Protein represented as a Bioseq</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">parsedProtein1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 12)" onmouseover="showTip(event, 'fs2', 12)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="id">ofAminoAcidString</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>seq [His; Glu; Leu; Leu; ...]</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Protein represented as a BioList</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">parsedProtein2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 16)" onmouseover="showTip(event, 'fs2', 16)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="m">BioList</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">ofAminoAcidString</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>[His; Glu; Leu; Leu; Pyl; Trp; Pyl; Arg; Leu; Asp]</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Protein represented as a BioArray</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="id">parsedProtein3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 20)" onmouseover="showTip(event, 'fs2', 20)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="id">ofAminoAcidString</span> 
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>[|His; Glu; Leu; Leu; Pyl; Trp; Pyl; Arg; Leu; Asp|]</code></pre></td></tr></table>
+<p>This yields us our Hello World protein. note that the '!' from the raw string is not contained in the sequence as it is not coding for an aminoacid.</p>
+<h1><a name="Pretty-Printing" class="anchor" href="#Pretty-Printing">Pretty Printing</a></h1>
+<p>Especially when working with longer sequences or multiple sequences, it can be beneficial to overwrite the default printing of biological datastructures.
+BioFSharp comes with a pretty printer for all BioCollections:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="id">largerSequence</span> <span class="o">=</span> 
+    <span class="s">&quot;&quot;&quot;MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
+<span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
+<span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT</span>
+<span class="s">    MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
+<span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
+<span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT</span>
+<span class="s">    MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
+<span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
+<span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT&quot;&quot;&quot;</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="id">ofAminoAcidString</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>[|Met; Ala; Ser; Ser; Met; Leu; Ser; Ser; Ala; Thr; Met; Val; Ala; Ser; Pro; Ala;
+  Gln; Ala; Thr; Met; Val; Ala; Pro; Phe; Asn; Gly; Leu; Lys; Ser; Ser; Ala; Ala;
+  Phe; Pro; Ala; Thr; Arg; Lys; Ala; Asn; Asn; Asp; Ile; Thr; Ser; Ile; Thr; Ser;
+  Asn; Gly; Gly; Arg; Val; Asn; Cys; Met; Gln; Val; Trp; Pro; Pro; Ile; Gly; Lys;
+  Lys; Lys; Phe; Glu; Thr; Leu; Ser; Tyr; Leu; Pro; Asp; Leu; Thr; Asp; Ser; Glu;
+  Leu; Ala; Lys; Glu; Val; Asp; Tyr; Leu; Ile; Arg; Asn; Lys; Trp; Ile; Pro; Cys;
+  Val; Glu; Phe; Glu; ...|]</code></pre></td></tr></table>
+<p>As you can see here, using the standard printing you are only able to see the first 100 amino acids in this sequence.
+Now lets take a look on the output when we use the pretty printer:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 26)" onmouseover="showTip(event, 'fs1', 26)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="id">FSIPrinters</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">prettyPrintBioCollection</span><span class="pn">)</span>
+</code></pre></td>
+</tr>
+</table>
+<pre>
+val it : BioArray.BioArray<AminoAcids.AminoAcid> =
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -90,19 +174,21 @@ if the caracter is not coding for an aminoacid.</p>
 <span class="l">6: </span>
 <span class="l">7: </span>
 <span class="l">8: </span>
+<span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Protein represented as a Bioseq</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">parsedProtein1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 12)" onmouseover="showTip(event, 'fs2', 12)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="id">ofAminoAcidString</span> 
-
-<span class="c">///Protein represented as a BioList</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">parsedProtein2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 16)" onmouseover="showTip(event, 'fs2', 16)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="m">BioList</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">ofAminoAcidString</span> 
-
-<span class="c">///Protein represented as a BioArray</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="id">parsedProtein3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 20)" onmouseover="showTip(event, 'fs2', 20)" class="id">rawString</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="id">ofAminoAcidString</span> 
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">     <span class="n">1</span>  <span class="id">MASSMLSSAT</span> <span class="id">MVASPAQATM</span> <span class="id">VAPFNGLKSS</span> <span class="id">AAFPATRKAN</span> <span class="id">NDITSITSNG</span> <span class="id">GRVNCMQVWP</span>
+    <span class="n">61</span>  <span class="id">PIGKKKFETL</span> <span class="id">SYLPDLTDSE</span> <span class="id">LAKEVDYLIR</span> <span class="id">NKWIPCVEFE</span> <span class="id">LEHGFVYREH</span> <span class="id">GNSPGYYDGR</span>
+   <span class="n">121</span>  <span class="id">YWTMWKLPLF</span> <span class="id">GCTDSAQVLK</span> <span class="id">EVEECKKEYP</span> <span class="id">NAFIRIIGFD</span> <span class="id">NTRQVQCISF</span> <span class="id">IAYKPPSFTM</span>
+   <span class="n">181</span>  <span class="id">ASSMLSSATM</span> <span class="id">VASPAQATMV</span> <span class="id">APFNGLKSSA</span> <span class="id">AFPATRKANN</span> <span class="id">DITSITSNGG</span> <span class="id">RVNCMQVWPP</span>
+   <span class="n">241</span>  <span class="id">IGKKKFETLS</span> <span class="id">YLPDLTDSEL</span> <span class="id">AKEVDYLIRN</span> <span class="id">KWIPCVEFEL</span> <span class="id">EHGFVYREHG</span> <span class="id">NSPGYYDGRY</span>
+   <span class="n">301</span>  <span class="id">WTMWKLPLFG</span> <span class="id">CTDSAQVLKE</span> <span class="id">VEECKKEYPN</span> <span class="id">AFIRIIGFDN</span> <span class="id">TRQVQCISFI</span> <span class="id">AYKPPSFTMA</span>
+   <span class="n">361</span>  <span class="id">SSMLSSATMV</span> <span class="id">ASPAQATMVA</span> <span class="id">PFNGLKSSAA</span> <span class="id">FPATRKANND</span> <span class="id">ITSITSNGGR</span> <span class="id">VNCMQVWPPI</span>
+   <span class="n">421</span>  <span class="id">GKKKFETLSY</span> <span class="id">LPDLTDSELA</span> <span class="id">KEVDYLIRNK</span> <span class="id">WIPCVEFELE</span> <span class="id">HGFVYREHGN</span> <span class="id">SPGYYDGRYW</span>
+   <span class="n">481</span>  <span class="id">TMWKLPLFGC</span> <span class="id">TDSAQVLKEV</span> <span class="id">EECKKEYPNA</span> <span class="id">FIRIIGFDNT</span> <span class="id">RQVQCISFIA</span> <span class="id">YKPPSFT</span>
 </code></pre></td>
 </tr>
 </table>
-<p>This yields us our Hello World protein. note that the '!' from the raw string is not contained in the sequence as it is not coding for an aminoacid.</p>
+</pre>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">val rawString : string<br /><em><br /><br />string form of our hello world protein</em></div>
@@ -120,6 +206,9 @@ if the caracter is not coding for an aminoacid.</p>
 <div class="tip" id="fs14">val parsedProtein3 : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;<br /><em><br /><br />Protein represented as a BioArray</em></div>
 <div class="tip" id="fs15">module BioArray<br /><br />from BioFSharp</div>
 <div class="tip" id="fs16">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs17">val largerSequence : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs18">module FSIPrinters<br /><br />from BioFSharp</div>
+<div class="tip" id="fs19">val prettyPrintBioCollection : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
 
 			</div>
 			<div class="span3" >
