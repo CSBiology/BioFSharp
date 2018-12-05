@@ -41,10 +41,10 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
 </td>
 </table>
-BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
-It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
+<p>BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
+It is able to create BLAST databases and perform <strong>blastN</strong> or <strong>blastP</strong> queries, while providing a way to set
 output parameter for creating a custom output format.
-Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690).
+Official documentation for all BLAST applications can be found <a href="http://www.ncbi.nlm.nih.gov/books/NBK279690">here</a>.</p>
 <p>For the purpose of this tutorial, we will build a protein database using a <code>.fastA</code> file containing chloroplast proteins
 of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data.</p>
 <p>Our query protein for the subsequent BLAST search will be the <a href="http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta">photosystem II protein D1</a> from Arabidopsis thaliana chloroplast.</p>
@@ -95,6 +95,26 @@ for every other parameter.</p>
 </code></pre></td>
 </tr>
 </table>
+<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Show/Hide console output</button>
+<div id="console1" class="collapse console1">
+<pre>
+|Starting Makeblastdb...
+|
+|
+|Building a new DB, current time: 12/05/2018 09:02:20
+|New DB name:   C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|New DB title:  C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|Sequence type: Protein
+|Deleted existing Protein BLAST database named C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|Keep Linkouts: T
+|Keep MBits: T
+|Maximum file size: 1000000000B
+|Adding sequences from FASTA; added 74 sequences in 0.0107442 seconds.
+|Makeblastdb done.
+</pre
+<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Hide again</button>  
+</div>
+<br>
 <p>This creates 3 new files in our directory:
 <code>Chlamy_Cp.fastA.phr</code>,<code>Chlamy_Cp.fastA.pin</code> and <code>Chlamy_Cp.fastA.psq</code>.</p>
 <p>We have sucesssfully created our search database.</p>
@@ -240,6 +260,28 @@ done otherwise</em></p>
 </code></pre></td>
 </tr>
 </table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">As</span> <span class="id">you</span> <span class="id">can</span> <span class="id">see</span> <span class="k">in</span> <span class="id">the</span> <span class="id">result</span> <span class="id">file</span><span class="pn">,</span> <span class="id">the</span> <span class="id">format</span> <span class="id">is</span> <span class="id">tab</span> <span class="id">separated</span> <span class="k">and</span> <span class="id">contains</span> <span class="id">the</span> <span class="id">fields</span> <span class="id">we</span> <span class="id">specified</span> <span class="k">in</span> <span class="id">our</span> <span class="id">our</span> <span class="k">`</span><span class="id">customOutputFormat</span><span class="k">`</span><span class="pn">.</span>
+</code></pre></td>
+</tr>
+</table>
+<pre>
+|# BLASTP 2.2.31+
+|# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+|# Database: C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+|# 8 hits found
+|>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+|>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+|>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+|>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+|>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+|>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+|# BLAST processed 1 queries
+</pre>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
