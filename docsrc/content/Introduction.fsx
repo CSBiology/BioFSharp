@@ -52,9 +52,13 @@ let valid = OptionConverter.charToOptionAminoAcid 'A'
 (*** include-value:valid ***)
 ///invalid character
 let invalid = OptionConverter.charToOptionAminoAcid '?'
+
 (**
-<pre>None<\pre>
+<pre>
+ None
+</pre
 *)
+
 (**
 Which results in 'A' being recognized as `Some Ala` and '?' as `None`.
 

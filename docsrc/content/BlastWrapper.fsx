@@ -17,6 +17,7 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
 </td>
 </table>
+
 BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
 It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
 output parameter for creating a custom output format.
@@ -63,6 +64,29 @@ We now provide the wrapper our ncbi path, the input path and a sequence of param
 *)
 (*** do-not-eval ***)
 BlastWrapper(ncbiPath).makeblastdb inputFile ([typeOfDatabase;] |> seq<Parameters.MakeDbParams>)
+
+(**
+<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Show/Hide console output</button>
+<div id="console1" class="collapse console1">
+<pre>
+|Starting Makeblastdb...
+|
+|
+|Building a new DB, current time: 12/05/2018 09:02:20
+|New DB name:   C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|New DB title:  C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|Sequence type: Protein
+|Deleted existing Protein BLAST database named C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|Keep Linkouts: T
+|Keep MBits: T
+|Maximum file size: 1000000000B
+|Adding sequences from FASTA; added 74 sequences in 0.0107442 seconds.
+|Makeblastdb done.
+</pre
+<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Hide again</button>  
+</div>
+<br>
+*)
 
 (**
 This creates 3 new files in our directory:
@@ -177,6 +201,30 @@ let outputPath = (__SOURCE_DIRECTORY__ + "/data/Output.txt")
 
 (*** do-not-eval ***)
 BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
+
+(**
+    As you can see in the result file, the format is tab separated and contains the fields we specified in our our `customOutputFormat`.
+*)
+
+(**
+<pre>
+|# BLASTP 2.2.31+
+|# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+|# Database: C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+|# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+|# 8 hits found
+|>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
+|>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
+|>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
+|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
+|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
+|>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
+|>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
+|>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
+|# BLAST processed 1 queries
+</pre>
+*)
+
 
 
 

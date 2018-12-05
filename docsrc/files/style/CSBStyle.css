@@ -26,6 +26,28 @@ table.pre::-webkit-scrollbar-thumb
 	background-color: #80b0b0;
 }
 
+pre {
+    border: hidden;
+    overflow-x: auto;
+}
+
+pre::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    background-color: #212d30;
+}
+
+pre::-webkit-scrollbar {
+    height: 8px;
+    background-color: #212d30;
+    border-radius: 5px
+}
+
+pre::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #80b0b0;
+}
 #main
 {
 	text-align:justify;
