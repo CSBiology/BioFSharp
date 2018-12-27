@@ -43,8 +43,29 @@ The core datamodel implements in ascending hierarchical order:
 Installation
 ------------
 
-BioFSharp is currently on the way to its 1.0.0 release. When this process is done, we will provide a nuget package. However, currently the only way to get BioFSharp running on 
-your machine is to clone the repository and build the binaries yourself.
+BioFSharp is currently on the way to its 1.0.0 release. When this process is done, we will provide a nuget package at [nuget.org](https://www.nuget.org/). However, currently the way to get BioFSharp running on 
+your machine is to either clone the repository and build the binaries yourself or download the prerelease packages from our [nuget branch](https://github.com/CSBiology/BioFSharp/tree/nuget).
+
+**Using prerelease packages from the nuget branch:**
+
+If you are using paket, add the following line to you `paket.dependencies` file:
+
+`git https://github.com/CSBiology/BioFSharp.git nuget Packages: /`
+
+you can then access the individual packages:
+
+`nuget BioFSharp`
+
+`nuget BioFSharp.IO`
+
+`nuget BioFSharp.Stats`
+
+`nuget BioFSharp.BioDB`
+
+`nuget BioFSharp.Vis`
+
+
+**To build the binaries yourself:**
 
 **Windows**:
 
@@ -53,7 +74,7 @@ your machine is to clone the repository and build the binaries yourself.
 - go to the project folder
 - use the console command `fake build`
 
-**Linux(Ubuntu)**:
+**Linux(Ubuntu, using Mono)**:
 
 - Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
 - go to the project folder
