@@ -50,8 +50,18 @@ It provides a variety of parsers for many biological file formats and a variety 
 </br>
 <hr />
 <h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
-<p>BioFSharp is currently on the way to its 1.0.0 release. When this process is done, we will provide a nuget package. However, currently the only way to get BioFSharp running on
-your machine is to clone the repository and build the binaries yourself.</p>
+<p>BioFSharp is currently on the way to its 1.0.0 release. When this process is done, we will provide a nuget package at <a href="https://www.nuget.org/">nuget.org</a>. However, currently the way to get BioFSharp running on
+your machine is to either clone the repository and build the binaries yourself or download the prerelease packages from our <a href="https://github.com/CSBiology/BioFSharp/tree/nuget">nuget branch</a>.</p>
+<p><strong>Using prerelease packages from the nuget branch:</strong></p>
+<p>If you are using paket, add the following line to you <code>paket.dependencies</code> file:</p>
+<p><code>git https://github.com/CSBiology/BioFSharp.git nuget Packages: /</code></p>
+<p>you can then access the individual packages:</p>
+<p><code>nuget BioFSharp</code></p>
+<p><code>nuget BioFSharp.IO</code></p>
+<p><code>nuget BioFSharp.Stats</code></p>
+<p><code>nuget BioFSharp.BioDB</code></p>
+<p><code>nuget BioFSharp.Vis</code></p>
+<p><strong>To build the binaries yourself:</strong></p>
 <p><strong>Windows</strong>:</p>
 <ul>
 <li>Install <a href="https://www.microsoft.com/net/download">.Net Core SDK</a></li>
@@ -59,7 +69,7 @@ your machine is to clone the repository and build the binaries yourself.</p>
 <li>go to the project folder</li>
 <li>use the console command <code>fake build</code></li>
 </ul>
-<p><strong>Linux(Ubuntu)</strong>:</p>
+<p><strong>Linux(Ubuntu, using Mono)</strong>:</p>
 <ul>
 <li>Install <a href="https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current">.Net Core SDK</a></li>
 <li>go to the project folder</li>

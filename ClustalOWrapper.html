@@ -60,16 +60,18 @@ For some more indepth information about which parameters to choose for your goal
 </table>
 <p>The general structure of arguments the wrapper takes was kept the same as in the command line tool. In general, you need an <code>inputPath</code>, an <code>outputPath</code> and <code>parameters</code>. As there are several inputs possible, you have to choose what it is. As we want to align a normal sequence we just pick <code>SequenceFile</code>.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">inputPath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="rt">Input</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">SequenceFile</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;file.fasta&quot;</span><span class="pn">)</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">outputPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;file.aln&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">inputPath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="rt">Input</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">SequenceFile</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\Chlamy_Cp.fastA&quot;</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
-<p>As additional parameters go, we'll restrict input to FastA format and the output to Clustal format. Also we will use the <code>Force</code> parameter to force the overwrite of a possilby already existing file with the name <code>file.aln</code>. For a complete overview of implemented parameters, check out the <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustalowrapper-parameters.html">API reference</a>.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">outputPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\Chlamy_Cp.aln&quot;</span>
+</code></pre></td>
+</tr>
+</table>
+<p>As additional parameters go, we'll restrict input to FastA format and the output to Clustal format. Also we will use the <code>Force</code> parameter to force the overwrite of a possilby already existing file with the name <code>ChlamyCp.aln</code>. For a complete overview of implemented parameters, check out the <a href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustalowrapper-parameters.html">API reference</a>.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
