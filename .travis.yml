@@ -16,4 +16,4 @@ script:
 branches:
   except:
     - gh-pages
-    
+    - nuget

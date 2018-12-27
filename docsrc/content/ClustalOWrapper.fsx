@@ -36,12 +36,12 @@ The general structure of arguments the wrapper takes was kept the same as in the
 *)
 
 
-let inputPath = Input.SequenceFile (__SOURCE_DIRECTORY__ + "file.fasta")
-
-let outputPath = __SOURCE_DIRECTORY__ + "file.aln"
+let inputPath = Input.SequenceFile (__SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.fastA")
+(***do-not-eval***)
+let outputPath = __SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.aln"
 
 (**
-As additional parameters go, we'll restrict input to FastA format and the output to Clustal format. Also we will use the `Force` parameter to force the overwrite of a possilby already existing file with the name `file.aln`. For a complete overview of implemented parameters, check out the [API reference](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustalowrapper-parameters.html).
+As additional parameters go, we'll restrict input to FastA format and the output to Clustal format. Also we will use the `Force` parameter to force the overwrite of a possilby already existing file with the name `ChlamyCp.aln`. For a complete overview of implemented parameters, check out the [API reference](https://csbiology.github.io/BioFSharp/reference/biofsharp-io-clustalowrapper-parameters.html).
 *)
 //Input has to be in FastA format
 let inputModifier = Parameters.ClustalParams.Input [Parameters.InputCustom.Format Parameters.FileFormat.FastA]

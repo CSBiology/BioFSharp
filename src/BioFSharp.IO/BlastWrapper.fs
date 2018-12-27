@@ -230,7 +230,7 @@ module BlastNCBI =
                 |> Process.Start
             p.WaitForExit()
             printfn "%s done." name
-            printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
+            printfn "Elapsed time: %A" (DateTime.UtcNow.Subtract(beginTime))
 
         ///Creates a BLAST databse from given source/s
         member this.makeblastdb searchDB (ps:seq<Parameters.MakeDbParams>) = 

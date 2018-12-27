@@ -27,13 +27,9 @@ Analogous to the build-in collections BioFSharp provides BioSeq, BioList and Bio
 *)
 
 
-(***define-output:testPrint***)
 let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
 let s2 = "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
 let s3 = "TAGCAT" |> BioArray.ofNucleotideString 
-
-(** TestPrint: *)
-(***include-output:testPrint***)
 
 (***do-not-eval***)
 ///Peptide represented as a Bioseq

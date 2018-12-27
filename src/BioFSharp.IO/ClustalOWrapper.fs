@@ -286,7 +286,7 @@ module ClustalOWrapper =
                 if File.Exists r then r
                 else failwith "clustalo file could not be found for given rootPath"
             | None -> 
-                let defaultPath = __SOURCE_DIRECTORY__ |> String.replace "src\BioFSharp.IO" @"lib\clustalomega'\clustalo.exe"
+                let defaultPath = __SOURCE_DIRECTORY__ |> String.replace "src\BioFSharp.IO" @"lib\clustal-omega\clustalo.exe"
                 printfn "try %s" defaultPath
                 if File.Exists defaultPath then defaultPath
                 else failwith "Default clustalo file could not be found, define rootPath argument."
@@ -301,7 +301,7 @@ module ClustalOWrapper =
                 |> Process.Start
             p.WaitForExit()
             printfn "%s done." name
-            printfn "Elapsed time: %A" (beginTime.Subtract(DateTime.UtcNow))
+            printfn "Elapsed time: %A" (DateTime.UtcNow.Subtract(beginTime))
         //#endif
         ///Runs clustalo tool with given input file paths and parameters and creates output file for given path
         member this.AlignFromFile((inputPath:Input),(outputPath:string),(parameters:seq<Parameters.ClustalParams>),(?name:string)) = 
