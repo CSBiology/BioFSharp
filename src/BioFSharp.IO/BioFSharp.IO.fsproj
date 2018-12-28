@@ -30,6 +30,7 @@
     <Compile Include="ClustalOWrapper.fs" />
     <Compile Include="SOFT.fs" />
     <Compile Include="WorkflowLanguage.fs" />
+    <Compile Include="FSIPrinters.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

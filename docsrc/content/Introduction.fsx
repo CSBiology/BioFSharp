@@ -9,7 +9,7 @@
 #I @"../../bin/BioFSharp.Stats/net47/"
 #I @"../../bin/BioFSharp.Vis/net47/"
 #r @"../../lib/Formatting/FSharp.Plotly.dll"
-
+#r "BioFSharp.IO"
 (**
 Introduction
 ============
@@ -108,7 +108,7 @@ As you can see here, using the standard printing you are only able to see the fi
 Now lets take a look on the output when we use the pretty printer:
 *)
 
-open BioFSharp.FSIPrinters
+open BioFSharp.IO.FSIPrinters
 fsi.AddPrinter(prettyPrintBioCollection)
 
 (**

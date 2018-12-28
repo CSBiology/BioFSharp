@@ -15,6 +15,107 @@
 #r "FSharpAux.dll"
 #r "FSharpAux.IO.dll"
 
+let formatExample = """
+CLUSTAL O(1.2.4) multiple sequence alignment
+
+
+
+
+
+C_reinhardtii      MVPQTETKAGAGFKAGVKDYRLTYYTPDYVVRDTDILAAFRMTPQLGVPPEECGAAVAAE
+
+N_tabacum          MSPQTETKASVGFKAGVKEYKLTYYTPEYQTKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+
+A_thaliana         MSPQTETKASVGFKAGVKEYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+
+O_sativa           MSPQTETKASVGFKAGVKDYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+
+                   * *******..*******:*:******:* .:*********:*** ******.*******
+
+
+
+C_reinhardtii      SSTGTWTTVWTDGLTSLDRYKGRCYDIEPVPGEDNQYIAYVAYPIDLFEEGSVTNMFTSI
+
+N_tabacum          SSTGTWTTVWTDGLTSLDRYKGRCYRIERVVGEKDQYIAYVAYPLDLFEEGSVTNMFTSI
+
+A_thaliana         SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVPGEETQFIAYVAYPLDLFEEGSVTNMFTSI
+
+O_sativa           SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVVGEDNQYIAYVAYPLDLFEEGSVTNMFTSI
+
+                   ************************* ** * **. *:*******:***************
+
+
+
+C_reinhardtii      VGNVFGFKALRALRLEDLRIPPAYVKTFVGPPHGIQVERDKLNKYGRGLLGCTIKPKLGL
+
+N_tabacum          VGNVFGFKALRALRLEDLRIPPAYVKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+
+A_thaliana         VGNVFGFKALAALRLEDLRIPPAYTKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+
+O_sativa           VGNVFGFKALRALRLEDLRIPPTYSKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+
+                   ********** ***********:* *** ****************** ************
+
+
+
+C_reinhardtii      SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFVAEAIYKAQAETGEVKGHYL
+
+N_tabacum          SAKNYGRAVYECLRGGLDFTKDDENVNSQPF-RWRDRFLFCAEALYKAQAETGEIKGHYL
+
+A_thaliana         SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFCAEAIYKSQAETGEIKGHYL
+
+O_sativa           SAKNYGRACYECLRGGLDFTKDDENVNSQPFMRWRDRFVFCAEAIYKSQAETGEIKGHYL
+
+                   ******** ********************** ******:* ***:**:******:*****
+
+
+
+C_reinhardtii      NATAGTCEEMMKRAVCAKELGVPIIMHDYLTGGFTANTSLAIYCRDNGLLLHIHRAMHAV
+
+N_tabacum          NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV
+
+A_thaliana         NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLSHYCRDNGLLLHIHRAMHAV
+
+O_sativa           NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV
+
+                   **********:**** *:******:***************: ******************
+
+
+
+C_reinhardtii      IDRQRNHGIHFRVLAKALRMSGGDHLHSGTVVGKLEGEREVTLGFVDLMRDDYVEKDRSR
+
+N_tabacum          IDRQKNHGIHFRVLAKALRMSGGDHIHSGTVVGKLEGERDITLGFVDLLRDDFVEQDRSR
+
+A_thaliana         IDRQKNHGMHFRVLAKALRLSGGDHIHAGTVVGKLEGDRESTLGFVDLLRDDYVEKDRSR
+
+O_sativa           IDRQKNHGMHFRVLAKALRMSGGDHIHAGTVVGKLEGEREMTLGFVDLLRDDFIEKDRAR
+
+                   ****:***:**********:*****:*:*********:*: *******:***::*:**:*
+
+
+
+C_reinhardtii      GIYFTQDWCSMPGVMPVASGGIHVWHMPALVEIFGDDACLQFGGGTLGHPWGNAPGAAAN
+
+N_tabacum          GIYFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN
+
+A_thaliana         GIFFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN
+
+O_sativa           GIFFTQDWVSMPGVIPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAAAN
+
+                   **:***** *:***:***************.******: ******************.**
+
+
+
+C_reinhardtii      RVALEACTQARNEGRDLAREGGDVIRSACKWSPELAAACEVWKEIKFEFDTIDKL----
+
+N_tabacum          RVALEACVKARNEGRDLAQEGNEIIREACKWSPELAAACEVWKEIVFNFAAVDVLDK--
+
+A_thaliana         RVALEACVQARNEGRDLAVEGNEIIREACKWSPELAAACEVWKEITFNFPTIDKLDGQE
+
+O_sativa           RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
+
+                   *******.:********* **.::**.*************:** * *:*  :* *    
+"""
 (**
 <table class="HeadAPI">
 <td class="Head"><h1>Clustal format</h1></td>
@@ -39,58 +140,12 @@ As an example, the peptide sequences of the large chain subunit of RuBisCO of di
 <br>
 <button type="button" class="btn" data-toggle="collapse" data-target="#clustalExample">Show/Hide example</button>
 <div id="clustalExample" class="collapse clustalExample ">
-<pre>
-CLUSTAL O(1.2.4) multiple sequence alignment<br>
-<br>
-<br>
-C\_reinhardtii      MVPQTETKAGAGFKAGVKDYRLTYYTPDYVVRDTDILAAFRMTPQLGVPPEECGAAVAAE<br>
-N\_tabacum          MSPQTETKASVGFKAGVKEYKLTYYTPEYQTKDTDILAAFRVTPQPGVPPEEAGAAVAAE<br>
-A\_thaliana         MSPQTETKASVGFKAGVKEYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE<br>
-O\_sativa           MSPQTETKASVGFKAGVKDYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE<br>
-                    \* \*\*\*\*\*\*\*..\*\*\*\*\*\*\*:\*:\*\*\*\*\*\*:\* .:\*\*\*\*\*\*\*\*\*:\*\*\* \*\*\*\*\*\*.\*\*\*\*\*\*\*<br>
-<br>
-C\_reinhardtii      SSTGTWTTVWTDGLTSLDRYKGRCYDIEPVPGEDNQYIAYVAYPIDLFEEGSVTNMFTSI<br>
-N\_tabacum          SSTGTWTTVWTDGLTSLDRYKGRCYRIERVVGEKDQYIAYVAYPLDLFEEGSVTNMFTSI<br>
-A\_thaliana         SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVPGEETQFIAYVAYPLDLFEEGSVTNMFTSI<br>
-O\_sativa           SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVVGEDNQYIAYVAYPLDLFEEGSVTNMFTSI<br>
-                    \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* \*\* \* \*\*. \*:\*\*\*\*\*\*\*:\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*<br>
-<br>
-C\_reinhardtii      VGNVFGFKALRALRLEDLRIPPAYVKTFVGPPHGIQVERDKLNKYGRGLLGCTIKPKLGL<br>
-N\_tabacum          VGNVFGFKALRALRLEDLRIPPAYVKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL<br>
-A\_thaliana         VGNVFGFKALAALRLEDLRIPPAYTKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL<br>
-O\_sativa           VGNVFGFKALRALRLEDLRIPPTYSKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL<br>
-                    \*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\*\*:\* \*\*\* \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\*\*\*<br>
-<br>
-C\_reinhardtii      SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFVAEAIYKAQAETGEVKGHYL<br>
-N\_tabacum          SAKNYGRAVYECLRGGLDFTKDDENVNSQPF-RWRDRFLFCAEALYKAQAETGEIKGHYL<br>
-A\_thaliana         SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFCAEAIYKSQAETGEIKGHYL<br>
-O\_sativa           SAKNYGRACYECLRGGLDFTKDDENVNSQPFMRWRDRFVFCAEAIYKSQAETGEIKGHYL<br>
-                     \*\*\*\*\*\*\*\* \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* \*\*\*\*\*\*:\* \*\*\*:\*\*:\*\*\*\*\*\*:\*\*\*\*\*<br>
-<br>
-C\_reinhardtii      NATAGTCEEMMKRAVCAKELGVPIIMHDYLTGGFTANTSLAIYCRDNGLLLHIHRAMHAV<br>
-N\_tabacum          NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV<br>
-A\_thaliana         NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLSHYCRDNGLLLHIHRAMHAV<br>
-O\_sativa           NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV<br>
-                    \*\*\*\*\*\*\*\*\*\*:\*\*\*\* \*:\*\*\*\*\*\*:\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*<br>
-<br>
-C\_reinhardtii      IDRQRNHGIHFRVLAKALRMSGGDHLHSGTVVGKLEGEREVTLGFVDLMRDDYVEKDRSR<br>
-N\_tabacum          IDRQKNHGIHFRVLAKALRMSGGDHIHSGTVVGKLEGERDITLGFVDLLRDDFVEQDRSR<br>
-A\_thaliana         IDRQKNHGMHFRVLAKALRLSGGDHIHAGTVVGKLEGDRESTLGFVDLLRDDYVEKDRSR<br>
-O\_sativa           IDRQKNHGMHFRVLAKALRMSGGDHIHAGTVVGKLEGEREMTLGFVDLLRDDFIEKDRAR<br>
-                    \*\*\*\*:\*\*\*:\*\*\*\*\*\*\*\*\*\*:\*\*\*\*\*:\*:\*\*\*\*\*\*\*\*\*:\*: \*\*\*\*\*\*\*:\*\*\*::\*:\*\*:\*<br>
-<br>
-C\_reinhardtii      GIYFTQDWCSMPGVMPVASGGIHVWHMPALVEIFGDDACLQFGGGTLGHPWGNAPGAAAN<br>
-N\_tabacum          GIYFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN<br>
-A\_thaliana         GIFFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN<br>
-O\_sativa           GIFFTQDWVSMPGVIPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAAAN<br>
-                    \*\*:\*\*\*\*\* \*:\*\*\*:\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*.\*\*\*\*\*\*: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*.\*\*<br>
-<br>
-C\_reinhardtii      RVALEACTQARNEGRDLAREGGDVIRSACKWSPELAAACEVWKEIKFEFDTIDKL----<br>
-N\_tabacum          RVALEACVKARNEGRDLAQEGNEIIREACKWSPELAAACEVWKEIVFNFAAVDVLDK--<br>
-A\_thaliana         RVALEACVQARNEGRDLAVEGNEIIREACKWSPELAAACEVWKEITFNFPTIDKLDGQE<br>
-O\_sativa           RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--<br>
-                    \*\*\*\*\*\*\*.:\*\*\*\*\*\*\*\*\* \*\*.::\*\*.\*\*\*\*\*\*\*\*\*\*\*\*\*:\*\* \* \*:\*  :\* \*    
-</pre>
+
+*)
+
+(*** include-value:formatExample ***)
+
+(**
 
 <button type="button" class="btn" data-toggle="collapse" data-target="#clustalExample">Hide again</button>  
 </div>
@@ -111,20 +166,10 @@ let path = fileDir + "clustalExample.asn"
 
 let clustalAlignment = Clustal.ofFile path
 
+(*** include-value: clustalAlignment ***)
+
 (**
-<pre>
-val clustalAlignment :
-  BioFSharp.Alignment.Alignment<Clustal.NamedSequence,Clustal.AlignmentInfo> =
-  {MetaData = {Header = &lt;seq&gt;;
-               ConservationInfo = &lt;seq&gt;;};
-   AlignedSequences =
-    [{Name = "C_reinhardtii";
-      Sequence = &lt;seq&gt;;}; {Name = "N_tabacum";
-                           Sequence = &lt;seq&gt;;}; {Name = "A_thaliana";
-                                                Sequence = &lt;seq&gt;;};
-     {Name = "O_sativa";
-      Sequence = &lt;seq&gt;;}];}
-</pre>
+
 ## Writing Clustal files
 
 For writing clustal files you can use the `toFile` function. It takes a path and the alignment. The type of alignment is the same as the result of the reading function. You can see this above.

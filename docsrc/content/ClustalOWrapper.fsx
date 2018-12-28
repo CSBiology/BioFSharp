@@ -37,7 +37,7 @@ The general structure of arguments the wrapper takes was kept the same as in the
 
 
 let inputPath = Input.SequenceFile (__SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.fastA")
-(***do-not-eval***)
+
 let outputPath = __SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.aln"
 
 (**
@@ -51,6 +51,7 @@ let outputModifier = Parameters.ClustalParams.Output [Parameters.OutputCustom.Fo
 let forceModifier = Parameters.ClustalParams.Miscallaneous [Parameters.MiscallaneousCustom.Force]
 
 //Perform alignment
+(***do-not-eval***)
 cw.AlignFromFile(inputPath,outputPath,[inputModifier;outputModifier;forceModifier])
 
 (** 
@@ -72,21 +73,4 @@ let sequences =
 let alignedSequences = 
     cw.AlignSequences(sequences,Seq.empty)
 
-(**
-Which will give the following result: 
-<pre>
-val it :
-  Alignment.Alignment<BioID.TaggedSequence<string,char>,Clustal.AlignmentInfo>
-= {MetaData = {Header = seq ['C'; 'L'; 'U'; 'S'; ...];
-               ConservationInfo = seq [' '; '*'; '*'; '*'; ...];};
-   AlignedSequences =
-    [{Tag = "pep1";
-      Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-     {Tag = "pep2";
-      Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-     {Tag = "pep3";
-      Sequence = seq ['A'; 'A'; 'A'; 'G'; ...];};
-     {Tag = "pep4";
-      Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}
-</pre>
-*)
+(*** include-value: alignedSequences ***)

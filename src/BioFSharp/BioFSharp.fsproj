@@ -41,7 +41,6 @@
     <Compile Include="Alignment.fs" />
     <Compile Include="PeptideClassification.fs" />
     <Compile Include="WorkflowLanguage.fs" />
-    <Compile Include="FSIPrinters.fs" />
     <!-- Algorithm -->
     <Compile Include="Algorithm\PatternQuery.fs" />
     <Compile Include="Algorithm\PairwiseAlignment.fs" />
