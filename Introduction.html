@@ -161,8 +161,8 @@ Now lets take a look on the output when we use the pretty printer:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 26)" onmouseover="showTip(event, 'fs1', 26)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="id">FSIPrinters</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">prettyPrintBioCollection</span><span class="pn">)</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 26)" onmouseover="showTip(event, 'fs1', 26)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">FSIPrinters</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 29)" onmouseover="showTip(event, 'fs20', 29)" class="id">prettyPrintBioCollection</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -197,68 +197,72 @@ Now lets take a look on the output when we use the pretty printer:</p>
 <div class="tip" id="fs15">module BioArray<br /><br />from BioFSharp</div>
 <div class="tip" id="fs16">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
 <div class="tip" id="fs17">val largerSequence : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs18">module FSIPrinters<br /><br />from BioFSharp</div>
-<div class="tip" id="fs19">val prettyPrintBioCollection : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
+<div class="tip" id="fs18">namespace BioFSharp.IO</div>
+<div class="tip" id="fs19">module FSIPrinters<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs20">val prettyPrintBioCollection : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
 
 			</div>
 			<div class="span3" >
 			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-					<li class="nav-header">BioFSharp</li>
-					<li><a href="/BioFSharp/index.html">Home page</a></li>
-					<li class="divider"></li>
-					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-					
-					<li class="nav-header">BioFSharp core</li>
-					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
-					<li>
-						<a href="/BioFSharp/BioItem.html">BioItems</a>
-					</li>
-					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
-					<li class="nav-header">Algorithm</li>
-					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
-					<li>
-						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
-					</li>
-					<li class="nav-header">File I/O</li>
-					<li>
-						<a href="/BioFSharp/Clustal.html">Clustal</a>
-					</li>
-					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
-					<li>
-						<a href="/BioFSharp/FastA.html">FastA</a>
-					</li>   
-					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-					<li>
-						<a href="/BioFSharp/GenBank.html">GenBank</a>
-					</li>  
-					<li>
-						<a href="/BioFSharp/GFF3.html">GFF3</a>
-					</li>    
-					<li>
-						<a href="/BioFSharp/Newick.html">Newick</a>
-					</li>                
-					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-					<li class="nav-header">Web I/O</li>
-					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
-					<li class="nav-header">Biostatistics</li>
-					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
-					<li class="nav-header">Biovisualization</li>
-					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
-					<li class="nav-header">GPU Computing</li>
-					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
-					<li class="nav-header">Documentation</li>
-					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
 
 
-					
-				</ul>
+                  
+              </ul>
 			</div>
 		  </div>
 		</div>

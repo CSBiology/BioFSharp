@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Node<'n> - BioFSharp</title>
+    <title>FSIPrinters - BioFSharp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -37,38 +37,119 @@
 
 
 
-<h1>Node<'n></h1>
+<h1>FSIPrinters</h1>
 <p>
-
-    <span>Namespace: BioFSharp</span><br />
-        <span>Parent Module: <a href="biofsharp-phyltree.html">PhylTree</a></span><br />
-    </p>
+  <span>Namespace: BioFSharp.IO</span><br />
+  </p>
 <div class="xmldoc">
-<p>Recursive type representing a phylogenetic tree</p>
+<p>Pretty printers for various custom types in the library</p>
 
 </div>
-  <h3>Union Cases</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Union Case</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '787', 787)" onmouseover="showTip(event, '787', 787)">
-            Branch(&#39;n,List&lt;Node&lt;&#39;n&gt;&gt;)
+          <code onmouseout="hideTip(event, '422', 422)" onmouseover="showTip(event, '422', 422)">
+            prettyPrintBioCollection(sequence)
           </code>
-          <div class="tip" id="787">
-            <strong>Signature:</strong> &#39;n * List&lt;Node&lt;&#39;n&gt;&gt;<br />
-                                  </div>
+          <div class="tip" id="422">
+            <strong>Signature:</strong> sequence:seq&lt;&#39;a&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/PhylTree.fs#L9-9" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L33-33" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Can be internal node or leaf node, depending on wether the list is empty or not. Match accordingly</p>
+          <p>print Biocollections in 6x10char blocks per line, preceeded by an index indicator</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '423', 423)" onmouseover="showTip(event, '423', 423)">
+            prettyPrintBioCollectionWithModifications(...)
+          </code>
+          <div class="tip" id="423">
+            <strong>Signature:</strong> sequence:seq&lt;&#39;a&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> 'a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>print Biocollections in 6x10char blocks per line, preceeded by an index indicator</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '424', 424)" onmouseover="showTip(event, '424', 424)">
+            prettyPrintBioItem(a)
+          </code>
+          <div class="tip" id="424">
+            <strong>Signature:</strong> a:&#39;a -&gt; string<br />
+                          <strong>Type parameters:</strong> 'a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L15-15" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>print BioItems by using symbols for AminoAcids and Nucleotides, and the name of Modifications in [brackets]</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '425', 425)" onmouseover="showTip(event, '425', 425)">
+            prettyPrintBioItemWithModifications(a)
+          </code>
+          <div class="tip" id="425">
+            <strong>Signature:</strong> a:&#39;a -&gt; string<br />
+                          <strong>Type parameters:</strong> 'a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L22-22" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>print BioItems by using symbols for AminoAcids and Nucleotides, and the name of Modifications in [brackets]</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '426', 426)" onmouseover="showTip(event, '426', 426)">
+            prettyPrintClustal(alignment)
+          </code>
+          <div class="tip" id="426">
+            <strong>Signature:</strong> alignment:Alignment&lt;TaggedSequence&lt;string,char&gt;,AlignmentInfo&gt; -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L67-67" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>print Clustal formatted file as seen in the specifications.</p>
 
 
         </td>

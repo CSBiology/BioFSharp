@@ -60,14 +60,12 @@ For some more indepth information about which parameters to choose for your goal
 </table>
 <p>The general structure of arguments the wrapper takes was kept the same as in the command line tool. In general, you need an <code>inputPath</code>, an <code>outputPath</code> and <code>parameters</code>. As there are several inputs possible, you have to choose what it is. As we want to align a normal sequence we just pick <code>SequenceFile</code>.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">inputPath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="rt">Input</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">SequenceFile</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\Chlamy_Cp.fastA&quot;</span><span class="pn">)</span>
-</code></pre></td>
-</tr>
-</table>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">outputPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\Chlamy_Cp.aln&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">outputPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">@&quot;\data\Chlamy_Cp.aln&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -80,7 +78,6 @@ For some more indepth information about which parameters to choose for your goal
 <span class="l">6: </span>
 <span class="l">7: </span>
 <span class="l">8: </span>
-<span class="l">9: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Input has to be in FastA format</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="id">inputModifier</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="m">Parameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="rt">ClustalParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="id">Input</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="m">Parameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="rt">InputCustom</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="id">Format</span> <span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="m">Parameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="rt">FileFormat</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="id">FastA</span><span class="pn">]</span>
@@ -90,7 +87,12 @@ For some more indepth information about which parameters to choose for your goal
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 31)" onmouseover="showTip(event, 'fs23', 31)" class="id">forceModifier</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 32)" onmouseover="showTip(event, 'fs11', 32)" class="m">Parameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 33)" onmouseover="showTip(event, 'fs12', 33)" class="rt">ClustalParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="id">Miscallaneous</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs11', 35)" onmouseover="showTip(event, 'fs11', 35)" class="m">Parameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="rt">MiscallaneousCustom</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 37)" onmouseover="showTip(event, 'fs26', 37)" class="id">Force</span><span class="pn">]</span>
 
 <span class="c">//Perform alignment</span>
-<span onmouseout="hideTip(event, 'fs4', 38)" onmouseover="showTip(event, 'fs4', 38)" class="fn">cw</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="id">AlignFromFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 40)" onmouseover="showTip(event, 'fs6', 40)" class="id">inputPath</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs9', 41)" onmouseover="showTip(event, 'fs9', 41)" class="id">outputPath</span><span class="pn">,</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs10', 42)" onmouseover="showTip(event, 'fs10', 42)" class="id">inputModifier</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs18', 43)" onmouseover="showTip(event, 'fs18', 43)" class="id">outputModifier</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 44)" onmouseover="showTip(event, 'fs23', 44)" class="id">forceModifier</span><span class="pn">]</span><span class="pn">)</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs4', 38)" onmouseover="showTip(event, 'fs4', 38)" class="fn">cw</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="id">AlignFromFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 40)" onmouseover="showTip(event, 'fs6', 40)" class="id">inputPath</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs9', 41)" onmouseover="showTip(event, 'fs9', 41)" class="id">outputPath</span><span class="pn">,</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs10', 42)" onmouseover="showTip(event, 'fs10', 42)" class="id">inputModifier</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs18', 43)" onmouseover="showTip(event, 'fs18', 43)" class="id">outputModifier</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 44)" onmouseover="showTip(event, 'fs23', 44)" class="id">forceModifier</span><span class="pn">]</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -121,22 +123,17 @@ For some more indepth information about which parameters to choose for your goal
 </code></pre></td>
 </tr>
 </table>
-<p>Which will give the following result:
-<pre>
-val it :
-Alignment.Alignment<BioID.TaggedSequence<string,char>,Clustal.AlignmentInfo&gt;
-= {MetaData = {Header = seq ['C'; 'L'; 'U'; 'S'; ...];
-ConservationInfo = seq [' '; '<em>'; '</em>'; '*'; ...];};
-AlignedSequences =
-[{Tag = "pep1";
-Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-{Tag = "pep2";
-Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-{Tag = "pep3";
-Sequence = seq ['A'; 'A'; 'A'; 'G'; ...];};
-{Tag = "pep4";
-Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}
-</pre></p>
+<table class="pre"><tr><td><pre><code>{MetaData = {Header = seq ['C'; 'L'; 'U'; 'S'; ...];
+             ConservationInfo = seq [' '; '*'; '*'; '*'; ...];};
+ AlignedSequences =
+  [{Tag = "pep1";
+    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
+   {Tag = "pep2";
+    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
+   {Tag = "pep3";
+    Sequence = seq ['A'; 'A'; 'A'; 'G'; ...];};
+   {Tag = "pep4";
+    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
@@ -176,62 +173,65 @@ Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}
 			</div>
 			<div class="span3" >
 			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
-				<ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-					<li class="nav-header">BioFSharp</li>
-					<li><a href="/BioFSharp/index.html">Home page</a></li>
-					<li class="divider"></li>
-					<li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
-					
-					<li class="nav-header">BioFSharp core</li>
-					<li><a href="/BioFSharp/Formula.html">Formula</a></li>
-					<li>
-						<a href="/BioFSharp/BioItem.html">BioItems</a>
-					</li>
-					<li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-					<li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
-					<li class="nav-header">Algorithm</li>
-					<li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-					<li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-					<li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-					<li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
-					<li>
-						<a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
-					</li>
-					<li class="nav-header">File I/O</li>
-					<li>
-						<a href="/BioFSharp/Clustal.html">Clustal</a>
-					</li>
-					<li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
-					<li>
-						<a href="/BioFSharp/FastA.html">FastA</a>
-					</li>   
-					<li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
-					<li>
-						<a href="/BioFSharp/GenBank.html">GenBank</a>
-					</li>  
-					<li>
-						<a href="/BioFSharp/GFF3.html">GFF3</a>
-					</li>    
-					<li>
-						<a href="/BioFSharp/Newick.html">Newick</a>
-					</li>                
-					<li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
-					<li class="nav-header">Web I/O</li>
-					<li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-					<li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
-					<li class="nav-header">Biostatistics</li>
-					<li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
-					<li class="nav-header">Biovisualization</li>
-					<li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
-					<li class="nav-header">GPU Computing</li>
-					<li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
-					<li class="nav-header">Documentation</li>
-					<li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
 
 
-					
-				</ul>
+                  
+              </ul>
 			</div>
 		  </div>
 		</div>
