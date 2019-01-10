@@ -65,6 +65,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{078A9C52-DDC
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
+		PULL_REQUEST_TEMPLATE.md = PULL_REQUEST_TEMPLATE.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{7C6D08E7-3EAC-4335-8F4B-252C193C27C9}"
