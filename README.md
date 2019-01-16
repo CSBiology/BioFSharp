@@ -35,3 +35,8 @@ Functions, types and Classes contained in BioFSharp come with short explanatory 
 More indepth explanations, tutorials and general information about the project can be found [here](http://csbiology.github.io/BioFSharp).
 
 The documentation and tutorials for this library are automatically generated (using the F# Formatting) from *.fsx and *.md files in the docs folder. If you find a typo, please submit a pull request!
+
+Contributing
+------------
+
+Please refer to the [Contribution guidelines](.github/CONTRIBUTING.md)
