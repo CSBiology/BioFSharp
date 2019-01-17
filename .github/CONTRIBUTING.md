@@ -4,6 +4,8 @@ First of all, we are really happy that you are reading this, because this means 
 
 The following is a set of guidelines for contributing to repositories which are hosted in the CSBiology Organization on GitHub. These guidelines are subject to changes, and therefore should not be thought about as strict rules. Feel free to suggest changes with a pull request to this file
 
+**If you just want to know how to start contributing without reading all of this stuff, go [here](#Starting-point-for-first-time-contributors) for a quickstart guide, or [here](#How-can-i-contribute) for more indepth information**
+
 ## Table of contents
 
 [Who we are](#Who-we-are)
@@ -16,7 +18,7 @@ The following is a set of guidelines for contributing to repositories which are 
 
 * [Build process](#Build-process)
 
-[How can i contribute?](#How-can-i-contribute?)
+[How can i contribute?](#How-can-i-contribute)
 
 * [Bug reports](#Bug-reports)
 
@@ -33,6 +35,10 @@ The following is a set of guidelines for contributing to repositories which are 
 * [Coding conventions](#Coding-conventions)
 
 * [Documentation guidelines](#Documentation-guidelines)
+
+## Code of Conduct
+
+This project and everyone participating in it is governed by the [CSBiology Code of Conduct](../CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [info@biofsharp.com](mailto:info@biofsharp.com).
 
 ## Who we are
 
@@ -96,7 +102,7 @@ All projects have at least the following build targets:
 
 ### Bug reports
 
-This section guides you through submitting a bug report for Atom. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for our repositories. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
 Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](ISSUE_TEMPLATE/bug_report.md), the information it asks for helps us resolve issues faster.
 
@@ -118,7 +124,7 @@ Explain the problem and include additional details to help maintainers reproduce
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
-* **Include screenshots and animated GIFs** which show you following the described steps and clearly demonstrate the problem. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
+* **Include screenshots** which show you following the described steps and clearly demonstrate the problem. 
 * **If the problem wasn't triggered by a specific action**, describe what you were doing before the problem happened and share more information using the guidelines below.
 
 Provide more context by answering these questions:
@@ -151,7 +157,7 @@ Feature requests are tracked as [GitHub issues](https://guides.github.com/featur
 * **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 * **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
-* **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of Atom which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
+* **Include screenshots** which help you demonstrate the steps which the suggestion is related to.
 * **Explain why this feature would be useful**
 * **Specify the name and version of the OS you're using.**
 
@@ -164,6 +170,14 @@ Please follow these steps to have your contribution considered by the maintainer
 3. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated.</details>
 
 ### Starting point for first-time contributors
+
+1. [Submit an issue](#Feature-requests) related to the contribution you want to make. Please do not submit pull request that have no corresponding issue.
+2. Create a fork of the respective project and create a new branch (ideally named after the contribution you want to make)
+3. Keep your commits granular and concise, so that your commit history is easily trackable by reviewers. See [here](#Git-Commit-Messages) for basic guidelines about git commit messages
+4. Group like-changes in one commit, and avoid to combine different types of changes in a single commit.
+5. Base pull requests on the `developer` branch of the respective project
+6. Fill out the template which will show up when creating a pull request
+7. Thank you for contributing :heart:
 
 ## Style guidelines
 
