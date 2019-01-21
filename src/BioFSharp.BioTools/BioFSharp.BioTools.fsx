@@ -59,6 +59,8 @@ let result =
         let! logs =
             client.Containers.GetContainerLogsAsync (id,paramLog,CancellationToken.None)
             |> Async.AwaitTask
+
+            
         
         return logs
     } 
