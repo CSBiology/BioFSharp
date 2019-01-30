@@ -17,6 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Docker.fs" />
+    <Compile Include="BioContainer.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
