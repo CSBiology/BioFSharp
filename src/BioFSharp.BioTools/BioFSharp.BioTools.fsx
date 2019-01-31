@@ -21,113 +21,150 @@ open Docker.DotNet.Models
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
 
+let targetPimage = Docker.DockerId.ImageId "49639db2e20c"
+
+let bcContext =
+    BioContainer.initBcContextAsync client targetPimage
+    |> Async.RunSynchronously
+
+
+
+BioContainer.execAsync bcContext ["echo"; "hello you4";]
+|> Async.RunSynchronously  
+
+
+// targetp -N /opt/targetP/test/one.fsa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 let cmd  = ["bash"] //;"echo"; "hello world";]
-let cmd' = ["echo"; "hello you";]
+let cmd' = ["echo"; "hello you2";]
 let dockerid =  (Docker.DockerId.ImageName "ubuntu") 
 let connection = client
 
 let cont = "1940820e0486"
 
 let readFrom (stream:System.IO.Stream) =
-    let length = (stream.Length-1L) |> int
+    let length = (stream.Length) |> int
     let tmp : array<byte> = Array.zeroCreate length
     stream.Read(tmp,0,length) |> ignore
 
     System.Text.Encoding.UTF8.GetString(tmp,0,length)
 
 
-// https://github.com/Microsoft/Docker.DotNet/issues/223 -> write
-// https://github.com/Microsoft/Docker.DotNet/issues/212 -> read
+Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId cont)  
+|> Async.RunSynchronously
 
-//-i, --interactive=false Keep STDIN open even if not attached
-//-t, --tty=false Allocate a pseudo-TTY
 
-let container,exe = 
-    async {
-        let! container =
-            let param = Docker.Container.ContainerParams.InitCreateContainerParameters(Image=dockerid.ToString(),Cmd=cmd,OpenStdin=true)
-            Docker.Container.createContainerWithAsync connection param      
+//// https://github.com/Microsoft/Docker.DotNet/issues/223 -> write
+//// https://github.com/Microsoft/Docker.DotNet/issues/212 -> read
+
+////-i, --interactive=false Keep STDIN open even if not attached
+////-t, --tty=false Allocate a pseudo-TTY
+
+//let exe = 
+//    async {
+//        //let! container =
+//        //    let param = Docker.Container.ContainerParams.InitCreateContainerParameters(Image=dockerid.ToString(),Cmd=cmd,OpenStdin=true)
+//        //    Docker.Container.createContainerWithAsync connection param      
         
-        let! isRunning =
-            let param = 
-                Docker.Container.ContainerParams.InitContainerStartParameters()
+//        //let! isRunning =
+//        //    let param = 
+//        //        Docker.Container.ContainerParams.InitContainerStartParameters()
 
-            Docker.Container.startContainerWithAsync connection param container.ID
+//        //    Docker.Container.startContainerWithAsync connection param container.ID
 
-        let! tmp =
-            let param = 
-                Docker.Container.ContainerParams.InitContainerExecCreateParameters(                                        
-                    AttachStderr=true,
-                    AttachStdout=true,                
-                    AttachStdin=false,
-                    Cmd=cmd',
-                    Detach=false,
-                    Tty=true
-                    )
+//        let! execContainer =
+//            let param = 
+//                Docker.Container.ContainerParams.InitContainerExecCreateParameters(                                        
+//                    AttachStderr=true,
+//                    AttachStdout=true,                
+//                    AttachStdin=false,
+//                    Cmd=cmd',
+//                    Detach=false
+//                    //Tty=false
+//                    )
 
-            Docker.Container.execCreateContainerAsync connection param (container.ID)
-        return container,tmp
-        }
+//            Docker.Container.execCreateContainerAsync connection param (cont)
+//        return tmp
+//        }
 
-    |> Async.RunSynchronously
-
-
-////docker stop $(docker ps -a -q)
-
-//Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId (container.ID))  
-//|> Async.RunSynchronously
+//    |> Async.RunSynchronously
 
 
-let ms = 
-    async {
+//////docker stop $(docker ps -a -q)
 
-        //    Docker.Container.startContainerWithAsync connection param container.ID
+////Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId (container.ID))  
+////|> Async.RunSynchronously
 
 
-
-        let! isRunning1 =
-            let param1 = 
-                Docker.Container.ContainerParams.InitContainerStartParameters()
-
-            Docker.Container.startContainerWithAsync connection param1 container.ID
+//let ms = 
+//    async {
         
-        let! isRunning =
-            let param = 
-                Docker.Container.ContainerParams.InitContainerExecStartParameters(
-                    AttachStderr=true,
-                    AttachStdout=true,                
-                    AttachStdin=false,                   
-                    Cmd=cmd' // cmd
-                    )                
-            Docker.Container. startContainerExecAsync connection exe.ID // startContainerWithExecConfigAsync connection param container.ID 
+//        let! execContainer =
+//            let param = 
+//                Docker.Container.ContainerParams.InitContainerExecCreateParameters(                                        
+//                    AttachStderr=true,
+//                    AttachStdout=true,                
+//                    AttachStdin=false,
+//                    Cmd=cmd,
+//                    Detach=false                    
+//                    )
+
+//            Docker.Container.execCreateContainerAsync connection param (cont)
+
+//        let! stream =
+//            let param = 
+//                Docker.Container.ContainerParams.InitContainerExecStartParameters(
+//                    AttachStderr=true,
+//                    AttachStdout=true,                
+//                    AttachStdin=false,                   
+//                    Cmd=cmd
+//                    )                
+//            Docker.Container.startContainerWithExecConfigAsync connection param cont // startContainerExecAsync connection exe.ID // 
             
-        let! stream = 
-            let param = Docker.Container.ContainerParams.InitContainerAttachParameters (Stdout=true,Stderr=true,Stdin=false,Stream=true)
-            connection.Containers.AttachContainerAsync(exe.ID,true,param)
-            |> Async.AwaitTask
-    
-        let stdOutputStream = new System.IO.MemoryStream()
-        let streamTask =
-            stream.CopyOutputToAsync(null,stdOutputStream,null,CancellationToken.None)             
+//        printfn "Start Exec"
+        
+//        //let stopParam = new ContainerStopParameters()        
+//        //let! st =  connection.Containers.StopContainerAsync(cont,stopParam) |> Async.AwaitTask
+        
+//        //printfn "Stop: %b" st
+        
+//        let stdOutputStream = new System.IO.MemoryStream()
+//        let streamTask =
+//            stream.CopyOutputToAsync(null,stdOutputStream,null,CancellationToken.None)             
 
                 
-        do! streamTask |> Async.AwaitTask
+//        do! streamTask |> Async.AwaitTask
 
-        let! wait = 
-            Docker.Container.waitContainerAsync connection container.ID
+//        printfn "Streamed"
 
-        let result =        
-            stdOutputStream.Position <- 0L
-            readFrom stdOutputStream
+//        //let! wait = 
+//        //    Docker.Container.waitContainerAsync connection container.ID
+
+//        let result =        
+//            stdOutputStream.Position <- 0L
+//            readFrom stdOutputStream
                     
-        //do! Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId container.ID)  
+//        //do! Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId container.ID)  
     
-        return result
+//        return result
     
-    } 
-    |> Async.RunSynchronously
+//    } 
+//    |> Async.RunSynchronously
 
 
 
@@ -224,10 +261,10 @@ let ms =
 
 
 
-let tmp =
-    BioContainer.runCmdAsync client (Docker.DockerId.ImageName "ubuntu") ["echo"; "hello world"]
-    |> Async.RunSynchronously
-    |> readFrom
+//let tmp =
+//    BioContainer.runCmdAsync client (Docker.DockerId.ImageName "ubuntu") ["echo"; "hello world"]
+//    |> Async.RunSynchronously
+//    |> readFrom
 
 
 

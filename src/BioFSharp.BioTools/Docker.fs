@@ -124,7 +124,24 @@ module Docker =
                 Tag       |> Option.iter param.set_Tag
 
                 param
-        
+
+            ///// Creates ImageBuildParameters
+            //static member InitImageBuildParameters
+            //    (
+            //        ?FromImage,
+            //        ?FromSrc,
+            //        ?Repo,
+            //        ?Tag
+            //    ) = 
+                
+            //    let param = new ImageBuildParameters()    
+                
+            //    FromImage |> Option.iter param.set_FromImage
+            //    FromSrc   |> Option.iter param.set_FromSrc
+            //    Repo      |> Option.iter param.set_Repo
+            //    Tag       |> Option.iter param.set_Tag
+
+            //    param        
         
         /// Lists available images with ImagesListParameters for filtering (async)
         let listImagesWithAsync (connection:DockerClient) (param:ImagesListParameters) =
@@ -163,7 +180,15 @@ module Docker =
             existsAsync connection dockerid
             |> Async.RunSynchronously 
 
-
+        /// Lists available images with ImagesListParameters for filtering (async)
+        let buildImageFromDockerfileAsync (connection:DockerClient) (param) (stream) =
+            //  ImagesListParameters are only for filtering
+            async {                
+                let! stream = 
+                    connection.Images.BuildImageFromDockerfileAsync(stream,param)              
+                    |> Async.AwaitTask                    
+                return stream
+                }
     
     //#####################################################
     //#####################################################
@@ -194,6 +219,18 @@ module Docker =
                 Limit     |> Option.iter (fun nv -> param.set_Limit (Nullable<int64>(nv)))
                 Since     |> Option.iter param.set_Since
                 Size      |> Option.iter (fun nv -> param.set_Size (Nullable<bool>(nv)))
+                
+                param
+
+            /// Creates ContainersListParameters for pre-filtering list function
+            static member InitContainerListParameters
+                (
+                    ?WaitBeforeKillSeconds
+                ) = 
+
+                let param = new ContainerStopParameters()
+                
+                WaitBeforeKillSeconds       |> Option.iter (fun nv -> param.set_WaitBeforeKillSeconds (Nullable<uint32>(nv)))                
                 
                 param
 
@@ -543,11 +580,8 @@ module Docker =
         /// Removes container  
         let removeContainerAsync (connection:DockerClient) (dockerid:DockerId) =
             let param = ContainerParams.InitContainerRemoveParameters()
-            async {                
-                do!
-                    connection.Containers.RemoveContainerAsync(dockerid.ToString(),param,CancellationToken.None)              
-                    |> Async.AwaitTask                                    
-                }       
+            removeContainerWithAsync connection param dockerid
+
 
         /// Creates an container that will perform the execution (async). IMPORTANT: Start exec-container using StartContainerExecAsync       
         let execCreateContainerAsync (connection:DockerClient) param id =        
@@ -566,6 +600,17 @@ module Docker =
                     connection.Containers.StartContainerExecAsync (id,CancellationToken.None)
                     |> Async.AwaitTask                                    
                 }  
+
+        /// Stops 
+        let stopContainerAsync (connection:DockerClient) (param) id =        
+            async {                              
+                let! isRunning =
+                    connection.Containers.StopContainerAsync(id,param,CancellationToken.None)
+                    |> Async.AwaitTask                                    
+                return isRunning
+                }  
+
+
 
     //#####################################################
     //#####################################################
