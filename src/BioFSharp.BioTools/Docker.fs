@@ -427,6 +427,33 @@ module Docker =
                                 
                 param
 
+
+            /// Creates ContainerPathStatParameters
+            static member InitContainerPathStatParameters
+                (                    
+                    ?AllowOverwriteDirWithFile,
+                    ?Path
+                ) = 
+                
+                let param = new ContainerPathStatParameters()                
+                AllowOverwriteDirWithFile |> Option.iter (fun v -> param.set_AllowOverwriteDirWithFile (Nullable<bool>(v) ) )
+                Path                      |> Option.iter param.set_Path
+                                
+                param
+
+
+            /// Creates ContainerPathStatParameters
+            static member InitGetArchiveFromContainerParameters
+                (                    
+                    ?Path
+                ) = 
+                
+                let param = new GetArchiveFromContainerParameters()                
+                Path    |> Option.iter param.set_Path
+                                
+                param
+
+
         /// Creates docker container with CreateContainerParameters for config (async)
         let createContainerWithAsync (connection:DockerClient) (param:CreateContainerParameters) =        
             async {              
@@ -610,6 +637,24 @@ module Docker =
                 return isRunning
                 }  
 
+        /// Writes stream into docker container 
+        let extractArchiveToContainerAsync (connection:DockerClient) (param) id stream =        
+            async {                              
+                let! isRunning =
+                    connection.Containers.ExtractArchiveToContainerAsync(id,param,stream,CancellationToken.None)
+                    |> Async.AwaitTask                                    
+                return isRunning
+                }  
+        
+        
+        ///
+        let getArchiveFromContainerAsync (connection:DockerClient) (param) statOnly id =        
+            async {                              
+                let! isRunning =
+                    connection.Containers.GetArchiveFromContainerAsync(id,param,statOnly,CancellationToken.None)
+                    |> Async.AwaitTask                                    
+                return isRunning
+                }  
 
 
     //#####################################################

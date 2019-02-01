@@ -17,20 +17,44 @@ open System.Threading.Tasks
 open BioFSharp.BioTools
 open System.Collections.Generic
 open Docker.DotNet.Models
+open System.IO
 
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
 
-let targetPimage = Docker.DockerId.ImageId "49639db2e20c"
+let targetPimage = Docker.DockerId.ImageId "targetp"
 
 let bcContext =
     BioContainer.initBcContextAsync client targetPimage
     |> Async.RunSynchronously
 
+let resp = 
+    let param = Docker.Container.ContainerParams.InitGetArchiveFromContainerParameters(Path="/opt/targetP/test/one.fsa")
+    Docker.Container.getArchiveFromContainerAsync  client param false bcContext.ContainerId //("81234502b363") 
+    |>  Async.RunSynchronously
+
+//let stream = new MemoryStream()
+let str = new StreamReader(resp.Stream)
 
 
-BioContainer.execAsync bcContext ["echo"; "hello you4";]
-|> Async.RunSynchronously  
+str.ReadToEnd()
+
+
+let input sourcePath targetPath  =
+    //let inputStream = new FileStream(sourcePath,FileMode.Open)
+    let stream = new MemoryStream()
+    
+    //printfn "length: %i" stream.Length
+    let param = Docker.Container.ContainerParams.InitContainerPathStatParameters(Path=targetPath)
+    Docker.Container.extractArchiveToContainerAsync client param (bcContext.ContainerId ) resp.Stream
+    |> Async.Start
+
+
+input "D:/myTest.fsa" "/tmp/myTest.fsa"
+
+let result =
+    BioContainer.execAsync bcContext ["echo";"targetp"; "-N";"/tmp/myTest.fsa"]
+    |> Async.RunSynchronously  
 
 
 // targetp -N /opt/targetP/test/one.fsa
@@ -38,13 +62,8 @@ BioContainer.execAsync bcContext ["echo"; "hello you4";]
 
 
 
-
-
-
-
-
-
-
+BioContainer.disposeAsync bcContext
+|> Async.RunSynchronously  
 
 
 
@@ -67,6 +86,12 @@ let readFrom (stream:System.IO.Stream) =
 
 Docker.Container.removeContainerAsync connection (Docker.DockerId.ContainerId cont)  
 |> Async.RunSynchronously
+
+
+
+//stream.Position <- 1L
+//readFrom stream
+
 
 
 //// https://github.com/Microsoft/Docker.DotNet/issues/223 -> write
