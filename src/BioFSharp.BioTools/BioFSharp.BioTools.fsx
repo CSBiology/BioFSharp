@@ -37,15 +37,14 @@ open System
 
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
-let targetPimage = Docker.DockerId.ImageId "targetp"
 
 
 let bcContext =
-    BioContainer.initBcContextAsync client targetPimage
+    BioContainer.initBcContextAsync client TargetP.ImageTagetP
     |> Async.RunSynchronously
 
 
-let stream = new FileStream("C:/tmp/myTest.fsa",FileMode.Open)
+let stream = new FileStream("C:/tmp/twelve.fsa",FileMode.Open)
 
 let res = TargetP.run bcContext (TargetP.NonPlant) stream
 
@@ -55,17 +54,6 @@ BioContainer.disposeAsync bcContext
 |> Async.Start
 
 
-
-//  " 
-//### targetp v1.1 prediction results ##################################
-//Number of query sequences:  1
-//Cleavage site predictions not included.
-//Using NON-PLANT networks.
-
-//Name	Len	mTP	SP	other	Loc	RC
-//----------------------------------------------------------------------
-//P11111;             	1088	 0.054	 0.068	 0.943	_	1
-//"
 
 
 

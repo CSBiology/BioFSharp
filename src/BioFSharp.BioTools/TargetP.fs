@@ -14,6 +14,8 @@ module TargetP =
     open FSharpAux.IO
     open FSharpAux.IO.SchemaReader.Attribute
  
+    let ImageTagetP = Docker.DockerId.ImageId "targetp"
+
     type TargetpCustomParams =
         | CleavagePredictions
         | CutOffChloroplast of float

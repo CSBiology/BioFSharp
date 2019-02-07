@@ -16,11 +16,15 @@ module BioContainer =
         ImageName   : string
         ContainerId : string
         }
-
+        
    
     /// Connect to docker engine (docker deamon)
     let connect str =
         (new DockerClientConfiguration(new Uri(str)) ).CreateClient()
+
+
+    /// Connect to default local docker engine (docker deamon: "npipe://./pipe/docker_engine")
+    //let connectLocalDefault () =
 
 
     /// Runs a container of a specified image and keeps it running
