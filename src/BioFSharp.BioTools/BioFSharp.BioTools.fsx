@@ -33,10 +33,40 @@ open Newtonsoft.Json.Serialization
 open System
 
 
+let param = Docker.DotNet.Models.HostConfig()
 
 
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
+
+
+
+let ubuntu = Docker.ImageName "ubuntu"
+
+let bcContextUbuntu =
+    BioContainer.initBcContextWithMountAsync client ubuntu "C:/tmp" 
+    |> Async.RunSynchronously
+
+
+
+BioContainer.disposeAsync bcContextUbuntu
+|> Async.Start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 let bcContext =
@@ -55,7 +85,7 @@ BioContainer.disposeAsync bcContext
 
 
 
-
+res |> Seq.head |> fun tp -> tp.Mtp
 
 
 

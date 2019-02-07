@@ -45,6 +45,27 @@ module BioContainer =
             } 
 
 
+    /// Runs a container of a specified image and keeps it running. Bind mounts the host directory under /mnt/ (without ':' and lower letter).
+    let initBcContextWithMountAsync (connection:DockerClient) (image: DockerId) (hostdirectory:string) =
+        if not (Docker.Image.exists connection image) then failwithf "Image %s does not exists! Please pull the image first." (string image )    
+        async {
+            let! container = // volume  bind
+                let hostdirectory' = hostdirectory |> BioContainerIO.toUnixDirectorySeparator 
+                let target = sprintf "/mnt/%s" (hostdirectory'.ToLower().Replace(":",""))
+                let mount = Docker.Container.ContainerParams.InitMount(Type="bind",Source=hostdirectory',Target=target,ReadOnly=false)
+                let hc    = Docker.Container.ContainerParams.InitHostConfig(Mounts=[mount])
+                let param = Docker.Container.ContainerParams.InitCreateContainerParameters(HostConfig=hc,Image=string image,OpenStdin=true)
+                Docker.Container.createContainerWithAsync connection param      
+        
+            let! isRunning =
+                let param = 
+                    Docker.Container.ContainerParams.InitContainerStartParameters()
+
+                Docker.Container.startContainerWithAsync connection param container.ID
+                
+            return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID}
+            } 
+
     /// Executes a command in the biocontainer context
     let execAsync (bc:BcContext) cmd =
         async {
