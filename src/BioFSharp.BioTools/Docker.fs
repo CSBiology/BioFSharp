@@ -432,6 +432,7 @@ module Docker =
             static member InitContainerPathStatParameters
                 (                    
                     ?AllowOverwriteDirWithFile,
+                    // Target path (example: /tmp/) 
                     ?Path
                 ) = 
                 

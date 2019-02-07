@@ -16,6 +16,9 @@ nuget Microsoft.Xaml
 nuget SwaggerProvider
 nuget YamlDotNet
 
+nuget docker.dotnet
+nuget SharpZipLib
+
 git https://github.com/CSBiology/FSharpAux.git nuget Packages: /
 nuget FSharpAux
 nuget FSharpAux.IO
@@ -26,7 +29,7 @@ nuget FSharp.Stats.MSF
 
 
 clitool dotnet-fake
-nuget docker.dotnet
+
 
 group BioDB
     framework:net45

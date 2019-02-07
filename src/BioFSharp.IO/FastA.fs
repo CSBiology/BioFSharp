@@ -5,6 +5,7 @@ open FSharpAux
 open FSharpAux.IO
     
 module FastA =
+    open System.IO
             
     /// Fasta item contains header and sequence
     type FastaItem<'a> = {
@@ -56,8 +57,8 @@ module FastA =
         |> fromFileEnumerator converter
 
 
-    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char
-    let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
+    /// Writes FastaItem to stream. Converter determines type of sequence by converting type -> char
+    let writeToStreaam (toString:'T -> char) (stream:Stream) (data:seq<FastaItem<#seq<'T>>>) =
         let toChunks (w:System.IO.StreamWriter) (length:int) (source: seq<'T>) =    
             use ie = source.GetEnumerator()
             let sourceIsEmpty = ref false
@@ -80,11 +81,16 @@ module FastA =
                                    ()
         
             loop ()
-        use sWriter = new System.IO.StreamWriter(filePath,true)
+        use sWriter = new System.IO.StreamWriter(stream)
         data
         |> Seq.iter (fun (i:FastaItem<_>) ->
                                 sWriter.WriteLine(">" + i.Header)
-                                toChunks sWriter 80 i.Sequence)   
+                                toChunks sWriter 80 i.Sequence) 
+
+    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char
+    let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
+        let file = new FileStream(filePath,FileMode.Append)
+        writeToStreaam toString file data   
 
 
     /// Converts FastaItem to string. Converter determines type of sequence by converting type -> char

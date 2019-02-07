@@ -22,13 +22,6 @@ module BioContainer =
     let connect str =
         (new DockerClientConfiguration(new Uri(str)) ).CreateClient()
 
-    
-    let private readFrom (stream:System.IO.Stream) =
-        let length = (stream.Length) |> int
-        let tmp : array<byte> = Array.zeroCreate length
-        stream.Read(tmp,0,length) |> ignore
-
-        System.Text.Encoding.UTF8.GetString(tmp,0,length)
 
     /// Runs a container of a specified image and keeps it running
     let initBcContextAsync (connection:DockerClient)  (image: DockerId) =
@@ -48,6 +41,7 @@ module BioContainer =
             } 
 
 
+    /// Executes a command in the biocontainer context
     let execAsync (bc:BcContext) cmd =
         async {
         
@@ -83,17 +77,50 @@ module BioContainer =
 
             let result =        
                 stdOutputStream.Position <- 0L
-                readFrom stdOutputStream
+                BioContainerIO.readFrom stdOutputStream
                     
             return result
     
         } 
         
 
-
+    /// Disposes the biocontainer context (stops and removes the underlying container)
     let disposeAsync (bc:BcContext) =
         let param = Docker.Container.ContainerParams.InitContainerRemoveParameters(Force=true)
         Docker.Container.removeContainerWithAsync bc.Connection param (Docker.DockerId.ContainerId bc.ContainerId)
+
+
+    /// Copies file from a container (only single file is supported)
+    let getFileAsync (bc:BcContext) (filePath) =
+        async {
+            let param = Docker.Container.ContainerParams.InitGetArchiveFromContainerParameters(Path=filePath)
+            let! res = Docker.Container.getArchiveFromContainerAsync  bc.Connection param false bc.ContainerId 
+            return BioContainerIO.tarToStream res.Stream
+            }
+    
+    /// Puts a stream in a container (only single file is supported)
+    let putStreamAsync (bc:BcContext) (sourceStream:System.IO.Stream) targetFileName  =
+        async {
+            let targetPath = BioContainerIO.directoryName targetFileName
+            let targetName = BioContainerIO.fileName targetFileName
+
+            // ! Set the target filename as tar-entry name to make renameing possible
+            let stream = BioContainerIO.tarOfStream targetName sourceStream
+    
+            let param = Docker.Container.ContainerParams.InitContainerPathStatParameters(AllowOverwriteDirWithFile=true, Path=targetPath)
+            do!
+                Docker.Container.extractArchiveToContainerAsync bc.Connection param (bc.ContainerId ) stream
+        
+            sourceStream.Close()
+            }
+
+    /// Copies file into a container (only single file is supported)
+    let putFileAsync (bc:BcContext) (sourceFileName:string) targetFileName  =
+        async {
+            let fileStream = new System.IO.FileStream(sourceFileName,System.IO.FileMode.Open)
+            do!
+                putStreamAsync bc fileStream targetFileName
+            }
 
 
     //let runCmdAsync (connection:DockerClient) (dockerid: DockerId) cmd =

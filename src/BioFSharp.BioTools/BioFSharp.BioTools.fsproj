@@ -17,8 +17,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Docker.fs" />
+    <Compile Include="BioContainerIO.fs" />
     <Compile Include="BioContainer.fs" />
+    <Compile Include="TargetP.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
+    <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
