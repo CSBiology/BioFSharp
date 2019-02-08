@@ -1,16 +1,17 @@
 namespace BioFSharp
 
-///Contains functions to classify peptides by their 
+///Contains functions to classify peptides based on their specificity when mapped to proteins
 module PeptideClassification =
     
     open FSharpAux
     open System.Collections.Generic
 
+    ///Direction of strand
     type StrandDirection =
         | Forward = 0
         | Reverse = 1
 
-    
+    /// Contains information about protein used to deduce its relation to other proteins
     type ProteinModelInfo<'id,'chromosomeId,'geneLocus when 'id: comparison and 'chromosomeId: comparison and 'geneLocus: comparison> = {
         Id              : 'id
         ChromosomeId    : 'chromosomeId
@@ -21,7 +22,8 @@ module PeptideClassification =
         Orthologs       : Set< ProteinModelInfo<'id,'chromosomeId,'geneLocus> >
         }
 
-    let createProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
+    /// Helper function to create ProteinModelInfo
+    let private createProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
         Id               = id
         ChromosomeId     = chromosomeId
         Strand           = strand
@@ -31,26 +33,29 @@ module PeptideClassification =
         Orthologs        = Set.ofSeq orthologs
         }       
 
+    /// Contains protein sequence and information about protein used to deduce its relation to other proteins
     type ProteinModel<'id,'chromosomeId,'geneLocus,'sequence when 'id: comparison and 'chromosomeId: comparison and 'geneLocus: comparison and 'sequence: comparison> = {
         ProteinModelInfo : ProteinModelInfo<'id,'chromosomeId,'geneLocus>
         Sequence : 'sequence 
         }
 
-    
-    let createProteinModel proteinModelInfo sequence = 
+    /// Helper function
+    let private createProteinModel proteinModelInfo sequence = 
         {ProteinModelInfo=proteinModelInfo;Sequence=sequence}
     
-
+    /// A marker for unambiguity of a peptide in protein inference 
     type PeptideEvidenceClass = 
         | Unknown   = 0
+        //Maps to exactly one isoform of one protein
         | C1a       = 1
+        //Maps to different isoforms of one protein
         | C1b       = 2
         | C2a       = 3
         | C2b       = 4
         | C3a       = 5
         | C3b       = 6
 
-    
+    /// Creates a lookup data base to assign peptides to the proteins they are contained in
     let createPeptideProteinRelation digest (protModels:seq<ProteinModel<'id,'chromosomeId,'geneLocus,'sequence> option>) =
         let ppRelation = BidirectionalDictionary<'sequence,ProteinModelInfo<'id,'chromosomeId,'geneLocus>>()
         protModels            
@@ -80,7 +85,7 @@ module PeptideClassification =
             )     
         gLocusToSplVarNr    
 
-
+    ///Assigns a PeptideEvidenceClass to the peptide by using the information given through lookup and proteinInfos
     let classify (lookUp:Dictionary<'geneLocus,int>) (peptide,proteinInfos:seq<ProteinModelInfo<_,_,'geneLocus>>) =
     
         let isGeneUnambiguous (pmi:seq< ProteinModelInfo<'id,'chromosomeId,'geneLocus> >) =
