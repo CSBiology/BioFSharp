@@ -33,9 +33,6 @@ open Newtonsoft.Json.Serialization
 open System
 
 
-let param = Docker.DotNet.Models.HostConfig()
-
-
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
 
