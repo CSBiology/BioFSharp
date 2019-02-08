@@ -24,7 +24,10 @@ module BioContainer =
 
 
     /// Connect to default local docker engine (docker deamon: "npipe://./pipe/docker_engine")
-    //let connectLocalDefault () =
+    let connectLocalDefault () =
+        // TODO: Use System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+        connect "npipe://./pipe/docker_engine"
+        
 
 
     /// Runs a container of a specified image and keeps it running
@@ -43,6 +46,12 @@ module BioContainer =
                 
             return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID}
             } 
+
+
+    /// Runs a container of a specified image and keeps it running on the local default docker engine
+    let initBcContextLocalDefaultAsync  (image: DockerId) =
+        let client = connectLocalDefault () 
+        initBcContextAsync client image
 
 
     /// Executes a command in the biocontainer context

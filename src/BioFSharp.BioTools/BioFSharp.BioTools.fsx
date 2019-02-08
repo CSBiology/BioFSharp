@@ -36,11 +36,8 @@ open System
 
 
 
-let client = Docker.connect "npipe://./pipe/docker_engine"
-
-
 let bcContext =
-    BioContainer.initBcContextAsync client TargetP.ImageTagetP
+    BioContainer.initBcContextLocalDefaultAsync TargetP.ImageTagetP
     |> Async.RunSynchronously
 
 
