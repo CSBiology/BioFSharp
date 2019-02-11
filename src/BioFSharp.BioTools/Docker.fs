@@ -317,10 +317,214 @@ module Docker =
 
                 param
 
+            /// Creates BindOptions
+            static member InitBindOptions
+                (
+                    ?Propagation
+                ) = 
+                
+                let param = new BindOptions()                                
+                Propagation |> Option.iter param.set_Propagation         
+
+                param
+
+            /// Creates VolumeOptions
+            static member InitVolumeOptions
+                (
+                    ?DriverConfig,
+                    ?Labels,
+                    ?NoCopy
+                ) = 
+                
+                let param = new VolumeOptions()                                
+                DriverConfig |> Option.iter param.set_DriverConfig         
+                Labels       |> Option.iter param.set_Labels
+                NoCopy       |> Option.iter param.set_NoCopy
+                
+                param
+
+            /// Creates TmpfsOptions
+            static member InitTmpfsOptions
+                (
+                    ?Mode,
+                    ?SizeBytes
+                ) = 
+                
+                let param = new TmpfsOptions()                                
+                Mode      |> Option.iter param.set_Mode         
+                SizeBytes |> Option.iter param.set_SizeBytes
+                
+                param
+
+            /// Creates Mount
+            static member InitMount
+                (
+                    ?Type          ,
+                    ?Source        ,
+                    ?Target        ,
+                    ?ReadOnly      ,
+                    ?BindOptions   ,
+                    ?VolumeOptions ,
+                    ?TmpfsOptions
+                ) = 
+                
+                let param = new Mount()                                
+                
+                Type          |> Option.iter param.set_Type         
+                Source        |> Option.iter param.set_Source       
+                Target        |> Option.iter param.set_Target       
+                ReadOnly      |> Option.iter param.set_ReadOnly     
+                BindOptions   |> Option.iter param.set_BindOptions  
+                VolumeOptions |> Option.iter param.set_VolumeOptions
+                TmpfsOptions  |> Option.iter param.set_TmpfsOptions 
+
+                param
+
+            /// Creates HostConfig
+            static member InitHostConfig
+                (
+                    ?ContainerIDFile     ,                        
+                    ?LogConfig           ,                  
+                    ?NetworkMode         ,                    
+                    ?PortBindings        ,                     
+                    ?RestartPolicy       ,                      
+                    ?AutoRemove          ,                   
+                    ?VolumeDriver        ,                     
+                    ?VolumesFrom         : seq<string>,                    
+                    ?CapAdd              ,               
+                    ?CapDrop             : seq<string>,                
+                    ?DNS                 : seq<string>,            
+                    ?DNSOptions          : seq<string>,                   
+                    ?DNSSearch           : seq<string>,                  
+                    ?ExtraHosts          : seq<string>,                   
+                    ?GroupAdd            : seq<string>,                 
+                    ?IpcMode             ,                
+                    ?Cgroup              ,               
+                    ?Links               : seq<string>,              
+                    ?OomScoreAdj         ,                    
+                    ?PidMode             ,                
+                    ?Privileged          ,                   
+                    ?PublishAllPorts     ,                        
+                    ?ReadonlyRootfs      ,                       
+                    ?SecurityOpt         : seq<string>,                    
+                    ?StorageOpt          ,                   
+                    ?Tmpfs               ,              
+                    ?UTSMode             ,                
+                    ?UsernsMode          ,                   
+                    ?ShmSize             ,                
+                    ?Sysctls             ,                
+                    ?Runtime             ,                
+                    ?ConsoleSize         ,                    
+                    ?Isolation           ,                  
+                    ?CPUShares           ,                  
+                    ?Memory              ,               
+                    ?NanoCPUs            ,                 
+                    ?CgroupParent        ,                     
+                    ?BlkioWeight         ,                    
+                    ?BlkioWeightDevice   : seq<_>,                          
+                    ?BlkioDeviceReadBps  : seq<_>,                           
+                    ?BlkioDeviceWriteBps : seq<_>,                            
+                    ?BlkioDeviceReadIOps : seq<_>,                            
+                    ?BlkioDeviceWriteIOps: seq<_>,                             
+                    ?CPUPeriod           ,                  
+                    ?CPUQuota            ,                 
+                    ?CPURealtimePeriod   ,                          
+                    ?CPURealtimeRuntime  ,                           
+                    ?CpusetCpus          ,                   
+                    ?CpusetMems          ,                   
+                    ?Devices             : seq<_>,                
+                    ?DiskQuota           ,                  
+                    ?KernelMemory        ,                     
+                    ?MemoryReservation   ,                          
+                    ?MemorySwap          ,                   
+                    ?MemorySwappiness    ,                         
+                    ?OomKillDisable      ,                       
+                    ?PidsLimit           ,                  
+                    ?Ulimits             : seq<Ulimit>,                
+                    ?CPUCount            ,                 
+                    ?CPUPercent          ,                   
+                    ?IOMaximumIOps       ,                      
+                    ?IOMaximumBandwidth  ,                           
+                    ?Mounts              : seq<Mount>,               
+                    ?Init                ,             
+                    ?InitPath            
+                ) = 
+                
+                let param = new HostConfig()                                
+                
+                ContainerIDFile      |> Option.iter param.set_ContainerIDFile     
+                LogConfig            |> Option.iter param.set_LogConfig           
+                NetworkMode          |> Option.iter param.set_NetworkMode         
+                PortBindings         |> Option.iter param.set_PortBindings        
+                RestartPolicy        |> Option.iter param.set_RestartPolicy       
+                AutoRemove           |> Option.iter param.set_AutoRemove          
+                VolumeDriver         |> Option.iter param.set_VolumeDriver        
+                VolumesFrom          |> Option.iter (fun v -> param.set_VolumesFrom (Collections.Generic.List(v)) )        
+                CapAdd               |> Option.iter param.set_CapAdd              
+                CapDrop              |> Option.iter (fun v -> param.set_CapDrop (Collections.Generic.List(v)) )            
+                DNS                  |> Option.iter (fun v -> param.set_DNS (Collections.Generic.List(v)) )                
+                DNSOptions           |> Option.iter (fun v -> param.set_DNSOptions (Collections.Generic.List(v)) )         
+                DNSSearch            |> Option.iter (fun v -> param.set_DNSSearch (Collections.Generic.List(v)) )
+                ExtraHosts           |> Option.iter (fun v -> param.set_ExtraHosts (Collections.Generic.List(v)) )         
+                GroupAdd             |> Option.iter (fun v -> param.set_GroupAdd (Collections.Generic.List(v)) )
+                IpcMode              |> Option.iter param.set_IpcMode           
+                Cgroup               |> Option.iter param.set_Cgroup              
+                Links                |> Option.iter (fun v -> param.set_Links (Collections.Generic.List(v)) )               
+                OomScoreAdj          |> Option.iter param.set_OomScoreAdj         
+                PidMode              |> Option.iter param.set_PidMode             
+                Privileged           |> Option.iter param.set_Privileged          
+                PublishAllPorts      |> Option.iter param.set_PublishAllPorts     
+                ReadonlyRootfs       |> Option.iter param.set_ReadonlyRootfs      
+                SecurityOpt          |> Option.iter (fun v -> param.set_SecurityOpt (Collections.Generic.List(v)) )         
+                StorageOpt           |> Option.iter param.set_StorageOpt          
+                Tmpfs                |> Option.iter param.set_Tmpfs               
+                UTSMode              |> Option.iter param.set_UTSMode             
+                UsernsMode           |> Option.iter param.set_UsernsMode          
+                ShmSize              |> Option.iter param.set_ShmSize             
+                Sysctls              |> Option.iter param.set_Sysctls             
+                Runtime              |> Option.iter param.set_Runtime             
+                ConsoleSize          |> Option.iter param.set_ConsoleSize         
+                Isolation            |> Option.iter param.set_Isolation           
+                CPUShares            |> Option.iter param.set_CPUShares           
+                Memory               |> Option.iter param.set_Memory              
+                NanoCPUs             |> Option.iter param.set_NanoCPUs            
+                CgroupParent         |> Option.iter param.set_CgroupParent        
+                BlkioWeight          |> Option.iter param.set_BlkioWeight         
+                BlkioWeightDevice    |> Option.iter (fun v -> param.set_BlkioWeightDevice  (Collections.Generic.List(v)) )  
+                BlkioDeviceReadBps   |> Option.iter (fun v -> param.set_BlkioDeviceReadBps (Collections.Generic.List(v)) ) 
+                BlkioDeviceWriteBps  |> Option.iter (fun v -> param.set_BlkioDeviceWriteBps (Collections.Generic.List(v)) )
+                BlkioDeviceReadIOps  |> Option.iter (fun v -> param.set_BlkioDeviceReadIOps (Collections.Generic.List(v)) )
+                BlkioDeviceWriteIOps |> Option.iter (fun v -> param.set_BlkioDeviceWriteIOps (Collections.Generic.List(v)) )
+                CPUPeriod            |> Option.iter param.set_CPUPeriod           
+                CPUQuota             |> Option.iter param.set_CPUQuota            
+                CPURealtimePeriod    |> Option.iter param.set_CPURealtimePeriod   
+                CPURealtimeRuntime   |> Option.iter param.set_CPURealtimeRuntime  
+                CpusetCpus           |> Option.iter param.set_CpusetCpus          
+                CpusetMems           |> Option.iter param.set_CpusetMems          
+                Devices              |> Option.iter (fun v -> param.set_Devices (Collections.Generic.List(v)) )            
+                DiskQuota            |> Option.iter param.set_DiskQuota          
+                KernelMemory         |> Option.iter param.set_KernelMemory        
+                MemoryReservation    |> Option.iter param.set_MemoryReservation   
+                MemorySwap           |> Option.iter param.set_MemorySwap          
+                MemorySwappiness     |> Option.iter (fun v -> param.set_MemorySwappiness (Nullable<int64>(v) ) )    
+                OomKillDisable       |> Option.iter (fun v -> param.set_OomKillDisable (Nullable<bool>(v) ) )     
+                PidsLimit            |> Option.iter param.set_PidsLimit           
+                Ulimits              |> Option.iter (fun v -> param.set_Ulimits (Collections.Generic.List(v)) )            
+                CPUCount             |> Option.iter param.set_CPUCount            
+                CPUPercent           |> Option.iter param.set_CPUPercent          
+                IOMaximumIOps        |> Option.iter param.set_IOMaximumIOps       
+                IOMaximumBandwidth   |> Option.iter param.set_IOMaximumBandwidth  
+                Mounts               |> Option.iter (fun v -> param.set_Mounts (Collections.Generic.List(v)) )             
+                Init                 |> Option.iter (fun v -> param.set_Init (Nullable<bool>(v) ) )                
+                InitPath             |> Option.iter param.set_InitPath 
+
+                param
+
             /// Creates CreateContainerParameters
             static member InitCreateContainerParameters
                 (
                     ?Hostname,
+                    ?HostConfig,
                     ?Domainname,
                     ?User,
                     ?AttachStdin,
@@ -350,6 +554,7 @@ module Docker =
                 let param = new CreateContainerParameters()
                 
                 Hostname         |> Option.iter param.set_Hostname       
+                HostConfig       |> Option.iter param.set_HostConfig
                 Domainname       |> Option.iter param.set_Domainname     
                 User             |> Option.iter param.set_User           
                 AttachStdin      |> Option.iter param.set_AttachStdin    
@@ -374,7 +579,7 @@ module Docker =
                 StopSignal       |> Option.iter param.set_StopSignal     
                 StopTimeout      |> Option.iter (fun v -> param.set_StopTimeout (Nullable<TimeSpan>(v) ) )   
                 Shell            |> Option.iter (fun v -> param.set_Shell (Collections.Generic.List(v)) )  
-
+                
                 param
 
                 
@@ -681,14 +886,14 @@ module Docker =
                 DriverOpts |> Option.iter param.set_DriverOpts
                 Labels     |> Option.iter param.set_Labels
                 Name       |> Option.iter param.set_Name    
-
+                
                 param
 
         /// Create volume with VolumesCreateParameters (async)
         let createAsync (connection:DockerClient) param =        
             async {                              
                 let! tmp = 
-                    connection.Volumes.CreateAsync(param,CancellationToken.None)
+                    connection.Volumes. CreateAsync(param,CancellationToken.None)
                     |> Async.AwaitTask            
         
                 return tmp
