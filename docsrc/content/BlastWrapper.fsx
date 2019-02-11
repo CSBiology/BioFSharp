@@ -202,11 +202,10 @@ let outputPath = (__SOURCE_DIRECTORY__ + "/data/Output.txt")
 (*** do-not-eval ***)
 BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
 
-(**
-    As you can see in the result file, the format is tab separated and contains the fields we specified in our our `customOutputFormat`.
-*)
 
 (**
+As you can see in the result file, the format is tab separated and contains the fields we specified in our our `customOutputFormat`.
+
 <pre>
 |# BLASTP 2.2.31+
 |# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
