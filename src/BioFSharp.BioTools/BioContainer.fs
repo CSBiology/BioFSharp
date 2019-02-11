@@ -10,11 +10,34 @@ module BioContainer =
     
     open Docker
 
+    //[<StructuredFormatDisplay("{AsString}")>]
+    type MountInfo =        
+        | NoMount        
+        | HostDir of string
+        
+        override this.ToString() =
+            match this with
+            | NoMount              -> "NoMount"
+            | HostDir _ -> sprintf "%s:%s" (MountInfo.getHostDir this) (MountInfo.getContainerPath this)      
+         
+
+        static member getContainerPath (hd:MountInfo) =
+            match hd with
+            | NoMount              -> failwithf "No mount directory set."
+            | HostDir hostdirectory -> sprintf "/data/%s" (hostdirectory.ToLower().Replace(":",""))
+
+        static member getHostDir (hd:MountInfo) =
+            match hd with
+            | NoMount              -> failwithf "No mount directory set."
+            | HostDir hostdirectory -> hostdirectory |> BioContainerIO.toUnixDirectorySeparator 
+
+
     type BcContext = {
         Id          : Guid
         Connection  : DockerClient
         ImageName   : string
         ContainerId : string
+        Mount       : MountInfo
         }
         
    
@@ -44,7 +67,7 @@ module BioContainer =
 
                 Docker.Container.startContainerWithAsync connection param container.ID
                 
-            return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID}
+            return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID;Mount=MountInfo.NoMount}
             } 
 
 
@@ -57,10 +80,12 @@ module BioContainer =
     /// Runs a container of a specified image and keeps it running. Bind mounts the host directory under /data/ (without ':' and lower letter according to BioContainer standards).
     let initBcContextWithMountAsync (connection:DockerClient) (image: DockerId) (hostdirectory:string) =
         if not (Docker.Image.exists connection image) then failwithf "Image %s does not exists! Please pull the image first." (string image )    
+        let hd = MountInfo.HostDir hostdirectory
         async {
             let! container = // volume  bind
-                let hostdirectory' = hostdirectory |> BioContainerIO.toUnixDirectorySeparator 
-                let target = sprintf "/data/%s" (hostdirectory'.ToLower().Replace(":",""))
+                
+                let hostdirectory' = MountInfo.getHostDir hd 
+                let target = MountInfo.getContainerPath hd  //sprintf "/data/%s" (hostdirectory'.ToLower().Replace(":",""))
                 let mount = Docker.Container.ContainerParams.InitMount(Type="bind",Source=hostdirectory',Target=target,ReadOnly=false)
                 let hc    = Docker.Container.ContainerParams.InitHostConfig(Mounts=[mount])
                 let param = Docker.Container.ContainerParams.InitCreateContainerParameters(User="root",HostConfig=hc,Image=string image,OpenStdin=true)
@@ -72,7 +97,7 @@ module BioContainer =
 
                 Docker.Container.startContainerWithAsync connection param container.ID
                 
-            return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID}
+            return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID;Mount=hd}
             } 
 
     /// Executes a command in the biocontainer context
