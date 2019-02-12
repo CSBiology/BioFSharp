@@ -9,6 +9,7 @@ open Docker.DotNet.Models
 module BioContainer =
     
     open Docker
+    open System.IO
 
     //[<StructuredFormatDisplay("{AsString}")>]
     type MountInfo =        
@@ -20,16 +21,70 @@ module BioContainer =
             | NoMount              -> "NoMount"
             | HostDir _ -> sprintf "%s:%s" (MountInfo.getHostDir this) (MountInfo.getContainerPath this)      
          
-
+        ///get the full mounted unix path used in the container 
         static member getContainerPath (hd:MountInfo) =
             match hd with
-            | NoMount              -> failwithf "No mount directory set."
-            | HostDir hostdirectory -> sprintf "/data/%s" (hostdirectory.ToLower().Replace(":",""))
+            | NoMount               -> failwithf "No mount directory set."
+            | HostDir hostdirectory -> 
+                if hostdirectory.Contains(" ") then 
+                    failwithf "paths mounted to docker cannot contain spaces.\r\nThe path %s contains spaces." hostdirectory
+                else
+                    sprintf "/data/%s" ((Path.GetFullPath(hostdirectory).Replace(":","")) |> BioContainerIO.toUnixDirectorySeparator )
 
+        ///get the path of the windows host directory used to mount in the container
         static member getHostDir (hd:MountInfo) =
             match hd with
-            | NoMount              -> failwithf "No mount directory set."
-            | HostDir hostdirectory -> hostdirectory |> BioContainerIO.toUnixDirectorySeparator 
+            | NoMount               -> failwithf "No mount directory set."
+            | HostDir hostdirectory -> Path.GetFullPath (hostdirectory)
+
+        ///get the container full mounted unix path of a file in a subfolder of the mounted host directory
+        static member containerPathOf (m:MountInfo) (filePath:string) =
+            let winDir          = MountInfo.getHostDir m
+
+            let containerBase   = MountInfo.getContainerPath m
+
+            printfn "Input filePath: %s" filePath
+            //spaces not supported in unix paths
+            if filePath.Contains(" ") then
+                failwithf "paths mounted to docker cannot contain spaces.\r\nThe path %s contains spaces." filePath
+            else
+                //the given path is relative
+                if filePath.StartsWith(".") then
+                    printfn "Path is relative"
+                    let fullFilePath = 
+                        //get absolute combined path
+                        Path.Combine(containerBase,filePath)
+                        |> Path.GetFullPath
+                        |> BioContainerIO.toUnixDirectorySeparator
+
+                    //check that combined path does not go above base (eg base/../../)
+                    if (fullFilePath.StartsWith(containerBase)) then
+                        printfn "Relative Path is correct"
+                        fullFilePath |> BioContainerIO.toUnixDirectorySeparator
+                    else
+                        failwithf ("the relative path \r\n%s\r\n escapes the scope of the container base path \r\n%s\r\n. the combined path is:\r\n%s\r\n") filePath containerBase fullFilePath
+
+                else
+                    printfn "Path is absolute"
+                    //Path is not relative. Use Path functions to resolve ../ and check if absolute path is a subpath of the windows base path
+                    printfn "filePath: %s" filePath
+                    let fullFilePath = filePath |> Path.GetFullPath
+                    printfn "fullPath: %s" fullFilePath
+                    if fullFilePath.StartsWith(winDir) then
+                        printfn "Full file path is subpath"
+                        //if absolute windows path is correct, replace it with the containerbase
+                        fullFilePath.Replace(winDir,containerBase)
+                        |> fun x -> x.Replace(":","")
+                        |> BioContainerIO.toUnixDirectorySeparator
+                    else 
+                        failwithf "The given path \r\n%s\r\n is not a subpath of the mounted host directory \r\n%s\r\n. If you want to use relative paths start them with ./" fullFilePath winDir
+                        
+
+
+            
+
+
+            
 
 
     type BcContext = {
@@ -100,7 +155,58 @@ module BioContainer =
             return {Id=Guid.NewGuid();Connection=connection;ImageName=string image;ContainerId=container.ID;Mount=hd}
             } 
 
-    /// Executes a command in the biocontainer context
+    /// Executes a command in the biocontainer context and returns the either the standard output of the container or the standard error of the container if stdout is empty
+    let execReturnAsync (bc:BcContext) cmd =
+        async {
+        
+            let! execContainer =
+                let param = 
+                    Docker.Container.ContainerParams.InitContainerExecCreateParameters(                                        
+                        AttachStderr=true,
+                        AttachStdout=true,                
+                        AttachStdin=false,
+                        Cmd=cmd,
+                        Detach=false                    
+                        )
+
+                Docker.Container.execCreateContainerAsync bc.Connection param (bc.ContainerId)
+
+            let! stream =
+                let param = 
+                    Docker.Container.ContainerParams.InitContainerExecStartParameters(
+                        AttachStderr=true,
+                        AttachStdout=true,                
+                        AttachStdin=false,                   
+                        Cmd=cmd
+                        )                
+                Docker.Container.startContainerWithExecConfigAsync bc.Connection param execContainer.ID
+
+
+            let stdOutputStream = new System.IO.MemoryStream()
+            let stdErrStream = new System.IO.MemoryStream()
+            let streamTask =
+                stream.CopyOutputToAsync(null,stdOutputStream,stdErrStream,CancellationToken.None)             
+                
+            do! streamTask |> Async.AwaitTask
+
+
+            let result =        
+                if stdOutputStream.Length < 1L then
+                    stdErrStream.Position <- 0L
+                    BioContainerIO.readFrom stdErrStream
+                else
+                    stdOutputStream.Position <- 0L
+                    BioContainerIO.readFrom stdOutputStream
+                    
+            if stdErrStream.Length > 0L then
+                stdErrStream.Position <- 0L
+                System.Console.Error.Write(BioContainerIO.readFrom stdErrStream)
+
+            return result
+    
+        } 
+  
+    ///Executes a command in the biocontainer context. Passes stdout and stderr of the container to stoud/stderr.
     let execAsync (bc:BcContext) cmd =
         async {
         
@@ -128,17 +234,23 @@ module BioContainer =
 
 
             let stdOutputStream = new System.IO.MemoryStream()
+            let stdErrStream = new System.IO.MemoryStream()
             let streamTask =
-                stream.CopyOutputToAsync(null,stdOutputStream,null,CancellationToken.None)             
+                stream.CopyOutputToAsync(null,stdOutputStream,stdErrStream,CancellationToken.None)             
                 
             do! streamTask |> Async.AwaitTask
 
 
-            let result =        
+
+            if stdErrStream.Length > 0L then
+                stdErrStream.Position <- 0L
+                System.Console.Error.Write(BioContainerIO.readFrom stdErrStream)
+
+            if stdOutputStream.Length > 0L then
                 stdOutputStream.Position <- 0L
-                BioContainerIO.readFrom stdOutputStream
+                System.Console.Write(BioContainerIO.readFrom stdOutputStream)
                     
-            return result
+            return ()
     
         } 
         

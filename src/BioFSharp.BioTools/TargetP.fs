@@ -83,7 +83,7 @@ module TargetP =
             do!
                 BioContainer.putStreamAsync bcContext fsaStream tmpFile
             let! targepResult =
-                BioContainer.execAsync bcContext (tp@[tmpFile])
+                BioContainer.execReturnAsync bcContext (tp@[tmpFile])
             //do!
             //    BioContainer.disposeAsync bcContext
  
