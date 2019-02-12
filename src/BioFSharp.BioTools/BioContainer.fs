@@ -40,17 +40,14 @@ module BioContainer =
         ///get the container full mounted unix path of a file in a subfolder of the mounted host directory
         static member containerPathOf (m:MountInfo) (filePath:string) =
             let winDir          = MountInfo.getHostDir m
-
             let containerBase   = MountInfo.getContainerPath m
 
-            printfn "Input filePath: %s" filePath
             //spaces not supported in unix paths
             if filePath.Contains(" ") then
                 failwithf "paths mounted to docker cannot contain spaces.\r\nThe path %s contains spaces." filePath
             else
                 //the given path is relative
                 if filePath.StartsWith(".") then
-                    printfn "Path is relative"
                     let fullFilePath = 
                         //get absolute combined path
                         Path.Combine(containerBase,filePath)
@@ -59,19 +56,15 @@ module BioContainer =
 
                     //check that combined path does not go above base (eg base/../../)
                     if (fullFilePath.StartsWith(containerBase)) then
-                        printfn "Relative Path is correct"
                         fullFilePath |> BioContainerIO.toUnixDirectorySeparator
                     else
                         failwithf ("the relative path \r\n%s\r\n escapes the scope of the container base path \r\n%s\r\n. the combined path is:\r\n%s\r\n") filePath containerBase fullFilePath
 
                 else
-                    printfn "Path is absolute"
                     //Path is not relative. Use Path functions to resolve ../ and check if absolute path is a subpath of the windows base path
-                    printfn "filePath: %s" filePath
+                    // TO-DO: make subpath matchin non-case-sensitive because that works on the windows side
                     let fullFilePath = filePath |> Path.GetFullPath
-                    printfn "fullPath: %s" fullFilePath
                     if fullFilePath.StartsWith(winDir) then
-                        printfn "Full file path is subpath"
                         //if absolute windows path is correct, replace it with the containerbase
                         fullFilePath.Replace(winDir,containerBase)
                         |> fun x -> x.Replace(":","")
