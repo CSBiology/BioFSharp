@@ -195,20 +195,29 @@ module Blast =
 
     let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeDbParams list) = 
 
-        let tp = "makeblastdb"::((opt |> List.map (MakeDbParams.makeCmdWith bcContext.Mount) |> List.concat))
-        printfn "%A" tp
+        let cmds = (opt |> List.map (MakeDbParams.makeCmdWith bcContext.Mount))
+        let tp = "makeblastdb"::(cmds |> List.concat)
+
+        printfn "Starting process makeblastdb\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
         async {
                 let! res = BioContainer.execAsync bcContext tp           
                 return res
         }
 
     let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeDbParams list) =
+
         runMakeBlastDBAsync bcContext opt
         |> Async.RunSynchronously
 
     let runBlastPAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
-        let tp = "blastp"::((opt |> List.map (BlastParams.makeCmdWith bcContext.Mount) |> List.concat))
-        printfn "%A" tp
+        let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
+        let tp = "blastp"::(cmds |> List.concat)
+
+        printfn "Starting process blastp\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
         async {
                 let! res = BioContainer.execAsync bcContext tp           
                 return res
@@ -219,8 +228,12 @@ module Blast =
         |> Async.RunSynchronously
 
     let runBlastNAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
-        let tp = "blastn"::((opt |> List.map (BlastParams.makeCmdWith bcContext.Mount) |> List.concat))
-        printfn "%A" tp
+        let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
+        let tp = "blastn"::(cmds |> List.concat)
+
+        printfn "Starting process blastn\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
         async {
                 let! res = BioContainer.execAsync bcContext tp           
                 return res
