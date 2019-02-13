@@ -20,6 +20,7 @@
     <Compile Include="BioContainerIO.fs" />
     <Compile Include="BioContainer.fs" />
     <Compile Include="Blast.fs" />
+    <Compile Include="ClustalO.fs" />
     <Compile Include="TargetP.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
   </ItemGroup>

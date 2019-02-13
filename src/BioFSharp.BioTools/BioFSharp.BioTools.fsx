@@ -14,6 +14,7 @@
 #load "BioContainer.fs"
 #load "TargetP.fs"
 #load "Blast.fs"
+#load "ClustalO.fs"
 
 open System.Threading
 open System.Threading
@@ -443,3 +444,34 @@ BioContainer.execAsync blastContext ["makeblastdb"; "-dbtype"; "prot" ;"-in"; "/
 
 BioContainer.disposeAsync blastContext
 |> Async.RunSynchronously
+
+
+open ClustalO
+
+let clustalImage = Docker.ImageName "clustal-omega"
+
+let clustalContext = 
+    BioContainer.initBcContextWithMountAsync client clustalImage @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    |> Async.RunSynchronously
+
+// ClustalO tests
+let clustalOParamz = [
+    ClustalOParams.Input 
+        (
+            FileInput.SequenceFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA",
+            [
+                InputCustom.Format FileFormat.FastA
+            ]
+        )
+    ClustalOParams.Output 
+        (
+            @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.aln",
+            []
+        )
+    ClustalOParams.Miscellaneous 
+        [
+            MiscellaneousCustom.Force
+        ]
+]
+
+runClustalO clustalContext clustalOParamz
