@@ -1,3 +1,9 @@
+#### 0.0.14 - Tuesday, February 12, 2019
+ * Addition of blast biocontainer support for makeblastdb, blastp, blastn with full parameter wrapping
+ * Extension of BioContainer functionality:
+   * Add windows/unix path conversions and subpath matching to MounInfo
+   * Add execReturnAsync (returns stdout of docker container) and execAsync (redirects stdout/stderr of container)
+
 #### 0.0.13 - Friday, February 8, 2019
 * Addition of the BioTools project, which uses docker.dotnet to use docker images and stream their output to fsi
 * Low level wrapping of multiple docker.dotnet functions for F#

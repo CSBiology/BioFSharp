@@ -432,6 +432,8 @@ let blastPParamz = [
 runMakeBlastDBAsync blastContext paramz
 |> Async.RunSynchronously
 
+runMakeBlastDB blastContext paramz
+
 runBlastPAsync blastContext blastPParamz
 |> Async.RunSynchronously
 
