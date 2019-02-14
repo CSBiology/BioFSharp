@@ -15,6 +15,7 @@
 #load "TargetP.fs"
 #load "Blast.fs"
 #load "ClustalO.fs"
+#load "HMMER.fs"
 
 open System.Threading
 open System.Threading
@@ -475,3 +476,20 @@ let clustalOParamz = [
 ]
 
 runClustalO clustalContext clustalOParamz
+
+open HMMER
+open HMMER.HMMbuild
+
+let HMMERImage =  Docker.ImageName "hmmer"
+
+let hmmerContext = 
+    BioContainer.initBcContextWithMountAsync client HMMERImage @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    |> Async.RunSynchronously
+
+let hmmbuildParamz = 
+    [
+        InputMSAFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\hmmer_testfiles\globins4.sto"
+        OutputHMMFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\hmmer_testfiles\testOutput.hmm"
+    ]
+
+runHMMbuild hmmerContext hmmbuildParamz
