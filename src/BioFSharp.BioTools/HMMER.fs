@@ -21,6 +21,97 @@ module HMMER =
             | DNA       ->  ["--dna"]
             | RNA       ->  ["--rna"]
 
+    ///Options controlling reporting thresholds:
+    //  -E <x>     : report sequences <= this E-value threshold in output  [10.0]  (x>0)
+    //  -T <x>     : report sequences >= this score threshold in output
+    //  --domE <x> : report domains <= this E-value threshold in output  [10.0]  (x>0)
+    //  --domT <x> : report domains >= this score cutoff in output
+
+    type ReportingThresholdOptions =
+        ///report sequences <= this E-value threshold in output
+        | MaxSequenceEvalue of float
+        ///report sequences >= this score threshold in output
+        | MinSequenceScore  of float
+        ///report domains <= this E-value threshold in output
+        | MaxDomainEvalue   of float
+        ///report domains >= this score cutoff in output
+        | MinDomainScore    of float
+
+        static member make = 
+            function
+            | MaxSequenceEvalue t   -> ["-E"; string t]
+            | MinSequenceScore  t   -> ["-T"; string t]
+            | MaxDomainEvalue   t   -> ["--domE"; string t]
+            | MinDomainScore    t   -> ["--domT"; string t]
+
+    ///Options controlling inclusion (significance) thresholds:
+    //  --incE <x>    : consider sequences <= this E-value threshold as significant
+    //  --incT <x>    : consider sequences >= this score threshold as significant
+    //  --incdomE <x> : consider domains <= this E-value threshold as significant
+    //  --incdomT <x> : consider domains >= this score threshold as significant
+
+    type InclusionThresholdOptions =
+        ///consider sequences <= this E-value threshold as significant
+        | MaxSequenceEvalue of float
+        ///consider sequences >= this score threshold as significant 
+        | MinSequenceScore  of float
+        ///consider domains <= this E-value threshold as significant
+        | MaxDomainEvalue   of float
+        ///consider domains >= this score threshold as significant
+        | MinDomainScore    of float
+
+        static member make = 
+            function
+            | MaxSequenceEvalue t   -> ["-incE"; string t]
+            | MinSequenceScore  t   -> ["-incT"; string t]
+            | MaxDomainEvalue   t   -> ["--incdomE"; string t]
+            | MinDomainScore    t   -> ["--incdomT"; string t]
+        
+    ///Options controlling model-specific thresholding:
+    //  --cut_ga : use profile's GA gathering cutoffs to set all thresholding
+    //  --cut_nc : use profile's NC noise cutoffs to set all thresholding
+    //  --cut_tc : use profile's TC trusted cutoffs to set all thresholding
+
+    type ModelSpecificThresholdOptions =
+        ///use profile's GA gathering cutoffs to set all thresholding
+        | GatheringCutoff
+        ///use profile's NC noise cutoffs to set all thresholding
+        | NoiseCutoff
+        ///use profile's TC trusted cutoffs to set all thresholding
+        | TrustedCutoff
+
+        static member make =
+            function
+            | GatheringCutoff   -> ["--cut_ga"]
+            | NoiseCutoff       -> ["--cut_nc"]
+            | TrustedCutoff     -> ["--cut_tc"]
+
+    ///Options controlling acceleration heuristics:
+    //  --max    : Turn all heuristic filters off (less speed, more power)
+    //  --F1 <x> : Stage 1 (MSV) threshold: promote hits w/ P <= F1  [0.02]
+    //  --F2 <x> : Stage 2 (Vit) threshold: promote hits w/ P <= F2  [1e-3]
+    //  --F3 <x> : Stage 3 (Fwd) threshold: promote hits w/ P <= F3  [1e-5]
+    //  --nobias : turn off composition bias filter
+
+    type AccelerationHeuristicsOptions =
+        ///Turn all heuristic filters off (less speed, more power)
+        | NoFilters
+        ///Stage 1 (MSV) threshold: promote hits w/ P <= F1
+        | MSVThreshold  of float
+        ///Stage 2 (Vit) threshold: promote hits w/ P <= F2
+        | VitThreshold  of float
+        ///Stage 3 (Fwd) threshold: promote hits w/ P <= F3
+        | FwdThreshold  of float 
+        ///turn off composition bias filter
+        | NoBiasFilter
+
+        static member make =
+            function
+            | NoFilters     -> ["max"]
+            | MSVThreshold t-> ["F1"; string t]
+            | VitThreshold t-> ["F2"; string t]
+            | FwdThreshold t-> ["F3"; string t]
+            | NoBiasFilter  -> ["nobias"]
     ///hmmbuild - construct profiles from multiple sequence alignments
     module HMMbuild =
         //Usage: hmmbuild [-options] <hmmfile_out> <msafile>
@@ -515,97 +606,7 @@ module HMMER =
                 | UnlimitedTextLineWidth        -> ["--notextw "]
                 | MaxTextLineWidth lw           -> ["--textw"]
 
-        ///Options controlling reporting thresholds:
-        //  -E <x>     : report sequences <= this E-value threshold in output  [10.0]  (x>0)
-        //  -T <x>     : report sequences >= this score threshold in output
-        //  --domE <x> : report domains <= this E-value threshold in output  [10.0]  (x>0)
-        //  --domT <x> : report domains >= this score cutoff in output
-
-        type ReportingThresholdOptions =
-            ///report sequences <= this E-value threshold in output
-            | MaxSequenceEvalue of float
-            ///report sequences >= this score threshold in output
-            | MinSequenceScore  of float
-            ///report domains <= this E-value threshold in output
-            | MaxDomainEvalue   of float
-            ///report domains >= this score cutoff in output
-            | MinDomainScore    of float
-
-            static member make = 
-                function
-                | MaxSequenceEvalue t   -> ["-E"; string t]
-                | MinSequenceScore  t   -> ["-T"; string t]
-                | MaxDomainEvalue   t   -> ["--domE"; string t]
-                | MinDomainScore    t   -> ["--domT"; string t]
-
-        ///Options controlling inclusion (significance) thresholds:
-        //  --incE <x>    : consider sequences <= this E-value threshold as significant
-        //  --incT <x>    : consider sequences >= this score threshold as significant
-        //  --incdomE <x> : consider domains <= this E-value threshold as significant
-        //  --incdomT <x> : consider domains >= this score threshold as significant
-
-        type InclusionThresholdOptions =
-            ///consider sequences <= this E-value threshold as significant
-            | MaxSequenceEvalue of float
-            ///consider sequences >= this score threshold as significant 
-            | MinSequenceScore  of float
-            ///consider domains <= this E-value threshold as significant
-            | MaxDomainEvalue   of float
-            ///consider domains >= this score threshold as significant
-            | MinDomainScore    of float
-
-            static member make = 
-                function
-                | MaxSequenceEvalue t   -> ["-incE"; string t]
-                | MinSequenceScore  t   -> ["-incT"; string t]
-                | MaxDomainEvalue   t   -> ["--incdomE"; string t]
-                | MinDomainScore    t   -> ["--incdomT"; string t]
         
-        ///Options controlling model-specific thresholding:
-        //  --cut_ga : use profile's GA gathering cutoffs to set all thresholding
-        //  --cut_nc : use profile's NC noise cutoffs to set all thresholding
-        //  --cut_tc : use profile's TC trusted cutoffs to set all thresholding
-
-        type ModelSpecificThresholdOptions =
-            ///use profile's GA gathering cutoffs to set all thresholding
-            | GatheringCutoff
-            ///use profile's NC noise cutoffs to set all thresholding
-            | NoiseCutoff
-            ///use profile's TC trusted cutoffs to set all thresholding
-            | TrustedCutoff
-
-            static member make =
-                function
-                | GatheringCutoff   -> ["--cut_ga"]
-                | NoiseCutoff       -> ["--cut_nc"]
-                | TrustedCutoff     -> ["--cut_tc"]
-
-        ///Options controlling acceleration heuristics:
-        //  --max    : Turn all heuristic filters off (less speed, more power)
-        //  --F1 <x> : Stage 1 (MSV) threshold: promote hits w/ P <= F1  [0.02]
-        //  --F2 <x> : Stage 2 (Vit) threshold: promote hits w/ P <= F2  [1e-3]
-        //  --F3 <x> : Stage 3 (Fwd) threshold: promote hits w/ P <= F3  [1e-5]
-        //  --nobias : turn off composition bias filter
-
-        type AccelerationHeuristicsOptions =
-            ///Turn all heuristic filters off (less speed, more power)
-            | NoFilters
-            ///Stage 1 (MSV) threshold: promote hits w/ P <= F1
-            | MSVThreshold  of float
-            ///Stage 2 (Vit) threshold: promote hits w/ P <= F2
-            | VitThreshold  of float
-            ///Stage 3 (Fwd) threshold: promote hits w/ P <= F3
-            | FwdThreshold  of float 
-            ///turn off composition bias filter
-            | NoBiasFilter
-
-            static member make =
-                function
-                | NoFilters     -> ["max"]
-                | MSVThreshold t-> ["F1"; string t]
-                | VitThreshold t-> ["F2"; string t]
-                | FwdThreshold t-> ["F3"; string t]
-                | NoBiasFilter  -> ["nobias"]
 
         ///Other expert options:
         //  --nonull2     : turn off biased composition score corrections
@@ -718,3 +719,133 @@ module HMMER =
         let runHMMalign (bcContext:BioContainer.BcContext) (opt:HMMsearchParams list) =
             runHMMsearchAsync bcContext opt
             |> Async.RunSynchronously
+
+    ///hmmscan - search sequence(s) against a profile database
+    module HMMscan =
+        
+    //Usage: hmmscan [-options] <hmmdb> <seqfile>
+
+        ///Options controlling output:
+        //  -o <f>           : direct output to file <f>, not stdout
+        //  --tblout <f>     : save parseable table of per-sequence hits to file <f>
+        //  --domtblout <f>  : save parseable table of per-domain hits to file <f>
+        //  --pfamtblout <f> : save table of hits and domains to file, in Pfam format <f>
+        //  --acc            : prefer accessions over names in output
+        //  --noali          : don't output alignments, so output is smaller
+        //  --notextw        : unlimit ASCII text output line width
+        //  --textw <n>      : set max width of ASCII text output lines  [120]  (n>=120)
+
+        //TO-DO: maybe unify overlap with output direcction options of other hmmer functions
+        type OutputDirectionsOptions =
+            ///direct output to file <f>, not stdout
+            | OutputToFile              of string
+            ///save parseable table of per-sequence hits to file <f>
+            | HitsToPerSequenceTable    of string
+            ///save parseable table of per-domain hits to file <f>
+            | HitsToPerDomainTable      of string
+            ///save table of hits and domains to file, in Pfam format <f>
+            | HitsToPfam                of string
+            ///prefer accessions over names in output
+            | PreferAccessionsOverNames
+            ///don't output alignments, so output is smaller
+            | NoAlignments
+            ///unlimit ASCII text output line width
+            | UnlimitedTextLineWidth
+            ///set max width of ASCII text output lines
+            | MaxTextLineWidth          of int
+
+            static member make = 
+                function
+                | OutputToFile path             -> ["-o"; path]
+                | HitsToPerSequenceTable path   -> ["--tblout"; path]
+                | HitsToPerDomainTable path     -> ["--domtblout"; path]
+                | HitsToPfam path               -> ["--pfamtblout"; path]
+                | PreferAccessionsOverNames     -> ["--acc"]
+                | NoAlignments                  -> ["--noali"]
+                | UnlimitedTextLineWidth        -> ["--notextw "]
+                | MaxTextLineWidth lw           -> ["--textw"]
+
+            static member makeWith (m:MountInfo) =
+                let cPath p = (MountInfo.containerPathOf m p)
+                function
+                | OutputToFile path             -> ["-o"; cPath path]
+                | HitsToPerSequenceTable path   -> ["--tblout"; cPath path]
+                | HitsToPerDomainTable path     -> ["--domtblout"; cPath path]
+                | HitsToPfam path               -> ["--pfamtblout"; cPath path]
+                | PreferAccessionsOverNames     -> ["--acc"]
+                | NoAlignments                  -> ["--noali"]
+                | UnlimitedTextLineWidth        -> ["--notextw "]
+                | MaxTextLineWidth lw           -> ["--textw"]
+
+        ///Other expert options:
+        //    --nonull2     : turn off biased composition score corrections
+        //    -Z <x>        : set # of comparisons done, for E-value calculation
+        //    --domZ <x>    : set # of significant seqs, for domain E-value calculation
+        //    --seed <n>    : set RNG seed to <n> (if 0: one-time arbitrary seed)  [42]
+        //    --qformat <s> : assert input <seqfile> is in format <s>: no autodetection
+        //    --daemon      : run program as a daemon
+        //    --cpu <n>     : number of parallel CPU workers to use for multithreads
+    
+        type MiscellaneousOptions =
+            ///turn off biased composition score corrections
+            | TurnOffBiasedScoreCorrections
+            ///set # of comparisons done, for E-value calculation
+            | EValueComparisons     of int
+            ///set # of significant seqs, for domain E-value calculation
+            | NumberOfSigSeqs       of int
+            ///set RNG seed to <n> (if 0: one-time arbitrary seed)
+            | RNGSeed               of int
+            ///assert target <seqfile> is in format <s>: no autodetection
+            | SequenceFileFormat    of string
+            ///number of parallel CPU workers to use for multithreads
+            | Threads               of int   
+            ///run program as a daemon
+            | RunAsDaemon
+            
+            static member make =
+                function
+                | TurnOffBiasedScoreCorrections -> ["--nonull2"]
+                | EValueComparisons n           -> ["-Z"; string n]
+                | NumberOfSigSeqs n             -> ["--domZ"; string n]
+                | RNGSeed s                     -> ["--seed"; string s]
+                | SequenceFileFormat f          -> ["--qformat"; f]
+                | Threads t                     -> ["--cpu"; string t]
+                | RunAsDaemon                   -> ["--daemon"]
+
+
+        type HMMscanParams =
+            | InputHMMDB                 of string
+            | InputSequenceFile          of string
+            | OutputDirections           of OutputDirectionsOptions list
+            ///Options controlling reporting thresholds
+            | ReportingThreshold        of ReportingThresholdOptions list
+            ///Options controlling inclusion (significance) thresholds
+            | InclusionThreshold        of InclusionThresholdOptions list
+            ///Options controlling model-specific thresholding
+            | ModelSpecificThreshold    of ModelSpecificThresholdOptions list
+            ///Options controlling acceleration heuristics
+            | AccelerationHeuristics    of AccelerationHeuristicsOptions list
+            ///Other expert options
+            | Miscellaneous             of MiscellaneousOptions list
+
+            static member makeCmd = function
+                | InputHMMDB path               -> [path]
+                | InputSequenceFile path        -> [path]
+                | OutputDirections pList        -> pList |> List.map OutputDirectionsOptions.make         |> List.concat
+                | ReportingThreshold pList      -> pList |> List.map ReportingThresholdOptions.make       |> List.concat
+                | InclusionThreshold pList      -> pList |> List.map InclusionThresholdOptions.make       |> List.concat
+                | ModelSpecificThreshold pList  -> pList |> List.map ModelSpecificThresholdOptions.make   |> List.concat
+                | AccelerationHeuristics pList  -> pList |> List.map AccelerationHeuristicsOptions.make   |> List.concat
+                | Miscellaneous   pList         -> pList |> List.map MiscellaneousOptions.make            |> List.concat
+
+            static member makeCmdWith (m:MountInfo) =
+                let cPath p = (MountInfo.containerPathOf m p)
+                function
+                | InputHMMDB path               -> [cPath path]
+                | InputSequenceFile path        -> [cPath path]
+                | OutputDirections pList        -> pList |> List.map (OutputDirectionsOptions.makeWith m) |> List.concat
+                | ReportingThreshold pList      -> pList |> List.map ReportingThresholdOptions.make       |> List.concat
+                | InclusionThreshold pList      -> pList |> List.map InclusionThresholdOptions.make       |> List.concat
+                | ModelSpecificThreshold pList  -> pList |> List.map ModelSpecificThresholdOptions.make   |> List.concat
+                | AccelerationHeuristics pList  -> pList |> List.map AccelerationHeuristicsOptions.make   |> List.concat
+                | Miscellaneous   pList         -> pList |> List.map MiscellaneousOptions.make            |> List.concat
