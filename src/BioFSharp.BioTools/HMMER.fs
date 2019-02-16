@@ -3,6 +3,8 @@
 // adaped from the hmmer usage guide at http://eddylab.org/software/hmmer/Userguide.pdf
 // HMMER: biosequence analysis using profile hidden Markov models (http://hmmer.org/)
 
+///HMMER - Biological sequence analysis using profile hidden Markov models
+///Functions providing an API for the HMMER 3 biocontainer
 module HMMER =
 
     open BioContainer
@@ -112,6 +114,7 @@ module HMMER =
             | VitThreshold t-> ["F2"; string t]
             | FwdThreshold t-> ["F3"; string t]
             | NoBiasFilter  -> ["nobias"]
+
     ///hmmbuild - construct profiles from multiple sequence alignments
     module HMMbuild =
         //Usage: hmmbuild [-options] <hmmfile_out> <msafile>
@@ -443,6 +446,8 @@ module HMMER =
  
             }
         
+        ///For each multiple sequence alignment in a msafile build a profile HMM and save it to a
+        ///new hmmfile.
         let runHMMbuild (bcContext:BioContainer.BcContext) (opt:HMMbuildParams list) = 
             runHMMbuildAsync bcContext opt
             |> Async.RunSynchronously
@@ -509,7 +514,7 @@ module HMMER =
 
 
         let runHMMalignAsync (bcContext:BioContainer.BcContext) (opt:HMMalignParams list) = 
-            //Usage: hmmbuild [-options] <hmmfile_out> <msafile> -> filter for in/out and move them to the end
+            //Usage: hmmalign [options] hmmfile seqfile
             let hmm     = 
                 opt 
                 |> List.filter (fun p -> match p with |InputHMMFile _ -> true |_ -> false)
@@ -530,7 +535,7 @@ module HMMER =
             let cmds = (options |> List.map (HMMalignParams.makeCmdWith bcContext.Mount))
             let tp = ("hmmalign"::(cmds |> List.concat))@hmm@seqFile
 
-            printfn "Starting process hmmalignn\r\nparameters:"
+            printfn "Starting process hmmalign\r\nparameters:"
             printfn "%s" hmm.[0]
             printfn "%s" seqFile.[0]
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -542,7 +547,7 @@ module HMMER =
             }
         ///Perform a multiple sequence alignment of all the sequences in seqfile by aligning
         ///them individually to the profile HMM in hmmfile. The new alignment is output to
-        ///stdout.
+        ///stdout (when not specified otherwise).
         let runHMMalign (bcContext:BioContainer.BcContext) (opt:HMMalignParams list) =
             runHMMalignAsync bcContext opt
             |> Async.RunSynchronously
@@ -682,7 +687,7 @@ module HMMER =
             //Usage: hmmsearch [options] <hmmfile> <seqdb>
 
         let runHMMsearchAsync (bcContext:BioContainer.BcContext) (opt:HMMsearchParams list) = 
-            //Usage: hmmbuild [-options] <hmmfile_out> <msafile> -> filter for in/out and move them to the end
+            //hmmsearch [options] hmmfile seqdb
             let hmm     = 
                 opt 
                 |> List.filter (fun p -> match p with |InputHMMFile _ -> true |_ -> false)
@@ -701,9 +706,9 @@ module HMMER =
 
             let options = opt |> List.filter (fun p -> match p with |InputHMMFile _ |SequenceDB _ -> false |_ -> true)
             let cmds = (options |> List.map (HMMsearchParams.makeCmdWith bcContext.Mount))
-            let tp = ("hmmalign"::(cmds |> List.concat))@hmm@seqDB
+            let tp = ("hmmsearch"::(cmds |> List.concat))@hmm@seqDB
 
-            printfn "Starting process hmmalignn\r\nparameters:"
+            printfn "Starting process hmmsearch\r\nparameters:"
             printfn "%s" hmm.[0]
             printfn "%s" seqDB.[0]
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -713,9 +718,11 @@ module HMMER =
                     return res
  
             }
-        ///Perform a multiple sequence alignment of all the sequences in seqfile by aligning
-        ///them individually to the profile HMM in hmmfile. The new alignment is output to
-        ///stdout.
+
+        ///hmmsearch is used to search one or more profiles against a sequence database. For each
+        ///profile in hmmfile, use that query profile to search the target database of sequences in
+        ///seqdb, and output ranked lists of the sequences with the most significant matches to
+        ///the profile
         let runHMMalign (bcContext:BioContainer.BcContext) (opt:HMMsearchParams list) =
             runHMMsearchAsync bcContext opt
             |> Async.RunSynchronously
@@ -849,3 +856,163 @@ module HMMER =
                 | ModelSpecificThreshold pList  -> pList |> List.map ModelSpecificThresholdOptions.make   |> List.concat
                 | AccelerationHeuristics pList  -> pList |> List.map AccelerationHeuristicsOptions.make   |> List.concat
                 | Miscellaneous   pList         -> pList |> List.map MiscellaneousOptions.make            |> List.concat
+
+        let runHMMscanAsync (bcContext:BioContainer.BcContext) (opt:HMMscanParams list) = 
+            //Usage: hmmscan [-options] <hmmdb> <seqfile>
+            let hmmDB     = 
+                opt 
+                |> List.filter (fun p -> match p with |InputHMMDB _ -> true |_ -> false)
+                |> fun x -> if List.isEmpty x then
+                                failwith "no input hmm db given"
+                            else 
+                                HMMscanParams.makeCmdWith bcContext.Mount x.[0]
+
+            let inSeq     = 
+                opt 
+                |> List.filter (fun p -> match p with |InputSequenceFile _ -> true |_ -> false)
+                |> fun x -> if List.isEmpty x then
+                                failwith "no input sequence file given"
+                            else 
+                                HMMscanParams.makeCmdWith bcContext.Mount x.[0]
+
+            let options = opt |> List.filter (fun p -> match p with |InputHMMDB _ |InputSequenceFile _ -> false |_ -> true)
+            let cmds = (options |> List.map (HMMscanParams.makeCmdWith bcContext.Mount))
+            let tp = ("hmmscan"::(cmds |> List.concat))@hmmDB@inSeq
+
+            printfn "Starting process hmmscan\r\nparameters:"
+            printfn "%s" hmmDB.[0]
+            printfn "%s" inSeq.[0]
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        ///hmmscan is used to search protein sequences against collections of protein profiles.
+        ///For each sequence in seqfile, use that query sequence to search the target database
+        ///of profiles in hmmdb, and output ranked lists of the profiles with the most significant
+        ///matches to the sequence
+        let runHMMscan (bcContext:BioContainer.BcContext) (opt:HMMscanParams list) =
+            runHMMscanAsync bcContext opt
+            |> Async.RunSynchronously
+
+
+    ///hmmpress - prepare a profile database for hmmscan
+    module HMMpress =
+        
+        type HMMpressParams = 
+            ///HMM profile to construct the binary compressed datafiles from
+            | HMMInputFile of string
+            ///overwrites any previous hmmpress’ed datafiles
+            | ForceOverwirite 
+
+            static member makeCmd =
+                function
+                | HMMInputFile path     -> [path]
+                | ForceOverwirite       -> ["-f"]
+
+            static member makeCmdWith (m:MountInfo) =
+                let cPath p = (MountInfo.containerPathOf m p)
+                function
+                | HMMInputFile path     -> [cPath path]
+                | ForceOverwirite       -> ["-f"]
+
+        let runHMMpressAsync (bcContext:BioContainer.BcContext) (opt:HMMpressParams list) = 
+            //Usage: hmmpress [options] hmmfile
+            let hmm     = 
+                opt 
+                |> List.filter (fun p -> match p with |HMMInputFile _ -> true |_ -> false)
+                |> fun x -> if List.isEmpty x then
+                                failwith "no input hmm db given"
+                            else 
+                                HMMpressParams.makeCmdWith bcContext.Mount x.[0]
+
+            let options = opt |> List.filter (fun p -> match p with |HMMInputFile _ -> false |_ -> true)
+            let cmds = (options |> List.map (HMMpressParams.makeCmdWith bcContext.Mount))
+            let tp = ("hmmpress"::(cmds |> List.concat))@hmm
+
+            printfn "Starting process hmmpress\r\nparameters:"
+            printfn "%s" hmm.[0]
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        ///Constructs binary compressed datafiles for hmmscan, starting from a profile database
+        ///hmmfile in standard HMMER3 format. The hmmpress step is required for hmmscan to work.
+        let runHMMpress (bcContext:BioContainer.BcContext) (opt:HMMpressParams list) =
+            runHMMpressAsync bcContext opt
+            |> Async.RunSynchronously
+
+
+    module HMMconvert =
+
+    //Usage: hmmconvert [-options] <hmmfile>
+
+    //Options:
+    //  -h           : show brief help on version and usage
+    //  -a           : ascii:  output models in HMMER3 ASCII format  [default]
+    //  -b           : binary: output models in HMMER3 binary format
+    //  -2           : HMMER2: output backward compatible HMMER2 ASCII format (ls mode)
+    //  --outfmt <s> : choose output legacy 3.x file formats by name, such as '3/a'
+
+        type OutputFormatOptions = 
+            | ASCII
+            | Binary
+            | HMMER2
+
+            static member make = function
+                | ASCII     -> ["-a"]
+                | Binary    -> ["-b"]
+                | HMMER2    -> ["-2"]
+
+        type HMMconvertParams =
+            | HMMInputFile of string
+            | OutputFormat of OutputFormatOptions list
+            | LegacyFormat of string
+
+            static member make = function
+                | HMMInputFile path     -> [path]
+                | OutputFormat pList    -> pList |> List.map OutputFormatOptions.make |> List.concat
+                | LegacyFormat f        -> ["--outfmt"; f]
+
+            static member makeCmdWith (m:MountInfo) =
+                let cPath p = (MountInfo.containerPathOf m p)
+                function
+                | HMMInputFile path     -> [cPath path]
+                | OutputFormat pList    -> pList |> List.map OutputFormatOptions.make |> List.concat
+                | LegacyFormat f        -> ["--outfmt"; f]
+
+        let runHMMconvertAsync (bcContext:BioContainer.BcContext) (opt:HMMconvertParams list) = 
+        //Usage: hmmconvert [options] hmmfile
+            let hmm     = 
+                opt 
+                |> List.filter (fun p -> match p with |HMMInputFile _ -> true |_ -> false)
+                |> fun x -> if List.isEmpty x then
+                                failwith "no input hmm given"
+                            else 
+                                HMMconvertParams.makeCmdWith bcContext.Mount x.[0]
+
+            let options = opt |> List.filter (fun p -> match p with |HMMInputFile _ -> false |_ -> true)
+            let cmds = (options |> List.map (HMMconvertParams.makeCmdWith bcContext.Mount))
+            let tp = ("hmmconvert"::(cmds |> List.concat))@hmm
+
+            printfn "Starting process hmmconvert\r\nparameters:"
+            printfn "%s" hmm.[0]
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        ///The hmmconvert utility converts an input profile file to different HMMER formats
+        let runHMMconvert (bcContext:BioContainer.BcContext) (opt:HMMconvertParams list) =
+            runHMMconvertAsync bcContext opt
+            |> Async.RunSynchronously
