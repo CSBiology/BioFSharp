@@ -1016,3 +1016,144 @@ module HMMER =
         let runHMMconvert (bcContext:BioContainer.BcContext) (opt:HMMconvertParams list) =
             runHMMconvertAsync bcContext opt
             |> Async.RunSynchronously
+
+    ///hmmemit - sample sequences from a profile
+    module HMMemit =
+
+
+        ///Options controlling what to emit:
+        //  -a : emit alignment
+        //  -c : emit simple majority-rule consensus sequence
+        //  -C : emit fancier consensus sequence (req's --minl, --minu)
+        //  -p : sample sequences from profile, not core model
+        
+        type EmitControllingOptions =
+            ///emit alignment
+            | EmitAlignment
+            ///emit simple majority-rule consensus sequence
+            | EmitConsensus
+            ///emit fancier consensus sequence (req's --minl, --minu)
+            | EmitConsensusFancy
+            ///sample sequences from profile, not core model
+            | SampleFromProfile
+
+            static member make = function
+                | EmitAlignment         -> ["-a"]
+                | EmitConsensus         -> ["-c"]
+                | EmitConsensusFancy    -> ["-C"]
+                | SampleFromProfile     -> ["-p"]
+
+        ///Options controlling emission from profiles with SampleFromProfile:
+        //  -L <n>      : set expected length from profile to <n>  [400]
+        //  --local     : configure profile in multihit local mode  [default]
+        //  --unilocal  : configure profile in unilocal mode
+        //  --glocal    : configure profile in multihit glocal mode
+        //  --uniglocal : configure profile in unihit glocal mode
+
+        type ProfileSamplingOptions =
+            ///set expected length from profile
+            | ExpectedLength of int
+            ///configure profile in multihit local mode
+            | MultihitLocal
+            ///configure profile in unilocal mode
+            | Unilocal
+            ///configure profile in multihit glocal mode
+            | MultihitGlocal
+            ///configure profile in unihit glocal mode
+            | UnihitGlocal
+
+            static member make = function
+                | ExpectedLength l  -> ["-L"; string l]
+                | MultihitLocal     -> ["--local"]
+                | Unilocal          -> ["--unilocal"]
+                | MultihitGlocal    -> ["--glocal"]
+                | UnihitGlocal      -> ["--uniglocal"]
+
+
+        ///Options controlling fancy consensus emission with -C:
+        //  --minl <x> : show consensus as 'any' (X/N) unless >= this fraction  [0.0]
+        //  --minu <x> : show consensus as upper case if >= this fraction  [0.0]
+
+        type FancyConsensusOptions =
+            ///show consensus as 'any' (X/N) unless >= this fraction
+            |ShowAsAny      of float
+            ///show consensus as upper case if >= this fraction
+            |ShowAsUpper    of float
+
+            static member make = function
+                | ShowAsAny f   -> ["--minl"; string f]
+                | ShowAsUpper f -> ["--minu"; string f]
+
+
+        //Common options are:
+        //  -h     : show brief help on version and usage
+        //  -o <f> : send sequence output to file <f>, not stdout
+        //  -N <n> : number of seqs to sample  [1]  (n>0)
+        //Other options::
+        //  --seed <n> : set RNG seed to <n>  [0]  (n>=0)
+        type HMMemitParams =
+            ///Options controlling fancy consensus emission with
+            | HMMInputFile      of string
+            ///direct output to file <f>, not stdout
+            | OutputToFile      of string
+            ///number of seqs to sample
+            | SampleAmount      of int
+            ///set RNG seed
+            | RNGSeed           of int
+            ///Options controlling what to emit
+            | EmitControlling   of EmitControllingOptions list
+            ///Options controlling emission from profiles with SampleFromProfile. Only use when using SampleFromProfile as EmitControllingOption
+            | ProfileSampling   of ProfileSamplingOptions list
+            ///Options controlling fancy consensus emission with EmitConsensusFancy. Only use when using EmitConsensusFancy as EmitControllingOption
+            | FancyConsensus    of FancyConsensusOptions list
+
+            static member makeCmd = function
+                | HMMInputFile    path  -> [path]
+                | OutputToFile    path  -> [path]
+                | SampleAmount    s     -> ["-N"; string s]
+                | RNGSeed         s     -> ["--seed"; string s]
+                | EmitControlling pList -> pList |> List.map EmitControllingOptions.make    |> List.concat
+                | ProfileSampling pList -> pList |> List.map ProfileSamplingOptions.make    |> List.concat
+                | FancyConsensus  pList -> pList |> List.map FancyConsensusOptions.make     |> List.concat
+
+            static member makeCmdWith (m:MountInfo) =
+                let cPath p = (MountInfo.containerPathOf m p)
+                function
+                | HMMInputFile    path  -> [cPath path]
+                | OutputToFile    path  -> [cPath path]
+                | SampleAmount    s     -> ["-N"; string s]
+                | RNGSeed         s     -> ["--seed"; string s]
+                | EmitControlling pList -> pList |> List.map EmitControllingOptions.make    |> List.concat
+                | ProfileSampling pList -> pList |> List.map ProfileSamplingOptions.make    |> List.concat
+                | FancyConsensus  pList -> pList |> List.map FancyConsensusOptions.make     |> List.concat
+
+        let runHMMemitAsync (bcContext:BioContainer.BcContext) (opt:HMMemitParams list) = 
+        //Usage: hmmemit [-options] <hmmfile (single)>
+            let hmm     = 
+                opt 
+                |> List.filter (fun p -> match p with |HMMInputFile _ -> true |_ -> false)
+                |> fun x -> if List.isEmpty x then
+                                failwith "no input hmm given"
+                            else 
+                                HMMemitParams.makeCmdWith bcContext.Mount x.[0]
+
+            let options = opt |> List.filter (fun p -> match p with |HMMInputFile _ -> false |_ -> true)
+            let cmds = (options |> List.map (HMMemitParams.makeCmdWith bcContext.Mount))
+            let tp = ("hmmemit"::(cmds |> List.concat))@hmm
+
+            printfn "Starting process hmmemit\r\nparameters:"
+            printfn "%s" hmm.[0]
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        ///The hmmemit program samples (emits) sequences from the profile HMM(s) in hmmfile,
+        ///and writes them to output. Sampling sequences may be useful for a variety of purposes, 
+        ///including creating synthetic true positives for benchmarks or tests.
+        let runHMMemit (bcContext:BioContainer.BcContext) (opt:HMMemitParams list) =
+            runHMMemitAsync bcContext opt
+            |> Async.RunSynchronously
