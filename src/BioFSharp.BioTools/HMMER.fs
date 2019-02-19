@@ -1,9 +1,10 @@
 ﻿namespace BioFSharp.BioTools
 
-// adaped from the hmmer usage guide at http://eddylab.org/software/hmmer/Userguide.pdf
+// adapted from the hmmer usage guide at http://eddylab.org/software/hmmer/Userguide.pdf
 // HMMER: biosequence analysis using profile hidden Markov models (http://hmmer.org/)
+// HMMER source code is available on github under The 3-Clause BSD License: https://github.com/EddyRivasLab/hmmer/blob/master/LICENSE
 
-///HMMER - Biological sequence analysis using profile hidden Markov models
+///HMMER - Biological sequence analysis using profile hidden Markov models (http://hmmer.org/)
 ///Functions providing an API for the HMMER 3 biocontainer
 module HMMER =
 
