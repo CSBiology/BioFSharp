@@ -33,14 +33,11 @@ module DPPOP =
             |> Set.ofSeq
 
         ///
-        let getDistinctPeptidesFromFastaFile (filePath: string) = 
+        let getDistinctTrypticPeptidesFromFastaFile (filePath: string) = 
             //fileDir + "Chlamy_Cp.fastA"
             filePath
             |> FastA.fromFile BioArray.ofAminoAcidString
-            |> Seq.map (fun fi -> fi.Sequence |> Array.filter (not << AminoAcids.isTerminator))
-            |> Seq.collect digestTryptic
-            |> Seq.map BioArray.toString
-            |> Set.ofSeq
+            |> getDistinctTrypticPeptidesFromFasta
 
 
         let getDifestionEfficiency (protId) (sequence:BioArray.BioArray<AminoAcids.AminoAcid>) =
@@ -64,6 +61,40 @@ module DPPOP =
             Digestion.BioArray.digest (Digestion.Table.getProteaseBy "Trypsin") 0 sequence
             |> Digestion.BioArray.concernMissCleavages 0 3
             |> Seq.map calc
+
+
+        ///get the physicochemical properties of a peptide: length, MolecularWeight, NetCharge, PositiveCharge, NegativeCharge, piI, Relative frewuencies of polar, hydrophobic, and negatively charge amino acids
+        let getPhysicochemicalProperties (peptide:BioArray.BioArray<AminoAcidSymbols.AminoAcidSymbol>) =
+            let pI peptide = 
+                //default function for pKr of charged aminoacids
+                let pKrFunction = IsoelectricPoint.getpKr
+                match IsoelectricPoint.tryFind pKrFunction 0.5 peptide with
+                | Some (pk) -> pk
+                | None -> 0.
+
+            let len = float peptide.Length
+            let positiveCharge = peptide |> Seq.countIf AminoAcidSymbols.isPosCharged |> float
+            let negativeCharge = peptide |> Seq.countIf AminoAcidSymbols.isNegCharged |> float
+            [|
+                //length
+                len;
+                //MolecularWeight
+                BioArray.toAverageMass peptide
+                //  NetCharge
+                negativeCharge + positiveCharge
+                // PositiveCharge, 
+                positiveCharge
+                // NegativeCharge        
+                negativeCharge
+                // piI
+                pI peptide      
+                //RelFreqPolar
+                peptide |> Seq.countIf AminoAcidSymbols.isPolar |> fun x -> float x / len  
+                //RelFreqHydrophobic
+                peptide |> Seq.countIf AminoAcidSymbols.isHydrophobic |> fun x -> float x / len
+                //RelFreqNegative 
+                negativeCharge / len
+            |]
 
     ///
     module Prediction =
