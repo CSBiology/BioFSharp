@@ -1,7 +1,7 @@
 namespace BioFSharp.ML
 
 module DPPOP =
-    
+    open System.Collections.Generic
     open FSharpAux
     open FSharpAux.IO
     open BioFSharp
@@ -9,7 +9,38 @@ module DPPOP =
     open BioFSharp.BioArray
     open BioFSharp.Digestion
     open BioFSharp.AminoAcidSymbols
-  
+    open CNTK
+
+    // Input
+    type Qid = {
+        Id        : int
+        Rank      : int
+        Data      : float[]
+        ProtId    : string
+        Intensity : float
+        Sequence  : string
+    }
+
+    // Output
+    type ScoredQid = {
+        Id        : int
+        Rank      : int
+        Data      : float[]
+        ProtId    : string
+        Intensity : float
+        Sequence  : string
+        Score     : float
+        }
+
+    let createScoredID id rank data protID intensity sequence score = {
+        Id        = id
+        Rank      = rank
+        Data      = data
+        ProtId    = protID
+        Intensity = intensity
+        Sequence  = sequence
+        Score     = score
+        }
     ///
     module Classification =
 
@@ -157,4 +188,52 @@ module DPPOP =
 
     ///
     module Prediction =
-        ()
+
+        /// Loads a trained CNTK model (at path given by "model") and evaluates the scores for the given collection of qids (input)
+        // in the final pipeline the parameter model is probably better modeled by a unionCase ;)
+        let scoreBy (model:string) (data:Qid []) = 
+            let device = DeviceDescriptor.CPUDevice
+
+            let PeptidePredictor : Function = 
+                Function.Load(model,device)
+
+            ///////////Input 
+            let inputVar: Variable = PeptidePredictor.Arguments.Item 0
+
+            let inputShape = inputVar.Shape
+            /// Gets Size of one Feature Vector
+            let featureVectorLength = inputShape.[0] 
+
+            /// Extracts all Features and appends them, stores Values in a List
+            let featureData = 
+                let tmp = new System.Collections.Generic.List<float32>()
+                data |> Array.iter (fun x -> 
+                                    let data' = x.Data |> Array.map (fun x -> float32 (x))
+                                    tmp.AddRange(data')
+                                   )
+                tmp
+
+            /// Creates an input Batch
+            let inputValues = Value.CreateBatch(inputShape,featureData,device)
+
+            let inputMap = new Dictionary<Variable,Value>()
+            inputMap.Add(inputVar,inputValues)
+
+            ///////////Output
+            let outputVar : Variable = PeptidePredictor.Output
+
+            let outputMap = new Dictionary<Variable,Value>()
+            outputMap.Add(outputVar,null)
+
+            PeptidePredictor.Evaluate(inputMap,outputMap,device)
+
+            let outputValues = outputMap.[outputVar]
+
+            let preds = 
+                outputValues.GetDenseData<float32>(outputVar)
+                |> Seq.concat
+                |> Array.ofSeq
+
+            let res = 
+                Array.map2 (fun (data:Qid) preds -> createScoredID data.Id data.Rank data.Data data.ProtId data.Intensity data.Sequence (float preds)) data preds
+            res
