@@ -2,6 +2,7 @@ namespace BioFSharp.ML
 
 module DPPOP =
     open System.Collections.Generic
+    open System.Reflection
     open FSharpAux
     open FSharpAux.IO
     open BioFSharp
@@ -188,14 +189,32 @@ module DPPOP =
 
     ///
     module Prediction =
+        open System.IO
+
+        type Model =
+            | Plant
+            | NonPlant
+            | Custom of string
+
+            static member getModelPath =
+                let assembly = Assembly.GetExecutingAssembly()
+                let resnames = assembly.GetManifestResourceNames();
+                function
+                | Plant         ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model")) resnames with
+                                    | Some path -> path
+                                    | _ -> failwithf "could not load model from embedded ressources, check package integrity"
+
+                | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Chlamy5Times128.model")) resnames with
+                                    | Some path -> path
+                                    | _ -> failwithf "could not load model from embedded ressources, check package integrity"
+                | Custom path   -> path
 
         /// Loads a trained CNTK model (at path given by "model") and evaluates the scores for the given collection of qids (input)
-        // in the final pipeline the parameter model is probably better modeled by a unionCase ;)
-        let scoreBy (model:string) (data:Qid []) = 
+        let scoreBy (model:Model) (data:Qid []) = 
             let device = DeviceDescriptor.CPUDevice
 
             let PeptidePredictor : Function = 
-                Function.Load(model,device)
+                Function.Load(Model.getModelPath model,device)
 
             ///////////Input 
             let inputVar: Variable = PeptidePredictor.Arguments.Item 0
