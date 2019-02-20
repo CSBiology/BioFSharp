@@ -20,6 +20,9 @@
     <None Include="CNTKLoadScript.fsx" />
     <Compile Include="CNTK.fs" />
     <Compile Include="DPPOP.fs" />
+    <!-- Resources -->
+    <EmbeddedResource Include="Resources\Chlamy5Times128.model" />
+    <EmbeddedResource Include="Resources\Yeast5Times128.model" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>
