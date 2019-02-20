@@ -1,6 +1,6 @@
 namespace BioFSharp.ML
 
-module Say =
+module CNTKExtensions =
 
     open CNTK
     let hello name =
