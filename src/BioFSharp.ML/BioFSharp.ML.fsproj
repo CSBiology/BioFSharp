@@ -16,6 +16,7 @@
     <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
     <None Include="CNTKLoadScript.fsx" />
     <Compile Include="CNTK.fs" />
     <None Include="paket.references" />
