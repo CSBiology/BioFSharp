@@ -19,6 +19,8 @@ nuget YamlDotNet
 nuget docker.dotnet
 nuget SharpZipLib
 
+nuget CNTK.CPUOnly
+
 git https://github.com/CSBiology/FSharpAux.git nuget Packages: /
 nuget FSharpAux
 nuget FSharpAux.IO
