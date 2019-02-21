@@ -13,24 +13,27 @@ module DPPOP =
     open BioFSharp.AminoAcidSymbols
     open CNTK
 
-    // Input for prediction
-    type Qid = {
-        Id        : int
-        Rank      : int
+    // Input for learning
+    type PredictionInput = {
         Data      : float[]
         ProtId    : string
-        Intensity : float
         Sequence  : string
     }
 
-    let createQID id rank data protID intensity sequence  = {
-        Id        = id
-        Rank      = rank
+    let createPredictionInput data protID sequence  = {
         Data      = data
         ProtId    = protID
-        Intensity = intensity
         Sequence  = sequence
         }
+
+
+    type PredictionOutput = {
+        ProteinId: string
+        Sequence: string
+        PredictionScore: float
+    }
+
+    let createPredictionOutput pId sequence score = {ProteinId = pId; Sequence = sequence; PredictionScore = score}
 
     // Output of prediction
     type ScoredQid = {
@@ -56,6 +59,7 @@ module DPPOP =
 
     ///
     module Classification =
+        open FSharpAux
 
         let private peptideFeatures =
             [|
@@ -85,7 +89,7 @@ module DPPOP =
         ///Tryptic digestion of an amino acid sequence with the settings used for the dppop web API
         let digestTryptic (aminoAcidSeq:BioArray<AminoAcids.AminoAcid>) =
             aminoAcidSeq
-            |> digestTrypticWith 3 6 
+            |> digestTrypticWith 0 6 
 
         ///
         let getDistinctTrypticPeptidesFromFasta (fa:seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>)= 
@@ -104,12 +108,12 @@ module DPPOP =
             |> getDistinctTrypticPeptidesFromFasta
 
 
-        let getDifestionEfficiency (protId) (sequence:BioArray<AminoAcids.AminoAcid>) =
+        let getDigestionEfficiency (protId) (sequence) =
             let cleavageScore = sequence |> Array.map AminoAcidSymbols.aminoAcidSymbol |> Digestion.CleavageScore.calculateCleavageScore
         
             //TODO: digestion hast changed from 1 based index to 0 based index, identify the numbers to change
-            let getStart index = if index < 2 then 0. else cleavageScore.[index-1]//pretty sure this one
-            let getEnd index = if index >= cleavageScore.Length  then 0. else cleavageScore.[index]
+            let getStart index = if index < 2 then 0. else cleavageScore.[index]//pretty sure this one
+            let getEnd index = if index >= cleavageScore.Length-1  then 0. else cleavageScore.[index-1]
 
 
             let calc (p:DigestedPeptide<int>) =
@@ -129,7 +133,7 @@ module DPPOP =
         let createDigestionEfficiencyMapFromFasta (fa:seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) = 
             fa
             |> Seq.map (fun fi -> {fi with Sequence=fi.Sequence |> Array.filter (not << AminoAcids.isTerminator)})
-            |> Seq.collect (fun fi -> getDifestionEfficiency fi.Header fi.Sequence)
+            |> Seq.collect (fun fi -> getDigestionEfficiency fi.Header fi.Sequence)
             |> Map.ofSeq
 
         ///get the physicochemical properties of a peptide: length, MolecularWeight, NetCharge, PositiveCharge, NegativeCharge, piI, Relative frewuencies of polar, hydrophobic, and negatively charge amino acids
@@ -167,7 +171,8 @@ module DPPOP =
 
 
         ///get all features of a peptide used for classification in dppop given a map that maps from (proteinID,Sequence) -> . 
-        let getPeptideFeatures (digestionEfficiencyMap:Map<(string*BioArray<AminoAcidSymbol>),(float*float*float)>) (protId:string) peptide =
+        let getPeptideFeatures (digestionEfficiencyMap:Map<(string*BioArray<AminoAcidSymbol>),(float*float*float)>) (protId:string) (peptide) =
+            let peptide' = peptide |> Array.map (fun x -> (x :> IBioItem).Symbol) |> String.fromCharArray
             let getIndex (a:AminoAcidSymbol) = (int a) - 65
             // Relative amino acid frequency peptide features
             let relFreq = 
@@ -195,9 +200,9 @@ module DPPOP =
                     // [|0.;0.;0.|]
                     None
             match digest with
-            | Some v -> Array.concat [|relFreq;physicochemical;pf;v|] |> Some //TO_DO -> return QID instead of feature data array
+            | Some v -> let inp = createPredictionInput (Array.concat [|relFreq;physicochemical;pf;v|]) protId (peptide')
+                        Some inp 
             | None -> None
-
 
     ///
     module Prediction =
@@ -208,21 +213,30 @@ module DPPOP =
             | NonPlant
             | Custom of string
 
-            static member getModelPath =
+            static member getModelPathFromAssembly =
                 let assembly = Assembly.GetExecutingAssembly()
                 let resnames = assembly.GetManifestResourceNames();
                 function
-                | Plant         ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model")) resnames with
+                | Plant         ->  match Array.tryFind (fun (r:string) -> r.Contains("Chlamy5Times128.model")) resnames with
                                     | Some path -> path
                                     | _ -> failwithf "could not load model from embedded ressources, check package integrity"
 
-                | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Chlamy5Times128.model")) resnames with
+                | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model.model")) resnames with
                                     | Some path -> path
                                     | _ -> failwithf "could not load model from embedded ressources, check package integrity"
                 | Custom path   -> path
 
+            static member getModelPath =
+                function
+                | Plant         ->  ""
+
+                | NonPlant      ->  ""
+
+                | Custom path   -> path
+            
+
         /// Loads a trained CNTK model (at path given by "model") and evaluates the scores for the given collection of qids (input)
-        let scoreBy (model:Model) (data:Qid []) = 
+        let scoreBy (model:Model) (data:PredictionInput []) = 
             let device = DeviceDescriptor.CPUDevice
 
             let PeptidePredictor : Function = 
@@ -238,7 +252,7 @@ module DPPOP =
             /// Extracts all Features and appends them, stores Values in a List
             let featureData = 
                 let tmp = new System.Collections.Generic.List<float32>()
-                data |> Array.iter (fun x -> 
+                data |> Array.iter(fun x -> 
                                     let data' = x.Data |> Array.map (fun x -> float32 (x))
                                     tmp.AddRange(data')
                                    )
@@ -266,5 +280,6 @@ module DPPOP =
                 |> Array.ofSeq
 
             let res = 
-                Array.map2 (fun (data:Qid) preds -> createScoredQID data.Id data.Rank data.Data data.ProtId data.Intensity data.Sequence (float preds)) data preds
+                Array.map2 (fun (data:PredictionInput) preds -> createPredictionOutput data.ProtId data.Sequence (float preds)) data preds
             res
+
