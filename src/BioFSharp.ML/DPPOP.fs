@@ -1,6 +1,7 @@
 namespace BioFSharp.ML
 
 module DPPOP =
+
     open System.Collections.Generic
     open System.Reflection
     open FSharpAux
@@ -12,7 +13,7 @@ module DPPOP =
     open BioFSharp.AminoAcidSymbols
     open CNTK
 
-    // Input
+    // Input for prediction
     type Qid = {
         Id        : int
         Rank      : int
@@ -22,7 +23,16 @@ module DPPOP =
         Sequence  : string
     }
 
-    // Output
+    let createQID id rank data protID intensity sequence  = {
+        Id        = id
+        Rank      = rank
+        Data      = data
+        ProtId    = protID
+        Intensity = intensity
+        Sequence  = sequence
+        }
+
+    // Output of prediction
     type ScoredQid = {
         Id        : int
         Rank      : int
@@ -33,7 +43,7 @@ module DPPOP =
         Score     : float
         }
 
-    let createScoredID id rank data protID intensity sequence score = {
+    let createScoredQID id rank data protID intensity sequence score = {
         Id        = id
         Rank      = rank
         Data      = data
@@ -42,6 +52,8 @@ module DPPOP =
         Sequence  = sequence
         Score     = score
         }
+
+
     ///
     module Classification =
 
@@ -96,7 +108,7 @@ module DPPOP =
             let cleavageScore = sequence |> Array.map AminoAcidSymbols.aminoAcidSymbol |> Digestion.CleavageScore.calculateCleavageScore
         
             //TODO: digestion hast changed from 1 based index to 0 based index, identify the numbers to change
-            let getStart index = if index < 2 then 0. else cleavageScore.[index-1]
+            let getStart index = if index < 2 then 0. else cleavageScore.[index-1]//pretty sure this one
             let getEnd index = if index >= cleavageScore.Length  then 0. else cleavageScore.[index]
 
 
@@ -104,7 +116,7 @@ module DPPOP =
                 if p.MissCleavages < 1 then
                     (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray ),(getStart p.CleavageStart,0.,getEnd p.CleavageEnd)
                 else
-                    let inter' = p.MissCleavages - 1 |> float
+                    let inter' = p.MissCleavages - 1 |> float // maybe this one
                     let s = getStart p.CleavageStart                
                     let e = getEnd p.CleavageEnd
                     // let inter' = inter - s - e
@@ -183,7 +195,7 @@ module DPPOP =
                     // [|0.;0.;0.|]
                     None
             match digest with
-            | Some v -> Array.concat [|relFreq;physicochemical;pf;v|] |> Some
+            | Some v -> Array.concat [|relFreq;physicochemical;pf;v|] |> Some //TO_DO -> return QID instead of feature data array
             | None -> None
 
 
@@ -254,5 +266,5 @@ module DPPOP =
                 |> Array.ofSeq
 
             let res = 
-                Array.map2 (fun (data:Qid) preds -> createScoredID data.Id data.Rank data.Data data.ProtId data.Intensity data.Sequence (float preds)) data preds
+                Array.map2 (fun (data:Qid) preds -> createScoredQID data.Id data.Rank data.Data data.ProtId data.Intensity data.Sequence (float preds)) data preds
             res
