@@ -431,9 +431,11 @@ module DPPOP =
         Sequence: string
         ///observability score returned by dppop prediction
         PredictionScore: float
+        ///Indicates wether the peptide is uniquely mapping to the protein of interest
+        Distinct: bool
     }
     /// returns a PredictionOutput type given the values for the record fields
-    let createPredictionOutput pId sequence score = {ProteinId = pId; Sequence = sequence; PredictionScore = score}
+    let createPredictionOutput pId sequence score distinct = {ProteinId = pId; Sequence = sequence; PredictionScore = score; Distinct=distinct}
 
     ///Contains functions to extract the features used in dppop to classify peptides for observability prediction
     module Classification =
@@ -474,8 +476,11 @@ module DPPOP =
             //fileDir + "Chlamy_Cp.fastA"
             fa
             |> Seq.map (fun fi -> fi.Sequence |> Array.filter (not << AminoAcids.isTerminator))
-            |> Seq.collect digestTryptic
-            |> Seq.map BioArray.toString
+            |> Seq.map digestTryptic
+            |> Seq.collect (fun dig -> dig |> Seq.map BioArray.toString |> Set.ofSeq |> Set.toSeq)
+            |> Seq.countBy id
+            |> Seq.filter (fun (key,count) -> count=1)
+            |> Seq.map fst
             |> Set.ofSeq
 
         ///Returns a distinct set of peptides that map uniquely to a single protein from the given fasta file input
@@ -720,8 +725,8 @@ module DPPOP =
         /// For expert use.
         /// Returns the observability prediction for the input peptides.
         /// Loads a trained CNTK model (either dppops plant/nonPlant models or a custom model) and evaluates the scores for the given collection of features (PredictionInput)
-        /// No feature normalization or determination of distinct peptides for the organism is done.
-        let scoreBy (model:Model) (data:PredictionInput []) = 
+        /// No feature normalization is done.
+        let scoreBy (model:Model) (distinctPeptideSet: Set<string>) (data:PredictionInput []) = 
             let device = DeviceDescriptor.CPUDevice
 
             let PeptidePredictor : Function = 
@@ -765,7 +770,7 @@ module DPPOP =
                 |> Array.ofSeq
 
             let res = 
-                Array.map2 (fun (data:PredictionInput) preds -> createPredictionOutput data.ProtId data.Sequence (float preds)) data preds
+                Array.map2 (fun (data:PredictionInput) preds -> createPredictionOutput data.ProtId data.Sequence (float preds) (distinctPeptideSet.Contains(data.Sequence))) data preds
             res
 
         ///Returns relative observability scores for uniquely mapping peptides of proteins of interest given a model, normalization procedure for features, and the proteome of the organism.
@@ -782,20 +787,20 @@ module DPPOP =
                                         let digested =
                                             Classification.digestTryptic protein.Sequence
                                             |> Seq.map (fun x -> BioArray.toString x)
-                                            |> Seq.filter (fun peptide -> distinctPeptides.Contains peptide)
                                             |> List.ofSeq
                                         let candidatePeptides = 
                                             digested
-                                            |> Seq.filter (fun p -> distinctPeptides.Contains(p))
                                             |> Seq.map (fun p -> Classification.getPeptideFeatures digestionEfficiencyMap protId (BioArray.ofAminoAcidSymbolString p))
                                             |> Array.ofSeq
                                             |> Array.choose id
+
                                         candidatePeptides
-                                        |> Array.map (featureNormalization)
-                                        |> scoreBy model
-                                        |> Array.sortByDescending (fun (x) -> x.PredictionScore)
-                                        |> fun x -> let max = (Array.maxBy (fun (x) -> x.PredictionScore) x).PredictionScore 
-                                                    x |> Array.map (fun (x) -> if x.PredictionScore >= 0. then {x with PredictionScore = (x.PredictionScore/max)} else {x with PredictionScore = 0.0})
+                                            |> Array.map (featureNormalization)
+                                            |> scoreBy model distinctPeptides
+                                            |> Array.sortByDescending (fun (x) -> x.PredictionScore)
+                                            |> fun x -> let max = (Array.maxBy (fun (x) -> x.PredictionScore) x).PredictionScore 
+                                                        x |> Array.map (fun (x) -> if x.PredictionScore >= 0. then {x with PredictionScore = (x.PredictionScore/max)} else {x with PredictionScore = 0.0})
+
                 )
 
         ///Returns relative observability scores for uniquely mapping peptides of proteins of interest using dppops plant model and feature normalization procedure, given the proteome of the organism.
