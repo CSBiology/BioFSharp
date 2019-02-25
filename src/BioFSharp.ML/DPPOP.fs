@@ -661,11 +661,11 @@ module DPPOP =
                 (0.4736182826, 0.1529837898); (0.0, 0.0); (0.5517373002, 0.2606125317)
             |]
 
-        let zNormalizeChlamyFeatureVector (features:PredictionInput) =
-            zNormalizePeptideFeaturesBy chlamyNorm
+        let zNormalizePlantFeatureVector (features:PredictionInput) =
+            zNormalizePeptideFeaturesBy chlamyNorm features
 
-        let zNormalizeYeastFeatureVector (features:PredictionInput) =
-            zNormalizePeptideFeaturesBy yeastNorm
+        let zNormalizeNonPlantFeatureVector (features:PredictionInput) =
+            zNormalizePeptideFeaturesBy yeastNorm features
 
     ///
     module Prediction =
@@ -698,12 +698,13 @@ module DPPOP =
                 | Custom path   -> path
             
 
-        /// Loads a trained CNTK model (at path given by "model") and evaluates the scores for the given collection of qids (input)
+        /// Loads a trained CNTK model (either dppops plant/nonPlant models or a custom model) and evaluates the scores for the given collection of features (PredictionInput)
+        /// For expert use. Neither contains feature normalization nor determination of distinct peptides for the organism.
         let scoreBy (model:Model) (data:PredictionInput []) = 
             let device = DeviceDescriptor.CPUDevice
 
             let PeptidePredictor : Function = 
-                Function.Load(Model.getModelPath model,device)
+                Function.Load(Model.getModelPathFromAssembly model,device)
 
             ///////////Input 
             let inputVar: Variable = PeptidePredictor.Arguments.Item 0
@@ -746,3 +747,38 @@ module DPPOP =
                 Array.map2 (fun (data:PredictionInput) preds -> createPredictionOutput data.ProtId data.Sequence (float preds)) data preds
             res
 
+        ///Returns relative observability scores for uniquely mapping peptides of proteins of interest given a model, normalization procedure for features, and the proteome of the organism.
+        let scoreProteinsAgainstProteome (model:Model) (featureNormalization: PredictionInput -> PredictionInput) (proteome: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) (proteinsOfInterest: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>)  =
+            printfn "Determining distinct peptides..."
+            //only uniquely mapping peptides in the given proteome will be considered candidate peptides.
+            let distinctPeptides = Classification.getDistinctTrypticPeptidesFromFasta proteome
+            let digestionEfficiencyMap = Classification.createDigestionEfficiencyMapFromFasta proteinsOfInterest
+            printfn "determining peptide features and predicting observability..."
+            proteinsOfInterest
+            |> Seq.map (fun protein ->
+                                        let protId = protein.Header
+                                        //uniquely mapping digested peptides
+                                        let digested =
+                                            Classification.digestTryptic protein.Sequence
+                                            |> Seq.map (fun x -> BioArray.toString x)
+                                            |> Seq.filter (fun peptide -> distinctPeptides.Contains peptide)
+                                            |> List.ofSeq
+                                        let candidatePeptides = 
+                                            digested
+                                            |> Seq.filter (fun p -> distinctPeptides.Contains(p))
+                                            |> Seq.map (fun p -> Classification.getPeptideFeatures digestionEfficiencyMap protId (BioArray.ofAminoAcidSymbolString p))
+                                            |> Array.ofSeq
+                                            |> Array.choose id
+                                        candidatePeptides
+                                        |> Array.map (featureNormalization)
+                                        |> scoreBy model
+                                        |> Array.sortByDescending (fun (x) -> x.PredictionScore)
+                                        |> fun x -> let max = (Array.maxBy (fun (x) -> x.PredictionScore) x).PredictionScore 
+                                                    x |> Array.map (fun (x) -> if x.PredictionScore >= 0. then {x with PredictionScore = (x.PredictionScore/max)} else {x with PredictionScore = 0.0})
+                )
+
+        let scoreDppopPlant (proteome: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) (proteinsOfInterest: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) =
+            scoreProteinsAgainstProteome Model.Plant Classification.zNormalizePlantFeatureVector proteome proteinsOfInterest
+
+        let scoreDppopNonPlant (proteome: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) (proteinsOfInterest: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) =
+            scoreProteinsAgainstProteome Model.NonPlant Classification.zNormalizeNonPlantFeatureVector proteome proteinsOfInterest
