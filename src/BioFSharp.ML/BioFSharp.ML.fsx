@@ -9,15 +9,14 @@ CNTKLoadscript.resolveCNTKDependencies ()
 #I @"..\..\bin\BioFSharp.ML\netstandard2.0"
 #r @"BioFSharp.dll"
 #r "BioFSharp.IO"
-//#r "BioFSharp.ML
-#load "DPPOP.fs"
+#r "BioFSharp.ML"
+//#load "DPPOP.fs"
 
 open BioFSharp.ML.DPPOP
 open BioFSharp.IO
 open BioFSharp
 open BioFSharp.IO.FastA
 open FSharpAux
-
 
 type Qid = {
     Id        : int
@@ -104,7 +103,7 @@ let candidatePeptides =
 
 candidatePeptides
 |> Array.map (fun x -> {x with Data= (Array.map2 (fun d (stDev,mean) -> if nan.Equals((d-mean)/stDev) then 0. else (d-mean)/stDev) ) x.Data normChlamy })
-|> Prediction.scoreBy (Prediction.Model.Custom @"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\src\BioFSharp.ML\Resources\Chlamy5Times128.model")
+|> Prediction.scoreBy (Prediction.Model.Plant)
 |> Array.map (fun x -> x.Sequence,x.PredictionScore)
 |> Array.sortByDescending (fun (_,s) -> s)
 |> fun x -> let max = Array.maxBy (fun (_,s) -> s) x |> snd

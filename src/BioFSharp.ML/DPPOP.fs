@@ -676,27 +676,31 @@ module DPPOP =
             | NonPlant
             | Custom of string
 
-            static member getModelPathFromAssembly =
+            static member getModelBuffer =
                 let assembly = Assembly.GetExecutingAssembly()
                 let resnames = assembly.GetManifestResourceNames();
                 function
                 | Plant         ->  match Array.tryFind (fun (r:string) -> r.Contains("Chlamy5Times128.model")) resnames with
-                                    | Some path -> path
+                                    | Some path -> 
+                                        use stream = assembly.GetManifestResourceStream(path)
+                                        let length = int stream.Length
+                                        use bReader = new BinaryReader(stream)
+                                        bReader.ReadBytes(length)
+
                                     | _ -> failwithf "could not load model from embedded ressources, check package integrity"
 
                 | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model.model")) resnames with
-                                    | Some path -> path
+                                    | Some path ->                                         
+                                        use stream = assembly.GetManifestResourceStream(path)
+                                        let length = int stream.Length
+                                        use bReader = new BinaryReader(stream)
+                                        bReader.ReadBytes(length)
                                     | _ -> failwithf "could not load model from embedded ressources, check package integrity"
-                | Custom path   -> path
+                | Custom path   ->  use stream = new FileStream(path,FileMode.Open)
+                                    let length = int stream.Length
+                                    use bReader = new BinaryReader(stream)
+                                    bReader.ReadBytes(length)
 
-            static member getModelPath =
-                function
-                | Plant         ->  ""
-
-                | NonPlant      ->  ""
-
-                | Custom path   -> path
-            
 
         /// Loads a trained CNTK model (either dppops plant/nonPlant models or a custom model) and evaluates the scores for the given collection of features (PredictionInput)
         /// For expert use. Neither contains feature normalization nor determination of distinct peptides for the organism.
@@ -704,7 +708,7 @@ module DPPOP =
             let device = DeviceDescriptor.CPUDevice
 
             let PeptidePredictor : Function = 
-                Function.Load(Model.getModelPathFromAssembly model,device)
+                Function.Load(Model.getModelBuffer model,device)
 
             ///////////Input 
             let inputVar: Variable = PeptidePredictor.Arguments.Item 0
