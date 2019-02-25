@@ -1,5 +1,10 @@
 namespace BioFSharp.ML
 
+///DPPOP - DeeP Peptide Observability Predictor.
+///
+///d::pPop uses a deep neural network to predict proteotypic peptides for proteins of interest.
+///
+///See the publication: https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full
 module DPPOP =
 
     // use old functionality due to recent changes in original library, needs fixing later
@@ -90,7 +95,7 @@ module DPPOP =
                     posChargeState - negChargeState
                 tryFindRoot f accuracy 0. 14. 50
                 |> Option.map (fun pH -> pH, f pH)
-
+    // use old functionality due to recent changes in original library, needs fixing later
     module internal Digestion2 =
         open BioFSharp
         open AminoAcids
@@ -401,29 +406,36 @@ module DPPOP =
     open BioFSharp.AminoAcidSymbols
     open CNTK
 
-    // Input for learning
+    /// Record type containing feature vector, proteinId, and sequence of a peptide
     type PredictionInput = {
+        ///Feature vector
         Data      : float[]
+        ///ID of the protein this peptide maps to
         ProtId    : string
+        ///Sequence of the peptide
         Sequence  : string
     }
 
+    /// returns a PredictionInput type given the values for the record fields
     let createPredictionInput data protID sequence  = {
         Data      = data
         ProtId    = protID
         Sequence  = sequence
         }
 
-
+    /// Record type containing prediction score, proteinId, and sequence of a peptide
     type PredictionOutput = {
+        ///ID of the protein this peptide maps to
         ProteinId: string
+        ///Sequence of the peptide
         Sequence: string
+        ///observability score returned by dppop prediction
         PredictionScore: float
     }
-
+    /// returns a PredictionOutput type given the values for the record fields
     let createPredictionOutput pId sequence score = {ProteinId = pId; Sequence = sequence; PredictionScore = score}
 
-    ///
+    ///Contains functions to extract the features used in dppop to classify peptides for observability prediction
     module Classification =
         open FSharpAux
 
@@ -457,7 +469,7 @@ module DPPOP =
             aminoAcidSeq
             |> digestTrypticWith 0 6 
 
-        ///
+        ///Returns a distinct set of peptides that map uniquely to a single protein from the given fasta input
         let getDistinctTrypticPeptidesFromFasta (fa:seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>)= 
             //fileDir + "Chlamy_Cp.fastA"
             fa
@@ -466,14 +478,15 @@ module DPPOP =
             |> Seq.map BioArray.toString
             |> Set.ofSeq
 
-        ///
+        ///Returns a distinct set of peptides that map uniquely to a single protein from the given fasta file input
         let getDistinctTrypticPeptidesFromFastaFile (filePath: string) = 
             //fileDir + "Chlamy_Cp.fastA"
             filePath
             |> FastA.fromFile BioArray.ofAminoAcidString
             |> getDistinctTrypticPeptidesFromFasta
 
-        let effic (protId) (sequence:BioArray.BioArray<AminoAcids.AminoAcid>) =
+        ///returns a map mapping from a (proteinID*sequence) touple to the three digestion efficiency scores in the form of a (float*float*float) tuple
+        let private getDigestionEfficiency (protId) (sequence:BioArray.BioArray<AminoAcids.AminoAcid>) =
                 let cs = sequence |> Array.map AminoAcidSymbols.aminoAcidSymbol |> Digestion2.CleavageScore.calculateCleavageScore
         
                 let getStart index = if index < 2 then 0. else cs.[index-1]
@@ -484,12 +497,6 @@ module DPPOP =
                         (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray ),(getStart p.MissCleavageStart,0.,getEnd p.MissCleavageEnd)
                     else
                         let inter' = p.MissCleavages - 1 |> float
-
-                            // let offset = p.MissCleavageStart 
-                            // Digestion2.BioArray.digest (Digestion2.Table.getProteaseBy "Trypsin") 0 (p.PepSequence |> List.toArray)
-                            // |> Seq.sumBy (fun c -> getStart (c.MissCleavageStart+offset-1) +  getEnd (c.MissCleavageEnd+offset-1))
-                    
-
                         let s = getStart p.MissCleavageStart                
                         let e = getEnd p.MissCleavageEnd
                         // let inter' = inter - s - e
@@ -499,33 +506,35 @@ module DPPOP =
                 |> Digestion2.BioArray.concernMissCleavages 0 3
                 |> Seq.map calc
 
-        let getDigestionEfficiency (protId) (sequence) =
-            let cleavageScore = sequence |> Array.map AminoAcidSymbols.aminoAcidSymbol |> Digestion.CleavageScore.calculateCleavageScore
+        //adaption to new digestion module, not working correctly. 
+        //let getDigestionEfficiency (protId) (sequence) =
+        //    let cleavageScore = sequence |> Array.map AminoAcidSymbols.aminoAcidSymbol |> Digestion.CleavageScore.calculateCleavageScore
         
-            //TODO: digestion hast changed from 1 based index to 0 based index, identify the numbers to change
-            //ERROR HERE
-            let getStart index = if index < 2 then 0. else cleavageScore.[index]//pretty sure this one
-            let getEnd index = if index >= cleavageScore.Length-1  then 0. else cleavageScore.[index]
+        //    //TODO: digestion hast changed from 1 based index to 0 based index, identify the numbers to change
+        //    //ERROR HERE
+        //    let getStart index = if index < 2 then 0. else cleavageScore.[index]//pretty sure this one
+        //    let getEnd index = if index >= cleavageScore.Length-1  then 0. else cleavageScore.[index]
 
 
-            let calc (p:DigestedPeptide<int>) =
-                if p.MissCleavages < 1 then
-                    (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray ),(getStart p.CleavageStart,0.,getEnd p.CleavageEnd)
-                else
-                    let inter' = p.MissCleavages - 1 |> float // maybe this one
-                    let s = getStart p.CleavageStart                
-                    let e = getEnd p.CleavageEnd
-                    // let inter' = inter - s - e
-                    (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray),(s,inter',e)
+        //    let calc (p:DigestedPeptide<int>) =
+        //        if p.MissCleavages < 1 then
+        //            (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray ),(getStart p.CleavageStart,0.,getEnd p.CleavageEnd)
+        //        else
+        //            let inter' = p.MissCleavages - 1 |> float // maybe this one
+        //            let s = getStart p.CleavageStart                
+        //            let e = getEnd p.CleavageEnd
+        //            // let inter' = inter - s - e
+        //            (protId,p.PepSequence |> Seq.map AminoAcidSymbols.aminoAcidSymbol |> Seq.toArray),(s,inter',e)
 
-            Digestion.BioArray.digest (Digestion.Table.getProteaseBy "Trypsin") 0 sequence
-            |> Digestion.BioArray.concernMissCleavages 0 3
-            |> Seq.map calc
+        //    Digestion.BioArray.digest (Digestion.Table.getProteaseBy "Trypsin") 0 sequence
+        //    |> Digestion.BioArray.concernMissCleavages 0 3
+        //    |> Seq.map calc
 
+        ///returns a map mapping from a (proteinID*sequence) touple to the three digestion efficiency scores in the form of a (float*float*float) tuple from the input fasta item collection
         let createDigestionEfficiencyMapFromFasta (fa:seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) = 
             fa
             |> Seq.map (fun fi -> {fi with Sequence=fi.Sequence |> Array.filter (not << AminoAcids.isTerminator)})
-            |> Seq.collect (fun fi -> effic fi.Header fi.Sequence)
+            |> Seq.collect (fun fi -> getDigestionEfficiency fi.Header fi.Sequence)
             |> Map.ofSeq
 
         ///get the physicochemical properties of a peptide: length, MolecularWeight, NetCharge, PositiveCharge, NegativeCharge, piI, Relative frewuencies of polar, hydrophobic, and negatively charge amino acids
@@ -562,7 +571,7 @@ module DPPOP =
             |]
 
 
-        ///get all features of a peptide used for classification in dppop given a map that maps from (proteinID,Sequence) -> . 
+        ///Returns a PredictionInput record type for the input peptide containing the calculated feature vector given a digestion efficiency map and the proteinId the peptide maps to
         let getPeptideFeatures (digestionEfficiencyMap:Map<(string*BioArray<AminoAcidSymbol>),(float*float*float)>) (protId:string) (peptide) =
             let peptide' = peptide |> Array.map (fun x -> (x :> IBioItem).Symbol) |> String.fromCharArray
             let getIndex (a:AminoAcidSymbol) = (int a) - 65
@@ -661,21 +670,28 @@ module DPPOP =
                 (0.4736182826, 0.1529837898); (0.0, 0.0); (0.5517373002, 0.2606125317)
             |]
 
+        ///returns the z normalized version of the input feature vector by using the normalization vector dppop uses for its plant model
         let zNormalizePlantFeatureVector (features:PredictionInput) =
             zNormalizePeptideFeaturesBy chlamyNorm features
 
+        ///returns the z normalized version of the input feature vector by using the normalization vector dppop uses for its non-plant model
         let zNormalizeNonPlantFeatureVector (features:PredictionInput) =
             zNormalizePeptideFeaturesBy yeastNorm features
 
-    ///
+    ///Contains functions to execute peptide observability prediction using the deep neural network dppop.
     module Prediction =
         open System.IO
 
+        ///Options concerning the model used for prediction.
         type Model =
+            ///dppops original plant model used in the web API.
             | Plant
+            ///dppops original non-plant model used in the web API.
             | NonPlant
+            ///Option to use a custom model at the given path
             | Custom of string
 
+            ///returns a byte array from the ressource stream. Either reads the original models from the manifest resources or reads the custom model from the given path
             static member getModelBuffer =
                 let assembly = Assembly.GetExecutingAssembly()
                 let resnames = assembly.GetManifestResourceNames();
@@ -687,7 +703,7 @@ module DPPOP =
                                         use bReader = new BinaryReader(stream)
                                         bReader.ReadBytes(length)
 
-                                    | _ -> failwithf "could not load model from embedded ressources, check package integrity"
+                                    | _ -> failwithf "could not plant load model from embedded ressources, check package integrity"
 
                 | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model.model")) resnames with
                                     | Some path ->                                         
@@ -695,15 +711,16 @@ module DPPOP =
                                         let length = int stream.Length
                                         use bReader = new BinaryReader(stream)
                                         bReader.ReadBytes(length)
-                                    | _ -> failwithf "could not load model from embedded ressources, check package integrity"
+                                    | _ -> failwithf "could not load non-plant model from embedded ressources, check package integrity"
                 | Custom path   ->  use stream = new FileStream(path,FileMode.Open)
                                     let length = int stream.Length
                                     use bReader = new BinaryReader(stream)
                                     bReader.ReadBytes(length)
 
-
+        /// For expert use.
+        /// Returns the observability prediction for the input peptides.
         /// Loads a trained CNTK model (either dppops plant/nonPlant models or a custom model) and evaluates the scores for the given collection of features (PredictionInput)
-        /// For expert use. Neither contains feature normalization nor determination of distinct peptides for the organism.
+        /// No feature normalization or determination of distinct peptides for the organism is done.
         let scoreBy (model:Model) (data:PredictionInput []) = 
             let device = DeviceDescriptor.CPUDevice
 
@@ -781,8 +798,10 @@ module DPPOP =
                                                     x |> Array.map (fun (x) -> if x.PredictionScore >= 0. then {x with PredictionScore = (x.PredictionScore/max)} else {x with PredictionScore = 0.0})
                 )
 
+        ///Returns relative observability scores for uniquely mapping peptides of proteins of interest using dppops plant model and feature normalization procedure, given the proteome of the organism.
         let scoreDppopPlant (proteome: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) (proteinsOfInterest: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) =
             scoreProteinsAgainstProteome Model.Plant Classification.zNormalizePlantFeatureVector proteome proteinsOfInterest
 
+        ///Returns relative observability scores for uniquely mapping peptides of proteins of interest using dppops non-plant model and feature normalization procedure, given the proteome of the organism.
         let scoreDppopNonPlant (proteome: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) (proteinsOfInterest: seq<FastA.FastaItem<BioArray<AminoAcids.AminoAcid>>>) =
             scoreProteinsAgainstProteome Model.NonPlant Classification.zNormalizeNonPlantFeatureVector proteome proteinsOfInterest
