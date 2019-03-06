@@ -29,7 +29,7 @@ It provides a variety of parsers for many biological file formats and a variety 
 The core datamodel implements in ascending hierarchical order:
 
 - Chemical elements and [formulas](https://csbiology.github.io/BioFSharp/Formula.html) which are a collection of elements
-- Amino Acids], Nucleotides and Modifications, which all implement the common [IBioItem interface](https://csbiology.github.io/BioFSharp/BioItem.html#Basics)
+- [Amino Acids](https://csbiology.github.io/BioFSharp/AminoProperties.html), Nucleotides and Modifications, which all implement the common [IBioItem interface](https://csbiology.github.io/BioFSharp/BioItem.html#Basics)
 - [BioCollections](https://csbiology.github.io/BioFSharp/BioCollections.html) (BioItem,BioList,BioSeq) as representation of biological sequences
 
 </br>
@@ -117,7 +117,7 @@ let arginineMass = AminoAcids.Arg |> AminoAcids.monoisoMass
 
 
 (**
-The various file readers in BioFSharp help to easyly retrieve information and write biology-associated file formats like for example FastA:
+The various file readers in BioFSharp help to easily retrieve information and write biology-associated file formats like FastA:
 *)
 open BioFSharp.IO
 

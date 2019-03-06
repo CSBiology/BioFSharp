@@ -23,7 +23,7 @@ open FSharpAux
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html" >&#128194;View BioSeq documentation</a>
 </td>
 </table>
-Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the ofBioItemString-functions
+Analogous to the built-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the `ofBioItemString` functions
 *)
 
 
@@ -64,9 +64,9 @@ let myPeptideMass = BioSeq.toAverageMass myPeptide
 (*** include-value:myPeptideMass ***)
 
 (**
-##AminoAcids
+##Amino Acids
 ###Digestion
-BioFSharp also comes equipped with a set of tools aimed at cutting apart amino acid sequences. To demonstrate the usage, we'll throw some `trypsin` at the small RuBisCO subunit of _Arabidopos thaliana_:  
+BioFSharp also comes equipped with a set of tools aimed at cutting apart amino acid sequences. To demonstrate their usage, we'll throw some `trypsin` at the small RuBisCO subunit of _Arabidopos thaliana_:  
 In the first step, we define our input sequence and the protease we want to use.
 *)
 
@@ -79,7 +79,7 @@ let RBCS =
 let trypsin = Digestion.Table.getProteaseBy "Trypsin"
 
 (**
-With these two things done, digesting the protein is a piece of cake. For doing this, just use the `digest` function.  
+With these two things done, digesting the protein is a piece of cake. To do this, just use the `digest` function.  
 *)
 let digestedRBCS = Digestion.BioArray.digest trypsin 0 RBCS 
 
@@ -198,7 +198,7 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 
 </div>
 <br>
-In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
+In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and the digested protein. As a result you get all possible combinations arising from this information.
 *)
 let digestedRBCS' = Digestion.BioArray.concernMissCleavages 0 2 digestedRBCS
 
@@ -471,7 +471,7 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 </div>
 <br>
 ##Nucleotides
-Let's imagine you have a given gene sequence and want to find out what the according protein might look like.
+Let's imagine you have a given gene sequence and want to find out what the corrisponding protein might look like.
 *)
 let myGene = BioSeq.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
 

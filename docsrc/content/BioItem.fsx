@@ -23,7 +23,7 @@ open BioFSharp.Formula.Table
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioitem.html" >&#128194;View module documentation</a>
 </td>
 </table>
-Often, dealing with similar problems separately results in different approaches. In a programming background, this might make things needlessly complex. Therefore in BioFSharp nucleotides and amino acids are based on the same structural scaffold, leading to a consistent way of working with them. This can come in handy especially when working with their formulas.  
+Often, dealing with similar problems separately results in different approaches. In a programming context, this might make things needlessly complex. Therefore in BioFSharp nucleotides and amino acids are based on the same structural scaffold, leading to a consistent way of working with them. This can come in handy, especially when working with their formulas.  
 
 ## Basics
 First let's define some amino acids and nucleotides 
@@ -38,7 +38,7 @@ let t = Nucleotides.T
 let gap = Nucleotides.Gap
 
 (**
-Many functions are similar for AminoAcids and Nucleotides, like for example:
+Many functions are similar for AminoAcids and Nucleotides, for example:
 *)
 (***hide***)
 let alaName = AminoAcids.name ala 
@@ -59,7 +59,7 @@ Nucleotides.formula t |> Formula.toString
 (*** include-value:tFormula ***)
 
 (**
-Nucleotides and AminoAcids in BioFSharp are represented as Union cases. This makes applying functions selectively very easy. 
+Nucleotides and amino acids in BioFSharp are represented as Union cases. This makes applying functions selectively very easy. 
 *)
 let filterLysine aa = 
     match aa with
@@ -131,8 +131,8 @@ giveMePositiveAAs glu
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-modificationinfo.html" >&#128194;View module documentation</a>
 </td>
 </table>
-What makes working on Amino Acids with BioFSharp truly powerful is the ability to easily modify AminoAcids, even altering their mass and formula. In the following example we try to find out the mass of a phosphorylated Serine. Applications like these might be quite usefull for identification of peptides in mass spectrometry.  
-As a first step, we make ourselves an easy helper function which returns the formula of an AminoAcid as string. Afterwards we start out by creating a Serine.
+What makes working on amino acids with BioFSharp truly powerful is the ability to easily modify amino acids, even altering their mass and formula. In the following example we try to find out the mass of a phosphorylated Serine. Applications like these can be useful for peptide identification in mass spectrometry.  
+As a first step, we make ourselves an easy helper function which returns the formula of an amino acid as a string. Afterwards we start out by creating a Serine.
 *)
 
 //easy helper function
@@ -149,7 +149,7 @@ getF mySerine
 (***include-value:getF1***)
 
 (**
-As you can see by the formula. Our Serine is missing two H and an O. In BioFSharp, all Amino Acids are dehydrolysed by default, because it is assumed that the user will use collections representing a peptide, rather than single Amino Acids. For our cause we want serine in hydrolysed form. An easy way to achieve this is to modify it. An addition of H2O is quite common and therefore premade: 
+As you can see by the formula. Our Serine is missing two H's and an O. In BioFSharp, all amino acids are dehydrolysed by default, because it is assumed that the user will use collections representing a peptide, rather than single amino acids. In our case we want Serine in hydrolysed form. An easy way to achieve this is to modify it. An addition of H2O is quite common and therefore premade: 
 *)
 
 ///Hydrolysed serine
@@ -163,7 +163,7 @@ getF hydroSerine
 (***include-value:getF2***)
 
 (**
-So far so good. Now let's add the phosphate. For this we first create a function which alters the formula of a given molecule in the way a phosphorylation would. In the second step we create a modification resembling a phosphorylation of a residual. At last we modify our Serine with this modification.
+So far so good. Now let's add the phosphate. For this we first create a function which alters the formula of a given molecule in the way a phosphorylation would. In the second step we create a modification resembling a phosphorylation of a residual. Finally, we modify our Serine with this modification.
 *)
 
 ///Phosphorylation of OH-Groups adds PO3 to formula and removes one H

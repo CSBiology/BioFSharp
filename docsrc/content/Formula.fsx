@@ -22,7 +22,7 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-formula.html" >&#128194;View module documentation</a>
 </td>
 </table>
-BioFSharp offers a great bunch of functionality for working with molecules. All elements are represented as the composition of their stable isotopes. A `Formula` is a collection of those Elements with the given count. Creating and altering formulas is quite easy. Also functions for obtaining a mass of a molecule, which becomes quite handy especially for mass spectrometry, can be used straightforwardly.  
+BioFSharp offers a variety of functions for working with molecules. All elements are represented as the composition of their stable isotopes. A 'Formula' is a collection of those elements with the given count. Creating and altering formulas is quite easy. Functions for obtaining the mass of a molecule, which is useful for mass spectrometry, are straightforward to use.  
 
 To create formulas, no direct fiddling around with the data type is necessary. You can just use the stringparser:
 *)
@@ -34,7 +34,7 @@ let CO2 = Formula.parseFormulaString "CO2"
 Formula.toString CO2 // val it : string = "C1.00 O2.00 "
 
 (**
-We just created some Carbon Dioxide. Luckily there is no in silico climate change. But let's get rid of it anyways, by making some <a data-toggle="collapse" data-target="#sprudel">Sprudel\*</a>:<div id="sprudel" class="collapse Sprudel">_\*german term for sprinkly water_</div>
+We just created some Carbon Dioxide. Luckily there is no in silico climate change. But let's get rid of it anyways, by making some <a data-toggle="collapse" data-target="#sprudel">Sprudel\*</a>:<div id="sprudel" class="collapse Sprudel">_\*german term for sparkling water_</div>
 *)
 let sprudel = Formula.add CO2 (Formula.Table.H2O)
 Formula.toString sprudel // val it : string = "C1.00 H2.00 O3.00 "
