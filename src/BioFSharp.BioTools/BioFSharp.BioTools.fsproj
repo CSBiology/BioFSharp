@@ -21,6 +21,8 @@
     <Compile Include="BioContainer.fs" />
     <Compile Include="Blast.fs" />
     <Compile Include="ClustalO.fs" />
+    <Compile Include="FastP.fs" />
+    <Compile Include="Hera.fs" />
     <Compile Include="HMMER.fs" />
     <Compile Include="TargetP.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
