@@ -1,3 +1,29 @@
+#### 0.0.15 - Thursday, March 7, 2019
+ * BioFSharp.ML - project introduction:
+   * Usage of Microsoft's CNTK library with a biological focus:
+   * This project comes with working CNTK integration:
+      * necessary dependencies to use CNTK and its unmanaged libraries
+      * CNTK loadscript: an easy way to load all dependencies of CNTK. load the script and use the resolveCNTKDependencies() function.
+   * Built-in deep neural network 'd::ppop' ([publication](https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full))
+     * predict peptide observability in mass spectrometry
+     * Classification: functions to determine peptide feature vectors as input for dppop
+     * Prediction: functions to predict peptide observability using the feature vectors prepared in Classification.
+     * NonPlant and Plant models as embedded resources: the two models used in the original Web API. Additionally load custom models.
+ * Othert additions:
+   * BioFSharp.BioTools:
+     * Integration of new tools as biocontainer APIs:
+       * Hera
+       * FastP
+       * ClustalO
+       * HMMER (experimental):
+         * hmmbuild
+         * hmmalign
+         * hmmsearch
+         * hmmscan
+         * hmmemit
+         * hmmpress
+         * hmmconvert
+
 #### 0.0.14 - Tuesday, February 12, 2019
  * Addition of blast biocontainer support for makeblastdb, blastp, blastn with full parameter wrapping
  * Extension of BioContainer functionality:

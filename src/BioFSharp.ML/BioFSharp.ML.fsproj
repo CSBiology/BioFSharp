@@ -18,7 +18,9 @@
   <ItemGroup>
     <None Include="BioFSharp.ML.fsx" />
     <Compile Include="AssemblyInfo.fs" />
-    <None Include="CNTKLoadScript.fsx" />
+    <None Include="CNTKLoadScript.fsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="CNTK.fs" />
     <Compile Include="DPPOP.fs" />
     <!-- Resources -->
