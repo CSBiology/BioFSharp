@@ -23,7 +23,7 @@ module PeptideClassification =
         }
 
     /// Helper function to create ProteinModelInfo
-    let private createProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
+    let createProteinModelInfo id chromosomeId strand geneLocus spliceVariantId seqEquivalents orthologs = {
         Id               = id
         ChromosomeId     = chromosomeId
         Strand           = strand
@@ -40,7 +40,7 @@ module PeptideClassification =
         }
 
     /// Helper function
-    let private createProteinModel proteinModelInfo sequence = 
+    let createProteinModel proteinModelInfo sequence = 
         {ProteinModelInfo=proteinModelInfo;Sequence=sequence}
     
     /// A marker for unambiguity of a peptide in protein inference 
