@@ -78,12 +78,12 @@ module TargetP =
 
     let runAsync bcContext (opt:TargetpParams) (fsaStream:Stream) = 
         let tp = "targetp"::TargetpParams.makeCmd opt
-        let tmpFile = sprintf "/tmp/%A.fsa" (System.Guid.NewGuid())
+        let tmpFile = sprintf "/data/%A.fsa" (System.Guid.NewGuid())
         async {
             do!
                 BioContainer.putStreamAsync bcContext fsaStream tmpFile
             let! targepResult =
-                BioContainer.execAsync bcContext (tp@[tmpFile])
+                BioContainer.execReturnAsync bcContext (tp@[tmpFile])
             //do!
             //    BioContainer.disposeAsync bcContext
  

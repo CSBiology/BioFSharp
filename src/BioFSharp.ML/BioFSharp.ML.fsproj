@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
-    <RootNamespace>BioFSharp.BioTools</RootNamespace>
-    <AssemblyName>BioFSharp.BioTools</AssemblyName>
-    <Name>BioFSharp.BioTools</Name>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <RootNamespace>BioFSharp.ML</RootNamespace>
+    <AssemblyName>BioFSharp.ML</AssemblyName>
+    <Name>BioFSharp.ML</Name>
     <OutputType>Library</OutputType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
@@ -16,21 +16,22 @@
     <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Docker.fs" />
-    <Compile Include="BioContainerIO.fs" />
-    <Compile Include="BioContainer.fs" />
-    <Compile Include="Blast.fs" />
-    <Compile Include="ClustalO.fs" />
-    <Compile Include="FastP.fs" />
-    <Compile Include="Hera.fs" />
-    <Compile Include="HMMER.fs" />
-    <Compile Include="TargetP.fs" />
-    <None Include="BioFSharp.BioTools.fsx" />
+    <None Include="BioFSharp.ML.fsx" />
+    <Compile Include="AssemblyInfo.fs" />
+    <None Include="CNTKLoadScript.fsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="CNTK.fs" />
+    <Compile Include="DPPOP.fs" />
+    <!-- Resources -->
+    <EmbeddedResource Include="Resources\Chlamy5Times128.model" />
+    <EmbeddedResource Include="Resources\Yeast5Times128.model" />
+    <None Include="paket.references" />
+    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
+    <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
-

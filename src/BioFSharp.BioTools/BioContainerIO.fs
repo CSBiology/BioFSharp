@@ -4,6 +4,7 @@ open System
 open System.Threading
 open Docker.DotNet
 open Docker.DotNet.Models
+open System.IO
 
 /// BioContainer helper
 module BioContainerIO =
@@ -16,7 +17,6 @@ module BioContainerIO =
         let dirSep = "/"
         filename.Replace("\\", dirSep)
             .TrimEnd(Path.DirectorySeparatorChar)
-
 
     let directoryName (filename:string) = 
         let dirSep = Path.DirectorySeparatorChar
@@ -74,3 +74,4 @@ module BioContainerIO =
         tarOutputStream.Close()
         outStream.Position <- 0L
         outStream
+

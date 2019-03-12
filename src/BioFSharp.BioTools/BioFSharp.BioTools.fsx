@@ -13,6 +13,9 @@
 #load "BioContainerIO.fs"
 #load "BioContainer.fs"
 #load "TargetP.fs"
+#load "Blast.fs"
+#load "ClustalO.fs"
+#load "HMMER.fs"
 
 open System.Threading
 open System.Threading
@@ -33,9 +36,6 @@ open Newtonsoft.Json.Serialization
 open System
 
 
-let param = Docker.DotNet.Models.HostConfig()
-
-
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
 
@@ -53,24 +53,8 @@ BioContainer.disposeAsync bcContextUbuntu
 |> Async.Start
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let bcContext =
-    BioContainer.initBcContextAsync client TargetP.ImageTagetP
+    BioContainer.initBcContextLocalDefaultAsync TargetP.ImageTagetP
     |> Async.RunSynchronously
 
 
@@ -246,43 +230,6 @@ res |> Seq.head |> fun tp -> tp.Mtp
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ////let tmp =
 ////    BioContainer.runCmdAsync client (Docker.DockerId.ImageName "ubuntu") ["echo"; "hello world"]
 ////    |> Async.RunSynchronously
@@ -378,3 +325,171 @@ res |> Seq.head |> fun tp -> tp.Mtp
 
 ////System.Text.Encoding.UTF8.GetString(tmp,0,1024)
 
+// Include CsbScaffold
+//#load "../../.env/CsbScaffold.fsx"
+//#r @"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\bin\BioFSharp.BioTools\net47\BioFSharp.BioTools.dll"
+
+//open BioFSharp.BioTools
+
+//open BioFSharp.IO
+//open BioFSharp.IO.BlastNCBI
+//open BioFSharp.IO.BlastNCBI.Parameters
+
+//let typeOfDatabase = Parameters.MakeDbParams.DbType Parameters.Protein
+
+
+//BlastWrapper(@"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\lib\ncbi-blast\bin").makeblastdb @"C:\Users\Kevin\Source\Repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"  ([typeOfDatabase;] |> seq<Parameters.MakeDbParams>)
+
+//let outputFormat= 
+    
+//    [   
+//        OutputCustom.Query_SeqId; 
+//        OutputCustom.Subject_SeqId;
+//        OutputCustom.Query_Length;
+//        OutputCustom.Subject_Length;
+//        OutputCustom.AlignmentLength;
+//        OutputCustom.MismatchCount;
+//        OutputCustom.IdentityCount;
+//        OutputCustom.PositiveScoringMatchCount;
+//        OutputCustom.Evalue;
+//        OutputCustom.Bitscore;
+//    ] 
+//    |> List.toSeq
+
+//let outputType = OutputType.TabularWithComments
+
+//let customOutputFormat = OutputTypeCustom(outputType , outputFormat)
+
+
+
+//BlastNCBI.BlastWrapper(@"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\lib\ncbi-blast\bin")
+//    .blastP 
+//        @"C:\Users\Kevin\Source\Repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA" 
+//        @"C:\Users\Kevin\Source\Repos\CsbScaffold\Docker\data\testQuery.fastA"
+//        @"C:\Users\Kevin\Source\Repos\CsbScaffold\Docker\data/Output.txt"
+//        ([customOutputFormat;] |> seq<BlastParams>)
+
+
+
+open FSharpAux
+open FSharpAux.IO
+open FSharpAux.IO.SchemaReader.Attribute
+open System.IO
+open BioFSharp.BioTools.BioContainer
+open BioFSharp.BioTools.BioContainerIO
+open Blast
+
+let client = Docker.connect "npipe://./pipe/docker_engine"
+
+let ImageBlast = Docker.DockerId.ImageId "blast"
+
+let blastContext = 
+    BioContainer.initBcContextWithMountAsync client ImageBlast @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    |> Async.RunSynchronously
+
+let paramz =
+    [
+        MakeDbParams.DbType Protein
+        MakeDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+    ]
+
+let outputFormat= 
+    
+    [   
+        OutputCustom.Query_SeqId; 
+        OutputCustom.Subject_SeqId;
+        OutputCustom.Query_Length;
+        OutputCustom.Subject_Length;
+        OutputCustom.AlignmentLength;
+        OutputCustom.MismatchCount;
+        OutputCustom.IdentityCount;
+        OutputCustom.PositiveScoringMatchCount;
+        OutputCustom.Evalue;
+        OutputCustom.Bitscore;
+    ] 
+
+let blastPParamz = [
+    BlastParams.SearchDB @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+    BlastParams.Query @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA"
+    BlastParams.Output @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt"
+    OutputTypeCustom
+        (
+             OutputType.TabularWithComments,
+             [   
+                OutputCustom.Query_SeqId; 
+                OutputCustom.Subject_SeqId;
+                OutputCustom.Query_Length;
+                OutputCustom.Subject_Length;
+                OutputCustom.AlignmentLength;
+                OutputCustom.MismatchCount;
+                OutputCustom.IdentityCount;
+                OutputCustom.PositiveScoringMatchCount;
+                OutputCustom.Evalue;
+                OutputCustom.Bitscore;
+             ] 
+        )
+]
+
+runMakeBlastDBAsync blastContext paramz
+|> Async.RunSynchronously
+
+runMakeBlastDB blastContext paramz
+
+runBlastPAsync blastContext blastPParamz
+|> Async.RunSynchronously
+
+
+BioContainer.execAsync blastContext ["makeblastdb"; "-dbtype"; "prot" ;"-in"; "/data/C/Users/Kevin/Source/Repos/CsbScaffold/Docker/data/Chlamy_Cp.fastA"; "-out"; "/data/C/Users/Kevin/Source/Repos/CsbScaffold/Docker/data/Chlamy_Cp.fastA"]
+|> Async.RunSynchronously
+
+BioContainer.disposeAsync blastContext
+|> Async.RunSynchronously
+
+
+open ClustalO
+
+let clustalImage = Docker.ImageName "clustal-omega"
+
+let clustalContext = 
+    BioContainer.initBcContextWithMountAsync client clustalImage @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    |> Async.RunSynchronously
+
+// ClustalO tests
+let clustalOParamz = [
+    ClustalOParams.Input 
+        (
+            FileInput.SequenceFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA",
+            [
+                InputCustom.Format FileFormat.FastA
+            ]
+        )
+    ClustalOParams.Output 
+        (
+            @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.aln",
+            []
+        )
+    ClustalOParams.Miscellaneous 
+        [
+            MiscellaneousCustom.Force
+        ]
+]
+
+runClustalO clustalContext clustalOParamz
+
+open HMMER
+open HMMER.HMMbuild
+
+let HMMERImage =  Docker.ImageName "hmmer"
+
+let hmmerContext = 
+    BioContainer.initBcContextWithMountAsync client HMMERImage @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    |> Async.RunSynchronously
+
+let hmmbuildParamz = 
+    [
+        InputMSAFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\hmmer_testfiles\globins4.sto"
+        OutputHMMFile @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\hmmer_testfiles\testOutput.hmm"
+    ]
+
+runHMMbuild hmmerContext hmmbuildParamz

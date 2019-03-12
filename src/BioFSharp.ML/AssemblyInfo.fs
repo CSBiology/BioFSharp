@@ -2,7 +2,7 @@
 namespace System
 open System.Reflection
 
-[<assembly: AssemblyTitleAttribute("BioFSharp.Stats")>]
+[<assembly: AssemblyTitleAttribute("BioFSharp.ML")>]
 [<assembly: AssemblyProductAttribute("BioFSharp")>]
 [<assembly: AssemblyDescriptionAttribute("An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>")>]
 [<assembly: AssemblyVersionAttribute("0.0.15")>]
@@ -11,7 +11,7 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] AssemblyTitle = "BioFSharp.Stats"
+    let [<Literal>] AssemblyTitle = "BioFSharp.ML"
     let [<Literal>] AssemblyProduct = "BioFSharp"
     let [<Literal>] AssemblyDescription = "An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"
     let [<Literal>] AssemblyVersion = "0.0.15"

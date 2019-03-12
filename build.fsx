@@ -352,10 +352,14 @@ Target.create "ReferenceDocs" (fun _ ->
                         DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net45"))
                     let net47Bin =
                         DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net47"))
+                    let netstandardBin =
+                        DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard"))
                     if net45Bin.Length > 0 then
                         d.Name, net45Bin.[0]
-                    else
+                    elif net47Bin.Length > 0 then
                         d.Name, net47Bin.[0]
+                    else
+                        d.Name, netstandardBin.[0]
 
                 dInfo.GetFiles()
                 |> Array.filter (fun x ->
