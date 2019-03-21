@@ -25,11 +25,17 @@ module Ricker =
             Array.append 
                 (Array.map (fun x -> correctionVal * ( rickerMHwithScale scaleRise x)) [|-(padArea)..(- 1.)|]) 
                 (Array.map (fun x ->                   rickerMHwithScale scaleDecay x) [|0.0..(padArea)|])
-                
+        let amplitudeAdjValues =
+            let sum = values |> Array.fold (fun acc x -> acc + Math.Abs(x)) 0.
+            let max = values |> Array.max
+            let corrFacTwo = 
+                0.15 / max
+            values |> Array.map (fun x -> corrFacTwo * x)      
         {
         ScaleDecay  = scaleDecay
         ScaleRise   = scaleRise
-        Values      = values
+        Values      = amplitudeAdjValues
+        //Values      = values
         PadArea     = padAreaInt
         }
 
