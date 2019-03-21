@@ -15,6 +15,7 @@
     <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GAF.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
