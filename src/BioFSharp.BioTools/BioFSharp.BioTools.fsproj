@@ -25,6 +25,7 @@
     <Compile Include="Hera.fs" />
     <Compile Include="HMMER.fs" />
     <Compile Include="TargetP.fs" />
+    <Compile Include="Tmhmm.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
   </ItemGroup>
   <ItemGroup>

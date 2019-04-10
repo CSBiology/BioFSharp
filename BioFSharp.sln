@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\BioDB.fsx = docsrc\content\BioDB.fsx
 		docsrc\content\BioID.fsx = docsrc\content\BioID.fsx
 		docsrc\content\BioItem.fsx = docsrc\content\BioItem.fsx
+		docsrc\content\BioTools-tmhmm.fsx = docsrc\content\BioTools-tmhmm.fsx
 		docsrc\content\BlastWrapper.fsx = docsrc\content\BlastWrapper.fsx
 		docsrc\content\Clustal.fsx = docsrc\content\Clustal.fsx
 		docsrc\content\ClustalOWrapper.fsx = docsrc\content\ClustalOWrapper.fsx
