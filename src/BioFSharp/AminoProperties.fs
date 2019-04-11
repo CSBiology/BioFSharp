@@ -10,6 +10,8 @@ module AminoProperties =
 
     ///Union case of amino acid properties, referencing the according included information in this library. Use "initGetAminoProperty" function to obtain a simple mapping function
     type AminoProperty =
+        // Gravy score (Grand Average of Hydropathy)
+        | GravyScore 
         /// Hydrophobicity index (Argos et al., 1982)
         | HydrophobicityIndex
         /// Hydrophobicity index (Fasman, 1989)
@@ -78,6 +80,8 @@ module AminoProperties =
         | CompositionIntracellular
         /// Composition of amino acids in extracellular proteins (percent) (Cedano et al., 1997)
         | CompositionExtracellular
+        // Weights for coil at the window position of -3 (Qian-Sejnowski, 1988) 
+        | WeightsCoilMinus3
         /// Weights for alpha-helix at the window position of -3 (Qian-Sejnowski, 1988)
         | WeightsHelixMinus3
         /// Helix formation parameters (delta delta G) (O'Neil-DeGrado, 1990)
@@ -89,6 +93,7 @@ module AminoProperties =
 
 
         static member toString = function
+            | GravyScore -> "Gravy score (Grand Average of Hydropathy)"
             | HydrophobicityIndex       -> "Hydrophobicity index (Argos et al., 1982)"
             | HydrophobicityFasman      -> "Hydrophobicity index (Fasman, 1989)"
             | HydrophobicityIndex2      -> "Hydrophobicity index (Wolfenden et al., 1979)"
@@ -123,6 +128,7 @@ module AminoProperties =
             | AverageNumberSurroundingResidues   -> "Average number of surrounding residues (Ponnuswamy et al., 1980)"
             | CompositionIntracellular  -> "Interior composition of amino acids in intracellular proteins of mesophiles (percent) (Fukuchi-Nishikawa, 2001)"
             | CompositionExtracellular  -> "Composition of amino acids in extracellular proteins (percent) (Cedano et al., 1997)"
+            | WeightsCoilMinus3        -> "Weights for coil at the window position of -3 (Qian-Sejnowski, 1988)"
             | WeightsHelixMinus3        -> "Weights for alpha-helix at the window position of -3 (Qian-Sejnowski, 1988)"
             | HelixFormationParameters  -> "Helix formation parameters (delta delta G) (O'Neil-DeGrado, 1990)"
             | FreeEnergyHelicalRegion   -> "Free energy in alpha-helical region (Munoz-Serrano, 1994)"

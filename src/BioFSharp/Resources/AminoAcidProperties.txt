@@ -1,3 +1,5 @@
+Gravy score (Grand Average of Hydropathy)
+A:1.8 R:-4.5 N:-3.5 D:-3.5 C:2.5 Q:-3.5 E:-3.5 G:-0.4 H:-3.2 I:4.5 L:3.8 K:-3.9 M:1.9 F:2.8 P:-1.6 S:-0.8 T:-0.7 W:-0.9 Y:-1.3 V:4.2
 Hydrophobicity index (Argos et al., 1982)
 A:0.61 R:0.6 N:0.06 D:0.46 C:1.07 Q:0 E:0.47 G:0.07 H:0.61 I:2.22 L:1.53 K:1.15 M:1.18 F:2.02 P:1.95 S:0.05 T:0.05 W:2.65 Y:1.88 V:1.32
 Hydrophobicity index (Fasman, 1989)
