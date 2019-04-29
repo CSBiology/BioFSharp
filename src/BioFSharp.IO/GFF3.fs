@@ -310,7 +310,7 @@ module GFF3 =
         else sprintf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" g.Seqid g.Source g.Feature (toStringInt g.StartPos) (toStringInt g.EndPos) (toStringFloat g.Score) (toStringChar g.Strand) (toStringInt g.Phase) (toStringMap g.Attributes) (toStringSup g.Supplement)
 
     ///converts GFF lines to string sequence. Hint: Use id as converter if no FASTA sequence is included.
-    let toString (input : seq<GFFLine<#seq<'a>>>) converter path=
+    let toString converter (input : seq<GFFLine<#seq<'a>>>) =
         let en = input.GetEnumerator()
         let toString =
             seq {   
@@ -326,13 +326,13 @@ module GFF3 =
 
     ///writesOrAppends GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.
     let writeOrAppend (input : seq<GFFLine<#seq<'a>>>) converter path =
-        toString input converter path
+        toString converter input
         |> Seq.writeOrAppend path
         printfn "Writing is finished! Path: %s" path
 
     ///writes GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.
-    let write (input : seq<GFFLine<#seq<'a>>>) converter path =
-        toString input converter path
+    let write converter path (input : seq<GFFLine<#seq<'a>>>) =
+        toString converter input
         |> Seq.write path
         printfn "Writing is finished! Path: %s" path
 
