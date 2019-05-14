@@ -527,6 +527,10 @@ Target.create "GitReleaseNuget" (fun _ ->
     Shell.copy tempNugetDir files
 )
 
+//Confirmation Targets (Ugly because error is thrown. Maybe there is a better way on handling this using the cancellation tokens in the target context, but i was not able to figure that out)
+
+Target.create "ReleaseConfirmation" (fun _ -> match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled")
+
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
@@ -561,7 +565,8 @@ Target.create "Linux" ignore
 "Clean"
   ==> "Release"
 
-"BuildPackage"
+"ReleaseConfirmation"
+  ==> "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
 
