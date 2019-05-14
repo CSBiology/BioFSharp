@@ -75,6 +75,26 @@ module TemporaryDocumentationHelpers =
         run arguments.ToolPath command
         printfn "Successfully generated docs for %s" source
 
+[<AutoOpen>]
+module MessagePrompts =
+
+    let prompt (msg:string) =
+      System.Console.Write(msg)
+      System.Console.ReadLine().Trim()
+      |> function | "" -> None | s -> Some s
+      |> Option.map (fun s -> s.Replace ("\"","\\\""))
+
+    let rec promptYesNo msg =
+      match prompt (sprintf "%s [Yn]: " msg) with
+      | None
+      | Some "Y" | Some "y" -> true
+      | Some "N" | Some "n" -> false
+      | _ -> System.Console.WriteLine("Sorry, invalid answer"); promptYesNo msg
+
+    let releaseMsg = """This will stage all uncommitted changes, push them to the origin and bump the release version to the latest number in the RELEASE_NOTES.md file. 
+    Do you want to continue?"""
+
+
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
 // --------------------------------------------------------------------------------------
@@ -486,13 +506,15 @@ Target.create "Release" (fun _ ->
     //|> Async.RunSynchronously
 
     // using simplified FAKE 5 release for now
+    match promptYesNo releaseMsg with
+    |true ->
+        Git.Staging.stageAll ""
+        Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
+        Git.Branches.push ""
 
-    Git.Staging.stageAll ""
-    Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
-    Git.Branches.push ""
-
-    Git.Branches.tag "" release.NugetVersion
-    Git.Branches.pushTag "" "origin" release.NugetVersion
+        Git.Branches.tag "" release.NugetVersion
+        Git.Branches.pushTag "" "origin" release.NugetVersion
+    |_ -> ()
 )
 
 Target.create "BuildPackage" ignore
