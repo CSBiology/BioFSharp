@@ -1,4 +1,5 @@
 ﻿type project
+id BioFSharp.Parallel
 title
     BioFSharp.Parallel
 owners
@@ -8,16 +9,22 @@ authors
 projectUrl
     https://github.com/CSBiology/BioFSharp
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/FSharp.FGL/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
 licenseUrl
     https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2015
+    Copyright 2019
 tags
-    F# FSharp bioinformatics
+    F# FSharp bioinformatics parallelization
 summary
-    F# FSharp bioinformatics
+    GPU parallelized functions from BioFSharp
 description
-    F# FSharp bioinformatics
+    GPU parallelized functions from BioFSharp
+include-referenced-projects 
+    true
+files
+    ../../bin/BioFSharp.Parallel ==> lib

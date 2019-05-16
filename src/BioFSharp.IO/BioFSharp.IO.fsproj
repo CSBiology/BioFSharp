@@ -33,6 +33,7 @@
     <Compile Include="WorkflowLanguage.fs" />
     <Compile Include="FSIPrinters.fs" />
     <None Include="paket.references" />
+    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />

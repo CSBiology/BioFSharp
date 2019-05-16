@@ -1,4 +1,4 @@
-type file
+type project
 id BioFSharp.BioTools
 title
     BioFSharp.BioTools
@@ -17,13 +17,14 @@ requireLicenseAcceptance
 language
     F#
 copyright
-    Copyright 2017
+    Copyright 2019
 tags
-    bioinformatics F# fsharp
+    bioinformatics F# fsharp docker biocontainer
 summary
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
+    Common bioinformatics tools in Docker containers accessible by F#
 description
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
-
+    Common bioinformatics tools in Docker containers (including BioContainers) accessible by F#
+include-referenced-projects 
+    true
 files
-	../../bin/BioFSharp ==> lib
+    ../../bin/BioFSharp.BioTools ==> lib

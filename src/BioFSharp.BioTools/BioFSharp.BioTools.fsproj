@@ -27,6 +27,8 @@
     <Compile Include="TargetP.fs" />
     <Compile Include="Tmhmm.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
+    <None Include="paket.references" />
+    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
