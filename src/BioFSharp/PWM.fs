@@ -92,6 +92,24 @@ module PWM =
             |> Array.take subsequenceLength 
             |> Array.ofSeq
 
+
+        ///Finds the best information content in an array of arrays of PWMSs and Positions.
+        let getBestInformationContent (item:((float*int)[])[]) =
+            let rec loop (n:int) (bestPWMS:(float*int)[]) =
+                if n = item.Length then bestPWMS
+                else
+                    let informationContentItem =
+                        item.[n]
+                        |> Array.fold (fun baseValue (pwms, _) -> pwms + baseValue) 0.
+                    let informationContentBestPWMS =
+                        bestPWMS
+                        |> Array.fold (fun baseValue (pwms, _) -> pwms + baseValue) 0.
+                    if informationContentItem > informationContentBestPWMS then
+                        loop (n + 1) item.[n]
+                    else
+                        loop (n + 1) bestPWMS
+            loop 0 [||]
+
     open HelperFunctionsAndTypes
 
     /// Contain tools to create and manipulate FrequencyVectors.
