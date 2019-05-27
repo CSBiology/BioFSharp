@@ -25,17 +25,19 @@ module Ricker =
             Array.append 
                 (Array.map (fun x -> correctionVal * ( rickerMHwithScale scaleRise x)) [|-(padArea)..(- 1.)|]) 
                 (Array.map (fun x ->                   rickerMHwithScale scaleDecay x) [|0.0..(padArea)|])
+
         let amplitudeAdjValues =
             let sum = values |> Array.fold (fun acc x -> acc + Math.Abs(x)) 0.
             let max = values |> Array.max
             let corrFacTwo = 
                 0.15 / max
             values |> Array.map (fun x -> corrFacTwo * x)      
+
         {
         ScaleDecay  = scaleDecay
         ScaleRise   = scaleRise
-        Values      = amplitudeAdjValues
-        //Values      = values
+        //Values      = amplitudeAdjValues
+        Values      = values
         PadArea     = padAreaInt
         }
 
@@ -123,14 +125,14 @@ module Trace =
 
     let paddTrace (cwtTrace:float[])= 
         let rnd = System.Random() 
-        let padding = 3000  //number of zeros the data is padded with
+        let padding = 20000  //number of zeros the data is padded with
         let listRnd = Array.map (fun x -> cwtTrace.[rnd.Next(0,cwtTrace.Length-1)]|> float ) [|0..padding-1|]
         let paddedCWT3Dtrace = Array.append (Array.append listRnd cwtTrace) listRnd
         paddedCWT3Dtrace
 
     ///computes the continious wavelet transform of the padded trace with wavelet type Ricker.
     let cWT1D (paddedTrace: float []) (myRicker: Ricker.myRicker)=
-        let padding =  3000
+        let padding =  20000
         let myRickerOffsetRise = (6. * myRicker.ScaleRise) |> ceil |> int 
         let myRickerOffset = myRicker.PadArea
         let arr = Array.zeroCreate (paddedTrace.Length - (2 * padding))
@@ -218,13 +220,15 @@ module Trace =
             let factorFstTerm = 3.4071 * factorSndTerm
             ((factorFstTerm * (x + rise)) / (Math.Sqrt(2. * Math.PI)))*Math.Exp(- 0.5 * (factorSndTerm * (x + rise)))
 
-        let blitarray = Array.zeroCreate (numberOfFrames+221)
+        //let blitarray = Array.zeroCreate (numberOfFrames+221)
+        let blitarray = Array.zeroCreate (numberOfFrames+501)
         let fitOfStandardCurve j =
                 if maximaArr.[j] >= threshold then 
                     //for i =j-7 to j+220 do
                         //blitarray.[i] <- (fittingFunction2 0.6 ((i - j) |> float)) * maximaArr.[j] 
-                    for i =j-(int rise) to j+220 do 
-                        blitarray.[i] <- (fittingFunction rise ((i - j) |> float)) * maximaArr.[j] 
+                    //for i =j-(int rise) to j+220 do 
+                    for i =j-(int rise) to j+500 do 
+                        blitarray.[i] <- (fittingFunction2 rise ((i - j) |> float)) * maximaArr.[j] 
                     blitarray.[0 .. numberOfFrames - 1]
                 else
                     blitarray.[j   ] <- 0.
