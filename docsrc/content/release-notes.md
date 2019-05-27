@@ -1,3 +1,9 @@
+#### 0.0.16 - Thursday, March 7, 2019
+ * Fix template files for all nuget packages: 
+   * use correct paths for binaries
+   * update project descriptions
+   * use type project to infer dependencies
+
 #### 0.0.15 - Thursday, March 7, 2019
  * BioFSharp.ML - project introduction:
    * Usage of Microsoft's CNTK library with a biological focus:

@@ -1,23 +1,30 @@
 ﻿type project
+id BioFSharp.IO
 title
     BioFSharp.IO
 owners
     Timo Mühlhaus
-authors
+authors 
     Timo Mühlhaus
 projectUrl
     https://github.com/CSBiology/BioFSharp
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/FSharp.FGL/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2015
+    Copyright 2019
 tags
-   F# FSharp bioinformatics
+    bioinformatics F# fsharp IO
 summary
-   F# FSharp bioinformatics
+    Readers/Writers for biological file formats
 description
-   F# FSharp bioinformatics
+    Readers/Writers for biological file formats
+include-referenced-projects 
+    true
+files
+	../../bin/BioFSharp.IO ==> lib

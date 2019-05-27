@@ -1,4 +1,4 @@
-type file
+type project
 id BioFSharp.ML
 title
     BioFSharp.ML
@@ -17,13 +17,14 @@ requireLicenseAcceptance
 language
     F#
 copyright
-    Copyright 2017
+    Copyright 2019
 tags
-    bioinformatics F# fsharp
+    bioinformatics F# fsharp maschine learning
 summary
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
+    Lighweight F# wrapper for ML.NET
 description
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
-
+    Lighweight F# wrapper for ML.NET
+include-referenced-projects 
+    true
 files
 	../../bin/BioFSharp.ML ==> lib

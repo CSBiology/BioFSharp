@@ -392,3 +392,60 @@ module GFF3 =
         sequenceOfFirstCDS
 
     //Output: Nucleotides.Nucleotides [] (ATG...TAA)
+
+    ///Parse FastA to GFF3
+    module FastAHeaderParser = 
+        
+        /// Takes a sequence of FastA items and a regex pattern and transforms them into a sequence of GFF3 RNA items with decoy gene loci.
+        let createGFF3OfFastAWithRegex pattern (fastA : seq<FastA.FastaItem<'A>>) = 
+            fastA
+            |> Seq.mapi (fun i item -> 
+                let id = 
+                    let regex = System.Text.RegularExpressions.Regex.Match (item.Header,pattern)
+                    if regex.Success then regex.Value
+                    else 
+                        failwithf "Couldn't find pattern \"%s\" in header \"%s\"" pattern item.Header
+                [
+                GFFEntryLine (createGFFEntry "Unknown" "." "gene" "." "." "." "." "." (sprintf "ID=%i" i) "");
+                GFFEntryLine (createGFFEntry "Unknown" "." "mRNA" "." "." "." "." "." (sprintf "ID=%s;Parent=%i" id i) "")
+                ]
+            )
+            |> Seq.concat
+
+        /// Takes a sequence of FastA items and transforms them into a sequence of GFF3 RNA and gene items. FastA headers have to be UniProt style.
+        ///
+        /// For Reference see: https://www.uniprot.org/help/fasta-headers
+        let createGFF3OfFastA (fastA : seq<FastA.FastaItem<'A>>)= 
+            let fastAHeaders = 
+                fastA
+                |> Seq.map (fun item -> item.Header |> BioFSharp.BioID.FastA.fromString)
+            // "protein" and "mRNA" used interchangeably
+            let mRNAHeadersWithGeneName = 
+                let mutable i = 0
+                fastAHeaders
+                |> Seq.map (fun header ->
+                    // If field Gene name for a given protein is occupied then this gene name is used. In this case multiple Proteins can be associated to the same gene. Else a decoy number is set.
+                    match Map.tryFind "GN" header.Info with
+                    | Some name ->
+                        (header.ID, name)
+                    | None ->
+                        let id = i |> string
+                        i <- i + 1
+                        header.ID,id
+                    )
+            // The proteins are grouped by their gene name 
+            mRNAHeadersWithGeneName
+            |> Seq.groupBy snd
+            |> Seq.collect (fun (genename,proteins) ->
+                // All proteins/mRNAs of one gene
+                proteins
+                |> Seq.map (fun (protID,_) ->
+                    GFFEntryLine (createGFFEntry "Unknown" "." "mRNA" "." "." "." "." "." (sprintf "ID=%s;Parent=%s" protID genename) "")
+                    )
+                // Then gene they point to
+                |> Seq.append (
+                    GFFEntryLine (createGFFEntry "Unknown" "." "gene" "." "." "." "." "." (sprintf "ID=%s" genename) "")
+                    |> Seq.singleton
+                    )
+                )
+

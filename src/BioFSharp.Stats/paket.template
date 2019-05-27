@@ -1,23 +1,30 @@
 ﻿type project
+id BioFSharp.Stats
 title
     BioFSharp.Stats
 owners
     Timo Mühlhaus
-authors
+authors 
     Timo Mühlhaus
 projectUrl
     https://github.com/CSBiology/BioFSharp
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/FSharp.FGL/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2015
+    Copyright 2019
 tags
-    F# FSharp bioinformatics
+    bioinformatics F# fsharp statistic
 summary
-    F# FSharp bioinformatics
+    Special statistical functions for bioinformatic purposes
 description
-    F# FSharp bioinformatics
+    Special statistical functions for bioinformatic purposes
+include-referenced-projects 
+    true
+files
+    ../../bin/BioFSharp.Stats ==> lib
