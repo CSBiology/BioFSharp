@@ -325,7 +325,7 @@ module GFF3 =
         toString
 
     ///writesOrAppends GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.
-    let writeOrAppend (input : seq<GFFLine<#seq<'a>>>) converter path =
+    let writeOrAppend converter path (input : seq<GFFLine<#seq<'a>>>) =
         toString converter input
         |> Seq.writeOrAppend path
         printfn "Writing is finished! Path: %s" path
@@ -337,7 +337,7 @@ module GFF3 =
         printfn "Writing is finished! Path: %s" path
 
     ///if a FastA sequence is included this function searches the features corresponding sequence
-    let getSequence (gFFFile : seq<GFFLine<#seq<'a>>>) (cDSfeature:GFFEntry)= 
+    let getSequence (cDSfeature:GFFEntry) (gFFFile : seq<GFFLine<#seq<'a>>>) = 
     
 //        let firstCDS = 
 //            let filteredGFFEntries = 
