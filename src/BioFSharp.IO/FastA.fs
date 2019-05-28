@@ -87,11 +87,15 @@ module FastA =
                                 sWriter.WriteLine(">" + i.Header)
                                 toChunks sWriter 80 i.Sequence) 
 
-    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char
+    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is overwritten.
     let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
-        let file = new FileStream(filePath,FileMode.Append)
+        let file = new FileStream(filePath,FileMode.Create)
         writeToStreaam toString file data   
 
+    /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is appended.
+    let writeAndAppend (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
+        let file = new FileStream(filePath,FileMode.Append)
+        writeToStreaam toString file data   
 
     /// Converts FastaItem to string. Converter determines type of sequence by converting type -> char
     let toString (toString:'T -> char) (data:seq<FastaItem<#seq<'T>>>) =
