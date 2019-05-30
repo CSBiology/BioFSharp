@@ -109,18 +109,23 @@ module Centroid =
 
 
     let inline C3DWT (marr: Marr.MarrWavelet) (frame:'a[,]) =   
-        let resolutionPixel = (Array2D.length1 frame) - 40 * 2
+        let resolutionPixelfst = (Array2D.length1 frame) - 40 * 2
+        let resolutionPixelsnd = (Array2D.length2 frame) - 40 * 2
         let offset = marr.PadAreaRadius
         let paddingoffset = 40
-        let (CWTArray2D0: float[,]) = Array2D.zeroCreate (Array2D.length1 frame) (Array2D.length2 frame)
-        for x = paddingoffset to (paddingoffset + (resolutionPixel-1)) do
-            for y = paddingoffset to (paddingoffset + (resolutionPixel-1)) do
+        let (CWTArray2D0: float[,]) = Array2D.zeroCreate (Array2D.length2 frame) (Array2D.length1 frame)
+        for x = paddingoffset to (paddingoffset + (resolutionPixelsnd-1)) do
+            for y = paddingoffset to (paddingoffset + (resolutionPixelfst-1)) do
                 CWTArray2D0.[x,y] <-
-                    let mutable acc = 0.                                       
-                    for a = 0 to 2*offset do
-                        for b = 0 to 2*offset do               
-                            acc <- acc + ((marr.Values).[a,b] * (frame.[(y+(a-offset)),(x+(b-offset))] |> float))
-                    acc
+                    let rec loop acc' a b =
+                        if a <= 2 * offset then
+                            if b <= 2 * offset then
+                                let acc = acc' + ((marr.Values).[a,b] * (frame.[(y+(a-offset)),(x+(b-offset))] |> float))
+                                loop acc a (b + 1)
+                            else
+                                loop acc' (a + 1) 0
+                        else acc'
+                    loop 0. 0 0
         let deletePaddingArea =
             let arrayWithoutPaddingoffset = Array2D.zeroCreate ((Array2D.length1 CWTArray2D0)-(2*paddingoffset)) ((Array2D.length2 CWTArray2D0)-(2*paddingoffset))
             for i=paddingoffset to (Array2D.length1 CWTArray2D0)-(paddingoffset+1) do

@@ -15,6 +15,7 @@
     <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GAF.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
@@ -32,6 +33,7 @@
     <Compile Include="WorkflowLanguage.fs" />
     <Compile Include="FSIPrinters.fs" />
     <None Include="paket.references" />
+    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />

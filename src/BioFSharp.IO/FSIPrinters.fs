@@ -8,6 +8,7 @@ module FSIPrinters =
     open BioFSharp.BioID
     open BioFSharp.IO
     open BioFSharp.IO.Clustal
+    open BioFSharp.IO.GFF3
     open FSharpAux
     open System.Text
     
@@ -101,3 +102,7 @@ module FSIPrinters =
         loop 0 false
         sprintf "\r\n%s\r\n" (prnt.ToString())
 
+    ///print GFF3 formatted file as seen in the specifications.
+    let prettyPrintGFF3 (input : seq<GFFLine<#seq<'a>>>) =
+        toString id input
+        |> Seq.iter (fun x -> printfn "%s" x)

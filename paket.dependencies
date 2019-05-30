@@ -1,4 +1,3 @@
-
 framework: auto-detect
 
 source https://nuget.org/api/v2
@@ -17,6 +16,11 @@ nuget Microsoft.Xaml
 nuget SwaggerProvider
 nuget YamlDotNet
 
+nuget docker.dotnet
+nuget SharpZipLib
+
+nuget CNTK.CPUOnly
+
 git https://github.com/CSBiology/FSharpAux.git nuget Packages: /
 nuget FSharpAux
 nuget FSharpAux.IO
@@ -27,6 +31,7 @@ nuget FSharp.Stats.MSF
 
 
 clitool dotnet-fake
+
 
 group BioDB
     framework:net45

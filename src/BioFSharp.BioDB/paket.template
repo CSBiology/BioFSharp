@@ -1,9 +1,10 @@
 ﻿type project
+id BioFSharp.BioDB
 title
     BioFSharp.BioDB
 owners
     Timo Mühlhaus
-authors
+authors 
     Timo Mühlhaus
 projectUrl
     https://github.com/CSBiology/BioFSharp
@@ -13,11 +14,17 @@ licenseUrl
     https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2018
+    Copyright 2019
 tags
-    F# FSharp bioinformatics
+    bioinformatics F# fsharp database-access
 summary
-    F# FSharp bioinformatics
+    APIs for querying common biological databases
 description
-    F# FSharp bioinformatics
+    APIs for querying common biological databases
+include-referenced-projects 
+    true
+files
+    ../../bin/BioFSharp.BioDB ==> lib

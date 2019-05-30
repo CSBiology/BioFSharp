@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45</TargetFrameworks>
     <RootNamespace>BioFSharp.BioDB</RootNamespace>
@@ -20,6 +20,7 @@
     <Compile Include="FaToolDb.fs" />
     <Compile Include="EbiAPI.fs" />
     <None Include="paket.references" />
+    <None Include="paket.template" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
     <!-- Resources -->

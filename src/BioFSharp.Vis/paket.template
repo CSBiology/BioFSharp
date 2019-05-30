@@ -1,23 +1,30 @@
 ﻿type project
+id BioFSharp.Vis
 title
     BioFSharp.Vis
 owners
     Timo Mühlhaus
-authors
+authors 
     Timo Mühlhaus
 projectUrl
     https://github.com/CSBiology/BioFSharp
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/FSharp.FGL/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
+language
+    F#
 copyright
-    Copyright 2015
+    Copyright 2019
 tags
-    F# FSharp bioinformatics
+    bioinformatics F# fsharp image-processing
 summary
-    F# FSharp bioinformatics
+    Image processing tools using continuous wavelet transformations
 description
-    F# FSharp bioinformatics
+    Image processing tools using continuous wavelet transformations
+include-referenced-projects 
+    true
+files
+    ../../bin/BioFSharp.Vis ==> lib

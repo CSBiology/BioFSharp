@@ -75,6 +75,26 @@ module TemporaryDocumentationHelpers =
         run arguments.ToolPath command
         printfn "Successfully generated docs for %s" source
 
+[<AutoOpen>]
+module MessagePrompts =
+
+    let prompt (msg:string) =
+        System.Console.Write(msg)
+        System.Console.ReadLine().Trim()
+        |> function | "" -> None | s -> Some s
+        |> Option.map (fun s -> s.Replace ("\"","\\\""))
+
+    let rec promptYesNo msg =
+        match prompt (sprintf "%s [Yn]: " msg) with
+        | Some "Y" | Some "y" -> true
+        | Some "N" | Some "n" -> false
+        | _ -> System.Console.WriteLine("Sorry, invalid answer"); promptYesNo msg
+
+    let releaseMsg = """This will stage all uncommitted changes, push them to the origin and bump the release version to the latest number in the RELEASE_NOTES.md file. 
+        Do you want to continue?"""
+
+    let releaseDocsMsg = """This will push the docs to gh-pages. Remember building the docs prior to this. Do you want to continue?"""
+
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
 // --------------------------------------------------------------------------------------
@@ -352,10 +372,14 @@ Target.create "ReferenceDocs" (fun _ ->
                         DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net45"))
                     let net47Bin =
                         DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net47"))
+                    let netstandardBin =
+                        DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard"))
                     if net45Bin.Length > 0 then
                         d.Name, net45Bin.[0]
-                    else
+                    elif net47Bin.Length > 0 then
                         d.Name, net47Bin.[0]
+                    else
+                        d.Name, netstandardBin.[0]
 
                 dInfo.GetFiles()
                 |> Array.filter (fun x ->
@@ -440,7 +464,7 @@ Target.create "ReleaseDocs" (fun _ ->
 )
 
 Target.create "ReleaseLocal" (fun _ ->
-    let tempDocsDir = "temp/gh-pages"
+    let tempDocsDir = "temp/localDocs"
     Shell.cleanDir tempDocsDir |> ignore
     Shell.copyRecursive "docs" tempDocsDir true  |> printfn "%A"
     Shell.replaceInFiles 
@@ -506,6 +530,11 @@ Target.create "GitReleaseNuget" (fun _ ->
     Shell.copy tempNugetDir files
 )
 
+//Confirmation Targets (Ugly because error is thrown. Maybe there is a better way on handling this using the cancellation tokens in the target context, but i was not able to figure that out)
+
+Target.create "ReleaseConfirmation" (fun _ -> match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled")
+Target.create "ReleaseDocsConfirmation" (fun _ -> match promptYesNo releaseDocsMsg with | true -> () |_ -> failwith "Release canceled")
+
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
@@ -540,7 +569,8 @@ Target.create "Linux" ignore
 "Clean"
   ==> "Release"
 
-"BuildPackage"
+"ReleaseConfirmation"
+  ==> "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
 
@@ -553,6 +583,9 @@ Target.create "Linux" ignore
   ==> "GitReleaseNuget"
 
 "GenerateDocs"
+  ==> "ReleaseDocs"
+
+"ReleaseDocsConfirmation"
   ==> "ReleaseDocs"
 
 "All"

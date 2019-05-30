@@ -26,7 +26,7 @@ module Obo =
             IsObsolete : string
             Replacedby : string //new
             Consider : string //new
-            AltId : string
+            AltId : string list
             DisjointFrom : string list
             Subset : string list
             IntersectionOf : string list
@@ -102,7 +102,7 @@ module Obo =
                                      xrefAnalog split.[1] isObsolete replaced_by consider altId disjointFrom subset intersectionOf xref propertyValue
         
             | "is_obsolete"     -> parseSingleOboTerm en  id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
-                                     xrefAnalog comment split.[1] replaced_by altId consider disjointFrom subset intersectionOf xref propertyValue
+                                     xrefAnalog comment split.[1] replaced_by consider altId disjointFrom subset intersectionOf xref propertyValue
                                          
             | "replaced_by"     -> parseSingleOboTerm en  id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
                                      xrefAnalog comment isObsolete split.[1] consider altId disjointFrom subset intersectionOf xref propertyValue
@@ -111,7 +111,7 @@ module Obo =
                                      xrefAnalog comment isObsolete replaced_by split.[1] altId disjointFrom subset intersectionOf xref propertyValue
         
             | "alt_id"          -> parseSingleOboTerm en  id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
-                                     xrefAnalog comment isObsolete replaced_by consider split.[1] disjointFrom subset intersectionOf xref propertyValue
+                                     xrefAnalog comment isObsolete replaced_by consider (split.[1]::altId) disjointFrom subset intersectionOf xref propertyValue
         
             | "disjoint_from"   -> parseSingleOboTerm en  id name name_space definition relationship related_synonym isA synonym exactSynonym broadSynonym narrowSynonym
                                      xrefAnalog comment isObsolete replaced_by consider altId (split.[1]::disjointFrom) subset intersectionOf xref propertyValue
@@ -167,7 +167,7 @@ module Obo =
                 match en.MoveNext() with
                 | true ->             
                     match en.Current with
-                    | "[Term]"    -> yield (parseSingleOboTerm en "" "" "" "" "" [] [] [] "" "" "" "" "" "" "" "" "" [] [] [] [] "")
+                    | "[Term]"    -> yield (parseSingleOboTerm en "" "" "" "" "" [] [] [] "" "" "" "" "" "" "" "" [] [] [] [] [] "")
                                      yield! loop en 
                     | _ -> yield! loop en
                 | false -> ()

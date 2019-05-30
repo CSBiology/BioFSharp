@@ -1,0 +1,30 @@
+type project
+id BioFSharp.BioTools
+title
+    BioFSharp.BioTools
+owners
+    Timo Mühlhaus
+authors 
+    Timo Mühlhaus
+projectUrl
+    https://github.com/CSBiology/BioFSharp
+iconUrl
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
+licenseUrl
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+language
+    F#
+copyright
+    Copyright 2019
+tags
+    bioinformatics F# fsharp docker biocontainer
+summary
+    Common bioinformatics tools in Docker containers accessible by F#
+description
+    Common bioinformatics tools in Docker containers (including BioContainers) accessible by F#
+include-referenced-projects 
+    true
+files
+    ../../bin/BioFSharp.BioTools ==> lib
