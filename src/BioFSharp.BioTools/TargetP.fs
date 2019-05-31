@@ -68,6 +68,7 @@ module TargetP =
             [<FieldAttribute("Name")>]  Name  : string
             [<FieldAttribute("Len")>]   Len   : int
             [<FieldAttribute("mTP")>]   Mtp   : float
+            [<FieldAttribute("cTP")>]   Ctp   : float
             [<FieldAttribute("SP")>]    SP    : float
             [<FieldAttribute("other")>] Other : float
             [<FieldAttribute("Loc")>]   Loc   : string
