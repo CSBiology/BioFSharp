@@ -68,6 +68,7 @@ module BioContainerIO =
                 tarOutputStream.CloseEntry()
             else
                 tarOutputStream.Write(localBuffer, 0, numRead)
+                loop ()
     
         loop ()
         tarOutputStream.IsStreamOwner <- false
