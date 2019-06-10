@@ -16,7 +16,7 @@ module Ricker =
 
     let createmyRicker scaleRise scaleDecay =  
         let rickerMHwithScale scale x = (2./(sqrt(3.*scale)*(Math.PI**0.25)))*(1.-((x**2.)/(scale**2.)))*(Math.E**(-(x**2.)/(2.*(scale**2.))))
-        let padArea = ceil (6. * scaleDecay)
+        let padArea = ceil (7. * scaleDecay)
         let padAreaInt = padArea |> int
         
         //correctionVal is a value that corrects admissibility. That is due to the modified ricker where the left part of the ricker at x=0 <> right(x=0) resulting in a area under the curve <> 0.
@@ -140,9 +140,11 @@ module Trace =
             let rec loop acc2 j =
                 if j < myRickerOffset then
                     loop ((paddedTrace.[i+j] * myRicker.Values.[(myRickerOffset)+j]) + acc2) (j+1)
-                else (arr.[i-padding] <- acc2)
+                //else (arr.[i-padding] <- acc2)
+                else (arr.[i-padding] <- (acc2 / Math.Sqrt(myRicker.ScaleDecay))) //corrects for admissibility (see Polikar wavelet tutorial)
             loop 0. (- myRickerOffsetRise) 
         arr
+
 
     
     let findLocalMaxima2D paddedTrace ricker neighbourPoints = 
