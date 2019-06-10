@@ -56,9 +56,12 @@ module GAF =
     let fromFile filepath :GAF=
         let strEnumerator = (FileIO.readFile(filepath)).GetEnumerator()
 
-        let isVersion2 = 
+        let version = 
             strEnumerator.MoveNext() |> ignore
-            strEnumerator.Current.StartsWith("!gaf-version: 2")
+            strEnumerator.Current
+
+        let isVersion2 = 
+            version.StartsWith("!gaf-version: 2")
 
         let rec parseSingle (accE:GAFEntry list) (accH:string list)=
             if strEnumerator.MoveNext() then 
@@ -72,4 +75,41 @@ module GAF =
                 {Header =  accH |> List.rev |> Seq.cast
                  Entries = accE |> List.rev |> Seq.cast}   
 
-        parseSingle [] []
+        parseSingle [] [version]
+
+    let toFile filepath (gaf: GAF) : unit =
+        let isVersion2 = 
+            (gaf.Header |> Seq.item 0).StartsWith("!gaf-version: 2")
+
+        let toString (entry: GAFEntry) : string =
+            [
+            entry.Database          
+            entry.DbObjectID
+            entry.DbObjectSymbol
+            entry.Qualifier         |> String.concat "|"
+            entry.GoTerm
+            entry.DbReference       |> String.concat "|"
+            entry.Evidence
+            entry.WithFrom          |> String.concat "|"
+            entry.Aspect
+            entry.DbObjectName
+            entry.DbObjectSynonym   |> String.concat "|"
+            entry.DbObjectType
+            entry.Taxon             |> String.concat "|"
+            entry.Date.ToString("yyyyMMdd")
+            entry.AssignedBy    
+            entry.AnnotationExtension |> fun x -> if isVersion2 then x.Value |> String.concat "," else ""   //adds additional tabs to file if version is <2
+            entry.GeneProductFormId   |> fun x -> if isVersion2 then x.Value else ""                        //adds additional tabs to file if version is <2
+            ]
+            |> String.concat "\t"
+
+        let toArr =
+            Seq.append gaf.Header (gaf.Entries |> Seq.map toString)
+        System.IO.File.WriteAllLines(filepath,toArr)
+
+
+
+
+//\bin\BioFSharp.IO\net47\FSharpAux.dll"
+//\bin\BioFSharp.IO\net47\BioFSharp.dll"
+//\bin\BioFSharp.IO\net47\BioFSharp.IO.dll"
