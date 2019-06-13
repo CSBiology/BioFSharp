@@ -61,6 +61,6 @@ Community/Social
 ----------------
 Want to get in touch with us? We recently joined the twitter crowd:
 
-![Twitter Follow](https://img.shields.io/twitter/follow/BioFSharp.svg?style=social)
+[![Twitter Follow](https://img.shields.io/twitter/follow/BioFSharp.svg?style=social)](https://twitter.com/biofsharp)
 
-![Twitter Follow](https://img.shields.io/twitter/follow/cs_biology.svg?style=social)
+[![Twitter Follow](https://img.shields.io/twitter/follow/cs_biology.svg?style=social)](https://twitter.com/cs_biology)
