@@ -27,6 +27,22 @@ BioDB functionality
 
 The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our workgroup for querying functional annotations of proteins.
 
+BioTools functionality
+----------------------
+
+The BioTools namespace is all about making common bioinformatics tools programmatically accessible from F#. This is realized by making the containerized tool accessible via the Docker daemon.
+
+ML functionality
+----------------
+
+Make your workflow ML ready with BioFSharp.ML. Currently contains helper functionf for [CNTK](https://docs.microsoft.com/en-us/cognitive-toolkit/) and a pre-trained model we used in our [publication about predicting peptide observability](https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full).
+
+Stats functionality
+----------------------
+
+The Stats namespace contains statistical functions with a clear biological focus such as functions for calculating Gene Ontology Enrichments.
+
+
 Documentation
 -------------
 
