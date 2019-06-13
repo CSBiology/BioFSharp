@@ -40,3 +40,11 @@ Contributing
 ------------
 
 Please refer to the [Contribution guidelines](.github/CONTRIBUTING.md)
+
+Community/Social
+----------------
+Want to get in touch with us? We recently joined the twitter crowd:
+
+![Twitter Follow](https://img.shields.io/twitter/follow/BioFSharp.svg?style=social)
+
+![Twitter Follow](https://img.shields.io/twitter/follow/cs_biology.svg?style=social)
