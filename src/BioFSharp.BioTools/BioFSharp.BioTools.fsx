@@ -381,17 +381,17 @@ open Blast
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
 
-let ImageBlast = Docker.DockerId.ImageId "blast"
+let ImageBlast = Docker.ImageName "biocontainers/blast:v2.2.31_cv2"
 
 let blastContext = 
-    BioContainer.initBcContextWithMountAsync client ImageBlast @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+    BioContainer.initBcContextWithMountAsync client ImageBlast (@"C:\Users\mikhay") //(__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data")
     |> Async.RunSynchronously
 
 let paramz =
     [
         MakeDbParams.DbType Protein
-        MakeDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-        MakeDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeDbParams.Input  (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\Chlamy_Cp.fastA")
+        MakeDbParams.Output (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\Chlamy_Cp.fastA")
     ]
 
 let outputFormat= 
@@ -410,9 +410,9 @@ let outputFormat=
     ] 
 
 let blastPParamz = [
-    BlastParams.SearchDB @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-    BlastParams.Query @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA"
-    BlastParams.Output @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt"
+    BlastParams.SearchDB (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\Chlamy_Cp.fastA")
+    BlastParams.Query  (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\testQuery.fastA")
+    BlastParams.Output (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\Output.txt")
     OutputTypeCustom
         (
              OutputType.TabularWithComments,
@@ -430,7 +430,6 @@ let blastPParamz = [
              ] 
         )
 ]
-
 runMakeBlastDBAsync blastContext paramz
 |> Async.RunSynchronously
 
@@ -443,6 +442,38 @@ runBlastPAsync blastContext blastPParamz
 BioContainer.execAsync blastContext ["makeblastdb"; "-dbtype"; "prot" ;"-in"; "/data/C/Users/Kevin/Source/Repos/CsbScaffold/Docker/data/Chlamy_Cp.fastA"; "-out"; "/data/C/Users/Kevin/Source/Repos/CsbScaffold/Docker/data/Chlamy_Cp.fastA"]
 |> Async.RunSynchronously
 
+////// Calculate PSSM with PSI-Blast command
+
+let psiBlastParamz = [
+    BlastParams.SearchDB (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\Chlamy_Cp.fastA") // @"C:/Users/mikhay/BLAST/nr" //
+    BlastParams.Query    (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\testQueryPSSM.fastA")
+    BlastParams.Num_Iterations 3
+    BlastParams.Comp_Based_Stats 1 // or 0
+    BlastParams.OutputPSSM (__SOURCE_DIRECTORY__ + @"\..\..\docsrc\content\data\testOutputPSSM.chk")
+    //BlastParams.Word_Size 5
+    //OutputTypeCustom
+    //    (
+    //         OutputType.TabularWithComments,
+    //         [   
+    //            OutputCustom.Query_SeqId; 
+    //            OutputCustom.Subject_SeqId;
+    //            OutputCustom.Query_Length;
+    //            OutputCustom.Subject_Length;
+    //            OutputCustom.AlignmentLength;
+    //            OutputCustom.MismatchCount;
+    //            OutputCustom.IdentityCount;
+    //            OutputCustom.PositiveScoringMatchCount;
+    //            OutputCustom.Evalue;
+    //            OutputCustom.Bitscore;
+    //         ] 
+    //    )
+    ]
+
+
+runPsiBlastAsync blastContext psiBlastParamz
+|> Async.RunSynchronously
+
+// close the docker
 BioContainer.disposeAsync blastContext
 |> Async.RunSynchronously
 

@@ -167,18 +167,23 @@ module Blast =
 
 
     type BlastParams =
-        | SearchDB of string
-        | Query    of string
-        | Output   of string
-        | OutputType of OutputType
+        | SearchDB     of string
+        | Query        of string
+        | Output       of string
+        | OutputPSSM   of string
+        | OutputType   of OutputType
         | OutputTypeCustom of OutputType * seq<OutputCustom>
-        | Num_threads of int
-        | Max_Hits of int
+        | Num_threads  of int
+        | Max_Hits     of int
+        | Num_Iterations of int
+        | Comp_Based_Stats of int
+        | Word_Size    of int
 
         static member makeCmdWith (m: MountInfo) = function
-            | SearchDB  (path)      -> ["-db"    ; (MountInfo.containerPathOf m path)]
-            | Query     (path)      -> ["-query" ; (MountInfo.containerPathOf m path)]
-            | Output    (path)      -> ["-out"   ; (MountInfo.containerPathOf m path)]
+            | SearchDB  (path)      -> ["-db"             ; (MountInfo.containerPathOf m path)]
+            | Query     (path)      -> ["-query"          ; (MountInfo.containerPathOf m path)]
+            | Output    (path)      -> ["-out"            ; (MountInfo.containerPathOf m path)]
+            | OutputPSSM(path)      -> ["-out_ascii_pssm" ; (MountInfo.containerPathOf m path)]
             | OutputType(format)    -> ["-outfmt"; string (format |> OutputType.make)]
             | OutputTypeCustom(t,p) ->  let tmp = 
                                             p 
@@ -191,6 +196,9 @@ module Blast =
                                         | _ -> failwithf "Output format %A does not support custom columns." t                                
             | Num_threads(i)        -> ["-num_threads"; string i]
             | Max_Hits (i)          -> ["-max_target_seqs"; string i]
+            | Num_Iterations (i)    -> ["-num_iterations"; string i]
+            | Comp_Based_Stats (i)  -> ["-comp_based_stats"; string i]
+            | Word_Size (i)         -> ["-word_size"; string i]
 
 
     let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeDbParams list) = 
@@ -242,4 +250,20 @@ module Blast =
 
     let runBlastN (bcContext:BioContainer.BcContext) (opt:BlastParams list) =
         runBlastNAsync bcContext opt
+        |> Async.RunSynchronously
+
+    let runPsiBlastAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
+        let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
+        let tp = "psiblast"::(cmds |> List.concat)
+
+        printfn "Starting process psiblast\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+        async {
+                let! res = BioContainer.execAsync bcContext tp           
+                return res
+        }
+
+    let runPsiBlast (bcContext:BioContainer.BcContext) (opt:BlastParams list) =
+        runPsiBlastAsync bcContext opt
         |> Async.RunSynchronously
