@@ -17,6 +17,7 @@
   <ItemGroup>
    <!-- Core -->
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Refactor.fs" />
     <Compile Include="PhysicalConstants.fs" />
     <Compile Include="BioID.fs" />
     <Compile Include="Isotopes.fs" />
