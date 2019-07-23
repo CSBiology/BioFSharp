@@ -4,6 +4,7 @@
 module ClustalOWrapper =
 
     open BioFSharp.IO
+    open BioFSharp.TaggedSequence
     open FSharpAux
 
     ///Contains modifier parameter type for Clustal Omega wrapper

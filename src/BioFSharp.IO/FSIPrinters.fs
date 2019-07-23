@@ -6,6 +6,7 @@ module FSIPrinters =
     open BioFSharp
     open BioFSharp.Alignment
     open BioFSharp.BioID
+    open BioFSharp.TaggedSequence
     open BioFSharp.IO
     open BioFSharp.IO.Clustal
     open BioFSharp.IO.GFF3
@@ -69,7 +70,7 @@ module FSIPrinters =
         let prnt = new StringBuilder()
         let seqs = 
             let sb = StringBuilder()
-            let max = (Seq.maxBy (fun (x:TaggedSequence<string,char>) -> x.Tag.Length) alignment.AlignedSequences).Tag.Length
+            let max = (Seq.maxBy (fun (x:TaggedSequence<string,char>) -> x.Tag.Length) alignment.Sequences).Tag.Length
             let addEmpty (s:string) = 
                 sb.Append(s) |> ignore
                 for i = 0 to max - sb.Length do
@@ -78,7 +79,7 @@ module FSIPrinters =
                 sb.Clear() |> ignore
                 s
             createTaggedSequence "" alignment.MetaData.ConservationInfo
-            |> Seq.appendSingleton alignment.AlignedSequences 
+            |> Seq.appendSingleton alignment.Sequences 
             |> Seq.map (fun x -> 
                 addEmpty x.Tag, 
                 x.Sequence |> Seq.groupsOfAtMost 60 |> fun x -> x.GetEnumerator()) 

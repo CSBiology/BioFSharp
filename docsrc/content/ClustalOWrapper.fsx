@@ -64,10 +64,10 @@ As input, it takes a collection of `TaggedSequence`s, and again a set of paramet
 
 let sequences = 
     [
-    BioID.createTaggedSequence "pep1" ("AAGECGEK")
-    BioID.createTaggedSequence "pep2" ("AAGEGEK")
-    BioID.createTaggedSequence "pep3" ("AAAGECGEK")
-    BioID.createTaggedSequence "pep4" ("AAGECGEL")
+    TaggedSequence.createTaggedSequence "pep1" ("AAGECGEK")
+    TaggedSequence.createTaggedSequence "pep2" ("AAGEGEK")
+    TaggedSequence.createTaggedSequence "pep3" ("AAAGECGEK")
+    TaggedSequence.createTaggedSequence "pep4" ("AAGECGEL")
     ]
 
 let alignedSequences = 

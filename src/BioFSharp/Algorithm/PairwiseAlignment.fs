@@ -49,7 +49,7 @@ module PairwiseAlignment =
     ///Merges the alignment score and the aligned sequences
     let private createAlignment score (sequence1,sequence2) : Alignment<'T,Score> =
         {
-        AlignedSequences = [sequence1;sequence2]; 
+        Sequences = [sequence1;sequence2]; 
         MetaData = score }
     
     ///Carries the costs for gaps and the scoring matrix (Similarity)
