@@ -6,7 +6,7 @@ module CNTKExtensions =
     open System.IO 
     open System.Collections.Generic
 
-    ///returns a byte array from the ressource stream.
+    //Loads a model as binary modelBuffer from the given path and returns the resulting CNTK.Function using the given DeviceDescriptor
     let loadModelWithDevice (device : DeviceDescriptor) (modelPath) =
         let modelBuffer = 
             use stream = new FileStream(modelPath,FileMode.Open)
@@ -16,21 +16,25 @@ module CNTKExtensions =
 
         Function.Load(modelBuffer,device)
 
+    ///Loads a model as binary modelBuffer from the given path and returns the resulting CNTK.Function
     let loadModel (modelPath) = 
         loadModelWithDevice (DeviceDescriptor.UseDefaultDevice()) modelPath
 
-    let toInputBatchWithDevice (device: DeviceDescriptor) (predictor:Function) (data: seq<#seq<'Feature>>) =
-        let inputVar: Variable = predictor.Arguments.Item 0
+    ///Returns an input batch from the given feature vectors attached to the given model using the given DeviceDescriptor
+    let toInputBatchWithDevice (device: DeviceDescriptor) (model:Function) (featureVectors: seq<#seq<'Feature>>) =
+        let inputVar: Variable = model.Arguments.Item 0
         
         let inputShape = inputVar.Shape
         
         /// Extracts all Features and appends them, stores Values in a List
         let featureData = 
             let tmp = new List<'Feature>()
-            data |> Seq.iter(fun x -> 
-                                let data' = x
-                                tmp.AddRange(data')
-                                )
+            featureVectors 
+            |> Seq.iter
+                (fun x -> 
+                    let data' = x
+                    tmp.AddRange(data')
+                )
             tmp
         
         /// Creates an input Batch
@@ -40,27 +44,38 @@ module CNTKExtensions =
         inputMap.Add(inputVar,inputValues)
         inputMap
 
-    let toInputBatch (predictor:Function) (data: 'Feature [] []) = 
-        toInputBatchWithDevice (DeviceDescriptor.UseDefaultDevice()) (predictor:Function) (data: 'Feature [] [])
+    ///Returns an input batch from the given feature vectors attached to the given model
+    let toInputBatch (model:Function) (featureVectors: seq<#seq<'Feature>>) = 
+        toInputBatchWithDevice (DeviceDescriptor.UseDefaultDevice()) model featureVectors
 
-    let predictAsWithDevice<'Output> (device: DeviceDescriptor) (predictor:Function) (inputBatch: Dictionary<Variable,Value>) =
+    ///Returns evaluations of the given model function for the input batch of attached feature vectors using the given DeviceDescriptor.
+    ///
+    ///To determine the type to cast the output to, use the following notation:
+    ///
+    /// predictAsWithDevice<float> ...
+    let predictAsWithDevice<'Output> (device: DeviceDescriptor) (model:Function) (inputBatch: Dictionary<Variable,Value>) =
         
-        ///////////Output
-        let outputVar : Variable = predictor.Output
+        //Set up output variables
+        let outputVar : Variable = model.Output
 
         let outputMap = new Dictionary<Variable,Value>()
         outputMap.Add(outputVar,null)
 
-        predictor.Evaluate(inputBatch,outputMap,device)
+        //Evaluate prediction
+        model.Evaluate(inputBatch,outputMap,device)
 
         let outputValues = outputMap.[outputVar]
 
-
+        //Return predicted data casted to the target type
         outputValues.GetDenseData<'Output>(outputVar)
         |> Seq.concat
-        |> Array.ofSeq
 
-    let predictAs<'Output> (predictor:Function) (inputBatch: Dictionary<Variable,Value>) =
-        predictAsWithDevice<'Output> (DeviceDescriptor.UseDefaultDevice()) predictor inputBatch
+    ///Returns evaluations of the given model function for the input batch of attached feature vectors.
+    ///
+    ///To determine the type to cast the output to, use the following notation:
+    ///
+    /// predictAs<float> ...
+    let predictAs<'Output> (model:Function) (inputBatch: Dictionary<Variable,Value>) =
+        predictAsWithDevice<'Output> (DeviceDescriptor.UseDefaultDevice()) model inputBatch
 
 
