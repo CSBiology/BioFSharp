@@ -20,6 +20,8 @@ module MoFF =
     open BioContainer
     open FSharpAux
 
+
+    ///File input methods for the different run options.
     type InputOption =
         ///--loc_in                      the folder where the input files are located
         | Ms2PeptidesInputFileFolder of string
@@ -43,6 +45,13 @@ module MoFF =
             | Ms2PeptidesInputFile (pathList)     -> List.append ["--tsv_list"] pathList 
             | RawFile (pathList)                  -> List.append ["--raw_list"] pathList 
 
+
+    ///Those options run the MBR module, which takes a list of features of interest for a given run, and then matches the corresponding features in other runs.
+    ///The output will be stored in a subfolder ('mbr_output') inside the specified input folder.
+    ///The MBR module will consider all the .txt files present in the specified input folder as replicates (to select specific files or
+    ///different extension, please refer to the example below). The files in sample_folder/mbr_output will be identical to the input files,
+    ///but they will have an additional field ('matched') that specifies which peptides have match (1) or not (0).
+    ///The MBR algorithm also produces a log file in the provided input directory.
     type MatchBetweenRunsOptions =
         ///--sample                      reg exp to filter the input file names (only with --loc_in input option-
         | FilterInputFiles of string
@@ -73,6 +82,10 @@ module MoFF =
             | OutlierFilter (boolean)                 -> ["--out_flag" ; string boolean]
             | WeightedRTModelCombination (boolean)    -> ["--w_comb" ; string boolean]
 
+    ///Those options run the Apex Intensity module.
+    ///Around the RT of the input feature, a time window is constructed which results in a local XIC.
+    ///The peak apex is then located in this local XIC. The log_L_R metric measures the skewness of the peak around the RT of the obtained apex point.
+    ///The SNR metric provides the ratio of peak height to noise, where the noise value is set as the lowest intensity value in the local XIC.
     ///mzML must be specified using --tsv_list | --raw_list (Ms2PeptidesInputFile & RawFile)
     type ApexIntensityOptions =
             ///--tol                         mass tollerance (ppm)
@@ -127,6 +140,9 @@ module MoFF =
                 | FilteringThresholdQuantileValue (f) -> ["--quantile_thr_filtering" ; string f]
                 | SampleSizeForThreshold (f)          -> ["--sample_size" ; string f]
 
+    ///Those options run the Entire Workflow module, which executes both, the Match between runs and Apex Intensity module.
+    ///The options are identical for both apex and MBR modules. The output for the latter (MBR) is stored in the folder sample_folder/mbr_output,
+    ///while the former (apex) generates files in the specified output_moff folder.Log files for both algorithms are generated in the respective folders.
     type EntireWorkflowOptions =
         ///--config_file                 specify a moFF parameter file
         | MoffFile of string
@@ -208,6 +224,7 @@ module MoFF =
             | FilteringThresholdQuantileValue (f)     -> ["--quantile_thr_filtering" ; string f]
             | SampleSizeForThreshold (f)              -> ["--sample_size" ; string f]
 
+    ///Header type which contains lists of all types for input options.
     type MoFFParameters =
         |Input of InputOption list
         |MatchBetweenRuns of MatchBetweenRunsOptions list
