@@ -13,8 +13,8 @@
   <ItemGroup>
     <Compile Include="BioFSharp\BioArrayTests.fs" />
     <Compile Include="Generators.fs" />
-    <Compile Include="Core.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Core.fs" />
     <Compile Include="RunTests.fs" />
     <None Include="paket.references" />
   </ItemGroup>
