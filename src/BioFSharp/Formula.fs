@@ -9,18 +9,19 @@ module Formula =
        
     let private REGEX_ELEMENT_SYM = new Regex(@"(?<element>[A-Z][a-z]*)(?:[ ({})]*)(?<number>[0-9.]*)", RegexOptions.Compiled);
     
-    /// private function to merge two maps
-    /// f is the function how to handel key conflicts
-    let private merge (a : Map<'a, 'b>) (b : Map<'a, 'b>) (f : 'a -> 'b * 'b -> 'b) =
-        Map.fold (fun s k v ->
-            match Map.tryFind k s with
-            | Some v' -> Map.add k (f k (v, v')) s
-            | None -> Map.add k v s) a b
 
-    
+    let private merge (a : Map<'a, float>) (b : Map<'a, float>) (f : 'a -> float * float -> 'b) =
+        a
+        |> Map.fold (fun acc k v' -> 
+                        match acc |> Map.tryFind k with 
+                        | Some v -> Map.add k (f k (v, v')) acc
+                        | None   -> Map.add k (f k (0., v')) acc 
+                    ) b
+                
+
     /// Type abreviation for Map<Elements.Element,float>
     type Formula      = Map<Elements.Element,float>
-    
+
     /// Empty formula
     let emptyFormula : Formula = Map.empty 
 
@@ -31,13 +32,13 @@ module Formula =
     /// adds two formula
     let add (f1:Formula) (f2:Formula) =
         merge (f1) (f2) (fun _ (v, v') -> v + v')
-    
+
     // adds two formula
     //let (+)  (f1:Formula) (f2:Formula) = add f1 f2
 
     /// substract two formula
     let substract (f1:Formula) (f2:Formula) =
-        merge (f1) (f2) (fun _ (v, v') -> v - v')
+        merge (f1) (f2)  (fun _ (v, v') -> v - v')
 
     // substract two formula
     //let (-)  (f1:Formula) (f2:Formula) = substract f1 f2
