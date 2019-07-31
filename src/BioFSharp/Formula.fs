@@ -27,7 +27,7 @@ module Formula =
 
     /// Returns Formula as string
     let toString (f:Formula) =
-        seq { for e in f do yield sprintf "%s%.2f " (Elements.getMainIsotope e.Key).AtomicSymbol e.Value } |> String.concat ""
+        seq { for e in f do yield sprintf "%s%.2f" (Elements.getMainIsotope e.Key).AtomicSymbol e.Value } |> String.concat " "
 
     /// adds two formula
     let add (f1:Formula) (f2:Formula) =
