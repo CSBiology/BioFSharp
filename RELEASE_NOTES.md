@@ -1,5 +1,5 @@
 #### 0.1.01 - Wednesday, July 31, 2019
-	Several bugfixes and additions to multiple sub projects:
+Several bugfixes and additions to multiple sub projects:
 	
 	* **BioFSharp** (core):
 		* Add Unit testing for modules:
