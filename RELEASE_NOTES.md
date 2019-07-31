@@ -1,3 +1,18 @@
+#### 0.1.01 - Wednesday, July 31, 2019
+	Several bugfixes and additions to multiple sub projects:
+	
+	* **BioFSharp** (core):
+		* Add Unit testing for modules:
+			Formula
+			Mass
+			BioArray
+		* Changed functionality:
+		  * Formula.substract now also returns negative atom counts
+		  
+	* **BioFSharp.ML**:
+		* Additional functionality:
+		  * add thin CNTK API
+
 #### 0.1.0 - Thursday, May 30, 2019
 Several bugfixes and additions to multiple sub projects:
 
