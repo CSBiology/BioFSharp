@@ -30,14 +30,14 @@ module Formula =
         seq { for e in f do yield sprintf "%s%.2f" (Elements.getMainIsotope e.Key).AtomicSymbol e.Value } |> String.concat " "
 
     /// adds two formula
-    let add (f1:Formula) (f2:Formula) =
+    let add (f1:Formula) (f2:Formula) :Formula =
         merge (f1) (f2) (fun _ (v, v') -> v + v')
 
     // adds two formula
     //let (+)  (f1:Formula) (f2:Formula) = add f1 f2
 
-    /// substract two formula
-    let substract (f1:Formula) (f2:Formula) =
+    /// substracts f1 from f2
+    let substract (f1:Formula) (f2:Formula) :Formula =
         merge (f1) (f2)  (fun _ (v, v') -> v - v')
 
     // substract two formula
@@ -61,7 +61,7 @@ module Formula =
         result
     
     /// Lables a given number of elements of a certain kind within a formula
-    let lableNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) =
+    let lableNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) : Formula =
         let result : Formula = 
             f 
             |> Seq.map (fun (keyValue) -> if keyValue.Key = unlabled then (keyValue.Key,keyValue.Value - number) else (keyValue.Key,keyValue.Value) )            
