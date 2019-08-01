@@ -6,8 +6,26 @@ open GeneratorsCode
 
 module Core =
 
-    open BioFSharp.Formula
+    open BioFSharp.Isotopes
+    [<Tests>]
+    let testIsotopes =
 
+        testList "BioFSharp.Isotopes" [
+
+            testCase "test_createIsotope" <| fun () ->
+                let H1 = { 
+                    AtomicSymbol  =  "H" 
+                    AtomicNumberZ = 1
+                    MassNumber    = 1
+                    Mass          = 1.00782503207
+                    NatAbundance  = 0.999885
+                    RelAtomicMass = 1.007947
+                    }
+                let H1' = create "H" 1 1 1.00782503207 0.999885 1.007947
+                Expect.isTrue (H1=H1') (sprintf "%A <> %A, check parameter order 'create'" H1 H1')
+        ]
+
+    open BioFSharp.Formula
     [<Tests>]
     let testFormula =
 
