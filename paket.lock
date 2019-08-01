@@ -19,14 +19,14 @@ NUGET
       System.Runtime (>= 4.3) - restriction: || (&& (== net45) (>= net46)) (== net47) (&& (== netstandard2.0) (>= net46))
       System.ValueTuple (>= 4.4)
     dotnet-fake (5.15.4) - clitool: true
-    Expecto (8.10.1)
+    Expecto (8.11)
       FSharp.Core (>= 4.3.4) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
       Mono.Cecil (>= 0.10.3) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
-    Expecto.BenchmarkDotNet (8.10.1)
+    Expecto.BenchmarkDotNet (8.11)
       BenchmarkDotNet (>= 0.10.14) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netcoreapp2.0)) (== net47) (&& (== netstandard2.0) (>= net461)) (&& (== netstandard2.0) (>= netcoreapp2.0))
       FSharp.Core (>= 4.3.4) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netcoreapp2.0)) (== net47) (&& (== netstandard2.0) (>= net461)) (&& (== netstandard2.0) (>= netcoreapp2.0))
-    Expecto.FsCheck (8.10.1)
-      Expecto (>= 8.10.1) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
+    Expecto.FsCheck (8.11)
+      Expecto (>= 8.11) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
       FsCheck (>= 2.13) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
     Expecto.VisualStudio.TestAdapter (10.0.2) - version_in_path: true
       Expecto (>= 8.0 < 9.0) - restriction: || (&& (== net45) (>= net461)) (== net47) (&& (== netstandard2.0) (>= net461))
@@ -73,7 +73,7 @@ NUGET
       System.Security.AccessControl (>= 4.5) - restriction: || (&& (== net45) (>= net461)) (&& (== net45) (>= netstandard2.0)) (== net47) (== netstandard2.0)
     System.Security.Principal.Windows (4.5.1) - restriction: || (&& (== net47) (>= monoandroid) (>= netstandard2.0)) (&& (== net47) (>= monotouch) (>= netstandard2.0)) (&& (== net47) (< net45) (>= netstandard2.0)) (&& (== net47) (>= netcoreapp2.0)) (&& (== net47) (>= netstandard2.0) (>= xamarintvos)) (&& (== net47) (>= netstandard2.0) (>= xamarinwatchos)) (== netstandard2.0)
     System.ValueTuple (4.5)
-    YamlDotNet (6.1.1)
+    YamlDotNet (6.1.2)
   remote: paket-files/github.com/CSBiology/FSharp.Stats
     FSharp.Stats (0.1.0)
     FSharp.Stats.MSF (0.1.0)
@@ -94,9 +94,9 @@ NUGET
     Alea (3.0.4)
     Argu (5.5)
       FSharp.Core (>= 4.0.0.1)
-    Expecto (8.10.1)
-    Expecto.BenchmarkDotNet (8.10.1)
-    Expecto.FsCheck (8.10.1)
+    Expecto (8.11)
+    Expecto.BenchmarkDotNet (8.11)
+    Expecto.FsCheck (8.11)
     Expecto.VisualStudio.TestAdapter (10.0.2) - version_in_path: true
     FSharp.Core (4.1.17)
       System.ValueTuple (>= 4.3)
@@ -109,7 +109,7 @@ NUGET
       FSharp.Core (>= 4.0)
       Newtonsoft.Json (>= 10.0)
     System.ValueTuple (4.5)
-    YamlDotNet (6.1.1)
+    YamlDotNet (6.1.2)
 
 GROUP FakeBuild
 STORAGE: NONE
@@ -364,23 +364,23 @@ NUGET
       System.Xml.ReaderWriter (>= 4.3) - restriction: || (&& (< net45) (>= netstandard1.1) (< netstandard1.2) (< win8)) (&& (< net45) (>= netstandard1.2) (< netstandard1.3) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.3) (< netstandard1.4) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.4) (< netstandard1.5) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.5) (< netstandard1.6) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81)) (&& (>= net46) (< netstandard1.4)) (&& (>= netstandard1.0) (< portable-net45+win8+wpa81) (< wp8)) (&& (>= uap10.0) (< uap10.1))
       System.Xml.XDocument (>= 4.3) - restriction: || (&& (< net45) (>= netstandard1.1) (< netstandard1.2) (< win8)) (&& (< net45) (>= netstandard1.2) (< netstandard1.3) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.3) (< netstandard1.4) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.4) (< netstandard1.5) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.5) (< netstandard1.6) (< win8) (< wpa81)) (&& (< net45) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81)) (&& (>= netstandard1.0) (< portable-net45+win8+wpa81) (< wp8)) (&& (>= uap10.0) (< uap10.1))
     Newtonsoft.Json (12.0.2) - restriction: || (>= net462) (>= netstandard2.0)
-    NuGet.Common (5.1) - restriction: >= netstandard2.0
-      NuGet.Frameworks (>= 5.1) - restriction: >= netstandard2.0
+    NuGet.Common (5.2) - restriction: >= netstandard2.0
+      NuGet.Frameworks (>= 5.2) - restriction: >= netstandard2.0
       System.Diagnostics.Process (>= 4.3) - restriction: && (< net472) (>= netstandard2.0)
       System.Threading.Thread (>= 4.3) - restriction: && (< net472) (>= netstandard2.0)
-    NuGet.Configuration (5.1) - restriction: >= netstandard2.0
-      NuGet.Common (>= 5.1) - restriction: >= netstandard2.0
+    NuGet.Configuration (5.2) - restriction: >= netstandard2.0
+      NuGet.Common (>= 5.2) - restriction: >= netstandard2.0
       System.Security.Cryptography.ProtectedData (>= 4.3) - restriction: && (< net472) (>= netstandard2.0)
-    NuGet.Frameworks (5.1) - restriction: >= netstandard2.0
-    NuGet.Packaging (5.1) - restriction: >= netstandard2.0
+    NuGet.Frameworks (5.2) - restriction: >= netstandard2.0
+    NuGet.Packaging (5.2) - restriction: >= netstandard2.0
       Newtonsoft.Json (>= 9.0.1) - restriction: >= netstandard2.0
-      NuGet.Configuration (>= 5.1) - restriction: >= netstandard2.0
-      NuGet.Versioning (>= 5.1) - restriction: >= netstandard2.0
+      NuGet.Configuration (>= 5.2) - restriction: >= netstandard2.0
+      NuGet.Versioning (>= 5.2) - restriction: >= netstandard2.0
       System.Dynamic.Runtime (>= 4.3) - restriction: && (< net472) (>= netstandard2.0)
-    NuGet.Protocol (5.1) - restriction: || (>= net462) (>= netstandard2.0)
-      NuGet.Packaging (>= 5.1) - restriction: >= netstandard2.0
+    NuGet.Protocol (5.2) - restriction: || (>= net462) (>= netstandard2.0)
+      NuGet.Packaging (>= 5.2) - restriction: >= netstandard2.0
       System.Dynamic.Runtime (>= 4.3) - restriction: && (< net472) (>= netstandard2.0)
-    NuGet.Versioning (5.1) - restriction: >= netstandard2.0
+    NuGet.Versioning (5.2) - restriction: >= netstandard2.0
     Octokit (0.32) - restriction: || (>= net46) (>= netstandard1.6)
       NETStandard.Library (>= 1.6) - restriction: && (< net45) (>= netstandard1.1)
     runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl (4.3.3) - restriction: || (&& (< monoandroid) (< net45) (>= netstandard2.0) (< xamarinios) (< xamarinmac)) (&& (< net45) (>= net462) (>= netstandard1.6))
