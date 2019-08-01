@@ -23,7 +23,7 @@ module Core =
                     RelAtomicMass = 1.007947
                     }
                 let H1' = create "H" 1 1 1.00782503207 0.999885 1.007947
-                Expect.isTrue (H1=H1') (sprintf "%A <> %A, check parameter order 'create'" H1 H1')
+                Expect.equal H1 H1' "Record initialization via function differs from initialization via record expression. Check parameter order of 'create'" 
         ]
     
     open BioFSharp.Elements
@@ -40,7 +40,7 @@ module Core =
                     Root   = Isotopes.Table.Na23.NatAbundance 
                     }
                 let Na' = createMono "Na" (Isotopes.Table.Na23,Isotopes.Table.Na23.NatAbundance) 
-                Expect.isTrue (Na=Na') (sprintf "%A <> %A, check parameter order 'create'" Na Na')
+                Expect.equal Na Na' "Record initialization via function differs from initialization via record expression. Check parameter order of 'createMono'"
 
             testCase "test_createDiIsotopic" <| fun () ->
                 let H = { 
@@ -52,12 +52,9 @@ module Core =
                     Root   = (-1. * Isotopes.Table.H1.NatAbundance / Isotopes.Table.H2.NatAbundance)
                     }
                 let H' = createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) 
-                Expect.isTrue (H=H') (sprintf "%A <> %A, check parameter order 'create'" H H')
+                Expect.equal H H' "Record initialization via function differs from initialization via record expression. Check parameter order of 'createDi'" 
 
-            testCase "test_createTriIsotopic" <| fun () ->
-                let compareComplexNumbers (c1:System.Numerics.Complex) (c2:System.Numerics.Complex) = 
-                    (Math.Abs(c1.Real - c2.Real) <= 0.0001) &&
-                    (Math.Abs(c1.Imaginary - c2.Imaginary) <= 0.0001);     
+            testList "test_createTriIsotopic" [    
                 let (rootO,rootO') =
                     System.Numerics.Complex(-0.0926829268292669, 22.0592593273255),
                     System.Numerics.Complex(-0.0926829268292696, -22.0592593273255)
@@ -72,16 +69,33 @@ module Core =
                     Root   = (rootO,rootO')//
                     }
                 let O' = createTri "O" (Isotopes.Table.O16,Isotopes.Table.O16.NatAbundance) (Isotopes.Table.O17,Isotopes.Table.O17.NatAbundance) (Isotopes.Table.O18,Isotopes.Table.O18.NatAbundance)
-                Expect.isTrue (O=O') (sprintf "%A <> %A, check parameter order 'create'" O O')
-                Expect.isTrue (compareComplexNumbers (fst O.Root) (fst O'.Root) && compareComplexNumbers (snd O.Root) (snd O'.Root)) (sprintf "%A <> %A, check private function 'calcRootsTri' and if the isotope composition of O has changed." O.Root O'.Root)
-                
-            testCase "test_TriIsotopicCompare" <| fun () ->
+                yield 
+                    testList "test_createTriIsotopic" [
+                        testCase "calcRootsTri_firstReal" <| fun () ->
+                            Expect.floatClose Accuracy.high (fst O.Root).Real (fst O'.Root).Real ""
+                        testCase "calcRootsTri_secondReal" <| fun () ->
+                            Expect.floatClose Accuracy.high (snd O.Root).Real (snd O'.Root).Real ""
+                        testCase "calcRootsTri_firstImaginary" <| fun () ->
+                            Expect.floatClose Accuracy.high (fst O.Root).Imaginary (fst O'.Root).Imaginary ""
+                        testCase "calcRootsTri_secondImaginary" <| fun () ->
+                            Expect.floatClose Accuracy.high (snd O.Root).Imaginary (snd O'.Root).Imaginary ""
+                    ]                                 
+                yield 
+                    testCase "initialization" <| fun () ->
+                        Expect.equal  O O' "Record initialization via function differs from initialization via record expression. Check parameter order of 'createTri'"                       
+            ]
+
+            testList "test_TriIsotopicCompare" [    
                 let O   = createTri "O" (Isotopes.Table.O16,Isotopes.Table.O16.NatAbundance) (Isotopes.Table.O17,Isotopes.Table.O17.NatAbundance) (Isotopes.Table.O18,Isotopes.Table.O18.NatAbundance)
                 let O'  = {O with Symbol = "N"}
                 let O'' = {O with Xcomp = nan}
-                Expect.isFalse (O=O') (sprintf "Expected False, because the member 'CompareTo' checks for equality of the record field Symbol")
-                Expect.isTrue (O=O'')(sprintf "Expected True, because the member 'CompareTo' checks for equality of the record field Symbol")
-               
+                yield 
+                    testCase "negative" <| fun () ->
+                        Expect.notEqual O O' "Expected equality, because the member 'CompareTo' checks for equality of the record field Symbol"                           
+                yield 
+                    testCase "positive" <| fun () ->
+                        Expect.equal O O'' "Expected equality, because the member 'CompareTo' checks for equality of the record field Symbol"                             
+            ]                                    
         ]
     
     open BioFSharp.Formula
@@ -117,7 +131,6 @@ module Core =
                 let f2  = "H2O" |> parseFormulaString 
                 let res = substract f1 f2 |> toString 
                 Expect.equal res "H0.00 O0.00" "Substraction of formulas failed"
-
         ]
     
     open BioFSharp.Mass  
@@ -162,9 +175,7 @@ module Core =
                         Expect.floatClose Accuracy.high min expMin "Delta mass calculation failed, lower border is incorrect."
                 yield 
                     testCase "upper_Border" <| fun () ->
-                        Expect.floatClose Accuracy.high max expMax "Delta mass calculation failed, upper border is incorrect."
-                    
-            ]
-            
+                        Expect.floatClose Accuracy.high max expMax "Delta mass calculation failed, upper border is incorrect."                   
+            ]        
         ]
         
