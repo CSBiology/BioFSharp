@@ -89,7 +89,7 @@ module Formula =
         // regex results as seq
         let ms = seq {for i = 0 to matches.Count - 1 do yield matches.[i]}
         let msItems = ms |> Seq.map ( fun g -> 
-                let elem = Elements.Table.ElementAsObject((g.Groups.["element"].Value))
+                let elem = Elements.Table.ofSymbol((g.Groups.["element"].Value))
                 let n    = (g.Groups.["number"].Value)
                 (elem, (if n <> "" then float(n) else 1.)) )
         let result : Formula =
