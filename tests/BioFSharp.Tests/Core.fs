@@ -66,18 +66,18 @@ module Core =
                     X1comp = Isotopes.Table.O17.NatAbundance
                     X2     = Isotopes.Table.O18
                     X2comp = Isotopes.Table.O18.NatAbundance
-                    Root   = (rootO,rootO')//
+                    Root   = (rootO,rootO')
                     }
                 let O' = createTri "O" (Isotopes.Table.O16,Isotopes.Table.O16.NatAbundance) (Isotopes.Table.O17,Isotopes.Table.O17.NatAbundance) (Isotopes.Table.O18,Isotopes.Table.O18.NatAbundance)
                 yield 
-                    testList "test_createTriIsotopic" [
-                        testCase "calcRootsTri_firstReal" <| fun () ->
+                    testList "test_calcRootsTri" [
+                        testCase "firstReal" <| fun () ->
                             Expect.floatClose Accuracy.high (fst O.Root).Real (fst O'.Root).Real ""
-                        testCase "calcRootsTri_secondReal" <| fun () ->
+                        testCase "secondReal" <| fun () ->
                             Expect.floatClose Accuracy.high (snd O.Root).Real (snd O'.Root).Real ""
-                        testCase "calcRootsTri_firstImaginary" <| fun () ->
+                        testCase "firstImaginary" <| fun () ->
                             Expect.floatClose Accuracy.high (fst O.Root).Imaginary (fst O'.Root).Imaginary ""
-                        testCase "calcRootsTri_secondImaginary" <| fun () ->
+                        testCase "secondImaginary" <| fun () ->
                             Expect.floatClose Accuracy.high (snd O.Root).Imaginary (snd O'.Root).Imaginary ""
                     ]                                 
                 yield 
@@ -95,7 +95,109 @@ module Core =
                 yield 
                     testCase "positive" <| fun () ->
                         Expect.equal O O'' "Expected equality, because the member 'CompareTo' checks for equality of the record field Symbol"                             
-            ]                                    
+            ]
+
+            testList "test_getMainIsotope" [    
+                yield 
+                    testCase "Mono" <| fun () ->
+                        let iso = getMainIsotope Table.Na
+                        let exp = Isotopes.Table.Na23
+                        Expect.equal iso exp ""                           
+                yield 
+                    testCase "Di" <| fun () ->
+                        let iso = getMainIsotope Table.H
+                        let exp = Isotopes.Table.H1
+                        Expect.equal iso exp ""                           
+                yield 
+                    testCase "Tri" <| fun () ->
+                        let iso = getMainIsotope Table.O
+                        let exp = Isotopes.Table.O16
+                        Expect.equal iso exp ""                           
+                yield 
+                    testCase "Multi" <| fun () ->                         
+                        let iso = getMainIsotope Table.Zn
+                        let exp = Isotopes.Table.Zn64
+                        Expect.equal iso exp ""                                               
+            ]     
+
+            testList "test_getMainXComp" [    
+                yield 
+                    testCase "Mono" <| fun () ->
+                        let abu = getMainXComp Table.Na
+                        let exp = Isotopes.Table.Na23.NatAbundance
+                        Expect.floatClose Accuracy.high abu exp ""                           
+                yield 
+                    testCase "Di" <| fun () ->
+                        let abu = getMainXComp Table.H
+                        let exp = Isotopes.Table.H1.NatAbundance
+                        Expect.floatClose Accuracy.high abu exp ""                           
+                yield 
+                    testCase "Tri" <| fun () ->
+                        let abu = getMainXComp Table.O
+                        let exp = Isotopes.Table.O16.NatAbundance
+                        Expect.floatClose Accuracy.high abu exp ""                           
+                yield 
+                    testCase "Multi" <| fun () ->                         
+                        let abu = getMainXComp Table.Zn
+                        let exp = Isotopes.Table.Zn64.NatAbundance
+                        Expect.floatClose Accuracy.high abu exp ""                                               
+            ]   
+            
+            testList "test_getSinglePhiL" [    
+                yield 
+                    testCase "Mono" <| fun () ->
+                        let res = getSinglePhiL Table.Na 1000000. 2.
+                        let exp = 1000000.0
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Di" <| fun () ->
+                        let res = getSinglePhiL Table.H 1000000. 2.
+                        let exp = 0.01322804227
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Tri" <| fun () ->
+                        let res = getSinglePhiL Table.O 1000000. 2.
+                        let exp = -4109.842165
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Multi" <| fun () ->                         
+                        let res = getSinglePhiL Table.Zn 1000000. 2.
+                        Expect.isTrue (nan.Equals(res)) ""                                              
+            ]
+
+            testList "test_getSinglePhiM" [    
+                yield 
+                    testCase "Mono" <| fun () ->
+                        let res = getSinglePhiM Table.Na 1000000. 2.
+                        let exp = 1892.042007
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Di" <| fun () ->
+                        let res = getSinglePhiM Table.H 1000000. 2.
+                        let exp = 0.0528309132
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Tri" <| fun () ->
+                        let res = getSinglePhiM Table.O 1000000. 2.
+                        let exp = -4109.842165
+                        Expect.floatClose Accuracy.high res exp ""                           
+                yield 
+                    testCase "Multi" <| fun () ->                         
+                        let res = getSinglePhiM Table.Zn 1000000. 2.
+                        Expect.isTrue (nan.Equals(res)) ""
+            ]
+
+            testCase "test_getAtomicSymbol" <| fun () ->
+                let naS'    = "Na"
+                let na      =  Mono (createMono naS' (Isotopes.Table.Na23,Isotopes.Table.Na23.NatAbundance) )
+                let naS    = getAtomicSymbol na
+                Expect.equal naS naS' "Symbols are not equal." 
+
+            testCase "test_ofSymbol" <| fun () ->
+                let H   = Elements.Table.ofSymbol "H" 
+                let H'  = Elements.Table.H
+                Expect.equal H H' "Symbols are not equal." 
+                  
         ]
     
     open BioFSharp.Formula
