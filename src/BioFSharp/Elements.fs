@@ -209,7 +209,9 @@ module Elements =
         ///Selenium  -Attention! Se is Multi-
         let Se = Mono (createMono "Se" (Isotopes.Table.Se74,Isotopes.Table.Se74.NatAbundance) )
         
-
+        ///Zinc
+        let Zn = Multi (createMulti "Zn" (Isotopes.Table.Zn64,Isotopes.Table.Zn64.NatAbundance ) (Isotopes.Table.Zn66,Isotopes.Table.Zn66.NatAbundance) (Isotopes.Table.Zn68,Isotopes.Table.Zn68.NatAbundance) [|Isotopes.Table.Zn67;Isotopes.Table.Zn70|])
+        
         /// Returns element object according to element symbol string
         let ElementAsObject (symbol:string) =
             match symbol with
