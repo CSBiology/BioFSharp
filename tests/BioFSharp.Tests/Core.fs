@@ -364,17 +364,102 @@ module Core =
                 let exp             = 0.1
                 Expect.floatClose Accuracy.high res exp "Delta mass calculation failed."
 
-            testList "test_rangePpm" [
-                let mass            = 1000.
-                let ppm             = 100.
-                let min,max         = rangePpm ppm mass  
-                let expMin,expMax   = 999.9, 1000.1
-                yield 
-                    testCase "lower_Border" <| fun () ->
-                        Expect.floatClose Accuracy.high min expMin "Delta mass calculation failed, lower border is incorrect."
-                yield 
-                    testCase "upper_Border" <| fun () ->
-                        Expect.floatClose Accuracy.high max expMax "Delta mass calculation failed, upper border is incorrect."                   
-            ]        
         ]
-        
+   
+      
+    [<Tests>]
+    let testIBioItem =
+
+        testList "BioFSharp.IBioItem" [
+
+            testCase "test_name" <| fun () ->
+                let res = BioItem.name AminoAcids.Ala  
+                let exp  = "Alanin"
+                Expect.equal res exp "Incorrect name returned."
+
+            testCase "test_symbol" <| fun () ->
+                let res = BioItem.symbol AminoAcids.Ala  
+                let exp  = 'A'
+                Expect.equal res exp "Incorrect symbol returned."
+                  
+            testCase "test_formula" <| fun () ->
+                let res = BioItem.formula AminoAcids.Ala  
+                let exp = Formula.Table.Ala
+                Expect.equal res exp "Incorrect formula returned."
+            
+            testCase "test_isTerminator" <| fun () ->
+                let res = BioItem.isTerminator AminoAcids.Ala  
+                Expect.isFalse res ""
+
+            testCase "test_isGap" <| fun () ->
+                let res = BioItem.isGap AminoAcids.Ala  
+                Expect.isFalse res ""
+
+            testCase "test_monoIsoMass" <| fun () ->
+                let res = BioItem.monoisoMass AminoAcids.Ala  
+                let exp = 71.03711378
+                Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+
+            testCase "test_averageMass" <| fun () ->
+                let res = BioItem.averageMass AminoAcids.Ala  
+                let exp = 71.078175
+                Expect.floatClose Accuracy.high res exp "Average mass of alanin was calculated incorrectly."
+
+            testList "test_monoIsoMassWithMem" [
+                yield 
+                    testCase "calculation" <| fun () ->
+                        let massF = BioItem.initMonoisoMassWithMem  
+                        let res = massF AminoAcids.Ala 
+                        let exp = 71.03711378
+                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                yield 
+                    testCase "speed" <| fun () ->
+                        let massF = BioItem.initMonoisoMassWithMem  
+                        let f1 () = [for i = 0 to 100 do yield massF AminoAcids.Ala] 
+                        let f2 () = [for i = 0 to 100 do yield BioItem.monoisoMass AminoAcids.Ala] 
+                        Expect.isFasterThan  f1 f2 ""
+                ]
+
+            testList "test_averageMassWithMem" [
+                yield 
+                    testCase "calculation" <| fun () ->
+                        let massF = BioItem.initAverageMassWithMem  
+                        let res = massF AminoAcids.Ala 
+                        let exp = 71.078175
+                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                yield
+                    testCase "speed" <| fun () ->
+                        let massF = BioItem.initAverageMassWithMem
+                        let f1 () = [for i = 0 to 100 do yield massF AminoAcids.Ala] 
+                        let f2 () = [for i = 0 to 100 do yield BioItem.averageMass AminoAcids.Ala] 
+                        Expect.isFasterThan  f1 f2 ""
+            ]
+            testList "test_monoIsoMassWithMemP" [
+                yield 
+                    testCase "calculation" <| fun () ->
+                        let massF = BioItem.initMonoisoMassWithMemP  
+                        let res = massF AminoAcids.Ala 
+                        let exp = 71.03711378
+                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                yield
+                    testCase "speed" <| fun () ->
+                        let massF = BioItem.initMonoisoMassWithMemP  
+                        let f1 () = [for i = 0 to 100 do yield massF AminoAcids.Ala] 
+                        let f2 () = [for i = 0 to 100 do yield BioItem.monoisoMass AminoAcids.Ala] 
+                        Expect.isFasterThan  f1 f2 ""
+            ]
+            testList "test_averageMassWithMemP" [
+                yield 
+                    testCase "calculation" <| fun () ->
+                        let massF = BioItem.initAverageMassWithMemP  
+                        let res = massF AminoAcids.Ala 
+                        let exp = 71.078175
+                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                yield
+                    testCase "speed" <| fun () ->
+                        let massF = BioItem.initAverageMassWithMemP  
+                        let f1 () = [for i = 0 to 100 do yield massF AminoAcids.Ala] 
+                        let f2 () = [for i = 0 to 100 do yield BioItem.averageMass AminoAcids.Ala] 
+                        Expect.isFasterThan  f1 f2 ""
+            ]
+        ]      
