@@ -67,19 +67,21 @@ module Formula =
             |> Map.ofSeq
         result.Add(labled,number)
     
-    ///If the Formula contains the given element, the count of the element in the formula is returned. Else returns a key not found error.
-    let getNumberOfElements (f:Formula) (ele:string) =
-        f 
-        |> Map.pick (fun e num -> 
-            if ele = Elements.getAtomicSymbol e then Some num
-            else None)
+    ///Retruns true if the formula contains the element of interest. 
+    let contains (ele:Elements.Element) (f:Formula)  = 
+        Map.containsKey ele f
 
-    //If the Formula contains the given element, the count of the element in the formula is returned as Some. Else returns None.
-    let tryGetNumberOfElements (f:Formula) (ele:string) =
+    ///Returns the number of occurences of the element of interest.
+    let count (ele:Elements.Element) (f:Formula) =
+        match Map.tryFind ele f with 
+        | Some n -> n 
+        | None   -> 0.
+      
+    ///Returns the number of occurences of the element with the given symbolic representation.
+    let countBySym (eleSym:string) (f:Formula) =
         f 
-        |> Map.tryPick (fun e num -> 
-            if ele = Elements.getAtomicSymbol e then Some num
-            else None)
+        |> Map.tryPick (fun e num -> if eleSym = Elements.getAtomicSymbol e then Some num else None)
+        |> Option.defaultValue 0.
 
     // TODO: (NO)2 
     /// Parse formula string and returns formula type
