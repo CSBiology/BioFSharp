@@ -290,31 +290,48 @@ module Core =
                     ]
                 ]
 
-            testCase "test_getNumberOfElements" <| fun () ->
-                let f = "N10" |> parseFormulaString  
-                let res = getNumberOfElements f "N" 
-                let exp = 10. 
-                Expect.floatClose Accuracy.high res exp "Element number not correct"
-
-            testList "test_tryGetNumberOfElements" [
+            testList "test_contains" [
                 let f = "N10" |> parseFormulaString  
                 yield 
                     testCase "positive" <| fun () ->
-                        let res = tryGetNumberOfElements f "N" 
-                        let exp = 10. 
-                        Expect.floatClose Accuracy.high (res.Value) (exp) "Element number not correct."
+                        let res = contains Elements.Table.N f 
+                        Expect.isTrue res ""
                 yield 
                     testCase "negative" <| fun () ->
-                        let res = tryGetNumberOfElements f "H" 
-                        Expect.isNone res "Element number not correct."
+                        let res = contains Elements.Table.H f 
+                        Expect.isFalse res ""
             ]
 
-            testCase "test_parseFormulaString" <| fun () ->
-                let res           = "H2O" |> parseFormulaString 
-                let exp  :Formula = [Elements.Table.H,2.;Elements.Table.O,1.] |> Map.ofSeq 
-                Expect.equal res exp "Formula parsing failed"
-        ]
+            testList "test_count" [
+                let f = "N10" |> parseFormulaString  
+                yield 
+                    testCase "positive" <| fun () ->
+                        let res = count Elements.Table.N f
+                        let exp = 10. 
+                        Expect.floatClose Accuracy.high (res) (exp) "Element number not correct."
+                yield 
+                    testCase "negative" <| fun () ->
+                        let res = count Elements.Table.H f
+                        let exp = 0.
+                        Expect.floatClose Accuracy.high (res) (exp) "Element number not correct."
+            ]
+                
+            testList "test_countBySym" [
+                let f = "N10" |> parseFormulaString  
+                yield 
+                    testCase "positive" <| fun () ->
+                        let res = countBySym "N" f 
+                        let exp = 10. 
+                        Expect.floatClose Accuracy.high (res) (exp) "Element number not correct."
+                yield 
+                    testCase "negative" <| fun () ->
+                        let res = countBySym "H" f
+                        let exp = 0.
+                        Expect.floatClose Accuracy.high (res) (exp) "Element number not correct."
+            ]
     
+    ]
+
     open BioFSharp.Mass  
     [<Tests>]
     let testMass =
