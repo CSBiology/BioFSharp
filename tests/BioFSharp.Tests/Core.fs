@@ -216,23 +216,103 @@ module Core =
                 let res = add f1 f2 |> toString 
                 Expect.equal res "H2.00 O1.00" "Addition of formulas failed."
             
-            testCase "test_substract" <| fun () ->
-                let f1  = "H2O"  |> parseFormulaString 
-                let f2  = "H4O2" |> parseFormulaString 
-                let res = substract f1 f2 |> toString 
-                Expect.equal res "H2.00 O1.00" "Substraction of formulas failed"
+            testList "test_substract" [    
+                yield
+                    testCase "substract_basic" <| fun () ->
+                        let f1  = "H2O"  |> parseFormulaString 
+                        let f2  = "H4O2" |> parseFormulaString 
+                        let res = substract f1 f2 |> toString 
+                        Expect.equal res "H2.00 O1.00" "Substraction of formulas failed"
+                yield
+                    testCase "substract_neg" <| fun () ->
+                        let f1  = "H2O"   |> parseFormulaString 
+                        let f2  = emptyFormula 
+                        let res = substract f1 f2 |> toString 
+                        Expect.equal res  "H-2.00 O-1.00" "Substraction of formulas failed"
+                yield 
+                    testCase "substract_Zero" <| fun () ->
+                        let f1  = "H2O" |> parseFormulaString 
+                        let f2  = "H2O" |> parseFormulaString 
+                        let res = substract f1 f2 |> toString 
+                        Expect.equal res "H0.00 O0.00" "Substraction of formulas failed"
+            ]
 
-            testCase "test_substract_neg" <| fun () ->
-                let f1  = "H2O"   |> parseFormulaString 
-                let f2  = emptyFormula 
-                let res = substract f1 f2 |> toString 
-                Expect.equal res  "H-2.00 O-1.00" "Substraction of formulas failed"
+            testCase "test_averageMass" <| fun () ->
+                let res = "H2O" |> parseFormulaString |> Formula.averageMass 
+                let exp = 18.015294
+                Expect.floatClose Accuracy.high res exp "Substraction of formulas failed"
 
-            testCase "test_substract_Zero" <| fun () ->
-                let f1  = "H2O" |> parseFormulaString 
-                let f2  = "H2O" |> parseFormulaString 
-                let res = substract f1 f2 |> toString 
-                Expect.equal res "H0.00 O0.00" "Substraction of formulas failed"
+            testCase "test_monoisoMass" <| fun () ->
+                let res = "H2O" |> parseFormulaString |> Formula.monoisoMass 
+                let exp = 18.01056468
+                Expect.floatClose Accuracy.high res exp "Substraction of formulas failed"            
+            
+            testList "test_replaceElement" [    
+                let f = "N10" |> parseFormulaString 
+                let labeledf  = Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15 
+                yield
+                    testCase "isReplaced" <| fun () ->
+                        let res = Map.containsKey Elements.Table.N labeledf
+                        Expect.isFalse res "Element was not removed."     
+                yield
+                    testCase "newElementInserted" <| fun () ->
+                        let res = Map.containsKey Elements.Table.Heavy.N15 labeledf
+                        Expect.isTrue res "Element was not replaced."
+                yield 
+                    testCase "NumberIsNotChanged" <| fun () ->
+                        let res  = Map.find Elements.Table.N f
+                        let res' = Map.find Elements.Table.Heavy.N15 labeledf
+                        
+                        Expect.floatClose Accuracy.high res res' "Element number has changed."
+                ]
+
+            testList "test_replaceNumberOfElement" [    
+                let f = "N10" |> parseFormulaString 
+                let labeledf  = Formula.replaceNumberOfElement f Elements.Table.N Elements.Table.Heavy.N15 4.
+                yield
+                    testCase "isNotReplaced" <| fun () ->
+                        let res = Map.containsKey Elements.Table.N labeledf
+                        Expect.isTrue res "Element was removed."        
+                yield
+                    testCase "newElementInserted" <| fun () ->
+                        let res = Map.containsKey Elements.Table.Heavy.N15 labeledf
+                        Expect.isTrue res "Element was not replaced."
+                yield 
+                    testList "stoichiomentry" [
+                        testCase "old" <| fun () ->
+                            let res = Map.find Elements.Table.N labeledf
+                            let exp = 6. 
+                            Expect.floatClose Accuracy.high res exp "Element number not correct."
+                        testCase "new" <| fun () ->
+                            let res = Map.find Elements.Table.Heavy.N15 labeledf
+                            let exp = 4. 
+                            Expect.floatClose Accuracy.high res exp "Element number not correct."
+                    ]
+                ]
+
+            testCase "test_getNumberOfElements" <| fun () ->
+                let f = "N10" |> parseFormulaString  
+                let res = getNumberOfElements f "N" 
+                let exp = 10. 
+                Expect.floatClose Accuracy.high res exp "Element number not correct"
+
+            testList "test_tryGetNumberOfElements" [
+                let f = "N10" |> parseFormulaString  
+                yield 
+                    testCase "positive" <| fun () ->
+                        let res = tryGetNumberOfElements f "N" 
+                        let exp = 10. 
+                        Expect.floatClose Accuracy.high (res.Value) (exp) "Element number not correct."
+                yield 
+                    testCase "negative" <| fun () ->
+                        let res = tryGetNumberOfElements f "H" 
+                        Expect.isNone res "Element number not correct."
+            ]
+
+            testCase "test_parseFormulaString" <| fun () ->
+                let res           = "H2O" |> parseFormulaString 
+                let exp  :Formula = [Elements.Table.H,2.;Elements.Table.O,1.] |> Map.ofSeq 
+                Expect.equal res exp "Formula parsing failed"
         ]
     
     open BioFSharp.Mass  
