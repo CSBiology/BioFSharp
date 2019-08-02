@@ -52,8 +52,7 @@ module Formula =
         f |> Seq.sumBy (fun elem -> (Elements.getMainIsotope elem.Key).Mass * elem.Value)
     
     /// Lables all elements of a certain kind within a formula
-    // TODO: refactor formula last
-    let lableElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
+    let replaceElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
         let result : Formula = 
             f 
             |> Seq.map (fun (keyValue) -> if keyValue.Key = unlabled then (labled,keyValue.Value) else (keyValue.Key,keyValue.Value) )
@@ -61,7 +60,7 @@ module Formula =
         result
     
     /// Lables a given number of elements of a certain kind within a formula
-    let lableNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) : Formula =
+    let replaceNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) : Formula =
         let result : Formula = 
             f 
             |> Seq.map (fun (keyValue) -> if keyValue.Key = unlabled then (keyValue.Key,keyValue.Value - number) else (keyValue.Key,keyValue.Value) )            
