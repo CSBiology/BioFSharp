@@ -22,8 +22,8 @@ module Core =
                     NatAbundance  = 0.999885
                     RelAtomicMass = 1.007947
                     }
-                let H1' = create "H" 1 1 1.00782503207 0.999885 1.007947
-                Expect.equal H1 H1' "Record initialization via function differs from initialization via record expression. Check parameter order of 'create'" 
+                let res = create "H" 1 1 1.00782503207 0.999885 1.007947
+                Expect.equal res H1 "Record initialization via function differs from initialization via record expression. Check parameter order of 'create'" 
         ]
     
     open BioFSharp.Elements
@@ -39,8 +39,8 @@ module Core =
                     Xcomp  = Isotopes.Table.Na23.NatAbundance
                     Root   = Isotopes.Table.Na23.NatAbundance 
                     }
-                let Na' = createMono "Na" (Isotopes.Table.Na23,Isotopes.Table.Na23.NatAbundance) 
-                Expect.equal Na Na' "Record initialization via function differs from initialization via record expression. Check parameter order of 'createMono'"
+                let res = createMono "Na" (Isotopes.Table.Na23,Isotopes.Table.Na23.NatAbundance) 
+                Expect.equal res Na "Record initialization via function differs from initialization via record expression. Check parameter order of 'createMono'"
 
             testCase "test_createDiIsotopic" <| fun () ->
                 let H = { 
@@ -51,8 +51,8 @@ module Core =
                     X1comp = Isotopes.Table.H2.NatAbundance
                     Root   = (-1. * Isotopes.Table.H1.NatAbundance / Isotopes.Table.H2.NatAbundance)
                     }
-                let H' = createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) 
-                Expect.equal H H' "Record initialization via function differs from initialization via record expression. Check parameter order of 'createDi'" 
+                let res = createDi "H" (Isotopes.Table.H1,Isotopes.Table.H1.NatAbundance) (Isotopes.Table.H2,Isotopes.Table.H2.NatAbundance) 
+                Expect.equal res H "Record initialization via function differs from initialization via record expression. Check parameter order of 'createDi'" 
 
             testList "test_createTriIsotopic" [    
                 let (rootO,rootO') =
@@ -426,7 +426,7 @@ module Core =
                         let massF = BioItem.initAverageMassWithMem  
                         let res = massF AminoAcids.Ala 
                         let exp = 71.078175
-                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                        Expect.floatClose Accuracy.high res exp "Average mass of alanin was calculated incorrectly."
                 yield
                     testCase "speed" <| fun () ->
                         let massF = BioItem.initAverageMassWithMem
@@ -454,7 +454,7 @@ module Core =
                         let massF = BioItem.initAverageMassWithMemP  
                         let res = massF AminoAcids.Ala 
                         let exp = 71.078175
-                        Expect.floatClose Accuracy.high res exp "Monoisotopic mass of alanin was calculated incorrectly."
+                        Expect.floatClose Accuracy.high res exp "Average mass of alanin was calculated incorrectly."
                 yield
                     testCase "speed" <| fun () ->
                         let massF = BioItem.initAverageMassWithMemP  
@@ -462,4 +462,29 @@ module Core =
                         let f2 () = [for i = 0 to 100 do yield BioItem.averageMass AminoAcids.Ala] 
                         Expect.isFasterThan  f1 f2 ""
             ]
-        ]      
+        ]
+    open BioFSharp.TaggedSequence  
+    [<Tests>]
+    let testTaggedSequence =
+
+        testList "BioFSharp.TaggedSequence" [
+            
+            let t   = "Numbers"
+            let s   = [1..100]  
+            let ts  = {Tag=t;Sequence=s}
+
+            yield
+                testCase "create" <| fun () ->
+                    let ts' = createTaggedSequence t s
+                    Expect.equal ts' ts "Record initialization via function differs from initialization via record expression. Check parameter order of 'create'"
+            yield
+                testCase "test_mapTag" <| fun () ->
+                    let t'    = ts.Tag.ToLower()
+                    let ts'   = mapTag (fun (t:string) -> t.ToLower() ) ts
+                    Expect.equal ts'.Tag t' "'mapTag' does not alter the value of the field 'Tag' as expected."
+            yield
+                testCase "test_mapSequence" <| fun () ->
+                    let t'    = ts.Sequence |> Seq.map ((*) (-1))
+                    let ts'   = mapSequence (Seq.map ((*) (-1))) ts
+                    Expect.sequenceEqual ts'.Sequence t' "'mapSequence' does not alter the value of the field 'Sequence' as expected."
+        ]
