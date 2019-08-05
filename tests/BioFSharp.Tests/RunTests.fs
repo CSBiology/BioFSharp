@@ -16,5 +16,7 @@ module RunTests =
         Tests.runTestsWithArgs defaultConfig args Core.testIBioItem         |> ignore
         Tests.runTestsWithArgs defaultConfig args Core.testTaggedSequence   |> ignore
         Tests.runTestsWithArgs defaultConfig args BioArray.parsingTests     |> ignore
+        Tests.runTestsWithArgs defaultConfig args Core.testIsotopicDistribution     |> ignore
+        
         0
 
