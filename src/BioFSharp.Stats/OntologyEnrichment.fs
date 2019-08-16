@@ -79,10 +79,10 @@ module OntologyEnrichment =
             let hp = FSharp.Stats.Distributions.Discrete.hypergeometric totalUnivers totalNumberOfDE numberInBin            
             if numberInBin > splitPvalueThreshold then                                
                 // Calculate normal pValue
-                1. -  hp.CDF (float (numberOfDEsInBin + 1)) 
+                1. -  hp.CDF (float (numberOfDEsInBin - 1)) 
             else
                 // Calculate split pValue
-                0.5 * ((1. -  hp.CDF(float(numberOfDEsInBin + 1)) ) + ( (1. -  hp.CDF(float(numberOfDEsInBin))) ) )
+                0.5 * ((1. -  hp.CDF(float(numberOfDEsInBin - 1)) ) + ( (1. -  hp.CDF(float(numberOfDEsInBin))) ) )
         else
                 nan
         
