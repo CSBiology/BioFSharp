@@ -143,7 +143,7 @@ module OntologyEnrichment =
         let countDE (subSet:seq<OntologyItem<'a>>) =             
             let countMap = 
                 subSet 
-                |> Seq.countBy (fun (oi) -> if oi.GroupIndex = deGroupIndex then true else false )
+                |> Seq.countBy (fun (oi) -> oi.GroupIndex = deGroupIndex)
                 |> Map.ofSeq
             (countMap.TryFindDefault 0 true,(countMap.TryFindDefault 0 true) + (countMap.TryFindDefault 0 false))
         

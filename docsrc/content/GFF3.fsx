@@ -127,6 +127,6 @@ let firstCDS =
     filteredCDSFeatures |> Seq.head
 
 
-let firstCDSSequence = GFF3.getSequence features firstCDS
+let firstCDSSequence = GFF3.getSequence firstCDS features
 
 //Output: Nucleotides.Nucleotides [] (ATG...TAA)
