@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>EntireWorkflowOptions - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
+
+
+
+<h1>EntireWorkflowOptions</h1>
+<p>
+
+    <span>Namespace: BioFSharp.BioTools</span><br />
+        <span>Parent Module: <a href="biofsharp-biotools-moff.html">MoFF</a></span><br />
+    </p>
+<div class="xmldoc">
+<p>Those options run the Entire Workflow module, which executes both, the Match between runs and Apex Intensity module.
+The options are identical for both apex and MBR modules. The output for the latter (MBR) is stored in the folder sample<em>folder/mbr</em>output,
+while the former (apex) generates files in the specified output_moff folder.Log files for both algorithms are generated in the respective folders.</p>
+
+</div>
+  <h3>Union Cases</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Union Case</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1616', 1616)" onmouseover="showTip(event, '1616', 1616)">
+            FileExtensionsInputFile(string)
+          </code>
+          <div class="tip" id="1616">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L152-152" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--ext                         file extention of the input file. Default .txt)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1617', 1617)" onmouseover="showTip(event, '1617', 1617)">
+            FileNameMBRLogFile(string)
+          </code>
+          <div class="tip" id="1617">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L154-154" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--log<em>label                   filename for the mbr log file. Default moFF</em>mbr</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1618', 1618)" onmouseover="showTip(event, '1618', 1618)">
+            FilteringThresholdQuantileValue(float)
+          </code>
+          <div class="tip" id="1618">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L181-181" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--quantile<em>thr</em>filtering      quantile value used to computed the filtering threshold for the matched peak . Default is 0.75</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1619', 1619)" onmouseover="showTip(event, '1619', 1619)">
+            FilterInputFiles(string)
+          </code>
+          <div class="tip" id="1619">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L150-150" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--sample                      reg exp to filter the input file names (only with --loc_in input option-</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1620', 1620)" onmouseover="showTip(event, '1620', 1620)">
+            FilterMatchedPeak(bool)
+          </code>
+          <div class="tip" id="1620">
+            <strong>Signature:</strong> bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L177-177" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--match_filter                If set, filtering on the matched peak is activated. Default value: False</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1621', 1621)" onmouseover="showTip(event, '1621', 1621)">
+            GetPeakInRtWindow(float)
+          </code>
+          <div class="tip" id="1621">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L166-166" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--rt<em>peak</em>win                 time windows used to get the apex for the ms2 peptide/feature  (minutes). Default value is 1</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1622', 1622)" onmouseover="showTip(event, '1622', 1622)">
+            GetPeakInRtWindowForMatches(float)
+          </code>
+          <div class="tip" id="1622">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L168-168" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--rt<em>peak</em>win_match           time windows used to get the apex for machted features (minutes). Default value is 1.2</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1623', 1623)" onmouseover="showTip(event, '1623', 1623)">
+            MassTolerance(int)
+          </code>
+          <div class="tip" id="1623">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L162-162" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--tol                         mass tollerance (ppm)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1624', 1624)" onmouseover="showTip(event, '1624', 1624)">
+            MoffFile(string)
+          </code>
+          <div class="tip" id="1624">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L148-148" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--config_file                 specify a moFF parameter file</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1625', 1625)" onmouseover="showTip(event, '1625', 1625)">
+            OutlierFilter(bool)
+          </code>
+          <div class="tip" id="1625">
+            <strong>Signature:</strong> bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L158-158" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--out_flag                    if set, outliers for rt time allignment are filtered. Default value: True</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1626', 1626)" onmouseover="showTip(event, '1626', 1626)">
+            OutputFileFolder(string)
+          </code>
+          <div class="tip" id="1626">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L175-175" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--loc_out                     output folder</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1627', 1627)" onmouseover="showTip(event, '1627', 1627)">
+            PeptideSummaryFile
+          </code>
+          <div class="tip" id="1627">
+            <strong>Signature:</strong> <br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--peptide_summary             flag that allows have as output the peptided summary intensity file. Default is disable(0)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1628', 1628)" onmouseover="showTip(event, '1628', 1628)">
+            PeptideSummaryFileName(string)
+          </code>
+          <div class="tip" id="1628">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L173-173" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--tag_pepsum                  a tag that is used in the peptide summary file name</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1629', 1629)" onmouseover="showTip(event, '1629', 1629)">
+            PtmFile(string)
+          </code>
+          <div class="tip" id="1629">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L179-179" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--ptm<em>file                    modification json ptm file. Default file ptm</em>setting.json</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1630', 1630)" onmouseover="showTip(event, '1630', 1630)">
+            RtWindow(float)
+          </code>
+          <div class="tip" id="1630">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L164-164" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--xic_length                  rt windows for xic (minutes). Default value is 3  min</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1631', 1631)" onmouseover="showTip(event, '1631', 1631)">
+            SampleSizeForThreshold(float)
+          </code>
+          <div class="tip" id="1631">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L183-183" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--sample_size                 percentage of MS2 identified peptides used to estimated the threshold</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1632', 1632)" onmouseover="showTip(event, '1632', 1632)">
+            WeightedRTModelCombination(bool)
+          </code>
+          <div class="tip" id="1632">
+            <strong>Signature:</strong> bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L160-160" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--w_comb                      if set, RT model combination is weighted using traing model errors: Default value: False</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1633', 1633)" onmouseover="showTip(event, '1633', 1633)">
+            WidthForOutlierFiltering(int)
+          </code>
+          <div class="tip" id="1633">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L156-156" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>--w_filt                      width value for outlier filtering. Default 3</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Static members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1634', 1634)" onmouseover="showTip(event, '1634', 1634)">
+            EntireWorkflowOptions.make
+          </code>
+          <div class="tip" id="1634">
+            <strong>Signature:</strong> EntireWorkflowOptions -&gt; string list<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L206-206" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>TODO: check if this needs actually a number, could be that it needs nothing</p>
+
+
+              <p>CompiledName: <code>get_make</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1635', 1635)" onmouseover="showTip(event, '1635', 1635)">
+            EntireWorkflowOptions.makeWith(m)
+          </code>
+          <div class="tip" id="1635">
+            <strong>Signature:</strong> m:MountInfo -&gt; EntireWorkflowOptions -&gt; string list<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioTools/MoFF.fs#L185-185" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GESA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+                  
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>

@@ -34,6 +34,190 @@
 		  <div class="row">
 			<div class="span9" id="main">
 			  
+<h4><a name="0-1-01-Wednesday-July-31-2019" class="anchor" href="#0-1-01-Wednesday-July-31-2019">0.1.01 - Wednesday, July 31, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">*</span> <span class="o">**</span><span class="id">BioFSharp</span><span class="o">**</span> <span class="pn">(</span><span class="id">core</span><span class="pn">)</span><span class="pn">:</span>
+	<span class="pn">*</span> <span class="id">Add</span> <span class="id">Unit</span> <span class="id">testing</span> <span class="k">for</span> <span class="id">modules</span><span class="pn">:</span>
+		<span class="id">Formula</span>
+		<span class="id">Mass</span>
+		<span class="id">BioArray</span>
+	<span class="pn">*</span> <span class="id">Changed</span> <span class="id">functionality</span><span class="pn">:</span>
+	  <span class="pn">*</span> <span class="id">Formula</span><span class="pn">.</span><span class="id">substract</span> <span class="id">now</span> <span class="id">also</span> <span class="id">returns</span> <span class="id">negative</span> <span class="id">atom</span> <span class="id">counts</span>
+	  
+<span class="pn">*</span> <span class="o">**</span><span class="id">BioFSharp</span><span class="pn">.</span><span class="id">ML</span><span class="o">**:</span>
+	<span class="pn">*</span> <span class="id">Additional</span> <span class="id">functionality</span><span class="pn">:</span>
+	  <span class="pn">*</span> <span class="id">add</span> <span class="id">thin</span> <span class="id">CNTK</span> <span class="id">API</span>
+</code></pre></td>
+</tr>
+</table>
+<h4><a name="0-1-0-Thursday-May-30-2019" class="anchor" href="#0-1-0-Thursday-May-30-2019">0.1.0 - Thursday, May 30, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>
+<strong>BioFSharp</strong> (core):
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/209c3497e3cdb1db56a0675e0f2a76634a6dbe7a">GravyScore</a> (Grand Average of Hydropathy) as additional amino acid property</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.IO</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/cbba6a41a9b239e26467f32048aaec3335373faf">GAF Parser</a> for GO Annotation file format: <a href="http://geneontology.org/docs/go-annotation-file-gaf-format-2.0/">Gene Association File</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/f2a16aaa2456b0c431f6d50d0f78a12834671e97">Uniprot style Fasta header parser</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/2cdd3537398040e1508736bd734b22a67a7c46e7">FastA to GFF3 converter functions</a></li>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/eaaa59fbd382721e75fbb9c6558b0ba2ff6afb00">GFF3 Pretty Printer</a></p></li>
+</ul>
+</li>
+<li>
+BugFixes:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/0354c9c13e7a4692f2ab61b80ef86ac8f5bd83c3">Fix OboParser</a> just taking the last occurence of the alt_id keyword and discards previous ones.</li>
+<li><p>Fix <a href="https://github.com/CSBiology/BioFSharp/commit/aff8eff849deb1cca411faf3c640d53f6e410497">Fasta</a> and <a href="https://github.com/CSBiology/BioFSharp/commit/d0f059ab899c715a37b7f50318292c8a81f18dd9">GFF3</a> writers appending to files instead of recreating</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.BioTools</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/f11cb122df29ccaa0809d3c3c951294a1b645e0f">TMHMM biocontainer API wrapper</a> (<a href="http://www.cbs.dtu.dk/services/TMHMM/">TMHMM</a> 2.0c predicts transmembrane helices in proteins)</li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/28b7654d57824bcdfdb8bae16af2f0f706ed60ad">FastP and Hera biocontainer API wrapper</a></li>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/a659496179cd754fbea2fe9ef4030544a35eb68b">IntaRNA biocontainer API wrapper</a> (<a href="https://github.com/BackofenLab/IntaRNA">IntaRNA</a> is a tool for prediction of various nucleotide interactions)</p></li>
+</ul>
+</li>
+<li>
+BugFixes:
+<ul>
+<li><p>Fix Stream entry closed error in <a href="https://github.com/CSBiology/BioFSharp/commit/20f8973ea717208627ef5a7ea0b72cbaecb4103c">BioContainer.tarOfStream()</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.ImgP</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/0b4ffe93755d915da64f4231199b0ec54d4d6c4d">update 3DCWT correlation calculation to loop</a></p></li>
+</ul>
+</li>
+<li>
+Bugfixes:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/abab82be1ac9fa0c540acfb5f3ccc6bd5143df1f">fix height adjustment in ricker</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/2bb6bb2b67ea43df2d9fe970bd1445e568df53d4">fix Ricker values for discrete time points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-16-Thursday-March-7-2019" class="anchor" href="#0-0-16-Thursday-March-7-2019">0.0.16 - Thursday, March 7, 2019</a></h4>
+<ul>
+<li>
+Fix template files for all nuget packages:
+<ul>
+<li>use correct paths for binaries</li>
+<li>update project descriptions</li>
+<li>use type project to infer dependencies</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-15-Thursday-March-7-2019" class="anchor" href="#0-0-15-Thursday-March-7-2019">0.0.15 - Thursday, March 7, 2019</a></h4>
+<ul>
+<li>
+BioFSharp.ML - project introduction:
+<ul>
+<li>Usage of Microsoft's CNTK library with a biological focus:</li>
+<li>
+This project comes with working CNTK integration:
+<ul>
+<li>necessary dependencies to use CNTK and its unmanaged libraries</li>
+<li>CNTK loadscript: an easy way to load all dependencies of CNTK. load the script and use the resolveCNTKDependencies() function.</li>
+</ul>
+</li>
+<li>
+Built-in deep neural network 'd::ppop' (<a href="https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full">publication</a>)
+<ul>
+<li>predict peptide observability in mass spectrometry</li>
+<li>Classification: functions to determine peptide feature vectors as input for dppop</li>
+<li>Prediction: functions to predict peptide observability using the feature vectors prepared in Classification.</li>
+<li>NonPlant and Plant models as embedded resources: the two models used in the original Web API. Additionally load custom models.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+Othert additions:
+<ul>
+<li>
+BioFSharp.BioTools:
+<ul>
+<li>
+Integration of new tools as biocontainer APIs:
+<ul>
+<li>Hera</li>
+<li>FastP</li>
+<li>ClustalO</li>
+<li>
+HMMER (experimental):
+<ul>
+<li>hmmbuild</li>
+<li>hmmalign</li>
+<li>hmmsearch</li>
+<li>hmmscan</li>
+<li>hmmemit</li>
+<li>hmmpress</li>
+<li>hmmconvert</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-14-Tuesday-February-12-2019" class="anchor" href="#0-0-14-Tuesday-February-12-2019">0.0.14 - Tuesday, February 12, 2019</a></h4>
+<ul>
+<li>Addition of blast biocontainer support for makeblastdb, blastp, blastn with full parameter wrapping</li>
+<li>
+Extension of BioContainer functionality:
+<ul>
+<li>Add windows/unix path conversions and subpath matching to MounInfo</li>
+<li>Add execReturnAsync (returns stdout of docker container) and execAsync (redirects stdout/stderr of container)</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-13-Friday-February-8-2019" class="anchor" href="#0-0-13-Friday-February-8-2019">0.0.13 - Friday, February 8, 2019</a></h4>
+<ul>
+<li>Addition of the BioTools project, which uses docker.dotnet to use docker images and stream their output to fsi</li>
+<li>Low level wrapping of multiple docker.dotnet functions for F#</li>
+<li>Basic functionality for using docker images from fsi</li>
+</ul>
 <h4><a name="0-0-12-Friday-December-28-2018" class="anchor" href="#0-0-12-Friday-December-28-2018">0.0.12 - Friday, December 28, 2018</a></h4>
 <ul>
 <li>Addition of Pretty Printers, SOFT Parser, GEOFTP functions</li>

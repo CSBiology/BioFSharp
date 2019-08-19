@@ -112,10 +112,10 @@ For some more indepth information about which parameters to choose for your goal
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="id">sequences</span> <span class="o">=</span> 
     <span class="pn">[</span>
-    <span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="m">BioID</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 47)" onmouseover="showTip(event, 'fs30', 47)" class="id">createTaggedSequence</span> <span class="s">&quot;pep1&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGECGEK&quot;</span><span class="pn">)</span>
-    <span onmouseout="hideTip(event, 'fs29', 48)" onmouseover="showTip(event, 'fs29', 48)" class="m">BioID</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="id">createTaggedSequence</span> <span class="s">&quot;pep2&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGEGEK&quot;</span><span class="pn">)</span>
-    <span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="m">BioID</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="id">createTaggedSequence</span> <span class="s">&quot;pep3&quot;</span> <span class="pn">(</span><span class="s">&quot;AAAGECGEK&quot;</span><span class="pn">)</span>
-    <span onmouseout="hideTip(event, 'fs29', 52)" onmouseover="showTip(event, 'fs29', 52)" class="m">BioID</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 53)" onmouseover="showTip(event, 'fs30', 53)" class="id">createTaggedSequence</span> <span class="s">&quot;pep4&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGECGEL&quot;</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="m">TaggedSequence</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 47)" onmouseover="showTip(event, 'fs30', 47)" class="id">createTaggedSequence</span> <span class="s">&quot;pep1&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGECGEK&quot;</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs29', 48)" onmouseover="showTip(event, 'fs29', 48)" class="m">TaggedSequence</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="id">createTaggedSequence</span> <span class="s">&quot;pep2&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGEGEK&quot;</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="m">TaggedSequence</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="id">createTaggedSequence</span> <span class="s">&quot;pep3&quot;</span> <span class="pn">(</span><span class="s">&quot;AAAGECGEK&quot;</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs29', 52)" onmouseover="showTip(event, 'fs29', 52)" class="m">TaggedSequence</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 53)" onmouseover="showTip(event, 'fs30', 53)" class="id">createTaggedSequence</span> <span class="s">&quot;pep4&quot;</span> <span class="pn">(</span><span class="s">&quot;AAGECGEL&quot;</span><span class="pn">)</span>
     <span class="pn">]</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 54)" onmouseover="showTip(event, 'fs31', 54)" class="id">alignedSequences</span> <span class="o">=</span> 
@@ -123,17 +123,7 @@ For some more indepth information about which parameters to choose for your goal
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>{MetaData = {Header = seq ['C'; 'L'; 'U'; 'S'; ...];
-             ConservationInfo = seq [' '; '*'; '*'; '*'; ...];};
- AlignedSequences =
-  [{Tag = "pep1";
-    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-   {Tag = "pep2";
-    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];};
-   {Tag = "pep3";
-    Sequence = seq ['A'; 'A'; 'A'; 'G'; ...];};
-   {Tag = "pep4";
-    Sequence = seq ['-'; 'A'; 'A'; 'G'; ...];}];}</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
@@ -162,11 +152,11 @@ For some more indepth information about which parameters to choose for your goal
 <div class="tip" id="fs25">type MiscallaneousCustom =<br />&#160;&#160;| Auto<br />&#160;&#160;| Threads of int<br />&#160;&#160;| Log of string<br />&#160;&#160;| VerboseLevel of int<br />&#160;&#160;| Version<br />&#160;&#160;| LongVersion<br />&#160;&#160;| Force</div>
 <div class="tip" id="fs26">union case Parameters.MiscallaneousCustom.Force: Parameters.MiscallaneousCustom</div>
 <div class="tip" id="fs27">member ClustalOWrapper.AlignFromFile : inputPath:Input * outputPath:string * parameters:seq&lt;Parameters.ClustalParams&gt; * ?name:string -&gt; unit</div>
-<div class="tip" id="fs28">val sequences : BioID.TaggedSequence&lt;string,char&gt; list</div>
-<div class="tip" id="fs29">module BioID<br /><br />from BioFSharp</div>
-<div class="tip" id="fs30">val createTaggedSequence : tag:&#39;a -&gt; sequence:seq&lt;&#39;b&gt; -&gt; BioID.TaggedSequence&lt;&#39;a,&#39;b&gt;</div>
-<div class="tip" id="fs31">val alignedSequences : Alignment.Alignment&lt;BioID.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
-<div class="tip" id="fs32">member ClustalOWrapper.AlignSequences : input:seq&lt;BioID.TaggedSequence&lt;string,char&gt;&gt; * parameters:seq&lt;Parameters.ClustalParams&gt; * ?name:string -&gt; Alignment.Alignment&lt;BioID.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs28">val sequences : TaggedSequence.TaggedSequence&lt;string,char&gt; list</div>
+<div class="tip" id="fs29">module TaggedSequence<br /><br />from BioFSharp</div>
+<div class="tip" id="fs30">val createTaggedSequence : tag:&#39;a -&gt; sequence:seq&lt;&#39;b&gt; -&gt; TaggedSequence.TaggedSequence&lt;&#39;a,&#39;b&gt;</div>
+<div class="tip" id="fs31">val alignedSequences : Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs32">member ClustalOWrapper.AlignSequences : input:seq&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;&gt; * parameters:seq&lt;Parameters.ClustalParams&gt; * ?name:string -&gt; Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
 <div class="tip" id="fs33">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
 <div class="tip" id="fs34">val empty&lt;&#39;T&gt; : seq&lt;&#39;T&gt;</div>
 

@@ -178,17 +178,7 @@ Keep in mind that if your clustal file containts numbers representing the charac
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>{MetaData = {Header = seq ['C'; 'L'; 'U'; 'S'; ...];
-             ConservationInfo = seq ['*'; ' '; '*'; '*'; ...];};
- AlignedSequences =
-  [{Tag = "C_reinhardtii";
-    Sequence = seq ['M'; 'V'; 'P'; 'Q'; ...];};
-   {Tag = "N_tabacum";
-    Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...];};
-   {Tag = "A_thaliana";
-    Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...];};
-   {Tag = "O_sativa";
-    Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...];}];}</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <h2><a name="Writing-Clustal-files" class="anchor" href="#Writing-Clustal-files">Writing Clustal files</a></h2>
 <p>For writing clustal files you can use the <code>toFile</code> function. It takes a path and the alignment. The type of alignment is the same as the result of the reading function. You can see this above.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
@@ -209,11 +199,11 @@ Keep in mind that if your clustal file containts numbers representing the charac
 <div class="tip" id="fs3">namespace BioFSharp.IO</div>
 <div class="tip" id="fs4">val fileDir : string</div>
 <div class="tip" id="fs5">val path : string</div>
-<div class="tip" id="fs6">val clustalAlignment : BioFSharp.Alignment.Alignment&lt;BioFSharp.BioID.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs6">val clustalAlignment : BioFSharp.Alignment.Alignment&lt;BioFSharp.TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
 <div class="tip" id="fs7">module Clustal<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs8">val ofFile : path:string -&gt; BioFSharp.Alignment.Alignment&lt;BioFSharp.BioID.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs8">val ofFile : path:string -&gt; BioFSharp.Alignment.Alignment&lt;BioFSharp.TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
 <div class="tip" id="fs9">val outputPath : string</div>
-<div class="tip" id="fs10">val toFileWithOverWrite : path:string -&gt; alignment:BioFSharp.Alignment.Alignment&lt;BioFSharp.BioID.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt; -&gt; unit</div>
+<div class="tip" id="fs10">val toFileWithOverWrite : path:string -&gt; alignment:BioFSharp.Alignment.Alignment&lt;BioFSharp.TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt; -&gt; unit</div>
 
 			</div>
 			<div class="span3" >

@@ -76,6 +76,23 @@
         </tr>
     </tbody>
   </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-io-gff3-fastaheaderparser.html">FastAHeaderParser</a>
+          </td>
+          <td class="xmldoc">
+          <p>Parse FastA to GFF3</p>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -88,10 +105,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '437', 437)" onmouseover="showTip(event, '437', 437)">
+          <code onmouseout="hideTip(event, '611', 611)" onmouseover="showTip(event, '611', 611)">
             createGFFEntry(...)
           </code>
-          <div class="tip" id="437">
+          <div class="tip" id="611">
             <strong>Signature:</strong> seqid:string -&gt; source:string -&gt; feature:string -&gt; startPos:string -&gt; endPos:string -&gt; score:string -&gt; strand:string -&gt; phase:string -&gt; attributes:string -&gt; supplement:string -&gt; GFFEntry<br />
                                   </div>
         </td>
@@ -108,10 +125,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '438', 438)" onmouseover="showTip(event, '438', 438)">
+          <code onmouseout="hideTip(event, '612', 612)" onmouseover="showTip(event, '612', 612)">
             fromFile fastAconverter filepath
           </code>
-          <div class="tip" id="438">
+          <div class="tip" id="612">
             <strong>Signature:</strong> fastAconverter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filepath:string -&gt; seq&lt;GFFLine&lt;&#39;a&gt;&gt;<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -128,10 +145,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '439', 439)" onmouseover="showTip(event, '439', 439)">
+          <code onmouseout="hideTip(event, '613', 613)" onmouseover="showTip(event, '613', 613)">
             fromFileWithoutFasta(filepath)
           </code>
-          <div class="tip" id="439">
+          <div class="tip" id="613">
             <strong>Signature:</strong> filepath:string -&gt; seq&lt;GFFLine&lt;seq&lt;char&gt;&gt;&gt;<br />
                                   </div>
         </td>
@@ -148,15 +165,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '440', 440)" onmouseover="showTip(event, '440', 440)">
-            getSequence gFFFile cDSfeature
+          <code onmouseout="hideTip(event, '614', 614)" onmouseover="showTip(event, '614', 614)">
+            getSequence cDSfeature gFFFile
           </code>
-          <div class="tip" id="440">
-            <strong>Signature:</strong> gFFFile:seq&lt;GFFLine&lt;&#39;?10082&gt;&gt; -&gt; cDSfeature:GFFEntry -&gt; seq&lt;&#39;a&gt;<br />
-                          <strong>Type parameters:</strong> '?10082, 'a                      </div>
+          <div class="tip" id="614">
+            <strong>Signature:</strong> cDSfeature:GFFEntry -&gt; gFFFile:seq&lt;GFFLine&lt;&#39;?11523&gt;&gt; -&gt; seq&lt;&#39;a&gt;<br />
+                          <strong>Type parameters:</strong> '?11523, 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L334-334" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L340-340" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -168,10 +185,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '441', 441)" onmouseover="showTip(event, '441', 441)">
+          <code onmouseout="hideTip(event, '615', 615)" onmouseover="showTip(event, '615', 615)">
             gFFEntrytoString(g)
           </code>
-          <div class="tip" id="441">
+          <div class="tip" id="615">
             <strong>Signature:</strong> g:GFFEntry -&gt; string<br />
                                   </div>
         </td>
@@ -188,10 +205,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '442', 442)" onmouseover="showTip(event, '442', 442)">
+          <code onmouseout="hideTip(event, '616', 616)" onmouseover="showTip(event, '616', 616)">
             parseStrToGFFEntry(str)
           </code>
-          <div class="tip" id="442">
+          <div class="tip" id="616">
             <strong>Signature:</strong> str:string -&gt; GFFEntry<br />
                                   </div>
         </td>
@@ -208,10 +225,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '443', 443)" onmouseover="showTip(event, '443', 443)">
+          <code onmouseout="hideTip(event, '617', 617)" onmouseover="showTip(event, '617', 617)">
             relationshipSearch gffList searchterm
           </code>
-          <div class="tip" id="443">
+          <div class="tip" id="617">
             <strong>Signature:</strong> gffList:seq&lt;GFFLine&lt;&#39;a&gt;&gt; -&gt; searchterm:string -&gt; seq&lt;GFFEntry&gt;<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
@@ -228,10 +245,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '444', 444)" onmouseover="showTip(event, '444', 444)">
+          <code onmouseout="hideTip(event, '618', 618)" onmouseover="showTip(event, '618', 618)">
             sanityCheck(filepath)
           </code>
-          <div class="tip" id="444">
+          <div class="tip" id="618">
             <strong>Signature:</strong> filepath:string -&gt; unit<br />
                                   </div>
         </td>
@@ -246,10 +263,10 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '445', 445)" onmouseover="showTip(event, '445', 445)">
+          <code onmouseout="hideTip(event, '619', 619)" onmouseover="showTip(event, '619', 619)">
             sanityCheckWithSOTerm(...)
           </code>
-          <div class="tip" id="445">
+          <div class="tip" id="619">
             <strong>Signature:</strong> so_TermsPath:string -&gt; filepath:string -&gt; unit<br />
                                   </div>
         </td>
@@ -266,12 +283,12 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '446', 446)" onmouseover="showTip(event, '446', 446)">
-            toString input converter path
+          <code onmouseout="hideTip(event, '620', 620)" onmouseover="showTip(event, '620', 620)">
+            toString converter input
           </code>
-          <div class="tip" id="446">
-            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?10075&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:&#39;?10077 -&gt; seq&lt;string&gt;<br />
-                          <strong>Type parameters:</strong> '?10075, 'a, '?10077                      </div>
+          <div class="tip" id="620">
+            <strong>Signature:</strong> converter:(&#39;a -&gt; char) -&gt; input:seq&lt;GFFLine&lt;&#39;b&gt;&gt; -&gt; seq&lt;string&gt;<br />
+                          <strong>Type parameters:</strong> 'a, 'b                      </div>
         </td>
         <td class="xmldoc">
                       <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L313-313" class="github-link">
@@ -286,19 +303,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '447', 447)" onmouseover="showTip(event, '447', 447)">
-            write input converter path
+          <code onmouseout="hideTip(event, '621', 621)" onmouseover="showTip(event, '621', 621)">
+            write converter path input
           </code>
-          <div class="tip" id="447">
-            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?10079&gt;&gt; -&gt; converter:(&#39;a -&gt; char) -&gt; path:string -&gt; unit<br />
-                          <strong>Type parameters:</strong> '?10079, 'a                      </div>
+          <div class="tip" id="621">
+            <strong>Signature:</strong> converter:(&#39;a -&gt; char) -&gt; path:string -&gt; input:seq&lt;GFFLine&lt;&#39;?11521&gt;&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'a, '?11521                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L334-334" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>writes GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '622', 622)" onmouseover="showTip(event, '622', 622)">
+            writeOrAppend converter path input
+          </code>
+          <div class="tip" id="622">
+            <strong>Signature:</strong> converter:(&#39;a -&gt; char) -&gt; path:string -&gt; input:seq&lt;GFFLine&lt;&#39;?11518&gt;&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> 'a, '?11518                      </div>
         </td>
         <td class="xmldoc">
                       <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/GFF3.fs#L328-328" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>writes GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.</p>
+          <p>writesOrAppends GFF lines to file. Hint: Use id as converter if no FASTA sequence is included.</p>
 
 
         </td>

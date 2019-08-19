@@ -86,14 +86,14 @@ Often, dealing with similar problems separately results in different approaches.
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"C6.00 H12.00 N2.00 O1.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"C6.00 H12.00 N2.00 O1.00"</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs14', 57)" onmouseover="showTip(event, 'fs14', 57)" class="m">Nucleotides</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 58)" onmouseover="showTip(event, 'fs28', 58)" class="id">formula</span> <span onmouseout="hideTip(event, 'fs16', 59)" onmouseover="showTip(event, 'fs16', 59)" class="id">t</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 60)" onmouseover="showTip(event, 'fs2', 60)" class="m">Formula</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 61)" onmouseover="showTip(event, 'fs26', 61)" class="id">toString</span> 
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"C10.00 H14.00 N2.00 O5.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"C10.00 H14.00 N2.00 O5.00"</code></pre></td></tr></table>
 <p>Nucleotides and AminoAcids in BioFSharp are represented as Union cases. This makes applying functions selectively very easy.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -163,7 +163,7 @@ Often, dealing with similar problems separately results in different approaches.
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>Just strolling around, minding my own business.</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No output has been produced.</code></pre></td></tr></table>
 <p>Lysine is usually positively charged:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
@@ -171,7 +171,7 @@ Often, dealing with similar problems separately results in different approaches.
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>Hey, how are you? I am Lysine, but my friends call me K. I'm usually in a positive mood</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No output has been produced.</code></pre></td></tr></table>
 <p>Glutamic acid is usually negatively charged:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
@@ -179,7 +179,7 @@ Often, dealing with similar problems separately results in different approaches.
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>I am Glutamic Acid, short: E. I'm usually in a negative mood</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No output has been produced.</code></pre></td></tr></table>
 <table class="HeadAPI">
 <td class="Head"><h2>Amino Acids</h2></td>
 <td class="API">
@@ -215,7 +215,7 @@ As a first step, we make ourselves an easy helper function which returns the for
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"C3.00 H5.00 N1.00 O2.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"C3.00 H5.00 N1.00 O2.00"</code></pre></td></tr></table>
 <p>As you can see by the formula. Our Serine is missing two H and an O. In BioFSharp, all Amino Acids are dehydrolysed by default, because it is assumed that the user will use collections representing a peptide, rather than single Amino Acids. For our cause we want serine in hydrolysed form. An easy way to achieve this is to modify it. An addition of H2O is quite common and therefore premade:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -233,7 +233,7 @@ As a first step, we make ourselves an easy helper function which returns the for
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"C3.00 H7.00 N1.00 O3.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"C3.00 H7.00 N1.00 O3.00"</code></pre></td></tr></table>
 <p>So far so good. Now let's add the phosphate. For this we first create a function which alters the formula of a given molecule in the way a phosphorylation would. In the second step we create a modification resembling a phosphorylation of a residual. At last we modify our Serine with this modification.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -265,7 +265,7 @@ As a first step, we make ourselves an easy helper function which returns the for
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"P1.00 C3.00 H6.00 N1.00 O6.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <p>As you can see the Serine is phosphorylated just as we wanted. Our inital aim was to check the mass, this can be done quite easily:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
@@ -273,14 +273,14 @@ As a first step, we make ourselves an easy helper function which returns the for
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>87.077575</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 181)" onmouseover="showTip(event, 'fs5', 181)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs64', 182)" onmouseover="showTip(event, 'fs64', 182)" class="id">averageMass</span> <span onmouseout="hideTip(event, 'fs61', 183)" onmouseover="showTip(event, 'fs61', 183)" class="id">phosphoSerine</span>
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>183.056884</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <table class="HeadAPI">
 <td class="Head"><h2>Nucleotides</h2></td>
 <td class="API">
@@ -357,11 +357,11 @@ As working with nucleotides is usually focused on the sequence of the bases, rat
 <div class="tip" id="fs49">module Table<br /><br />from BioFSharp.ModificationInfo</div>
 <div class="tip" id="fs50">val H2O : ModificationInfo.Modification</div>
 <div class="tip" id="fs51">val getF2 : string</div>
-<div class="tip" id="fs52">val phosporylate : formula:Formula.Formula -&gt; Map&lt;Elements.Element,float&gt;<br /><em><br /><br />Phosphorylation of OH-Groups adds PO3 to formula and removes one H</em></div>
+<div class="tip" id="fs52">val phosporylate : formula:Formula.Formula -&gt; Formula.Formula<br /><em><br /><br />Phosphorylation of OH-Groups adds PO3 to formula and removes one H</em></div>
 <div class="tip" id="fs53">val formula : Formula.Formula</div>
-<div class="tip" id="fs54">val add : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Map&lt;Elements.Element,float&gt;</div>
+<div class="tip" id="fs54">val add : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Formula.Formula</div>
 <div class="tip" id="fs55">val parseFormulaString : strFormula:string -&gt; Formula.Formula</div>
-<div class="tip" id="fs56">val substract : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Map&lt;Elements.Element,float&gt;</div>
+<div class="tip" id="fs56">val substract : f1:Formula.Formula -&gt; f2:Formula.Formula -&gt; Formula.Formula</div>
 <div class="tip" id="fs57">val phosphorylation : ModificationInfo.Modification</div>
 <div class="tip" id="fs58">val createModification : name:string -&gt; isBiological:bool -&gt; location:ModificationInfo.ModLocation -&gt; modifier:(Formula.Formula -&gt; Formula.Formula) -&gt; ModificationInfo.Modification</div>
 <div class="tip" id="fs59">type ModLocation =<br />&#160;&#160;| Residual = 0<br />&#160;&#160;| Cterm = 1<br />&#160;&#160;| Nterm = 2<br />&#160;&#160;| ProteinCterm = 3<br />&#160;&#160;| ProteinNterm = 4<br />&#160;&#160;| Isotopic = 5</div>

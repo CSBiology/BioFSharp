@@ -79,18 +79,58 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '1', 1)" onmouseover="showTip(event, '1', 1)">
-            mapSequences mapping alignment
+            createAlignment metaData sequences
           </code>
           <div class="tip" id="1">
-            <strong>Signature:</strong> mapping:(&#39;Sequence -&gt; &#39;mSequence) -&gt; alignment:Alignment&lt;&#39;Sequence,&#39;?8549&gt; -&gt; Alignment&lt;&#39;mSequence,&#39;?8549&gt;<br />
-                          <strong>Type parameters:</strong> 'Sequence, 'mSequence, '?8549                      </div>
+            <strong>Signature:</strong> metaData:&#39;?8537 -&gt; sequences:seq&lt;&#39;?8538&gt; -&gt; Alignment&lt;&#39;?8538,&#39;?8537&gt;<br />
+                          <strong>Type parameters:</strong> '?8537, '?8538                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Alignment.fs#L16-16" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Alignment.fs#L17-17" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>mapping function for aligned sequences, keeping the associated metadata.</p>
+          <p>Creates Alignment type</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2', 2)" onmouseover="showTip(event, '2', 2)">
+            mapmetaData mapping alignment
+          </code>
+          <div class="tip" id="2">
+            <strong>Signature:</strong> mapping:(&#39;Metadata -&gt; &#39;NewMetadata) -&gt; alignment:Alignment&lt;&#39;Sequence,&#39;Metadata&gt; -&gt; Alignment&lt;&#39;Sequence,&#39;NewMetadata&gt;<br />
+                          <strong>Type parameters:</strong> 'Metadata, 'NewMetadata, 'Sequence                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Alignment.fs#L26-26" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Mapping function for aligned sequences, keeping the associated metadata.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
+            mapSequences mapping alignment
+          </code>
+          <div class="tip" id="3">
+            <strong>Signature:</strong> mapping:(&#39;Sequence -&gt; &#39;mSequence) -&gt; alignment:Alignment&lt;&#39;Sequence,&#39;?8542&gt; -&gt; Alignment&lt;&#39;mSequence,&#39;?8542&gt;<br />
+                          <strong>Type parameters:</strong> 'Sequence, 'mSequence, '?8542                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp/Alignment.fs#L21-21" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Mapping function for aligned sequences, keeping the associated metadata.</p>
 
 
         </td>

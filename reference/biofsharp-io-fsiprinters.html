@@ -57,15 +57,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '422', 422)" onmouseover="showTip(event, '422', 422)">
+          <code onmouseout="hideTip(event, '590', 590)" onmouseover="showTip(event, '590', 590)">
             prettyPrintBioCollection(sequence)
           </code>
-          <div class="tip" id="422">
+          <div class="tip" id="590">
             <strong>Signature:</strong> sequence:seq&lt;&#39;a&gt; -&gt; string<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L33-33" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L35-35" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -77,15 +77,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '423', 423)" onmouseover="showTip(event, '423', 423)">
+          <code onmouseout="hideTip(event, '591', 591)" onmouseover="showTip(event, '591', 591)">
             prettyPrintBioCollectionWithModifications(...)
           </code>
-          <div class="tip" id="423">
+          <div class="tip" id="591">
             <strong>Signature:</strong> sequence:seq&lt;&#39;a&gt; -&gt; string<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L50-50" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L52-52" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -97,15 +97,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '424', 424)" onmouseover="showTip(event, '424', 424)">
+          <code onmouseout="hideTip(event, '592', 592)" onmouseover="showTip(event, '592', 592)">
             prettyPrintBioItem(a)
           </code>
-          <div class="tip" id="424">
+          <div class="tip" id="592">
             <strong>Signature:</strong> a:&#39;a -&gt; string<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L15-15" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L17-17" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -117,15 +117,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '425', 425)" onmouseover="showTip(event, '425', 425)">
+          <code onmouseout="hideTip(event, '593', 593)" onmouseover="showTip(event, '593', 593)">
             prettyPrintBioItemWithModifications(a)
           </code>
-          <div class="tip" id="425">
+          <div class="tip" id="593">
             <strong>Signature:</strong> a:&#39;a -&gt; string<br />
                           <strong>Type parameters:</strong> 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L22-22" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L24-24" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -137,19 +137,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '426', 426)" onmouseover="showTip(event, '426', 426)">
+          <code onmouseout="hideTip(event, '594', 594)" onmouseover="showTip(event, '594', 594)">
             prettyPrintClustal(alignment)
           </code>
-          <div class="tip" id="426">
+          <div class="tip" id="594">
             <strong>Signature:</strong> alignment:Alignment&lt;TaggedSequence&lt;string,char&gt;,AlignmentInfo&gt; -&gt; string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L67-67" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L69-69" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>print Clustal formatted file as seen in the specifications.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '595', 595)" onmouseover="showTip(event, '595', 595)">
+            prettyPrintGFF3(input)
+          </code>
+          <div class="tip" id="595">
+            <strong>Signature:</strong> input:seq&lt;GFFLine&lt;&#39;?11180&gt;&gt; -&gt; unit<br />
+                          <strong>Type parameters:</strong> '?11180                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/FSIPrinters.fs#L107-107" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>print GFF3 formatted file as seen in the specifications.</p>
 
 
         </td>

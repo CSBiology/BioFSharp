@@ -70,7 +70,7 @@ Analogous to the build-in collections BioFSharp provides BioSeq, BioList and Bio
 <p>Resulting BioSeq containing our peptide:</p>
 <table class="pre"><tr><td><pre><code>seq [Pro; Glu; Pro; Thr; ...]</code></pre></td></tr></table>
 <p>Resulting BioList containing our peptide:</p>
-<table class="pre"><tr><td><pre><code>[P; E; P; T; I; D; E]</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>seq [P; E; P; T; ...]</code></pre></td></tr></table>
 <p>Resulting BioArray containing our oligonucleotide:</p>
 <table class="pre"><tr><td><pre><code>[|T; A; G; C; A; T|]</code></pre></td></tr></table>
 <h2><a name="Basics" class="anchor" href="#Basics">Basics</a></h2>
@@ -88,7 +88,7 @@ Analogous to the build-in collections BioFSharp provides BioSeq, BioList and Bio
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>"C34.00 H51.00 N7.00 O14.00 "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"C34.00 H51.00 N7.00 O14.00"</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="id">myPeptideMass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 30)" onmouseover="showTip(event, 'fs6', 30)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="id">toAverageMass</span> <span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="id">myPeptide</span> 
@@ -544,7 +544,7 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>[Met; Ala; Arg; Ser; Ile; Asp; Arg; Leu; Thr; Ter]</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
@@ -561,7 +561,7 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 <div class="tip" id="fs13">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;Nucleotides.Nucleotide&gt;</div>
 <div class="tip" id="fs14">val myPeptide : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;<br /><em><br /><br />Nucleotide sequence represented as a BioArray</em></div>
 <div class="tip" id="fs15">val myPeptideFormula : string</div>
-<div class="tip" id="fs16">val toFormula : bs:seq&lt;#IBioItem&gt; -&gt; Map&lt;Elements.Element,float&gt;</div>
+<div class="tip" id="fs16">val toFormula : bs:seq&lt;#IBioItem&gt; -&gt; Formula.Formula</div>
 <div class="tip" id="fs17">module Formula<br /><br />from BioFSharp</div>
 <div class="tip" id="fs18">val toString : f:Formula.Formula -&gt; string</div>
 <div class="tip" id="fs19">val myPeptideMass : float</div>
