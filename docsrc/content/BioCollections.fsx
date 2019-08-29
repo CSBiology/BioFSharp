@@ -23,19 +23,22 @@ open FSharpAux
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html" >&#128194;View BioSeq documentation</a>
 </td>
 </table>
-Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the ofBioItemString-functions
+Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. 
+The easiest way to create them are the `ofBioItemString` -functions
 *)
 
 
 let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
-let s2 = "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
-let s3 = "TAGCAT" |> BioArray.ofNucleotideString 
+let s2 = "PEPTIDE" |> BioList.ofAminoAcidSymbolString 
+let s3 = "TAGCAT"  |> BioArray.ofNucleotideString 
 
 (***do-not-eval***)
 ///Peptide represented as a Bioseq
 "PEPTIDE" |> BioSeq.ofAminoAcidString 
+
 ///Peptide represented as a BioList
 "PEPTIDE"|> BioList.ofAminoAcidSymbolString 
+
 ///Nucleotide sequence represented as a BioArray
 "TAGCAT" |> BioArray.ofNucleotideString 
 
@@ -198,7 +201,8 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 
 </div>
 <br>
-In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
+In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. 
+This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
 *)
 let digestedRBCS' = Digestion.BioArray.concernMissCleavages 0 2 digestedRBCS
 
@@ -471,6 +475,12 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 </div>
 <br>
 ##Nucleotides
+
+![Nucleotides1](img/Nucleotides.svg)
+
+**Figure 1: Selection of covered nucleotide operations** (A) Bilogical principle. (B) Workflow with `BioSeq`. (C) Other covered functionalities.
+
+
 Let's imagine you have a given gene sequence and want to find out what the according protein might look like.
 *)
 let myGene = BioSeq.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
@@ -478,7 +488,7 @@ let myGene = BioSeq.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
 (*** include-value:myGene ***)
 
 (**
-Yikes! Unfortunately we got the 5'-3' strand. For proper transcription we should get the complementary strand first:
+Yikes! Unfortunately we got the 5'-3' coding strand. For proper transcription we should get the complementary strand first:
 *)
 let myProperGene = Seq.map Nucleotides.complement myGene
 
@@ -492,7 +502,37 @@ let myTranslatedGene =
     myProperGene
     |> BioSeq.transcribeTemplateStrand
     |> BioSeq.translate 0
-    |> Seq.toList 
 
 (*** include-value:myTranslatedGene ***)
+
+(**
+Of course, if your input sequence originates from the coding strand, you can directly transcribe it to mRNA since the 
+only difference between the coding strand and the mRNA is the replacement of 'T' by 'U' (Figure 1B)
+*)
+
+let myTranslatedGeneFromCodingStrand = 
+    myGene
+    |> BioSeq.transcribeCodingStrand
+    |> BioSeq.translate 0
+
+(*** include-value:myTranslatedGeneFromCodingStrand ***)
+
+(**
+Other Nucleotide conversion operations are also covered:
+*)
+
+let mySmallGene      = BioSeq.ofNucleotideString  "ATGTTCCGAT"
+
+let smallGeneRev     = BioSeq.reverse mySmallGene 
+//Original: ATGTTCCGAT
+//Output:   TAGCCTTGTA
+
+let smallGeneComp    = BioSeq.complement mySmallGene
+//Original: ATGTTCCGAT
+//Output:   TACAAGGCTA
+
+let smallGeneRevComp = BioSeq.reverseComplement mySmallGene
+//Original: ATGTTCCGAT
+//Reverse:  TAGCCTTGTA
+//Output:   ATCGGAACAT
 

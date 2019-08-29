@@ -64,30 +64,30 @@ module BioSeq =
 
 
     /// Create the reverse DNA or RNA strand. For example, the sequence "ATGC" is converted to "CGTA"
-    let reverse (nucs:seq<Nucleotides.Nucleotide>) = 
+    let reverse (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.rev
 
     /// Create the complement DNA or cDNA (from RNA) strand. For example, the sequence "ATGC" is converted to "TACG"
-    let complement (nucs:seq<Nucleotides.Nucleotide>) = 
+    let complement (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map Nucleotides.complement
 
     /// Create the reverse complement strand meaning antiparallel DNA strand or the cDNA (from RNA) respectivly. For example, the sequence "ATGC" is converted to "GCAT". "Antiparallel" combines the two functions "Complement" and "Inverse".
-    let reverseComplement (nucs:seq<Nucleotides.Nucleotide>) = 
+    let reverseComplement (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map Nucleotides.complement |> Seq.rev
 
     //  Replace T by U
     /// Transcribe a given DNA coding strand (5'-----3')
-    let transcribeCodeingStrand (nucs:seq<Nucleotides.Nucleotide>) = 
+    let transcribeCodingStrand (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map (fun nuc -> Nucleotides.replaceTbyU nuc)
         
     //  
     /// Transcribe a given DNA template strand (3'-----5')
-    let transcribeTemplateStrand (nucs:seq<Nucleotides.Nucleotide>) = 
+    let transcribeTemplateStrand (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map (fun nuc -> Nucleotides.replaceTbyU (Nucleotides.complement nuc))
 
 
     /// translates nucleotide sequence to aminoacid sequence    
-    let translate (nucleotideOffset:int) (rnaSeq:seq<Nucleotides.Nucleotide>) =         
+    let translate (nucleotideOffset:int) (rnaSeq:seq<Nucleotides.Nucleotide>) : BioSeq<_> =         
         if (nucleotideOffset < 0) then
                 raise (System.ArgumentException(sprintf "Input error: nucleotide offset of %i is invalid" nucleotideOffset))                
         rnaSeq
