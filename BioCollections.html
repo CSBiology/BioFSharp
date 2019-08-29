@@ -40,14 +40,15 @@
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-bioseq.html" >&#128194;View BioSeq documentation</a>
 </td>
 </table>
-Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. The easiest way to create them are the ofBioItemString-functions
+Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. 
+The easiest way to create them are the `ofBioItemString` -functions
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">s1</span> <span class="o">=</span> <span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">ofAminoAcidString</span> 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">s2</span> <span class="o">=</span> <span class="s">&quot;PEPTIDE&quot;</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="m">BioList</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">ofAminoAcidSymbolString</span> 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="id">s3</span> <span class="o">=</span> <span class="s">&quot;TAGCAT&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">ofNucleotideString</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">s2</span> <span class="o">=</span> <span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="m">BioList</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">ofAminoAcidSymbolString</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="id">s3</span> <span class="o">=</span> <span class="s">&quot;TAGCAT&quot;</span>  <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">ofNucleotideString</span> 
 </code></pre></td>
 </tr>
 </table>
@@ -57,11 +58,15 @@ Analogous to the build-in collections BioFSharp provides BioSeq, BioList and Bio
 <span class="l">4: </span>
 <span class="l">5: </span>
 <span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Peptide represented as a Bioseq</span>
 <span class="s">&quot;PEPTIDE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="id">ofAminoAcidString</span> 
+
 <span class="c">///Peptide represented as a BioList</span>
 <span class="s">&quot;PEPTIDE&quot;</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="m">BioList</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="id">ofAminoAcidSymbolString</span> 
+
 <span class="c">///Nucleotide sequence represented as a BioArray</span>
 <span class="s">&quot;TAGCAT&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="id">ofNucleotideString</span> 
 </code></pre></td>
@@ -238,7 +243,8 @@ val digestedRBCS : Digestion.DigestedPeptide [] =
 <button type="button" class="btn" data-toggle="collapse" data-target="#digested">Hide again</button>  
 </div>
 <br>
-In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
+In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. 
+This can easily be done with the `concernMissCleavages` function. It takes the minimum and maximum amount of misscleavages you want to have and also the digested protein. As a result you get all possible combinations arising from this information.
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 46)" onmouseover="showTip(event, 'fs30', 46)" class="id">digestedRBCS&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="m">Digestion</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 49)" onmouseover="showTip(event, 'fs31', 49)" class="id">concernMissCleavages</span> <span class="n">0</span> <span class="n">2</span> <span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="id">digestedRBCS</span>
@@ -513,6 +519,8 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 </div>
 <br>
 <h2><a name="Nucleotides" class="anchor" href="#Nucleotides">Nucleotides</a></h2>
+<p><img src="img/Nucleotides.svg" alt="Nucleotides1" /></p>
+<p><strong>Figure 1: Selection of covered nucleotide operations</strong> (A) Bilogical principle. (B) Workflow with <code>BioSeq</code>. (C) Other covered functionalities.</p>
 <p>Let's imagine you have a given gene sequence and want to find out what the according protein might look like.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
@@ -521,7 +529,7 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 </tr>
 </table>
 <table class="pre"><tr><td><pre><code>seq [A; T; G; G; ...]</code></pre></td></tr></table>
-<p>Yikes! Unfortunately we got the 5'-3' strand. For proper transcription we should get the complementary strand first:</p>
+<p>Yikes! Unfortunately we got the 5'-3' coding strand. For proper transcription we should get the complementary strand first:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 54)" onmouseover="showTip(event, 'fs34', 54)" class="id">myProperGene</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs35', 55)" onmouseover="showTip(event, 'fs35', 55)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="id">map</span> <span onmouseout="hideTip(event, 'fs37', 57)" onmouseover="showTip(event, 'fs37', 57)" class="m">Nucleotides</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 58)" onmouseover="showTip(event, 'fs38', 58)" class="id">complement</span> <span onmouseout="hideTip(event, 'fs32', 59)" onmouseover="showTip(event, 'fs32', 59)" class="id">myGene</span>
@@ -534,17 +542,63 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 60)" onmouseover="showTip(event, 'fs39', 60)" class="id">myTranslatedGene</span> <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs34', 61)" onmouseover="showTip(event, 'fs34', 61)" class="id">myProperGene</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 62)" onmouseover="showTip(event, 'fs6', 62)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="id">transcribeTemplateStrand</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 64)" onmouseover="showTip(event, 'fs6', 64)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 65)" onmouseover="showTip(event, 'fs41', 65)" class="id">translate</span> <span class="n">0</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 66)" onmouseover="showTip(event, 'fs35', 66)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 67)" onmouseover="showTip(event, 'fs42', 67)" class="id">toList</span> 
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>Error: The type initializer for '&lt;StartupCode$BioFSharp&gt;.$Nucleotides' threw an exception.</code></pre></td></tr></table>
+<p>Of course, if your input sequence originates from the coding strand, you can directly transcribe it to mRNA since the
+only difference between the coding strand and the mRNA is the replacement of 'T' by 'U' (Figure 1B)</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 66)" onmouseover="showTip(event, 'fs42', 66)" class="id">myTranslatedGeneFromCodingStrand</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs32', 67)" onmouseover="showTip(event, 'fs32', 67)" class="id">myGene</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 68)" onmouseover="showTip(event, 'fs6', 68)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 69)" onmouseover="showTip(event, 'fs43', 69)" class="id">transcribeCodingStrand</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs6', 70)" onmouseover="showTip(event, 'fs6', 70)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 71)" onmouseover="showTip(event, 'fs41', 71)" class="id">translate</span> <span class="n">0</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>Error: The type initializer for '&lt;StartupCode$BioFSharp&gt;.$Nucleotides' threw an exception.</code></pre></td></tr></table>
+<p>Other Nucleotide conversion operations are also covered:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 72)" onmouseover="showTip(event, 'fs44', 72)" class="id">mySmallGene</span>      <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 73)" onmouseover="showTip(event, 'fs6', 73)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 74)" onmouseover="showTip(event, 'fs33', 74)" class="id">ofNucleotideString</span>  <span class="s">&quot;ATGTTCCGAT&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs45', 75)" onmouseover="showTip(event, 'fs45', 75)" class="id">smallGeneRev</span>     <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 76)" onmouseover="showTip(event, 'fs6', 76)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 77)" onmouseover="showTip(event, 'fs46', 77)" class="id">reverse</span> <span onmouseout="hideTip(event, 'fs44', 78)" onmouseover="showTip(event, 'fs44', 78)" class="id">mySmallGene</span> 
+<span class="c">//Original: ATGTTCCGAT</span>
+<span class="c">//Output:   TAGCCTTGTA</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 79)" onmouseover="showTip(event, 'fs47', 79)" class="id">smallGeneComp</span>    <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 80)" onmouseover="showTip(event, 'fs6', 80)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs48', 81)" onmouseover="showTip(event, 'fs48', 81)" class="id">complement</span> <span onmouseout="hideTip(event, 'fs44', 82)" onmouseover="showTip(event, 'fs44', 82)" class="id">mySmallGene</span>
+<span class="c">//Original: ATGTTCCGAT</span>
+<span class="c">//Output:   TACAAGGCTA</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 83)" onmouseover="showTip(event, 'fs49', 83)" class="id">smallGeneRevComp</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 84)" onmouseover="showTip(event, 'fs6', 84)" class="m">BioSeq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 85)" onmouseover="showTip(event, 'fs50', 85)" class="id">reverseComplement</span> <span onmouseout="hideTip(event, 'fs44', 86)" onmouseover="showTip(event, 'fs44', 86)" class="id">mySmallGene</span>
+<span class="c">//Original: ATGTTCCGAT</span>
+<span class="c">//Reverse:  TAGCCTTGTA</span>
+<span class="c">//Output:   ATCGGAACAT</span>
+</code></pre></td>
+</tr>
+</table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
@@ -584,10 +638,18 @@ val digestedRBCS' : Digestion.DigestedPeptide [] =
 <div class="tip" id="fs36">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;</div>
 <div class="tip" id="fs37">module Nucleotides<br /><br />from BioFSharp</div>
 <div class="tip" id="fs38">val complement : nuc:Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide</div>
-<div class="tip" id="fs39">val myTranslatedGene : AminoAcids.AminoAcid list</div>
-<div class="tip" id="fs40">val transcribeTemplateStrand : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;Nucleotides.Nucleotide&gt;</div>
-<div class="tip" id="fs41">val translate : nucleotideOffset:int -&gt; rnaSeq:seq&lt;Nucleotides.Nucleotide&gt; -&gt; seq&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs42">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list</div>
+<div class="tip" id="fs39">val myTranslatedGene : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs40">val transcribeTemplateStrand : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs41">val translate : nucleotideOffset:int -&gt; rnaSeq:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs42">val myTranslatedGeneFromCodingStrand : BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs43">val transcribeCodingStrand : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs44">val mySmallGene : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs45">val smallGeneRev : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs46">val reverse : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs47">val smallGeneComp : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs48">val complement : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs49">val smallGeneRevComp : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
+<div class="tip" id="fs50">val reverseComplement : nucs:seq&lt;Nucleotides.Nucleotide&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
 
 			</div>
 			<div class="span3" >

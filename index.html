@@ -102,16 +102,16 @@ your machine is to either clone the repository and build the binaries yourself o
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Returns the corresponding nucleotide of the anti-parallel strand</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="id">antiG</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="m">Nucleotides</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">G</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="m">Nucleotides</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">antiparallel</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="id">antiG</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="m">Nucleotides</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">G</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="m">Nucleotides</span><span class="pn">.</span><span class="id">antiparallel</span>
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>A</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Returns the monoicsotopic mass of Arginine (minus H2O)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">arginineMass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="id">Arg</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">monoisoMass</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">arginineMass</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">Arg</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="id">monoisoMass</span>
 </code></pre></td>
 </tr>
 </table>
@@ -124,19 +124,19 @@ your machine is to either clone the repository and build the binaries yourself o
 <span class="l">5: </span>
 <span class="l">6: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 21)" onmouseover="showTip(event, 'fs1', 21)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="id">IO</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 20)" onmouseover="showTip(event, 'fs1', 20)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="id">IO</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="id">filepathFastaA</span> <span class="o">=</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Chlamy_Cp.fastA&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="id">filepathFastaA</span> <span class="o">=</span> <span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/Chlamy_Cp.fastA&quot;</span><span class="pn">)</span>
 <span class="c">//reads from file to an array of FastaItems.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="id">fastaItems</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs22', 27)" onmouseover="showTip(event, 'fs22', 27)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 28)" onmouseover="showTip(event, 'fs23', 28)" class="id">ofAminoAcidString</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="id">filepathFastaA</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="id">fastaItems</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 27)" onmouseover="showTip(event, 'fs22', 27)" class="id">ofAminoAcidString</span> <span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="id">filepathFastaA</span>
 </code></pre></td>
 </tr>
 </table>
 <p>This will return a sequence of <code>FastaItem</code>s, where you can directly start working with the individual sequences represented as a <code>BioArray</code> of amino acids.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 30)" onmouseover="showTip(event, 'fs24', 30)" class="id">firstItem</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="id">fastaItems</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 32)" onmouseover="showTip(event, 'fs25', 32)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 33)" onmouseover="showTip(event, 'fs26', 33)" class="id">item</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 29)" onmouseover="showTip(event, 'fs23', 29)" class="id">firstItem</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="id">fastaItems</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 31)" onmouseover="showTip(event, 'fs24', 31)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 32)" onmouseover="showTip(event, 'fs25', 32)" class="id">item</span> <span class="n">0</span>
 </code></pre></td>
 </tr>
 </table>
@@ -160,24 +160,23 @@ redistribution for both commercial and non-commercial purposes. For more informa
 <div class="tip" id="fs6">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;AminoAcids.AminoAcid&gt;</div>
 <div class="tip" id="fs7">val nucleotideSequence : BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
 <div class="tip" id="fs8">val ofNucleotideString : s:#seq&lt;char&gt; -&gt; BioSeq.BioSeq&lt;Nucleotides.Nucleotide&gt;</div>
-<div class="tip" id="fs9">val antiG : Nucleotides.Nucleotide</div>
+<div class="tip" id="fs9">val antiG : obj</div>
 <div class="tip" id="fs10">module Nucleotides<br /><br />from BioFSharp</div>
 <div class="tip" id="fs11">union case Nucleotides.Nucleotide.G: Nucleotides.Nucleotide</div>
-<div class="tip" id="fs12">val antiparallel : nuc:Nucleotides.Nucleotide -&gt; Nucleotides.Nucleotide</div>
-<div class="tip" id="fs13">val arginineMass : float</div>
-<div class="tip" id="fs14">module AminoAcids<br /><br />from BioFSharp</div>
-<div class="tip" id="fs15">union case AminoAcids.AminoAcid.Arg: AminoAcids.AminoAcid</div>
-<div class="tip" id="fs16">val monoisoMass : aa:AminoAcids.AminoAcid -&gt; float</div>
-<div class="tip" id="fs17">namespace BioFSharp.IO</div>
-<div class="tip" id="fs18">val filepathFastaA : string</div>
-<div class="tip" id="fs19">val fastaItems : seq&lt;FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
-<div class="tip" id="fs20">module FastA<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs21">val fromFile : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filePath:string -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;</div>
-<div class="tip" id="fs22">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs23">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs24">val firstItem : FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;</div>
-<div class="tip" id="fs25">Multiple items<br />module Seq<br /><br />from FSharpAux<br /><br />--------------------<br />module Seq<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =<br />&#160;&#160;static member fromFile : filePath:string -&gt; seq&lt;string&gt;<br />&#160;&#160;static member fromFileWithCsvSchema : filePath:string * separator:char * firstLineHasHeader:bool * ?skipLines:int * ?skipLinesBeforeHeader:int * ?schemaMode:SchemaModes -&gt; seq&lt;&#39;schema&gt;<br />&#160;&#160;static member fromFileWithSep : separator:char -&gt; filePath:string -&gt; seq&lt;string []&gt;<br />&#160;&#160;static member toCSV : separator:string -&gt; header:bool -&gt; data:seq&lt;&#39;a&gt; -&gt; seq&lt;string&gt;<br />&#160;&#160;static member write : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br />&#160;&#160;static member writeOrAppend : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit</div>
-<div class="tip" id="fs26">val item : index:int -&gt; source:seq&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="tip" id="fs12">val arginineMass : float</div>
+<div class="tip" id="fs13">module AminoAcids<br /><br />from BioFSharp</div>
+<div class="tip" id="fs14">union case AminoAcids.AminoAcid.Arg: AminoAcids.AminoAcid</div>
+<div class="tip" id="fs15">val monoisoMass : aa:AminoAcids.AminoAcid -&gt; float</div>
+<div class="tip" id="fs16">namespace BioFSharp.IO</div>
+<div class="tip" id="fs17">val filepathFastaA : string</div>
+<div class="tip" id="fs18">val fastaItems : seq&lt;FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;&gt;</div>
+<div class="tip" id="fs19">module FastA<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs20">val fromFile : converter:(seq&lt;char&gt; -&gt; &#39;a) -&gt; filePath:string -&gt; seq&lt;FastA.FastaItem&lt;&#39;a&gt;&gt;</div>
+<div class="tip" id="fs21">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs22">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs23">val firstItem : FastA.FastaItem&lt;BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;&gt;</div>
+<div class="tip" id="fs24">Multiple items<br />module Seq<br /><br />from FSharpAux<br /><br />--------------------<br />module Seq<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =<br />&#160;&#160;static member fromFile : filePath:string -&gt; seq&lt;string&gt;<br />&#160;&#160;static member fromFileWithCsvSchema : filePath:string * separator:char * firstLineHasHeader:bool * ?skipLines:int * ?skipLinesBeforeHeader:int * ?schemaMode:SchemaModes -&gt; seq&lt;&#39;schema&gt;<br />&#160;&#160;static member fromFileWithSep : separator:char -&gt; filePath:string -&gt; seq&lt;string []&gt;<br />&#160;&#160;static member toCSV : separator:string -&gt; header:bool -&gt; data:seq&lt;&#39;a&gt; -&gt; seq&lt;string&gt;<br />&#160;&#160;static member write : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit<br />&#160;&#160;static member writeOrAppend : path:string -&gt; data:seq&lt;&#39;a&gt; -&gt; unit</div>
+<div class="tip" id="fs25">val item : index:int -&gt; source:seq&lt;&#39;T&gt; -&gt; &#39;T</div>
 
 			</div>
 			<div class="span3" >
