@@ -270,7 +270,7 @@ module Nucleotides =
         
         
         
-    /// Create the complement DNA or RNA strand. For example, the sequence "ATGC" is converted to "TACG"
+    /// Returns the Nucleotide from the complementary strand 
     let complement (nuc:Nucleotide) =
         match nuc with
         | A    -> T 
@@ -289,34 +289,6 @@ module Nucleotides =
         | _    -> nuc
 
         
-    /// Create the inverse DNA or RNA strand. For example, the sequence "ATGC" is converted to "CGTA"
-    let inverse (nuc:Nucleotide) =           
-        match nuc with
-        | A -> C
-        | T -> G
-        | G -> T 
-        | C -> A
-            
-        | U -> A        
-                        
-        // 'Ambiguous Nucleotide Codes: double base codes
-        | R -> W
-        | Y -> S
-        | K -> M
-        | M -> K
-        | S -> Y
-        | W -> R
-        // 'Ambiguous Nucleotide Codes: triple base codes
-        | B -> V
-        | D -> H
-        | H -> D
-        | V -> B
-        
-        | _    -> nuc
-
-    /// Create the antiparallel DNA or RNA strand. For example, the sequence "ATGC" is converted to "GCAT". "Antiparallel" combines the two functions "Complement" and "Inverse".
-    let antiparallel (nuc:Nucleotide) = 
-        inverse (complement nuc)
             
         
     /// Replace thymidine (T) by uracil (U). For example, the sequence "ATUGC" is converted to "AUUGC".

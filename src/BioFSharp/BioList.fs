@@ -43,6 +43,18 @@ module BioList =
         |> Seq.choose OptionConverter.charToOptionNucleotid           
         |> Seq.toList
 
+
+    /// Create the reverse DNA or RNA strand. For example, the sequence "ATGC" is converted to "CGTA"
+    let reverse (nucs:BioList<Nucleotides.Nucleotide>) = 
+        nucs |> List.rev
+
+    /// Create the complement DNA or cDNA (from RNA) strand. For example, the sequence "ATGC" is converted to "TACG"
+    let complement (nucs:BioList<Nucleotides.Nucleotide>) = 
+        nucs |> List.map Nucleotides.complement
+
+    /// Create the reverse complement strand meaning antiparallel DNA strand or the cDNA (from RNA) respectivly. For example, the sequence "ATGC" is converted to "GCAT". "Antiparallel" combines the two functions "Complement" and "Inverse".
+    let reverseComplement (nucs:BioList<Nucleotides.Nucleotide>) = 
+        nucs |> List.map Nucleotides.complement |> List.rev
     
 //    /// Builts a new collection whose elements are the result of applying
 //    /// the given function to each triplet of the collection. 
