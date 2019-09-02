@@ -75,13 +75,13 @@ This will not display all available information, but in return keep collections 
 <table class="pre"><tr><td><pre><code>T</code></pre></td></tr></table>
 <table class="pre"><tr><td><pre><code>Mod
   (Ala,
-   [{Name = "CO addition";
-     IsBiological = true;
-     Location = Cterm;
-     Modify = &lt;fun:createModificationWithAdd@56&gt;;}; {Name = "#N15";
-                                                     IsBiological = true;
-                                                     Location = Isotopic;
-                                                     Modify = &lt;fun:N15@89&gt;;}])</code></pre></td></tr></table>
+   [{ Name = "CO addition"
+      IsBiological = true
+      Location = Cterm
+      Modify = &lt;fun:createModificationWithAdd@56&gt; }; { Name = "#N15"
+                                                       IsBiological = true
+                                                       Location = Isotopic
+                                                       Modify = &lt;fun:N15@89&gt; }])</code></pre></td></tr></table>
 <p>Console output using <code>prettyPrintBioItem</code>:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -156,10 +156,10 @@ This will not display all available information, but in return keep collections 
   Leu; Ala; Lys; Glu; Val; Asp; Tyr; Leu; Ile; Arg; Asn; Lys; Trp; Ile; Pro; Cys;
   Val; Glu; Phe; Glu; ...|]</code></pre></td></tr></table>
 <table class="pre"><tr><td><pre><code>[|Met; Ala; Ser;
-  Mod (Ala,[{Name = "#N15";
-           IsBiological = true;
-           Location = Isotopic;
-           Modify = &lt;fun:N15@89&gt;;}]);
+  Mod (Ala,[{ Name = "#N15"
+            IsBiological = true
+            Location = Isotopic
+            Modify = &lt;fun:N15@89&gt; }]);
   Met; Leu; Ser; Ser; Ala; Thr; Met; Val; Ala; Ser; Pro; Ala; Gln; Ala; Thr; Met;
   Val; Ala; Pro; Phe; Asn; Gly; Leu; Lys; Ser; Ser; Ala; Ala; Phe; Pro; Ala; Thr;
   Arg; Lys; Ala; Asn; Asn; Asp; Ile; Thr; Ser; Ile; Thr; Ser; Asn; Gly; Gly; Arg;
@@ -245,7 +245,17 @@ This will not display all available information, but in return keep collections 
 </tr>
 </table>
 <p>Standard console output:</p>
-<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>{ MetaData = { Header = seq ['C'; 'L'; 'U'; 'S'; ...]
+               ConservationInfo = seq ['*'; ' '; '*'; '*'; ...] }
+  Sequences =
+             [{ Tag = "C_reinhardtii"
+                Sequence = seq ['M'; 'V'; 'P'; 'Q'; ...] };
+              { Tag = "N_tabacum"
+                Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...] };
+              { Tag = "A_thaliana"
+                Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...] };
+              { Tag = "O_sativa"
+                Sequence = seq ['M'; 'S'; 'P'; 'Q'; ...] }] }</code></pre></td></tr></table>
 <p>Console output using <code>prettyPrintClustal</code>:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -255,7 +265,97 @@ This will not display all available information, but in return keep collections 
 </code></pre></td>
 </tr>
 </table>
-<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"
+CLUSTAL O(1.2.4) multiple sequence alignment
+
+C_reinhardtii 
+MVPQTETKAGAGFKAGVKDYRLTYYTPDYVVRDTDILAAFRMTPQLGVPPEECGAAVAAE
+N_tabacum     
+MSPQTETKASVGFKAGVKEYKLTYYTPEYQTKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+A_thaliana    
+MSPQTETKASVGFKAGVKEYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+O_sativa      
+MSPQTETKASVGFKAGVKDYKLTYYTPEYETKDTDILAAFRVTPQPGVPPEEAGAAVAAE
+              
+* *******..*******:*:******:* .:*********:*** ******.*******
+
+C_reinhardtii 
+SSTGTWTTVWTDGLTSLDRYKGRCYDIEPVPGEDNQYIAYVAYPIDLFEEGSVTNMFTSI
+N_tabacum     
+SSTGTWTTVWTDGLTSLDRYKGRCYRIERVVGEKDQYIAYVAYPLDLFEEGSVTNMFTSI
+A_thaliana    
+SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVPGEETQFIAYVAYPLDLFEEGSVTNMFTSI
+O_sativa      
+SSTGTWTTVWTDGLTSLDRYKGRCYHIEPVVGEDNQYIAYVAYPLDLFEEGSVTNMFTSI
+              
+************************* ** * **. *:*******:***************
+
+C_reinhardtii 
+VGNVFGFKALRALRLEDLRIPPAYVKTFVGPPHGIQVERDKLNKYGRGLLGCTIKPKLGL
+N_tabacum     
+VGNVFGFKALRALRLEDLRIPPAYVKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+A_thaliana    
+VGNVFGFKALAALRLEDLRIPPAYTKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+O_sativa      
+VGNVFGFKALRALRLEDLRIPPTYSKTFQGPPHGIQVERDKLNKYGRPLLGCTIKPKLGL
+              
+********** ***********:* *** ****************** ************
+
+C_reinhardtii 
+SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFVAEAIYKAQAETGEVKGHYL
+N_tabacum     
+SAKNYGRAVYECLRGGLDFTKDDENVNSQPF-RWRDRFLFCAEALYKAQAETGEIKGHYL
+A_thaliana    
+SAKNYGRAVYECLRGGLDFTKDDENVNSQPFMRWRDRFLFCAEAIYKSQAETGEIKGHYL
+O_sativa      
+SAKNYGRACYECLRGGLDFTKDDENVNSQPFMRWRDRFVFCAEAIYKSQAETGEIKGHYL
+              
+******** ********************** ******:* ***:**:******:*****
+
+C_reinhardtii 
+NATAGTCEEMMKRAVCAKELGVPIIMHDYLTGGFTANTSLAIYCRDNGLLLHIHRAMHAV
+N_tabacum     
+NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV
+A_thaliana    
+NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLSHYCRDNGLLLHIHRAMHAV
+O_sativa      
+NATAGTCEEMIKRAVFARELGVPIVMHDYLTGGFTANTSLAHYCRDNGLLLHIHRAMHAV
+              
+**********:**** *:******:***************: ******************
+
+C_reinhardtii 
+IDRQRNHGIHFRVLAKALRMSGGDHLHSGTVVGKLEGEREVTLGFVDLMRDDYVEKDRSR
+N_tabacum     
+IDRQKNHGIHFRVLAKALRMSGGDHIHSGTVVGKLEGERDITLGFVDLLRDDFVEQDRSR
+A_thaliana    
+IDRQKNHGMHFRVLAKALRLSGGDHIHAGTVVGKLEGDRESTLGFVDLLRDDYVEKDRSR
+O_sativa      
+IDRQKNHGMHFRVLAKALRMSGGDHIHAGTVVGKLEGEREMTLGFVDLLRDDFIEKDRAR
+              
+****:***:**********:*****:*:*********:*: *******:***::*:**:*
+
+C_reinhardtii 
+GIYFTQDWCSMPGVMPVASGGIHVWHMPALVEIFGDDACLQFGGGTLGHPWGNAPGAAAN
+N_tabacum     
+GIYFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN
+A_thaliana    
+GIFFTQDWVSLPGVLPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAVAN
+O_sativa      
+GIFFTQDWVSMPGVIPVASGGIHVWHMPALTEIFGDDSVLQFGGGTLGHPWGNAPGAAAN
+              
+**:***** *:***:***************.******: ******************.**
+
+C_reinhardtii 
+RVALEACTQARNEGRDLAREGGDVIRSACKWSPELAAACEVWKEIKFEFDTIDKL----
+N_tabacum     
+RVALEACVKARNEGRDLAQEGNEIIREACKWSPELAAACEVWKEIVFNFAAVDVLDK--
+A_thaliana    
+RVALEACVQARNEGRDLAVEGNEIIREACKWSPELAAACEVWKEITFNFPTIDKLDGQE
+O_sativa      
+RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
+              
+*******.:********* **.::**.*************:** * *:*  :* *    
+"</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
