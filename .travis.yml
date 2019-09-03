@@ -14,6 +14,6 @@ script:
  - dotnet fake build --target Linux
 
 branches:
-  except:
-    - gh-pages
-    - nuget
+  only:
+  - master
+  - developer
