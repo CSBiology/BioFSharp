@@ -150,6 +150,14 @@ let website = "/BioFSharp"
 // END TODO: The rest of the file includes standard build steps
 // --------------------------------------------------------------------------------------
 
+//Target.create "InstallPaket" (fun _ ->
+//    if not (File.exists ".paket\paket.exe") then
+//        DotNet.exec id "tool" "install --tool-path \".paket\" Paket"
+//        |> ignore
+//    else
+//        printfn "paket already installed"
+//)
+
 // Read additional information from the release notes document
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 
@@ -310,8 +318,9 @@ Target.create "RunTests" (fun _ ->
 
 Target.create "NuGet" (fun _ ->
     Paket.pack(fun p ->
+
         { p with
-            ToolPath=".paket/paket.exe"
+            ToolPath="paket"
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = String.toLines release.Notes})
@@ -544,6 +553,7 @@ Target.create "All" ignore
 Target.create "Linux" ignore
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "BuildLinux"
@@ -551,6 +561,7 @@ Target.create "Linux" ignore
   ==> "Linux"
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "Build"
@@ -576,6 +587,7 @@ Target.create "Linux" ignore
   ==> "Release"
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
