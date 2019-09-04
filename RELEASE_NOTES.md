@@ -1,17 +1,29 @@
+#### 0.1.02 - Wednesday, September 04, 2019
+Several bugfixes and additions to multiple sub projects:
+ 
+ * **BioFSharp** (core):
+   * Addition of various Unit tests (see the [issue](https://github.com/CSBiology/BioFSharp/issues/30) to track what has been added since the last version)
+   * Bugfixes:
+     * [Naming clarification and bugfixes regarding reverse and reverse complements for DNA](https://github.com/CSBiology/BioFSharp/commit/27ab68f84aacd6de01a194dc5542da90a85e59d4) (fixes [#66](https://github.com/CSBiology/BioFSharp/issues/66) and [#65](https://github.com/CSBiology/BioFSharp/issues/65))
+
+ * **BioFSharp.Stats**
+   * Bugfixes
+     * [Ontology enrichment is now more conservative](https://github.com/CSBiology/BioFSharp/commit/0ed0161d8a203f38ac7171b3213eb7b386adcacf)
+
 #### 0.1.01 - Wednesday, July 31, 2019
 Several bugfixes and additions to multiple sub projects:
 	
-	* **BioFSharp** (core):
-		* Add Unit testing for modules:
-			Formula
-			Mass
-			BioArray
-		* Changed functionality:
-		  * Formula.substract now also returns negative atom counts
+ * **BioFSharp** (core):
+	* Add Unit testing for modules:
+		Formula
+		Mass
+		BioArray
+	* Changed functionality:
+		 * Formula.substract now also returns negative atom counts
 		  
-	* **BioFSharp.ML**:
-		* Additional functionality:
-		  * add thin CNTK API
+ * **BioFSharp.ML**:
+	* Additional functionality:
+     	* add thin CNTK API
 
 #### 0.1.0 - Thursday, May 30, 2019
 Several bugfixes and additions to multiple sub projects:
