@@ -1,5 +1,5 @@
 ﻿#r "netstandard"
-#r "../../packages/Newtonsoft.Json.10.0.3/lib/netstandard1.3/Newtonsoft.Json.dll"
+#r "../../packages/Newtonsoft.Json.11.0.2/lib/netstandard2.0/Newtonsoft.Json.dll"
 #r "../../packages/System.Buffers/lib/netstandard2.0/System.Buffers.dll"
 #r "../../packages/Docker.DotNet/lib/netstandard2.0/Docker.DotNet.dll"
 
@@ -16,6 +16,7 @@
 #load "Blast.fs"
 #load "ClustalO.fs"
 #load "HMMER.fs"
+#load "LastAlign.fs"
 
 open System.Threading
 open System.Threading
@@ -493,3 +494,43 @@ let hmmbuildParamz =
     ]
 
 runHMMbuild hmmerContext hmmbuildParamz
+
+
+
+let imageLastAlign = Docker.ImageName "last-align"
+
+let lastAlignContext = 
+    BioContainer.initBcContextWithMountAsync client imageLastAlign @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes"
+    |> Async.RunSynchronously
+
+
+open LastAlign
+
+let lastDBParameters =
+    [
+        LastDBParams.Input
+            (InputOptions.Single @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GCF_000091205.1_ASM9120v1_genomic.fna")
+        LastDBParams.OutputName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\CyanidioschyzonDB"
+
+    ]
+
+runLastDBAsync lastAlignContext lastDBParameters
+|> Async.RunSynchronously
+
+BioContainer.disposeAsync lastAlignContext |> Async.RunSynchronously
+
+let alignParams = 
+    [
+        LastAlignParameters.DBName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GaldieriaDB"
+        LastAlignParameters.Query
+            (QueryOptions.SingleFastaFile @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GCF_000091205.1_ASM9120v1_genomic.fna")
+        LastAlignParameters.OutputFileName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf"
+        LastAlignParameters.Verbose
+    ]
+
+runLastAlignAsync lastAlignContext alignParams
+|> Async.RunSynchronously
+|> fun x -> File.WriteAllLines(@"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf",x.Split([|"\r\n";"\r";"\n"|],StringSplitOptions.None))

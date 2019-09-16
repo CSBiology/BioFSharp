@@ -25,9 +25,10 @@
     <Compile Include="Hera.fs" />
     <Compile Include="HMMER.fs" />
     <Compile Include="IntaRNA.fs" />
+    <Compile Include="LastAlign.fs" />
+    <Compile Include="MoFF.fs" />
     <Compile Include="TargetP.fs" />
     <Compile Include="Tmhmm.fs" />
-    <Compile Include="MoFF.fs" />
     <None Include="BioFSharp.BioTools.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
