@@ -5,7 +5,7 @@ module SOFT =
     open System.Collections.Generic
     open FSharpAux.IO
 
-    //TODO : Full parsing, get rid of the "not interesting" cases and just parse everything
+    //TODO : Full parsing, get rid of the "not interesting" cases and just parse everything. Remodel parser to return these types instead of string maps and such.
 
     type SOFTSeriesSpecifications =
     ///Provide an identifier for this entity. This identifier is used only as an internal reference within a given file. The identifier will not appear on final GEO records.
@@ -118,16 +118,15 @@ module SOFT =
 
     let private createPlatformInfos acc name org = {Accession = acc; Name = name; Organism= org}
 
-    ///Type representation of SOFT `^SAMPLE` Entities
     type SampleInfos = {
-        Accession       : string
-        Title           : string
-        Channels        : int
-        Organism        : Map<string,string list>
-        Source          : Map<string,string list>
-        Characteristics : Map<string,string list>
-        Molecules       : Map<string,string list>
-        SRAAccession    : string
+        Accession: string
+        Title : string
+        Channels: int
+        Organism: Map<string,string list>
+        Source:Map<string,string list>
+        Characteristics: Map<string,string list>
+        Molecules: Map<string,string list>
+        SRAAccession: string
     }
 
     let private createSampleInfos acc t ch org src char mol sra = 
@@ -142,31 +141,32 @@ module SOFT =
             SRAAccession    = sra
         }
 
-    ///Type Representation of SOFT `^Series` Entities
     type SeriesInfos = {
-        Accession       : string
-        Title           : string
-        Design          : string
-        Type            : string list
-        Date            : string
-        Publications    : string list
-        Platform        : Map<string,PlatformInfos>
-        Samples         : Map<string,SampleInfos>
+        Accession : string
+        Title: string
+        Design: string
+        Type : string list
+        SampleIds: string list
+        Date: string
+        Publications: string list
+        Platform : Map<string,PlatformInfos>
+        SampleAnnotations: Map<string,SampleInfos>
     }
 
-    let private createSeriesInfo acc t des typ d pub pI sI =
+    let private createSeriesInfo acc t des typ sIds d pub pI sI =
         {
             Accession = acc
             Title = t
             Design = des
             Type = typ
+            SampleIds = sIds
             Date = d
             Publications = pub
             Platform = pI
-            Samples = sI
+            SampleAnnotations = sI
         }
 
-    type private SOFTToken =
+    type SOFTToken =
     |Entity of (string * string)
     |Attribute of (string * string)
     |DataTable
@@ -212,7 +212,7 @@ module SOFT =
                                                             | a when a.Contains("!Sample_molecule_ch")          -> loop nextToken acc t ch org src char ((a,v)::mol) sra
                                                             | "!Sample_relation" when (v.Contains("SRA"))       -> loop nextToken acc t ch org src char mol (if v.Contains("SRA") then v else sra)
                                                             | _                                                 -> loop nextToken acc t ch org src char mol sra
-                                
+                            
                 //return finished sample when new entity starts
                 |Attribute (a,v),Entity (e,ev) ->   match a with
                                                     | "!Sample_title"                                   -> nextToken,acc,(createSampleInfos acc v ch (Map.ofList (reduceMaps org)) (Map.ofList (reduceMaps src)) (Map.ofList (reduceMaps char)) (Map.ofList (reduceMaps mol)) sra)
@@ -229,7 +229,7 @@ module SOFT =
                 token,acc,(createSampleInfos acc t ch (Map.ofList (reduceMaps org)) (Map.ofList (reduceMaps src)) (Map.ofList (reduceMaps char)) (Map.ofList (reduceMaps mol)) sra)
         loop token accession "" -1 [] [] [] [] ""
 
-    let rec private parsePlatformInfos (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
+    let private parsePlatformInfos (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
         let rec loop (token:SOFTToken) acc name org = 
             if en.MoveNext() then
                 let nextToken = en.Current
@@ -243,7 +243,7 @@ module SOFT =
                 | Attribute (a,v),Entity (e,ev) ->  match a with   
                                                     | "!Platform_title" -> token,acc,createPlatformInfos acc v org
                                                     | "!Platform_organism" -> token,acc,createPlatformInfos acc name org
-                                                    | _ -> token,acc,createPlatformInfos acc name org
+                                                    | _ -> nextToken,acc,createPlatformInfos acc name org
                 //not interesting
                 | _ -> loop nextToken acc name org
             else 
@@ -252,38 +252,88 @@ module SOFT =
 
     let private parseSOFT (soft: seq<SOFTToken>) =
         let en = soft.GetEnumerator()
-        let rec loop (token: SOFTToken) (seriesAccession: string) (seriesTitle: string) (seriesDesign: string) (seriesType:string list) (date: string) (publications: string list) (samples: (string*SampleInfos) list) (platform: (string*PlatformInfos) list) = 
-            if en.MoveNext() then
-                let nextToken = en.Current
-                match nextToken with
-                |Entity (e,v) -> 
-                    match e with
-                    //gather Series Info
-                    | "^SERIES"     ->  loop nextToken (v) seriesTitle seriesDesign seriesType date publications samples platform
-                    //call sample parser
-                    | "^SAMPLE"     ->  let token', smplAcc, smpl = parseSample token en v
-                                        loop (token') seriesAccession seriesTitle seriesDesign seriesType date publications ((smplAcc,smpl)::samples) platform
-                    //call platform parser
-                    | "^PLATFORM"   ->  let token', pltfrmlAcc, pltfrm = parsePlatformInfos token en v
-                                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType date publications samples ((pltfrmlAcc,pltfrm)::platform)
-                    //ignore unexpected/uninteresting entities
-                    | _             ->  loop nextToken seriesAccession seriesTitle seriesDesign seriesType date publications samples platform
-                //Attributes are only found here when on series level or uninteresting
-                |Attribute (a,v) -> match a with
-                                    | "!Series_title"                           -> loop nextToken seriesAccession (v) seriesDesign seriesType date publications samples platform
-                                    | "!Series_submission_date"                 -> loop nextToken seriesAccession seriesTitle seriesDesign seriesType (v) publications samples platform
-                                    | "!Series_pubmed_id" | "!Series_web_link"  -> loop nextToken seriesAccession seriesTitle seriesDesign seriesType date ((sprintf "%s = %s" a v)::publications) samples platform
-                                    | "!Series_overall_design"                  -> loop nextToken seriesAccession seriesTitle v seriesType date publications samples platform
-                                    | "!Series_type"                            -> loop nextToken seriesAccession seriesTitle seriesDesign (v::seriesType) date publications samples platform
-                                    //attributes of uninteresting entities
-                                    | _ -> loop nextToken seriesAccession seriesTitle seriesDesign seriesType date publications samples platform
-                //not interesting
-                |_ -> loop nextToken seriesAccession seriesTitle seriesDesign seriesType date publications samples platform
 
-            else 
-                createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType date publications (Map.ofList platform) ( Map.ofList samples)
+        let rec loop (token: SOFTToken) (seriesAccession: string) (seriesTitle: string) (seriesDesign: string) (seriesType:string list) (seriesSamples:string list) (date: string) (publications: string list) (samples: (string*SampleInfos) list) (platform: (string*PlatformInfos) list) = 
+
+            match token with
+            |Entity (e,v) -> 
+                match e with
+                //gather Series Info
+                | "^SERIES"     ->  
+                    if en.MoveNext() then
+                        let nextToken = en.Current
+                        loop nextToken (v) seriesTitle seriesDesign seriesType seriesSamples date publications samples platform
+                    else 
+                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                //call sample parser
+                | "^SAMPLE"     ->  //printfn "SAMPLE??? %s" v
+                                    let token', smplAcc, smpl = parseSample token en v
+                                    loop (token') seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications ((smplAcc,smpl)::samples) platform
+                //call platform parser
+                | "^PLATFORM"   ->  let token', pltfrmlAcc, pltfrm = parsePlatformInfos token en v
+                                    loop (token') seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications samples ((pltfrmlAcc,pltfrm)::platform)
+                //ignore unexpected/uninteresting entities
+                | _             ->  
+                    if en.MoveNext() then
+                        let nextToken = en.Current
+                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications samples platform
+                    else 
+                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+            //Attributes are only found here when on series level or uninteresting
+            |Attribute (a,v) -> match a with
+                                | "!Series_title"                           -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession (v) seriesDesign seriesType seriesSamples date publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                | "!Series_submission_date"                 -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType seriesSamples (v) publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                | "!Series_pubmed_id" | "!Series_web_link"  -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType seriesSamples date ((sprintf "%s = %s" a v)::publications) samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                | "!Series_overall_design"                  -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle v seriesType seriesSamples date publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                | "!Series_type"                            -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle seriesDesign (v::seriesType) seriesSamples date publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                | "!Series_sample_id"                       -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType (v::seriesSamples) date  publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+                                //attributes of uninteresting entities
+                                | _ -> 
+                                    if en.MoveNext() then
+                                        let nextToken = en.Current
+                                        loop nextToken seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications samples platform
+                                    else 
+                                        createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+            //not interesting
+            |_ -> 
+                if en.MoveNext() then
+                    let nextToken = en.Current
+                    loop nextToken seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications samples platform
+                else 
+                    createSeriesInfo seriesAccession seriesTitle seriesDesign seriesType seriesSamples date publications (Map.ofList platform) ( Map.ofList samples)
+
         if en.MoveNext() then
-            loop en.Current "" "" "" [] "" [] [] []
+            loop en.Current "" "" "" [] [] "" [] [] []
         else failwith "empty input"
 
     ///Read SOFT SeriesInfo from a SOFT series file
