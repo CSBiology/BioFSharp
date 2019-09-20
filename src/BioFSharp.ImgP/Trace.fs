@@ -80,6 +80,8 @@ module Ricker =
 
             
 module Trace =
+
+    [<Obsolete("Do not use anymore. Switch to getCorrelationAtCoor instead.")>]
     let inline cwtDataOfCoor (marr: Marr.MarrWavelet) y x (paddedData:seq<'a[,]>)=
         ///calculates the wavelet transformation at position 'x,y' with MarrWavelet 'marr' 
         let C3DWTatPositionAndFrame (marr: Marr.MarrWavelet) (paddedframe:'a[,]) y x = 
@@ -89,13 +91,33 @@ module Trace =
             for a = 0 to 2*offset do
                 for b = 0 to 2*offset do
                     acc <- ((marr.Values).[a,b] * ((paddedframe).[((x+offsetpadding)+(a-offset)),((y+offsetpadding)+(b-offset))] |> float) )::acc
-            acc |> List.fold (fun acc x -> acc + x) 0. //CONSTANT ENERGY times 1/(sqrt |scale|)
+            acc 
+            |> List.sum 
+            |> fun x -> x / (sqrt (Math.Abs marr.Scale)) //CONSTANT ENERGY times 1/(sqrt |scale|)
         let result =
             [|0..(Seq.length paddedData) - 1|]       
             |> Array.map (fun fr -> 
                 C3DWTatPositionAndFrame marr (paddedData |> Seq.item fr) y x)
         result
+    
+    ///calculates the correlations value at a specified coordinate
+    let inline getCorrelationAtCoor borderpadding (marr: Marr.MarrWavelet) y x (paddedData:seq<'a[,]>)=
+        ///calculates the wavelet transformation at position 'x,y' with MarrWavelet 'marr' 
+        let C3DWTatPositionAndFrame (paddedframe:'a[,]) y x = 
+            let offset = marr.PadAreaRadius
+            Array2D.init (2*offset) (2*offset) (fun a b -> 
+                let waveletvalue = (marr.Values).[a,b] 
+                let datavalue = float paddedframe.[((x+borderpadding)+(a-offset)),((y+borderpadding)+(b-offset))]
+                waveletvalue * datavalue)
+            |> Array2D.toLongColumnArray 
+            |> Array.sum
+            |> fun x -> x / (sqrt (Math.Abs marr.Scale))
+           
+        let result =
+            Array.init (Seq.length paddedData) (fun fr -> C3DWTatPositionAndFrame (paddedData |> Seq.item fr) y x)
+        result
 
+    [<Obsolete("Do not use anymore. Switch to getTraceOfBestCorrelation instead.")>]
     let inline findTraceOfBestCoor marrList (paddedData:seq<'a[,]>) (coor:float*float) =
         let yCoor = (fst coor) |> Core.Operators.round |> int
         let xCoor = (snd coor) |> Core.Operators.round |> int 
@@ -105,7 +127,6 @@ module Trace =
             |> List.map (fun x -> 
                 let corrcoeff = cwtDataOfCoor x yCoor xCoor paddedData
                 corrcoeff)
-
         //searches for the index of the wavelet in marrList with the highest score (representing the best matching waveletfunction).
         let indexOfBestScale = 
             let foldedIntensities=
@@ -123,16 +144,40 @@ module Trace =
         let radius = (marrList.[indexOfBestScale]).Zero 
         (radius,trace)
 
+    ///calculates the correlation values of a specified coordinate with given wavelets and returns the trace of highest correlation
+    let inline getTraceOfBestCorrelation borderpadding marrList (paddedData:seq<'a[,]>) (coor:float*float) =
+        let yCoor = (fst coor) |> round 0 |> int
+        let xCoor = (snd coor) |> round 0 |> int 
+        //calculates the summed correlation values of each wavelet transformed trace
+        let intensityList = 
+            marrList  
+            |> List.map (fun x -> 
+                getCorrelationAtCoor borderpadding x yCoor xCoor paddedData
+                |> Array.sum)
+        //gives the index of the best matching waveletfunction based on summed correlation values for each wavelet
+        let indexOfBestScale = 
+            intensityList 
+            |> List.indexed
+            |> List.maxBy snd
+            |> fst
+        //trace of highest correlation (best matching waveletfunction at this position)
+        let trace = intensityList.[indexOfBestScale]
+        //radius of the best matching waveletfunction at this position
+        let radius = (marrList.[indexOfBestScale]).Zero 
+        (radius,trace)
+
+    [<Obsolete("Do not use anymore. Use FSharp.Stats.Signal.Padding.Discrete.padRnd with borderpadding=20,000 instead.")>]
+    ///padds the trace with 20k data points randomly selected for 
     let paddTrace (cwtTrace:float[])= 
         let rnd = System.Random() 
         let padding = 20000  //number of zeros the data is padded with
-        let listRnd = Array.map (fun x -> cwtTrace.[rnd.Next(0,cwtTrace.Length-1)]|> float ) [|0..padding-1|]
+        let listRnd = Array.init padding (fun _ -> cwtTrace.[rnd.Next(0,cwtTrace.Length-1)]|> float )
         let paddedCWT3Dtrace = Array.append (Array.append listRnd cwtTrace) listRnd
         paddedCWT3Dtrace
 
-    ///computes the continious wavelet transform of the padded trace with wavelet type Ricker.
-    let cWT1D (paddedTrace: float []) (myRicker: Ricker.myRicker)=
-        let padding =  20000
+    ///computes the continuous wavelet transform of the padded trace with wavelet type myRicker.
+    let transform2D borderpadding (myRicker: Ricker.myRicker) (paddedTrace: float []) =
+        let padding =  borderpadding
         let myRickerOffsetRise = (6. * myRicker.ScaleRise) |> ceil |> int 
         let myRickerOffset = myRicker.PadArea
         let arr = Array.zeroCreate (paddedTrace.Length - (2 * padding))
@@ -144,12 +189,14 @@ module Trace =
                 else (arr.[i-padding] <- (acc2 / Math.Sqrt(myRicker.ScaleDecay))) //corrects for admissibility (see Polikar wavelet tutorial)
             loop 0. (- myRickerOffsetRise) 
         arr
-
-
     
-    let findLocalMaxima2D paddedTrace ricker neighbourPoints = 
+    [<Obsolete("Do not use anymore. Use transform2D instead.")>]
+    let cWT1D (paddedTrace: float []) (myRicker: Ricker.myRicker) = transform2D 20000 myRicker paddedTrace
+
+    ///calculates the positions of maxima with given neighbourPoints and returns a maximaArray and the wavelet transformed trace
+    let isolateLocalMaxima borderpadding paddedTrace ricker neighbourPoints = 
         let (cWTArray: float []) = 
-            cWT1D paddedTrace ricker 
+            transform2D borderpadding ricker paddedTrace  
         let arrayOfMaxima = Array.zeroCreate (Array.length cWTArray)
         ///gets coordinates of pixel and number of pixel in surrounding and gives bool, if coor has highest value
         let checkListsForContinuousDecline pointindex =      
@@ -171,8 +218,7 @@ module Trace =
             //checks order of each direction (left/right)
             let boolList = surroundingList |> List.map  (fun x -> isSortedAsc x)
             //if any list is not sorted -> false
-            not (boolList |> List.contains false)
-
+            not (List.exists (fun x -> x = false) boolList)
         //calculates decline for every point
         for i=neighbourPoints to (cWTArray.Length)-(neighbourPoints+1) do
             if checkListsForContinuousDecline i  = true  
@@ -180,19 +226,22 @@ module Trace =
             else arrayOfMaxima.[i] <- 0.
         arrayOfMaxima,cWTArray
     
-    ///gives maximaarray (checked with x neigbours) * CWT trace of maximal correlation
-    let collectMaxima rickerarray neighbourPoints (paddedTrace:float[]) = 
-        let numberOfFrames = paddedTrace.Length - (2 * 3000)
+    [<Obsolete("Do not use anymore. Use isolateLocalMaxima instead.")>]
+    let findLocalMaxima2D = isolateLocalMaxima
+
+    ///takes a collection of wavelets and a padded trace and computes a merged trace, where maxima of each trace are merged
+    let collectMaxima rickerarray neighbourPoints borderpadding (paddedTrace:float[]) = 
+        let numberOfFrames = paddedTrace.Length - (2 * borderpadding)
         let arr = Array.zeroCreate numberOfFrames
         let arrCurve = Array.zeroCreate numberOfFrames
         let maximaArray =
             rickerarray
-            |> Array.map (fun x ->  fst (findLocalMaxima2D paddedTrace x neighbourPoints))
+            |> Array.map (fun x ->  fst (isolateLocalMaxima borderpadding paddedTrace x neighbourPoints))
             |> fun x -> x |> JaggedArray.transpose
             |> Array.map (fun x -> x |> Array.max)
         let curveArray =
             rickerarray
-            |> Array.map (fun x ->  snd (findLocalMaxima2D paddedTrace x neighbourPoints))
+            |> Array.map (fun x ->  snd (isolateLocalMaxima borderpadding paddedTrace x neighbourPoints))
             |> fun x -> x |> JaggedArray.transpose
             |> Array.map (fun x -> x |> Array.max)
 
@@ -239,9 +288,9 @@ module Trace =
 
 
     /// gets finalcentroidlist and cellnumber and fits the fitting with threshold to trace. With numberOfSurroundingIntensities you can set the area in which a maxima has to be the highest point
-    let fittingCaSignalToMaxima rickerarray threshold numberOfSurroundingIntensities rise (paddedTrace:float[]) = 
-        let numberOfFrames = paddedTrace.Length - (2 * 3000)
-        let (maximaarray,cWTCurve) = collectMaxima rickerarray numberOfSurroundingIntensities paddedTrace
+    let fittingCaSignalToMaxima rickerarray threshold borderpadding numberOfSurroundingIntensities rise (paddedTrace:float[]) = 
+        let numberOfFrames = paddedTrace.Length - (2 * borderpadding)
+        let (maximaarray,cWTCurve) = collectMaxima rickerarray numberOfSurroundingIntensities borderpadding paddedTrace
 
         let fittedList =
             [|(int rise)..numberOfFrames-1|]
