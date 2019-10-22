@@ -1,4 +1,4 @@
-﻿namespace BioFSharp.BioTools
+﻿namespace BioFSharp.BioContainers
 
 // adapted from the hmmer usage guide at http://eddylab.org/software/hmmer/Userguide.pdf
 // HMMER: biosequence analysis using profile hidden Markov models (http://hmmer.org/)

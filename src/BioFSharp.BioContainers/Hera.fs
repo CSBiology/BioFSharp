@@ -1,4 +1,4 @@
-namespace BioFSharp.BioTools
+namespace BioFSharp.BioContainers
 
 module Hera =
     open FSharpAux

@@ -1,7 +1,7 @@
 type project
-id BioFSharp.BioTools
+id BioFSharp.BioContainers
 title
-    BioFSharp.BioTools
+    BioFSharp.BioContainers
 owners
     Timo Mühlhaus
 authors 
@@ -27,4 +27,4 @@ description
 include-referenced-projects 
     true
 files
-    ../../bin/BioFSharp.BioTools ==> lib
+    ../../bin/BioFSharp.BioContainers ==> lib
