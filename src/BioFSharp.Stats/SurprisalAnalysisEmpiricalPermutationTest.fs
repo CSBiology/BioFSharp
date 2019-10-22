@@ -27,13 +27,17 @@ module Sailent =
 
     let private createSailentResult raw abs pos neg iter = {RawData=raw; AbsoluteDescriptor=abs; PositiveDescriptor=pos; NegativeDescriptor=neg; BootstrapIterations=iter}
 
-    let getDistinctGroups (cons:OntologyItem<float> array) =
+    let private getDistinctGroups (cons:OntologyItem<float> array) =
         [for ann in cons do yield ann.OntologyTerm]
         |> List.distinct
-    
+
     //create distribution of iter weight sums for a bin of size binSize 
-    let private bootstrapBin (binSize: int) (weightArray:float[]) (iter: int) =
+    let private bootstrapBin (verbose:bool) (binSize: int) (weightArray:float[]) (iter: int) =
+        let steps = iter / 10
+        let startTime = System.DateTime.Now
         let rec loop currentIter resultList =
+            if verbose && (currentIter % steps = 0) then
+                printfn "[%i/%i] iterations @%i min" (System.DateTime.Now.Subtract(startTime).Minutes) currentIter iter
             if currentIter < iter then
                 let tmp = Array.shuffleFisherYates weightArray
                 loop (currentIter+1) ((Array.sum (tmp.[0..binSize-1]))::resultList)
@@ -67,7 +71,10 @@ module Sailent =
         |> List.map (fun (name,binSize,weightSum) -> createSailentCharacterization name (getEmpiricalPvalue testDistributions weightSum binSize) binSize weightSum)
     
     ///utility function to prepare a dataset column for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module. 
-    let prepareDataColumn (ontologyMap:Map<string,(string*string)list>) (identifiers: string []) (rawData:float []) =
+    ///
+    ///identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map. 
+    ///rawData: feature array of interest, must be same length as annotations.
+    let prepareDataColumn (ontologyMap:Map<string,(string*string) [] >) (identifiers: string []) (rawData:float []) =
 
         if rawData.Length <> identifiers.Length then
             failwithf "data column and identifiers dont have the same length (%i vs %i)" rawData.Length identifiers.Length
@@ -75,7 +82,7 @@ module Sailent =
             let annotatedIds =
                 identifiers
                 |> Array.map (fun id -> match Map.tryFind id ontologyMap with
-                                        |Some ann -> ann |> List.map snd |> Array.ofSeq
+                                        |Some ann -> ann |> Array.map snd |> Array.ofSeq
                                         |_ -> [|"35.2"|]
                                         )
             rawData
@@ -86,11 +93,29 @@ module Sailent =
             |> Array.map (fun (identifier,annotation,indx,value) -> createOntologyItem identifier annotation indx value)
 
     ///utility function to prepare a dataset (in column major form) for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module.
-    let prepareDataset (ontologyMap:Map<string,(string*string)list>) (identifiers: string []) (rawDataset:float [] []) =
+    ///identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map. 
+    ///rawData: feature matrix of interest, columns must have same length as identifiers
+    let prepareDataset (ontologyMap:Map<string,(string*string) [] >) (identifiers: string []) (rawDataset:float [] []) =
         rawDataset
         |> Array.map (prepareDataColumn ontologyMap identifiers)
 
-    let compute (bootstrapIterations:int) (data: OntologyItem<float> array) =
+    ///Compute SAILENT (Surprisal AnalysIs EmpiricaL pErmutatioN Test) for the given annotated dataset. This empirical test was
+    ///initially designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution 
+    ///of the same size given the whole dataset, but it should be applicable to similar types of datasets.
+    ///
+    ///Input: 
+    ///
+    ///- verbose: if true, bootstrap iterations and runtime for bootstrapping is printed
+    ///
+    ///- bootstrapIterations: the amount of distributions to sample from the whole dataset to create test distributions for each binsize present in the data
+    ///
+    ///- data: annotated dataset (containing ontology items with the associated feature)
+    ///
+    ///a SAILENT test returns 3 descriptors for the input data:
+    ///Absolute descriptor: test distributions and tests are performed on the absolute values of the dataset
+    ///Negative descriptor: test distributions and tests are performed on the negative values of the dataset only
+    ///Absolute descriptor: test distributions and tests are performed on the positive values of the dataset only
+    let compute (verbose:bool) (bootstrapIterations:int) (data: OntologyItem<float> array) =
 
         printfn "starting SAILENT characterization"
 
@@ -133,7 +158,7 @@ module Sailent =
         let absoluteTestDistributions =
             [|  
                 for binSize in absoluteBinsizes do
-                let tmp = bootstrapBin binSize weightArr bootstrapIterations
+                let tmp = bootstrapBin verbose binSize weightArr bootstrapIterations
                 yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
             |]
             |> Map.ofArray
@@ -142,7 +167,7 @@ module Sailent =
         let positiveTestDistributions =
             [|  
                 for binSize in positiveBinsizes do
-                let tmp = bootstrapBin binSize posWeightArr bootstrapIterations
+                let tmp = bootstrapBin verbose binSize posWeightArr bootstrapIterations
                 yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
             |]
             |> Map.ofArray
@@ -151,7 +176,7 @@ module Sailent =
         let negativeTestDistributions = 
             [|  
                 for binSize in negativeBinsizes do
-                let tmp = bootstrapBin binSize negWeightArr bootstrapIterations
+                let tmp = bootstrapBin verbose binSize negWeightArr bootstrapIterations
                 yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
             |]
             |> Map.ofArray
@@ -162,3 +187,38 @@ module Sailent =
         let negResults = assignPValues negativeTestDistributions negativeTestTargets
 
         createSailentResult data absResults posResults negResults bootstrapIterations
+
+
+    ///Compute SAILENT (Surprisal AnalysIs EmpiricaL pErmutatioN Test) for the given Surprisal Analysis result. This empirical test was
+    ///is designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution 
+    ///of the same size given the whole dataset.
+    ///
+    ///Input: 
+    ///
+    ///- verbose: if true, bootstrap iterations and runtime for bootstrapping is printed
+    ///
+    ///- ontologyMap: maps identifiers of the data to ontology annotations (can be created using the BioFSharp.BioDB module)
+    ///
+    ///- identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map. 
+    ///
+    ///- bootstrapIterations: the amount of distributions to sample from the whole dataset to create test distributions for each binsize present in the data
+    ///
+    ///- saRes: the Surprisal Analysis Result to test
+    ///
+    ///a SAILENT test returns 3 descriptors for each constraint of the Surprisal Nalysis result:
+    ///Absolute descriptor: test distributions and tests are performed on the absolute values of the dataset
+    ///Negative descriptor: test distributions and tests are performed on the negative values of the dataset only
+    ///Absolute descriptor: test distributions and tests are performed on the positive values of the dataset only
+
+    let computeOfSARes (verbose:bool) (ontologyMap:Map<string,(string*string) [] >) (identifiers: string []) (bootstrapIterations:int) (saRes:FSharp.Stats.ML.SurprisalAnalysis.SAResult) =
+        saRes.MolecularPhenotypes
+        |> Matrix.toJaggedArray
+        // Matrices are sadly row major =(
+        |> JaggedArray.transpose
+        |> prepareDataset ontologyMap identifiers
+        |> Array.mapi 
+            (fun i p ->
+                printfn "Sailent of constraint %i" i
+                compute verbose bootstrapIterations p
+            ) 
+    
