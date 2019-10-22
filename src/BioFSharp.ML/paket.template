@@ -5,7 +5,7 @@ title
 owners
     Timo Mühlhaus
 authors 
-    Timo Mühlhaus
+    Timo Mühlhaus, Kevin Schneider
 projectUrl
     https://github.com/CSBiology/BioFSharp
 iconUrl
@@ -21,9 +21,9 @@ copyright
 tags
     bioinformatics F# fsharp maschine learning
 summary
-    Lighweight F# wrapper for ML.NET
+    Machinelearning with BioFSharp
 description
-    Lighweight F# wrapper for ML.NET
+    Machinelearning with BioFSharp, containing a lighweight F# wrapper for CNTK and some pretrained models
 include-referenced-projects 
     true
 files

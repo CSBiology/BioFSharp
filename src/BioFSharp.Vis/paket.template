@@ -19,11 +19,11 @@ language
 copyright
     Copyright 2019
 tags
-    bioinformatics F# fsharp image-processing
+    bioinformatics F# fsharp visualization
 summary
-    Image processing tools using continuous wavelet transformations
+    Data visualization for bioinformatic purposes
 description
-    Image processing tools using continuous wavelet transformations
+    Data visualization for bioinformatic purposes, containing for instance Venn and Chord diagramms
 include-referenced-projects 
     true
 files
