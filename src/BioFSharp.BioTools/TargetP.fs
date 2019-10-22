@@ -14,7 +14,7 @@ module TargetP =
     open FSharpAux.IO
     open FSharpAux.IO.SchemaReader.Attribute
  
-    let ImageTagetP = Docker.DockerId.ImageId "targetp"
+    let ImageTargetP = Docker.DockerId.ImageId "targetp"
 
     type TargetpCustomParams =
         | CleavagePredictions
