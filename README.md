@@ -1,12 +1,21 @@
-BioFSharp
-=========
 
-An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
+![Data model](docsrc/files/img/Logo_large.png)
+
+
+
+
+BioFSharp is an open source bioinformatics and computational biology toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
+
+[![Gitter](https://badges.gitter.im/CSBiology/BioFSharp.svg)](https://gitter.im/CSBiology/BioFSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+
 
 |Branch|Ubuntu(trusty)|Windows|
 |---|---|---|
 | master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
 | developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
+
+
 
 Core functionality
 ------------------
@@ -16,6 +25,8 @@ In its core namespace, BioFSharp contains the basic data structures for common b
 ![Data model](https://i.imgur.com/LXBvhmi.png)
 
 Additionally, core algorithms for biological sequences such as alignments and pattern matching algorithms are implemented.
+
+Besides the core functionality, BioFSharp has several namespaces as sub-projects with different scopes. These are:
 
 IO functionality
 ----------------
@@ -27,10 +38,12 @@ BioDB functionality
 
 The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our workgroup for querying functional annotations of proteins.
 
-BioTools functionality
+BioContainers functionality
 ----------------------
 
-The BioTools namespace is all about making common bioinformatics tools programmatically accessible from F#. This is realized by making the containerized tool accessible via the Docker daemon.
+The BioContainers namespace is our newest BioFSharp project and we are very excited about it! It is all about making common bioinformatics tools programmatically accessible from F#. 
+This is realized by making the containerized tool accessible via the Docker daemon. We wrap some functionality from
+[Docker.DotNet](https://github.com/microsoft/Docker.DotNet) to communicate with the docker API while providing extensive, type safe bindings for already 9 tools, including Blast, ClustalO, and TMHMM
 
 ML functionality
 ----------------
