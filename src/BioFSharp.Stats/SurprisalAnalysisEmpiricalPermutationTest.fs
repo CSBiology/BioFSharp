@@ -35,14 +35,22 @@ module Sailent =
     let private bootstrapBin (verbose:bool) (binSize: int) (weightArray:float[]) (iter: int) =
         let steps = iter / 10
         let startTime = System.DateTime.Now
+
+        let rec sumRandomEntriesBy k sum =
+            if k < binSize then
+                sumRandomEntriesBy (k+1) (sum + (weightArray.[Random.rndgen.NextInt(weightArray.Length - 1)]))
+            else 
+                sum
+
         let rec loop currentIter resultList =
             if verbose && (currentIter % steps = 0) then
-                printfn "[%i/%i] iterations @%i min" (System.DateTime.Now.Subtract(startTime).Minutes) currentIter iter
+                printfn "[%i/%i] iterations @%i min" currentIter iter (System.DateTime.Now.Subtract(startTime).Minutes)
             if currentIter < iter then
-                let tmp = Array.shuffleFisherYates weightArray
-                loop (currentIter+1) ((Array.sum (tmp.[0..binSize-1]))::resultList)
+                let tmp = sumRandomEntriesBy 0 0.
+                loop (currentIter+1) (tmp::resultList)
             else
                 resultList |> Array.ofList
+
         loop 1 []
 
     let private getBins (term:string) (cons:OntologyItem<float> array) =
@@ -220,5 +228,20 @@ module Sailent =
             (fun i p ->
                 printfn "Sailent of constraint %i" i
                 compute verbose bootstrapIterations p
+            ) 
+    
+    ///Async version of computeOfSARes to use for parallelization (computeOfSAResAsync ( .. ) |> Async.Parallel |> Async.RunSynchronously)
+    let computeOfSAResAsync (verbose:bool) (ontologyMap:Map<string,(string*string) [] >) (identifiers: string []) (bootstrapIterations:int) (saRes:FSharp.Stats.ML.SurprisalAnalysis.SAResult) =
+        saRes.MolecularPhenotypes
+        |> Matrix.toJaggedArray
+        // Matrices are sadly row major =(
+        |> JaggedArray.transpose
+        |> prepareDataset ontologyMap identifiers
+        |> Array.mapi 
+            (fun i p ->
+                async {
+                    do printfn "Sailent of constraint %i" i
+                    return compute verbose bootstrapIterations p
+                }
             ) 
     
