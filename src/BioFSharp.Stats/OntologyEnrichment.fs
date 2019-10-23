@@ -4,7 +4,6 @@ open System
 open System.Collections.Generic
 open FSharpAux
 
-
 module OntologyEnrichment =
 
     /// Represents an item in an ontology set
@@ -36,10 +35,15 @@ module OntologyEnrichment =
         {OntologyTerm = ontologyTerm;ItemsInBin = desInBin; NumberOfDEsInBin = numberOfDEsInBin; 
             NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUnivers = totalUnivers; PValue = pValue}
 
+    ///Splits an OntologyEntry with seperator concatenated TermIds
+    let splitMultipleAnnotationsBy (separator:char) (item:OntologyItem<'A>) =
+        let annotations = item.OntologyTerm.Split(separator)
+        annotations
+        |> Seq.map (fun ot -> {item with OntologyTerm = ot})
 
-    /// Splites OntologyEntry with conacat TermId
-    /// Attention: Also parses string to int to get rit of 0 - terms
-    let splitMapManOntologyItems (separator:char) (data:seq<OntologyItem<'a>>) =
+    /// Splits MapMan OntologyEntries with seperator concatenated TermIds
+    /// Attention: Also parses string to int to get rid of 0 - terms
+    let splitMapManOntologyItemsBy (separator:char) (data:seq<OntologyItem<'a>>) =
         let splitTerm (termId:string) (separator:char) =
             termId.Split(separator) 
             |> Array.map (fun sTerm -> 
@@ -75,10 +79,10 @@ module OntologyEnrichment =
             let hp = FSharp.Stats.Distributions.Discrete.hypergeometric totalUnivers totalNumberOfDE numberInBin            
             if numberInBin > splitPvalueThreshold then                                
                 // Calculate normal pValue
-                1. -  hp.CDF (float (numberOfDEsInBin + 1)) 
+                1. -  hp.CDF (float (numberOfDEsInBin - 1)) 
             else
                 // Calculate split pValue
-                0.5 * ((1. -  hp.CDF(float(numberOfDEsInBin + 1)) ) + ( (1. -  hp.CDF(float(numberOfDEsInBin))) ) )
+                0.5 * ((1. -  hp.CDF(float(numberOfDEsInBin - 1)) ) + ( (1. -  hp.CDF(float(numberOfDEsInBin))) ) )
         else
                 nan
         
@@ -139,7 +143,7 @@ module OntologyEnrichment =
         let countDE (subSet:seq<OntologyItem<'a>>) =             
             let countMap = 
                 subSet 
-                |> Seq.countBy (fun (oi) -> if oi.GroupIndex = deGroupIndex then true else false )
+                |> Seq.countBy (fun (oi) -> oi.GroupIndex = deGroupIndex)
                 |> Map.ofSeq
             (countMap.TryFindDefault 0 true,(countMap.TryFindDefault 0 true) + (countMap.TryFindDefault 0 false))
         

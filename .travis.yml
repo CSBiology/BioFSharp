@@ -6,14 +6,14 @@ mono: latest
 dotnet : 2.1.403
 
 before_install:
-
+ - export PATH=$PATH:/home/travis/.dotnet/tools
+ - dotnet tool install paket -g
  - dotnet restore build.proj
-
 
 script:
  - dotnet fake build --target Linux
 
 branches:
-  except:
-    - gh-pages
-    - nuget
+  only:
+  - master
+  - developer

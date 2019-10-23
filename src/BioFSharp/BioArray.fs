@@ -40,7 +40,17 @@ module BioArray =
         |> Seq.toArray
 
 
+    /// Create the reverse DNA or RNA strand. For example, the sequence "ATGC" is converted to "CGTA"
+    let reverse (nucs:BioArray<Nucleotides.Nucleotide>) = 
+        nucs |> Array.rev
 
+    /// Create the complement DNA or cDNA (from RNA) strand. For example, the sequence "ATGC" is converted to "TACG"
+    let complement (nucs:BioArray<Nucleotides.Nucleotide>) = 
+        nucs |> Array.map Nucleotides.complement
+
+    /// Create the reverse complement strand meaning antiparallel DNA strand or the cDNA (from RNA) respectivly. For example, the sequence "ATGC" is converted to "GCAT". "Antiparallel" combines the two functions "Complement" and "Inverse".
+    let reverseComplement (nucs:BioArray<Nucleotides.Nucleotide>) = 
+        nucs |> Array.map Nucleotides.complement |> Array.rev
 
 
     /// Builts a new collection whose elements are the result of applying

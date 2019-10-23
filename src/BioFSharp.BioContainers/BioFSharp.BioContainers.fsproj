@@ -2,9 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
-    <RootNamespace>BioFSharp.BioTools</RootNamespace>
-    <AssemblyName>BioFSharp.BioTools</AssemblyName>
-    <Name>BioFSharp.BioTools</Name>
+    <RootNamespace>BioFSharp.BioContainers</RootNamespace>
+    <AssemblyName>BioFSharp.BioContainers</AssemblyName>
+    <Name>BioFSharp.BioContainers</Name>
     <OutputType>Library</OutputType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
@@ -25,9 +25,12 @@
     <Compile Include="Hera.fs" />
     <Compile Include="HMMER.fs" />
     <Compile Include="IntaRNA.fs" />
+    <Compile Include="LastAlign.fs" />
+    <Compile Include="MoFF.fs" />
     <Compile Include="TargetP.fs" />
+    <Compile Include="SRAToolkit.fs" />
     <Compile Include="Tmhmm.fs" />
-    <None Include="BioFSharp.BioTools.fsx" />
+    <None Include="BioFSharp.BioContainers.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

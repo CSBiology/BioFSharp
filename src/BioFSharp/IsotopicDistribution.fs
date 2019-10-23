@@ -8,6 +8,7 @@ module IsotopicDistribution =
 
         // Implementation according to BRAIN - algortihm
         /// Generates the distribution of the isotopic abundancy
+        /// The predicted distribution is only valid for Elements with isotopes at natural abundance
         let ofFormula (limit:int) (fml:Formula) =
             let calcP0 (fml:Formula) = 
                 fml 
@@ -409,7 +410,7 @@ module IsotopicDistribution =
         let normalizeByProbSum minProb (pols: Polynomial list) = 
             let sum = 
                 pols
-                |> List.filter (fun x -> x > minProb)
+                |> List.filter (fun x -> x.Probability > minProb)
                 |> List.sumBy (fun x -> x.Probability)
             pols 
             |> List.map (fun x -> {x with Probability = x.Probability/sum})
@@ -447,3 +448,4 @@ module IsotopicDistribution =
             |> mergeFinePolynomial (mergeResolution)
             |> (normF minProb)
             |> powerToMw charge
+

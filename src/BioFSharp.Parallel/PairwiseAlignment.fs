@@ -31,9 +31,9 @@ open Alea.FSharp
     /// Packages an alignment into standard form.
     let packageAlignment (score) (alignment) =
         {
-            AlignedSequences = [(fst alignment) |> primitiveSequenceToString |> BioArray.ofNucleotideString |> Array.toList;
+            Sequences = [(fst alignment) |> primitiveSequenceToString |> BioArray.ofNucleotideString |> Array.toList;
                                 (snd alignment) |> primitiveSequenceToString |> BioArray.ofNucleotideString |> Array.toList];
-            MetaData = score
+            MetaData  = score
         }
 
 module PairwiseAlignment =

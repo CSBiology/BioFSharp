@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,6 +14,7 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp", "src\BioFSharp\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
@@ -33,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\BioID.fsx = docsrc\content\BioID.fsx
 		docsrc\content\BioItem.fsx = docsrc\content\BioItem.fsx
 		docsrc\content\BioTools-tmhmm.fsx = docsrc\content\BioTools-tmhmm.fsx
+		docsrc\content\Blast.fsx = docsrc\content\Blast.fsx
 		docsrc\content\BlastWrapper.fsx = docsrc\content\BlastWrapper.fsx
 		docsrc\content\Clustal.fsx = docsrc\content\Clustal.fsx
 		docsrc\content\ClustalOWrapper.fsx = docsrc\content\ClustalOWrapper.fsx
@@ -42,8 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\Formula.fsx = docsrc\content\Formula.fsx
 		docsrc\content\FSIPrinters.fsx = docsrc\content\FSIPrinters.fsx
 		docsrc\content\GenBank.fsx = docsrc\content\GenBank.fsx
-		docsrc\content\GESA.fsx = docsrc\content\GESA.fsx
 		docsrc\content\GFF3.fsx = docsrc\content\GFF3.fsx
+		docsrc\content\GSEA.fsx = docsrc\content\GSEA.fsx
 		docsrc\content\index.fsx = docsrc\content\index.fsx
 		docsrc\content\Introduction.fsx = docsrc\content\Introduction.fsx
 		docsrc\content\MoleculeFinding.fsx = docsrc\content\MoleculeFinding.fsx
@@ -69,6 +71,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{078A9C52-DDC
 		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
 		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
 		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\ISSUE_TEMPLATE\documentation.md = .github\ISSUE_TEMPLATE\documentation.md
 		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
 		PULL_REQUEST_TEMPLATE.md = PULL_REQUEST_TEMPLATE.md
 	EndProjectSection
@@ -95,9 +98,9 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.Vis", "src\BioFSh
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.ImgP", "src\BioFSharp.ImgP\BioFSharp.ImgP.fsproj", "{1EB6FB44-6B1E-4939-BF49-267D163959FF}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.BioTools", "src\BioFSharp.BioTools\BioFSharp.BioTools.fsproj", "{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}"
-EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.ML", "src\BioFSharp.ML\BioFSharp.ML.fsproj", "{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.BioContainers", "src\BioFSharp.BioContainers\BioFSharp.BioContainers.fsproj", "{6055D81F-D817-44B3-B82B-F35E9ACB4802}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,18 +156,18 @@ Global
 		{1EB6FB44-6B1E-4939-BF49-267D163959FF}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{1EB6FB44-6B1E-4939-BF49-267D163959FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB6FB44-6B1E-4939-BF49-267D163959FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Mono|Any CPU.Build.0 = Mono|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E8A5AED-DD3C-4250-A9B2-164B08238F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B46C2CB5-8EC2-425B-9B15-D0BAEF30C08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Mono|Any CPU.Build.0 = Mono|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6055D81F-D817-44B3-B82B-F35E9ACB4802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

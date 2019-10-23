@@ -107,8 +107,8 @@ let nucleotideSequence = "ATGC" |> BioSeq.ofNucleotideString
 (**
 BioFSharp comes equipped with a broad range of features and functions to map amino acids and nucleotides. 
 *)
-// Returns the corresponding nucleotide of the anti-parallel strand
-let antiG = Nucleotides.G |> Nucleotides.antiparallel
+// Returns the corresponding nucleotide of the complementary strand
+let antiG = Nucleotides.G |> Nucleotides.complement
 (***include-value:antiG***)
 
 // Returns the monoicsotopic mass of Arginine (minus H2O)
@@ -149,13 +149,12 @@ the project and submit pull requests. If you're adding a new public API, please 
 consider adding [samples][content] that can be turned into a documentation. You might
 also want to read the [library design notes][readme] to understand how it works.
 
-The library is available under Public Domain license, which allows modification and 
-redistribution for both commercial and non-commercial purposes. For more information see the 
+The library is available under the OSI-approved MIT license. For more information see the 
 [License file][license] in the GitHub repository. 
 
   [content]: https://github.com/CSBiology/BioFSharp/tree/master/docsrc/content
   [gh]: https://github.com/CSBiology/BioFSharp
   [issues]: https://github.com/CSBiology/BioFSharp/issues
   [readme]: https://github.com/CSBiology/BioFSharp/blob/master/README.md
-  [license]: https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
+  [license]: https://github.com/CSBiology/BioFSharp/blob/master/LICENSE
 *)

@@ -32,16 +32,30 @@ module TemporaryDocumentationHelpers =
           FsiEval : bool }
 
 
-    let private run toolPath command = 
-        if 0 <> Process.execSimple ((fun info ->
-                { info with
-                    FileName = toolPath
-                    Arguments = command }) >> Process.withFramework) System.TimeSpan.MaxValue
+    let private run toolPath arguments = 
+        Command.RawCommand
+            (
+                toolPath,
+                arguments
+            )
+        |> CreateProcess.fromCommand
+        |> CreateProcess.withFramework
+        |> CreateProcess.ensureExitCode
+        |> Proc.run
+        |> ignore
+        //if 0 <> Process.execSimple ((fun info ->
+        //        { info with
+        //            FileName = toolPath
+        //            Arguments = command }) >> Process.withFramework) System.TimeSpan.MaxValue
 
-        then failwithf "FSharp.Formatting %s failed." command
+        //then failwithf "FSharp.Formatting %s failed." command
 
     let createDocs p =
-        let toolPath = Tools.findToolInSubPath "fsformatting.exe" (Directory.GetCurrentDirectory() @@ "lib/Formatting")
+        let toolPath = 
+            match ProcessUtils.tryFindLocalTool "" "fsformatting.exe"  [(Directory.GetCurrentDirectory() @@ "/lib")] with
+            |Some tool -> tool
+            | _ -> failwith "FSFormatting executable not found"
+        //let toolPath = Tools.findToolInSubPath "fsformatting.exe" (Directory.GetCurrentDirectory() @@ "lib/Formatting")
 
         let defaultLiterateArguments =
             { ToolPath = toolPath
@@ -68,10 +82,7 @@ module TemporaryDocumentationHelpers =
             |> Seq.append 
                    (["literate"; "--processdirectory" ] @ layoutroots @ [ "--inputdirectory"; source; "--templatefile"; template; 
                       "--outputDirectory"; outputDir] @ fsiEval @ [ "--replacements" ])
-            |> Seq.map (fun s -> 
-                   if s.StartsWith "\"" then s
-                   else sprintf "\"%s\"" s)
-            |> String.separated " "
+            |> Arguments.OfArgs
         run arguments.ToolPath command
         printfn "Successfully generated docs for %s" source
 
@@ -149,6 +160,14 @@ let website = "/BioFSharp"
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
 // --------------------------------------------------------------------------------------
+
+//Target.create "InstallPaket" (fun _ ->
+//    if not (File.exists ".paket\paket.exe") then
+//        DotNet.exec id "tool" "install --tool-path \".paket\" Paket"
+//        |> ignore
+//    else
+//        printfn "paket already installed"
+//)
 
 // Read additional information from the release notes document
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
@@ -286,23 +305,18 @@ Target.create "BuildLinux" (fun _ ->
 Target.create "RunTests" (fun _ ->
     let assemblies = !! testAssemblies
 
-    let setParams f =
-        match Environment.isWindows with
-        | true ->
-            fun p ->
-                { p with
-                    FileName = f}
-        | false ->
-            fun p ->
-                { p with
-                    FileName = "mono"
-                    Arguments = f }
     assemblies
-    |> Seq.map (fun f ->
-        Process.execSimple (setParams f) System.TimeSpan.MaxValue
+    |> Seq.iter (fun f ->
+        Command.RawCommand (
+            f,
+            Arguments.OfArgs []
+        )
+        |> CreateProcess.fromCommand
+        |> CreateProcess.withFramework
+        |> CreateProcess.ensureExitCode
+        |> Proc.run
+        |> ignore
     )
-    |>Seq.reduce (+)
-    |> (fun i -> if i > 0 then failwith "")
 )
 
 // --------------------------------------------------------------------------------------
@@ -310,8 +324,9 @@ Target.create "RunTests" (fun _ ->
 
 Target.create "NuGet" (fun _ ->
     Paket.pack(fun p ->
+
         { p with
-            ToolPath=".paket/paket.exe"
+            ToolPath="paket"
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = String.toLines release.Notes})
@@ -414,8 +429,8 @@ Target.create "Docs" (fun _ ->
     Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
 
     File.delete "docsrc/content/license.md"
-    Shell.copyFile "docsrc/content/" "LICENSE.txt"
-    Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
+    Shell.copyFile "docsrc/content/" "LICENSE"
+    Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE"
 
 
     DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
@@ -544,6 +559,7 @@ Target.create "All" ignore
 Target.create "Linux" ignore
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "BuildLinux"
@@ -551,6 +567,7 @@ Target.create "Linux" ignore
   ==> "Linux"
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "Build"
@@ -576,6 +593,7 @@ Target.create "Linux" ignore
   ==> "Release"
 
 "Clean"
+  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"

@@ -17,6 +17,7 @@
   <ItemGroup>
    <!-- Core -->
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Refactor.fs" />
     <Compile Include="PhysicalConstants.fs" />
     <Compile Include="BioID.fs" />
     <Compile Include="Isotopes.fs" />
@@ -24,6 +25,7 @@
     <Compile Include="Formula.fs" />
     <Compile Include="Mass.fs" />
     <Compile Include="IBioItem.fs" />
+    <Compile Include="TaggedSequence.fs" />
     <Compile Include="IsotopicDistribution.fs" />
     <Compile Include="ModificationInfo.fs" />
     <Compile Include="AminoAcidSymbols.fs" />

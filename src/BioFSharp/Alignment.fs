@@ -10,10 +10,19 @@ module Alignment =
                 ///Additional information for this alignment
                 MetaData            : 'Metadata;
                 ///List of aligned Sequences
-                AlignedSequences    : list<'Sequence>;
+                Sequences    : seq<'Sequence>;
                 }
-        ///mapping function for aligned sequences, keeping the associated metadata.
+        
+        ///Creates Alignment type 
+        let createAlignment metaData sequences =
+            {MetaData=metaData;Sequences=sequences}
+
+        ///Mapping function for aligned sequences, keeping the associated metadata.
         let mapSequences (mapping: 'Sequence -> 'mSequence) (alignment: Alignment<'Sequence,_>) =       
-            {MetaData = alignment.MetaData;
-            AlignedSequences = List.map (mapping) alignment.AlignedSequences}
-    
+            {MetaData = alignment.MetaData; Sequences = Seq.map (mapping) alignment.Sequences}
+
+
+        ///Mapping function for aligned sequences, keeping the associated metadata.
+        let mapmetaData (mapping: 'Metadata -> 'NewMetadata) (alignment: Alignment<'Sequence,_>) =       
+            { MetaData = mapping alignment.MetaData; Sequences = alignment.Sequences}    
+

@@ -86,9 +86,9 @@ module ModificationInfo =
     ///Contains frequent modifications
     module Table = 
         
-        let N15         = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let N15'        = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
-        let N15NH3      = createModification "#N15 NH3" true ModLocation.Isotopic (fun f -> Formula.lableElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15         = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15'        = createModification "#N15" true ModLocation.Isotopic (fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15)
+        let N15NH3      = createModification "#N15 NH3" true ModLocation.Isotopic (fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15)
         let H2O         = createModificationWithAdd "H2O" true ModLocation.Nterm "H2O"
         let CO          = createModificationWithAdd "CO addition" true ModLocation.Cterm "CO"
         let NH3         = createModificationWithAdd "NH3 addition" true ModLocation.Nterm "NH3"

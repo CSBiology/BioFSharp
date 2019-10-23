@@ -710,7 +710,7 @@ module DPPOP =
 
                                     | _ -> failwithf "could not plant load model from embedded ressources, check package integrity"
 
-                | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model.model")) resnames with
+                | NonPlant      ->  match Array.tryFind (fun (r:string) -> r.Contains("Yeast5Times128.model")) resnames with
                                     | Some path ->                                         
                                         use stream = assembly.GetManifestResourceStream(path)
                                         let length = int stream.Length

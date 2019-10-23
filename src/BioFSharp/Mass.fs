@@ -41,10 +41,9 @@ module Mass =
     let ofMZ (mz:float) (z:float) = 
         ((mz * z) - (Table.PMassInU * z))
 
-    /// Calculates accuracy of mass versus (theoretical) reference mass 
+    /// Calculates accuracy in ppm of mass versus (theoretical) reference mass 
     let accuracy mass referenceMass =
         ((mass - referenceMass) / referenceMass) * 1000000.
-
 
     /// Returns delta mass by ppm
     let deltaMassByPpm ppm mass =

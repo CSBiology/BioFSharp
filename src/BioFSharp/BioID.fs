@@ -349,12 +349,5 @@ module BioID =
 //            let infoStr = header.Info |> Seq.map (fun kv -> sprintf "%s=%s" kv.Key kv.Value) |> String.concat " "
 //            sprintf "%s %s %s" (header.ID.ToString()) header.Description infoStr     
 
-    /// record of a sequence and its tag
-    type TaggedSequence<'a,'b> ={
-        Tag: 'a;
-        Sequence: seq<'b>}
-    
-    /// maps tag and sequence to tagged sequence
-    let createTaggedSequence tag sequence = 
-        {Tag = tag; Sequence = sequence}
+
 

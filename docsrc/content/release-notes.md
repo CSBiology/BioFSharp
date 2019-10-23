@@ -1,3 +1,52 @@
+#### 1.0.0 - Wednesday, October 23, 2019
+Renaming of BioFSharp.Biotools makes this a major version increase, as it is not backwards compatible. Several bugfixes and additions to multiple sub projects:
+
+ * We now have a cool new logo! (See readme)
+
+ * **BioFSharp.BioTools has been renamed to BioFSharp.BioContainers**. This reflects the purpose of the library better than the previous name.
+ 
+ * **BioFSharp.BioContainers**
+   * Add thin [LastAlign biocontainer API wrapper](https://github.com/CSBiology/BioFSharp/commit/3304e612ccc0b97aa1625c29619968173168b545)
+
+ * **BioFSharp.IO**
+   * Bugfixes:
+     * [Fix SOFT parser skipping entities](https://github.com/CSBiology/BioFSharp/commit/cc3a3f9efe898395c59a97e2b66792c4b3970749) (fixes [#72](https://github.com/CSBiology/BioFSharp/issues/72))
+
+ * **BioFSharp.Stats**
+   * Sailent is now [faster](https://github.com/CSBiology/BioFSharp/commit/844d2efcdd4b85c9e1c80f0160fb74e72f514a90) and has a [verbose option](https://github.com/CSBiology/BioFSharp/commit/97cd33978142f3cc669c4d1e527d8583456f5bc6) (fixes [#74](https://github.com/CSBiology/BioFSharp/issues/74),[#75](https://github.com/CSBiology/BioFSharp/issues/75))
+
+ * **BioFSharp.ImgP** 
+   * Add functionality to [isolate local maxima from frames](https://github.com/CSBiology/BioFSharp/commit/68073759265d086ea6d9b47f30bc3e47c8d3fb60)
+   * Add functionality to [get correlation at specified coordinates](https://github.com/CSBiology/BioFSharp/commit/57efb6003254b234fdad2837e5ee666933a4355f)
+
+
+#### 0.1.02 - Wednesday, September 04, 2019
+Several bugfixes and additions to multiple sub projects:
+ 
+ * **BioFSharp** (core):
+   * Addition of various Unit tests (see the [issue](https://github.com/CSBiology/BioFSharp/issues/30) to track what has been added since the last version)
+   * Bugfixes:
+     * [Naming clarification and bugfixes regarding reverse and reverse complements for DNA](https://github.com/CSBiology/BioFSharp/commit/27ab68f84aacd6de01a194dc5542da90a85e59d4) (fixes [#66](https://github.com/CSBiology/BioFSharp/issues/66) and [#65](https://github.com/CSBiology/BioFSharp/issues/65))
+
+ * **BioFSharp.Stats**
+   * Bugfixes
+     * [Ontology enrichment is now more conservative](https://github.com/CSBiology/BioFSharp/commit/0ed0161d8a203f38ac7171b3213eb7b386adcacf)
+
+#### 0.1.01 - Wednesday, July 31, 2019
+Several bugfixes and additions to multiple sub projects:
+	
+ * **BioFSharp** (core):
+	* Add Unit testing for modules:
+		Formula
+		Mass
+		BioArray
+	* Changed functionality:
+		 * Formula.substract now also returns negative atom counts
+		  
+ * **BioFSharp.ML**:
+	* Additional functionality:
+     	* add thin CNTK API
+
 #### 0.1.0 - Thursday, May 30, 2019
 Several bugfixes and additions to multiple sub projects:
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
@@ -11,8 +11,11 @@
     <Configurations>Debug;Release;Mono</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BioFSharp\BioArrayTests.fs" />
+    <Compile Include="Testing.fs" />
     <Compile Include="Generators.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Core.fs" />
     <Compile Include="RunTests.fs" />
     <None Include="paket.references" />
   </ItemGroup>

@@ -3,23 +3,23 @@ id BioFSharp.ImgP
 title
     BioFSharp.ImgP
 owners
-    gresgsr
+    Timo Mühlhaus
 authors 
-    gresgsr
+    Timo Mühlhaus, Benedikt Venn
 projectUrl
-    serfes/wadawd/BioFSharp.ImgP
+    https://github.com/CSBiology/BioFSharp
 iconUrl
-    asfwa/wadawd/BioFSharp.ImgP/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
 licenseUrl
-    serfes/wadawd/BioFSharp.ImgP/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
 language
     F#
 copyright
-    Copyright 2017
+    Copyright 2019
 tags
-    rdhdr
+    bioinformatics F# image-recognition image-processing
 summary
     dawdf
 description

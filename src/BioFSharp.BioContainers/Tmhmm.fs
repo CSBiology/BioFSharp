@@ -1,4 +1,4 @@
-namespace BioFSharp.BioTools
+namespace BioFSharp.BioContainers
 
 open System
 open System.IO

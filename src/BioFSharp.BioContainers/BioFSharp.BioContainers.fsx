@@ -1,5 +1,5 @@
 ﻿#r "netstandard"
-#r "../../packages/Newtonsoft.Json.10.0.3/lib/netstandard1.3/Newtonsoft.Json.dll"
+#r "../../packages/Newtonsoft.Json.11.0.2/lib/netstandard2.0/Newtonsoft.Json.dll"
 #r "../../packages/System.Buffers/lib/netstandard2.0/System.Buffers.dll"
 #r "../../packages/Docker.DotNet/lib/netstandard2.0/Docker.DotNet.dll"
 
@@ -16,6 +16,7 @@
 #load "Blast.fs"
 #load "ClustalO.fs"
 #load "HMMER.fs"
+#load "LastAlign.fs"
 
 open System.Threading
 open System.Threading
@@ -24,7 +25,7 @@ open System.Threading
 open System.Buffers
 open System.Threading.Tasks
 
-open BioFSharp.BioTools
+open BioFSharp.BioContainers
 open System.Collections.Generic
 open Docker.DotNet.Models
 open System.IO
@@ -35,9 +36,53 @@ open ICSharpCode.SharpZipLib.Tar
 open Newtonsoft.Json.Serialization
 open System
 
-
-
 let client = Docker.connect "npipe://./pipe/docker_engine"
+
+Docker.Image.exists client (Docker.Tag (@"quay.io/biocontainers/fastp:0.20.0--hdbcaa40_0","0.20.0--hdbcaa40_0"))
+
+type soos () = 
+    
+    static member InitImagesCreateParams
+        (
+            ?FromImage,
+            ?FromSrc,
+            ?Repo,
+            ?Tag
+        ) = 
+
+        let param = new ImagesCreateParameters()                
+        FromImage   |> Option.iter param.set_FromImage
+        FromSrc     |> Option.iter param.set_FromSrc
+        Repo        |> Option.iter param.set_Repo
+        Tag         |> Option.iter param.set_Tag
+
+        param
+
+type saas<'T> () =
+    interface IProgress<Docker.DotNet.Models.JSONMessage> with
+        member _.Report(x) = 
+            let status,error,progress =
+                x.Status,x.ErrorMessage,x.ProgressMessage
+            [status;error;progress]
+            |> List.iter (fun m -> match m with |null -> () |message -> printfn "%s" message)
+
+
+
+let pullImageAsync (connection:DockerClient) (imageName: string) =
+    let param = soos.InitImagesCreateParams(FromSrc=imageName)
+    async {
+        let! tmp = 
+            let myAuth = AuthConfig()
+            myAuth.Password         <- ""
+            myAuth.Username         <- "Mutagene"
+            myAuth.Email    <- "kevin-schneider@mutagene.de"
+            connection.Images.CreateImageAsync(param,myAuth,saas())
+            |> Async.AwaitTask
+        return tmp
+        }
+
+pullImageAsync client "registry-1.docker.io/v1/library/ubuntu/manifests/latest"
+|> Async.RunSynchronously
 
 
 
@@ -54,7 +99,7 @@ BioContainer.disposeAsync bcContextUbuntu
 
 
 let bcContext =
-    BioContainer.initBcContextLocalDefaultAsync TargetP.ImageTagetP
+    BioContainer.initBcContextLocalDefaultAsync TargetP.ImageTargetP
     |> Async.RunSynchronously
 
 
@@ -375,8 +420,8 @@ open FSharpAux
 open FSharpAux.IO
 open FSharpAux.IO.SchemaReader.Attribute
 open System.IO
-open BioFSharp.BioTools.BioContainer
-open BioFSharp.BioTools.BioContainerIO
+open BioFSharp.BioContainers.BioContainer
+open BioFSharp.BioContainers.BioContainerIO
 open Blast
 
 let client = Docker.connect "npipe://./pipe/docker_engine"
@@ -493,3 +538,43 @@ let hmmbuildParamz =
     ]
 
 runHMMbuild hmmerContext hmmbuildParamz
+
+
+
+let imageLastAlign = Docker.ImageName "last-align"
+
+let lastAlignContext = 
+    BioContainer.initBcContextWithMountAsync client imageLastAlign @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes"
+    |> Async.RunSynchronously
+
+
+open LastAlign
+
+let lastDBParameters =
+    [
+        LastDBParams.Input
+            (InputOptions.Single @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GCF_000091205.1_ASM9120v1_genomic.fna")
+        LastDBParams.OutputName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\CyanidioschyzonDB"
+
+    ]
+
+runLastDBAsync lastAlignContext lastDBParameters
+|> Async.RunSynchronously
+
+BioContainer.disposeAsync lastAlignContext |> Async.RunSynchronously
+
+let alignParams = 
+    [
+        LastAlignParameters.DBName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GaldieriaDB"
+        LastAlignParameters.Query
+            (QueryOptions.SingleFastaFile @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GCF_000091205.1_ASM9120v1_genomic.fna")
+        LastAlignParameters.OutputFileName
+            @"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf"
+        LastAlignParameters.Verbose
+    ]
+
+runLastAlignAsync lastAlignContext alignParams
+|> Async.RunSynchronously
+|> fun x -> File.WriteAllLines(@"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf",x.Split([|"\r\n";"\r";"\n"|],StringSplitOptions.None))

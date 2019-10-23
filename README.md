@@ -1,12 +1,22 @@
-BioFSharp
-=========
 
-An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
+![Data model](docsrc/files/img/Logo_large.png)
+
+
+
+
+BioFSharp is an open source bioinformatics and computational biology toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
+
+[![Gitter](https://badges.gitter.im/CSBiology/BioFSharp.svg)](https://gitter.im/CSBiology/BioFSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Generic badge](https://img.shields.io/badge/Made%20with-FSharp-rgb(1,143,204).svg)](https://shields.io/)
+![GitHub contributors](https://img.shields.io/github/contributors/CSBiology/BioFSharp)
+
 
 |Branch|Ubuntu(trusty)|Windows|
 |---|---|---|
 | master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
 | developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
+
+
 
 Core functionality
 ------------------
@@ -17,6 +27,8 @@ In its core namespace, BioFSharp contains the basic data structures for common b
 
 Additionally, core algorithms for biological sequences such as alignments and pattern matching algorithms are implemented.
 
+Besides the core functionality, BioFSharp has several namespaces as sub-projects with different scopes:
+
 IO functionality
 ----------------
 
@@ -26,6 +38,24 @@ BioDB functionality
 -------------------
 
 The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our workgroup for querying functional annotations of proteins.
+
+BioContainers functionality
+----------------------
+
+The BioContainers namespace is our newest BioFSharp project and we are very excited about it! It is all about making common bioinformatics tools programmatically accessible from F#. 
+This is realized by making the containerized tool accessible via the Docker daemon. We wrap some functionality from
+[Docker.DotNet](https://github.com/microsoft/Docker.DotNet) to communicate with the docker API while providing extensive, type safe bindings for already 9 tools, including Blast, ClustalO, and TMHMM
+
+ML functionality
+----------------
+
+Make your workflow ML ready with BioFSharp.ML. Currently contains helper functionf for [CNTK](https://docs.microsoft.com/en-us/cognitive-toolkit/) and a pre-trained model we used in our [publication about predicting peptide observability](https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full).
+
+Stats functionality
+----------------------
+
+The Stats namespace contains statistical functions with a clear biological focus such as functions for calculating Gene Ontology Enrichments.
+
 
 Documentation
 -------------
@@ -40,3 +70,11 @@ Contributing
 ------------
 
 Please refer to the [Contribution guidelines](.github/CONTRIBUTING.md)
+
+Community/Social
+----------------
+Want to get in touch with us? We recently joined the twitter crowd:
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/BioFSharp.svg?style=social)](https://twitter.com/biofsharp)
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/cs_biology.svg?style=social)](https://twitter.com/cs_biology)

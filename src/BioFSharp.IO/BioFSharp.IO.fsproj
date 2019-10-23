@@ -19,6 +19,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
+    <Compile Include="BlastQueries.fs" />
     <Compile Include="Clustal.fs" />
     <Compile Include="FastA.fs" />
     <Compile Include="FastQ.fs" />

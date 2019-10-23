@@ -9,35 +9,36 @@ module Formula =
        
     let private REGEX_ELEMENT_SYM = new Regex(@"(?<element>[A-Z][a-z]*)(?:[ ({})]*)(?<number>[0-9.]*)", RegexOptions.Compiled);
     
-    /// private function to merge two maps
-    /// f is the function how to handel key conflicts
-    let private merge (a : Map<'a, 'b>) (b : Map<'a, 'b>) (f : 'a -> 'b * 'b -> 'b) =
-        Map.fold (fun s k v ->
-            match Map.tryFind k s with
-            | Some v' -> Map.add k (f k (v, v')) s
-            | None -> Map.add k v s) a b
 
-    
+    let private merge (a : Map<'a, float>) (b : Map<'a, float>) (f : 'a -> float * float -> 'b) =
+        a
+        |> Map.fold (fun acc k v' -> 
+                        match acc |> Map.tryFind k with 
+                        | Some v -> Map.add k (f k (v, v')) acc
+                        | None   -> Map.add k (f k (0., v')) acc 
+                    ) b
+                
+
     /// Type abreviation for Map<Elements.Element,float>
     type Formula      = Map<Elements.Element,float>
-    
+
     /// Empty formula
     let emptyFormula : Formula = Map.empty 
 
     /// Returns Formula as string
     let toString (f:Formula) =
-        seq { for e in f do yield sprintf "%s%.2f " (Elements.getMainIsotope e.Key).AtomicSymbol e.Value } |> String.concat ""
+        seq { for e in f do yield sprintf "%s%.2f" (Elements.getMainIsotope e.Key).AtomicSymbol e.Value } |> String.concat " "
 
     /// adds two formula
-    let add (f1:Formula) (f2:Formula) =
+    let add (f1:Formula) (f2:Formula) :Formula =
         merge (f1) (f2) (fun _ (v, v') -> v + v')
-    
+
     // adds two formula
     //let (+)  (f1:Formula) (f2:Formula) = add f1 f2
 
-    /// substract two formula
-    let substract (f1:Formula) (f2:Formula) =
-        merge (f1) (f2) (fun _ (v, v') -> v - v')
+    /// substracts f1 from f2
+    let substract (f1:Formula) (f2:Formula) :Formula =
+        merge (f1) (f2)  (fun _ (v, v') -> v - v')
 
     // substract two formula
     //let (-)  (f1:Formula) (f2:Formula) = substract f1 f2
@@ -51,8 +52,7 @@ module Formula =
         f |> Seq.sumBy (fun elem -> (Elements.getMainIsotope elem.Key).Mass * elem.Value)
     
     /// Lables all elements of a certain kind within a formula
-    // TODO: refactor formula last
-    let lableElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
+    let replaceElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) =
         let result : Formula = 
             f 
             |> Seq.map (fun (keyValue) -> if keyValue.Key = unlabled then (labled,keyValue.Value) else (keyValue.Key,keyValue.Value) )
@@ -60,26 +60,28 @@ module Formula =
         result
     
     /// Lables a given number of elements of a certain kind within a formula
-    let lableNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) =
+    let replaceNumberOfElement (f:Formula) (unlabled:Elements.Element) (labled:Elements.Element) (number:float) : Formula =
         let result : Formula = 
             f 
             |> Seq.map (fun (keyValue) -> if keyValue.Key = unlabled then (keyValue.Key,keyValue.Value - number) else (keyValue.Key,keyValue.Value) )            
             |> Map.ofSeq
         result.Add(labled,number)
     
-    ///If the Formula contains the given element, the count of the element in the formula is returned. Else returns a key not found error.
-    let getNumberOfElements (f:Formula) (ele:string) =
-        f 
-        |> Map.pick (fun e num -> 
-            if ele = Elements.getAtomicSymbol e then Some num
-            else None)
+    ///Retruns true if the formula contains the element of interest. 
+    let contains (ele:Elements.Element) (f:Formula)  = 
+        Map.containsKey ele f
 
-    //If the Formula contains the given element, the count of the element in the formula is returned as Some. Else returns None.
-    let tryGetNumberOfElements (f:Formula) (ele:string) =
+    ///Returns the number of occurences of the element of interest.
+    let count (ele:Elements.Element) (f:Formula) =
+        match Map.tryFind ele f with 
+        | Some n -> n 
+        | None   -> 0.
+      
+    ///Returns the number of occurences of the element with the given symbolic representation.
+    let countBySym (eleSym:string) (f:Formula) =
         f 
-        |> Map.tryPick (fun e num -> 
-            if ele = Elements.getAtomicSymbol e then Some num
-            else None)
+        |> Map.tryPick (fun e num -> if eleSym = Elements.getAtomicSymbol e then Some num else None)
+        |> Option.defaultValue 0.
 
     // TODO: (NO)2 
     /// Parse formula string and returns formula type
@@ -88,7 +90,7 @@ module Formula =
         // regex results as seq
         let ms = seq {for i = 0 to matches.Count - 1 do yield matches.[i]}
         let msItems = ms |> Seq.map ( fun g -> 
-                let elem = Elements.Table.ElementAsObject((g.Groups.["element"].Value))
+                let elem = Elements.Table.ofSymbol((g.Groups.["element"].Value))
                 let n    = (g.Groups.["number"].Value)
                 (elem, (if n <> "" then float(n) else 1.)) )
         let result : Formula =

@@ -3,7 +3,8 @@
 open FSharpAux
 open System.Text
 open System.IO
-open BioFSharp.Alignment
+open BioFSharp
+open BioFSharp.TaggedSequence
 open BioFSharp.BioID
 
 ///Contains functions for reading clustal alignment files
@@ -58,7 +59,7 @@ module Clustal =
         loop false 0 0 (Header 'p')
 
     ///Builds the alignment out of the Tokensequence
-    let private parser (lexerInput: seq<Token>) : Alignment<TaggedSequence<string,char>,AlignmentInfo>= 
+    let private parser (lexerInput: seq<Token>) : Alignment.Alignment<TaggedSequence<string,char>,AlignmentInfo>= 
         let sequences = System.Collections.Generic.Dictionary<string,char seq>()
         let en = lexerInput.GetEnumerator()
         let sb = System.Text.StringBuilder()
@@ -88,7 +89,7 @@ module Clustal =
                     loop lastLabel en.Current seqAcc (Seq.appendSingleton header c) alignment
         let h,al = loop "" (Header 'p') Seq.empty Seq.empty Seq.empty
         {   MetaData  = {Header = h; ConservationInfo = al};
-            AlignedSequences =    
+            Sequences =    
                 [
                     for kv in sequences do
                         yield createTaggedSequence kv.Key kv.Value
@@ -102,7 +103,7 @@ module Clustal =
         |> parser
     
     ///Checks if the header of a parsed clustal alignment matches the clustal file conventions
-    let hasClustalFileHeader (alignment:Alignment<TaggedSequence<string,char>,AlignmentInfo>) = 
+    let hasClustalFileHeader (alignment:Alignment.Alignment<TaggedSequence<string,char>,AlignmentInfo>) = 
         let en = alignment.MetaData.Header.GetEnumerator()
         let rec loop i =
             match en.MoveNext() with
@@ -120,11 +121,11 @@ module Clustal =
         loop 0
     
     ///Writes an alignment to given path in clustal format. Overwrites file if it already exists
-    let toFileWithOverWrite (path:string) (alignment: Alignment<TaggedSequence<string,char>,AlignmentInfo>) =
+    let toFileWithOverWrite (path:string) (alignment: Alignment.Alignment<TaggedSequence<string,char>,AlignmentInfo>) =
         use sw = new System.IO.StreamWriter(path)     
         let seqs = 
             let sb = StringBuilder()
-            let max = (Seq.maxBy (fun (x:TaggedSequence<string,char>) -> x.Tag.Length) alignment.AlignedSequences).Tag.Length
+            let max = (Seq.maxBy (fun (x:TaggedSequence<string,char>) -> x.Tag.Length) alignment.Sequences).Tag.Length
             let addEmpty (s:string) = 
                 sb.Append(s) |> ignore
                 for i = 0 to max - sb.Length do
@@ -133,7 +134,7 @@ module Clustal =
                 sb.Clear() |> ignore
                 s
             createTaggedSequence "" alignment.MetaData.ConservationInfo
-            |> Seq.appendSingleton alignment.AlignedSequences 
+            |> Seq.appendSingleton alignment.Sequences 
             |> Seq.map (fun x -> 
                 addEmpty x.Tag, 
                 x.Sequence |> Seq.groupsOfAtMost 60 |> fun x -> x.GetEnumerator()) 

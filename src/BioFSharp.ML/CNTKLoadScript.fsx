@@ -30,5 +30,5 @@ let resolveCNTKDependencies () =
 #I @"../../bin"
 
  
-#r @"../../packages/CNTK.CPUOnly/lib/netstandard2.0/Cntk.Core.Managed-2.6.dll"
+#r @"../../packages/CNTK.CPUOnly/lib/netstandard2.0/Cntk.Core.Managed-2.7.dll"
 #r "netstandard"

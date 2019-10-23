@@ -1,4 +1,4 @@
-namespace BioFSharp.BioTools
+namespace BioFSharp.BioContainers
 
 module FastP =
     open FSharpAux
