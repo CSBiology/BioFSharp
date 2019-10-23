@@ -7,7 +7,8 @@
 BioFSharp is an open source bioinformatics and computational biology toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
 
 [![Gitter](https://badges.gitter.im/CSBiology/BioFSharp.svg)](https://gitter.im/CSBiology/BioFSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
+[![Generic badge](https://img.shields.io/badge/Made%20with-FSharp-rgb(1,143,204).svg)](https://shields.io/)
+![GitHub contributors](https://img.shields.io/github/contributors/CSBiology/BioFSharp)
 
 
 |Branch|Ubuntu(trusty)|Windows|
@@ -26,7 +27,7 @@ In its core namespace, BioFSharp contains the basic data structures for common b
 
 Additionally, core algorithms for biological sequences such as alignments and pattern matching algorithms are implemented.
 
-Besides the core functionality, BioFSharp has several namespaces as sub-projects with different scopes. These are:
+Besides the core functionality, BioFSharp has several namespaces as sub-projects with different scopes:
 
 IO functionality
 ----------------
