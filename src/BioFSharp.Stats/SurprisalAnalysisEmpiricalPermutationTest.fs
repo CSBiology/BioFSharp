@@ -38,7 +38,7 @@ module Sailent =
 
         let rec sumRandomEntriesBy k sum =
             if k < binSize then
-                sumRandomEntriesBy (k+1) (sum + (weightArray.[Random.rndgen.NextInt(weightArray.Length - 1)]))
+                sumRandomEntriesBy (k+1) (sum + (weightArray.[Random.rndgen.NextInt(weightArray.Length)]))
             else 
                 sum
 
