@@ -1,3 +1,7 @@
+#### 1.0.01 - Thursday, October 24, 2019
+ * **BioFSharp.Stats:**
+    * Major speed improvements for Sailent
+
 #### 1.0.0 - Wednesday, October 23, 2019
 Renaming of BioFSharp.Biotools makes this a major version increase, as it is not backwards compatible. Several bugfixes and additions to multiple sub projects:
 
