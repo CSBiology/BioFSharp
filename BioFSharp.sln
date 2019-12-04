@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\Alignment.fsx = docsrc\content\Alignment.fsx
 		docsrc\content\AminoProperties.fsx = docsrc\content\AminoProperties.fsx
 		docsrc\content\BioCollections.fsx = docsrc\content\BioCollections.fsx
+		docsrc\content\BioContainers.fsx = docsrc\content\BioContainers.fsx
 		docsrc\content\BioDB.fsx = docsrc\content\BioDB.fsx
 		docsrc\content\BioID.fsx = docsrc\content\BioID.fsx
 		docsrc\content\BioItem.fsx = docsrc\content\BioItem.fsx
