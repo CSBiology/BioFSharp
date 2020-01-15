@@ -6,7 +6,10 @@ open System.Data.Services.Client
 //all credit for the database goes to https://github.com/goedels and https://github.com/luede
 module FaToolDb =
     
-    let[<Literal>]url = "http://iomiqsweb1.bio.uni-kl.de/Services/FaToolDbDataService.svc"
+    //let[<Literal>]url = "http://iomiqsweb1.bio.uni-kl.de/Services/FaToolDbDataService.svc"
+
+    //server adress the service migrated to
+    let [<Literal>]url = "http://hyperweb.bio.uni-kl.de:8015/Services/FaToolDbDataService.svc"
 
     type FaToolData = 
         ODataService<url>
