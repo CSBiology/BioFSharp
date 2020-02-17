@@ -2,10 +2,22 @@
 // FAKE build script
 // --------------------------------------------------------------------------------------
 
-#r "paket: groupref FakeBuild //"
+#r "paket:
+nuget Fake.Core.Target
+nuget Fake.Core.Process
+nuget Fake.Core.ReleaseNotes
+nuget Fake.IO.FileSystem
+nuget Fake.DotNet.Cli
+nuget Fake.DotNet.MSBuild
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Paket
+nuget Fake.DotNet.FSFormatting
+nuget Fake.DotNet.Fsi
+nuget Fake.DotNet.NuGet
+nuget Fake.Api.Github
+nuget Fake.DotNet.Testing.Expecto"
 
-#load "./.fake/build.fsx/intellisense.fsx"
-
+#load ".fake/build.fsx/intellisense.fsx"
 open System.IO
 open Fake.Core
 open Fake.Core.TargetOperators
@@ -18,6 +30,8 @@ open Fake.DotNet.Testing
 open Fake.Tools
 open Fake.Api
 open Fake.Tools.Git
+
+Target.initEnvironment ()
 
 [<AutoOpen>]
 module TemporaryDocumentationHelpers =
@@ -157,6 +171,10 @@ let gitRaw = Environment.environVarOrDefault "gitRaw" "https://raw.githubusercon
 
 let website = "/BioFSharp"
 
+let pkgDir = "pkg"
+
+let linuxConfiguration = DotNet.Custom "Mono"
+let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
 // --------------------------------------------------------------------------------------
@@ -242,8 +260,6 @@ Target.create "CopyBinariesLinux" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Clean build results
 
-let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
-
 Target.create "Clean" (fun _ ->
     Shell.cleanDirs ["bin"; "temp"]
 )
@@ -261,10 +277,6 @@ Target.create "Restore" (fun _ ->
 )
 
 Target.create "Build" (fun _ ->
-    (*solutionFile
-    |> DotNet.build (fun p ->
-        { p with
-            Configuration = buildConfiguration })*)
     let setParams (defaults:MSBuildParams) =
         { defaults with
             Verbosity = Some(Quiet)
@@ -280,10 +292,6 @@ Target.create "Build" (fun _ ->
 )
 
 Target.create "BuildLinux" (fun _ ->
-    (*solutionFile
-    |> DotNet.build (fun p ->
-        { p with
-            Configuration = buildConfiguration })*)
     let setParams (defaults:MSBuildParams) =
         { defaults with
             Verbosity = Some(Quiet)
@@ -297,7 +305,6 @@ Target.create "BuildLinux" (fun _ ->
          }
     MSBuild.build setParams solutionFile
 )
-
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
@@ -322,23 +329,23 @@ Target.create "RunTests" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
+
 Target.create "NuGet" (fun _ ->
     Paket.pack(fun p ->
-
         { p with
-            ToolPath="paket"
-            OutputPath = "bin"
+            ToolType = ToolType.CreateLocalTool()
+            OutputPath = pkgDir
             Version = release.NugetVersion
-            ReleaseNotes = String.toLines release.Notes})
-)
+            ReleaseNotes = release.Notes |> String.toLines })
+        )
 
 Target.create "PublishNuget" (fun _ ->
     Paket.push(fun p ->
         { p with
-            PublishUrl = "https://www.nuget.org"
-            WorkingDir = "bin" })
+            WorkingDir = pkgDir
+            ToolType = ToolType.CreateLocalTool()
+            ApiKey = Environment.environVarOrDefault "NuGet-key" "" })
 )
-
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
