@@ -3,15 +3,10 @@ language: csharp
 sudo: false
 dist: trusty # Ubuntu 14.04
 mono: latest
-dotnet : 2.1.403
-
-before_install:
- - export PATH=$PATH:/home/travis/.dotnet/tools
- - dotnet tool install paket -g
- - dotnet restore build.proj
+dotnet : 3.1.101
 
 script:
- - dotnet fake build --target Linux
+ - build.sh
 
 branches:
   only:
