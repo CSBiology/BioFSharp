@@ -6,7 +6,10 @@ mono: latest
 dotnet : 3.1.101
 
 script:
- - build.sh
+ - dotnet tool restore
+ - dotnet restore build.proj
+ - dotnet paket restore
+ - dotnet fake build
 
 branches:
   only:
