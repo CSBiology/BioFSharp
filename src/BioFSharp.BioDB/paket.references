@@ -1,6 +1,5 @@
 group BioDB
-FSharp.Core framework:net45
+FSharp.Core
 SwaggerProvider
-Newtonsoft.Json
 YamlDotNet
 FSharp.Data.TypeProviders

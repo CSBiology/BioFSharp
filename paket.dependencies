@@ -14,32 +14,18 @@ nuget FSharp.Plotly >= 1.2.0
 nuget docker.dotnet >= 3.125.2
 nuget SharpZipLib >= 1.2.0
 nuget CNTK.CPUOnly >= 2.7.0
-
 nuget Microsoft.Xaml >= 4.0.0.1
-
 nuget Argu
 nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
 
-
 group BioDB
-    framework:net45
     source https://www.nuget.org/api/v2
-
-    nuget Alea
-    nuget FSharp.Core 4.1.17
-    nuget Argu
-
-    nuget Expecto
-    nuget Expecto.BenchmarkDotNet
-    nuget Expecto.FsCheck
-    nuget Expecto.VisualStudio.TestAdapter version_in_path: true
-    nuget FSharp.Data.TypeProviders
-    nuget FSharp.Plotly
-    nuget Microsoft.Xaml
-    nuget SwaggerProvider
+    nuget SwaggerProvider >= 0.10
     nuget YamlDotNet
+    nuget FSharp.Data.TypeProviders
+
 
 group Formatting
 

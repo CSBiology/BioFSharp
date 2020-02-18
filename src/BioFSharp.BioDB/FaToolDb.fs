@@ -1,6 +1,5 @@
 namespace BioFSharp.BioDB
 open FSharp.Data.TypeProviders
-open System.Data.Services.Client
 
 ///Tools for the odata service FaTools available at http://iomiqsweb1.bio.uni-kl.de/Services/FaToolDbDataService.svc
 //all credit for the database goes to https://github.com/goedels and https://github.com/luede

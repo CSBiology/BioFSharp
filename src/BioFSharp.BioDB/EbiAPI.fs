@@ -16,9 +16,9 @@ module EbiAPI =
 
     let [<Literal>] private schemaURL = __SOURCE_DIRECTORY__ + "/Resources/ebiProteinsAPIswagger.json" //"http://www.ebi.ac.uk/proteins/api/swagger.json"
 
-    type ProteinsAPIschema = SwaggerProvider<schemaURL> // ,EmbeddedResource=("BioFSharp.dll,ebiProteinsAPIswagger.json")>
+    type ProteinsAPIschema = SwaggerClientProvider<schemaURL, PreferAsync=true> // ,EmbeddedResource=("BioFSharp.dll,ebiProteinsAPIswagger.json")>
     
-    let private proteinsAPI = ProteinsAPIschema()
+    let private proteinsAPI = ProteinsAPIschema.Client()
 
     /// Access to the uniprot protein data base
     type UniProteinDB () =
@@ -66,147 +66,147 @@ module EbiAPI =
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
        /// Search protein sequence features in UniProt
-       //static member searchProteinSeqFeature
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset     : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size       : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession  : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?reviewed   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?gene       : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?protein    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?organism   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?taxid      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?categories : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?types      : string
+       static member searchProteinSeqFeature
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset     : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size       : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession  : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?reviewed   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?gene       : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?protein    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?organism   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?taxid      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?categories : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?types      : string
 
-       //     ) = 
-       //     let accession = defaultArg accession null
-       //     let reviewed = defaultArg reviewed null
-       //     let gene = defaultArg gene null
-       //     let protein = defaultArg protein null
-       //     let organism = defaultArg organism null
-       //     let taxid = defaultArg taxid null
-       //     let categories = defaultArg categories null
-       //     let types = defaultArg types null
-       //     proteinsAPI.Search2(offset,size,accession,reviewed,gene,protein,organism,taxid,categories,types)
+            ) = 
+            let accession = defaultArg accession null
+            let reviewed = defaultArg reviewed null
+            let gene = defaultArg gene null
+            let protein = defaultArg protein null
+            let organism = defaultArg organism null
+            let taxid = defaultArg taxid null
+            let categories = defaultArg categories null
+            let types = defaultArg types null
+            proteinsAPI.Search2(offset,size,accession,reviewed,gene,protein,organism,taxid,categories,types)
 
 
        /// Search antigen in UniProt
-       //static member searchAntigens
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset             : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size               : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession          : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?antigenSequence    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?antigenID          : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?ensemblIDs         : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?matchscore         : int
+       static member searchAntigens
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset             : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size               : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession          : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?antigenSequence    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?antigenID          : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?ensemblIDs         : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?matchscore         : int
 
-       //     ) = 
-       //     let accession = defaultArg accession null
-       //     let antigenSequence = defaultArg antigenSequence null
-       //     let antigenID = defaultArg antigenID null
-       //     let ensemblIDs = defaultArg ensemblIDs null
+            ) = 
+            let accession = defaultArg accession null
+            let antigenSequence = defaultArg antigenSequence null
+            let antigenID = defaultArg antigenID null
+            let ensemblIDs = defaultArg ensemblIDs null
             
-       //     proteinsAPI.Search(offset,size,accession,antigenSequence,antigenID,ensemblIDs,matchscore)
+            proteinsAPI.Search(offset,size,accession,antigenSequence,antigenID,ensemblIDs,matchscore)
 
 
        /// Search genomic coordinates in UniProt
-       //static member searchGenomicCoordinates
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset     : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size       : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession  : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?chromosome : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?ensembl    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?gene       : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?protein    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?taxid      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?location   : string
+       static member searchGenomicCoordinates
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset     : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size       : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession  : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?chromosome : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?ensembl    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?gene       : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?protein    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?taxid      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?location   : string
 
-       //     ) = 
+            ) = 
 
-       //     let accession = defaultArg accession null
-       //     let chromosome = defaultArg chromosome null
-       //     let ensembl = defaultArg ensembl null
-       //     let gene = defaultArg gene null
-       //     let protein = defaultArg protein null
-       //     let taxid = defaultArg taxid null
-       //     let location = defaultArg location null
+            let accession = defaultArg accession null
+            let chromosome = defaultArg chromosome null
+            let ensembl = defaultArg ensembl null
+            let gene = defaultArg gene null
+            let protein = defaultArg protein null
+            let taxid = defaultArg taxid null
+            let location = defaultArg location null
             
-       //     proteinsAPI.Search1(offset,size,accession,chromosome,ensembl,gene,protein,taxid,location)
+            proteinsAPI.Search1(offset,size,accession,chromosome,ensembl,gene,protein,taxid,location)
 
 
        /// Search entries in UniProt
-       //static member searchEntries
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset     : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size       : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession  : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?reviewed   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?isoforms   : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?goterms    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?keywords   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?ec         : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?gene       : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?protein    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?organism   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?taxid      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?pubmed     : string
+       static member searchEntries
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset     : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size       : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession  : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?reviewed   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?isoforms   : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?goterms    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?keywords   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?ec         : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?gene       : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?protein    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?organism   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?taxid      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?pubmed     : string
 
-       //     ) = 
+            ) = 
 
-       //     let accession = defaultArg accession null
-       //     let reviewed = defaultArg reviewed null
-       //     let goterms = defaultArg goterms null
-       //     let keywords = defaultArg keywords null
-       //     let ec = defaultArg ec null
-       //     let gene = defaultArg gene null
-       //     let protein = defaultArg protein null
-       //     let organism  = defaultArg organism  null
-       //     let taxid = defaultArg taxid null
-       //     let pubmed = defaultArg pubmed null
+            let accession = defaultArg accession null
+            let reviewed = defaultArg reviewed null
+            let goterms = defaultArg goterms null
+            let keywords = defaultArg keywords null
+            let ec = defaultArg ec null
+            let gene = defaultArg gene null
+            let protein = defaultArg protein null
+            let organism  = defaultArg organism  null
+            let taxid = defaultArg taxid null
+            let pubmed = defaultArg pubmed null
             
-       //     proteinsAPI.Search3(offset,size,accession,reviewed,isoforms,goterms,keywords,ec,gene,protein,organism,taxid,pubmed)
+            proteinsAPI.Search3(offset,size,accession,reviewed,isoforms,goterms,keywords,ec,gene,protein,organism,taxid,pubmed)
 
        /// Search proteomes in UniProt
        static member searchProteomes
@@ -246,76 +246,76 @@ module EbiAPI =
             proteinsAPI.Search4(offset,size,upid,name,taxid,keyword,xref,genomeAcc,isRefProteome,isRedundant)
     
        /// Search ProteomicsPeptides in UniProt
-       //static member searchProteomicsPeptides
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset         : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size           : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?taxid   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?upid      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?datasource   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?peptide    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?unique           : string
+       static member searchProteomicsPeptides
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset         : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size           : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?taxid   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?upid      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?datasource   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?peptide    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?unique           : string
 
-       //     ) = 
+            ) = 
 
-       //     let accession  = defaultArg accession  null
-       //     let taxid = defaultArg taxid null
-       //     let upid = defaultArg upid null
-       //     let datasource = defaultArg datasource null
-       //     let peptide = defaultArg peptide null
-       //     let unique = defaultArg unique null
+            let accession  = defaultArg accession  null
+            let taxid = defaultArg taxid null
+            let upid = defaultArg upid null
+            let datasource = defaultArg datasource null
+            let peptide = defaultArg peptide null
+            let unique = defaultArg unique null
             
-       //     proteinsAPI.Search5(offset,size,accession,taxid,upid,datasource,peptide,unique)    
+            proteinsAPI.Search5(offset,size,accession,taxid,upid,datasource,peptide,unique)    
 
 
        /// Search natural variants in UniProt
-       //static member searchNaturalVariants
-       //     (
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?offset         : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?size           : int,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?accession      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?taxid   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?sourcetype      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?consequencetype   : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?wildtype    : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?alternativesequence      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?location      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?disease      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?omim      : string,
-       //         [<Optional;DefaultParameterValue(null)>] 
-       //         ?evidence           : string
+       static member searchNaturalVariants
+            (
+                [<Optional;DefaultParameterValue(null)>] 
+                ?offset         : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?size           : int,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?accession      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?taxid   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?sourcetype      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?consequencetype   : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?wildtype    : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?alternativesequence      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?location      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?disease      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?omim      : string,
+                [<Optional;DefaultParameterValue(null)>] 
+                ?evidence           : string
 
-       //     ) = 
+            ) = 
 
-       //     let accession  = defaultArg accession  null
-       //     let taxid = defaultArg taxid null
-       //     let sourcetype = defaultArg sourcetype null
-       //     let consequencetype = defaultArg consequencetype null
-       //     let wildtype = defaultArg wildtype null
-       //     let alternativesequence = defaultArg alternativesequence null
-       //     let location = defaultArg location null
-       //     let disease = defaultArg disease null
-       //     let omim = defaultArg omim null
-       //     let evidence = defaultArg evidence null
+            let accession  = defaultArg accession  null
+            let taxid = defaultArg taxid null
+            let sourcetype = defaultArg sourcetype null
+            let consequencetype = defaultArg consequencetype null
+            let wildtype = defaultArg wildtype null
+            let alternativesequence = defaultArg alternativesequence null
+            let location = defaultArg location null
+            let disease = defaultArg disease null
+            let omim = defaultArg omim null
+            let evidence = defaultArg evidence null
             
-       //     proteinsAPI.Search6(sourcetype,consequencetype,wildtype,alternativesequence,location,accession,disease,omim,evidence,taxid,offset,size) 
+            proteinsAPI.Search6(sourcetype,consequencetype,wildtype,alternativesequence,location,accession,disease,omim,evidence,taxid,offset,size) 
