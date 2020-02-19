@@ -1,3 +1,9 @@
+#### 1.0.02 - Wednesday, February 19, 2020
+ * **BioFSharp.BioDB:**
+    * Fix FaTool OData model URL
+ * **BioFSharp.Vis**
+   * Add Function to save chord plots as html files
+
 #### 1.0.01 - Thursday, October 24, 2019
  * **BioFSharp.Stats:**
     * Major speed improvements for Sailent

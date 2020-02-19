@@ -382,7 +382,6 @@ Target.create "RunTestsMono" (fun _ ->
 Target.create "NuGet" (fun _ ->
     Paket.pack(fun p ->
         { p with
-            BuildPlatform = "net45;net47;netstandard2.0"
             ToolType = ToolType.CreateLocalTool()
             OutputPath = pkgDir
             Version = release.NugetVersion
