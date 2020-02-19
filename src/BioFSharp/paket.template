@@ -3,28 +3,35 @@ id BioFSharp
 title
     BioFSharp
 owners
-    Timo Mühlhaus
+    Timo Mühlhaus, Kevin Schneider
 authors 
-    Timo Mühlhaus
+    Timo Mühlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors
 projectUrl
-    https://github.com/CSBiology/BioFSharp
+    https://csbiology.github.io/BioFSharp/
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE
 requireLicenseAcceptance
     false
 language
     F#
 copyright
-    Copyright 2019
+    Copyright 2017-2020
 tags
-    bioinformatics F# fsharp
+    F# FSharp bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis docker bioinformatics-containers biocontainers
 summary
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
+    The F# open source bioinformatics toolbox
 description
-    BioFSharp aims to be a user-friendly library for Bioinformatics written in F# as the official successor of FSharpBio.
+    BioFSharp aims to be a user-friendly library for Bioinformatics written in F#.
+    This is the core package that contains optimized biological datastructures 
+    (For example aminoacdis, nucleotides, and sequences consisting of them) and core
+    bioinformatic algorithms (such as alignments or pattern search). BioFSharp has many 
+    more to offer in its subnamespaces, so be sure to check them out!
 include-referenced-projects 
     true
-files
-	../../bin/BioFSharp ==> lib
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/BioFSharp
+include-pdbs true

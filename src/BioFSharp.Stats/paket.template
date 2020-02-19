@@ -17,14 +17,17 @@ requireLicenseAcceptance
 language
     F#
 copyright
-    Copyright 2019
+    Copyright 2017-2020
 tags
     bioinformatics F# fsharp statistic
 summary
-    Special statistical functions for bioinformatic purposes
+    Statistical functions with a clear biological focus in F#
 description
-    Special statistical functions for bioinformatic purposes
+    Statistical functions with a clear biological focus such as Gene Set Enrichment Analysis (GSEA)
 include-referenced-projects 
     true
-files
-    ../../bin/BioFSharp.Stats ==> lib
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/BioFSharp
+include-pdbs true

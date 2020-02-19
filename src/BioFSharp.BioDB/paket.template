@@ -3,28 +3,34 @@ id BioFSharp.BioDB
 title
     BioFSharp.BioDB
 owners
-    Timo Mühlhaus
+    Timo Mühlhaus, Kevin Schneider
 authors 
-    Timo Mühlhaus
+    Timo Mühlhaus, Sabrina Gödel, Kevin Schneider, F# open source contributors
 projectUrl
-    https://github.com/CSBiology/BioFSharp
+    https://csbiology.github.io/BioFSharp
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE
 requireLicenseAcceptance
     false
 language
     F#
 copyright
-    Copyright 2019
+    Copyright 2017-2020
 tags
-    bioinformatics F# fsharp database-access
+    F# FSharp bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis docker bioinformatics-containers biocontainers
 summary
-    APIs for querying common biological databases
+    Connect BioFSharp with containerized bioinformatic workflows without leaving your F# environment
 description
-    APIs for querying common biological databases
+    BioFSharp.BioContainers gives you the possibility to leverage containerized applications without 
+    leaving you F# environment. We build on the fondation of Docker.DotNet to programmatically access 
+    the the REST API on top of the docker daemon. We provide special functions to use with biocontainers, 
+    which is a standardized way to create containerized bioinformatic software.
 include-referenced-projects 
     true
-files
-    ../../bin/BioFSharp.BioDB ==> lib
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/BioFSharp
+include-pdbs true
