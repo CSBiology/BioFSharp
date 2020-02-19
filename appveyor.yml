@@ -19,7 +19,7 @@ for:
       - image: Ubuntu
 
   build_script:
-  - sh: ./build.sh -t Linux
+  - sh: sudo ./build.sh -t Linux
 
 test: off
 version: 0.0.1.{build}
