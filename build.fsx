@@ -295,6 +295,7 @@ Target.create "Restore" (fun _ ->
 
 Target.create "RestoreMono" (fun _ ->
     !! "src/**/*.??proj"
+    ++ "tests/**/*.??proj"
     -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
     -- "src/**/*.shproj"
     |> Seq.iter (fun f -> f |> DotNet.restore id)
