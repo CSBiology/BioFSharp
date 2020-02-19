@@ -287,7 +287,10 @@ Target.create "CleanDocs" (fun _ ->
 
 Target.create "Restore" (fun _ ->
     solutionFile
-    |> DotNet.restore id
+    |> DotNet.restore (fun p -> 
+        { p with
+            p.}
+        )
 )
 
 Target.create "Build" (fun _ ->
@@ -595,7 +598,7 @@ Target.create "CIBuildLinux" ignore
 //Dotnet core build, excludes all .net framework only projects
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Restore"
+  //==> "Restore"
   ==> "BuildDotnet"
   ==> "CopyBinariesDotnet"
   ==> "Dotnet"
@@ -603,14 +606,14 @@ Target.create "CIBuildLinux" ignore
 //Builds on mono, biodb is excluded as i simly cannot get it to work
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Restore"
+  //==> "Restore"
   ==> "BuildMono"
   ==> "CopyBinariesMono"
   ==> "Mono"
 
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Restore"
+  //==> "Restore"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
