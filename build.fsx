@@ -613,7 +613,7 @@ Target.create "CIBuildLinux" ignore
 
 "Clean"
   ==> "AssemblyInfo"
-  //==> "Restore"
+  ==> "Restore"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
