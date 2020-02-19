@@ -293,6 +293,16 @@ Target.create "Restore" (fun _ ->
     |> DotNet.restore id
 )
 
+Target.create "RestoreMono" (fun _ ->
+    !! "src/**/*.??proj"
+    -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
+    -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
+    -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
+    -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"
+    -- "src/**/*.shproj"
+    |> Seq.iter (fun f -> f |> DotNet.restore id)
+)
+
 Target.create "Build" (fun _ ->
     let setParams (defaults:MSBuildParams) =
         { defaults with
@@ -606,7 +616,7 @@ Target.create "CIBuildLinux" ignore
 //Builds on mono, biodb is excluded as i simply cannot get it to work
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Restore"
+  ==> "RestoreMono"
   ==> "BuildMono"
   ==> "CopyBinariesMono"
   ==> "Mono"
