@@ -258,13 +258,13 @@ Target.create "CopyBinariesMono" (fun _ ->
 )
 
 Target.create "CopyBinariesDotnet" (fun _ ->
-    printfn "excluding the biodb project for mono builds"
+    printfn "excluding the biodb project for dotnet builds"
     printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj"-- "src/BioFSharp.Parallel.fsproj"-- "src/BioFSharp.ImgP.fsproj" -- "src/BioFSharp.Vis.fsproj")
     let targets = 
         !! "src/**/*.??proj"
         -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
         -- "src/**/*.shproj"
-        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "Mono", "bin" </> (Path.GetFileNameWithoutExtension f)))
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "DotnetCore", "bin" </> (Path.GetFileNameWithoutExtension f)))
     for i in targets do printfn "%A" i
     targets
     |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
