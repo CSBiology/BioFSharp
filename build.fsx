@@ -263,10 +263,10 @@ Target.create "CopyBinariesDotnet" (fun _ ->
     let targets = 
         !! "src/**/*.??proj"
         -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
+        -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
+        -- "src/BioFSharp.Parallel/BioFSharp.ImgP.fsproj" 
+        -- "src/BioFSharp.Parallel/BioFSharp.Vis.fsproj"
         -- "src/**/*.shproj"
-        -- "src/BioFSharp.Parallel.fsproj" 
-        -- "src/BioFSharp.ImgP.fsproj" 
-        -- "src/BioFSharp.Vis.fsproj"
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "DotnetCore", "bin" </> (Path.GetFileNameWithoutExtension f)))
     for i in targets do printfn "%A" i
     targets
