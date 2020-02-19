@@ -15,7 +15,7 @@ nuget Fake.DotNet.FSFormatting
 nuget Fake.DotNet.Fsi
 nuget Fake.DotNet.NuGet
 nuget Fake.Api.Github
-nuget Fake.DotNet.Testing.Expecto"
+nuget Fake.DotNet.Testing.Expecto //"
 
 #load ".fake/build.fsx/intellisense.fsx"
 open System.IO
@@ -564,6 +564,10 @@ Target.create "ReleaseDocsConfirmation" (fun _ -> match promptYesNo releaseDocsM
 Target.create "All" ignore
 
 Target.create "Linux" ignore
+
+Target.create "CIBuild" ignore
+
+Target.create "CIBuildLinux" ignore
 
 "Clean"
   //==> "InstallPaket"
