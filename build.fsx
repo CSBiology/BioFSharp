@@ -264,8 +264,8 @@ Target.create "CopyBinariesDotnet" (fun _ ->
         !! "src/**/*.??proj"
         -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
         -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
-        -- "src/BioFSharp.Parallel/BioFSharp.ImgP.fsproj" 
-        -- "src/BioFSharp.Parallel/BioFSharp.Vis.fsproj"
+        -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
+        -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"
         -- "src/**/*.shproj"
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "DotnetCore", "bin" </> (Path.GetFileNameWithoutExtension f)))
     for i in targets do printfn "%A" i
@@ -287,6 +287,11 @@ Target.create "CleanDocs" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Build library & test project
+
+Target.create "Restore" (fun _ ->
+    solutionFile
+    |> DotNet.restore id
+)
 
 Target.create "Build" (fun _ ->
     let setParams (defaults:MSBuildParams) =
@@ -598,10 +603,10 @@ Target.create "CIBuildLinux" ignore
   ==> "CopyBinariesDotnet"
   ==> "Dotnet"
 
-//Builds on mono, biodb is excluded as i simly cannot get it to work
+//Builds on mono, biodb is excluded as i simply cannot get it to work
 "Clean"
   ==> "AssemblyInfo"
-  //==> "Restore"
+  ==> "Restore"
   ==> "BuildMono"
   ==> "CopyBinariesMono"
   ==> "Mono"
