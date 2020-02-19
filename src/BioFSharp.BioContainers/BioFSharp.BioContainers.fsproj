@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
     <TargetFramework>netstandard2.0</TargetFramework>
+    <BaseOutputPath>bin</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
     <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
+    <BaseOutputPath>bin</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>BioFSharp.BioContainers</RootNamespace>
