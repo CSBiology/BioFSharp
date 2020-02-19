@@ -1,6 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net47;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
+    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
     <RootNamespace>BioFSharp</RootNamespace>
     <AssemblyName>BioFSharp</AssemblyName>
     <Name>BioFSharp</Name>
@@ -12,7 +20,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <Configurations>Debug;Release;Mono</Configurations>
+    <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
   </PropertyGroup>
   <ItemGroup>
    <!-- Core -->

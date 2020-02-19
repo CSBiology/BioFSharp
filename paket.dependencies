@@ -1,78 +1,36 @@
-framework: auto-detect
+source https://www.nuget.org/api/v2
 
-source https://nuget.org/api/v2
+framework: net45, net47, netstandard2.0, netstandard2.1
 
+strategy: max
+
+nuget FSharp.Core >= 4.7.0
 nuget Alea
-nuget FSharp.Core 
+nuget FSharpAux >= 1.0.0
+nuget FSharpAux.IO >= 1.0.0
+nuget FSharp.Stats >= 0.2.1-beta
+#nuget FSharp.Stats.MSF >= 0.2.1-beta
+nuget FSharp.Plotly >= 1.2.0
+nuget docker.dotnet >= 3.125.2
+nuget SharpZipLib >= 1.2.0
+nuget CNTK.CPUOnly >= 2.7.0
+nuget Microsoft.Xaml >= 4.0.0.1
 nuget Argu
-
 nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
-nuget Expecto.VisualStudio.TestAdapter version_in_path: true
-nuget FSharp.Data.TypeProviders
-nuget FSharp.Plotly
-nuget Microsoft.Xaml
-nuget SwaggerProvider
-nuget YamlDotNet
-
-nuget docker.dotnet
-nuget SharpZipLib
-
-nuget CNTK.CPUOnly
-
-git https://github.com/CSBiology/FSharpAux.git nuget Packages: /
-nuget FSharpAux
-nuget FSharpAux.IO
-
-git https://github.com/CSBiology/FSharp.Stats.git nuget Packages: /
-nuget FSharp.Stats
-nuget FSharp.Stats.MSF
-
-
-clitool dotnet-fake
-
 
 group BioDB
-    framework:net45
-    source https://nuget.org/api/v2
-
-    nuget Alea
-    nuget FSharp.Core 4.1.17
-    nuget Argu
-
-    nuget Expecto
-    nuget Expecto.BenchmarkDotNet
-    nuget Expecto.FsCheck
-    nuget Expecto.VisualStudio.TestAdapter version_in_path: true
-    nuget FSharp.Data.TypeProviders
-    nuget FSharp.Plotly
-    nuget Microsoft.Xaml
-    nuget SwaggerProvider
+    source https://www.nuget.org/api/v2
+    nuget SwaggerProvider >= 0.10
     nuget YamlDotNet
+    nuget FSharp.Data.TypeProviders
+
 
 group Formatting
 
-    source https://nuget.org/api/v2
+    source https://www.nuget.org/api/v2
     source https://ci.appveyor.com/nuget/fsharp-formatting
 
     nuget FSharp.Formatting prerelease
     nuget FSharp.Formatting.CommandTool prerelease
-
-group FakeBuild
-    
-    source https://api.nuget.org/v3/index.json
-
-    storage: none
-
-    nuget Fake.Core.Target
-    nuget Fake.IO.FileSystem
-    nuget Fake.DotNet.Cli
-    nuget Fake.Tools.Git
-    nuget Fake.DotNet.MSBuild
-    nuget Fake.Core.ReleaseNotes 
-    nuget Fake.DotNet.AssemblyInfoFile
-    nuget Fake.DotNet.Paket
-    nuget Fake.DotNet.Testing.Expecto 
-    nuget Fake.DotNet.FSFormatting 
-    nuget Fake.Api.GitHub
