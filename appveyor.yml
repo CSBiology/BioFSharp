@@ -5,6 +5,9 @@ image:
 init:
   - git config --global core.autocrlf input
 
+matrix:
+  fast_finish: true
+
 for:
 -
   matrix:
