@@ -358,6 +358,23 @@ Target.create "RunTests" (fun _ ->
     )
 )
 
+Target.create "RunTestsMono" (fun _ ->
+    let assemblies = !! testAssemblies
+
+    assemblies
+    |> Seq.iter (fun f ->
+        Command.RawCommand (
+            f,
+            Arguments.OfArgs []
+        )
+        |> CreateProcess.fromCommand
+        |> CreateProcess.withFramework
+        |> CreateProcess.ensureExitCode
+        |> Proc.run
+        |> ignore
+    )
+)
+
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
@@ -618,7 +635,7 @@ Target.create "CIBuildLinux" ignore
   ==> "RestoreMono"
   ==> "BuildMono"
   ==> "CopyBinariesMono"
-  ==> "RunTests"
+  ==> "RunTestsMono"
   ==> "Mono"
 
 "Clean"
