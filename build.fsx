@@ -285,14 +285,6 @@ Target.create "CleanDocs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
-Target.create "Restore" (fun _ ->
-    solutionFile
-    |> DotNet.restore (fun p -> 
-        { p with
-            p.}
-        )
-)
-
 Target.create "Build" (fun _ ->
     let setParams (defaults:MSBuildParams) =
         { defaults with
