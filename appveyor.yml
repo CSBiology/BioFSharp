@@ -23,7 +23,7 @@ for:
 
   build_script:
   - chmod +x ./build.sh
-  - sh: ./build.sh -t Linux
+  - sh: ./build.sh -t Dotnet
 
 test: off
 version: 0.0.1.{build}

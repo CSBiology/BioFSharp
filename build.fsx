@@ -173,7 +173,8 @@ let website = "/BioFSharp"
 
 let pkgDir = "pkg"
 
-let linuxConfiguration = DotNet.Custom "Mono"
+let monoConfiguration = DotNet.Custom "Mono"
+let dotnetCoreConfiguration = DotNet.Custom "DotnetCore"
 let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
@@ -242,7 +243,7 @@ Target.create "CopyBinaries" (fun _ ->
     |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
 )
 
-Target.create "CopyBinariesLinux" (fun _ ->
+Target.create "CopyBinariesMono" (fun _ ->
     printfn "excluding the biodb project for mono builds"
     printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj")
     let targets = 
@@ -256,6 +257,19 @@ Target.create "CopyBinariesLinux" (fun _ ->
                                             Shell.copyDir toDir fromDir (fun _ -> true))
 )
 
+Target.create "CopyBinariesDotnet" (fun _ ->
+    printfn "excluding the biodb project for mono builds"
+    printfn "paths to copy : %A" (!! "src/**/*.??proj"-- "src/**/*.shproj" -- "src/BioFSharp.BioDb.fsproj"-- "src/BioFSharp.Parallel.fsproj"-- "src/BioFSharp.ImgP.fsproj" -- "src/BioFSharp.Vis.fsproj")
+    let targets = 
+        !! "src/**/*.??proj"
+        -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
+        -- "src/**/*.shproj"
+        |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "Mono", "bin" </> (Path.GetFileNameWithoutExtension f)))
+    for i in targets do printfn "%A" i
+    targets
+    |>  Seq.iter (fun (fromDir, toDir) ->   printfn "copy from %s to %s" fromDir toDir
+                                            Shell.copyDir toDir fromDir (fun _ -> true))
+)
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -291,14 +305,28 @@ Target.create "Build" (fun _ ->
     MSBuild.build setParams solutionFile
 )
 
-Target.create "BuildLinux" (fun _ ->
+Target.create "BuildMono" (fun _ ->
+    let setParams (defaults:MSBuildParams) =
+        { defaults with
+            Verbosity = Some(Quiet)
+            Targets = ["Build"]
+            Properties =
+                [
+                    "Optimize", "True"
+                    "DebugSymbols", "True"
+                    "Configuration", "Mono"
+                ]
+         }
+    MSBuild.build setParams solutionFile
+    )
+
+Target.create "BuildDotnet" (fun _ ->
     solutionFile 
     |> DotNet.build (fun p -> 
         { p with
-            Configuration = DotNet.BuildConfiguration.fromString "Mono" }
+            Configuration = dotnetCoreConfiguration }
         )
 )
-
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
@@ -556,22 +584,31 @@ Target.create "ReleaseDocsConfirmation" (fun _ -> match promptYesNo releaseDocsM
 
 Target.create "All" ignore
 
-Target.create "Linux" ignore
+Target.create "Dotnet" ignore
+
+Target.create "Mono" ignore
 
 Target.create "CIBuild" ignore
 
 Target.create "CIBuildLinux" ignore
 
+//Dotnet core build, excludes all .net framework only projects
 "Clean"
-  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
-  ==> "BuildLinux"
-  ==> "CopyBinariesLinux"
-  ==> "Linux"
+  ==> "BuildDotnet"
+  ==> "CopyBinariesDotnet"
+  ==> "Dotnet"
+
+//Builds on mono, biodb is excluded as i simly cannot get it to work
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Restore"
+  ==> "BuildMono"
+  ==> "CopyBinariesMono"
+  ==> "Mono"
 
 "Clean"
-  //==> "InstallPaket"
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "Build"
