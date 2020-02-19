@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>MoFF - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
+
+
+
+<h1>MoFF</h1>
+<p>
+  <span>Namespace: BioFSharp.BioContainers</span><br />
+  </p>
+<div class="xmldoc">
+<p>moFF is an OS independent tool designed to extract apex MS1 intensity using a set of identified MS2 peptides. It currently uses a Thermo library to directly extract data from Thermo Raw spectrum files,
+eliminating the need for conversions from other formats. Moreover, moFF also allows to work directly with mzML files.
+Input Data: moFF requires two types of input for the quantification procedure
+Thermo RAW file or mzML file -and- MS2 identified peptide information.
+The MS2 identified peptides can be presented as a tab-delimited file containing mimimal (mandatory) annotation for each peptide.
+The tab-delimited file must contain the following information for all the peptides:
+'peptide' : peptide-spectrum-match sequence
+'prot' : protein ID
+'mod_peptide' : peptide-spectrum-match sequence that contains also possible modification (i.e NH2-M<Mox>LTKFESK-COOH )
+'rt': peptide-spectrum-match retention time (i.e the retention time contained in the mgf file; The retention time must be specified in second)
+'mz' : mass over charge
+'mass' : mass of the peptide
+'charge' : charge of the ionized peptide.
+------ Argentini et al. Nature Methods. 2016 12(13):964–966.</p>
+
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-moff-apexintensityoptions.html">ApexIntensityOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Those options run the Apex Intensity module.
+Around the RT of the input feature, a time window is constructed which results in a local XIC.
+The peak apex is then located in this local XIC. The log<em>L</em>R metric measures the skewness of the peak around the RT of the obtained apex point.
+The SNR metric provides the ratio of peak height to noise, where the noise value is set as the lowest intensity value in the local XIC.
+mzML must be specified using --tsv<em>list | --raw</em>list (Ms2PeptidesInputFile &amp; RawFile)</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-moff-entireworkflowoptions.html">EntireWorkflowOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Those options run the Entire Workflow module, which executes both, the Match between runs and Apex Intensity module.
+The options are identical for both apex and MBR modules. The output for the latter (MBR) is stored in the folder sample<em>folder/mbr</em>output,
+while the former (apex) generates files in the specified output_moff folder.Log files for both algorithms are generated in the respective folders.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-moff-inputoption.html">InputOption</a>
+          </td>
+          <td class="xmldoc">
+          <p>File input methods for the different run options.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-moff-matchbetweenrunsoptions.html">MatchBetweenRunsOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Those options run the MBR module, which takes a list of features of interest for a given run, and then matches the corresponding features in other runs.
+The output will be stored in a subfolder ('mbr<em>output') inside the specified input folder.
+The MBR module will consider all the .txt files present in the specified input folder as replicates (to select specific files or
+different extension, please refer to the example below). The files in sample</em>folder/mbr_output will be identical to the input files,
+but they will have an additional field ('matched') that specifies which peptides have match (1) or not (0).
+The MBR algorithm also produces a log file in the provided input directory.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-moff-moffparameters.html">MoFFParameters</a>
+          </td>
+          <td class="xmldoc">
+          <p>Header type which contains lists of all types for input options.</p>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '540', 540)" onmouseover="showTip(event, '540', 540)">
+            runApexIntensity bcContext opts
+          </code>
+          <div class="tip" id="540">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L320-320" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '541', 541)" onmouseover="showTip(event, '541', 541)">
+            runApexIntensityAsync bcContext opts
+          </code>
+          <div class="tip" id="541">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; Async&lt;string&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L289-289" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Warning 1: In case of 'ApexIntensityOptions.Ms2PeptidesInputFileFolder' and 'ApexIntensityOptions.RawFilesFolder' raw file names MUST be the same of the input file otherwise the script gives you an error !
+Warning 2: You can not mix the two input methods ( 'Ms2PeptidesInputFileFolder' / 'RawFilesFolder' and 'Ms2PeptidesInputFile' / 'RawFile' ) otherwise the script gives you an error !
+Warning 3: mzML raw file MUST be only specified using 'RawFile' / 'Ms2PeptidesInputFile'. The 'RawFilesFolder' option is not available for mzML files.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '542', 542)" onmouseover="showTip(event, '542', 542)">
+            runEntireWorkflow bcContext opts
+          </code>
+          <div class="tip" id="542">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L359-359" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '543', 543)" onmouseover="showTip(event, '543', 543)">
+            runEntireWorkflowAsync bcContext opts
+          </code>
+          <div class="tip" id="543">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; Async&lt;string&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L329-329" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The output for MBR (MatchBetweenRuns) is stored in the folder sample<em>folder/mbr</em>output, while apex (ApexIntensity) generates files in the specified output_moff folder. Log files for both algorithms are generated in the respective folders.
+Warning 1: In case of 'ApexIntensityOptions.Ms2PeptidesInputFileFolder' and 'ApexIntensityOptions.RawFilesFolder' raw file names MUST be the same of the input file otherwise the script gives you an error !
+Warning 2: You can not mix the two input methods ( 'Ms2PeptidesInputFileFolder' / 'RawFilesFolder' and 'Ms2PeptidesInputFile' / 'RawFile' ) otherwise the script gives you an error !
+Warning 3: mzML raw file MUST be only specified using 'RawFile' / 'Ms2PeptidesInputFile'. The 'RawFilesFolder' option is not available for mzML files.
+You can set all the parameters values in a file and load them using "MoffFile".</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '544', 544)" onmouseover="showTip(event, '544', 544)">
+            runMatchBetweenRuns bcContext opts
+          </code>
+          <div class="tip" id="544">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L282-282" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '545', 545)" onmouseover="showTip(event, '545', 545)">
+            runMatchBetweenRunsAsync bcContext opts
+          </code>
+          <div class="tip" id="545">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opts:MoFFParameters list -&gt; Async&lt;string&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/MoFF.fs#L249-249" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>The output will be stored in a subfolder ('mbr<em>output') inside the specified input folder. The MBR module will consider all the .txt files present in the specified input folder as replicates.
+The files in sample</em>folder/mbr_output will be identical to the input files, but they will have an additional field ('matched') that specifies which peptides have match (1) or not (0).
+The MBR algorithm also produces a log file in the provided input directory.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+                  
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>

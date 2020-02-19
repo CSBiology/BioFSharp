@@ -82,55 +82,107 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '755', 755)" onmouseover="showTip(event, '755', 755)">
-            compute bootstrapIterations data
+          <code onmouseout="hideTip(event, '763', 763)" onmouseover="showTip(event, '763', 763)">
+            compute verbose bootstrapIterations data
           </code>
-          <div class="tip" id="755">
-            <strong>Signature:</strong> bootstrapIterations:int -&gt; data:OntologyItem&lt;float&gt; array -&gt; SailentResult&lt;float&gt;<br />
+          <div class="tip" id="763">
+            <strong>Signature:</strong> verbose:bool -&gt; bootstrapIterations:int -&gt; data:OntologyItem&lt;float&gt; array -&gt; SailentResult&lt;float&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L93-93" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L124-124" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Compute SAILENT (Surprisal AnalysIs EmpiricaL pErmutatioN Test) for the given annotated dataset. This empirical test was
+initially designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution
+of the same size given the whole dataset, but it should be applicable to similar types of datasets.</p>
+<p>Input:</p>
+<ul>
+<li>verbose: if true, bootstrap iterations and runtime for bootstrapping is printed</li>
+<li>bootstrapIterations: the amount of distributions to sample from the whole dataset to create test distributions for each binsize present in the data</li>
+<li>data: annotated dataset (containing ontology items with the associated feature)</li>
+</ul>
+<p>a SAILENT test returns 3 descriptors for the input data:
+Absolute descriptor: test distributions and tests are performed on the absolute values of the dataset
+Negative descriptor: test distributions and tests are performed on the negative values of the dataset only
+Absolute descriptor: test distributions and tests are performed on the positive values of the dataset only</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '756', 756)" onmouseover="showTip(event, '756', 756)">
-            getDistinctGroups(cons)
+          <code onmouseout="hideTip(event, '764', 764)" onmouseover="showTip(event, '764', 764)">
+            computeOfSARes(...)
           </code>
-          <div class="tip" id="756">
-            <strong>Signature:</strong> cons:OntologyItem&lt;float&gt; array -&gt; string list<br />
+          <div class="tip" id="764">
+            <strong>Signature:</strong> verbose:bool -&gt; ontologyMap:Map&lt;string,(string * string) []&gt; -&gt; identifiers:string [] -&gt; bootstrapIterations:int -&gt; saRes:(type) -&gt; SailentResult&lt;float&gt; []<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L30-30" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L249-249" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Compute SAILENT (Surprisal AnalysIs EmpiricaL pErmutatioN Test) for the given Surprisal Analysis result. This empirical test was
+designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution
+of the same size given the whole dataset.</p>
+<p>Input:</p>
+<ul>
+<li>verbose: if true, bootstrap iterations and runtime for bootstrapping is printed</li>
+<li>ontologyMap: maps identifiers of the data to ontology annotations (can be created using the BioFSharp.BioDB module)</li>
+<li>identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map.</li>
+<li>bootstrapIterations: the amount of distributions to sample from the whole dataset to create test distributions for each binsize present in the data</li>
+<li>saRes: the Surprisal Analysis Result to test</li>
+</ul>
+<p>a SAILENT test returns 3 descriptors for each constraint of the Surprisal Nalysis result:
+Absolute descriptor: test distributions and tests are performed on the absolute values of the dataset
+Negative descriptor: test distributions and tests are performed on the negative values of the dataset only
+Absolute descriptor: test distributions and tests are performed on the positive values of the dataset only</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '757', 757)" onmouseover="showTip(event, '757', 757)">
+          <code onmouseout="hideTip(event, '765', 765)" onmouseover="showTip(event, '765', 765)">
+            computeOfSAResAsync(...)
+          </code>
+          <div class="tip" id="765">
+            <strong>Signature:</strong> verbose:bool -&gt; ontologyMap:Map&lt;string,(string * string) []&gt; -&gt; identifiers:string [] -&gt; bootstrapIterations:int -&gt; saRes:(type) -&gt; Async&lt;SailentResult&lt;float&gt;&gt; []<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L262-262" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Async version of computeOfSARes to use for parallelization (computeOfSAResAsync ( .. ) |&gt; Async.Parallel |&gt; Async.RunSynchronously)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '766', 766)" onmouseover="showTip(event, '766', 766)">
             prepareDataColumn(...)
           </code>
-          <div class="tip" id="757">
-            <strong>Signature:</strong> ontologyMap:Map&lt;string,(string * string) list&gt; -&gt; identifiers:string [] -&gt; rawData:float [] -&gt; OntologyItem&lt;float&gt; []<br />
+          <div class="tip" id="766">
+            <strong>Signature:</strong> ontologyMap:Map&lt;string,(string * string) []&gt; -&gt; identifiers:string [] -&gt; rawData:float [] -&gt; OntologyItem&lt;float&gt; []<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L70-70" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L83-83" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>utility function to prepare a dataset column for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module.</p>
+<p>identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map.
+rawData: feature array of interest, must be same length as annotations.</p>
 
 
         </td>
@@ -138,19 +190,21 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '758', 758)" onmouseover="showTip(event, '758', 758)">
+          <code onmouseout="hideTip(event, '767', 767)" onmouseover="showTip(event, '767', 767)">
             prepareDataset(...)
           </code>
-          <div class="tip" id="758">
-            <strong>Signature:</strong> ontologyMap:Map&lt;string,(string * string) list&gt; -&gt; identifiers:string [] -&gt; rawDataset:float [] [] -&gt; OntologyItem&lt;float&gt; [] []<br />
+          <div class="tip" id="767">
+            <strong>Signature:</strong> ontologyMap:Map&lt;string,(string * string) []&gt; -&gt; identifiers:string [] -&gt; rawDataset:float [] [] -&gt; OntologyItem&lt;float&gt; [] []<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L89-89" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.Stats/SurprisalAnalysisEmpiricalPermutationTest.fs#L104-104" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>utility function to prepare a dataset (in column major form) for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module.</p>
+          <p>utility function to prepare a dataset (in column major form) for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module.
+identifiers: a string array containing the annotations of the data at the same index, used as lookup in the ontology map.
+rawData: feature matrix of interest, columns must have same length as identifiers</p>
 
 
         </td>
@@ -175,6 +229,10 @@
                   </li>
                   <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                   <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                   <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>

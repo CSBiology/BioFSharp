@@ -34,34 +34,117 @@
 		  <div class="row">
 			<div class="span9" id="main">
 			  
+<h4><a name="1-0-02-Thursday-October-24-2019" class="anchor" href="#1-0-02-Thursday-October-24-2019">1.0.02 - Thursday, October 24, 2019</a></h4>
+<ul>
+<li>
+<strong>BioFSharp.BioDB:</strong>
+<ul>
+<li>Fix FaTool OData model URL</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.Vis</strong>
+<ul>
+<li>Add Function to save chord plots as html files</li>
+</ul>
+</li>
+</ul>
+<h4><a name="1-0-01-Thursday-October-24-2019" class="anchor" href="#1-0-01-Thursday-October-24-2019">1.0.01 - Thursday, October 24, 2019</a></h4>
+<ul>
+<li>
+<strong>BioFSharp.Stats:</strong>
+<ul>
+<li>Major speed improvements for Sailent</li>
+</ul>
+</li>
+</ul>
+<h4><a name="1-0-0-Wednesday-October-23-2019" class="anchor" href="#1-0-0-Wednesday-October-23-2019">1.0.0 - Wednesday, October 23, 2019</a></h4>
+<p>Renaming of BioFSharp.Biotools makes this a major version increase, as it is not backwards compatible. Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>We now have a cool new logo! (See readme)</li>
+<li><p><strong>BioFSharp.BioTools has been renamed to BioFSharp.BioContainers</strong>. This reflects the purpose of the library better than the previous name.</p></li>
+<li>
+<p><strong>BioFSharp.BioContainers</strong></p>
+<ul>
+<li><p>Add thin <a href="https://github.com/CSBiology/BioFSharp/commit/3304e612ccc0b97aa1625c29619968173168b545">LastAlign biocontainer API wrapper</a></p></li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.IO</strong></p>
+<ul>
+<li>
+<p>Bugfixes:</p>
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/cc3a3f9efe898395c59a97e2b66792c4b3970749">Fix SOFT parser skipping entities</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/72">#72</a>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.Stats</strong></p>
+<ul>
+<li><p>Sailent is now <a href="https://github.com/CSBiology/BioFSharp/commit/844d2efcdd4b85c9e1c80f0160fb74e72f514a90">faster</a> and has a <a href="https://github.com/CSBiology/BioFSharp/commit/97cd33978142f3cc669c4d1e527d8583456f5bc6">verbose option</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/74">#74</a>,<a href="https://github.com/CSBiology/BioFSharp/issues/75">#75</a>)</p></li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.ImgP</strong></p>
+<ul>
+<li><p>Add functionality to <a href="https://github.com/CSBiology/BioFSharp/commit/68073759265d086ea6d9b47f30bc3e47c8d3fb60">isolate local maxima from frames</a></p></li>
+<li><p>Add functionality to <a href="https://github.com/CSBiology/BioFSharp/commit/57efb6003254b234fdad2837e5ee666933a4355f">get correlation at specified coordinates</a></p></li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-1-02-Wednesday-September-04-2019" class="anchor" href="#0-1-02-Wednesday-September-04-2019">0.1.02 - Wednesday, September 04, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>
+<strong>BioFSharp</strong> (core):
+<ul>
+<li>Addition of various Unit tests (see the <a href="https://github.com/CSBiology/BioFSharp/issues/30">issue</a> to track what has been added since the last version)</li>
+<li>
+Bugfixes:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/27ab68f84aacd6de01a194dc5542da90a85e59d4">Naming clarification and bugfixes regarding reverse and reverse complements for DNA</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/66">#66</a> and <a href="https://github.com/CSBiology/BioFSharp/issues/65">#65</a>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.Stats</strong>
+<ul>
+<li>
+Bugfixes
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/0ed0161d8a203f38ac7171b3213eb7b386adcacf">Ontology enrichment is now more conservative</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4><a name="0-1-01-Wednesday-July-31-2019" class="anchor" href="#0-1-01-Wednesday-July-31-2019">0.1.01 - Wednesday, July 31, 2019</a></h4>
 <p>Several bugfixes and additions to multiple sub projects:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">*</span> <span class="o">**</span><span class="id">BioFSharp</span><span class="o">**</span> <span class="pn">(</span><span class="id">core</span><span class="pn">)</span><span class="pn">:</span>
-	<span class="pn">*</span> <span class="id">Add</span> <span class="id">Unit</span> <span class="id">testing</span> <span class="k">for</span> <span class="id">modules</span><span class="pn">:</span>
-		<span class="id">Formula</span>
-		<span class="id">Mass</span>
-		<span class="id">BioArray</span>
-	<span class="pn">*</span> <span class="id">Changed</span> <span class="id">functionality</span><span class="pn">:</span>
-	  <span class="pn">*</span> <span class="id">Formula</span><span class="pn">.</span><span class="id">substract</span> <span class="id">now</span> <span class="id">also</span> <span class="id">returns</span> <span class="id">negative</span> <span class="id">atom</span> <span class="id">counts</span>
-	  
-<span class="pn">*</span> <span class="o">**</span><span class="id">BioFSharp</span><span class="pn">.</span><span class="id">ML</span><span class="o">**:</span>
-	<span class="pn">*</span> <span class="id">Additional</span> <span class="id">functionality</span><span class="pn">:</span>
-	  <span class="pn">*</span> <span class="id">add</span> <span class="id">thin</span> <span class="id">CNTK</span> <span class="id">API</span>
-</code></pre></td>
-</tr>
-</table>
+<ul>
+<li><strong>BioFSharp</strong> (core):</li>
+<li>
+Add Unit testing for modules:
+Formula
+Mass
+BioArray
+</li>
+<li>
+Changed functionality:
+<ul>
+<li>Formula.substract now also returns negative atom counts</li>
+</ul>
+</li>
+<li><strong>BioFSharp.ML</strong>:</li>
+<li>
+Additional functionality:
+<ul>
+<li>add thin CNTK API</li>
+</ul>
+</li>
+</ul>
 <h4><a name="0-1-0-Thursday-May-30-2019" class="anchor" href="#0-1-0-Thursday-May-30-2019">0.1.0 - Thursday, May 30, 2019</a></h4>
 <p>Several bugfixes and additions to multiple sub projects:</p>
 <ul>
@@ -250,6 +333,10 @@ Extension of BioContainer functionality:
                   </li>
                   <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                   <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                   <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>

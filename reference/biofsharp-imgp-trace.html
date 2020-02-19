@@ -55,109 +55,139 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '718', 718)" onmouseover="showTip(event, '718', 718)">
+          <code onmouseout="hideTip(event, '722', 722)" onmouseover="showTip(event, '722', 722)">
             collectMaxima(...)
           </code>
-          <div class="tip" id="718">
-            <strong>Signature:</strong> rickerarray:myRicker [] -&gt; neighbourPoints:int -&gt; paddedTrace:float [] -&gt; float [] * float []<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L184-184" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>gives maximaarray (checked with x neigbours) * CWT trace of maximal correlation</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '719', 719)" onmouseover="showTip(event, '719', 719)">
-            cWT1D paddedTrace myRicker
-          </code>
-          <div class="tip" id="719">
-            <strong>Signature:</strong> paddedTrace:float [] -&gt; myRicker:myRicker -&gt; float []<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L134-134" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>computes the continious wavelet transform of the padded trace with wavelet type Ricker.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '720', 720)" onmouseover="showTip(event, '720', 720)">
-            cwtDataOfCoor marr y x paddedData
-          </code>
-          <div class="tip" id="720">
-            <strong>Signature:</strong> marr:MarrWavelet -&gt; y:int -&gt; x:int -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; float&lt;MeasureOne&gt; []<br />
-                          <strong>Type parameters:</strong> ^a                      </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L83-83" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '721', 721)" onmouseover="showTip(event, '721', 721)">
-            findLocalMaxima2D(...)
-          </code>
-          <div class="tip" id="721">
-            <strong>Signature:</strong> paddedTrace:float [] -&gt; ricker:myRicker -&gt; neighbourPoints:int -&gt; float [] * float []<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L150-150" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '722', 722)" onmouseover="showTip(event, '722', 722)">
-            findTraceOfBestCoor(...)
-          </code>
           <div class="tip" id="722">
-            <strong>Signature:</strong> marrList:MarrWavelet list -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; (float * float) -&gt; float * float&lt;MeasureOne&gt; []<br />
-                          <strong>Type parameters:</strong> ^a                      </div>
+            <strong>Signature:</strong> rickerarray:myRicker [] -&gt; neighbourPoints:int -&gt; borderpadding:int -&gt; paddedTrace:float [] -&gt; float [] * float []<br />
+                                  </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L99-99" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L233-233" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>takes a collection of wavelets and a padded trace and computes a merged trace, where maxima of each trace are merged</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '723', 723)" onmouseover="showTip(event, '723', 723)">
-            fitting(...)
+            cWT1D paddedTrace myRicker
           </code>
           <div class="tip" id="723">
+            <strong>Signature:</strong> paddedTrace:float [] -&gt; myRicker:myRicker -&gt; float []<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use anymore. Use transform2D instead.&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use anymore. Use transform2D instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L194-194" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '724', 724)" onmouseover="showTip(event, '724', 724)">
+            cwtDataOfCoor marr y x paddedData
+          </code>
+          <div class="tip" id="724">
+            <strong>Signature:</strong> marr:MarrWavelet -&gt; y:int -&gt; x:int -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; float []<br />
+                          <strong>Type parameters:</strong> ^a                        <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use anymore. Switch to getCorrelationAtCoor instead.&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use anymore. Switch to getCorrelationAtCoor instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L85-85" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '725', 725)" onmouseover="showTip(event, '725', 725)">
+            findLocalMaxima2D
+          </code>
+          <div class="tip" id="725">
+            <strong>Signature:</strong> int -&gt; float [] -&gt; myRicker -&gt; int -&gt; float [] * float []<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use anymore. Use isolateLocalMaxima instead.&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use anymore. Use isolateLocalMaxima instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L230-230" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '726', 726)" onmouseover="showTip(event, '726', 726)">
+            findTraceOfBestCoor(...)
+          </code>
+          <div class="tip" id="726">
+            <strong>Signature:</strong> marrList:MarrWavelet list -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; (float * float) -&gt; float * float []<br />
+                          <strong>Type parameters:</strong> ^a                        <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use anymore. Switch to getTraceOfBestCorrelation instead.&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use anymore. Switch to getTraceOfBestCorrelation instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L121-121" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '727', 727)" onmouseover="showTip(event, '727', 727)">
+            fitting(...)
+          </code>
+          <div class="tip" id="727">
             <strong>Signature:</strong> j:int -&gt; maximaArr:float [] -&gt; threshold:float -&gt; numberOfFrames:int -&gt; rise:float -&gt; float&lt;MeasureOne&gt; []<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L209-209" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L258-258" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -169,15 +199,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '724', 724)" onmouseover="showTip(event, '724', 724)">
+          <code onmouseout="hideTip(event, '728', 728)" onmouseover="showTip(event, '728', 728)">
             fittingCaSignalToMaxima(...)
           </code>
-          <div class="tip" id="724">
-            <strong>Signature:</strong> rickerarray:myRicker [] -&gt; threshold:float -&gt; numberOfSurroundingIntensities:int -&gt; rise:float -&gt; paddedTrace:float [] -&gt; float&lt;MeasureOne&gt; []<br />
+          <div class="tip" id="728">
+            <strong>Signature:</strong> rickerarray:myRicker [] -&gt; threshold:float -&gt; borderpadding:int -&gt; numberOfSurroundingIntensities:int -&gt; rise:float -&gt; paddedTrace:float [] -&gt; float&lt;MeasureOne&gt; []<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L242-242" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L291-291" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -189,19 +219,109 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '725', 725)" onmouseover="showTip(event, '725', 725)">
-            paddTrace(cwtTrace)
+          <code onmouseout="hideTip(event, '729', 729)" onmouseover="showTip(event, '729', 729)">
+            getCorrelationAtCoor(...)
           </code>
-          <div class="tip" id="725">
-            <strong>Signature:</strong> cwtTrace:float [] -&gt; float []<br />
-                                  </div>
+          <div class="tip" id="729">
+            <strong>Signature:</strong> borderpadding:^?11175 -&gt; marr:MarrWavelet -&gt; y:^?11177 -&gt; x:^?11176 -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; float []<br />
+                          <strong>Type parameters:</strong> ^?11175, ^?11176, ^?11177, ^a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L126-126" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L104-104" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>calculates the correlations value at a specified coordinate</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '730', 730)" onmouseover="showTip(event, '730', 730)">
+            getTraceOfBestCorrelation(...)
+          </code>
+          <div class="tip" id="730">
+            <strong>Signature:</strong> borderpadding:int -&gt; marrList:MarrWavelet list -&gt; paddedData:seq&lt;^a [,]&gt; -&gt; (float * float) -&gt; float * float<br />
+                          <strong>Type parameters:</strong> ^a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L148-148" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>calculates the correlation values of a specified coordinate with given wavelets and returns the trace of highest correlation</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '731', 731)" onmouseover="showTip(event, '731', 731)">
+            isolateLocalMaxima(...)
+          </code>
+          <div class="tip" id="731">
+            <strong>Signature:</strong> borderpadding:int -&gt; paddedTrace:float [] -&gt; ricker:myRicker -&gt; neighbourPoints:int -&gt; float [] * float []<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L197-197" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>calculates the positions of maxima with given neighbourPoints and returns a maximaArray and the wavelet transformed trace</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '732', 732)" onmouseover="showTip(event, '732', 732)">
+            paddTrace(cwtTrace)
+          </code>
+          <div class="tip" id="732">
+            <strong>Signature:</strong> cwtTrace:float [] -&gt; float []<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use anymore. Use FSharp.Stats.Signal.Padding.Discrete.padRnd with borderpadding=20,000 instead.&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use anymore. Use FSharp.Stats.Signal.Padding.Discrete.padRnd with borderpadding=20,000 instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>padds the trace with 20k data points randomly selected for</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '733', 733)" onmouseover="showTip(event, '733', 733)">
+            transform2D(...)
+          </code>
+          <div class="tip" id="733">
+            <strong>Signature:</strong> borderpadding:int -&gt; myRicker:myRicker -&gt; paddedTrace:float [] -&gt; float []<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Trace.fs#L179-179" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>computes the continuous wavelet transform of the padded trace with wavelet type myRicker.</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -224,6 +344,10 @@
                   </li>
                   <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                   <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                   <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>

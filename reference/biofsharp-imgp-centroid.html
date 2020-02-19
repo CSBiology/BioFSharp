@@ -74,53 +74,23 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '671', 671)" onmouseover="showTip(event, '671', 671)">
+          <code onmouseout="hideTip(event, '673', 673)" onmouseover="showTip(event, '673', 673)">
             C3DWT marr frame
           </code>
-          <div class="tip" id="671">
-            <strong>Signature:</strong> marr:MarrWavelet -&gt; frame:^a [,] -&gt; float [,]<br />
-                          <strong>Type parameters:</strong> ^a                      </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L111-111" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '672', 672)" onmouseover="showTip(event, '672', 672)">
-            collectAllFrameInformation2 marr data
-          </code>
-          <div class="tip" id="672">
-            <strong>Signature:</strong> marr:MarrWavelet -&gt; data:seq&lt;^a [,]&gt; -&gt; LocalMaxima [] []<br />
-                          <strong>Type parameters:</strong> ^a                      </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L189-189" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>gets Marr-Wavelet and gives all LocalMaxima of the whole file as a List</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '673', 673)" onmouseover="showTip(event, '673', 673)">
-            collectFrameInformation marr index frame
-          </code>
           <div class="tip" id="673">
-            <strong>Signature:</strong> marr:MarrWavelet -&gt; index:int -&gt; frame:^a [,] -&gt; LocalMaxima []<br />
-                          <strong>Type parameters:</strong> ^a                      </div>
+            <strong>Signature:</strong> marr:MarrWavelet -&gt; frame:^a [,] -&gt; float [,]<br />
+                          <strong>Type parameters:</strong> ^a                        <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use. Switch to transform3D instead.&quot;)&gt;]<br />
+          </span>
+          </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L222-222" class="github-link">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use. Switch to transform3D instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L156-156" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -131,36 +101,38 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '674', 674)" onmouseover="showTip(event, '674', 674)">
-            createLocalMaxima(...)
+            collectAllLocalMaxima(...)
           </code>
           <div class="tip" id="674">
-            <strong>Signature:</strong> framenumber:int -&gt; x:float -&gt; y:float -&gt; intensity:float -&gt; LocalMaxima<br />
-                                  </div>
+            <strong>Signature:</strong> borderpadding:int -&gt; marr:MarrWavelet -&gt; data:seq&lt;^a [,]&gt; -&gt; LocalMaxima [] []<br />
+                          <strong>Type parameters:</strong> ^a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L60-60" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L256-256" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Transforms a padded frame stack with a given borderpadding (default 40) and a Marr wavelet into a list of all present local maxima.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '675', 675)" onmouseover="showTip(event, '675', 675)">
-            findLocalMaxima marr frame
+            collectLocalMaximaOfFrame(...)
           </code>
           <div class="tip" id="675">
-            <strong>Signature:</strong> marr:MarrWavelet -&gt; frame:^?11147 [,] -&gt; (float * float) list<br />
-                          <strong>Type parameters:</strong> ^?11147                      </div>
+            <strong>Signature:</strong> borderpadding:int -&gt; marr:MarrWavelet -&gt; index:int -&gt; frame:^a [,] -&gt; LocalMaxima []<br />
+                          <strong>Type parameters:</strong> ^a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L138-138" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L247-247" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>gets Marr, a framenumber, an offset and the number of pixels to look at in the surrounding, and gives [,] of localMaxima</p>
+          <p>Transforms a raw frame and gives a local maxima list. (marr:used Wavelet; borderpadding:default 40; index:index of frame in sequence)</p>
 
 
         </td>
@@ -169,14 +141,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '676', 676)" onmouseover="showTip(event, '676', 676)">
-            isolateCentroids(...)
+            createLocalMaxima(...)
           </code>
           <div class="tip" id="676">
-            <strong>Signature:</strong> eps:^?11154 -&gt; minPts:int -&gt; marrList:MarrWavelet list -&gt; followingFrames:int -&gt; zEqualityDistance:float&lt;MeasureOne&gt; -&gt; fu:(MarrWavelet -&gt; seq&lt;&#39;a [,]&gt; -&gt; LocalMaxima [] []) -&gt; data:seq&lt;&#39;a [,]&gt; -&gt; seq&lt;float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;&gt; * (type)<br />
-                          <strong>Type parameters:</strong> ^?11154, 'a                      </div>
+            <strong>Signature:</strong> framenumber:int -&gt; x:float -&gt; y:float -&gt; intensity:float -&gt; LocalMaxima<br />
+                                  </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L293-293" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L56-56" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -187,50 +159,70 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '677', 677)" onmouseover="showTip(event, '677', 677)">
-            isolateCentroids2(...)
+            findLocalMaxima marr frame
           </code>
           <div class="tip" id="677">
-            <strong>Signature:</strong> eps:^?11157 -&gt; minPts:int -&gt; marrList:MarrWavelet list -&gt; followingFrames:int -&gt; zEqualityDistance:float&lt;MeasureOne&gt; -&gt; data:seq&lt;^a [,]&gt; -&gt; seq&lt;float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;&gt; * (type)<br />
-                          <strong>Type parameters:</strong> ^?11157, ^a                      </div>
+            <strong>Signature:</strong> marr:MarrWavelet -&gt; frame:^?11235 [,] -&gt; LocalMaxima list<br />
+                          <strong>Type parameters:</strong> ^?11235                        <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use. Switch to isolateLocalMaxima instead.&quot;)&gt;]<br />
+          </span>
+          </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L330-330" class="github-link">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use. Switch to isolateLocalMaxima instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L160-160" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>gets a Marr wavelet and a raw frame to isolate local maxima</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '678', 678)" onmouseover="showTip(event, '678', 678)">
-            k
+            isolateCentroids(...)
           </code>
           <div class="tip" id="678">
-            <strong>Signature:</strong> float<br />
-                                  </div>
+            <strong>Signature:</strong> borderpadding:int -&gt; eps:^?11247 -&gt; minPts:int -&gt; marrList:MarrWavelet list -&gt; followingFrames:int -&gt; zEqualityDistance:float&lt;MeasureOne&gt; -&gt; data:seq&lt;^a [,]&gt; -&gt; seq&lt;float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;&gt; * (type)<br />
+                          <strong>Type parameters:</strong> ^?11247, ^a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L366-366" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L359-359" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>takes borderpadding(40), imgP, and DBSCAN parameters and gives final centroids and clusterresult</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '679', 679)" onmouseover="showTip(event, '679', 679)">
-            loadTiff(filePath)
+            isolateCentroids2
           </code>
           <div class="tip" id="679">
-            <strong>Signature:</strong> filePath:string -&gt; seq&lt;int16 [,]&gt;<br />
-                                  </div>
+            <strong>Signature:</strong> int -&gt; float -&gt; int -&gt; MarrWavelet list -&gt; int -&gt; float&lt;MeasureOne&gt; -&gt; seq&lt;int [,]&gt; -&gt; seq&lt;float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;&gt; * (type)<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Do not use. Switch to isolateCentroids instead.&quot;)&gt;]<br />
+          </span>
+          </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L67-67" class="github-link">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Do not use. Switch to isolateCentroids instead.</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L397-397" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -241,14 +233,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '680', 680)" onmouseover="showTip(event, '680', 680)">
-            paddTiff(data)
+            isolateCentroidsBy(...)
           </code>
           <div class="tip" id="680">
-            <strong>Signature:</strong> data:seq&lt;&#39;a [,]&gt; -&gt; &#39;a [,] []<br />
-                          <strong>Type parameters:</strong> 'a                      </div>
+            <strong>Signature:</strong> eps:^?11244 -&gt; minPts:int -&gt; marrList:MarrWavelet list -&gt; followingFrames:int -&gt; zEqualityDistance:float&lt;MeasureOne&gt; -&gt; isolateLocalMaxima:(MarrWavelet -&gt; seq&lt;&#39;a [,]&gt; -&gt; LocalMaxima [] []) -&gt; data:seq&lt;&#39;a [,]&gt; -&gt; seq&lt;float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;&gt; * (type)<br />
+                          <strong>Type parameters:</strong> ^?11244, 'a                      </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L89-89" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L321-321" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -259,14 +251,94 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '681', 681)" onmouseover="showTip(event, '681', 681)">
-            zEqualityFilter(...)
+            isolateLocalMaxima(...)
           </code>
           <div class="tip" id="681">
-            <strong>Signature:</strong> followingSerialFrames:int -&gt; distance:float&lt;MeasureOne&gt; -&gt; array:LocalMaxima [] [] -&gt; LocalMaxima []<br />
+            <strong>Signature:</strong> transformedFrame:^a [,] -&gt; localMaximaDistance:int -&gt; LocalMaxima list<br />
+                          <strong>Type parameters:</strong> ^a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L214-214" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Isolates local maxima of a transformed frame (without padding area) and a localMaximaDistance as number of pixels to consider in each direction (field in MarrWavelet)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '682', 682)" onmouseover="showTip(event, '682', 682)">
+            loadTiff(filePath)
+          </code>
+          <div class="tip" id="682">
+            <strong>Signature:</strong> filePath:string -&gt; seq&lt;int16 [,]&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L238-238" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L63-63" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>gets a filepath of a stack of int16 frames and reads them as stack of int16[,]</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '683', 683)" onmouseover="showTip(event, '683', 683)">
+            paddTiff borderpadding data
+          </code>
+          <div class="tip" id="683">
+            <strong>Signature:</strong> borderpadding:int -&gt; data:seq&lt;&#39;a [,]&gt; -&gt; &#39;a [,] []<br />
+                          <strong>Type parameters:</strong> 'a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>padds each frame present in the sequence with a given number of randomly chosen elements</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '684', 684)" onmouseover="showTip(event, '684', 684)">
+            transform3D wavelet borderpadding data
+          </code>
+          <div class="tip" id="684">
+            <strong>Signature:</strong> wavelet:MarrWavelet -&gt; borderpadding:int -&gt; data:^a [,] -&gt; float [,]<br />
+                          <strong>Type parameters:</strong> ^a                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L135-135" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>computes a continuous wavelet transform on discrete data (default borderpadding=40)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '685', 685)" onmouseover="showTip(event, '685', 685)">
+            zEqualityFilter(...)
+          </code>
+          <div class="tip" id="685">
+            <strong>Signature:</strong> followingSerialFrames:int -&gt; distance:float&lt;MeasureOne&gt; -&gt; lmArray:LocalMaxima [] [] -&gt; LocalMaxima []<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.ImgP/Centroid.fs#L265-265" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -295,6 +367,10 @@
                   </li>
                   <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
                   <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                   <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
