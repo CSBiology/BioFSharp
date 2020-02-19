@@ -189,7 +189,13 @@ module Chord =
         let path = Path.Combine(tempPath, file)
         File.WriteAllText(path, html)
         System.Diagnostics.Process.Start(path) |> ignore
+        
 
-
+    let saveHtmlAs path tickInterval width height labels clabels data =
+        let labelString = fromLabel labels
+        let colorLabelString = fromColorLabel clabels        
+        let guid = System.Guid.NewGuid().ToString()
+        let html = chord2Scaffold data labelString colorLabelString tickInterval width height
+        File.WriteAllText(path, html)
 
 

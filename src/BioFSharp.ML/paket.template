@@ -3,28 +3,34 @@ id BioFSharp.ML
 title
     BioFSharp.ML
 owners
-    Timo Mühlhaus
+    Timo Mühlhaus, David Zimmer, Kevin Schneider
 authors 
-    Timo Mühlhaus, Kevin Schneider
+    Timo Mühlhaus, David Zimmer, Kevin Schneider
 projectUrl
-    https://github.com/CSBiology/BioFSharp
+    https://csbiology.github.io/BioFSharp/
 iconUrl
-    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png
 licenseUrl
-    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE.txt
+    https://github.com/CSBiology/BioFSharp/blob/master/LICENSE
 requireLicenseAcceptance
     false
 language
     F#
 copyright
-    Copyright 2019
+    Copyright 2017-2020
 tags
-    bioinformatics F# fsharp maschine learning
+    F# FSharp bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis docker bioinformatics-containers biocontainers
 summary
-    Machinelearning with BioFSharp
+    Machine learning with BioFSharp and CNTK.Net
 description
-    Machinelearning with BioFSharp, containing a lighweight F# wrapper for CNTK and some pretrained models
+    Make your workflow ML ready with BioFSharp.ML. 
+    Currently contains helper functionf for CNTK 
+    and a pre-trained model we used in our publication 
+    about predicting peptide observability.
 include-referenced-projects 
     true
-files
-	../../bin/BioFSharp.ML ==> lib
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/BioFSharp
+include-pdbs true

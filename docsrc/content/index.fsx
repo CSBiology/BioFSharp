@@ -43,7 +43,7 @@ The core datamodel implements in ascending hierarchical order:
 Installation
 ------------
 
-BioFSharp is currently on the way to its 1.0.0 release. When this process is done, we will provide a nuget package at [nuget.org](https://www.nuget.org/). However, currently the way to get BioFSharp running on 
+BioFSharp is currently on the way to its 1.x release. When this process is done, we will provide a nuget package at [nuget.org](https://www.nuget.org/). However, currently the way to get BioFSharp running on 
 your machine is to either clone the repository and build the binaries yourself or download the prerelease packages from our [nuget branch](https://github.com/CSBiology/BioFSharp/tree/nuget).
 
 **Using prerelease packages from the nuget branch:**
@@ -56,13 +56,18 @@ you can then access the individual packages:
 
 `nuget BioFSharp`
 
+`nuget BioFSharp.BioContainers`
+
 `nuget BioFSharp.IO`
 
 `nuget BioFSharp.Stats`
 
+`nuget BioFSharp.ML`
+
 `nuget BioFSharp.BioDB`
 
 `nuget BioFSharp.Vis`
+
 
 
 **To build the binaries yourself:**
@@ -71,12 +76,15 @@ you can then access the individual packages:
 
 - Install [.Net Core SDK](https://www.microsoft.com/net/download)
 - Install the dotnet tool fake cli by `dotnet tool install fake-cli -g` for global installation or `dotnet tool install fake-cli --tool-path yourtoolpath`
+- Install the dotnet tool paket by `dotnet tool install paket -g` for global installation or `dotnet tool install paket --tool-path yourtoolpath`
 - go to the project folder
 - use the console command `fake build`
 
 **Linux(Ubuntu, using Mono)**:
 
 - Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
+- Install the dotnet tool fake cli by `dotnet tool install fake-cli -g` for global installation or `dotnet tool install fake-cli --tool-path yourtoolpath`
+- Install the dotnet tool paket by `dotnet tool install paket -g` for global installation or `dotnet tool install paket --tool-path yourtoolpath`
 - go to the project folder
 - use the console command `dotnet fake build --target Linux`
 

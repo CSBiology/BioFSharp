@@ -17,7 +17,7 @@ requireLicenseAcceptance
 language
     F#
 copyright
-    Copyright 2019
+    Copyright 2017-2020
 tags
     bioinformatics F# fsharp visualization
 summary
@@ -26,5 +26,8 @@ description
     Data visualization for bioinformatic purposes, containing for instance Venn and Chord diagramms
 include-referenced-projects 
     true
-files
-    ../../bin/BioFSharp.Vis ==> lib
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/BioFSharp
+include-pdbs true

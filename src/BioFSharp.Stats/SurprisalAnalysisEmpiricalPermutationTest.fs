@@ -32,7 +32,7 @@ module Sailent =
         |> List.distinct
 
     //create distribution of iter weight sums for a bin of size binSize 
-    let private bootstrapBin (verbose:bool) (binSize: int) (weightArray:float[]) (iter: int) =
+    let private bootstrapBin (binSize: int) (weightArray:float[]) (iter: int) =
         let steps = iter / 10
         let startTime = System.DateTime.Now
 
@@ -43,8 +43,6 @@ module Sailent =
                 sum
 
         let rec loop currentIter resultList =
-            if verbose && (currentIter % steps = 0) then
-                printfn "[%i/%i] iterations @%i min" currentIter iter (System.DateTime.Now.Subtract(startTime).Minutes)
             if currentIter < iter then
                 let tmp = sumRandomEntriesBy 0 0.
                 loop (currentIter+1) (tmp::resultList)
@@ -125,7 +123,7 @@ module Sailent =
     ///Absolute descriptor: test distributions and tests are performed on the positive values of the dataset only
     let compute (verbose:bool) (bootstrapIterations:int) (data: OntologyItem<float> array) =
 
-        printfn "starting SAILENT characterization"
+        if verbose then printfn "starting SAILENT characterization"
 
         // get distinct ontology terms in the dataset
         let distinctGroups = getDistinctGroups data
@@ -152,42 +150,72 @@ module Sailent =
                                 termName,tmp.Length,tmp |> List.sumBy (fun x -> x.Item))
             |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
 
-        let absoluteBinsizes =  [for (_,binSize,_) in absoluteTestTargets do yield binSize]
-        let positiveBinsizes =  [for (_,binSize,_) in positiveTestTargets do yield binSize]
-        let negativeBinsizes =  [for (_,binSize,_) in negativeTestTargets do yield binSize]
+        let absoluteBinsizes = absoluteTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
+        let positiveBinsizes = positiveTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
+        let negativeBinsizes = negativeTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
 
-        let weightArr =     [|for ann in data do yield ann.Item|]
-        let posWeightArr =  [|for ann in data do yield ann.Item|] |> Array.filter(fun x -> x>0.)
-        let negWeightArr =  [|for ann in data do yield ann.Item|] |> Array.filter(fun x -> x<0.)
+        let weightArr =     data        |> Array.map (fun ann -> ann.Item)
+        let absWeightArr =  weightArr   |> Array.map abs
+        let posWeightArr =  weightArr   |> Array.filter(fun x -> x>0.)
+        let negWeightArr =  weightArr   |> Array.filter(fun x -> x<0.)
 
 
         // create bootstrapped test distributions for all test targets
-        printfn "bootstrapping absolute test distributions..."
+        if verbose then printfn "bootstrapping absolute test distributions for %i bins" absoluteBinsizes.Length
         let absoluteTestDistributions =
-            [|  
-                for binSize in absoluteBinsizes do
-                let tmp = bootstrapBin verbose binSize weightArr bootstrapIterations
-                yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
-            |]
-            |> Map.ofArray
 
-        printfn "bootstrapping positive test distributions..."
+            let startTime = System.DateTime.Now
+
+            absoluteBinsizes
+            |> List.mapi 
+                (fun i binSize ->
+
+                    if verbose && (i % (absoluteBinsizes.Length / 10) = 0 ) then
+                        let elapsed = System.DateTime.Now.Subtract(startTime)
+                        printfn "[%i/%i] bins @ %imin %is" i absoluteBinsizes.Length elapsed.Minutes elapsed.Seconds
+
+                    let tmp = bootstrapBin binSize absWeightArr bootstrapIterations
+                    (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
+                )
+            |> Map.ofList
+
+        if verbose then printfn "bootstrapping positive test distributions for %i bins" positiveBinsizes.Length
         let positiveTestDistributions =
-            [|  
-                for binSize in positiveBinsizes do
-                let tmp = bootstrapBin verbose binSize posWeightArr bootstrapIterations
-                yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
-            |]
-            |> Map.ofArray
-        
-        printfn "bootstrapping negative test distributions..."
+
+            let startTime = System.DateTime.Now
+
+            positiveBinsizes
+            |> List.mapi 
+                (fun i binSize ->
+
+                    if verbose && (i % (positiveBinsizes.Length / 10) = 0 ) then
+                        let elapsed = System.DateTime.Now.Subtract(startTime)
+                        printfn "[%i/%i] bins @ %imin %is" i positiveBinsizes.Length elapsed.Minutes elapsed.Seconds
+
+                    let tmp = bootstrapBin binSize posWeightArr bootstrapIterations
+                    (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
+                )
+            |> Map.ofList
+            
+        if verbose then printfn "bootstrapping negative test distributions for %i bins" negativeBinsizes.Length
         let negativeTestDistributions = 
-            [|  
-                for binSize in negativeBinsizes do
-                let tmp = bootstrapBin verbose binSize negWeightArr bootstrapIterations
-                yield (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
-            |]
-            |> Map.ofArray
+
+            let startTime = System.DateTime.Now
+
+            negativeBinsizes
+            |> List.mapi 
+                (fun i binSize ->
+
+                    if verbose && (i % (negativeBinsizes.Length / 10) = 0 ) then
+                        let elapsed = System.DateTime.Now.Subtract(startTime)
+                        printfn "[%i/%i] bins @ %imin %is" i negativeBinsizes.Length elapsed.Minutes elapsed.Seconds
+
+                    let tmp = bootstrapBin binSize negWeightArr bootstrapIterations
+                    (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
+                )
+            |> Map.ofList
+
+        if verbose then printfn "assigning empirical pValues for all bins..."
 
         //assign Pvalues for all test targets
         let absResults = assignPValues absoluteTestDistributions absoluteTestTargets
@@ -198,7 +226,7 @@ module Sailent =
 
 
     ///Compute SAILENT (Surprisal AnalysIs EmpiricaL pErmutatioN Test) for the given Surprisal Analysis result. This empirical test was
-    ///is designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution 
+    ///designed for the biological application of Surprisal Analysis to test the weight distribution of a given bin of annotations is significantly different than a random distribution 
     ///of the same size given the whole dataset.
     ///
     ///Input: 
@@ -226,7 +254,7 @@ module Sailent =
         |> prepareDataset ontologyMap identifiers
         |> Array.mapi 
             (fun i p ->
-                printfn "Sailent of constraint %i" i
+                if verbose then printfn "Sailent of constraint %i" i
                 compute verbose bootstrapIterations p
             ) 
     
@@ -240,7 +268,6 @@ module Sailent =
         |> Array.mapi 
             (fun i p ->
                 async {
-                    do printfn "Sailent of constraint %i" i
                     return compute verbose bootstrapIterations p
                 }
             ) 

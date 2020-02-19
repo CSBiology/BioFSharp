@@ -185,3 +185,4 @@ paket-files
 docsrc/tools/FSharp.Formatting.svclog
 docs
 /temp
+/pkg

@@ -11,10 +11,10 @@ BioFSharp is an open source bioinformatics and computational biology toolbox wri
 ![GitHub contributors](https://img.shields.io/github/contributors/CSBiology/BioFSharp)
 
 
-|Branch|Ubuntu(trusty)|Windows|
+|Branch|Linux Mono (Xenial)|Linux .Net Core only (Bionic Beaver)|Windows|
 |---|---|---|
-| master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
-| developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
+| master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
+| developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |[![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
 
 
 
