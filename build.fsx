@@ -292,18 +292,11 @@ Target.create "Build" (fun _ ->
 )
 
 Target.create "BuildLinux" (fun _ ->
-    let setParams (defaults:MSBuildParams) =
-        { defaults with
-            Verbosity = Some(Quiet)
-            Targets = ["Build"]
-            Properties =
-                [
-                    "Optimize", "True"
-                    "DebugSymbols", "True"
-                    "Configuration", "Mono"
-                ]
-         }
-    MSBuild.build setParams solutionFile
+    solutionFile 
+    |> DotNet.build (fun p -> 
+        { p with
+            Configuration = DotNet.BuildConfiguration.fromString "Mono" }
+        )
 )
 
 // --------------------------------------------------------------------------------------
