@@ -18,8 +18,11 @@ for:
     only:
       - image: Ubuntu
 
+  init:
+  - chmod +x ./build.sh
+
   build_script:
-  - sh: sudo ./build.sh -t Linux
+  - sh: ./build.sh -t Linux
 
 test: off
 version: 0.0.1.{build}
