@@ -1,4 +1,4 @@
-#### 1.0.02 - Thursday, October 24, 2019
+#### 1.0.02 - Wednesday, February 19, 2020
  * **BioFSharp.BioDB:**
     * Fix FaTool OData model URL
  * **BioFSharp.Vis**
