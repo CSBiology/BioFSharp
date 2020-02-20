@@ -48,8 +48,8 @@ Installation
 You can get the stable versions of all BioFSharp packages from nuget:
 
 <pre>
-PM> Install-Package BioFSharp
-> paket add BioFSharp
+Install-Package BioFSharp
+paket add BioFSharp
 </pre>
 
 All associated packages can be found [here](https://www.nuget.org/profiles/CSBiology)
