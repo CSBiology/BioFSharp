@@ -21,9 +21,12 @@ copyright
 tags
     F# FSharp bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis docker bioinformatics-containers biocontainers
 summary
-    API access to powerful popular bioinformatic databases
+    Connect BioFSharp with containerized bioinformatic workflows without leaving your F# environment
 description
-    API access to powerful popular bioinformatic databases
+    BioFSharp.BioContainers gives you the possibility to leverage containerized applications without 
+    leaving you F# environment. We build on the fondation of Docker.DotNet to programmatically access 
+    the the REST API on top of the docker daemon. We provide special functions to use with biocontainers, 
+    which is a standardized way to create containerized bioinformatic software.
 include-referenced-projects 
     true
 repositoryType
