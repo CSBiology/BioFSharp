@@ -5,7 +5,7 @@ framework: net45, net47, netstandard2.0, netstandard2.1
 strategy: max
 
 nuget FSharp.Core >= 4.7.0
-nuget Alea
+nuget Alea >= 3.0.4
 nuget FSharpAux >= 1.0.0
 nuget FSharpAux.IO >= 1.0.0
 nuget FSharp.Stats >= 0.2.1-beta
@@ -15,7 +15,7 @@ nuget docker.dotnet >= 3.125.2
 nuget SharpZipLib >= 1.2.0
 nuget CNTK.CPUOnly >= 2.7.0
 nuget Microsoft.Xaml >= 4.0.0.1
-nuget Argu
+nuget Argu      
 nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
@@ -23,8 +23,8 @@ nuget Expecto.FsCheck
 group BioDB
     source https://www.nuget.org/api/v2
     nuget SwaggerProvider >= 0.10
-    nuget YamlDotNet
-    nuget FSharp.Data.TypeProviders
+    nuget YamlDotNet >= 8.1.0
+    nuget FSharp.Data.TypeProviders >= 5.0.0.6
 
 
 group Formatting
