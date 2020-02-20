@@ -7,7 +7,25 @@ module Blast =
     open FSharpAux.IO.SchemaReader.Attribute
     open BioContainer
     open BioContainerIO
-     
+
+    ///Input file type for makeblastdb
+    type MakeBlastDBInputType =
+        ///fasta: for FASTA file(s)
+        |Fasta
+        ///blastdb: for BLAST database(s)
+        |Blastdb
+        ///asn1_txt: for Seq-entries in text ASN.1 format
+        |Asn1Txt
+        ///asn1_bin: for Seq-entries in binary ASN.1 format
+        |ASN1Bin
+
+        static member make = function
+            |Fasta      -> "fasta"
+            |Blastdb    -> "blastdb"
+            |Asn1Txt    -> "asn1_txt"
+            |ASN1Bin    -> "asn1_bin"
+
+    ///Molecule type of input, values can be nucl or prot
     type DbType =
         | Protein 
         | Nucleotide
@@ -16,20 +34,75 @@ module Blast =
             | Protein       -> "prot"
             | Nucleotide    -> "nucl"
 
-
-    type MakeDbParams =
-        | Input  of string
-        | Output of string
-        | DbType of DbType
-        | MaskData of string
+    ///DSL for command line arguments for the NCBI makeblastdb tool
+    type MakeBlastDbParams =
+        ///Input file/database name
+        | Input         of string
+        ///Input file type for makeblastdb
+        | InputType     of MakeBlastDBInputType
+        ///Molecule type of input, values can be nucl or prot
+        | DbType        of DbType
+        ///Title for BLAST database. If not set, the input file name will be used
+        | Title         of string
+        ///Parse bar delimited sequence identifiers (e.g., gi|129295) in FASTA input
         | ParseSeqIds    
+        ///Create index of sequence hash values
+        | HashIndex
+        ///Comma-separated list of input files containing masking data as produced by NCBI masking applications (e.g. dustmasker, segmasker, windowmasker
+        | MaskData      of string list
+        ///Name of BLAST database to be created. Input file name is used if none provided. This field is required if input consists of multiple files
+        | Output        of string
+        ///Maximum file size to use for BLAST database. 4GB is the maximum supported by the database structure
+        | MaxFileSize   of string
+        ///Taxonomy ID to assign to all sequences.
+        | TaxId         of int
+        ///File with two columns mapping sequence ID to the taxonomy ID. The first column is the sequence ID represented as one of:
+        ///
+        ///1
+        ///fasta with accessions (e.g., emb|X17276.1|)
+        ///
+        ///2
+        ///fasta with GI (e.g., gi|4)
+        ///
+        ///3
+        ///GI as a bare number (e.g., 4)
+        ///
+        ///4
+        ///A local ID. The local ID must be prefixed with "lcl" (e.g., lcl|4).
+        ///The second column should be the NCBI taxonomy ID (e.g., 9606 for human).
+        | TaxIdMapFile  of string
+        ///Program log file (default is stderr).
+        | Logfile       of string
 
+        ///returns the string form of command line argument DSL for makeblastdb
+        static member makeCmd = function
+            | Input  (path)         -> ["-in"           ; path]
+            | InputType it          -> ["-input_type"   ; MakeBlastDBInputType.make it]
+            | DbType (dbt)          -> ["-dbtype"       ; DbType.make dbt]
+            | Title t               -> ["-title"        ; t]
+            | ParseSeqIds           -> ["-parse_seqids"] 
+            | HashIndex             -> ["-hash_index"]
+            | MaskData (paths)      -> ["-mask_data"    ; paths |> String.concat ","]
+            | Output (path)         -> ["-out"          ; path]
+            | MaxFileSize fs        -> ["-max_file_size"; fs]
+            | TaxId tid             -> ["-taxid"        ; sprintf "%i" tid]
+            | TaxIdMapFile (path)   -> ["-taxid_map"    ; path]
+            | Logfile(path)         -> ["-logfile"      ; path]
+
+        ///returns the string form of command line argument DSL for makeblastdb with paths adjusted for container localization
         static member makeCmdWith (m: MountInfo) = function
-            | Input  (path)     -> ["-in"  ;(MountInfo.containerPathOf m path)]
-            | Output (path)     -> ["-out" ;(MountInfo.containerPathOf m path)]
-            | DbType (dbt)      -> ["-dbtype"; (DbType.make dbt)]
-            | MaskData (path)   -> ["-mask_data"; (sprintf "%s.asnb") (MountInfo.containerPathOf m path)]
-            | ParseSeqIds       -> ["-parse_seqids"] 
+            | Input  (path)         -> ["-in"           ; MountInfo.containerPathOf m path]
+            | InputType it          -> ["-input_type"   ; MakeBlastDBInputType.make it]
+            | DbType (dbt)          -> ["-dbtype"       ; DbType.make dbt]
+            | Title t               -> ["-title"        ; t]
+            | ParseSeqIds           -> ["-parse_seqids"] 
+            | HashIndex             -> ["-hash_index"]
+            | MaskData (paths)      -> ["-mask_data"    ; paths |> List.map (MountInfo.containerPathOf m) |> String.concat ","]
+            | Output (path)         -> ["-out"          ; MountInfo.containerPathOf m path]
+            | MaxFileSize fs        -> ["-max_file_size"; fs]
+            | TaxId tid             -> ["-taxid"        ; sprintf "%i" tid]
+            | TaxIdMapFile (path)   -> ["-taxid_map"    ; MountInfo.containerPathOf m path]
+            | Logfile(path)         -> ["-logfile"      ; MountInfo.containerPathOf m path]
 
 
     type OutputType = 
@@ -175,6 +248,23 @@ module Blast =
         | Num_threads of int
         | Max_Hits of int
 
+        static member makeCmd  = function
+            | SearchDB  (path)      -> ["-db"    ; path]
+            | Query     (path)      -> ["-query" ; path]
+            | Output    (path)      -> ["-out"   ; path]
+            | OutputType(format)    -> ["-outfmt"; string (format |> OutputType.make)]
+            | OutputTypeCustom(t,p) ->  let tmp = 
+                                            p 
+                                            |> Seq.map OutputCustom.make 
+                                            |> String.concat " "
+                                        match t with
+                                        | OutputType.Tabular             -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                                        | OutputType.TabularWithComments -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                                        | OutputType.CSV                 -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                                        | _ -> failwithf "Output format %A does not support custom columns." t                                
+            | Num_threads(i)        -> ["-num_threads"; string i]
+            | Max_Hits (i)          -> ["-max_target_seqs"; string i]
+
         static member makeCmdWith (m: MountInfo) = function
             | SearchDB  (path)      -> ["-db"    ; (MountInfo.containerPathOf m path)]
             | Query     (path)      -> ["-query" ; (MountInfo.containerPathOf m path)]
@@ -193,9 +283,9 @@ module Blast =
             | Max_Hits (i)          -> ["-max_target_seqs"; string i]
 
 
-    let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeDbParams list) = 
+    let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) = 
 
-        let cmds = (opt |> List.map (MakeDbParams.makeCmdWith bcContext.Mount))
+        let cmds = (opt |> List.map (MakeBlastDbParams.makeCmdWith bcContext.Mount))
         let tp = "makeblastdb"::(cmds |> List.concat)
 
         printfn "Starting process makeblastdb\r\nparameters:"
@@ -206,7 +296,7 @@ module Blast =
                 return res
         }
 
-    let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeDbParams list) =
+    let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) =
 
         runMakeBlastDBAsync bcContext opt
         |> Async.RunSynchronously
