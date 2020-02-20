@@ -50,9 +50,15 @@ It provides a variety of parsers for many biological file formats and a variety 
 </br>
 <hr />
 <h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
-<p>BioFSharp is currently on the way to its 1.x release. When this process is done, we will provide a nuget package at <a href="https://www.nuget.org/">nuget.org</a>. However, currently the way to get BioFSharp running on
-your machine is to either clone the repository and build the binaries yourself or download the prerelease packages from our <a href="https://github.com/CSBiology/BioFSharp/tree/nuget">nuget branch</a>.</p>
-<p><strong>Using prerelease packages from the nuget branch:</strong></p>
+<p><strong>From Nuget.org:</strong></p>
+<p>You can get the stable versions of all BioFSharp packages from nuget:</p>
+<pre>
+Install-Package BioFSharp
+paket add BioFSharp
+</pre>
+<p>All associated packages can be found <a href="https://www.nuget.org/profiles/CSBiology">here</a></p>
+<p><strong>Prerelease packages from the nuget branch:</strong></p>
+<p>Unstable/Experimental packages only.</p>
 <p>If you are using paket, add the following line to you <code>paket.dependencies</code> file:</p>
 <p><code>git https://github.com/CSBiology/BioFSharp.git nuget Packages: /</code></p>
 <p>you can then access the individual packages:</p>
@@ -63,22 +69,26 @@ your machine is to either clone the repository and build the binaries yourself o
 <p><code>nuget BioFSharp.ML</code></p>
 <p><code>nuget BioFSharp.BioDB</code></p>
 <p><code>nuget BioFSharp.Vis</code></p>
-<p><strong>To build the binaries yourself:</strong></p>
+<p><strong>Build the binaries yourself:</strong></p>
 <p><strong>Windows</strong>:</p>
 <ul>
-<li>Install <a href="https://www.microsoft.com/net/download">.Net Core SDK</a></li>
-<li>Install the dotnet tool fake cli by <code>dotnet tool install fake-cli -g</code> for global installation or <code>dotnet tool install fake-cli --tool-path yourtoolpath</code></li>
-<li>Install the dotnet tool paket by <code>dotnet tool install paket -g</code> for global installation or <code>dotnet tool install paket --tool-path yourtoolpath</code></li>
+<li>Install <a href="https://www.microsoft.com/net/download">.Net Core SDK</a> 3.0 +</li>
 <li>go to the project folder</li>
-<li>use the console command <code>fake build</code></li>
+<li><code>.\build.cmd</code></li>
 </ul>
-<p><strong>Linux(Ubuntu, using Mono)</strong>:</p>
+<p><strong>Linux(using Mono)</strong>:</p>
 <ul>
-<li>Install <a href="https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current">.Net Core SDK</a></li>
-<li>Install the dotnet tool fake cli by <code>dotnet tool install fake-cli -g</code> for global installation or <code>dotnet tool install fake-cli --tool-path yourtoolpath</code></li>
-<li>Install the dotnet tool paket by <code>dotnet tool install paket -g</code> for global installation or <code>dotnet tool install paket --tool-path yourtoolpath</code></li>
+<li>BioDB is excluded from this build.</li>
+<li><p>Install <a href="https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current">.Net Core SDK</a></p></li>
 <li>go to the project folder</li>
-<li>use the console command <code>dotnet fake build --target Linux</code></li>
+<li>./build.sh -t Mono</li>
+</ul>
+<p><strong>Linux(Dotnet Core only)</strong>:</p>
+<ul>
+<li>this does only build projects targeting netstandard2.0 (Core, BioContainers, IO, Stats, ML)</li>
+<li><p>Install <a href="https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current">.Net Core SDK</a></p></li>
+<li>go to the project folder</li>
+<li>./build.sh -t Dotnet</li>
 </ul>
 </br>
 <hr />
@@ -199,6 +209,7 @@ also want to read the <a href="https://github.com/CSBiology/BioFSharp/blob/maste
                   <li class="nav-header">BioFSharp</li>
                   <li><a href="/BioFSharp/index.html">Home page</a></li>
                   <li class="divider"></li>
+                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
                   <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
 
                   
@@ -211,8 +222,7 @@ also want to read the <a href="https://github.com/CSBiology/BioFSharp/blob/maste
                   <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
                   <li class="nav-header">BioContainers</li>
                   <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
-                  <li><a href="/BioFSharp/BioContainers_DesignGuide.html">Container API Design Guide</a></li>
-                  <li><a href="/BioFSharp/BioContainers_Blast.html">Blast Container</a></li>
+                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
                   <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
