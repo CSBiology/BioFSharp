@@ -27,10 +27,6 @@ module Sailent =
 
     let private createSailentResult raw abs pos neg iter = {RawData=raw; AbsoluteDescriptor=abs; PositiveDescriptor=pos; NegativeDescriptor=neg; BootstrapIterations=iter}
 
-    let private getDistinctGroups (cons:OntologyItem<float> array) =
-        [for ann in cons do yield ann.OntologyTerm]
-        |> List.distinct
-
     //create distribution of iter weight sums for a bin of size binSize 
     let private bootstrapBin (binSize: int) (weightArray:float[]) (iter: int) =
         let steps = iter / 10
@@ -51,30 +47,15 @@ module Sailent =
 
         loop 1 []
 
-    let private getBins (term:string) (cons:OntologyItem<float> array) =
-        [for ann in cons do 
-            if ann.OntologyTerm = term then yield ann
-        ]
-    
-    let private getNegativeBins (term:string) (cons:OntologyItem<float> array) =
-        [for ann in cons do 
-            if ann.OntologyTerm = term && ann.Item<0. then yield ann
-        ]
-    
-    let private getPositiveBins (term:string) (cons:OntologyItem<float> array) =
-        [for ann in cons do 
-            if ann.OntologyTerm = term && ann.Item>0. then yield ann
-        ]
-
     let private getEmpiricalPvalue (testDistributions: Map<int,Map<float,int>>) (weightSum:float) (binSize:int) =
         match Map.tryFind binSize testDistributions with
         |Some dist ->   let testDist = dist
                         float (testDist |> Map.fold (fun acc key value -> if abs key > abs weightSum then acc + value else acc) 0) / (float (testDist |> Map.fold (fun acc key value -> acc + value) 0))
         |_ -> 10000000.
 
-    let private assignPValues (testDistributions:Map<int,Map<float,int>>) (testTargets:(string*int*float)list)=
+    let private assignPValues (testDistributions:Map<int,Map<float,int>>) (testTargets:(string*int*float)[])=
         testTargets 
-        |> List.map (fun (name,binSize,weightSum) -> createSailentCharacterization name (getEmpiricalPvalue testDistributions weightSum binSize) binSize weightSum)
+        |> Array.map (fun (name,binSize,weightSum) -> createSailentCharacterization name (getEmpiricalPvalue testDistributions weightSum binSize) binSize weightSum)
     
     ///utility function to prepare a dataset column for SAILENT characterization. The ontology map can be created by using the BioFSharp.BioDB module. 
     ///
@@ -125,34 +106,31 @@ module Sailent =
 
         if verbose then printfn "starting SAILENT characterization"
 
-        // get distinct ontology terms in the dataset
-        let distinctGroups = getDistinctGroups data
-
-        // allocate test targets from the dataset
+        let groups = data |> Array.groupBy (fun x -> x.OntologyTerm)
+        
         let absoluteTestTargets = 
-            distinctGroups
-            |> List.map (fun (termName)
-                            ->  let tmp = getBins termName data
-                                termName,tmp.Length,tmp |> List.sumBy (fun x -> abs x.Item))
-            |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
+            groups
+            |> Array.map (fun (termName,tmp) ->   
+                termName,tmp.Length,tmp |> Array.sumBy (fun x -> abs x.Item))
+            |> Array.filter (fun (termName,binSize,weightSum) -> binSize>0)
+        
+        let positiveTestTargets = 
+            groups
+            |> Array.map (fun (termName,tmp) ->   
+                let tmp = tmp |> Array.filter (fun ann -> ann.Item > 0.)
+                termName,tmp.Length,tmp |> Array.sumBy (fun x -> abs x.Item))
+            |> Array.filter (fun (termName,binSize,weightSum) -> binSize>0)
+        
+        let negativeTestTargets = 
+            groups
+            |> Array.map (fun (termName,tmp) ->   
+                let tmp = tmp |> Array.filter (fun ann -> ann.Item < 0.)
+                termName,tmp.Length,tmp |> Array.sumBy (fun x -> abs x.Item))
+            |> Array.filter (fun (termName,binSize,weightSum) -> binSize>0)
 
-        let positiveTestTargets =
-            distinctGroups
-            |> List.map (fun (termName)
-                            ->  let tmp = getPositiveBins termName data
-                                termName,tmp.Length,tmp |> List.sumBy (fun x -> x.Item))
-            |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
-
-        let negativeTestTargets =
-            distinctGroups
-            |> List.map (fun (termName)
-                            ->  let tmp = getNegativeBins termName data
-                                termName,tmp.Length,tmp |> List.sumBy (fun x -> x.Item))
-            |> List.filter (fun (termName,binSize,weightSum) -> binSize>0)
-
-        let absoluteBinsizes = absoluteTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
-        let positiveBinsizes = positiveTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
-        let negativeBinsizes = negativeTestTargets |> List.map (fun (_,binSize,_) -> binSize) |> List.distinct
+        let absoluteBinsizes = absoluteTestTargets |> Array.map (fun (_,binSize,_) -> binSize) |> Array.distinct
+        let positiveBinsizes = positiveTestTargets |> Array.map (fun (_,binSize,_) -> binSize) |> Array.distinct
+        let negativeBinsizes = negativeTestTargets |> Array.map (fun (_,binSize,_) -> binSize) |> Array.distinct
 
         let weightArr =     data        |> Array.map (fun ann -> ann.Item)
         let absWeightArr =  weightArr   |> Array.map abs
@@ -167,7 +145,7 @@ module Sailent =
             let startTime = System.DateTime.Now
 
             absoluteBinsizes
-            |> List.mapi 
+            |> Array.mapi 
                 (fun i binSize ->
 
                     if verbose && (i % (absoluteBinsizes.Length / 10) = 0 ) then
@@ -177,7 +155,7 @@ module Sailent =
                     let tmp = bootstrapBin binSize absWeightArr bootstrapIterations
                     (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
                 )
-            |> Map.ofList
+            |> Map.ofArray
 
         if verbose then printfn "bootstrapping positive test distributions for %i bins" positiveBinsizes.Length
         let positiveTestDistributions =
@@ -185,7 +163,7 @@ module Sailent =
             let startTime = System.DateTime.Now
 
             positiveBinsizes
-            |> List.mapi 
+            |> Array.mapi 
                 (fun i binSize ->
 
                     if verbose && (i % (positiveBinsizes.Length / 10) = 0 ) then
@@ -195,7 +173,7 @@ module Sailent =
                     let tmp = bootstrapBin binSize posWeightArr bootstrapIterations
                     (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
                 )
-            |> Map.ofList
+            |> Map.ofArray
             
         if verbose then printfn "bootstrapping negative test distributions for %i bins" negativeBinsizes.Length
         let negativeTestDistributions = 
@@ -203,7 +181,7 @@ module Sailent =
             let startTime = System.DateTime.Now
 
             negativeBinsizes
-            |> List.mapi 
+            |> Array.mapi 
                 (fun i binSize ->
 
                     if verbose && (i % (negativeBinsizes.Length / 10) = 0 ) then
@@ -213,14 +191,14 @@ module Sailent =
                     let tmp = bootstrapBin binSize negWeightArr bootstrapIterations
                     (binSize,Distributions.Frequency.create (Distributions.Bandwidth.nrd0 tmp) tmp)
                 )
-            |> Map.ofList
+            |> Map.ofArray
 
         if verbose then printfn "assigning empirical pValues for all bins..."
 
         //assign Pvalues for all test targets
-        let absResults = assignPValues absoluteTestDistributions absoluteTestTargets
-        let posResults = assignPValues positiveTestDistributions positiveTestTargets
-        let negResults = assignPValues negativeTestDistributions negativeTestTargets
+        let absResults = assignPValues absoluteTestDistributions absoluteTestTargets |> Array.toList
+        let posResults = assignPValues positiveTestDistributions positiveTestTargets |> Array.toList
+        let negResults = assignPValues negativeTestDistributions negativeTestTargets |> Array.toList
 
         createSailentResult data absResults posResults negResults bootstrapIterations
 
