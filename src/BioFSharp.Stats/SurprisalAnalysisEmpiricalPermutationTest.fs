@@ -125,7 +125,7 @@ module Sailent =
             groups
             |> Array.map (fun (termName,tmp) ->   
                 let tmp = tmp |> Array.filter (fun ann -> ann.Item < 0.)
-                termName,tmp.Length,tmp |> Array.sumBy (fun x -> abs x.Item))
+                termName,tmp.Length,tmp |> Array.sumBy (fun x -> x.Item))
             |> Array.filter (fun (termName,binSize,weightSum) -> binSize>0)
 
         let absoluteBinsizes = absoluteTestTargets |> Array.map (fun (_,binSize,_) -> binSize) |> Array.distinct
