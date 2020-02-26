@@ -109,7 +109,7 @@ module FSIPrinters =
         |> Seq.iter (fun x -> printfn "%s" x)
 
 
-    let prettyPrintGSE (gse:GSE) =
+    let prettyPrintGSE (gse:SOFT.Series.GSE) =
 
         let formatSingleEntry rootIdent (s: string) =
             let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
@@ -187,7 +187,7 @@ Samples         %s
             (gse.SeriesMetadata.Summary             |> formatMultiEntries 4)
             (gse.SampleMetadata                     |> formatSamples 4)
 
-    let prettyPrintGPL (gpl:GPL) =
+    let prettyPrintGPL (gpl:SOFT.Platform.GPL) =
 
         let formatSingleEntry rootIdent (s: string) =
             let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
