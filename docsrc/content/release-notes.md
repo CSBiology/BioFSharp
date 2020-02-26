@@ -1,4 +1,14 @@
-#### 1.0.02 - Thursday, October 24, 2019
+#### 1.0.03 - Wednesday, February 26, 2020
+ * **BioFSharp.Stats:**
+    * Massively improved SAILENT characterization speed for [preprocessing of large datasets](https://github.com/CSBiology/BioFSharp/pull/82)
+ * **BioFSharp.BioContainers:**
+    * [Improved DSL for Blast biocontainer API](https://github.com/CSBiology/BioFSharp/pull/83/commits/8e463f8cbc87797261520519b876b836d0b55bde)
+ * **BioFSharp.IO:**
+    * [Refactored SOFT Parser](https://github.com/CSBiology/BioFSharp/pull/83/commits/da0ba0cfa8807fad2032be66054125bd12f732c2) and [improved its namespace encapsulation](https://github.com/CSBiology/BioFSharp/pull/83/commits/eb389a908e7cee66f01616e62ef65df20fc88c6c).
+    * add prettyPrinters for the SOFT GSE/GPL type](https://github.com/CSBiology/BioFSharp/pull/83/commits/615dcbfd30632d6fdf7a70edae9f5227ce250937)
+
+
+#### 1.0.02 - Wednesday, February 19, 2020
  * **BioFSharp.BioDB:**
     * Fix FaTool OData model URL
  * **BioFSharp.Vis**

@@ -23,6 +23,7 @@
     <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="GenerateSOFTTypes.fsx" />
     <Compile Include="GAF.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AgilentRaw.fs" />
