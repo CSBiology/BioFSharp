@@ -594,7 +594,7 @@ Target.create "GitReleaseNuget" (fun _ ->
     let tempNugetDir = "temp/nuget"
     Shell.cleanDir tempNugetDir |> ignore
     Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "nuget" tempNugetDir
-    let files = Directory.EnumerateFiles bin 
+    let files = Directory.EnumerateFiles pkgDir 
     Shell.copy tempNugetDir files
     Git.Staging.stageAll tempNugetDir
     Git.Commit.exec tempNugetDir (sprintf "Update git nuget packages for version %s" release.NugetVersion)
