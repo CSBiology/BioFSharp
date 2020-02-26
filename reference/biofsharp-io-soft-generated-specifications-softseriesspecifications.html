@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>SOFTSeriesSpecifications - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
+
+
+
+<h1>SOFTSeriesSpecifications</h1>
+<p>
+
+    <span>Namespace: BioFSharp.IO</span><br />
+        <span>Parent Module: <a href="biofsharp-io-soft-generated-specifications.html">Specifications</a></span><br />
+    </p>
+<div class="xmldoc">
+</div>
+  <h3>Union Cases</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Union Case</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2071', 2071)" onmouseover="showTip(event, '2071', 2071)">
+            Accession(string)
+          </code>
+          <div class="tip" id="2071">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L50-50" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Provide an identifier for this entity. This identifier is used only as an internal reference within a given file. The identifier will not appear on final GEO records.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2072', 2072)" onmouseover="showTip(event, '2072', 2072)">
+            AdditionalAttribute(string,string)
+          </code>
+          <div class="tip" id="2072">
+            <strong>Signature:</strong> string * string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L82-82" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Custom Attributes Used in the SOFT file</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2073', 2073)" onmouseover="showTip(event, '2073', 2073)">
+            Contributor(string)
+          </code>
+          <div class="tip" id="2073">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L62-62" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>List all people associated with this study.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2074', 2074)" onmouseover="showTip(event, '2074', 2074)">
+            GeoAccession(string)
+          </code>
+          <div class="tip" id="2074">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L76-76" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Only use for performing�updates�to existing GEO records.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2075', 2075)" onmouseover="showTip(event, '2075', 2075)">
+            OverallDesign(string)
+          </code>
+          <div class="tip" id="2075">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L56-56" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Provide a description of the experimental design. Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2076', 2076)" onmouseover="showTip(event, '2076', 2076)">
+            PubmedId(string)
+          </code>
+          <div class="tip" id="2076">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L58-58" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Specify a valid PubMed identifier (PMID) that references a published article describing this study. Most commonly, this information is not available at the time of submission - it can be added later once the data are published."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2077', 2077)" onmouseover="showTip(event, '2077', 2077)">
+            Repeats(int,string)
+          </code>
+          <div class="tip" id="2077">
+            <strong>Signature:</strong> int * string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L70-70" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Indicate the repeat type(s), e.g.,"!Series<em>repeats</em>1 = biological replicate!Series<em>repeats</em>2 = biological replicate"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2078', 2078)" onmouseover="showTip(event, '2078', 2078)">
+            RepeatsSampleList(int,string list)
+          </code>
+          <div class="tip" id="2078">
+            <strong>Signature:</strong> int * string list<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L72-72" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"List which Samples belong to each group, e.g.,""!Series<em>repeats</em>sample<em>list</em>1 = samA, samB""!Series<em>repeats</em>sample<em>list</em>2 = samC, samD""NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2079', 2079)" onmouseover="showTip(event, '2079', 2079)">
+            SampleId(string)
+          </code>
+          <div class="tip" id="2079">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L74-74" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Reference the Samples that make up this experiment. Reference the Sample accession numbers (GSMxxx) if the Samples already exists in GEO, or reference the ^Sample identifiers if they are being submitted in the same file."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2080', 2080)" onmouseover="showTip(event, '2080', 2080)">
+            SubmissionDate(string)
+          </code>
+          <div class="tip" id="2080">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L80-80" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Time of submission to GEO"</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2081', 2081)" onmouseover="showTip(event, '2081', 2081)">
+            Summary(string)
+          </code>
+          <div class="tip" id="2081">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L54-54" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Summarize the goals and objectives of this study. The abstract from the associated publication may be suitable. You can include as much text as you need to thoroughly describe the study.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2082', 2082)" onmouseover="showTip(event, '2082', 2082)">
+            Title(string)
+          </code>
+          <div class="tip" id="2082">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L52-52" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Provide a unique title that describes the overall study.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2083', 2083)" onmouseover="showTip(event, '2083', 2083)">
+            Type(string)
+          </code>
+          <div class="tip" id="2083">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L78-78" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Indicates the type(s) of experiment conducted in the Series"</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2084', 2084)" onmouseover="showTip(event, '2084', 2084)">
+            Variable(int,string)
+          </code>
+          <div class="tip" id="2084">
+            <strong>Signature:</strong> int * string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L64-64" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Indicate the variable type(s) investigated in this study, e.g.,"!Series<em>variable</em>1 = age!Series<em>variable</em>2 = age"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2085', 2085)" onmouseover="showTip(event, '2085', 2085)">
+            VariableDescription(int,string)
+          </code>
+          <div class="tip" id="2085">
+            <strong>Signature:</strong> int * string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"Describe each variable, e.g.,"!Series<em>variable</em>description<em>1 = 2 months!Series</em>variable<em>description</em>2 = 12 months"NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2086', 2086)" onmouseover="showTip(event, '2086', 2086)">
+            VariableSampleList(int,string list)
+          </code>
+          <div class="tip" id="2086">
+            <strong>Signature:</strong> int * string list<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>"List which Samples belong to each group, e.g.,""!Series<em>variable</em>sample<em>list</em>1 = samA, samB""!Series<em>variable</em>sample<em>list</em>2 = samC, samD""NOTE - this information is optional and does not appear in Series records or downloads, but will be used to assemble corresponding GEO DataSet records."</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '2087', 2087)" onmouseover="showTip(event, '2087', 2087)">
+            WebLink(string)
+          </code>
+          <div class="tip" id="2087">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.IO/SOFT.fs#L60-60" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Specify a Web link that directs users to supplementary information about the study. Please restrict to Web sites that you know are stable.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+                  
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>
