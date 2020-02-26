@@ -535,6 +535,19 @@ Target.create "ReleaseDocs" (fun _ ->
     Git.Branches.push tempDocsDir
 )
 
+Target.create "GenerateDocsWithFSI" (fun _ ->
+    //CreateProcess.fromRawCommandLine "dotnet" "fsi generate.fsx"
+    //|> CreateProcess.withFramework
+    //|> CreateProcess.ensureExitCode
+    //|> CreateProcess.withWorkingDirectory "docsrc/tools"
+    //|> CreateProcess.ensureExitCode
+    //|> Proc.run 
+    //|> ignore
+  let (exitCode, messages) = Fsi.exec (fun p -> { p with WorkingDirectory="docsrc/tools"; Define="RELEASE"; }) "generate.fsx" []
+  if exitCode = 0 then () else 
+    failwith (messages |> String.concat "\r\n")
+)
+
 Target.create "ReleaseLocal" (fun _ ->
     let tempDocsDir = "temp/localDocs"
     Shell.cleanDir tempDocsDir |> ignore
@@ -650,9 +663,13 @@ Target.create "CIBuildLinux" ignore
 "RunTests" ?=> "CleanDocs"
 
 "CleanDocs"
-  ==>"Docs"
+  ==> "Docs"
   ==> "ReferenceDocs"
   ==> "GenerateDocs"
+
+"CleanDocs"
+  ==> "GenerateDocsWithFSI"
+
 
 "Clean"
   ==> "Release"
