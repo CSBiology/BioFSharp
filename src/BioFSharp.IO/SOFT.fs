@@ -570,12 +570,12 @@ module SOFT =
     open Generated
     open Generated.Specifications
 
-    let listMustContainExactlyOne failmessage l =
+    let private listMustContainExactlyOne failmessage l =
         match List.tryExactlyOne l with
         | Some v -> v
         | _ -> failwith failmessage
 
-    let listMustContainOneOrMore failmessage (l: 'a list) =
+    let private listMustContainOneOrMore failmessage (l: 'a list) =
         if l.Length >= 1 then
             l
         else failwith failmessage
@@ -1183,46 +1183,6 @@ module SOFT =
             SpecificationTokens = specList
     }
 
-    [<RequireQualifiedAccess>]
-    type GSE = {
-        SeriesMetadata      : SeriesRecord
-        SampleMetadata      : Map<string,SampleRecord>
-        PlatformMetadata    : Map<string,PlatformRecord>
-    }
-
-    let private createGSE (seriesRecords: Map<string,SeriesRecord>, sampleRecords: Map<string,SampleRecord>, platformRecords: Map<string,PlatformRecord>) : GSE =
-        {
-            SeriesMetadata =
-                seriesRecords
-                |> Map.toList
-                |> List.exactlyOne
-                |> snd
-
-            SampleMetadata      = sampleRecords
-            PlatformMetadata    = platformRecords
-        }
-
-    [<RequireQualifiedAccess>]
-    type GPL = {
-        PlatformMetadata    : PlatformRecord
-        SeriesMetadata      : Map<string,SeriesRecord>
-        SampleMetadata      : Map<string,SampleRecord>
-    }
-
-    let private createGPL (seriesRecords: Map<string,SeriesRecord>, sampleRecords: Map<string,SampleRecord>, platformRecords: Map<string,PlatformRecord>) : GPL =
-        {
-            PlatformMetadata    = 
-                platformRecords
-                |> Map.toList
-                |> List.exactlyOne
-                |> snd
-
-            SeriesMetadata      = seriesRecords
-            SampleMetadata      = sampleRecords
-
-        }
-
-
     module internal Tokenization =
 
         type SOFTToken =
@@ -1250,13 +1210,13 @@ module SOFT =
                     else
                         Broken token
 
-    module Parsing =
+    module internal Parsing =
 
         open Tokenization
         open Generated.Lexing
         open System.Collections.Generic
 
-        let private parseSampleEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
+        let parseSampleEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
             let rec loop (token:SOFTToken) (lexedSample:SOFTSampleSpecifications list) =
                 if en.MoveNext() then
                     let nextToken = en.Current
@@ -1330,7 +1290,7 @@ module SOFT =
                     token,accession, createSampleRecord accession lexedSample
             loop token [] 
 
-        let private parsePlatformEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
+        let parsePlatformEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
             let rec loop (token:SOFTToken) (lexedPlatform:SOFTPlatformSpecifications list) = 
                 if en.MoveNext() then
                     let nextToken = en.Current
@@ -1383,7 +1343,7 @@ module SOFT =
                     token,accession,createPlatformRecord accession lexedPlatform
             loop token []
 
-        let private parseSeriesEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
+        let parseSeriesEntity (token:SOFTToken) (en: IEnumerator<SOFTToken>) (accession: string) =
                 let rec loop (token:SOFTToken) (lexedSeries:SOFTSeriesSpecifications list) = 
                     if en.MoveNext() then
                         let nextToken = en.Current
@@ -1436,7 +1396,7 @@ module SOFT =
                         token,accession,createSeriesRecord accession lexedSeries
                 loop token []
 
-        let private parseSOFTEntities (soft: seq<SOFTToken>) : (Map<string,SeriesRecord>)*(Map<string,SampleRecord>)*(Map<string,PlatformRecord>) =
+        let parseSOFTEntities (soft: seq<SOFTToken>) : (Map<string,SeriesRecord>)*(Map<string,SampleRecord>)*(Map<string,PlatformRecord>) =
 
             let en = soft.GetEnumerator()
             let rec loop (token: SOFTToken) (seriesRecords: (string*SeriesRecord) list) (sampleRecords: (string*SampleRecord) list) (platformRecords: (string*PlatformRecord) list) = 
@@ -1476,33 +1436,130 @@ module SOFT =
                 loop en.Current [] [] []
             else failwith "empty input"
 
+    [<RequireQualifiedAccess>]
+    module Series =
 
         open FSharpAux.IO
 
-        ///Read SOFT SeriesInfo from a SOFT series file
-        let fromSeriesFile (path:string) =
+        type GSE = {
+            SeriesMetadata      : SeriesRecord
+            SampleMetadata      : Map<string,SampleRecord>
+            PlatformMetadata    : Map<string,PlatformRecord>
+        }
+
+        let private createGSE (seriesRecords: Map<string,SeriesRecord>, sampleRecords: Map<string,SampleRecord>, platformRecords: Map<string,PlatformRecord>) : GSE =
+            {
+                SeriesMetadata =
+                    seriesRecords
+                    |> Map.toList
+                    |> List.exactlyOne
+                    |> snd
+
+                SampleMetadata      = sampleRecords
+                PlatformMetadata    = platformRecords
+            }
+
+        ///Read GEO series metadata and associated sample/platform metadata from a SOFT formatted series file (GPLXXXXX_family.soft)
+        let fromFile (path:string) =
             Seq.fromFile path
             |> Seq.map Tokenization.tokenizeSOFTLine
-            |> parseSOFTEntities
+            |> Parsing.parseSOFTEntities
             |> createGSE
 
-        ///Read SOFT SeriesInfo from a string representing a SOFT Series file
-        let fromSeriesFileEnumerator (fileEnumerator:seq<string>) =
+        ///Read GEO series metadata and associated sample/platform metadata from a sequence of strings representing a SOFT formatted series
+        let fromFileEnumerator (fileEnumerator:seq<string>) =
             fileEnumerator
             |> Seq.map Tokenization.tokenizeSOFTLine
-            |> parseSOFTEntities
+            |> Parsing.parseSOFTEntities
             |> createGSE
 
-        ///Read SOFT SeriesInfo from a SOFT series file
-        let fromPlatformFile (path:string) =
+        ///returns platform metadata associated with the input series GSE representation
+        let getAssociatedPlatforms (gse:GSE) =
+            gse.PlatformMetadata
+            |> Map.toList
+            |> List.map snd
+
+        ///returns platform accessions associated with the input series GSE representation
+        let getAssociatedPlatformAccessions (gse:GSE) =
+            gse.PlatformMetadata
+            |> Map.toList
+            |> List.map snd
+            |> List.map (fun record -> record.Accession)
+
+        ///returns sample metadata associated with the input series GSE representation
+        let getAssociatedSamples (gse:GSE) =
+            gse.SampleMetadata
+            |> Map.toList
+            |> List.map fst
+
+        ///returns sample accessions associated with the input series GSE representation
+        let getAssociatedSampleAccessions (gse:GSE) =
+            gse.SampleMetadata
+            |> Map.toList
+            |> List.map fst
+
+
+    [<RequireQualifiedAccess>]
+    module Platform =
+
+        open FSharpAux.IO
+
+        type GPL = {
+            PlatformMetadata    : PlatformRecord
+            SeriesMetadata      : Map<string,SeriesRecord>
+            SampleMetadata      : Map<string,SampleRecord>
+        }
+
+        let private createGPL (seriesRecords: Map<string,SeriesRecord>, sampleRecords: Map<string,SampleRecord>, platformRecords: Map<string,PlatformRecord>) : GPL =
+            {
+                PlatformMetadata    = 
+                    platformRecords
+                    |> Map.toList
+                    |> List.exactlyOne
+                    |> snd
+
+                SeriesMetadata      = seriesRecords
+                SampleMetadata      = sampleRecords
+
+            }
+
+        //Readers
+
+        ///Read GEO platform metadata and associated sample/series Metadata from a SOFT formatted platform file (GPLXXXXX_family.soft)
+        let fromFile (path:string) =
             Seq.fromFile path
             |> Seq.map Tokenization.tokenizeSOFTLine
-            |> parseSOFTEntities
+            |> Parsing.parseSOFTEntities
             |> createGPL
 
-        ///Read SOFT SeriesInfo from a string representing a SOFT Series file
-        let fromPlatformFileEnumerator (fileEnumerator:seq<string>) =
+        ///Read GEO platform metadata and associated sample/series Metadata from a sequence of strings representing a SOFT formatted platform
+        let fromFileEnumerator (fileEnumerator:seq<string>) =
             fileEnumerator
             |> Seq.map Tokenization.tokenizeSOFTLine
-            |> parseSOFTEntities
+            |> Parsing.parseSOFTEntities
             |> createGPL
+
+        ///returns series metadata associated with the input platform GPL representation
+        let getAssociatedSeries (gpl:GPL) =
+            gpl.SeriesMetadata
+            |> Map.toList
+            |> List.map snd
+
+        ///returns series accessions associated with the input platform GPL representation
+        let getAssociatedSeriesAccessions (gpl:GPL) =
+            gpl.SeriesMetadata
+            |> Map.toList
+            |> List.map snd
+            |> List.map (fun record -> record.Accession)
+
+        ///returns sample metadata associated with the input platform GPL representation
+        let getAssociatedSamples (gpl:GPL) =
+            gpl.SampleMetadata
+            |> Map.toList
+            |> List.map fst
+
+        ///returns sample accessions associated with the input platform GPL representation
+        let getAssociatedSampleAccessions (gpl:GPL) =
+            gpl.SampleMetadata
+            |> Map.toList
+            |> List.map fst
