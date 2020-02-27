@@ -12,7 +12,103 @@ module FSIPrinters =
     open BioFSharp.IO.GFF3
     open FSharpAux
     open System.Text
+
+    module internal FormatHelpers =
+        
+            module SOFT =
+
+                let formatSingleEntry rootIdent (s: string) =
+                    let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
+                    s
+                    |> String.split ' '
+                    |> Array.chunkBySize 15
+                    |> Array.map (String.concat " ")
+                    |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
+                    |> String.concat "\r\n"
+
+                let formatMultiEntries rootIdent (l: string list) =
+                    let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
+                    l 
+                    |> List.map 
+                        (fun summary -> 
+                            summary
+                            |> String.split ' '
+                            |> Array.chunkBySize 15
+                            |> Array.map (String.concat " ")
+                        )
+                    |> Array.concat
+                    |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
+                    |> String.concat "\r\n"
+
+                let formatSamples rootIdent (sm : Map<string,SampleRecord>) = 
+                    let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat "" 
+                    sm
+                    |> Map.toList
+                    |> List.map 
+                        (fun (k,v) ->
+                            sprintf "%s => %s" k v.Title
+                        )
+                    |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
+                    |> fun lines ->
+                        if lines.Length > 15 then
+                            let morelineCount = lines.Length - 15
+                            [
+                                yield! lines.[0..14]
+                                sprintf "%s(...and %i more)" ident morelineCount
+                            ]
+                            |> String.concat "\r\n"
+                        else
+                            lines |> String.concat "\r\n"
     
+                let formatPlatforms rootIdent (sm : Map<string,PlatformRecord>) = 
+                    let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
+                    sm
+                    |> Map.toList
+                    |> List.map 
+                        (fun (k,v) ->
+                            sprintf "%s => %s" k v.Title
+                        )
+                    |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
+                    |> fun lines ->
+                        if lines.Length > 15 then
+                            let morelineCount = lines.Length - 15
+                            [
+                                yield! lines.[0..14]
+                                sprintf "%s(...and %i more)" ident morelineCount
+                            ]
+                            |> String.concat "\r\n"
+                        else
+                            lines |> String.concat "\r\n"
+
+                let formatSeries rootIdent (sm : Map<string,SeriesRecord>) = 
+                    let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
+                    sm
+                    |> Map.toList
+                    |> List.map 
+                        (fun (k,v) ->
+                            sprintf "%s => %s" k v.Title
+                        )
+                    |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
+                    |> fun lines ->
+                        if lines.Length > 15 then
+                            let morelineCount = lines.Length - 15
+                            [
+                                yield! lines.[0..14]
+                                sprintf "%s(...and %i more)" ident morelineCount
+                            ]
+                            |> String.concat "\r\n"
+                        else
+                            lines |> String.concat "\r\n"
+
+                let formatMultiChannelEntry rootIdent l =
+                l 
+                |> List.groupBy fst 
+                |> List.map (fun (i,c) -> (sprintf "[CHANNEL %i]\r\n" i ) :: (c |> List.map snd)) 
+                |> List.concat 
+                |> formatMultiEntries rootIdent
+
+    open FormatHelpers
+
     ///print BioItems by using symbols for AminoAcids and Nucleotides, and the name of Modifications in [brackets]
     let prettyPrintBioItem (a: 'a when 'a :> IBioItem) =
         match (a :> IBioItem) with
@@ -108,56 +204,85 @@ module FSIPrinters =
         toString id input
         |> String.concat "\r\n"
 
+    let prettyPrintSampleRecord (sample:SOFT.SampleRecord) =
+        sprintf
+            """
+METADATA FOR SAMPLE RECORD %s
+===========================%s
+
+Title:              %s
+
+Type(s):            %s
+
+Organism(s)         %s
+
+Characteristics:    %s
+
+Description:        %s
+
+(For more Metadata, access the type directly)
+            """
+            sample.Accession
+            (sample.Accession           |> String.map (fun c -> '='))
+            (sample.Title               |> SOFT.formatSingleEntry 5)
+            (sample.Type                |> SOFT.formatSingleEntry 5)
+            (sample.Organism            |> SOFT.formatMultiChannelEntry 5)
+            (sample.Characteristics     |> SOFT.formatMultiChannelEntry 5)
+            (sample.Description         |> SOFT.formatMultiEntries 5)
+
+    let prettyPrintSeriesRecord (series:SOFT.SeriesRecord) =
+        sprintf
+            """
+GEO SERIES RECORD %s
+==================%s
+
+Type(s):        %s
+
+Title:          %s
+
+Contributor(s): %s
+
+Design:         %s
+
+Summary:        %s
+
+(For more Metadata, access the type directly)
+            """
+            series.Accession
+            (series.Accession           |> String.map (fun c -> '='))
+            (series.Type                |> SOFT.formatMultiEntries 4)
+            (series.Title               |> SOFT.formatSingleEntry 4)
+            (series.Contributor         |> SOFT.formatMultiEntries 4)
+            (series.OverallDesign       |> SOFT.formatMultiEntries 4)
+            (series.Summary             |> SOFT.formatMultiEntries 4)
+
+    let prettyPrintPlatformRecord (platform:SOFT.PlatformRecord) =
+        sprintf
+            """
+GEO PLATFORM RECORD %s
+====================%s
+
+Title:          %s
+
+Organism(s):    %s
+
+Description:    %s
+
+Technology:     %s
+
+Contributor(s): %s
+
+(For more Metadata, access the type directly)
+            """
+            platform.Accession
+            (platform.Accession             |> String.map (fun c -> '='))
+            (platform.Title                 |> SOFT.formatSingleEntry 4)
+            (platform.Organism              |> SOFT.formatMultiEntries 4)
+            (platform.Description           |> SOFT.formatMultiEntries 4)
+            (platform.Technology            |> SOFT.formatSingleEntry 4)
+            (platform.Contributor           |> SOFT.formatMultiEntries 4)
 
     let prettyPrintGSE (gse:SOFT.Series.GSE) =
-
-        let formatSingleEntry rootIdent (s: string) =
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            s
-            |> String.split ' '
-            |> Array.chunkBySize 15
-            |> Array.map (String.concat " ")
-            |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-
-        let formatMultiEntries rootIdent (l: string list) =
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            l 
-            |> List.map 
-                (fun summary -> 
-                    summary
-                    |> String.split ' '
-                    |> Array.chunkBySize 15
-                    |> Array.map (String.concat " ")
-                )
-            |> Array.concat
-            |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-        let formatSamples rootIdent (sm : Map<string,SampleRecord>) = 
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            sm
-            |> Map.toList
-            |> List.map 
-                (fun (k,v) ->
-                    sprintf "%s => %s" k v.Title
-                )
-            |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-    
-        let formatPlatforms rootIdent (sm : Map<string,PlatformRecord>) = 
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            sm
-            |> Map.toList
-            |> List.map 
-                (fun (k,v) ->
-                    sprintf "%s => %s" k v.Title
-                )
-            |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
         sprintf
             """
 GEO SERIES RECORD %s
@@ -176,66 +301,20 @@ Design:         %s
 Summary:        %s
 
 Samples         %s
+
+(For more Metadata, access the type directly)
             """
             gse.SeriesMetadata.Accession
             (gse.SeriesMetadata.Accession           |> String.map (fun c -> '='))
-            (gse.SeriesMetadata.Type                |> formatMultiEntries 4)
-            (gse.PlatformMetadata                   |> formatPlatforms 4)
-            (gse.SeriesMetadata.Title               |> formatSingleEntry 4)
-            (gse.SeriesMetadata.Contributor         |> formatMultiEntries 4)
-            (gse.SeriesMetadata.OverallDesign       |> formatMultiEntries 4)
-            (gse.SeriesMetadata.Summary             |> formatMultiEntries 4)
-            (gse.SampleMetadata                     |> formatSamples 4)
+            (gse.SeriesMetadata.Type                |> SOFT.formatMultiEntries 4)
+            (gse.PlatformMetadata                   |> SOFT.formatPlatforms 4)
+            (gse.SeriesMetadata.Title               |> SOFT.formatSingleEntry 4)
+            (gse.SeriesMetadata.Contributor         |> SOFT.formatMultiEntries 4)
+            (gse.SeriesMetadata.OverallDesign       |> SOFT.formatMultiEntries 4)
+            (gse.SeriesMetadata.Summary             |> SOFT.formatMultiEntries 4)
+            (gse.SampleMetadata                     |> SOFT.formatSamples 4)
 
     let prettyPrintGPL (gpl:SOFT.Platform.GPL) =
-
-        let formatSingleEntry rootIdent (s: string) =
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            s
-            |> String.split ' '
-            |> Array.chunkBySize 15
-            |> Array.map (String.concat " ")
-            |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-
-        let formatMultiEntries rootIdent (l: string list) =
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            l 
-            |> List.map 
-                (fun summary -> 
-                    summary
-                    |> String.split ' '
-                    |> Array.chunkBySize 15
-                    |> Array.map (String.concat " ")
-                )
-            |> Array.concat
-            |> Array.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-        let formatSamples rootIdent (sm : Map<string,SampleRecord>) = 
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            sm
-            |> Map.toList
-            |> List.map 
-                (fun (k,v) ->
-                    sprintf "%s => %s" k v.Title
-                )
-            |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
-    
-        let formatSeries rootIdent (sm : Map<string,SeriesRecord>) = 
-            let ident = [for i in [1 .. (4*rootIdent)] do yield " "] |> String.concat ""
-            sm
-            |> Map.toList
-            |> List.map 
-                (fun (k,v) ->
-                    sprintf "%s => %s" k v.Title
-                )
-            |> List.mapi (fun i s -> if i = 0 then s else sprintf "%s%s" ident s)
-            |> String.concat "\r\n"
-
         sprintf
             """
 GEO PLATFORM RECORD %s
@@ -254,13 +333,16 @@ Contributor(s): %s
 Series(s):      %s
 
 Samples         %s
+
+(For more Metadata, access the type directly)
             """
             gpl.PlatformMetadata.Accession
             (gpl.PlatformMetadata.Accession             |> String.map (fun c -> '='))
-            (gpl.PlatformMetadata.Title                 |> formatSingleEntry 4)
-            (gpl.PlatformMetadata.Organism              |> formatMultiEntries 4)
-            (gpl.PlatformMetadata.Description           |> formatMultiEntries 4)
-            (gpl.PlatformMetadata.Technology            |> formatSingleEntry 4)
-            (gpl.PlatformMetadata.Contributor           |> formatMultiEntries 4)
-            (gpl.SeriesMetadata                         |> formatSeries 4)
-            (gpl.SampleMetadata                         |> formatSamples 4)
+            (gpl.PlatformMetadata.Title                 |> SOFT.formatSingleEntry 4)
+            (gpl.PlatformMetadata.Organism              |> SOFT.formatMultiEntries 4)
+            (gpl.PlatformMetadata.Description           |> SOFT.formatMultiEntries 4)
+            (gpl.PlatformMetadata.Technology            |> SOFT.formatSingleEntry 4)
+            (gpl.PlatformMetadata.Contributor           |> SOFT.formatMultiEntries 4)
+            (gpl.SeriesMetadata                         |> SOFT.formatSeries 4)
+            (gpl.SampleMetadata                         |> SOFT.formatSamples 4)
+
