@@ -1483,14 +1483,13 @@ module SOFT =
         let getAssociatedPlatformAccessions (gse:GSE) =
             gse.PlatformMetadata
             |> Map.toList
-            |> List.map snd
-            |> List.map (fun record -> record.Accession)
+            |> List.map fst
 
         ///returns sample metadata associated with the input series GSE representation
         let getAssociatedSamples (gse:GSE) =
             gse.SampleMetadata
             |> Map.toList
-            |> List.map fst
+            |> List.map snd
 
         ///returns sample accessions associated with the input series GSE representation
         let getAssociatedSampleAccessions (gse:GSE) =
@@ -1556,7 +1555,7 @@ module SOFT =
         let getAssociatedSamples (gpl:GPL) =
             gpl.SampleMetadata
             |> Map.toList
-            |> List.map fst
+            |> List.map snd
 
         ///returns sample accessions associated with the input platform GPL representation
         let getAssociatedSampleAccessions (gpl:GPL) =
