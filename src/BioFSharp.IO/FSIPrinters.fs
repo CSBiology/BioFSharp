@@ -106,7 +106,7 @@ module FSIPrinters =
     ///print GFF3 formatted file as seen in the specifications.
     let prettyPrintGFF3 (input : seq<GFFLine<#seq<'a>>>) =
         toString id input
-        |> Seq.iter (fun x -> printfn "%s" x)
+        |> String.concat "\r\n"
 
 
     let prettyPrintGSE (gse:SOFT.Series.GSE) =
@@ -264,4 +264,3 @@ Samples         %s
             (gpl.PlatformMetadata.Contributor           |> formatMultiEntries 4)
             (gpl.SeriesMetadata                         |> formatSeries 4)
             (gpl.SampleMetadata                         |> formatSamples 4)
-
