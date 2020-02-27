@@ -40,7 +40,9 @@
 a bunch of functions to view our data types in a structured string format. This helps avoiding to save interim results for the purpose of
 visual investigation. To use these printers, use the <code>fsi.AddPrinter</code> function to register the desired printer. This will override the default
 printing behaviour of the respective type in the FSI.</p>
-<p>Currently, the following printers are implemented:</p>
+<p>We also provide a <code>BioFSharp.IO.fsx</code> convenience script in our nuget packages, that registers all (except modification printers) printers to the FSI.
+just <code>#load</code> the script and you get all the printing goodness.</p>
+<p>However, if you want to selectively register FSI printers,here are the currently implemented ones:</p>
 <h2><a name="BioItems" class="anchor" href="#BioItems">BioItems</a></h2>
 <p>There are two options when printing BioItems concerning modifications:</p>
 <ul>
@@ -356,6 +358,235 @@ RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
               
 *******.:********* **.::**.*************:** * *:*  :* *    
 "</code></pre></td></tr></table>
+<h2><a name="SOFT" class="anchor" href="#SOFT">SOFT</a></h2>
+<p>There are 5 printers available:</p>
+<p><code>prettyPrintGSE</code> and <code>prettyPrintGPL</code> format the top level types <code>SOFT.Series.GSE</code> and <code>SOFT.Platform.GPL</code> including associated record metadata.</p>
+<p><code>prettyPrintSampleRecord</code>,<code>prettyPrintSeriesRecord</code>, and <code>prettyPrintPlatformRecord</code> format single record metadata.</p>
+<p>All SOFT types are very large and hard to read from standard output, especially the nested top level types, so we will omitt the standard output for readability.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printers</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 96)" onmouseover="showTip(event, 'fs16', 96)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 97)" onmouseover="showTip(event, 'fs42', 97)" class="id">prettyPrintGPL</span><span class="pn">)</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 98)" onmouseover="showTip(event, 'fs16', 98)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 99)" onmouseover="showTip(event, 'fs43', 99)" class="id">prettyPrintGSE</span><span class="pn">)</span>
+
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 100)" onmouseover="showTip(event, 'fs16', 100)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 101)" onmouseover="showTip(event, 'fs44', 101)" class="id">prettyPrintSampleRecord</span><span class="pn">)</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 102)" onmouseover="showTip(event, 'fs16', 102)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 103)" onmouseover="showTip(event, 'fs45', 103)" class="id">prettyPrintSeriesRecord</span><span class="pn">)</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 104)" onmouseover="showTip(event, 'fs16', 104)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 105)" onmouseover="showTip(event, 'fs46', 105)" class="id">prettyPrintPlatformRecord</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 106)" onmouseover="showTip(event, 'fs47', 106)" class="id">gplPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GPL15922_family.soft&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 107)" onmouseover="showTip(event, 'fs48', 107)" class="id">gpl15922</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 108)" onmouseover="showTip(event, 'fs49', 108)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 109)" onmouseover="showTip(event, 'fs50', 109)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 110)" onmouseover="showTip(event, 'fs51', 110)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs47', 111)" onmouseover="showTip(event, 'fs47', 111)" class="id">gplPath</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Console output using <code>prettyPrintGPL</code>:</p>
+<table class="pre"><tr><td><pre><code>"
+GEO PLATFORM RECORD GPL15922
+============================
+
+Title:          Illumina HiSeq 2000 (Chlamydomonas reinhardtii)
+
+Organism(s):    Chlamydomonas reinhardtii
+
+Description:    
+
+Technology:     high-throughput sequencing
+
+Contributor(s): 
+
+Series(s):      GSE101944 =&gt; Transcriptome analysis of Chlamydomonas reinhardtii chloroplast and mitochondria
+                GSE112394 =&gt; Transcriptomics analysis of the Chlamydomonas reinhardtii diurnal cycle.
+                GSE40031 =&gt; Retrograde bilin signaling enables Chlamydomonas greening and phototrophic survival
+                GSE44611 =&gt; Changes in membrane lipid composition during Iron depletion and starvation in Chlamydomonas reinhardtii
+                GSE55253 =&gt; The Path to Triacylglyceride Obesity in the sta6 Strain of Chlamydomonas reinhardtii
+                GSE58786 =&gt; RNAseq Analysis of Transcriptomic Response to Zn Resupply in Chlamydomonas reinhardtii
+                GSE59629 =&gt; Lineage-Specific Chromatin Signatures Reveal a Master Lipid Switch in Microalgae
+                GSE62690 =&gt; N6-Methyldeoxyadenosine Marks Active Transcription Start Sites in Chlamydomonas
+                GSE71469 =&gt; Chlamydomonas diurnal transcriptome
+                GSE77388 =&gt; Bilin-dependent photoacclimation in Chlamydomonas reinhardtii
+
+Samples         GSM1087792 =&gt; C.reinhardtii _Fe_Long_0_hours
+                GSM1087793 =&gt; C.reinhardtii _Fe_Long_0.5_hours
+                GSM1087794 =&gt; C.reinhardtii _Fe_Long_1_hours
+                GSM1087795 =&gt; C.reinhardtii _Fe_Long_2_hours
+                GSM1087796 =&gt; C.reinhardtii _Fe_Long_4_hours
+                GSM1087797 =&gt; C.reinhardtii _Fe_Long_8_hours
+                GSM1087798 =&gt; C.reinhardtii _Fe_Long_12_hours
+                GSM1087799 =&gt; C.reinhardtii _Fe_Long_24_hours
+                GSM1087800 =&gt; C.reinhardtii _Fe_Long_48_hours
+                GSM1332630 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0h pre-wash
+                GSM1332631 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0h
+                GSM1332632 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0.5h
+                GSM1332633 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 2h
+                GSM1332634 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 4h
+                GSM1332635 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 8h
+                (...and 208 more)
+
+(For more Metadata, access the type directly)
+            "</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs53', 116)" onmouseover="showTip(event, 'fs53', 116)" class="id">gsePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GSE71469_family.soft&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 117)" onmouseover="showTip(event, 'fs54', 117)" class="id">gse71469</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 118)" onmouseover="showTip(event, 'fs49', 118)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 119)" onmouseover="showTip(event, 'fs55', 119)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 120)" onmouseover="showTip(event, 'fs56', 120)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs53', 121)" onmouseover="showTip(event, 'fs53', 121)" class="id">gsePath</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Console output using <code>prettyPrintGSE</code>:</p>
+<table class="pre"><tr><td><pre><code>"
+GEO SERIES RECORD GSE71469
+==========================
+
+Type(s):        Expression profiling by high throughput sequencing
+
+Platform(s):    GPL15922 =&gt; Illumina HiSeq 2000 (Chlamydomonas reinhardtii)
+
+Title:          Chlamydomonas diurnal transcriptome
+
+Contributor(s): James,G,Umen
+                Sabeeha,S,Merchant
+                Ian,K,Blaby
+                James,M,Zones
+
+Design:         Synchronous phototrophic cultures of Chlamydomonas reinhardtii were prepared in controlled diurnal bioreactor growth conditions and
+                sampled in two 24-hour replicate time courses at 1-hour and 0.5-hour intervals for Illumina paired-end
+                RNA-Seq. More than ~3 million paired end reads were obtained for each sample.
+
+Summary:        We combined a highly synchronous photobioreactor culture system with frequent temporal sampling to characterize genome-wide
+                periodic gene expression in Chlamydomonas.
+
+Samples         GSM1835200 =&gt; 1_1
+                GSM1835201 =&gt; 2_1
+                GSM1835202 =&gt; 3_1
+                GSM1835203 =&gt; 4_1
+                GSM1835204 =&gt; 5_1
+                GSM1835205 =&gt; 6_1
+                GSM1835206 =&gt; 7_1
+                GSM1835207 =&gt; 8_1
+                GSM1835208 =&gt; 9_1
+                GSM1835209 =&gt; 10_1
+                GSM1835210 =&gt; 11_1
+                GSM1835211 =&gt; 11.5_1
+                GSM1835212 =&gt; 12_1
+                GSM1835213 =&gt; 12.5_1
+                GSM1835214 =&gt; 13_1
+                (...and 41 more)
+
+(For more Metadata, access the type directly)
+            "</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 126)" onmouseover="showTip(event, 'fs58', 126)" class="id">smplRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs54', 127)" onmouseover="showTip(event, 'fs54', 127)" class="id">gse71469</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 128)" onmouseover="showTip(event, 'fs49', 128)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 129)" onmouseover="showTip(event, 'fs55', 129)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 130)" onmouseover="showTip(event, 'fs59', 130)" class="id">getAssociatedSamples</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 131)" onmouseover="showTip(event, 'fs60', 131)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 132)" onmouseover="showTip(event, 'fs61', 132)" class="id">item</span> <span class="n">0</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Console output using <code>prettyPrintSampleRecord</code>:</p>
+<table class="pre"><tr><td><pre><code>"
+METADATA FOR SAMPLE RECORD GSM1835200
+=====================================
+
+Title:              1_1
+
+Type(s):            SRA
+
+Organism(s)         [CHANNEL 1]
+
+                    Chlamydomonas reinhardtii
+
+Characteristics:    [CHANNEL 1]
+
+                    time (zeitgeber): ZT1
+                    protocol: light
+                    replicate time course: Replicate 1
+                    strain: 6145c (CC-2895)
+
+Description:        
+
+(For more Metadata, access the type directly)
+            "</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 137)" onmouseover="showTip(event, 'fs63', 137)" class="id">seriesRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs48', 138)" onmouseover="showTip(event, 'fs48', 138)" class="id">gpl15922</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 139)" onmouseover="showTip(event, 'fs49', 139)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 140)" onmouseover="showTip(event, 'fs50', 140)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs64', 141)" onmouseover="showTip(event, 'fs64', 141)" class="id">getAssociatedSeries</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 142)" onmouseover="showTip(event, 'fs60', 142)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 143)" onmouseover="showTip(event, 'fs61', 143)" class="id">item</span> <span class="n">0</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Console output using <code>prettyPrintSeriesRecord</code>:</p>
+<table class="pre"><tr><td><pre><code>"
+GEO SERIES RECORD GSE101944
+===========================
+
+Type(s):        Expression profiling by high throughput sequencing
+
+Title:          Transcriptome analysis of Chlamydomonas reinhardtii chloroplast and mitochondria
+
+Contributor(s): Daniela,,Strenkert
+                Sean,D,Gallaher
+
+Design:         RNA-Seq libraries were prepared from Chlamydomonas reinhardtii sampled under 12 different conditions including: diurnal growth
+                in light, diurnal growth in dark, +Fe, â€“Fe, +Cu, â€“Cu, mt+ vegetative, mtâ€“ vegetative, mt+
+                gamete, mtâ€“ gamete, zygote, and post-germination.
+
+Summary:        Here, we report on the transcriptome of the organelles of the micro-alga, Chlamydomonas reinhardtii, sampled
+                under a number of different conditions. The preparation of the RNA-Seq libraries and their analysis
+                were performed using protocols optimized for organellar transcripts. Samples include growth in media +/â€“ Fe,
+                growth in media +/â€“ Cu, diurnal growth samples collected in dark and light, and the
+                sexual cycle.
+
+(For more Metadata, access the type directly)
+            "</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 148)" onmouseover="showTip(event, 'fs66', 148)" class="id">pltfrmRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs54', 149)" onmouseover="showTip(event, 'fs54', 149)" class="id">gse71469</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 150)" onmouseover="showTip(event, 'fs49', 150)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 151)" onmouseover="showTip(event, 'fs55', 151)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 152)" onmouseover="showTip(event, 'fs67', 152)" class="id">getAssociatedPlatforms</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 153)" onmouseover="showTip(event, 'fs60', 153)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 154)" onmouseover="showTip(event, 'fs61', 154)" class="id">item</span> <span class="n">0</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Console output using <code>prettyPrintSampleRecord</code>:</p>
+<table class="pre"><tr><td><pre><code>"
+GEO PLATFORM RECORD GPL15922
+============================
+
+Title:          Illumina HiSeq 2000 (Chlamydomonas reinhardtii)
+
+Organism(s):    Chlamydomonas reinhardtii
+
+Description:    
+
+Technology:     high-throughput sequencing
+
+Contributor(s): 
+
+(For more Metadata, access the type directly)
+            "</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
 <div class="tip" id="fs2">namespace BioFSharp.IO</div>
@@ -398,6 +629,33 @@ RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
 <div class="tip" id="fs39">val ofFile : path:string -&gt; Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
 <div class="tip" id="fs40">val clustalPrnt : string</div>
 <div class="tip" id="fs41">val prettyPrintClustal : alignment:Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt; -&gt; string</div>
+<div class="tip" id="fs42">val prettyPrintGPL : gpl:Platform.GPL -&gt; string</div>
+<div class="tip" id="fs43">val prettyPrintGSE : gse:Series.GSE -&gt; string</div>
+<div class="tip" id="fs44">val prettyPrintSampleRecord : sample:SampleRecord -&gt; string</div>
+<div class="tip" id="fs45">val prettyPrintSeriesRecord : series:SeriesRecord -&gt; string</div>
+<div class="tip" id="fs46">val prettyPrintPlatformRecord : platform:PlatformRecord -&gt; string</div>
+<div class="tip" id="fs47">val gplPath : string</div>
+<div class="tip" id="fs48">val gpl15922 : Platform.GPL</div>
+<div class="tip" id="fs49">module SOFT<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs50">module Platform<br /><br />from BioFSharp.IO.SOFT</div>
+<div class="tip" id="fs51">val fromFile : path:string -&gt; Platform.GPL</div>
+<div class="tip" id="fs52">val gplPrnt : string</div>
+<div class="tip" id="fs53">val gsePath : string</div>
+<div class="tip" id="fs54">val gse71469 : Series.GSE</div>
+<div class="tip" id="fs55">module Series<br /><br />from BioFSharp.IO.SOFT</div>
+<div class="tip" id="fs56">val fromFile : path:string -&gt; Series.GSE</div>
+<div class="tip" id="fs57">val gsePrnt : string</div>
+<div class="tip" id="fs58">val smplRecord : SampleRecord</div>
+<div class="tip" id="fs59">val getAssociatedSamples : gse:Series.GSE -&gt; SampleRecord list</div>
+<div class="tip" id="fs60">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;&#160;&#160;...</div>
+<div class="tip" id="fs61">val item : index:int -&gt; list:&#39;T list -&gt; &#39;T</div>
+<div class="tip" id="fs62">val smplPrint : string</div>
+<div class="tip" id="fs63">val seriesRecord : SeriesRecord</div>
+<div class="tip" id="fs64">val getAssociatedSeries : gpl:Platform.GPL -&gt; SeriesRecord list</div>
+<div class="tip" id="fs65">val seriesPrint : string</div>
+<div class="tip" id="fs66">val pltfrmRecord : PlatformRecord</div>
+<div class="tip" id="fs67">val getAssociatedPlatforms : gse:Series.GSE -&gt; PlatformRecord list</div>
+<div class="tip" id="fs68">val pltfrmPrint : string</div>
 
 			</div>
 			<div class="span3" >
@@ -440,6 +698,7 @@ RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
                   <li>
                       <a href="/BioFSharp/GenBank.html">GenBank</a>
                   </li>
+                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
                   <li>
                       <a href="/BioFSharp/GFF3.html">GFF3</a>
                   </li>
@@ -453,6 +712,7 @@ RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
                               <li><a href="/BioFSharp/FSIPrinters.html#BioItems">BioItems</a></li>
                               <li><a href="/BioFSharp/FSIPrinters.html#BioCollections">BioCollections</a></li>
                               <li><a href="/BioFSharp/FSIPrinters.html#Clustal-formatted-alignments">Clustal</a></li>
+                              <li><a href="/BioFSharp/FSIPrinters.html#SOFT">GEO Metadata (SOFT)</a></li>
                           </ul>
                   </li>
                   <li class="nav-header">Web I/O</li>
