@@ -17,6 +17,7 @@
 #load "ClustalO.fs"
 #load "HMMER.fs"
 #load "LastAlign.fs"
+#load "SRAToolkit.fs"
 
 open System.Threading
 open System.Threading
@@ -424,8 +425,6 @@ open BioFSharp.BioContainers.BioContainer
 open BioFSharp.BioContainers.BioContainerIO
 open Blast
 
-let client = Docker.connect "npipe://./pipe/docker_engine"
-
 let ImageBlast = Docker.DockerId.ImageId "blast"
 
 let blastContext = 
@@ -434,9 +433,9 @@ let blastContext =
 
 let paramz =
     [
-        MakeDbParams.DbType Protein
-        MakeDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-        MakeDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeBlastDbParams.DbType Protein
+        MakeBlastDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeBlastDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
     ]
 
 let outputFormat= 
@@ -578,3 +577,27 @@ let alignParams =
 runLastAlignAsync lastAlignContext alignParams
 |> Async.RunSynchronously
 |> fun x -> File.WriteAllLines(@"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf",x.Split([|"\r\n";"\r";"\n"|],StringSplitOptions.None))
+
+
+open SRATools
+
+let sraImage = Docker.ImageId "quay.io/biocontainers/sra-tools:2.10.3--pl526haddd2b5_0"
+    
+let sraContext = 
+    BioContainer.initBcContextWithMountAsync client sraImage  @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data"
+    |> Async.RunSynchronously
+
+let FQDOptions =
+    [
+        FasterQDumpParams.OutDirectory @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\lol"
+        FasterQDumpParams.TempDirectory @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\lol\tmp"
+        FasterQDumpParams.Split SplitOptions.Split3
+        FasterQDumpParams.PrintDetails
+        FasterQDumpParams.ShowProgress
+    ]
+    
+runFasterQDump sraContext FQDOptions "SRR000001"
+
+sraContext
+|> BioContainer.disposeAsync  
+|> Async.RunSynchronously
