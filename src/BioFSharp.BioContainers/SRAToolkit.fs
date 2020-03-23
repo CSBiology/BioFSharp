@@ -3,30 +3,120 @@ open BioContainer
 
 module SRATools =
 
-    //type PrefetchParams =
-    //    |Placeholder
+//  accessions(s)                    list of accessions to process
 
-    //    static member makeCmd = function
-    //        |Placeholder -> [""]
+    type PrefetchForceOptions =
+        ///Skip download if the object is found on the output path.
+        | No
+        ///Download it even if the object is found on the output path.
+        | Yes
+        ///Ignore lock files (stale locks or if it is currently being downloaded: use at your own risk!).
+        | All
 
-    //    static member makeCmdWith (m:MountInfo) = function
-    //        |Placeholder -> [""]
-    
+        static member make  = function
+            | No    -> "no" 
+            | Yes   -> "yes"
+            | All   -> "all"
+
+    type PrefetchTransportOptions =
+        ///Use only ascp for file transfer.
+        | AscpOnly
+        ///Use only HTTP for file transfer.
+        | HttpOnly
+        ///Try ascp first for file transfer, fallback to HTTP.
+        | TryAscpWithHttpFallback
+
+        static member make = function
+            | AscpOnly                  -> "ascp"
+            | HttpOnly                  -> "http"
+            | TryAscpWithHttpFallback   -> "both"
+
+//Options:
+
+    type PrefetchParams =
+        ///specify file type to download. Default: sra
+        |FileType               of string
+        ///Minimum file size to download in KB (inclusive).
+        |MinimumFileSize        of int
+        ///Maximum file size to download in KB (exclusive). Default: 20G
+        |MaximumFileSize        of int
+        ///Force object download one of: no, yes, all. no [default]: skip download if the object if found and complete; yes: download it even if it is found and is complete; all: ignore lock files (stale locks or it is being downloaded by another process: use at your own risk!)
+        |Force                  of PrefetchForceOptions
+        ///Time period in minutes to display download progress (0: no progress), default: 1
+        |Progress               of int
+        ///Double-check all refseqs
+        |CheckAll
+        ///Write file to FILE when downloading single file
+        |OutputFile             of string
+        ///Save files to path/
+        |OutputDirectory        of string
+        ///<path> to ngc file
+        |NGCFilePath            of string
+        ///<path> to permission file
+        |PermissionFilePath     of string
+        ///location in cloud
+        |CloudLocation          of string
+        ///<path> to cart file
+        |CartPath of string
+        ///disable multithreading
+        |DisableMultiThreading
+        ///Display the version of the program
+        |Version
+        ///Logging level as number or enum string. One of (fatal|sys|int|err|warn|info|debug) or (0-6) Current/default is warn
+        |LogLevel               of string
+        ///Read more options and parameters from the file.
+        |OptionFilePath         of string
+
+        static member makeCmd = function
+            |FileType              p -> ["--type"                   ; p]
+            |MinimumFileSize       p -> ["--min_size"               ; p |> string]
+            |MaximumFileSize       p -> ["--max_size"               ; p |> string]
+            |Force                 p -> ["--force"                  ; p |> PrefetchForceOptions.make]
+            |Progress              p -> ["--progress"               ; p |> string]
+            |CheckAll                -> ["--check-all"              ; ]
+            |OutputFile            p -> ["--output-file"            ; p ]
+            |OutputDirectory       p -> ["--output-directory"       ; p ]
+            |NGCFilePath           p -> ["--ngc"                    ; p ]
+            |PermissionFilePath    p -> ["--perm"                   ; p ]
+            |OptionFilePath        p -> ["--option-file"            ; p ]
+            |CartPath              p -> ["--cart"                   ; p ]
+            |CloudLocation         p -> ["--location"               ; p ]
+            |DisableMultiThreading   -> ["--disable-multithreading" ; ]
+            |Version                 -> ["--version"                ; ]
+            |LogLevel              p -> ["--log-level"              ; p ]
+
+        
+        static member makeCmdWith (m:MountInfo) = function
+            |FileType              p -> ["--type"                   ; p]
+            |MinimumFileSize       p -> ["--min_size"               ; p |> string]
+            |MaximumFileSize       p -> ["--max_size"               ; p |> string]
+            |Force                 p -> ["--force"                  ; p |> PrefetchForceOptions.make]
+            |Progress              p -> ["--progress"               ; p |> string]
+            |CheckAll                -> ["--check-all"              ; ]
+            |OutputFile            p -> ["--output-file"            ; p |> MountInfo.containerPathOf m]
+            |OutputDirectory       p -> ["--output-directory"       ; p |> MountInfo.containerPathOf m]
+            |NGCFilePath           p -> ["--ngc"                    ; p |> MountInfo.containerPathOf m]
+            |PermissionFilePath    p -> ["--perm"                   ; p |> MountInfo.containerPathOf m]
+            |OptionFilePath        p -> ["--option-file"            ; p |> MountInfo.containerPathOf m]
+            |CartPath              p -> ["--cart"                   ; p |> MountInfo.containerPathOf m]
+            |CloudLocation         p -> ["--location"               ; p ]
+            |DisableMultiThreading   -> ["--disable-multithreading" ; ]
+            |Version                 -> ["--version"                ; ]
+            |LogLevel              p -> ["--log-level"              ; p ]
 
 
+    let runPrefetchAsync (bcContext:BioContainer.BcContext) (opt:PrefetchParams list) (accession:string) = 
 
-    //let runPrefetchAsync (bcContext:BioContainer.BcContext) (opt:PrefetchParams list) = 
+        let cmds = (opt |> List.map (PrefetchParams.makeCmdWith bcContext.Mount))
+        let tp = "prefetch"::(cmds |> List.concat)@[accession]
 
-    //    let cmds = (opt |> List.map (PrefetchParams.makeCmdWith bcContext.Mount))
-    //    let tp = "prefetch"::(cmds |> List.concat)
+        printfn "Starting process prefetch\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
 
-    //    printfn "Starting process prefetch\r\nparameters:"
-    //    cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
-
-    //    async {
-    //            let! res = BioContainer.execAsync bcContext tp           
-    //            return res
-    //    }
+        async {
+                let! res = BioContainer.execAsync bcContext tp           
+                return res
+        }
 
     type SplitOptions =
         ///Split spots into reads
@@ -194,7 +284,7 @@ module SRATools =
             |DisableMultiThreading  -> ["--disable-multithreading"]
 
 
-    let runFasterQDumpAsync (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (accession:string) = 
+    let runFasterQDumpOfAccessionAsync (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (accession:string) = 
 
         let cmds = (opt |> List.map (FasterQDumpParams.makeCmdWith bcContext.Mount))
         let tp = "fasterq-dump"::(cmds |> List.concat)@[accession]
@@ -207,6 +297,24 @@ module SRATools =
                 return res
         }
 
-    let runFasterQDump (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (accession:string) = 
-        runFasterQDumpAsync bcContext opt accession
+    let runFasterQDumpOfAccession (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (accession:string) = 
+        runFasterQDumpOfAccessionAsync bcContext opt accession
+        |> Async.RunSynchronously
+
+    
+    let runFasterQDumpOfFileAsync (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (sraPath:string) = 
+
+        let cmds = (opt |> List.map (FasterQDumpParams.makeCmdWith bcContext.Mount))
+        let tp = "fasterq-dump"::(cmds |> List.concat)@[MountInfo.containerPathOf bcContext.Mount sraPath]
+
+        printfn "Starting process fasterq-dump\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+        async {
+                let! res = BioContainer.execAsync bcContext tp           
+                return res
+        }
+
+    let runFasterQDumpOfFile (bcContext:BioContainer.BcContext) (opt:FasterQDumpParams list) (accession:string) = 
+        runFasterQDumpOfFileAsync bcContext opt accession
         |> Async.RunSynchronously
