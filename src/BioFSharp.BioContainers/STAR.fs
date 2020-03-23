@@ -154,7 +154,7 @@ module STAR =
             |All   -> "All"
 
     type SpliceJunctionsDatabaseParams =
-        ///path(s) to the files with genomic coordinates (chr <tab> start <tab> end <tab> strand) for the splice junction introns. Multiple files can be supplied wand will be concatenated.
+        ///path(s) to the files with genomic coordinates (chr tab start tab end tab strand) for the splice junction introns. Multiple files can be supplied wand will be concatenated.
         |FileChrStartEnd of string list
         ///string: path to the GTF file with annotations
         |GTFfile of string

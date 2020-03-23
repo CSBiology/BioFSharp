@@ -48,15 +48,15 @@ module SRATools =
         |CheckAll
         ///Write file to FILE when downloading single file
         |OutputFile             of string
-        ///Save files to path/
+        ///Save files to path
         |OutputDirectory        of string
-        ///<path> to ngc file
+        ///path to ngc file
         |NGCFilePath            of string
-        ///<path> to permission file
+        ///path to permission file
         |PermissionFilePath     of string
         ///location in cloud
         |CloudLocation          of string
-        ///<path> to cart file
+        ///path to cart file
         |CartPath of string
         ///disable multithreading
         |DisableMultiThreading
