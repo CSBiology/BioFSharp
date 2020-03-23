@@ -23,7 +23,11 @@ a bunch of functions to view our data types in a structured string format. This 
 visual investigation. To use these printers, use the `fsi.AddPrinter` function to register the desired printer. This will override the default 
 printing behaviour of the respective type in the FSI.
 
-Currently, the following printers are implemented:
+We also provide a `BioFSharp.IO.fsx` convenience script in our nuget packages, that registers all (except modification printers) printers to the FSI.
+just `#load` the script and you get all the printing goodness.
+
+
+However, if you want to selectively register FSI printers,here are the currently implemented ones:
 
 BioItems
 --------
@@ -174,3 +178,93 @@ Console output using `prettyPrintClustal`:
 fsi.AddPrinter(FSIPrinters.prettyPrintClustal)
 
 (*** include-value:clustalPrnt ***)
+
+
+(**
+SOFT
+----
+There are 5 printers available:
+
+`prettyPrintGSE` and `prettyPrintGPL` format the top level types `SOFT.Series.GSE` and `SOFT.Platform.GPL` including associated record metadata.
+
+`prettyPrintSampleRecord`,`prettyPrintSeriesRecord`, and `prettyPrintPlatformRecord` format single record metadata.
+
+All SOFT types are very large and hard to read from standard output, especially the nested top level types, so we will omitt the standard output for readability.
+*)
+
+//register the desired printers
+fsi.AddPrinter(FSIPrinters.prettyPrintGPL)
+fsi.AddPrinter(FSIPrinters.prettyPrintGSE)
+
+fsi.AddPrinter(FSIPrinters.prettyPrintSampleRecord)
+fsi.AddPrinter(FSIPrinters.prettyPrintSeriesRecord)
+fsi.AddPrinter(FSIPrinters.prettyPrintPlatformRecord)
+
+let gplPath = __SOURCE_DIRECTORY__ + "/data/GPL15922_family.soft"
+
+let gpl15922 = SOFT.Platform.fromFile gplPath
+
+(***hide***)
+let gplPrnt = FSIPrinters.prettyPrintGPL gpl15922
+
+(** 
+Console output using `prettyPrintGPL`:
+*)
+
+(*** include-value:gplPrnt ***)
+
+let gsePath = __SOURCE_DIRECTORY__ + "/data/GSE71469_family.soft"
+
+let gse71469 = SOFT.Series.fromFile gsePath
+
+(***hide***)
+let gsePrnt = FSIPrinters.prettyPrintGSE gse71469
+
+(** 
+Console output using `prettyPrintGSE`:
+*)
+
+(*** include-value:gsePrnt ***)
+
+let smplRecord = 
+    gse71469
+    |> SOFT.Series.getAssociatedSamples
+    |> List.item 0
+
+(***hide***)
+let smplPrint = FSIPrinters.prettyPrintSampleRecord smplRecord
+
+(** 
+Console output using `prettyPrintSampleRecord`:
+*)
+
+(*** include-value:smplPrint ***)
+
+let seriesRecord = 
+    gpl15922
+    |> SOFT.Platform.getAssociatedSeries
+    |> List.item 0
+
+(***hide***)
+let seriesPrint = FSIPrinters.prettyPrintSeriesRecord seriesRecord
+
+(** 
+Console output using `prettyPrintSeriesRecord`:
+*)
+
+(*** include-value:seriesPrint ***)
+
+
+let pltfrmRecord = 
+    gse71469
+    |> SOFT.Series.getAssociatedPlatforms
+    |> List.item 0
+
+(***hide***)
+let pltfrmPrint = FSIPrinters.prettyPrintPlatformRecord pltfrmRecord
+
+(** 
+Console output using `prettyPrintSampleRecord`:
+*)
+
+(*** include-value:pltfrmPrint ***)

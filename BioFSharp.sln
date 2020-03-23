@@ -55,6 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\Obo.fsx = docsrc\content\Obo.fsx
 		docsrc\content\PetideClassification.fsx = docsrc\content\PetideClassification.fsx
 		docsrc\content\Readers.fsx = docsrc\content\Readers.fsx
+		docsrc\content\SOFT.fsx = docsrc\content\SOFT.fsx
 		docsrc\content\StringMatching.fsx = docsrc\content\StringMatching.fsx
 		docsrc\content\tutorial.fsx = docsrc\content\tutorial.fsx
 		docsrc\content\UniProt.fsx = docsrc\content\UniProt.fsx

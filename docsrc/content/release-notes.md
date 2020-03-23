@@ -1,3 +1,17 @@
+#### 1.1.0 - Wednesday, March 23, 2020
+**Additions:**
+ * **BioFSharp.BioContainers:**
+   * Add [fasterq-dump](https://github.com/CSBiology/BioFSharp/commit/425fbb93b41700eeece8f8ab063c9c37b15124bd) and [prefetch](https://github.com/CSBiology/BioFSharp/commit/b08f307f203eea4c2a84cce10f1a72d05453806b) DSL for the SRATools biocontainer
+   * Add full [STAR](https://github.com/alexdobin/STAR) RNASeq aligner DSL for the respective BioContainer. [Commit details](https://github.com/CSBiology/BioFSharp/commit/d2cbc0a8691564a487d70d9825867e7eb261d03a)
+ * **BioFSharp.IO:**
+   * [Add load script for referencing pretty printers](https://github.com/CSBiology/BioFSharp/commit/130e1c63264989978e54f114dbd04b6dfb9458d3), included in the nuget package
+   * [Add multiple new pretty printers for SOFT](https://github.com/CSBiology/BioFSharp/commit/97cca9bd06f63455ebafbf3cbb8029a0651137cb)
+
+**Bugfixes:**
+ * **BioFSharp.IO:**
+   * [Fix GFF3 pretty printer return type](https://github.com/CSBiology/BioFSharp/commit/bcec2cc719eef7e43827521bd281582a8b5ebe72)
+
+
 #### 1.0.03 - Wednesday, February 26, 2020
  * **BioFSharp.Stats:**
     * Massively improved SAILENT characterization speed for [preprocessing of large datasets](https://github.com/CSBiology/BioFSharp/pull/82)

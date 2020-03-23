@@ -39,6 +39,7 @@
     <Compile Include="MoFF.fs" />
     <Compile Include="TargetP.fs" />
     <Compile Include="SRAToolkit.fs" />
+    <Compile Include="STAR.fs" />
     <Compile Include="Tmhmm.fs" />
     <None Include="BioFSharp.BioContainers.fsx" />
     <None Include="paket.references" />

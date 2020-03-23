@@ -17,6 +17,9 @@
 #load "ClustalO.fs"
 #load "HMMER.fs"
 #load "LastAlign.fs"
+#load "SRAToolkit.fs"
+#load "STAR.fs"
+#load "FastP.fs"
 
 open System.Threading
 open System.Threading
@@ -424,8 +427,6 @@ open BioFSharp.BioContainers.BioContainer
 open BioFSharp.BioContainers.BioContainerIO
 open Blast
 
-let client = Docker.connect "npipe://./pipe/docker_engine"
-
 let ImageBlast = Docker.DockerId.ImageId "blast"
 
 let blastContext = 
@@ -434,9 +435,9 @@ let blastContext =
 
 let paramz =
     [
-        MakeDbParams.DbType Protein
-        MakeDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-        MakeDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeBlastDbParams.DbType Protein
+        MakeBlastDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeBlastDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
     ]
 
 let outputFormat= 
@@ -578,3 +579,59 @@ let alignParams =
 runLastAlignAsync lastAlignContext alignParams
 |> Async.RunSynchronously
 |> fun x -> File.WriteAllLines(@"C:\Users\kevin\Desktop\Microbiology_CrossGenomics\Data\Genomes\GenomeAlignment.maf",x.Split([|"\r\n";"\r";"\n"|],StringSplitOptions.None))
+
+
+open SRATools
+
+let sraImage = Docker.ImageId "quay.io/biocontainers/sra-tools:2.10.3--pl526haddd2b5_0"
+
+let sraContext = 
+    BioContainer.initBcContextWithMountAsync client sraImage  @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data"
+    |> Async.RunSynchronously
+
+let FQDOptions =
+    [
+        FasterQDumpParams.OutDirectory @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\Testerino"
+        FasterQDumpParams.TempDirectory @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\Testerino\tmp"
+        FasterQDumpParams.Split SplitOptions.SplitFiles
+        FasterQDumpParams.PrintDetails
+        FasterQDumpParams.ShowProgress
+    ]
+
+runFasterQDumpOfAccession sraContext FQDOptions "SRR000001"
+
+sraContext
+|> BioContainer.disposeAsync  
+|> Async.RunSynchronously
+
+
+open FastP
+
+let fastPImage = Docker.ImageId "quay.io/biocontainers/fastp:0.20.0--hdbcaa40_0"
+
+
+open STAR
+
+let STARImage =  Docker.ImageId "quay.io/biocontainers/star:2.7.3a--0"
+
+let starContext = 
+    BioContainer.initBcContextWithMountAsync client STARImage  @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data"
+    |> Async.RunSynchronously
+
+STAR.BasicWorkflows.runBasicGenomeIndexing
+    2
+    @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\Testerino"
+    [@"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\Chlamydomonas_reinhardtii.Chlamydomonas_reinhardtii_v5.5.dna.toplevel.fa"]
+    @"C:\Users\kevin\Downloads\CsbScaffold-master\MetaIndexing_New\data\ChlamyGTF.gtf"
+    starContext
+    [
+        STARParams.GenomeParameters [
+            GenomeParams.IndexingOptions[
+                GenomeIndexingOptions.SAindexNbases 12
+            ]
+        ]
+    ]
+
+starContext
+|> BioContainer.disposeAsync  
+|> Async.RunSynchronously
