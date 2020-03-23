@@ -821,7 +821,7 @@ module STAR =
             |MatchNmin                        i -> ["--outFilterMatchNmin"             ; i |> string]
             |MatchNminOverLread               f -> ["--outFilterMatchNminOverLread"    ; f |> string]
             |IntronMotifs                     m -> ["--outFilterIntronMotifs"          ; m |> OutputFilterIntronMotifsOptions.make]
-            |RemoveInconsistentIntronStrands  b -> ["--outFilterIntronStrands"         ; if b then "RemoveInconsistentStrands" else "None"]
+            |RemoveInconsistentIntronStrands  b -> ["--outFilterIntronStrands"         ; (if b then "RemoveInconsistentStrands" else "None")]
             |SpliceJunctionsFiltering         s -> s |> List.map OutputFilteringSpliceJunctionsOptions.makeCmd |> List.concat
     type AlignmentScoringOptions =
         ///splice junction penalty (independent on intron motif)
@@ -980,7 +980,7 @@ module STAR =
             |TranscriptsPerReadNmax      p -> ["--alignTranscriptsPerReadNmax"      ; p |> string]
             |EndsType                    p -> ["--alignEndsType"                    ; p |> AlignmentEndsTypeOptions.make]
             |EndsProtrusion              p -> ["--alignEndsProtrude"                ; p |> AlignmentEndsProtrusionOptions.make]
-            |SoftClipAtReferenceEnds     p -> ["--alignSoftClipAtReferenceEnds"     ; if p then "Yes" else "No"]
+            |SoftClipAtReferenceEnds     p -> ["--alignSoftClipAtReferenceEnds"     ; (if p then "Yes" else "No")]
             |InsertionFlush              p -> ["--alignInsertionFlush"              ; p |> AlignmentInsertionFlushOptions.make]
             |PairedEndReadOptions        p -> p |> List.map AligmentPairedEndReadOptions.makeCmd |> List.concat
     
