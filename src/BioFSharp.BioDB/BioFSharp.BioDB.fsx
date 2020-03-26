@@ -8,24 +8,27 @@
 #load "Entrez.fs"
 
 open BioFSharp.BioDB.Entrez
-open EntrezInfo
 open Hopac
 open HttpFs
 open HttpFs.Client
 
-let q =
+
+//=============================== eInfo Tests ======================================
+open EntrezInfo
+
+let eInfoQuery =
     {OptionalParameters = 
         [
-            //EntrezInfoParameters.RetrievalMode RetrievalModeOptions.JSON
-            //EntrezInfoParameters.Db "sra"
+            EntrezInfoParameters.RetrievalMode RetrievalModeOptions.JSON
+            EntrezInfoParameters.Db "sra"
         ]
     }
     |> EntrezInfoQuery.makeRequest
 
-let r =
+let eInfoRequest =
 
     job {
-      use! response = getResponse q // disposed at the end of async, don't
+      use! response = getResponse eInfoQuery // disposed at the end of async, don't
                                           // fetch outside async body
       // the above doesn't download the response, so you'll have to do that:
       let! bodyStr = Response.readBodyAsString response
@@ -38,4 +41,40 @@ let r =
       return bodyStr
     }
 
-let res = r |> run
+let eInfoResponse = eInfoRequest |> run
+
+//=============================== eSearch Tests ======================================
+open EntrezSearch
+
+let eSearchQuery =
+    {   
+        Db = "sra"
+        Term = "SRX245325"
+        OptionalParameters = 
+            [
+                RetrievalParameters [
+                    EntrezSearchRetrievalParams.RetrievalMode RetrievalModeOptions.JSON
+                ]
+            ]
+    }
+    |> EntrezSearchQuery.makeRequest
+
+let eSearchRequest =
+
+    job {
+      use! response = getResponse eSearchQuery // disposed at the end of async, don't
+                                          // fetch outside async body
+      // the above doesn't download the response, so you'll have to do that:
+      let! bodyStr = Response.readBodyAsString response
+      // OR:
+      //let! bodyBs = Response.readBodyAsBytes
+
+      // remember HttpFs doesn't buffer the stream (how would we know if we're
+      // downloading 3GiB?), so once you use one of the above methods, you can't do it
+      // again, but have to buffer/stash it yourself somewhere.
+      return bodyStr
+    }
+
+let eISearchResponse = 
+    eSearchRequest 
+    |> run
