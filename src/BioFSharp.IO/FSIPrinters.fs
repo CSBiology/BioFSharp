@@ -101,11 +101,11 @@ module FSIPrinters =
                             lines |> String.concat "\r\n"
 
                 let formatMultiChannelEntry rootIdent l =
-                l 
-                |> List.groupBy fst 
-                |> List.map (fun (i,c) -> (sprintf "[CHANNEL %i]\r\n" i ) :: (c |> List.map snd)) 
-                |> List.concat 
-                |> formatMultiEntries rootIdent
+                    l 
+                    |> List.groupBy fst 
+                    |> List.map (fun (i,c) -> (sprintf "[CHANNEL %i]\r\n" i ) :: (c |> List.map snd)) 
+                    |> List.concat 
+                    |> formatMultiEntries rootIdent
 
     open FormatHelpers
 
