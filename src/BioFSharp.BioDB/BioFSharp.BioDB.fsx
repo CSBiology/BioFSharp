@@ -211,3 +211,65 @@ let eLinkRequest =
     }
 
 let eLinkResponse = eLinkRequest |> run
+
+//=============================== eLink Tests ======================================
+open EntrezGQuery
+
+let eGQuery =
+    let r = 
+        {
+            Term = "SRX245325"
+        }
+    r |> EntrezGQueryQuery.makeRequest
+
+let eGQueryRequest =
+
+    job {
+      use! response = getResponse eGQuery
+      let! bodyStr = Response.readBodyAsString response
+      return bodyStr
+    }
+
+let eGQueryResponse = eGQueryRequest |> run
+
+//=============================== eLink Tests ======================================
+open EntrezSpell
+
+let eSpellQuery =
+    let r = 
+        {
+            Db   = "sra"
+            Term = "asthmaa+OR+alergies"
+        }
+    r |> EntrezSpellQuery.makeRequest
+
+let eSpellRequest =
+
+    job {
+      use! response = getResponse eSpellQuery
+      let! bodyStr = Response.readBodyAsString response
+      return bodyStr
+    }
+
+let eSpellResponse = eSpellRequest |> run
+
+//=============================== eLink Tests ======================================
+open EntrezCitMatch
+
+let eCitMatchQuery =
+    let r = 
+        {
+            Db    = "pubmed"
+            BData = "proc+natl+acad+sci+u+s+a|1991|88|3248|mann+bj|Art1|%0Dscience|1987|235|182|palmenberg+ac|Art2|"
+        }
+    r |> EntrezCitMatchQuery.makeRequest
+
+let eCitMatchRequest =
+
+    job {
+      use! response = getResponse eCitMatchQuery
+      let! bodyStr = Response.readBodyAsString response
+      return bodyStr
+    }
+
+let eCitMatchResponse = eCitMatchRequest |> run

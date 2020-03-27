@@ -590,3 +590,69 @@ module Entrez =
                     |_  -> r |> Request.queryStringItem "id" uIDs
                 |> Request.queryStringItems optParams
                     
+    
+    ///DSL for constructing and executing eGQuery queries
+    ///
+    ///Endpoint Functions:
+    ///
+    /// - Provides the number of records retrieved in all Entrez databases by a single text query.
+    module EntrezGQuery =
+    
+        type EntrezGQueryQuery =
+            {
+                ///Entrez text query. All special characters must be URL encoded. Spaces may be replaced by '+' signs. For very long queries (more than several hundred characters long), consider using an HTTP POST call. See the PubMed or Entrez help for information about search field descriptions and tags. Search fields and tags are database specific.
+                Term: string
+            }
+
+            static member makeRequest (q : EntrezGQueryQuery) = 
+
+                Request.createUrl Get BaseUrls.egQuery
+                |> Request.queryStringItem "term" q.Term
+
+    ///DSL for constructing and executing eSpell queries
+    ///
+    ///Endpoint Functions:
+    ///
+    /// - Provides spelling suggestions for terms within a single text query in a given database.
+    module EntrezSpell =
+
+        type EntrezSpellQuery =
+            {
+                ///Database to search. Value must be a valid Entrez database name (default = pubmed).
+                Db  : string
+                ///Entrez text query. All special characters must be URL encoded. Spaces may be replaced by '+' signs. For very long queries (more than several hundred characters long), consider using an HTTP POST call. See the PubMed or Entrez help for information about search field descriptions and tags. Search fields and tags are database specific.
+                Term: string
+            }
+
+            static member makeRequest (q : EntrezSpellQuery) = 
+
+                Request.createUrl Get BaseUrls.eSpell
+                |> Request.queryStringItem "db"   q.Db
+                |> Request.queryStringItem "term" q.Term
+               
+    ///DSL for constructing and executing eCitMatch queries
+    ///
+    ///Endpoint Functions:
+    ///
+    ///Retrieves PubMed IDs (PMIDs) that correspond to a set of input citation strings.
+    module EntrezCitMatch =
+        
+        type EntrezCitMatchQuery =
+            {
+                ///Database to search. The only supported value is ‘pubmed’.
+                Db      : string
+                ///Citation strings. Each input citation must be represented by a citation string in the following format:
+                ///
+                ///journal_title|year|volume|first_page|author_name|your_key|
+                ///
+                ///Multiple citation strings may be provided by separating the strings with a carriage return character (%0D). The your_key value is an arbitrary label provided by the user that may serve as a local identifier for the citation, and it will be included in the output. Be aware that all spaces must be replaced by ‘+’ symbols and that citation strings should end with a final vertical bar ‘|’.
+                BData   : string
+            }
+
+            static member makeRequest (q : EntrezCitMatchQuery) = 
+
+                Request.createUrl Get BaseUrls.ecitMatch
+                |> Request.queryStringItem "db"     q.Db
+                |> Request.queryStringItem "rettype" "xml"
+                |> Request.queryStringItem "bdata"  q.BData
+               
