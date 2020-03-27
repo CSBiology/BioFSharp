@@ -176,17 +176,38 @@ let eSummaryQuery =
 let eSummaryRequest =
 
     job {
-      use! response = getResponse eSummaryQuery // disposed at the end of async, don't
-                                          // fetch outside async body
-      // the above doesn't download the response, so you'll have to do that:
+      use! response = getResponse eSummaryQuery
       let! bodyStr = Response.readBodyAsString response
-      // OR:
-      //let! bodyBs = Response.readBodyAsBytes
-
-      // remember HttpFs doesn't buffer the stream (how would we know if we're
-      // downloading 3GiB?), so once you use one of the above methods, you can't do it
-      // again, but have to buffer/stash it yourself somewhere.
       return bodyStr
     }
 
 let eSummaryResponse = eSummaryRequest |> run
+
+
+//=============================== eLink Tests ======================================
+open EntrezLink
+
+let eLinkQuery =
+    let r = 
+        {
+            SourceDb = "sra"
+            TargetDb = "gds"
+            UIDs     = ["336327";"336326"]
+            OptionalParameters = [
+                HistoryServerParameters [
+                    EntrezLinkHistoryServerParams.WebEnvironment webenv
+                ] 
+            ]
+            LinkCommand = EntrezLinkCommandOptions.Neighbor
+        }
+    r |> EntrezLinkQuery.makeRequest
+
+let eLinkRequest =
+
+    job {
+      use! response = getResponse eLinkQuery
+      let! bodyStr = Response.readBodyAsString response
+      return bodyStr
+    }
+
+let eLinkResponse = eLinkRequest |> run

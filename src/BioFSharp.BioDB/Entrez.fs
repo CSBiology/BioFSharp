@@ -442,3 +442,151 @@ module Entrez =
                     match uIDs with
                     |"" -> r
                     |_ -> r |> Request.queryStringItem "id" uIDs
+
+    ///DSL for constructing and executing eLink queries
+    ///
+    ///Functions
+    ///
+    /// - Returns UIDs linked to an input set of UIDs in either the same or a different Entrez database
+    ///
+    /// - Returns UIDs linked to other UIDs in the same Entrez database that match an Entrez query
+    ///
+    /// - Checks for the existence of Entrez links for a set of UIDs within the same database
+    ///
+    /// - Lists the available links for a UID
+    ///
+    /// - Lists LinkOut URLs and attributes for a set of UIDs
+    ///
+    /// - Lists hyperlinks to primary LinkOut providers for a set of UIDs
+    ///
+    /// - Creates hyperlinks to the primary LinkOut provider for a single UID
+    module EntrezLink =
+        
+        type EntrezLinkHistoryServerParams =
+            ///Query key. This integer specifies which of the UID lists attached to the given Web Environment will be used as input to EFetch. Query keys are obtained from the output of previous ESearch, EPost or ELInk calls. The query_key parameter must be used in conjunction with WebEnv.
+            |WebEnvironment of string
+            ///Web Environment. This parameter specifies the Web Environment that contains the UID list to be provided as input to EFetch. Usually this WebEnv value is obtained from the output of a previous ESearch, EPost or ELink call. The WebEnv parameter must be used in conjunction with query_key.
+            |QueryKey       of int
+
+            static member makeQuery = function
+                |WebEnvironment q -> ("WebEnv"      , q         )
+                |QueryKey       q -> ("query_key"   , string q  )
+
+        type EntrezLinkRetrievalParams =
+            |IdType of string
+            ///Retrieval mode. This parameter specifies the data format of the records returned, such as plain text, HMTL or XML. See https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/?report=objectonly
+            |RetrievalMode  of RetrievalModeOptions
+
+            static member makeQuery = function
+                |IdType         q -> ("idtype"      ,q )
+                |RetrievalMode  q -> ("retmode"     ,q |> RetrievalModeOptions.make)
+
+        type EntrezLinkLimitParams =    
+            ///Name of the Entrez link to retrieve. Every link in Entrez is given a name of the form
+            ///
+            ///dbfrom_db_subset.
+            ///
+            ///The values of subset vary depending on the values of dbfrom and db. Many dbfrom/db combinations have no subset values. See the list of Entrez links for a listing of all available linknames. When linkname is used, only the links with that name will be retrieved.
+            ///
+            ///The linkname parameter only functions when cmd is set to neighbor or neighbor_history.
+            |LinkName   of string
+            ///Entrez query used to limit the output set of linked UIDs. The query in the term parameter will be applied after the link operation, and only those UIDs matching the query will be returned by ELink. The term parameter only functions when db and dbfrom are set to the same database value.
+            |Term       of string
+            ///Name of LinkOut provider. Only URLs for the LinkOut provider specified by holding will be returned. The value provided to holding should be the abbreviation of the LinkOut provider's name found in the <NameAbbr> tag of the ELink XML output when cmd is set to llinks or llinkslib. The holding parameter only functions when cmd is set to llinks or llinkslib.
+            |Holding    of string
+            
+
+            static member makeQuery = function
+                |LinkName   q -> ("linkname", q)
+                |Term       q -> ("term"    , q)
+                |Holding    q -> ("holding" , q)
+
+        type EntrezLinkDateParams =
+            ///Type of date used to limit a search. The allowed values vary between Entrez databases, but common values are 'mdat' (modification date), 'pdat' (publication date) and 'edat' (Entrez date). Generally an Entrez database will have only two allowed values for datetype.
+            |Datetype   of string
+            ///When reldate is set to an integer n, the search returns only those items that have a date specified by datetype within the last n days.
+            |RelDate    of int
+            ///Lower Border of Date range used to limit a search result by the date specified by datetype. These two parameters (mindate, maxdate) must be used together to specify an arbitrary date range. The general date format is YYYY/MM/DD, and these variants are also allowed: YYYY, YYYY/MM.
+            |MinDate    of System.DateTime
+            ///Upper Border of Date range used to limit a search result by the date specified by datetype. These two parameters (mindate, maxdate) must be used together to specify an arbitrary date range. The general date format is YYYY/MM/DD, and these variants are also allowed: YYYY, YYYY/MM.
+            |MaxDate    of System.DateTime
+
+            static member makeQuery = function
+                |Datetype   q   -> ("datetype"  , q )
+                |RelDate    q   -> ("reldate"   , q |> string)
+                |MinDate    q   -> ("mindate"   , q.ToString("YYYY/MM/DD"))
+                |MaxDate    q   -> ("mindate"   , q.ToString("YYYY/MM/DD"))
+
+
+        type EntrezLinkParameters = 
+            |HistoryServerParameters    of EntrezLinkHistoryServerParams    list
+            |RetrievalParameters        of EntrezLinkRetrievalParams        list
+            |DateParameters             of EntrezLinkDateParams             list
+            |LimitParameters            of EntrezLinkLimitParams            list
+
+            static member makeQuery = function
+                |HistoryServerParameters    ql -> ql |> List.map EntrezLinkHistoryServerParams.makeQuery
+                |RetrievalParameters        ql -> ql |> List.map EntrezLinkRetrievalParams    .makeQuery
+                |DateParameters             ql -> ql |> List.map EntrezLinkDateParams         .makeQuery
+                |LimitParameters            ql -> ql |> List.map EntrezLinkLimitParams        .makeQuery
+
+        type EntrezLinkCommandOptions =
+            |Neighbor
+            |NeighborScore
+            |NeighborHistory
+            |ACheck
+            |NCheck
+            |LCheck
+            |LLinks
+            |LLinksLib
+            |PrLinks
+
+            static member makeQuery = function
+                |Neighbor           -> ("cmd", "neighbor"           )
+                |NeighborScore      -> ("cmd", "neighbor_score"     )
+                |NeighborHistory    -> ("cmd", "neighbor_history"   )
+                |ACheck             -> ("cmd", "acheck"             )
+                |NCheck             -> ("cmd", "ncheck"             )
+                |LCheck             -> ("cmd", "lcheck"             )
+                |LLinks             -> ("cmd", "llinks"             )
+                |LLinksLib          -> ("cmd", "llinkslib"          )
+                |PrLinks            -> ("cmd", "prlinks"            )
+
+        type EntrezLinkQuery = 
+            {
+                ///Database containing the input UIDs. The value must be a valid Entrez database name (default = pubmed). This is the origin database of the link operation. If db and dbfrom are set to the same database value, then ELink will return computational neighbors within that database. Please see the full list of Entrez links for available computational neighbors. Computational neighbors have linknames that begin with dbname_dbname (examples: protein_protein, pcassay_pcassay_activityneighbor).
+                SourceDb            : string
+                ///Database from which to retrieve UIDs. The value must be a valid Entrez database name (default = pubmed). This is the destination database for the link operation.
+                TargetDb            : string
+                ///UID list. Either a single UID or a comma-delimited list of UIDs may be provided. All of the UIDs must be from the database specified by dbfrom. There is no set maximum for the number of UIDs that can be passed to ELink, but if more than about 200 UIDs are to be provided, the request should be made using the HTTP POST method.
+                ///
+                ///If more than one id parameter is provided, ELink will perform a separate link operation for the set of UIDs specified by each id parameter. This effectively accomplishes "one-to-one" links and preserves the connection between the input and output UIDs.
+                ///
+                ///For sequence databases (nuccore, nucest, nucgss, popset, protein), the UID list may be a mixed list of GI numbers and accession.version identifiers.
+                UIDs                : string list
+                ///ELink command mode. The command mode specified which function ELink will perform. Some optional parameters only function for certain values of &cmd (see below).
+                LinkCommand         : EntrezLinkCommandOptions
+                OptionalParameters  : EntrezLinkParameters list
+            }
+
+            static member makeRequest (q : EntrezLinkQuery) = 
+
+                let optParams = 
+                    q.OptionalParameters 
+                    |> List.map EntrezLinkParameters.makeQuery
+                    |> List.concat
+                
+                let uIDs = 
+                    match q.UIDs with
+                    | [] -> ""
+                    | _ -> q.UIDs |> String.concat ","
+
+                Request.createUrl Get BaseUrls.eLink
+                |> Request.queryStringItem "db"     q.TargetDb
+                |> Request.queryStringItem "dbFrom" q.SourceDb
+                |> fun r ->
+                    match uIDs with
+                    |"" -> r
+                    |_  -> r |> Request.queryStringItem "id" uIDs
+                |> Request.queryStringItems optParams
+                    
