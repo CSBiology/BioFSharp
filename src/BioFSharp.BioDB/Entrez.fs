@@ -83,8 +83,6 @@ module Entrez =
 
                 Request.createUrl Get BaseUrls.eInfo
                 |> Request.queryStringItems optParams
-                    
-
 
     ///DSL for constructing and executing eSearch queries
     ///
@@ -99,7 +97,6 @@ module Entrez =
     /// - Combines or limits UID datasets stored on the History server
     ///
     /// - Sorts sets of UIDs
-
     module EntrezSearch =
     
         type EntrezSearchRetrievalTypeOptions =
@@ -328,3 +325,120 @@ module Entrez =
                     |"" -> r
                     |_ -> r |> Request.queryStringItem "id" uIDs
                 |> Request.queryStringItems optParams
+
+    ///DSL for constructing and executing ePost queries
+    ///
+    ///Endpoint Functions:
+    ///
+    /// - Uploads a list of UIDs to the Entrez History server
+    ///
+    /// - Appends a list of UIDs to an existing set of UID lists attached to a Web Environment
+    module EntrezPost =
+        
+        type EntrezPostQuery =
+            {
+                ///Database containing the UIDs in the input list. The value must be a valid Entrez database name (default = pubmed).
+                Db              : string
+                ///UID list. Either a single UID or a comma-delimited list of UIDs may be provided. All of the UIDs must be from the database specified by db. There is no set maximum for the number of UIDs that can be passed to epost, but if more than about 200 UIDs are to be posted, the request should be made using the HTTP POST method.
+                ///
+                ///For sequence databases (nuccore, nucest, nucgss, popset, protein), the UID list may be a mixed list of GI numbers and accession.version identifiers.
+                UIDs            : string list
+                ///Web Environment. If provided, this parameter specifies the Web Environment that will receive the UID list sent by post. EPost will create a new query key associated with that Web Environment. Usually this WebEnv value is obtained from the output of a previous ESearch, EPost or ELink call. If no WebEnv parameter is provided, EPost will create a new Web Environment and post the UID list to query_key 1.
+                WebEnvironment  : string option
+            }
+
+            static member makeRequest (q : EntrezPostQuery) = 
+
+                let db = q.Db
+
+                let uIDs = 
+                    match q.UIDs with
+                    | [] -> ""
+                    | _ -> q.UIDs |> String.concat ","
+                
+                Request.createUrl Get BaseUrls.ePost
+                |> Request.queryStringItem "db" db
+                |> fun r -> 
+                    match uIDs with
+                    |"" -> r
+                    |_ -> r |> Request.queryStringItem "id" uIDs
+                |> fun r -> 
+                    match q.WebEnvironment with
+                    |None -> r
+                    |Some w -> r |> Request.queryStringItem "WebEnv" w
+
+    ///DSL for constructing and executing eSummary queries
+    ///
+    ///Functions
+    ///
+    /// - Returns document summaries (DocSums) for a list of input UIDs
+    ///
+    /// - Returns DocSums for a set of UIDs stored on the Entrez History server
+    module EntrezSummary =
+        
+        type EntrezSummaryHistoryServerParams =
+            ///Query key. This integer specifies which of the UID lists attached to the given Web Environment will be used as input to EFetch. Query keys are obtained from the output of previous ESearch, EPost or ELInk calls. The query_key parameter must be used in conjunction with WebEnv.
+            |WebEnvironment of string
+            ///Web Environment. This parameter specifies the Web Environment that contains the UID list to be provided as input to EFetch. Usually this WebEnv value is obtained from the output of a previous ESearch, EPost or ELink call. The WebEnv parameter must be used in conjunction with query_key.
+            |QueryKey       of int
+
+            static member makeQuery = function
+                |WebEnvironment q -> ("WebEnv"      , q         )
+                |QueryKey       q -> ("query_key"   , string q  )
+
+        type EntrezSummaryRetrievalParams =
+            ///Sequential index of the first record to be retrieved (default=0, corresponding to the first record of the entire set). This parameter can be used in conjunction with retmax to download an arbitrary subset of records from the input set.
+            |RetrievalStart of int
+            ///Total number of records from the input set to be retrieved, up to a maximum of 10,000. Optionally, for a large set the value of retstart can be iterated while holding retmax constant, thereby downloading the entire set in batches of size retmax.
+            |RetrievalMax   of int
+            ///Retrieval mode. Determines the format of the returned output. The default value is ‘xml’ for ESummary XML, but ‘json’ is also supported to return output in JSON format.
+            |RetrievalMode  of RetrievalModeOptions
+            ///Used to specify version 2.0 ESummary XML. The only supported value is ‘2.0’. When present, ESummary will return version 2.0 DocSum XML that is unique to each Entrez database and that often contains more data than the default DocSum XML.
+            |Version        of string
+
+            static member makeQuery = function
+                |RetrievalStart q -> ("retstart"    ,q |> string)
+                |RetrievalMax   q -> ("retmax"      ,q |> string)
+                |RetrievalMode  q -> ("retmode"     ,q |> RetrievalModeOptions.make)
+                |Version        q -> ("version"     ,q )    
+
+        type EntrezSummaryParameters =
+            |HistoryServerParameters    of EntrezSummaryHistoryServerParams list
+            |RetrievalParameters        of EntrezSummaryRetrievalParams     list
+
+            static member makeQuery = function
+                |HistoryServerParameters    ql -> ql |> List.map EntrezSummaryHistoryServerParams     .makeQuery
+                |RetrievalParameters        ql -> ql |> List.map EntrezSummaryRetrievalParams         .makeQuery
+
+        type EntrezSummaryQuery =
+            {
+                ///Database containing the UIDs in the input list. The value must be a valid Entrez database name (default = pubmed).
+                Db                  : string
+                ///UID list. Either a single UID or a comma-delimited list of UIDs may be provided. All of the UIDs must be from the database specified by db. There is no set maximum for the number of UIDs that can be passed to epost, but if more than about 200 UIDs are to be posted, the request should be made using the HTTP POST method.
+                ///
+                ///For sequence databases (nuccore, nucest, nucgss, popset, protein), the UID list may be a mixed list of GI numbers and accession.version identifiers.
+                UIDs                : string list
+                ///Web Environment. If provided, this parameter specifies the Web Environment that will receive the UID list sent by post. EPost will create a new query key associated with that Web Environment. Usually this WebEnv value is obtained from the output of a previous ESearch, EPost or ELink call. If no WebEnv parameter is provided, EPost will create a new Web Environment and post the UID list to query_key 1.
+                OptionalParameters  : EntrezSummaryParameters list
+            }
+
+            static member makeRequest (q : EntrezSummaryQuery) = 
+
+                let db = q.Db
+
+                let uIDs = 
+                    match q.UIDs with
+                    | [] -> ""
+                    | _ -> q.UIDs |> String.concat ","
+                       
+                let optParams = 
+                    q.OptionalParameters 
+                    |> List.map EntrezSummaryParameters.makeQuery
+                    |> List.concat
+
+                Request.createUrl Get BaseUrls.eSummary
+                |> Request.queryStringItem "db" db
+                |> fun r -> 
+                    match uIDs with
+                    |"" -> r
+                    |_ -> r |> Request.queryStringItem "id" uIDs

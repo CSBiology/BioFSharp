@@ -65,16 +65,8 @@ let eSearchQuery =
 let eSearchRequest =
 
     job {
-      use! response = getResponse eSearchQuery // disposed at the end of async, don't
-                                          // fetch outside async body
-      // the above doesn't download the response, so you'll have to do that:
+      use! response = getResponse eSearchQuery
       let! bodyStr = Response.readBodyAsString response
-      // OR:
-      //let! bodyBs = Response.readBodyAsBytes
-
-      // remember HttpFs doesn't buffer the stream (how would we know if we're
-      // downloading 3GiB?), so once you use one of the above methods, you can't do it
-      // again, but have to buffer/stash it yourself somewhere.
       return bodyStr
     }
 
@@ -105,8 +97,8 @@ let eFetchQuery =
         OptionalParameters = 
             [
                 HistoryServerParameters [
-                    EntrezFetchHistoryServerParams.QueryKey 1
-                    EntrezFetchHistoryServerParams.WebEnvironment "NCID_1_60315023_130.14.22.76_9001_1585298131_991043432_0MetA0_S_MegaStore"
+                    EntrezFetchHistoryServerParams.QueryKey (queryKey |> int )
+                    EntrezFetchHistoryServerParams.WebEnvironment webenv
                 ]
                 RetrievalParameters [
                     EntrezFetchRetrievalParams.RetrievalType "RunInfo"
@@ -118,16 +110,8 @@ let eFetchQuery =
 let eFetchRequest =
 
     job {
-      use! response = getResponse eFetchQuery // disposed at the end of async, don't
-                                          // fetch outside async body
-      // the above doesn't download the response, so you'll have to do that:
+      use! response = getResponse eFetchQuery
       let! bodyStr = Response.readBodyAsString response
-      // OR:
-      //let! bodyBs = Response.readBodyAsBytes
-
-      // remember HttpFs doesn't buffer the stream (how would we know if we're
-      // downloading 3GiB?), so once you use one of the above methods, you can't do it
-      // again, but have to buffer/stash it yourself somewhere.
       return bodyStr
     }
 
@@ -149,3 +133,60 @@ xmlResponse.SelectNodes ("EXPERIMENT_PACKAGE_SET/EXPERIMENT_PACKAGE/RUN_SET/RUN"
         fun node -> 
             node.Attributes.["accession"].Value
     )
+
+
+//=============================== ePost Tests ======================================
+open EntrezPost
+
+let ePostQuery =
+    let r = 
+        {
+            Db = "sra"
+            UIDs = ["336327"]
+            WebEnvironment = Some webenv
+        }
+    r |> EntrezPostQuery.makeRequest
+
+let ePostRequest =
+
+    job {
+      use! response = getResponse ePostQuery 
+      let! bodyStr = Response.readBodyAsString response
+      return bodyStr
+    }
+
+let eIPostResponse = ePostRequest |> run
+
+//=============================== eSummary Tests ======================================
+open EntrezSummary
+
+let eSummaryQuery =
+    let r = 
+        {
+            Db = "sra"
+            UIDs = ["336327";"336326"]
+            OptionalParameters = [
+                HistoryServerParameters [
+                    EntrezSummaryHistoryServerParams.WebEnvironment webenv
+                ] 
+            ]
+        }
+    r |> EntrezSummaryQuery.makeRequest
+
+let eSummaryRequest =
+
+    job {
+      use! response = getResponse eSummaryQuery // disposed at the end of async, don't
+                                          // fetch outside async body
+      // the above doesn't download the response, so you'll have to do that:
+      let! bodyStr = Response.readBodyAsString response
+      // OR:
+      //let! bodyBs = Response.readBodyAsBytes
+
+      // remember HttpFs doesn't buffer the stream (how would we know if we're
+      // downloading 3GiB?), so once you use one of the above methods, you can't do it
+      // again, but have to buffer/stash it yourself somewhere.
+      return bodyStr
+    }
+
+let eSummaryResponse = eSummaryRequest |> run
