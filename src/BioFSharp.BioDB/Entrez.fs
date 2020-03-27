@@ -86,8 +86,7 @@ module Entrez =
                     
 
 
-    ///DSL for constructing and executing eISearch queries
-    ///
+    ///DSL for constructing and executing eSearch queries
     ///
     ///Endpoint Functions:
     ///
@@ -180,7 +179,11 @@ module Entrez =
 
         type EntrezSearchQuery = 
             {
+                ///Database to search. Value must be a valid Entrez database name (default = pubmed).
                 Db                  : string
+                ///Entrez text query. All special characters must be URL encoded. Spaces may be replaced by '+' signs. For very long queries (more than several hundred characters long), consider using an HTTP POST call. See the PubMed or Entrez help for information about search field descriptions and tags. Search fields and tags are database specific.
+                ///
+                ///esearch.fcgi?db=pubmed&term=asthma
                 Term                : string
                 OptionalParameters  : EntrezSearchParameters list
             }
@@ -200,4 +203,128 @@ module Entrez =
                 Request.createUrl Get BaseUrls.eSearch
                 |> Request.queryStringItem "db" db
                 |> Request.queryStringItem "term" term
+                |> Request.queryStringItems optParams
+
+    ///DSL for constructing and executing eFetch queries
+    ///
+    ///Functions
+    ///
+    ///- Returns formatted data records for a list of input UIDs
+    ///
+    ///- Returns formatted data records for a set of UIDs stored on the Entrez History server
+    module EntrezFetch =
+
+        type EntrezFetchHistoryServerParams =
+            ///Query key. This integer specifies which of the UID lists attached to the given Web Environment will be used as input to EFetch. Query keys are obtained from the output of previous ESearch, EPost or ELInk calls. The query_key parameter must be used in conjunction with WebEnv.
+            |WebEnvironment of string
+            ///Web Environment. This parameter specifies the Web Environment that contains the UID list to be provided as input to EFetch. Usually this WebEnv value is obtained from the output of a previous ESearch, EPost or ELink call. The WebEnv parameter must be used in conjunction with query_key.
+            |QueryKey       of int
+
+            static member makeQuery = function
+                |WebEnvironment q -> ("WebEnv"      , q         )
+                |QueryKey       q -> ("query_key"   , string q  )
+
+        type EntrezFetchRetrievalParams =
+            ///Sequential index of the first record to be retrieved (default=0, corresponding to the first record of the entire set). This parameter can be used in conjunction with retmax to download an arbitrary subset of records from the input set.
+            |RetrievalStart of int
+            ///Total number of records from the input set to be retrieved, up to a maximum of 10,000. Optionally, for a large set the value of retstart can be iterated while holding retmax constant, thereby downloading the entire set in batches of size retmax.
+            |RetrievalMax   of int
+            ///Retrieval type. This parameter specifies the record view returned, such as Abstract or MEDLINE from PubMed, or GenPept or FASTA from protein. Please see https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/?report=objectonly for a full list of allowed values for each database.
+            |RetrievalType  of string
+            ///Retrieval mode. This parameter specifies the data format of the records returned, such as plain text, HMTL or XML. See https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/?report=objectonly
+            |RetrievalMode  of string
+
+            static member makeQuery = function
+                |RetrievalStart q -> ("retstart"    ,q |> string)
+                |RetrievalMax   q -> ("retmax"      ,q |> string)
+                |RetrievalType  q -> ("rettype"     ,q )
+                |RetrievalMode  q -> ("retmode"     ,q )
+
+        type EntrezFetchSequenceDatabaseOptions =
+            |Plus   
+            |Minus
+                
+            static member make = function
+                |Plus   -> "1"
+                |Minus  -> "2"
+
+        type EntrezFetchComplexityOptions =
+            |EntireBlob
+            |Bioseq
+            |MinimalBioseqSet
+            |MinimalNucProt
+            |MinimalPubSet
+
+            static member make = function
+                |EntireBlob         -> "0"
+                |Bioseq             -> "1"
+                |MinimalBioseqSet   -> "2"
+                |MinimalNucProt     -> "3"
+                |MinimalPubSet      -> "4"
+            
+        type EntrezFetchSequenceDatabaseParams =
+            ///Strand of DNA to retrieve. Available values are "1" for the plus strand and "2" for the minus strand.
+            |Strand     of EntrezFetchSequenceDatabaseOptions
+            ///First sequence base to retrieve. The value should be the integer coordinate of the first desired base, with "1" representing the first base of the seqence.
+            |SeqStart   of int
+            ///Last sequence base to retrieve. The value should be the integer coordinate of the last desired base, with "1" representing the first base of the seqence.
+            |SeqStop    of int
+            ///Data content to return. Many sequence records are part of a larger data structure or "blob", and the complexity parameter determines how much of that blob to return. For example, an mRNA may be stored together with its protein product. The available values are as follows:
+            ///Value of complexity	Data returned for each requested GI
+            |Complexity of EntrezFetchComplexityOptions
+            
+            static member makeQuery = function
+                |Strand      q -> ("strand"       , q |> EntrezFetchSequenceDatabaseOptions.make)
+                |SeqStart    q -> ("seq_start"    , q |> string)
+                |SeqStop     q -> ("seq_stop"     , q |> string)
+                |Complexity  q -> ("complexity"   , q |> EntrezFetchComplexityOptions.make)
+            
+
+        type EntrezFetchParameters =
+            |HistoryServerParameters    of EntrezFetchHistoryServerParams       list
+            |RetrievalParameters        of EntrezFetchRetrievalParams           list
+            |SequenceDatabaseParameters of EntrezFetchSequenceDatabaseParams    list
+
+            static member makeQuery = function
+                |HistoryServerParameters    ql -> ql |> List.map EntrezFetchHistoryServerParams     .makeQuery
+                |RetrievalParameters        ql -> ql |> List.map EntrezFetchRetrievalParams         .makeQuery
+                |SequenceDatabaseParameters ql -> ql |> List.map EntrezFetchSequenceDatabaseParams  .makeQuery
+
+        type EntrezFetchQuery = 
+            {
+                ///Database from which to retrieve records. The value must be a valid Entrez database name (default = pubmed). Currently EFetch does not support all Entrez databases.
+                Db                  : string
+                ///UID list. Either a single UID or a comma-delimited list of UIDs may be provided. All of the UIDs must be from the database specified by db. There is no set maximum for the number of UIDs that can be passed to EFetch, but if more than about 200 UIDs are to be provided, the request should be made using the HTTP POST method.
+                ///
+                ///For sequence databases (nuccore, nucest, nucgss, popset, protein), the UID list may be a mixed list of GI numbers and accession.version identifiers.
+                ///
+                ///efetch.fcgi?db=pubmed&id=19393038,30242208,29453458
+                ///efetch.fcgi?db=protein&id=15718680,NP_001098858.1,119703751
+                ///Special note for sequence databases.
+                ///
+                ///NCBI is no longer assigning GI numbers to a growing number of new sequence records. As such, these records are not indexed in Entrez, and so cannot be retrieved using ESearch or ESummary, and have no Entrez links accessible by ELink. EFetch can retrieve these records by including their accession.version identifier in the id parameter.
+                UIDs                : string list
+                OptionalParameters  : EntrezFetchParameters list
+            }
+
+            static member makeRequest (q : EntrezFetchQuery) = 
+
+                let optParams = 
+                    q.OptionalParameters 
+                    |> List.map EntrezFetchParameters.makeQuery
+                    |> List.concat
+
+                let db = q.Db
+
+                let uIDs = 
+                    match q.UIDs with
+                    | [] -> ""
+                    | _ -> q.UIDs |> String.concat ","
+                
+                Request.createUrl Get BaseUrls.eFetch
+                |> Request.queryStringItem "db" db
+                |> fun r -> 
+                    match uIDs with
+                    |"" -> r
+                    |_ -> r |> Request.queryStringItem "id" uIDs
                 |> Request.queryStringItems optParams
