@@ -1,4 +1,22 @@
-#### 1.1.0 - Wednesday, March 23, 2020
+#### 1.2.0 - Monday, March 30
+
+**Additions:**
+ * **BioFSharp.BioDD:**
+   * [Full low-level DSL for generating Entrez queries for NCBI cgis](https://github.com/CSBiology/BioFSharp/issues/84):
+     * [einfo](https://github.com/CSBiology/BioFSharp/commit/311e2fea029eb536fb21016e33cc60e6aed7b63f)
+     * [esearch](https://github.com/CSBiology/BioFSharp/commit/7d000e24a40cba6a6944f7fefd56fb9aca5a696f)
+     * [epost](https://github.com/CSBiology/BioFSharp/commit/d8e0daf8b6e80cb6f79740a68a20dfffea2a98d7)
+     * [esummary](https://github.com/CSBiology/BioFSharp/commit/d8e0daf8b6e80cb6f79740a68a20dfffea2a98d7)
+     * [efetch](https://github.com/CSBiology/BioFSharp/commit/07ab9b96ae761ab0d393e936bb8de42b25cfb7c9)
+     * [elink](https://github.com/CSBiology/BioFSharp/commit/8b0d1649c2b22d93f02541da7944a2bb9e441c65)
+     * [egquery](https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e)
+     * [espell](https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e)
+     * [ecitmatch](https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e)
+ * **Bugfixes:**
+   * BioFSharp.BioContainers:
+     * [fix fastP DSL command line generation](https://github.com/CSBiology/BioFSharp/commit/b1768ae3d728cdd59cdfe1e23aae2ff5554f11b9) (missing `=` signs)
+
+#### 1.1.0 - Monday, March 23, 2020
 **Additions:**
  * **BioFSharp.BioContainers:**
    * Add [fasterq-dump](https://github.com/CSBiology/BioFSharp/commit/425fbb93b41700eeece8f8ab063c9c37b15124bd) and [prefetch](https://github.com/CSBiology/BioFSharp/commit/b08f307f203eea4c2a84cce10f1a72d05453806b) DSL for the SRATools biocontainer

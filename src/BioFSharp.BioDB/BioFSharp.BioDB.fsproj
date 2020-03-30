@@ -15,10 +15,12 @@
     <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GEO.fs" />
+    <None Include="BioFSharp.BioDB.fsx" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="FaToolDb.fs" />
     <Compile Include="EbiAPI.fs" />
+    <Compile Include="Entrez.fs" />
+    <Compile Include="GEO.fs" />
     <None Include="paket.references" />
     <None Include="paket.template" />
     <!-- Resources -->

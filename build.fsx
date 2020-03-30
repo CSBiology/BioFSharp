@@ -278,7 +278,7 @@ Target.create "CopyBinariesDotnet" (fun _ ->
 // Clean build results
 
 Target.create "Clean" (fun _ ->
-    Shell.cleanDirs ["bin"; "temp"]
+    Shell.cleanDirs ["bin"; "temp"; "pkg"]
 )
 
 Target.create "CleanDocs" (fun _ ->
