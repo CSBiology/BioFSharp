@@ -15,7 +15,7 @@ for:
       - image: Visual Studio 2019
 
   build_script:
-  - cmd: build.cmd
+  - cmd: build.cmd -t fullBuildChainCI
 -
   matrix:
     only:
@@ -23,7 +23,7 @@ for:
 
   build_script:
   - chmod +x ./build.sh
-  - sh: ./build.sh -t Dotnet
+  - sh: ./build.sh -t dotnetBuildChainCI
 
 test: off
 version: 0.0.1.{build}
