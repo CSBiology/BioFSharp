@@ -89,14 +89,25 @@ Here is a brief overview of our main projects (also available [here](https://git
 
 ### Build process
 
-Our F# projects use the [ProjectScaffold](https://github.com/fsprojects/ProjectScaffold) layout. To build our projects, you will need [.NET Core SDK](https://dotnet.microsoft.com/download) and an installation of [FAKE5 CLI]().
+Most of our F# projects use the [ProjectScaffold](https://github.com/fsprojects/ProjectScaffold) layout. To build our projects, you will need [.NET Core SDK](https://dotnet.microsoft.com/download) and an installation of [FAKE5 CLI]().
+
+However, the world of F# project scaffolding is in turmoil atm, and we are migrating to the modern toolchains when we see them fit and they are somewhat stable. Here are some of the uncomplete changes that we have at least partially adapted:
+
+ - all projects _should_ have a .config/dotnet-tools.json manifest that tracks the needed local dotnet tools to build the project. If they are missing, file a PR please!
+
+ - In projects where we cant use simple build chains, we use the [Fake.BuildTask DSL](https://github.com/vbfox/FoxSharp/blob/master/src/BlackFox.Fake.BuildTask/Readme.md) to have easier control over soft dependencies and target order
+
+ - The automated documentation generation using generator scripts and FSharp.Formatting seems to work again and we move away from our temporary fix.
 
 All projects have at least the following build targets:
 
 |Target|Description|Command Line Arguments|
 |---|---|---|
-|Build|Builds the binaries and docs|fake build|
-|ReleaseLocal|Uses Build. Afterwards creates a folder structure so you can see the docs with proper style and relative paths in temp/localDocs. Use this to test documentation. | fake build --target releaselocal|
+|`All`|Builds the binaries, packages, and docs. runs tests|build.cmd/build.sh/fake build (it is the default target)|
+|`fullBuildChainLocal`|The same as `All` in Fake.BuildTask form|build.cmd/build.sh/fake build (it is the default build task)|
+|`ReleaseLocal`|Uses Build. Afterwards creates a folder structure so you can see the docs with proper style and relative paths in temp/localDocs. Use this to test documentation. | build.cmd/build.sh/fake build -t releaselocal|
+|`buildLocalDocs`|The same as `ReleaseLocal` in Fake.BuildTask form| build.cmd/build.sh/fake build -t buildLocalDocs|
+
 
 ## How can i contribute?
 
