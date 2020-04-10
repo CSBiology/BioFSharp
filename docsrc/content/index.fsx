@@ -3,13 +3,13 @@
 // it to define helpers that you do not want to show in the documentation.
 
 #I @"../../bin/BioFSharp/net47/"
-#I @"../../bin/BioFSharp.BioDB/net45/"
+#I @"../../bin/BioFSharp.BioDB/net47/"
 #I @"../../bin/BioFSharp.ImgP/net47"
 #I @"../../bin/BioFSharp.IO/net47/"
 #I @"../../bin/BioFSharp.Parallel/net47/"
 #I @"../../bin/BioFSharp.Stats/net47/"
 #I @"../../bin/BioFSharp.Vis/net47"
-#r @"../../lib/Formatting/FSharp.Plotly.dll"
+#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
 #r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
 #r @"../..\bin\BioFSharp\net47\FSharpAux.dll"
@@ -29,7 +29,7 @@ It provides a variety of parsers for many biological file formats and a variety 
 The core datamodel implements in ascending hierarchical order:
 
 - Chemical elements and [formulas](https://csbiology.github.io/BioFSharp/Formula.html) which are a collection of elements
-- Amino Acids], Nucleotides and Modifications, which all implement the common [IBioItem interface](https://csbiology.github.io/BioFSharp/BioItem.html#Basics)
+- Amino Acids, Nucleotides and Modifications, which all implement the common [IBioItem interface](https://csbiology.github.io/BioFSharp/BioItem.html#Basics)
 - [BioCollections](https://csbiology.github.io/BioFSharp/BioCollections.html) (BioItem,BioList,BioSeq) as representation of biological sequences
 
 </br>
@@ -53,7 +53,6 @@ paket add BioFSharp
 </pre>
 
 All associated packages can be found [here](https://www.nuget.org/profiles/CSBiology)
-
 
 **Prerelease packages from the nuget branch:**
 
@@ -94,7 +93,7 @@ you can then access the individual packages:
 
 - Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
 - go to the project folder
-- ./build.sh -t Mono
+- ./build.sh -t monoBuildChainLocal
 
 **Linux(Dotnet Core only)**:
 
@@ -102,7 +101,7 @@ you can then access the individual packages:
 
 - Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
 - go to the project folder
-- ./build.sh -t Dotnet
+- ./build.sh -t dotnetBuildChainLocal
 
 </br>
 

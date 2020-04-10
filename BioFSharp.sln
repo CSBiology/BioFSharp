@@ -13,6 +13,7 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp", "src\BioFSharp\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 		LICENSE = LICENSE
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
@@ -20,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175-43B1-4C90-A1EE-8E351C33435D}"
 	ProjectSection(SolutionItems) = preProject
+		docsrc\tools\formatters.fsx = docsrc\tools\formatters.fsx
 		docsrc\tools\generate.fsx = docsrc\tools\generate.fsx
 		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
 	EndProjectSection
@@ -35,7 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 		docsrc\content\BioID.fsx = docsrc\content\BioID.fsx
 		docsrc\content\BioItem.fsx = docsrc\content\BioItem.fsx
 		docsrc\content\BioTools-tmhmm.fsx = docsrc\content\BioTools-tmhmm.fsx
-		docsrc\content\Blast.fsx = docsrc\content\Blast.fsx
 		docsrc\content\BlastWrapper.fsx = docsrc\content\BlastWrapper.fsx
 		docsrc\content\Clustal.fsx = docsrc\content\Clustal.fsx
 		docsrc\content\ClustalOWrapper.fsx = docsrc\content\ClustalOWrapper.fsx
@@ -84,7 +85,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{7C6D08
 		appveyor.yml = appveyor.yml
 		build.cmd = build.cmd
 		build.fsx = build.fsx
-		build.proj = build.proj
 		build.sh = build.sh
 	EndProjectSection
 EndProject

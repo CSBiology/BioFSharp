@@ -1,7 +1,7 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#r @"..\..\lib\Formatting\FSharp.Plotly.dll"
+#r @"..\..\packages\formatting\FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
 (**
 Introducing your project
 ========================
@@ -28,11 +28,6 @@ printf "Result is: %d" test
 open FSharp.Plotly
 
 let testData = [1.,2.;3.,4.]
-
-
-let testPlot = testData |> Chart.Line
-
-(*** include-value:testPlot ***)
 
 (**
 Some more info
