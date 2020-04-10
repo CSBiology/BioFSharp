@@ -587,7 +587,7 @@ let releaseOnGithub =
     }
 
 let askForGitReleaseNugetConfirmation = 
-    BuildTask.create "ReleaseConfirmation" [] {
+    BuildTask.create "GitReleaseNugetConfirmation" [] {
         match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled"
     }
 
