@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>MoleculeFinding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">  1: </span>
+<span class="l">  2: </span>
+<span class="l">  3: </span>
+<span class="l">  4: </span>
+<span class="l">  5: </span>
+<span class="l">  6: </span>
+<span class="l">  7: </span>
+<span class="l">  8: </span>
+<span class="l">  9: </span>
+<span class="l"> 10: </span>
+<span class="l"> 11: </span>
+<span class="l"> 12: </span>
+<span class="l"> 13: </span>
+<span class="l"> 14: </span>
+<span class="l"> 15: </span>
+<span class="l"> 16: </span>
+<span class="l"> 17: </span>
+<span class="l"> 18: </span>
+<span class="l"> 19: </span>
+<span class="l"> 20: </span>
+<span class="l"> 21: </span>
+<span class="l"> 22: </span>
+<span class="l"> 23: </span>
+<span class="l"> 24: </span>
+<span class="l"> 25: </span>
+<span class="l"> 26: </span>
+<span class="l"> 27: </span>
+<span class="l"> 28: </span>
+<span class="l"> 29: </span>
+<span class="l"> 30: </span>
+<span class="l"> 31: </span>
+<span class="l"> 32: </span>
+<span class="l"> 33: </span>
+<span class="l"> 34: </span>
+<span class="l"> 35: </span>
+<span class="l"> 36: </span>
+<span class="l"> 37: </span>
+<span class="l"> 38: </span>
+<span class="l"> 39: </span>
+<span class="l"> 40: </span>
+<span class="l"> 41: </span>
+<span class="l"> 42: </span>
+<span class="l"> 43: </span>
+<span class="l"> 44: </span>
+<span class="l"> 45: </span>
+<span class="l"> 46: </span>
+<span class="l"> 47: </span>
+<span class="l"> 48: </span>
+<span class="l"> 49: </span>
+<span class="l"> 50: </span>
+<span class="l"> 51: </span>
+<span class="l"> 52: </span>
+<span class="l"> 53: </span>
+<span class="l"> 54: </span>
+<span class="l"> 55: </span>
+<span class="l"> 56: </span>
+<span class="l"> 57: </span>
+<span class="l"> 58: </span>
+<span class="l"> 59: </span>
+<span class="l"> 60: </span>
+<span class="l"> 61: </span>
+<span class="l"> 62: </span>
+<span class="l"> 63: </span>
+<span class="l"> 64: </span>
+<span class="l"> 65: </span>
+<span class="l"> 66: </span>
+<span class="l"> 67: </span>
+<span class="l"> 68: </span>
+<span class="l"> 69: </span>
+<span class="l"> 70: </span>
+<span class="l"> 71: </span>
+<span class="l"> 72: </span>
+<span class="l"> 73: </span>
+<span class="l"> 74: </span>
+<span class="l"> 75: </span>
+<span class="l"> 76: </span>
+<span class="l"> 77: </span>
+<span class="l"> 78: </span>
+<span class="l"> 79: </span>
+<span class="l"> 80: </span>
+<span class="l"> 81: </span>
+<span class="l"> 82: </span>
+<span class="l"> 83: </span>
+<span class="l"> 84: </span>
+<span class="l"> 85: </span>
+<span class="l"> 86: </span>
+<span class="l"> 87: </span>
+<span class="l"> 88: </span>
+<span class="l"> 89: </span>
+<span class="l"> 90: </span>
+<span class="l"> 91: </span>
+<span class="l"> 92: </span>
+<span class="l"> 93: </span>
+<span class="l"> 94: </span>
+<span class="l"> 95: </span>
+<span class="l"> 96: </span>
+<span class="l"> 97: </span>
+<span class="l"> 98: </span>
+<span class="l"> 99: </span>
+<span class="l">100: </span>
+<span class="l">101: </span>
+<span class="l">102: </span>
+<span class="l">103: </span>
+<span class="l">104: </span>
+<span class="l">105: </span>
+<span class="l">106: </span>
+<span class="l">107: </span>
+<span class="l">108: </span>
+<span class="l">109: </span>
+<span class="l">110: </span>
+<span class="l">111: </span>
+<span class="l">112: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(*** hide ***)</span>
+<span class="c">//#r &quot;../../bin/BioFSharp.dll&quot;</span>
+<span class="c">//#r &quot;../../bin/BioFSharp.Mz.dll&quot;</span>
+<span class="c">//#r &quot;../../packages/build/FSharp.Plotly/lib/net40/FSharp.Plotly.dll&quot;</span>
+
+<span class="c">//(**</span>
+<span class="c">//#Molecule Finding</span>
+
+
+<span class="c">//Given a specific mass and a list of atoms, this algorithm looks for atom-combinations, that fit together in mass and valence electrons. This documentations provides five examples on how to use the algorithm to identify post translational modifications.</span>
+
+<span class="c">//*)</span>
+
+<span class="c">//open System</span>
+<span class="c">//open BioFSharp</span>
+<span class="c">//open BioFSharp.Mz</span>
+<span class="c">//open Isotopes.Table</span>
+<span class="c">//open FSharp.Plotly</span>
+<span class="c">//open MoleculeFinding</span>
+
+<span class="c">//(**</span>
+<span class="c">//##Input</span>
+
+
+<span class="c">//The function receaves a list of atoms as input. In addition a list without Hydrogen is necessary, because it only has one valence electron and binds only to one `atom`. So it can not act as `node` between two or more atoms.</span>
+<span class="c">//The five examples shown here use the following list of atoms:</span>
+<span class="c">//*)</span>
+<span class="c">//let atoms = [ Se; S; P; O; N; C; H;]</span>
+<span class="c">//let nodes = [ Se; S; P; O; N; C;] </span>
+
+<span class="c">//(**The Algorithm takes the two predefined lists, a float value as gap (Monoisotopic Mass of examples) and another float value as accuracy (0.5 in this examples). The result is a list of potential molecules.</span>
+<span class="c">//*)</span>
+
+
+<span class="c">//(**</span>
+<span class="c">//##Example Results</span>
+
+<span class="c">//*)</span>
+<span class="c">//let resulteg1 = find atoms nodes 87.068414 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 1</span>
+
+<span class="c">//- Name: **Hypusine**</span>
+<span class="c">//- Monoisotopic Mass: _87.068414_</span>
+<span class="c">//- Atom-Composition: **H(9) C(4) N O**</span>
+<span class="c">//- Found?-**NO** </span>
+<span class="c">//- Number of potential molecules: _16979_</span>
+<span class="c">//- Time: Real: 00:00:00.185, CPU: 00:00:00.234, GC Gen0: 10, Gen1: 0, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg2 = find atoms nodes 107.997631 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 2</span>
+
+<span class="c">//- Name: **Ethylphosphate**</span>
+<span class="c">//- Description: O-Ethylphosphorylation</span>
+<span class="c">//- Monoisotopic Mass: _107.997631_</span>
+<span class="c">//- Atom-Composition: **H(5) C(2) O(3) P**</span>
+<span class="c">//- Found?-**YES**</span>
+<span class="c">//- Number of potential molecules: _80529_</span>
+<span class="c">//- Time: Real: 00:00:00.543, CPU: 00:00:00.546, GC Gen0: 82, Gen1: 1, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg3 = find atoms nodes 136.001656 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 3</span>
+
+<span class="c">//- Name: **DTT_ST**</span>
+<span class="c">//- Description: Dithiothreitol (DTT)</span>
+<span class="c">//- Monoisotopic Mass: _136.001656_</span>
+<span class="c">//- Atom-Composition: **H(8) C(4) O S(2)**</span>
+<span class="c">//- Found?-**YES**</span>
+<span class="c">//- Number of potential molecules: _995704_</span>
+<span class="c">//- Time: Real: 00:00:07.470, CPU: 00:00:07.953, GC Gen0: 968, Gen1: 10, Gen2: 1</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg4 = find atoms nodes 86.000394 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 4</span>
+
+<span class="c">//- Name: **Malonyl**</span>
+<span class="c">//- Monoisotopic Mass: _86.000394_</span>
+<span class="c">//- Atom-Composition: **H(2) C(3) O(3)**</span>
+<span class="c">//- Found?-**YES** </span>
+<span class="c">//- Number of potential molecules: _13755_</span>
+<span class="c">//- Time: Real: 00:00:00.070, CPU: 00:00:00.046, GC Gen0: 11, Gen1: 1, Gen2: 0</span>
+<span class="c">//*)</span>
+
+<span class="c">//let resulteg5 = find atoms nodes 42.021798 0.5</span>
+<span class="c">//(**</span>
+<span class="c">//###Example 5</span>
+
+<span class="c">//- Name: **Guanidination**</span>
+<span class="c">//- Monoisotopic Mass: _42.021798_</span>
+<span class="c">//- Atom-Composition: **H(2) C N(2)**</span>
+<span class="c">//- Found?-**YES** </span>
+<span class="c">//- Number of potential molecules: _60_</span>
+<span class="c">//- Time: Real: 00:00:00.004, CPU: 00:00:00.000, GC Gen0: 0, Gen1: 0, Gen2: 0</span>
+
+
+<span class="c">//##Time complexity</span>
+
+<span class="c">//O(n*g)^g</span>
+<span class="c">//*)</span>
+
+<span class="c">//(***hide***)</span>
+<span class="c">//let values = [0.004; 0.07; 0.185; 0.543; 7.47] </span>
+<span class="c">//let keys = [&quot;Guanidination: 42u, found&quot;;&quot;Malonyl: 86u, found&quot;;&quot;Hypusine: 88u, not found&quot;; &quot;Ethylphosphate: 108u, found&quot;;&quot;DTT_ST: 136u, found&quot;]</span>
+<span class="c">//let labels = [&quot;60 potential molecules&quot;; &quot;13755 potential molecules&quot;; &quot;16979 potential molecules&quot;; &quot;80529 potential molecules&quot;; &quot;995704 potential molecules&quot;]</span>
+<span class="c">//(*** define-output:bar1 ***)</span>
+<span class="c">//Chart.Column(keys,values,Labels=labels,Opacity=1.0,Marker=Options.Marker(Color=&quot;rgba(10,100,100,1.0)&quot;))</span>
+<span class="c">//(*** include-it:bar1 ***)</span>
+</code></pre></td>
+</tr>
+</table>
+
+
+			</div>
+			<div class="span3" >
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
+
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
+
+
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>

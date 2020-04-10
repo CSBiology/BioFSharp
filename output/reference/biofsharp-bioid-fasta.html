@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>FastA - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
+
+<h1>FastA</h1>
+<p>
+  <span>Namespace: BioFSharp</span><br />
+  <span>Parent Module: <a href="biofsharp-bioid.html">BioID</a></span>
+  </p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-bioid-fasta-fastaheader-1.html">FastaHeader<'IdType></a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '86', 86)" onmouseover="showTip(event, '86', 86)">
+            aliasesOf(header)
+          </code>
+          <div class="tip" id="86">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59399&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59399                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L150-150" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns Aliases of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '87', 87)" onmouseover="showTip(event, '87', 87)">
+            createFastaHeader id description info
+          </code>
+          <div class="tip" id="87">
+            <strong>Signature:</strong> id:&#39;?59395 -&gt; description:string -&gt; info:Map&lt;string,string&gt; -&gt; FastaHeader&lt;&#39;?59395&gt;<br />
+                          <strong>Type parameters:</strong> '?59395                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L142-142" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '88', 88)" onmouseover="showTip(event, '88', 88)">
+            dataBaseVersionOf(header)
+          </code>
+          <div class="tip" id="88">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59401&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59401                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L153-153" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns DataBaseVersion of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '89', 89)" onmouseover="showTip(event, '89', 89)">
+            displayIdOf(header)
+          </code>
+          <div class="tip" id="89">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59397&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59397                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L147-147" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns DisplayId of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '90', 90)" onmouseover="showTip(event, '90', 90)">
+            fromString(str)
+          </code>
+          <div class="tip" id="90">
+            <strong>Signature:</strong> str:string -&gt; FastaHeader&lt;string&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L233-233" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns FastAHeader Object from UniProt style FastAHeader string</p>
+<p>For Reference see: <a href="https://www.uniprot.org/help/fasta-headers">https://www.uniprot.org/help/fasta-headers</a></p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
+            geneNameOf(header)
+          </code>
+          <div class="tip" id="91">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59411&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59411                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L168-168" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns GeneName of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+            organismNameOf(header)
+          </code>
+          <div class="tip" id="92">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59407&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59407                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L162-162" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns OrganismName of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+            proteinExistenceOf(header)
+          </code>
+          <div class="tip" id="93">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59409&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59409                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L165-165" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns ProteinExistence of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+            proteinNameOf(header)
+          </code>
+          <div class="tip" id="94">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59413&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59413                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns ProteinName of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+            sequenceVersionOf(header)
+          </code>
+          <div class="tip" id="95">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59405&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59405                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L159-159" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns SequenceVersion of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+            setAliases alias header
+          </code>
+          <div class="tip" id="96">
+            <strong>Signature:</strong> alias:string -&gt; header:FastaHeader&lt;&#39;?59417&gt; -&gt; FastaHeader&lt;&#39;?59417&gt;<br />
+                          <strong>Type parameters:</strong> '?59417                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L180-180" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets Aliases in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+            setDataBaseVersion dbv header
+          </code>
+          <div class="tip" id="97">
+            <strong>Signature:</strong> dbv:string -&gt; header:FastaHeader&lt;&#39;?59419&gt; -&gt; FastaHeader&lt;&#39;?59419&gt;<br />
+                          <strong>Type parameters:</strong> '?59419                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L183-183" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets DataBaseVersion in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
+            setDisplayId displayId header
+          </code>
+          <div class="tip" id="98">
+            <strong>Signature:</strong> displayId:string -&gt; header:FastaHeader&lt;&#39;?59415&gt; -&gt; FastaHeader&lt;&#39;?59415&gt;<br />
+                          <strong>Type parameters:</strong> '?59415                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L177-177" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets DisplayId in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
+            setGeneName gn header
+          </code>
+          <div class="tip" id="99">
+            <strong>Signature:</strong> gn:string -&gt; header:FastaHeader&lt;&#39;?59429&gt; -&gt; FastaHeader&lt;&#39;?59429&gt;<br />
+                          <strong>Type parameters:</strong> '?59429                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L198-198" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets GeneName in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
+            setIdType idType header
+          </code>
+          <div class="tip" id="100">
+            <strong>Signature:</strong> idType:string -&gt; header:FastaHeader&lt;&#39;?59421&gt; -&gt; FastaHeader&lt;&#39;?59421&gt;<br />
+                          <strong>Type parameters:</strong> '?59421                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L186-186" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets Type of UniqueIdentifier in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
+            setOrganismName os header
+          </code>
+          <div class="tip" id="101">
+            <strong>Signature:</strong> os:string -&gt; header:FastaHeader&lt;&#39;?59425&gt; -&gt; FastaHeader&lt;&#39;?59425&gt;<br />
+                          <strong>Type parameters:</strong> '?59425                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L192-192" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets OrganismName in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
+            setProteinExistence pe header
+          </code>
+          <div class="tip" id="102">
+            <strong>Signature:</strong> pe:string -&gt; header:FastaHeader&lt;&#39;?59427&gt; -&gt; FastaHeader&lt;&#39;?59427&gt;<br />
+                          <strong>Type parameters:</strong> '?59427                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L195-195" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets ProteinExistence in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
+            setProteinName pn header
+          </code>
+          <div class="tip" id="103">
+            <strong>Signature:</strong> pn:string -&gt; header:FastaHeader&lt;&#39;?59431&gt; -&gt; FastaHeader&lt;&#39;?59431&gt;<br />
+                          <strong>Type parameters:</strong> '?59431                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L201-201" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets ProteinName in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
+            setSequenceVersion sv header
+          </code>
+          <div class="tip" id="104">
+            <strong>Signature:</strong> sv:string -&gt; header:FastaHeader&lt;&#39;?59423&gt; -&gt; FastaHeader&lt;&#39;?59423&gt;<br />
+                          <strong>Type parameters:</strong> '?59423                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L189-189" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets SequenceVersion in FastA header.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+            touOf(header)
+          </code>
+          <div class="tip" id="105">
+            <strong>Signature:</strong> header:FastaHeader&lt;&#39;?59403&gt; -&gt; string<br />
+                          <strong>Type parameters:</strong> '?59403                      </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp/BioID.fs#L156-156" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns Type of UniqueIdentifier of FastA header. None if none present.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+			</div>
+			<div class="span3" >
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
+
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
+
+
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>

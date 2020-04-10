@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>release-notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  <h4><a name="1-2-0-Monday-March-30" class="anchor" href="#1-2-0-Monday-March-30">1.2.0 - Monday, March 30</a></h4>
+<p><strong>Additions:</strong>
+<em> </em><em>BioFSharp.BioDD:</em><em>
+</em> <a href="https://github.com/CSBiology/BioFSharp/issues/84">Full low-level DSL for generating Entrez queries for NCBI cgis</a>:
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/311e2fea029eb536fb21016e33cc60e6aed7b63f">einfo</a>
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/7d000e24a40cba6a6944f7fefd56fb9aca5a696f">esearch</a>
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/d8e0daf8b6e80cb6f79740a68a20dfffea2a98d7">epost</a>
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/d8e0daf8b6e80cb6f79740a68a20dfffea2a98d7">esummary</a>
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/07ab9b96ae761ab0d393e936bb8de42b25cfb7c9">efetch</a>
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/8b0d1649c2b22d93f02541da7944a2bb9e441c65">elink</a>
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e">egquery</a>
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e">espell</a>
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/147d8d01c295f2326e123b1588bdcad2c69cda6e">ecitmatch</a>
+</em> <strong>Bugfixes:</strong>
+<em> BioFSharp.BioContainers:
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/b1768ae3d728cdd59cdfe1e23aae2ff5554f11b9">fix fastP DSL command line generation</a> (missing <code>=</code> signs)</p>
+<h4><a name="1-1-0-Monday-March-23-2020" class="anchor" href="#1-1-0-Monday-March-23-2020">1.1.0 - Monday, March 23, 2020</a></h4>
+<p><strong>Additions:</strong>
+<em> </em><em>BioFSharp.BioContainers:</em><em>
+</em> Add <a href="https://github.com/CSBiology/BioFSharp/commit/425fbb93b41700eeece8f8ab063c9c37b15124bd">fasterq-dump</a> and <a href="https://github.com/CSBiology/BioFSharp/commit/b08f307f203eea4c2a84cce10f1a72d05453806b">prefetch</a> DSL for the SRATools biocontainer
+<em> Add full <a href="https://github.com/alexdobin/STAR">STAR</a> RNASeq aligner DSL for the respective BioContainer. <a href="https://github.com/CSBiology/BioFSharp/commit/d2cbc0a8691564a487d70d9825867e7eb261d03a">Commit details</a>
+</em> <strong>BioFSharp.IO:</strong>
+<em> <a href="https://github.com/CSBiology/BioFSharp/commit/130e1c63264989978e54f114dbd04b6dfb9458d3">Add load script for referencing pretty printers</a>, included in the nuget package
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/97cca9bd06f63455ebafbf3cbb8029a0651137cb">Add multiple new pretty printers for SOFT</a></p>
+<p><strong>Bugfixes:</strong>
+<em> </em><em>BioFSharp.IO:</em><em>
+</em> <a href="https://github.com/CSBiology/BioFSharp/commit/bcec2cc719eef7e43827521bd281582a8b5ebe72">Fix GFF3 pretty printer return type</a></p>
+<h4><a name="1-0-03-Wednesday-February-26-2020" class="anchor" href="#1-0-03-Wednesday-February-26-2020">1.0.03 - Wednesday, February 26, 2020</a></h4>
+<ul>
+<li>
+<strong>BioFSharp.Stats:</strong>
+<ul>
+<li>Massively improved SAILENT characterization speed for <a href="https://github.com/CSBiology/BioFSharp/pull/82">preprocessing of large datasets</a></li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.BioContainers:</strong>
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/pull/83/commits/8e463f8cbc87797261520519b876b836d0b55bde">Improved DSL for Blast biocontainer API</a></li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.IO:</strong>
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/pull/83/commits/da0ba0cfa8807fad2032be66054125bd12f732c2">Refactored SOFT Parser</a> and <a href="https://github.com/CSBiology/BioFSharp/pull/83/commits/eb389a908e7cee66f01616e62ef65df20fc88c6c">improved its namespace encapsulation</a>.</li>
+<li>add prettyPrinters for the SOFT GSE/GPL type](<a href="https://github.com/CSBiology/BioFSharp/pull/83/commits/615dcbfd30632d6fdf7a70edae9f5227ce250937)">https://github.com/CSBiology/BioFSharp/pull/83/commits/615dcbfd30632d6fdf7a70edae9f5227ce250937)</a></li>
+</ul>
+</li>
+</ul>
+<h4><a name="1-0-02-Wednesday-February-19-2020" class="anchor" href="#1-0-02-Wednesday-February-19-2020">1.0.02 - Wednesday, February 19, 2020</a></h4>
+<ul>
+<li>
+<strong>BioFSharp.BioDB:</strong>
+<ul>
+<li>Fix FaTool OData model URL</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.Vis</strong>
+<ul>
+<li>Add Function to save chord plots as html files</li>
+</ul>
+</li>
+</ul>
+<h4><a name="1-0-01-Thursday-October-24-2019" class="anchor" href="#1-0-01-Thursday-October-24-2019">1.0.01 - Thursday, October 24, 2019</a></h4>
+<ul>
+<li>
+<strong>BioFSharp.Stats:</strong>
+<ul>
+<li>Major speed improvements for Sailent</li>
+</ul>
+</li>
+</ul>
+<h4><a name="1-0-0-Wednesday-October-23-2019" class="anchor" href="#1-0-0-Wednesday-October-23-2019">1.0.0 - Wednesday, October 23, 2019</a></h4>
+<p>Renaming of BioFSharp.Biotools makes this a major version increase, as it is not backwards compatible. Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>We now have a cool new logo! (See readme)</li>
+<li><p><strong>BioFSharp.BioTools has been renamed to BioFSharp.BioContainers</strong>. This reflects the purpose of the library better than the previous name.</p></li>
+<li>
+<p><strong>BioFSharp.BioContainers</strong></p>
+<ul>
+<li><p>Add thin <a href="https://github.com/CSBiology/BioFSharp/commit/3304e612ccc0b97aa1625c29619968173168b545">LastAlign biocontainer API wrapper</a></p></li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.IO</strong></p>
+<ul>
+<li>
+<p>Bugfixes:</p>
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/cc3a3f9efe898395c59a97e2b66792c4b3970749">Fix SOFT parser skipping entities</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/72">#72</a>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.Stats</strong></p>
+<ul>
+<li><p>Sailent is now <a href="https://github.com/CSBiology/BioFSharp/commit/844d2efcdd4b85c9e1c80f0160fb74e72f514a90">faster</a> and has a <a href="https://github.com/CSBiology/BioFSharp/commit/97cd33978142f3cc669c4d1e527d8583456f5bc6">verbose option</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/74">#74</a>,<a href="https://github.com/CSBiology/BioFSharp/issues/75">#75</a>)</p></li>
+</ul>
+</li>
+<li>
+<p><strong>BioFSharp.ImgP</strong></p>
+<ul>
+<li><p>Add functionality to <a href="https://github.com/CSBiology/BioFSharp/commit/68073759265d086ea6d9b47f30bc3e47c8d3fb60">isolate local maxima from frames</a></p></li>
+<li><p>Add functionality to <a href="https://github.com/CSBiology/BioFSharp/commit/57efb6003254b234fdad2837e5ee666933a4355f">get correlation at specified coordinates</a></p></li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-1-02-Wednesday-September-04-2019" class="anchor" href="#0-1-02-Wednesday-September-04-2019">0.1.02 - Wednesday, September 04, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>
+<strong>BioFSharp</strong> (core):
+<ul>
+<li>Addition of various Unit tests (see the <a href="https://github.com/CSBiology/BioFSharp/issues/30">issue</a> to track what has been added since the last version)</li>
+<li>
+Bugfixes:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/27ab68f84aacd6de01a194dc5542da90a85e59d4">Naming clarification and bugfixes regarding reverse and reverse complements for DNA</a> (fixes <a href="https://github.com/CSBiology/BioFSharp/issues/66">#66</a> and <a href="https://github.com/CSBiology/BioFSharp/issues/65">#65</a>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.Stats</strong>
+<ul>
+<li>
+Bugfixes
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/0ed0161d8a203f38ac7171b3213eb7b386adcacf">Ontology enrichment is now more conservative</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-1-01-Wednesday-July-31-2019" class="anchor" href="#0-1-01-Wednesday-July-31-2019">0.1.01 - Wednesday, July 31, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li><strong>BioFSharp</strong> (core):</li>
+<li>
+Add Unit testing for modules:
+Formula
+Mass
+BioArray
+</li>
+<li>
+Changed functionality:
+<ul>
+<li>Formula.substract now also returns negative atom counts</li>
+</ul>
+</li>
+<li><strong>BioFSharp.ML</strong>:</li>
+<li>
+Additional functionality:
+<ul>
+<li>add thin CNTK API</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-1-0-Thursday-May-30-2019" class="anchor" href="#0-1-0-Thursday-May-30-2019">0.1.0 - Thursday, May 30, 2019</a></h4>
+<p>Several bugfixes and additions to multiple sub projects:</p>
+<ul>
+<li>
+<strong>BioFSharp</strong> (core):
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/209c3497e3cdb1db56a0675e0f2a76634a6dbe7a">GravyScore</a> (Grand Average of Hydropathy) as additional amino acid property</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.IO</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/cbba6a41a9b239e26467f32048aaec3335373faf">GAF Parser</a> for GO Annotation file format: <a href="http://geneontology.org/docs/go-annotation-file-gaf-format-2.0/">Gene Association File</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/f2a16aaa2456b0c431f6d50d0f78a12834671e97">Uniprot style Fasta header parser</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/2cdd3537398040e1508736bd734b22a67a7c46e7">FastA to GFF3 converter functions</a></li>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/eaaa59fbd382721e75fbb9c6558b0ba2ff6afb00">GFF3 Pretty Printer</a></p></li>
+</ul>
+</li>
+<li>
+BugFixes:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/0354c9c13e7a4692f2ab61b80ef86ac8f5bd83c3">Fix OboParser</a> just taking the last occurence of the alt_id keyword and discards previous ones.</li>
+<li><p>Fix <a href="https://github.com/CSBiology/BioFSharp/commit/aff8eff849deb1cca411faf3c640d53f6e410497">Fasta</a> and <a href="https://github.com/CSBiology/BioFSharp/commit/d0f059ab899c715a37b7f50318292c8a81f18dd9">GFF3</a> writers appending to files instead of recreating</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.BioTools</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/f11cb122df29ccaa0809d3c3c951294a1b645e0f">TMHMM biocontainer API wrapper</a> (<a href="http://www.cbs.dtu.dk/services/TMHMM/">TMHMM</a> 2.0c predicts transmembrane helices in proteins)</li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/28b7654d57824bcdfdb8bae16af2f0f706ed60ad">FastP and Hera biocontainer API wrapper</a></li>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/a659496179cd754fbea2fe9ef4030544a35eb68b">IntaRNA biocontainer API wrapper</a> (<a href="https://github.com/BackofenLab/IntaRNA">IntaRNA</a> is a tool for prediction of various nucleotide interactions)</p></li>
+</ul>
+</li>
+<li>
+BugFixes:
+<ul>
+<li><p>Fix Stream entry closed error in <a href="https://github.com/CSBiology/BioFSharp/commit/20f8973ea717208627ef5a7ea0b72cbaecb4103c">BioContainer.tarOfStream()</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>BioFSharp.ImgP</strong>:
+<ul>
+<li>
+Additional functionality:
+<ul>
+<li><p><a href="https://github.com/CSBiology/BioFSharp/commit/0b4ffe93755d915da64f4231199b0ec54d4d6c4d">update 3DCWT correlation calculation to loop</a></p></li>
+</ul>
+</li>
+<li>
+Bugfixes:
+<ul>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/abab82be1ac9fa0c540acfb5f3ccc6bd5143df1f">fix height adjustment in ricker</a></li>
+<li><a href="https://github.com/CSBiology/BioFSharp/commit/2bb6bb2b67ea43df2d9fe970bd1445e568df53d4">fix Ricker values for discrete time points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-16-Thursday-March-7-2019" class="anchor" href="#0-0-16-Thursday-March-7-2019">0.0.16 - Thursday, March 7, 2019</a></h4>
+<ul>
+<li>
+Fix template files for all nuget packages:
+<ul>
+<li>use correct paths for binaries</li>
+<li>update project descriptions</li>
+<li>use type project to infer dependencies</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-15-Thursday-March-7-2019" class="anchor" href="#0-0-15-Thursday-March-7-2019">0.0.15 - Thursday, March 7, 2019</a></h4>
+<ul>
+<li>
+BioFSharp.ML - project introduction:
+<ul>
+<li>Usage of Microsoft's CNTK library with a biological focus:</li>
+<li>
+This project comes with working CNTK integration:
+<ul>
+<li>necessary dependencies to use CNTK and its unmanaged libraries</li>
+<li>CNTK loadscript: an easy way to load all dependencies of CNTK. load the script and use the resolveCNTKDependencies() function.</li>
+</ul>
+</li>
+<li>
+Built-in deep neural network 'd::ppop' (<a href="https://www.frontiersin.org/articles/10.3389/fpls.2018.01559/full">publication</a>)
+<ul>
+<li>predict peptide observability in mass spectrometry</li>
+<li>Classification: functions to determine peptide feature vectors as input for dppop</li>
+<li>Prediction: functions to predict peptide observability using the feature vectors prepared in Classification.</li>
+<li>NonPlant and Plant models as embedded resources: the two models used in the original Web API. Additionally load custom models.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+Othert additions:
+<ul>
+<li>
+BioFSharp.BioTools:
+<ul>
+<li>
+Integration of new tools as biocontainer APIs:
+<ul>
+<li>Hera</li>
+<li>FastP</li>
+<li>ClustalO</li>
+<li>
+HMMER (experimental):
+<ul>
+<li>hmmbuild</li>
+<li>hmmalign</li>
+<li>hmmsearch</li>
+<li>hmmscan</li>
+<li>hmmemit</li>
+<li>hmmpress</li>
+<li>hmmconvert</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-14-Tuesday-February-12-2019" class="anchor" href="#0-0-14-Tuesday-February-12-2019">0.0.14 - Tuesday, February 12, 2019</a></h4>
+<ul>
+<li>Addition of blast biocontainer support for makeblastdb, blastp, blastn with full parameter wrapping</li>
+<li>
+Extension of BioContainer functionality:
+<ul>
+<li>Add windows/unix path conversions and subpath matching to MounInfo</li>
+<li>Add execReturnAsync (returns stdout of docker container) and execAsync (redirects stdout/stderr of container)</li>
+</ul>
+</li>
+</ul>
+<h4><a name="0-0-13-Friday-February-8-2019" class="anchor" href="#0-0-13-Friday-February-8-2019">0.0.13 - Friday, February 8, 2019</a></h4>
+<ul>
+<li>Addition of the BioTools project, which uses docker.dotnet to use docker images and stream their output to fsi</li>
+<li>Low level wrapping of multiple docker.dotnet functions for F#</li>
+<li>Basic functionality for using docker images from fsi</li>
+</ul>
+<h4><a name="0-0-12-Friday-December-28-2018" class="anchor" href="#0-0-12-Friday-December-28-2018">0.0.12 - Friday, December 28, 2018</a></h4>
+<ul>
+<li>Addition of Pretty Printers, SOFT Parser, GEOFTP functions</li>
+<li>Improvement and refactoring of Modification functionality</li>
+</ul>
+<h4><a name="0-0-11-Tuesday-November-2-2018" class="anchor" href="#0-0-11-Tuesday-November-2-2018">0.0.11 - Tuesday, November 2, 2018</a></h4>
+<ul>
+<li>ImgP - project introduction</li>
+</ul>
+<h4><a name="0-0-1-Thursday-August-9-2018" class="anchor" href="#0-0-1-Thursday-August-9-2018">0.0.1 - Thursday, August 9, 2018</a></h4>
+<ul>
+<li>Initial release</li>
+</ul>
+
+
+			</div>
+			<div class="span3" >
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
+
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
+                  </li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
+
+
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>

@@ -44,7 +44,7 @@ The services provide sequence feature annotations from UniProtKB, variation data
 proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) and genome coordinate mappings</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="m">EbiAPI</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">UniProteinDB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">getProteinSeqFeature</span> <span class="s">&quot;Q64446&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">EbiAPI</span><span class="pn">.</span><span class="id">UniProteinDB</span><span class="pn">.</span><span class="id">getProteinSeqFeature</span> <span class="s">&quot;Q64446&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -54,10 +54,6 @@ proteomics data mapped from Large Scale sources (PeptideAtlas, MaxQB and EPD) an
 <p>This documentation is not yet here. Hopefully it will be soon =)</p>
 
 <div class="tip" id="fs1">namespace BioFSharp</div>
-<div class="tip" id="fs2">namespace BioFSharp.BioDB</div>
-<div class="tip" id="fs3">module EbiAPI<br /><br />from BioFSharp.BioDB</div>
-<div class="tip" id="fs4">Multiple items<br />type UniProteinDB =<br />&#160;&#160;new : unit -&gt; UniProteinDB<br />&#160;&#160;static member getAntigen : accession:string -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getGenomicCoordinates : accession:string -&gt; GnEntry<br />&#160;&#160;static member getProteinSeqFeature : accession:string * ?categories:string [] * ?types:string [] -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getProteomicsPeptide : accession:string -&gt; ProteinFeatureInfo<br />&#160;&#160;static member getUniProtEntry : accession:string -&gt; Entry<br />&#160;&#160;static member searchProteomes : ?offset:int * ?size:int * ?upid:string * ?name:string * ?taxid:string * ?keyword:string * ?xref:string * ?genomeAcc:string * ?isRefProteome:string * ?isRedundant:string -&gt; Proteome<br /><br />--------------------<br />new : unit -&gt; EbiAPI.UniProteinDB</div>
-<div class="tip" id="fs5">static member EbiAPI.UniProteinDB.getProteinSeqFeature : accession:string * ?categories:string [] * ?types:string [] -&gt; EbiAPI.ProteinsAPIschema.ProteinFeatureInfo</div>
 
 			</div>
 			<div class="span3" >

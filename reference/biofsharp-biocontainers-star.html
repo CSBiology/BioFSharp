@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>STAR - BioFSharp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Timo Mühlhaus"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
+    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+	<body>
+		<div class="container">
+		  <div class="masthead">
+			<ul class="nav nav-pills pull-right">
+			  <li><a href="http://fsharp.org">fsharp.org</a></li>
+			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
+			</ul>
+			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+		  </div>
+		  <hr />
+		  <div class="row">
+			<div class="span9" id="main">
+			  
+
+
+
+<h1>STAR</h1>
+<p>
+  <span>Namespace: BioFSharp.BioContainers</span><br />
+  </p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-aligmentpairedendreadoptions.html">AligmentPairedEndReadOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentchimericoptions.html">AlignmentChimericOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentendsprotrusionoptions.html">AlignmentEndsProtrusionOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>maximum and type of allowed allow protrusion of alignment ends, i.e. start (end) of the +strand mate downstream of the start (end) of the -strand mate</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentendstypeoptions.html">AlignmentEndsTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of read ends alignment</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentgeneraloptions.html">AlignmentGeneralOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentinsertionflushoptions.html">AlignmentInsertionFlushOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>how to flush ambiguous insertion positions</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentorder.html">AlignmentOrder</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentparams.html">AlignmentParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentscoringoptions.html">AlignmentScoringOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentseedoptions.html">AlignmentSeedOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-alignmentwindowoptions.html">AlignmentWindowOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Windows, Anchors, Binning Options</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-annotationquantificationmodeoptions.html">AnnotationQuantificationModeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>types of quantification requested</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-annotationquantificationparams.html">AnnotationQuantificationParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-attributeoptions.html">AttributeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>desired SAM attributes, in the order desired for the output SAM</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-bamhandlingoptions.html">BAMHandlingOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-chimericalignmentfilteroptions.html">ChimericAlignmentFilterOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>different filters for chimeric alignments</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-chimericalignmentoutputtypeoptions.html">ChimericAlignmentOutputTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of chimeric output</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-chimericoutjunctionformatoptions.html">ChimericOutJunctionFormatOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>formatting type for the Chimeric.out.junction file</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-genomeindexingoptions.html">GenomeIndexingOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Genome Indexing Parameters - only used with --runMode genomeGenerate</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-genomeload.html">GenomeLoad</a>
+          </td>
+          <td class="xmldoc">
+          <p>mode of shared memory usage for the genome files. Only used with --runMode alignReads.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-genomeparams.html">GenomeParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-limitparams.html">LimitParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-mateclippingoptions.html">MateClippingOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>clipping options from either end of the mates</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-mateslengths.html">MatesLengths</a>
+          </td>
+          <td class="xmldoc">
+          <p>lengths of names,sequences,qualities for both mates are the same  / not the same. NotEqual is safe in all situations.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputfilterintronmotifsoptions.html">OutputFilterIntronMotifsOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>filter alignment using their motifs</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputfilteroptions.html">OutputFilterOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>filter the output into main SAM/BAM files</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputfiltertypeoptions.html">OutputFilterTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputfilteringparams.html">OutputFilteringParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputfilteringsplicejunctionsoptions.html">OutputFilteringSpliceJunctionsOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputformattingoptions.html">OutputFormattingOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputmodeoptions.html">OutputModeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>mode of SAM output</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputparams.html">OutputParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputstdoptions.html">OutputSTDOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputsortingoptions.html">OutputSortingOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of sorting for the SAM output</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputtypeoptions.html">OutputTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of SAM/BAM output</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-outputwiggleparams.html">OutputWiggleParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-primaryflagoptions.html">PrimaryFlagOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>which alignments are considered primary - all others will be marked with 0x100 bit in the FLAG</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-readfilestype.html">ReadFilesType</a>
+          </td>
+          <td class="xmldoc">
+          <p>format of input read files</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-readidoptions.html">ReadIDOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>read ID record type</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-readparams.html">ReadParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-removeduplicatestypeoptions.html">RemoveDuplicatesTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>mark duplicates in the BAM file, for now only works with (i) sorted BAM fed with inputBAMfile, and (ii) for paired-end alignments only</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-runmode.html">RunMode</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of the STAR run</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-runparams.html">RunParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-runpermission.html">RunPermission</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-samsortingoptions.html">SAMSortingOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starparams.html">STARParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolobarcodereadlengthoptions.html">STARSoloBarcodeReadLengthOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>length of the barcode read</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolocellbarcodewhitelistoptions.html">STARSoloCellBarcodeWhiteListOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>matching the Cell Barcodes to the WhiteList</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolocellfilteroptions.html">STARSoloCellFilterOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>cell filtering type and parameters</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolofeaturesoptions.html">STARSoloFeaturesOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>genomic features for which the UMI counts per Cell Barcode are collected</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsoloparams.html">STARSoloParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolostrandoptions.html">STARSoloStrandOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>strandedness of the solo libraries:</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsolotypeoptions.html">STARSoloTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of single-cell RNA-seq</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsoloumideduplicationoptions.html">STARSoloUMIDeDuplicationOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of UMI deduplication (collapsing) algorithm</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-starsoloumifilteringoptions.html">STARSoloUMIFilteringOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of UMI filtering</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-splicejunctionsdatabaseparams.html">SpliceJunctionsDatabaseParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-splicejunctionsdatabasesaveoptions.html">SpliceJunctionsDatabaseSaveOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>which files to save when sjdb junctions are inserted on the fly at the mapping step</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-splicejunctionsfilterreadoptions.html">SpliceJunctionsFilterReadOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>which reads to consider for collapsed splice junctions output</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-strandfieldoptions.html">StrandFieldOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>Cufflinks-like strand field flag</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-transcriptomebanoptions.html">TranscriptomeBanOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>prohibit various alignment type</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-twopassmappingparams.html">TwoPassMappingParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-twopassmodeoptions.html">TwoPassModeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>2-pass mapping mode.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-unmappedreadoptions.html">UnmappedReadOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>output of unmapped reads in the SAM format</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-waspoutputmodeoptions.html">WASPOutputModeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>WASP allele-specific output type. This is re-implemenation of the original WASP mappability filtering by Bryce van de Geijn, Graham McVicker, Yoav Gilad &amp; Jonathan K Pritchard. Please cite the original WASP paper: Nature Methods 12, 1061�1063 (2015), <a href="https://www.nature.com/articles/nmeth.3582">https://www.nature.com/articles/nmeth.3582</a> .</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-waspparams.html">WASPParams</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-wigglenormalizationoptions.html">WiggleNormalizationOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-wigglesignal.html">WiggleSignal</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-wigglestrandoptions.html">WiggleStrandOptions</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-biocontainers-star-wiggletypeoptions.html">WiggleTypeOptions</a>
+          </td>
+          <td class="xmldoc">
+          <p>type of signal output, e.g. "bedGraph" OR "bedGraph read1_5p". Requires sorted BAM: --outSAMtype BAM SortedByCoordinate .</p>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-biocontainers-star-basicworkflows.html">BasicWorkflows</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '550', 550)" onmouseover="showTip(event, '550', 550)">
+            runStar bcContext opt
+          </code>
+          <div class="tip" id="550">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:STARParams list -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/STAR.fs#L1461-1461" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '551', 551)" onmouseover="showTip(event, '551', 551)">
+            runSTARAsync bcContext opt
+          </code>
+          <div class="tip" id="551">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:STARParams list -&gt; Async&lt;unit&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master/src/BioFSharp.BioContainers/STAR.fs#L1448-1448" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+			</div>
+			<div class="span3" >
+			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+              <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                  <li class="nav-header">BioFSharp</li>
+                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
+                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+
+                  
+                  <li class="nav-header">BioFSharp core</li>
+                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li>
+                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                  </li>
+                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
+                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li class="nav-header">BioContainers</li>
+                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
+                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li class="nav-header">Algorithm</li>
+                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
+                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
+                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li>
+                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                  </li>
+                  <li class="nav-header">File I/O</li>
+                  <li>
+                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                  </li>
+                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li>
+                      <a href="/BioFSharp/FastA.html">FastA</a>
+                  </li>
+                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li>
+                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                  </li>
+                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li>
+                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                  </li>
+                  <li>
+                      <a href="/BioFSharp/Newick.html">Newick</a>
+                  </li>
+                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li>
+                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                  </li>
+                  <li class="nav-header">Web I/O</li>
+                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
+                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li class="nav-header">Biostatistics</li>
+                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li class="nav-header">Biovisualization</li>
+                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li class="nav-header">GPU Computing</li>
+                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li class="nav-header">Documentation</li>
+                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+
+
+                  
+              </ul>
+			</div>
+		  </div>
+		</div>
+		<a href="https://github.com/CSBiology/BioFSharp"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+	  </body>
+  </html>
