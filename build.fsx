@@ -188,7 +188,10 @@ let dotnetProjectPaths =
 
 let clean = 
     BuildTask.create "clean" [] {
-        Shell.cleanDirs ["bin"; "temp"; "pkg"]
+        Shell.cleanDirs [
+            "bin"; "temp"; "pkg" 
+            yield! allProjectPaths |> Seq.map (fun x -> x </> "bin")
+            ]
     }
 
 let cleanDocs = 
@@ -660,7 +663,7 @@ let monoBuildChainCI  =
         buildMono
         copyBinariesMono
         runTestsMono
-        (buildCIPackages "TravisMono" "Mono" monoProjectPaths)
+        //(buildCIPackages "TravisMono" "Mono" monoProjectPaths)
     ]
 
 let dotnetBuildChainCI    = 
@@ -669,7 +672,7 @@ let dotnetBuildChainCI    =
         assemblyInfo
         buildDotnet
         copyBinariesDotnet
-        (buildCIPackages "AppveyorDotnet" "DotnetCore" dotnetProjectPaths)
+        //(buildCIPackages "AppveyorDotnet" "DotnetCore" dotnetProjectPaths)
     ]
 
 Target.create "PrintGraph" (fun _ ->
