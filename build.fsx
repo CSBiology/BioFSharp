@@ -187,12 +187,12 @@ let dotnetProjectPaths =
 // Clean build results
 
 let clean = 
-    BuildTask.create "Clean" [] {
+    BuildTask.create "clean" [] {
         Shell.cleanDirs ["bin"; "temp"; "pkg"]
     }
 
 let cleanDocs = 
-    BuildTask.create "CleanDocs" [] {
+    BuildTask.create "cleanDocs" [] {
         Shell.cleanDirs ["docs"]
     }
 
@@ -200,7 +200,7 @@ let cleanDocs =
 // Generate assembly info files with the right version & up-to-date information. Clean first.
 
 let assemblyInfo = 
-    BuildTask.create "AssemblyInfo" [clean.IfNeeded] {
+    BuildTask.create "assemblyInfo" [clean.IfNeeded] {
         let getAssemblyInfoAttributes projectName =
             [ AssemblyInfo.Title (projectName)
               AssemblyInfo.Product project
@@ -230,7 +230,7 @@ let assemblyInfo =
 // Build library & test project. build assembly info first
 
 let buildAll = 
-    BuildTask.create "BuildAll" [clean.IfNeeded; assemblyInfo] {
+    BuildTask.create "buildAll" [clean.IfNeeded; assemblyInfo] {
         let setParams (defaults:MSBuildParams) =
             { defaults with
                 Verbosity = Some(Quiet)
@@ -246,7 +246,7 @@ let buildAll =
     }
 
 let buildMono = 
-    BuildTask.create "BuildMono" [clean.IfNeeded; assemblyInfo] {
+    BuildTask.create "buildMono" [clean.IfNeeded; assemblyInfo] {
         let setParams (defaults:MSBuildParams) =
             { defaults with
                 Verbosity = Some(Quiet)
@@ -262,7 +262,7 @@ let buildMono =
     }
 
 let buildDotnet = 
-    BuildTask.create "BuildDotnet" [clean.IfNeeded; assemblyInfo] {
+    BuildTask.create "buildDotnet" [clean.IfNeeded; assemblyInfo] {
         solutionFile 
         |> DotNet.build (fun p -> 
             { p with
@@ -277,7 +277,7 @@ let buildDotnet =
 // Build first.
 
 let copyBinaries = 
-        BuildTask.create "CopyBinaries" [clean.IfNeeded; assemblyInfo.IfNeeded; buildAll] {
+        BuildTask.create "copyBinaries" [clean.IfNeeded; assemblyInfo.IfNeeded; buildAll] {
         !! "src/**/*.fsproj"
         |>  Seq.map 
             (fun f -> (Path.getDirectory f) </> "bin" </> configuration, "bin" </> (Path.GetFileNameWithoutExtension f))
@@ -289,7 +289,7 @@ let copyBinaries =
     }
 
 let copyBinariesMono = 
-    BuildTask.create "CopyBinariesMono" [clean.IfNeeded; assemblyInfo.IfNeeded; buildMono] {
+    BuildTask.create "copyBinariesMono" [clean.IfNeeded; assemblyInfo.IfNeeded; buildMono] {
         //only select projects with the mono configuration
         !! "src/**/*.fsproj"
         -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
@@ -302,7 +302,7 @@ let copyBinariesMono =
     }
 
 let copyBinariesDotnet = 
-    BuildTask.create "CopyBinariesDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; buildDotnet] {
+    BuildTask.create "copyBinariesDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; buildDotnet] {
         //only select projects with the dotnet configuration
         !! "src/**/*.fsproj"
         -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
@@ -321,7 +321,7 @@ let copyBinariesDotnet =
 // Run the unit tests using test runner. Of course build the assemblies to test first
 
 let runTestsAll = 
-    BuildTask.create "RunTests" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinaries.IfNeeded; buildAll] {
+    BuildTask.create "runTestsAll" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinaries.IfNeeded; buildAll] {
         let assemblies = !! testAssemblies
 
         assemblies
@@ -339,7 +339,7 @@ let runTestsAll =
     }
 
 let runTestsMono = 
-    BuildTask.create "RunTestsMono" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesMono.IfNeeded; buildMono] {
+    BuildTask.create "runTestsMono" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesMono.IfNeeded; buildMono] {
         let assemblies = !! testAssemblies
 
         assemblies
@@ -360,7 +360,7 @@ let runTestsMono =
 // Build a NuGet package. Build and test packages first
 
 let buildPrereleasePackages = 
-    BuildTask.create "BuildPreReleasePackages" [buildAll; runTestsAll] {
+    BuildTask.create "buildPrereleasePackages" [buildAll; runTestsAll] {
         printfn "Please enter pre-release package suffix"
         let suffix = System.Console.ReadLine()
         Paket.pack(fun p -> 
@@ -384,25 +384,30 @@ let BuildReleasePackages =
 
 //dependencies for cI will be resolved in the CI build task.
 let buildCIPackages name config projectPaths = 
-    BuildTask.create (sprintf "BuildCIPackages%s" name) [buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
-        projectPaths
-        |> Seq.iter 
-            (fun proj -> 
-                Paket.pack (fun p ->
-                    { p with
-                        BuildConfig = config
-                        TemplateFile = proj </> "paket.template"
-                        ToolType = ToolType.CreateLocalTool()
-                        OutputPath = pkgDir
-                        Version = sprintf "%s-%s" release.NugetVersion buildServerSuffix
-                        ReleaseNotes = release.Notes |> String.toLines 
-                    }
+    BuildTask.create (sprintf "buildCIPackages%s" name) [
+        buildAll.IfNeeded; runTestsAll.IfNeeded; copyBinaries.IfNeeded
+        buildMono.IfNeeded; runTestsMono.IfNeeded; copyBinariesMono.IfNeeded
+        buildDotnet.IfNeeded; copyBinariesDotnet.IfNeeded
+        ] 
+        {
+            projectPaths
+            |> Seq.iter 
+                (fun proj -> 
+                    Paket.pack (fun p ->
+                        { p with
+                            BuildConfig = config
+                            TemplateFile = proj </> "paket.template"
+                            ToolType = ToolType.CreateLocalTool()
+                            OutputPath = pkgDir
+                            Version = sprintf "%s-%s" release.NugetVersion buildServerSuffix
+                            ReleaseNotes = release.Notes |> String.toLines 
+                        }
+                    )
                 )
-            )
-    }
+        }
 
 let publishNugetPackages = 
-    BuildTask.create "PublishNugetPackages" [buildAll; runTestsAll; BuildReleasePackages] {
+    BuildTask.create "publishNugetPackages" [buildAll; runTestsAll; BuildReleasePackages] {
         Paket.push(fun p ->
             { p with
                 WorkingDir = pkgDir
@@ -443,7 +448,7 @@ layoutRootsAll.Add("en",[   templates;
                             formatting @@ "templates/reference" ])
 
 let buildReferenceDocs = 
-    BuildTask.create "ReferenceDocs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
+    BuildTask.create "buildReferenceDocs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
         Directory.ensure (output @@ "reference")
 
         let binaries () =
@@ -495,7 +500,7 @@ let copyFiles () =
     |> Trace.logItems "Copying styles and scripts: "
 
 let buildDocs =  
-    BuildTask.create "Docs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
+    BuildTask.create "buildDocs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
         File.delete "docsrc/content/release-notes.md"
         Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
         Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
@@ -536,7 +541,7 @@ let buildDocs =
                     } )
     }
 
-let generateDocumentation = BuildTask.createEmpty "GenerateDocs" [buildAll; buildReferenceDocs; buildDocs]
+let generateDocumentation = BuildTask.createEmpty "generateDocumentation" [buildAll; buildReferenceDocs; buildDocs]
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
@@ -544,11 +549,11 @@ let generateDocumentation = BuildTask.createEmpty "GenerateDocs" [buildAll; buil
 //#load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
 //open Octokit
 let askForDocReleaseConfirmation =
-    BuildTask.create "ReleaseDocsConfirmation" [] {
+    BuildTask.create "askForDocReleaseConfirmation" [] {
         match promptYesNo releaseDocsMsg with | true -> () |_ -> failwith "Release canceled"
     }
 let releaseDocsToGhPages = 
-    BuildTask.create "ReleaseDocs" [askForDocReleaseConfirmation;generateDocumentation] {
+    BuildTask.create "releaseDocsToGhPages" [askForDocReleaseConfirmation;generateDocumentation] {
         let tempDocsDir = "temp/gh-pages"
         Shell.cleanDir tempDocsDir |> ignore
         Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
@@ -559,7 +564,7 @@ let releaseDocsToGhPages =
     }
 
 let buildLocalDocs = 
-    BuildTask.create "BuildLocalDocs" [generateDocumentation] {
+    BuildTask.create "buildLocalDocs" [generateDocumentation] {
         let tempDocsDir = "temp/localDocs"
         Shell.cleanDir tempDocsDir |> ignore
         Shell.copyRecursive "docs" tempDocsDir true  |> printfn "%A"
@@ -572,12 +577,12 @@ let buildLocalDocs =
 
 
 let askForReleaseConfirmation = 
-    BuildTask.create "ReleaseConfirmation" [] {
+    BuildTask.create "askForReleaseConfirmation" [] {
         match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled"
     }
 
 let releaseOnGithub = 
-    BuildTask.create "ReleaseonGithub" [askForReleaseConfirmation; buildAll; runTestsAll;] {
+    BuildTask.create "releaseOnGithub" [askForReleaseConfirmation; buildAll; runTestsAll;] {
         Git.Staging.stageAll ""
         Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
         Git.Branches.push ""
@@ -587,12 +592,12 @@ let releaseOnGithub =
     }
 
 let askForGitReleaseNugetConfirmation = 
-    BuildTask.create "GitReleaseNugetConfirmation" [] {
+    BuildTask.create "askForGitReleaseNugetConfirmation" [] {
         match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled"
     }
 
 let releaseNugetPackageOnGithub =
-    BuildTask.create "GitReleaseNuget" [askForGitReleaseNugetConfirmation; buildAll; runTestsAll;] {
+    BuildTask.create "releaseNugetPackageOnGithub" [askForGitReleaseNugetConfirmation; buildAll; runTestsAll;] {
         let tempNugetDir = "temp/nuget"
         Shell.cleanDir tempNugetDir |> ignore
         Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "nuget" tempNugetDir
@@ -609,7 +614,7 @@ let releaseNugetPackageOnGithub =
 
 //Token Targets for local builds
 let fullBuildChainLocal = 
-    BuildTask.createEmpty "FullLocal" [
+    BuildTask.createEmpty "fullBuildChainLocal" [
         clean
         assemblyInfo
         buildAll
@@ -621,7 +626,7 @@ let fullBuildChainLocal =
     ]
 
 let monoBuildChainLocal = 
-    BuildTask.createEmpty "MonoLocal"   [
+    BuildTask.createEmpty "monoBuildChainLocal"   [
         clean
         assemblyInfo
         buildMono
@@ -630,7 +635,7 @@ let monoBuildChainLocal =
     ]
 
 let dotnetBuildChainLocal = 
-    BuildTask.createEmpty "DotnetLocal" [
+    BuildTask.createEmpty "dotnetBuildChainLocal" [
         clean
         assemblyInfo
         buildDotnet
@@ -639,7 +644,7 @@ let dotnetBuildChainLocal =
 
 //Token Targets for CI builds
 let fullBuildChainCI    = 
-    BuildTask.createEmpty "FullCI" [
+    BuildTask.createEmpty "fullBuildChainCI" [
         clean
         assemblyInfo
         buildAll
@@ -649,7 +654,7 @@ let fullBuildChainCI    =
     ]
 
 let monoBuildChainCI  = 
-    BuildTask.createEmpty "CIBuildMono" [
+    BuildTask.createEmpty "monoBuildChainCI" [
         clean
         assemblyInfo
         buildMono
@@ -659,7 +664,7 @@ let monoBuildChainCI  =
     ]
 
 let dotnetBuildChainCI    = 
-    BuildTask.createEmpty "CIBuildDotnet" [
+    BuildTask.createEmpty "dotnetBuildChainCI" [
         clean
         assemblyInfo
         buildDotnet
