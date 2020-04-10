@@ -8,7 +8,7 @@
 #r "../../packages/SharpZipLib/lib/netstandard2.0/ICSharpCode.SharpZipLib.dll"
 #r "../../packages/FSharpAux.IO/lib/netstandard2.0/FSharpAux.dll"
 #r "../../packages/FSharpAux.IO/lib/netstandard2.0/FSharpAux.IO.dll"
-#r @"../../lib/Formatting/FSharp.Plotly.dll"
+#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
 
 #I @"../../bin/BioFSharp/netstandard2.0/"
 #I @"../../bin/BioFSharp.IO/netstandard2.0/"

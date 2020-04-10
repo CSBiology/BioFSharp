@@ -37,73 +37,6 @@ open Fake.Tools.Git
 Target.initEnvironment ()
 
 [<AutoOpen>]
-module TemporaryDocumentationHelpers =
-
-    type LiterateArguments =
-        { ToolPath : string
-          Source : string
-          OutputDirectory : string 
-          Template : string
-          ProjectParameters : (string * string) list
-          LayoutRoots : string list 
-          FsiEval : bool }
-
-
-    let private run toolPath arguments = 
-        Command.RawCommand
-            (
-                toolPath,
-                arguments
-            )
-        |> CreateProcess.fromCommand
-        |> CreateProcess.withFramework
-        |> CreateProcess.ensureExitCode
-        |> Proc.run
-        |> ignore
-        //if 0 <> Process.execSimple ((fun info ->
-        //        { info with
-        //            FileName = toolPath
-        //            Arguments = command }) >> Process.withFramework) System.TimeSpan.MaxValue
-
-        //then failwithf "FSharp.Formatting %s failed." command
-
-    let createDocs p =
-        let toolPath = 
-            match ProcessUtils.tryFindLocalTool "" "fsformatting.exe"  [(Directory.GetCurrentDirectory() @@ "/lib")] with
-            |Some tool -> tool
-            | _ -> failwith "FSFormatting executable not found"
-        //let toolPath = Tools.findToolInSubPath "fsformatting.exe" (Directory.GetCurrentDirectory() @@ "lib/Formatting")
-
-        let defaultLiterateArguments =
-            { ToolPath = toolPath
-              Source = ""
-              OutputDirectory = ""
-              Template = ""
-              ProjectParameters = []
-              LayoutRoots = [] 
-              FsiEval = false }
-
-        let arguments = (p:LiterateArguments->LiterateArguments) defaultLiterateArguments
-        let layoutroots =
-            if arguments.LayoutRoots.IsEmpty then []
-            else [ "--layoutRoots" ] @ arguments.LayoutRoots
-        let source = arguments.Source
-        let template = arguments.Template
-        let outputDir = arguments.OutputDirectory
-        let fsiEval = if arguments.FsiEval then [ "--fsieval" ] else []
-
-        let command = 
-            arguments.ProjectParameters
-            |> Seq.map (fun (k, v) -> [ k; v ])
-            |> Seq.concat
-            |> Seq.append 
-                   (["literate"; "--processdirectory" ] @ layoutroots @ [ "--inputdirectory"; source; "--templatefile"; template; 
-                      "--outputDirectory"; outputDir] @ fsiEval @ [ "--replacements" ])
-            |> Arguments.OfArgs
-        run arguments.ToolPath command
-        printfn "Successfully generated docs for %s" source
-
-[<AutoOpen>]
 module MessagePrompts =
 
     let prompt (msg:string) =
@@ -441,110 +374,17 @@ let info =
     "project-github", githubLink
     "project-nuget", "http://nuget.org/packages/BioFSharp" ]
 
-let root = website
+let generateDocumentation = 
+    BuildTask.create "generateDocumentation" [buildAll] {
+        let result =
+            DotNet.exec
+                (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
+                "fsi"
+                "--define:RELEASE --define:REFERENCE --define:HELP --exec generate.fsx"
 
-let referenceBinaries = []
-
-let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
-layoutRootsAll.Add("en",[   templates;
-                            formatting @@ "templates"
-                            formatting @@ "templates/reference" ])
-
-let buildReferenceDocs = 
-    BuildTask.create "buildReferenceDocs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
-        Directory.ensure (output @@ "reference")
-
-        let binaries () =
-            let manuallyAdded =
-                referenceBinaries
-                |> List.map (fun b -> bin @@ b)
-
-            let conventionBased =
-                DirectoryInfo.getSubDirectories <| DirectoryInfo bin
-                |> Array.collect (fun d ->
-                    let name, dInfo =
-                        let net45Bin =
-                            DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net45"))
-                        let net47Bin =
-                            DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net47"))
-                        let netstandardBin =
-                            DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard"))
-                        if net45Bin.Length > 0 then
-                            d.Name, net45Bin.[0]
-                        elif net47Bin.Length > 0 then
-                            d.Name, net47Bin.[0]
-                        else
-                            d.Name, netstandardBin.[0]
-
-                    dInfo.GetFiles()
-                    |> Array.filter (fun x ->
-                        x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-                    |> Array.map (fun x -> x.FullName)
-                    )
-                |> List.ofArray
-
-            conventionBased @ manuallyAdded
-
-        binaries()
-        |> FSFormatting.createDocsForDlls (fun args ->
-            { args with
-                OutputDirectory = output @@ "reference"
-                LayoutRoots =  layoutRootsAll.["en"]
-                ProjectParameters =  ("root", root)::info
-                SourceRepository = githubLink @@ "tree/master" }
-               )
+        if not result.OK then 
+            failwith "error generating docs" 
     }
-
-let copyFiles () =
-    Shell.copyRecursive files output true
-    |> Trace.logItems "Copying file: "
-    Directory.ensure (output @@ "content")
-    Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true
-    |> Trace.logItems "Copying styles and scripts: "
-
-let buildDocs =  
-    BuildTask.create "buildDocs" [cleanDocs; buildAll.IfNeeded; runTestsAll.IfNeeded; buildMono.IfNeeded; runTestsMono.IfNeeded; buildDotnet.IfNeeded] {
-        File.delete "docsrc/content/release-notes.md"
-        Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
-        Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
-
-        File.delete "docsrc/content/license.md"
-        Shell.copyFile "docsrc/content/" "LICENSE"
-        Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE"
-
-
-        DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
-        |> Seq.iter (fun d ->
-                        let name = d.Name
-                        if name.Length = 2 || name.Length = 3 then
-                            layoutRootsAll.Add(
-                                    name, [templates @@ name
-                                           formatting @@ "templates"
-                                           formatting @@ "templates/reference" ]))
-        copyFiles ()
-
-        for dir in  [ content; ] do
-            let langSpecificPath(lang, path:string) =
-                path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
-                |> Array.exists(fun i -> i = lang)
-            let layoutRoots =
-                let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
-                match key with
-                | Some lang -> layoutRootsAll.[lang]
-                | None -> layoutRootsAll.["en"] // "en" is the default language
-
-            createDocs (fun args ->
-                { args with
-                    Source = content
-                    OutputDirectory = output
-                    LayoutRoots = layoutRoots
-                    ProjectParameters  = ("root", root)::info
-                    Template = docTemplate 
-                    FsiEval = true
-                    } )
-    }
-
-let generateDocumentation = BuildTask.createEmpty "generateDocumentation" [buildAll; buildReferenceDocs; buildDocs]
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
