@@ -4,7 +4,7 @@
 
 
 [![Nuget](https://img.shields.io/nuget/v/BioFSharp)](https://www.nuget.org/packages/BioFSharp/)
-![Made with F#](https://img.shields.io/badge/Made%20with-FSharp-rgb(1,143,204).svg)
+![Made with F#](https://img.shields.io/badge/Made%20with-FSharp-rgb(184,69,252).svg)
 
 BioFSharp is an open source bioinformatics and computational biology toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
 
