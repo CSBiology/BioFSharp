@@ -6,7 +6,7 @@
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
-    <meta name="author" content="Timo Mühlhaus"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
@@ -14,9 +14,9 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <meta http-equiv="X-UA-Compatible" content="IE=11" >
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
-    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -29,13 +29,12 @@
 			  <li><a href="http://fsharp.org">fsharp.org</a></li>
 			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
 			</ul>
-			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
 		  </div>
 		  <hr />
 		  <div class="row">
 			<div class="span9" id="main">
-			  
-<h1><a name="Pretty-Printers" class="anchor" href="#Pretty-Printers">Pretty Printers</a></h1>
+			  <h1><a name="Pretty-Printers" class="anchor" href="#Pretty-Printers">Pretty Printers</a></h1>
 <p>BioFSharp is designed to work well with the FSI, as data evaluation usually involves a lot of scripting. The <code>BioFSharp.IO.FSIPrinters</code> module offers
 a bunch of functions to view our data types in a structured string format. This helps avoiding to save interim results for the purpose of
 visual investigation. To use these printers, use the <code>fsi.AddPrinter</code> function to register the desired printer. This will override the default
@@ -89,7 +88,7 @@ This will not display all available information, but in return keep collections 
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printer</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 46)" onmouseover="showTip(event, 'fs16', 46)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 47)" onmouseover="showTip(event, 'fs17', 47)" class="id">prettyPrintBioItem</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 47)" onmouseover="showTip(event, 'fs25', 47)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 48)" onmouseover="showTip(event, 'fs16', 48)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 49)" onmouseover="showTip(event, 'fs17', 49)" class="id">prettyPrintBioItem</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -101,7 +100,7 @@ This will not display all available information, but in return keep collections 
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printer</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 48)" onmouseover="showTip(event, 'fs16', 48)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 49)" onmouseover="showTip(event, 'fs21', 49)" class="id">prettyPrintBioItemWithModifications</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 50)" onmouseover="showTip(event, 'fs24', 50)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 51)" onmouseover="showTip(event, 'fs25', 51)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 52)" onmouseover="showTip(event, 'fs16', 52)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 53)" onmouseover="showTip(event, 'fs21', 53)" class="id">prettyPrintBioItemWithModifications</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -130,7 +129,7 @@ This will not display all available information, but in return keep collections 
 <span class="l">17: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//an amino acid sequence</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 50)" onmouseover="showTip(event, 'fs24', 50)" class="id">largerSequence</span> <span class="o">=</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 54)" onmouseover="showTip(event, 'fs26', 54)" class="id">largerSequence</span> <span class="o">=</span> 
     <span class="s">&quot;&quot;&quot;MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
 <span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
 <span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT</span>
@@ -140,12 +139,12 @@ This will not display all available information, but in return keep collections 
 <span class="s">    MASSMLSSATMVASPAQATMVAPFNGLKSSAAFPATRKANNDITSITSNGGRVNCMQVWP</span>
 <span class="s">    PIGKKKFETLSYLPDLTDSELAKEVDYLIRNKWIPCVEFELEHGFVYREHGNSPGYYDGR</span>
 <span class="s">    YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT&quot;&quot;&quot;</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 51)" onmouseover="showTip(event, 'fs25', 51)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 52)" onmouseover="showTip(event, 'fs26', 52)" class="id">ofAminoAcidString</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 55)" onmouseover="showTip(event, 'fs27', 55)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 56)" onmouseover="showTip(event, 'fs28', 56)" class="id">ofAminoAcidString</span>
 
 <span class="c">//the same amino acid sequence with a 15N labeled Alanine at position 4</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 53)" onmouseover="showTip(event, 'fs27', 53)" class="id">modifiedSequence</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs28', 54)" onmouseover="showTip(event, 'fs28', 54)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="id">copy</span> <span onmouseout="hideTip(event, 'fs24', 56)" onmouseover="showTip(event, 'fs24', 56)" class="id">largerSequence</span>
-<span onmouseout="hideTip(event, 'fs27', 57)" onmouseover="showTip(event, 'fs27', 57)" class="id">modifiedSequence</span><span class="m">.</span><span class="pn">[</span><span class="n">3</span><span class="pn">]</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs4', 58)" onmouseover="showTip(event, 'fs4', 58)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 59)" onmouseover="showTip(event, 'fs10', 59)" class="id">setModification</span> <span onmouseout="hideTip(event, 'fs11', 60)" onmouseover="showTip(event, 'fs11', 60)" class="m">ModificationInfo</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 61)" onmouseover="showTip(event, 'fs12', 61)" class="m">Table</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 62)" onmouseover="showTip(event, 'fs13', 62)" class="id">N15</span> <span onmouseout="hideTip(event, 'fs4', 63)" onmouseover="showTip(event, 'fs4', 63)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 64)" onmouseover="showTip(event, 'fs5', 64)" class="id">Ala</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 57)" onmouseover="showTip(event, 'fs29', 57)" class="id">modifiedSequence</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs30', 58)" onmouseover="showTip(event, 'fs30', 58)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 59)" onmouseover="showTip(event, 'fs31', 59)" class="id">copy</span> <span onmouseout="hideTip(event, 'fs26', 60)" onmouseover="showTip(event, 'fs26', 60)" class="id">largerSequence</span>
+<span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="id">modifiedSequence</span><span class="m">.</span><span class="pn">[</span><span class="n">3</span><span class="pn">]</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs4', 62)" onmouseover="showTip(event, 'fs4', 62)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 63)" onmouseover="showTip(event, 'fs10', 63)" class="id">setModification</span> <span onmouseout="hideTip(event, 'fs11', 64)" onmouseover="showTip(event, 'fs11', 64)" class="m">ModificationInfo</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 65)" onmouseover="showTip(event, 'fs12', 65)" class="m">Table</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 66)" onmouseover="showTip(event, 'fs13', 66)" class="id">N15</span> <span onmouseout="hideTip(event, 'fs4', 67)" onmouseover="showTip(event, 'fs4', 67)" class="m">AminoAcids</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 68)" onmouseover="showTip(event, 'fs5', 68)" class="id">Ala</span>
 </code></pre></td>
 </tr>
 </table>
@@ -157,24 +156,22 @@ This will not display all available information, but in return keep collections 
   Lys; Lys; Phe; Glu; Thr; Leu; Ser; Tyr; Leu; Pro; Asp; Leu; Thr; Asp; Ser; Glu;
   Leu; Ala; Lys; Glu; Val; Asp; Tyr; Leu; Ile; Arg; Asn; Lys; Trp; Ile; Pro; Cys;
   Val; Glu; Phe; Glu; ...|]</code></pre></td></tr></table>
-<table class="pre"><tr><td><pre><code>[|Met; Ala; Ser;
-  Mod (Ala,[{ Name = "#N15"
-            IsBiological = true
-            Location = Isotopic
-            Modify = &lt;fun:N15@89&gt; }]);
-  Met; Leu; Ser; Ser; Ala; Thr; Met; Val; Ala; Ser; Pro; Ala; Gln; Ala; Thr; Met;
-  Val; Ala; Pro; Phe; Asn; Gly; Leu; Lys; Ser; Ser; Ala; Ala; Phe; Pro; Ala; Thr;
-  Arg; Lys; Ala; Asn; Asn; Asp; Ile; Thr; Ser; Ile; Thr; Ser; Asn; Gly; Gly; Arg;
-  Val; Asn; Cys; Met; Gln; Val; Trp; Pro; Pro; Ile; Gly; Lys; Lys; Lys; Phe; Glu;
-  Thr; Leu; Ser; Tyr; Leu; Pro; Asp; Leu; Thr; Asp; Ser; Glu; Leu; Ala; Lys; Glu;
-  Val; Asp; Tyr; Leu; Ile; Arg; Asn; Lys; Trp; Ile; Pro; Cys; Val; Glu; Phe; Glu;
-  ...|]</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>[|Met; Ala; Ser; Mod (Ala,[{ Name = "#N15"
+                             IsBiological = true
+                             Location = Isotopic
+                             Modify = &lt;fun:N15@89&gt; }]); Met; Leu; Ser; Ser; Ala;
+  Thr; Met; Val; Ala; Ser; Pro; Ala; Gln; Ala; Thr; Met; Val; Ala; Pro; Phe; Asn;
+  Gly; Leu; Lys; Ser; Ser; Ala; Ala; Phe; Pro; Ala; Thr; Arg; Lys; Ala; Asn; Asn;
+  Asp; Ile; Thr; Ser; Ile; Thr; Ser; Asn; Gly; Gly; Arg; Val; Asn; Cys; Met; Gln;
+  Val; Trp; Pro; Pro; Ile; Gly; Lys; Lys; Lys; Phe; Glu; Thr; Leu; Ser; Tyr; Leu;
+  Pro; Asp; Leu; Thr; Asp; Ser; Glu; Leu; Ala; Lys; Glu; Val; Asp; Tyr; Leu; Ile;
+  Arg; Asn; Lys; Trp; Ile; Pro; Cys; Val; Glu; Phe; Glu; ...|]</code></pre></td></tr></table>
 <p>Console output using <code>prettyPrintBioCollection</code>:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printer</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 81)" onmouseover="showTip(event, 'fs16', 81)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 82)" onmouseover="showTip(event, 'fs31', 82)" class="id">prettyPrintBioCollection</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 85)" onmouseover="showTip(event, 'fs24', 85)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 86)" onmouseover="showTip(event, 'fs25', 86)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 87)" onmouseover="showTip(event, 'fs16', 87)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 88)" onmouseover="showTip(event, 'fs33', 88)" class="id">prettyPrintBioCollection</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -206,7 +203,7 @@ This will not display all available information, but in return keep collections 
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printer</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 83)" onmouseover="showTip(event, 'fs16', 83)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 84)" onmouseover="showTip(event, 'fs34', 84)" class="id">prettyPrintBioCollectionWithModifications</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 89)" onmouseover="showTip(event, 'fs24', 89)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 90)" onmouseover="showTip(event, 'fs25', 90)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 91)" onmouseover="showTip(event, 'fs16', 91)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 92)" onmouseover="showTip(event, 'fs36', 92)" class="id">prettyPrintBioCollectionWithModifications</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -239,10 +236,10 @@ This will not display all available information, but in return keep collections 
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 85)" onmouseover="showTip(event, 'fs36', 85)" class="id">path</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/clustalExample.asn&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 93)" onmouseover="showTip(event, 'fs38', 93)" class="id">path</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/clustalExample.asn&quot;</span>
 
 <span class="c">//Clustal algnment read in from a clustal formated .asn file</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 86)" onmouseover="showTip(event, 'fs37', 86)" class="id">clustalAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 87)" onmouseover="showTip(event, 'fs38', 87)" class="m">Clustal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 88)" onmouseover="showTip(event, 'fs39', 88)" class="id">ofFile</span> <span onmouseout="hideTip(event, 'fs36', 89)" onmouseover="showTip(event, 'fs36', 89)" class="id">path</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 94)" onmouseover="showTip(event, 'fs39', 94)" class="id">clustalAlignment</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 95)" onmouseover="showTip(event, 'fs40', 95)" class="m">Clustal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 96)" onmouseover="showTip(event, 'fs41', 96)" class="id">ofFile</span> <span onmouseout="hideTip(event, 'fs38', 97)" onmouseover="showTip(event, 'fs38', 97)" class="id">path</span>
 </code></pre></td>
 </tr>
 </table>
@@ -263,7 +260,7 @@ This will not display all available information, but in return keep collections 
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printer</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 94)" onmouseover="showTip(event, 'fs16', 94)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 95)" onmouseover="showTip(event, 'fs41', 95)" class="id">prettyPrintClustal</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 102)" onmouseover="showTip(event, 'fs24', 102)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 103)" onmouseover="showTip(event, 'fs25', 103)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 104)" onmouseover="showTip(event, 'fs16', 104)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 105)" onmouseover="showTip(event, 'fs43', 105)" class="id">prettyPrintClustal</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -376,71 +373,28 @@ RVALEACVQARNEGRDLAREGNEIIRSACKWSPELAAACEIWKAIKFEFEPVDKLDS--
 <span class="l">11: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//register the desired printers</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 96)" onmouseover="showTip(event, 'fs16', 96)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 97)" onmouseover="showTip(event, 'fs42', 97)" class="id">prettyPrintGPL</span><span class="pn">)</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 98)" onmouseover="showTip(event, 'fs16', 98)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 99)" onmouseover="showTip(event, 'fs43', 99)" class="id">prettyPrintGSE</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 106)" onmouseover="showTip(event, 'fs24', 106)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 107)" onmouseover="showTip(event, 'fs25', 107)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 108)" onmouseover="showTip(event, 'fs16', 108)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 109)" onmouseover="showTip(event, 'fs44', 109)" class="id">prettyPrintGPL</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 110)" onmouseover="showTip(event, 'fs24', 110)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 111)" onmouseover="showTip(event, 'fs25', 111)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 112)" onmouseover="showTip(event, 'fs16', 112)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 113)" onmouseover="showTip(event, 'fs45', 113)" class="id">prettyPrintGSE</span><span class="pn">)</span>
 
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 100)" onmouseover="showTip(event, 'fs16', 100)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 101)" onmouseover="showTip(event, 'fs44', 101)" class="id">prettyPrintSampleRecord</span><span class="pn">)</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 102)" onmouseover="showTip(event, 'fs16', 102)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 103)" onmouseover="showTip(event, 'fs45', 103)" class="id">prettyPrintSeriesRecord</span><span class="pn">)</span>
-<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 104)" onmouseover="showTip(event, 'fs16', 104)" class="id">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 105)" onmouseover="showTip(event, 'fs46', 105)" class="id">prettyPrintPlatformRecord</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 114)" onmouseover="showTip(event, 'fs24', 114)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 115)" onmouseover="showTip(event, 'fs25', 115)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 116)" onmouseover="showTip(event, 'fs16', 116)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 117)" onmouseover="showTip(event, 'fs46', 117)" class="id">prettyPrintSampleRecord</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 118)" onmouseover="showTip(event, 'fs24', 118)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 119)" onmouseover="showTip(event, 'fs25', 119)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 120)" onmouseover="showTip(event, 'fs16', 120)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 121)" onmouseover="showTip(event, 'fs47', 121)" class="id">prettyPrintSeriesRecord</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs24', 122)" onmouseover="showTip(event, 'fs24', 122)" class="fn">fsi</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 123)" onmouseover="showTip(event, 'fs25', 123)" class="id">AddPrinter</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 124)" onmouseover="showTip(event, 'fs16', 124)" class="m">FSIPrinters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs48', 125)" onmouseover="showTip(event, 'fs48', 125)" class="id">prettyPrintPlatformRecord</span><span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 106)" onmouseover="showTip(event, 'fs47', 106)" class="id">gplPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GPL15922_family.soft&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 126)" onmouseover="showTip(event, 'fs49', 126)" class="id">gplPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GPL15922_family.soft&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 107)" onmouseover="showTip(event, 'fs48', 107)" class="id">gpl15922</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 108)" onmouseover="showTip(event, 'fs49', 108)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 109)" onmouseover="showTip(event, 'fs50', 109)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 110)" onmouseover="showTip(event, 'fs51', 110)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs47', 111)" onmouseover="showTip(event, 'fs47', 111)" class="id">gplPath</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 127)" onmouseover="showTip(event, 'fs50', 127)" class="id">gpl15922</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 128)" onmouseover="showTip(event, 'fs51', 128)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 129)" onmouseover="showTip(event, 'fs52', 129)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 130)" onmouseover="showTip(event, 'fs53', 130)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs49', 131)" onmouseover="showTip(event, 'fs49', 131)" class="id">gplPath</span>
 </code></pre></td>
 </tr>
 </table>
 <p>Console output using <code>prettyPrintGPL</code>:</p>
-<table class="pre"><tr><td><pre><code>"
-GEO PLATFORM RECORD GPL15922
-============================
-
-Title:          Illumina HiSeq 2000 (Chlamydomonas reinhardtii)
-
-Organism(s):    Chlamydomonas reinhardtii
-
-Description:    
-
-Technology:     high-throughput sequencing
-
-Contributor(s): 
-
-Series(s):      GSE101944 =&gt; Transcriptome analysis of Chlamydomonas reinhardtii chloroplast and mitochondria
-                GSE112394 =&gt; Transcriptomics analysis of the Chlamydomonas reinhardtii diurnal cycle.
-                GSE40031 =&gt; Retrograde bilin signaling enables Chlamydomonas greening and phototrophic survival
-                GSE44611 =&gt; Changes in membrane lipid composition during Iron depletion and starvation in Chlamydomonas reinhardtii
-                GSE55253 =&gt; The Path to Triacylglyceride Obesity in the sta6 Strain of Chlamydomonas reinhardtii
-                GSE58786 =&gt; RNAseq Analysis of Transcriptomic Response to Zn Resupply in Chlamydomonas reinhardtii
-                GSE59629 =&gt; Lineage-Specific Chromatin Signatures Reveal a Master Lipid Switch in Microalgae
-                GSE62690 =&gt; N6-Methyldeoxyadenosine Marks Active Transcription Start Sites in Chlamydomonas
-                GSE71469 =&gt; Chlamydomonas diurnal transcriptome
-                GSE77388 =&gt; Bilin-dependent photoacclimation in Chlamydomonas reinhardtii
-
-Samples         GSM1087792 =&gt; C.reinhardtii _Fe_Long_0_hours
-                GSM1087793 =&gt; C.reinhardtii _Fe_Long_0.5_hours
-                GSM1087794 =&gt; C.reinhardtii _Fe_Long_1_hours
-                GSM1087795 =&gt; C.reinhardtii _Fe_Long_2_hours
-                GSM1087796 =&gt; C.reinhardtii _Fe_Long_4_hours
-                GSM1087797 =&gt; C.reinhardtii _Fe_Long_8_hours
-                GSM1087798 =&gt; C.reinhardtii _Fe_Long_12_hours
-                GSM1087799 =&gt; C.reinhardtii _Fe_Long_24_hours
-                GSM1087800 =&gt; C.reinhardtii _Fe_Long_48_hours
-                GSM1332630 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0h pre-wash
-                GSM1332631 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0h
-                GSM1332632 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 0.5h
-                GSM1332633 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 2h
-                GSM1332634 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 4h
-                GSM1332635 =&gt; Chlamydomonas reinhardtii CC-4349 minus N 8h
-                (...and 208 more)
-
-(For more Metadata, access the type directly)
-            "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs53', 116)" onmouseover="showTip(event, 'fs53', 116)" class="id">gsePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GSE71469_family.soft&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 136)" onmouseover="showTip(event, 'fs55', 136)" class="id">gsePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/GSE71469_family.soft&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 117)" onmouseover="showTip(event, 'fs54', 117)" class="id">gse71469</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 118)" onmouseover="showTip(event, 'fs49', 118)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 119)" onmouseover="showTip(event, 'fs55', 119)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 120)" onmouseover="showTip(event, 'fs56', 120)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs53', 121)" onmouseover="showTip(event, 'fs53', 121)" class="id">gsePath</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 137)" onmouseover="showTip(event, 'fs56', 137)" class="id">gse71469</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 138)" onmouseover="showTip(event, 'fs51', 138)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 139)" onmouseover="showTip(event, 'fs57', 139)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 140)" onmouseover="showTip(event, 'fs58', 140)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs55', 141)" onmouseover="showTip(event, 'fs55', 141)" class="id">gsePath</span>
 </code></pre></td>
 </tr>
 </table>
@@ -491,10 +445,10 @@ Samples         GSM1835200 =&gt; 1_1
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 126)" onmouseover="showTip(event, 'fs58', 126)" class="id">smplRecord</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs54', 127)" onmouseover="showTip(event, 'fs54', 127)" class="id">gse71469</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 128)" onmouseover="showTip(event, 'fs49', 128)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 129)" onmouseover="showTip(event, 'fs55', 129)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 130)" onmouseover="showTip(event, 'fs59', 130)" class="id">getAssociatedSamples</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 131)" onmouseover="showTip(event, 'fs60', 131)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 132)" onmouseover="showTip(event, 'fs61', 132)" class="id">item</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 146)" onmouseover="showTip(event, 'fs60', 146)" class="id">smplRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs56', 147)" onmouseover="showTip(event, 'fs56', 147)" class="id">gse71469</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs51', 148)" onmouseover="showTip(event, 'fs51', 148)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 149)" onmouseover="showTip(event, 'fs57', 149)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 150)" onmouseover="showTip(event, 'fs61', 150)" class="id">getAssociatedSamples</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs62', 151)" onmouseover="showTip(event, 'fs62', 151)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 152)" onmouseover="showTip(event, 'fs63', 152)" class="id">item</span> <span class="n">0</span>
 </code></pre></td>
 </tr>
 </table>
@@ -527,46 +481,24 @@ Description:
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 137)" onmouseover="showTip(event, 'fs63', 137)" class="id">seriesRecord</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs48', 138)" onmouseover="showTip(event, 'fs48', 138)" class="id">gpl15922</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 139)" onmouseover="showTip(event, 'fs49', 139)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 140)" onmouseover="showTip(event, 'fs50', 140)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs64', 141)" onmouseover="showTip(event, 'fs64', 141)" class="id">getAssociatedSeries</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 142)" onmouseover="showTip(event, 'fs60', 142)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 143)" onmouseover="showTip(event, 'fs61', 143)" class="id">item</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 157)" onmouseover="showTip(event, 'fs65', 157)" class="id">seriesRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs50', 158)" onmouseover="showTip(event, 'fs50', 158)" class="id">gpl15922</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs51', 159)" onmouseover="showTip(event, 'fs51', 159)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 160)" onmouseover="showTip(event, 'fs52', 160)" class="m">Platform</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 161)" onmouseover="showTip(event, 'fs66', 161)" class="id">getAssociatedSeries</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs62', 162)" onmouseover="showTip(event, 'fs62', 162)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 163)" onmouseover="showTip(event, 'fs63', 163)" class="id">item</span> <span class="n">0</span>
 </code></pre></td>
 </tr>
 </table>
 <p>Console output using <code>prettyPrintSeriesRecord</code>:</p>
-<table class="pre"><tr><td><pre><code>"
-GEO SERIES RECORD GSE101944
-===========================
-
-Type(s):        Expression profiling by high throughput sequencing
-
-Title:          Transcriptome analysis of Chlamydomonas reinhardtii chloroplast and mitochondria
-
-Contributor(s): Daniela,,Strenkert
-                Sean,D,Gallaher
-
-Design:         RNA-Seq libraries were prepared from Chlamydomonas reinhardtii sampled under 12 different conditions including: diurnal growth
-                in light, diurnal growth in dark, +Fe, â€“Fe, +Cu, â€“Cu, mt+ vegetative, mtâ€“ vegetative, mt+
-                gamete, mtâ€“ gamete, zygote, and post-germination.
-
-Summary:        Here, we report on the transcriptome of the organelles of the micro-alga, Chlamydomonas reinhardtii, sampled
-                under a number of different conditions. The preparation of the RNA-Seq libraries and their analysis
-                were performed using protocols optimized for organellar transcripts. Samples include growth in media +/â€“ Fe,
-                growth in media +/â€“ Cu, diurnal growth samples collected in dark and light, and the
-                sexual cycle.
-
-(For more Metadata, access the type directly)
-            "</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 148)" onmouseover="showTip(event, 'fs66', 148)" class="id">pltfrmRecord</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs54', 149)" onmouseover="showTip(event, 'fs54', 149)" class="id">gse71469</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs49', 150)" onmouseover="showTip(event, 'fs49', 150)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 151)" onmouseover="showTip(event, 'fs55', 151)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 152)" onmouseover="showTip(event, 'fs67', 152)" class="id">getAssociatedPlatforms</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs60', 153)" onmouseover="showTip(event, 'fs60', 153)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 154)" onmouseover="showTip(event, 'fs61', 154)" class="id">item</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 168)" onmouseover="showTip(event, 'fs68', 168)" class="id">pltfrmRecord</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs56', 169)" onmouseover="showTip(event, 'fs56', 169)" class="id">gse71469</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs51', 170)" onmouseover="showTip(event, 'fs51', 170)" class="m">SOFT</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 171)" onmouseover="showTip(event, 'fs57', 171)" class="m">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 172)" onmouseover="showTip(event, 'fs69', 172)" class="id">getAssociatedPlatforms</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs62', 173)" onmouseover="showTip(event, 'fs62', 173)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 174)" onmouseover="showTip(event, 'fs63', 174)" class="id">item</span> <span class="n">0</span>
 </code></pre></td>
 </tr>
 </table>
@@ -611,124 +543,124 @@ Contributor(s):
 <div class="tip" id="fs21">val prettyPrintBioItemWithModifications : a:#IBioItem -&gt; string</div>
 <div class="tip" id="fs22">val nPrint&#39; : string</div>
 <div class="tip" id="fs23">val aaPrintWithMod&#39; : string</div>
-<div class="tip" id="fs24">val largerSequence : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs25">module BioArray<br /><br />from BioFSharp</div>
-<div class="tip" id="fs26">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
-<div class="tip" id="fs27">val modifiedSequence : AminoAcids.AminoAcid []</div>
-<div class="tip" id="fs28">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs29">val copy : array:&#39;T [] -&gt; &#39;T []</div>
-<div class="tip" id="fs30">val colPrnt : string</div>
-<div class="tip" id="fs31">val prettyPrintBioCollection : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
-<div class="tip" id="fs32">val colPrntMod : string</div>
-<div class="tip" id="fs33">val colPrnt&#39; : string</div>
-<div class="tip" id="fs34">val prettyPrintBioCollectionWithModifications : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
-<div class="tip" id="fs35">val colPrntMod&#39; : string</div>
-<div class="tip" id="fs36">val path : string</div>
-<div class="tip" id="fs37">val clustalAlignment : Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
-<div class="tip" id="fs38">module Clustal<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs39">val ofFile : path:string -&gt; Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
-<div class="tip" id="fs40">val clustalPrnt : string</div>
-<div class="tip" id="fs41">val prettyPrintClustal : alignment:Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt; -&gt; string</div>
-<div class="tip" id="fs42">val prettyPrintGPL : gpl:Platform.GPL -&gt; string</div>
-<div class="tip" id="fs43">val prettyPrintGSE : gse:Series.GSE -&gt; string</div>
-<div class="tip" id="fs44">val prettyPrintSampleRecord : sample:SampleRecord -&gt; string</div>
-<div class="tip" id="fs45">val prettyPrintSeriesRecord : series:SeriesRecord -&gt; string</div>
-<div class="tip" id="fs46">val prettyPrintPlatformRecord : platform:PlatformRecord -&gt; string</div>
-<div class="tip" id="fs47">val gplPath : string</div>
-<div class="tip" id="fs48">val gpl15922 : Platform.GPL</div>
-<div class="tip" id="fs49">module SOFT<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs50">module Platform<br /><br />from BioFSharp.IO.SOFT</div>
-<div class="tip" id="fs51">val fromFile : path:string -&gt; Platform.GPL</div>
-<div class="tip" id="fs52">val gplPrnt : string</div>
-<div class="tip" id="fs53">val gsePath : string</div>
-<div class="tip" id="fs54">val gse71469 : Series.GSE</div>
-<div class="tip" id="fs55">module Series<br /><br />from BioFSharp.IO.SOFT</div>
-<div class="tip" id="fs56">val fromFile : path:string -&gt; Series.GSE</div>
-<div class="tip" id="fs57">val gsePrnt : string</div>
-<div class="tip" id="fs58">val smplRecord : SampleRecord</div>
-<div class="tip" id="fs59">val getAssociatedSamples : gse:Series.GSE -&gt; SampleRecord list</div>
-<div class="tip" id="fs60">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;&#160;&#160;...</div>
-<div class="tip" id="fs61">val item : index:int -&gt; list:&#39;T list -&gt; &#39;T</div>
-<div class="tip" id="fs62">val smplPrint : string</div>
-<div class="tip" id="fs63">val seriesRecord : SeriesRecord</div>
-<div class="tip" id="fs64">val getAssociatedSeries : gpl:Platform.GPL -&gt; SeriesRecord list</div>
-<div class="tip" id="fs65">val seriesPrint : string</div>
-<div class="tip" id="fs66">val pltfrmRecord : PlatformRecord</div>
-<div class="tip" id="fs67">val getAssociatedPlatforms : gse:Series.GSE -&gt; PlatformRecord list</div>
-<div class="tip" id="fs68">val pltfrmPrint : string</div>
+<div class="tip" id="fs24">val fsi : FSharp.Compiler.Interactive.InteractiveSession</div>
+<div class="tip" id="fs25">member FSharp.Compiler.Interactive.InteractiveSession.AddPrinter : (&#39;T -&gt; string) -&gt; unit</div>
+<div class="tip" id="fs26">val largerSequence : BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs27">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs28">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioArray.BioArray&lt;AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs29">val modifiedSequence : AminoAcids.AminoAcid []</div>
+<div class="tip" id="fs30">module Array<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs31">val copy : array:&#39;T [] -&gt; &#39;T []</div>
+<div class="tip" id="fs32">val colPrnt : string</div>
+<div class="tip" id="fs33">val prettyPrintBioCollection : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
+<div class="tip" id="fs34">val colPrntMod : string</div>
+<div class="tip" id="fs35">val colPrnt&#39; : string</div>
+<div class="tip" id="fs36">val prettyPrintBioCollectionWithModifications : sequence:seq&lt;#IBioItem&gt; -&gt; string</div>
+<div class="tip" id="fs37">val colPrntMod&#39; : string</div>
+<div class="tip" id="fs38">val path : string</div>
+<div class="tip" id="fs39">val clustalAlignment : Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs40">module Clustal<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs41">val ofFile : path:string -&gt; Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt;</div>
+<div class="tip" id="fs42">val clustalPrnt : string</div>
+<div class="tip" id="fs43">val prettyPrintClustal : alignment:Alignment.Alignment&lt;TaggedSequence.TaggedSequence&lt;string,char&gt;,Clustal.AlignmentInfo&gt; -&gt; string</div>
+<div class="tip" id="fs44">val prettyPrintGPL : gpl:Platform.GPL -&gt; string</div>
+<div class="tip" id="fs45">val prettyPrintGSE : gse:Series.GSE -&gt; string</div>
+<div class="tip" id="fs46">val prettyPrintSampleRecord : sample:SampleRecord -&gt; string</div>
+<div class="tip" id="fs47">val prettyPrintSeriesRecord : series:SeriesRecord -&gt; string</div>
+<div class="tip" id="fs48">val prettyPrintPlatformRecord : platform:PlatformRecord -&gt; string</div>
+<div class="tip" id="fs49">val gplPath : string</div>
+<div class="tip" id="fs50">val gpl15922 : Platform.GPL</div>
+<div class="tip" id="fs51">module SOFT<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs52">module Platform<br /><br />from BioFSharp.IO.SOFT</div>
+<div class="tip" id="fs53">val fromFile : path:string -&gt; Platform.GPL</div>
+<div class="tip" id="fs54">val gplPrnt : string</div>
+<div class="tip" id="fs55">val gsePath : string</div>
+<div class="tip" id="fs56">val gse71469 : Series.GSE</div>
+<div class="tip" id="fs57">module Series<br /><br />from BioFSharp.IO.SOFT</div>
+<div class="tip" id="fs58">val fromFile : path:string -&gt; Series.GSE</div>
+<div class="tip" id="fs59">val gsePrnt : string</div>
+<div class="tip" id="fs60">val smplRecord : SampleRecord</div>
+<div class="tip" id="fs61">val getAssociatedSamples : gse:Series.GSE -&gt; SampleRecord list</div>
+<div class="tip" id="fs62">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetReverseIndex : rank:int * offset:int -&gt; int<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;...</div>
+<div class="tip" id="fs63">val item : index:int -&gt; list:&#39;T list -&gt; &#39;T</div>
+<div class="tip" id="fs64">val smplPrint : string</div>
+<div class="tip" id="fs65">val seriesRecord : SeriesRecord</div>
+<div class="tip" id="fs66">val getAssociatedSeries : gpl:Platform.GPL -&gt; SeriesRecord list</div>
+<div class="tip" id="fs67">val seriesPrint : string</div>
+<div class="tip" id="fs68">val pltfrmRecord : PlatformRecord</div>
+<div class="tip" id="fs69">val getAssociatedPlatforms : gse:Series.GSE -&gt; PlatformRecord list</div>
+<div class="tip" id="fs70">val pltfrmPrint : string</div>
 
 			</div>
 			<div class="span3" >
-			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
               <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                   <li class="nav-header">BioFSharp</li>
-                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
                   <li class="divider"></li>
-                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
 
-                  
                   <li class="nav-header">BioFSharp core</li>
-                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
                   <li>
-                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
                   </li>
-                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
                   <li class="nav-header">BioContainers</li>
-                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
-                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
                   <li class="nav-header">Algorithm</li>
-                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
                   <li>
-                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
                   </li>
                   <li class="nav-header">File I/O</li>
                   <li>
-                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
                   </li>
-                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
                   <li>
-                      <a href="/BioFSharp/FastA.html">FastA</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
                   </li>
-                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
                   <li>
-                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
                   </li>
-                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
                   <li>
-                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
                   </li>
                   <li>
-                      <a href="/BioFSharp/Newick.html">Newick</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
                   </li>
-                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
                   <li>
-                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
                           <ul class="nav nav-list">
-                              <li><a href="/BioFSharp/FSIPrinters.html#BioItems">BioItems</a></li>
-                              <li><a href="/BioFSharp/FSIPrinters.html#BioCollections">BioCollections</a></li>
-                              <li><a href="/BioFSharp/FSIPrinters.html#Clustal-formatted-alignments">Clustal</a></li>
-                              <li><a href="/BioFSharp/FSIPrinters.html#SOFT">GEO Metadata (SOFT)</a></li>
+                              <li><a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html#BioItems">BioItems</a></li>
+                              <li><a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html#BioCollections">BioCollections</a></li>
+                              <li><a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html#Clustal-formatted-alignments">Clustal</a></li>
+                              <li><a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html#SOFT">GEO Metadata (SOFT)</a></li>
                           </ul>
                   </li>
                   <li class="nav-header">Web I/O</li>
-                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
                   <li class="nav-header">Biostatistics</li>
-                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
                   <li class="nav-header">Biovisualization</li>
-                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
                   <li class="nav-header">GPU Computing</li>
-                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
                   <li class="nav-header">Documentation</li>
-                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
 
 
-                  
               </ul>
 			</div>
 		  </div>

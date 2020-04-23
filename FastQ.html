@@ -5,7 +5,7 @@
     <title>FastQ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
-    <meta name="author" content="Timo Mühlhaus"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
@@ -13,9 +13,9 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <meta http-equiv="X-UA-Compatible" content="IE=11" >
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
-    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -28,13 +28,12 @@
 			  <li><a href="http://fsharp.org">fsharp.org</a></li>
 			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
 			</ul>
-			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
 		  </div>
 		  <hr />
 		  <div class="row">
 			<div class="span9" id="main">
-			  
-<table class="HeadAPI">
+			  <table class="HeadAPI">
 <td class="Head"><h1>FastQ format</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fastq.html" >&#128194;View module documentation</a>
@@ -114,7 +113,7 @@ then you can use our converting function:</p>
 <div class="tip" id="fs3">namespace BioFSharp.IO</div>
 <div class="tip" id="fs4">namespace FSharpAux</div>
 <div class="tip" id="fs5">namespace FSharpAux.IO</div>
-<div class="tip" id="fs6">type FastqItem&lt;&#39;a,&#39;b&gt; =<br />&#160;&#160;{Header: string;<br />&#160;&#160;&#160;Sequence: &#39;a;<br />&#160;&#160;&#160;QualityHeader: string;<br />&#160;&#160;&#160;QualitySequence: &#39;b;}<br /><em><br /><br />&#160;FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</em></div>
+<div class="tip" id="fs6">type FastqItem&lt;&#39;a,&#39;b&gt; =<br />&#160;&#160;{ Header: string<br />&#160;&#160;&#160;&#160;Sequence: &#39;a<br />&#160;&#160;&#160;&#160;QualityHeader: string<br />&#160;&#160;&#160;&#160;QualitySequence: &#39;b }<br /><em><br /><br />&#160;FastqItem record contains header, sequence, qualityheader, qualitysequence of one entry</em></div>
 <div class="tip" id="fs7">FastqItem.Header: string</div>
 <div class="tip" id="fs8">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />--------------------<br />type string = String</div>
 <div class="tip" id="fs9">FastqItem.Sequence: &#39;a</div>
@@ -122,7 +121,7 @@ then you can use our converting function:</p>
 <div class="tip" id="fs11">FastqItem.QualitySequence: &#39;b</div>
 <div class="tip" id="fs12">val converterToAA : string:string -&gt; AminoAcids.AminoAcid option []<br /><em><br /><br />&#160;get characters as sequence units</em></div>
 <div class="tip" id="fs13">Multiple items<br />val string : string<br /><br />--------------------<br />type string = String</div>
-<div class="tip" id="fs14">Multiple items<br />type String =<br />&#160;&#160;new : value:char -&gt; string + 7 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 2 overloads<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : String<br />String(value: nativeptr&lt;sbyte&gt;) : String<br />String(value: char []) : String<br />String(c: char, count: int) : String<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : String<br />String(value: char [], startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : String</div>
+<div class="tip" id="fs14">Multiple items<br />type String =<br />&#160;&#160;new : value:char[] -&gt; string + 8 overloads<br />&#160;&#160;member Chars : int -&gt; char<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CompareTo : value:obj -&gt; int + 1 overload<br />&#160;&#160;member Contains : value:string -&gt; bool + 3 overloads<br />&#160;&#160;member CopyTo : sourceIndex:int * destination:char[] * destinationIndex:int * count:int -&gt; unit<br />&#160;&#160;member EndsWith : value:string -&gt; bool + 3 overloads<br />&#160;&#160;member EnumerateRunes : unit -&gt; StringRuneEnumerator<br />&#160;&#160;member Equals : obj:obj -&gt; bool + 2 overloads<br />&#160;&#160;member GetEnumerator : unit -&gt; CharEnumerator<br />&#160;&#160;...<br /><br />--------------------<br />String(value: char []) : String<br />String(value: nativeptr&lt;char&gt;) : String<br />String(value: nativeptr&lt;sbyte&gt;) : String<br />String(value: ReadOnlySpan&lt;char&gt;) : String<br />String(c: char, count: int) : String<br />String(value: char [], startIndex: int, length: int) : String<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : String</div>
 <div class="tip" id="fs15">val toCharArray : str:string -&gt; char []</div>
 <div class="tip" id="fs16">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...</div>
 <div class="tip" id="fs17">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
@@ -131,7 +130,7 @@ then you can use our converting function:</p>
 <div class="tip" id="fs20">val charToOptionAminoAcid : aac:char -&gt; AminoAcids.AminoAcid option</div>
 <div class="tip" id="fs21">val qualityConvertFn : string:string -&gt; int []<br /><em><br /><br />&#160;get Phred quality score</em></div>
 <div class="tip" id="fs22">val i : char</div>
-<div class="tip" id="fs23">Char.GetHashCode() : int</div>
+<div class="tip" id="fs23"></div>
 <div class="tip" id="fs24">val yourFastqFile : string</div>
 <div class="tip" id="fs25">val FastQSequence : seq&lt;FastQ.FastqItem&lt;AminoAcids.AminoAcid option [],int []&gt;&gt;</div>
 <div class="tip" id="fs26">module FastQ<br /><br />from BioFSharp.IO</div>
@@ -139,70 +138,68 @@ then you can use our converting function:</p>
 
 			</div>
 			<div class="span3" >
-			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
               <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                   <li class="nav-header">BioFSharp</li>
-                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
                   <li class="divider"></li>
-                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
 
-                  
                   <li class="nav-header">BioFSharp core</li>
-                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
                   <li>
-                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
                   </li>
-                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
                   <li class="nav-header">BioContainers</li>
-                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
-                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
                   <li class="nav-header">Algorithm</li>
-                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
                   <li>
-                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
                   </li>
                   <li class="nav-header">File I/O</li>
                   <li>
-                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
                   </li>
-                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
                   <li>
-                      <a href="/BioFSharp/FastA.html">FastA</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
                   </li>
-                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
                   <li>
-                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
                   </li>
-                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
                   <li>
-                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
                   </li>
                   <li>
-                      <a href="/BioFSharp/Newick.html">Newick</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
                   </li>
-                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
                   <li>
-                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
                   </li>
                   <li class="nav-header">Web I/O</li>
-                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
                   <li class="nav-header">Biostatistics</li>
-                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
                   <li class="nav-header">Biovisualization</li>
-                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
                   <li class="nav-header">GPU Computing</li>
-                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
                   <li class="nav-header">Documentation</li>
-                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
 
 
-                  
               </ul>
 			</div>
 		  </div>

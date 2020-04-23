@@ -6,7 +6,7 @@
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
-    <meta name="author" content="Timo Mühlhaus"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
@@ -14,9 +14,9 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <meta http-equiv="X-UA-Compatible" content="IE=11" >
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
-    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -29,13 +29,12 @@
 			  <li><a href="http://fsharp.org">fsharp.org</a></li>
 			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
 			</ul>
-			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
 		  </div>
 		  <hr />
 		  <div class="row">
 			<div class="span9" id="main">
-			  
-<h1><a name="BioFSharp-BioContainers" class="anchor" href="#BioFSharp-BioContainers">BioFSharp.BioContainers</a></h1>
+			  <h1><a name="BioFSharp-BioContainers" class="anchor" href="#BioFSharp-BioContainers">BioFSharp.BioContainers</a></h1>
 <p>BioFSharp.BioContainers is all about connecting BioFSharp and F# itself with the Bioinformatics community and integrating
 common bioinformatic workflows.There are many established tools and software suites in bioinformatics, and most of the time
 there is no point in rewriting them for a specific programming language. Containerized applications make it possible to use
@@ -88,7 +87,7 @@ to help out, this is a great place to do so!</p>
 <span class="o">|&gt;</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">images</span> <span class="k">-&gt;</span>
     <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">printfn</span> <span class="s">&quot;Repository/Tags\tImageId\tCreated\t Size&quot;</span>
     <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="id">images</span> 
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="id">iter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">img</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">\t</span><span class="pf">%s</span><span class="s">\t</span><span class="pf">%A</span><span class="s">\t </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">RepoTags</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="id">ID</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="id">Created</span> <span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="id">Size</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="id">iter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">img</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">\t</span><span class="pf">%s</span><span class="s">\t</span><span class="pf">%A</span><span class="s">\t </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">RepoTags</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="id">ID</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="id">Created</span> <span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="id">img</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="id">Size</span><span class="pn">)</span>
 </code></pre></td>
 </tr>
 </table>
@@ -97,7 +96,7 @@ to help out, this is a great place to do so!</p>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="id">Repository</span><span class="o">/</span><span class="id">Tags</span>         <span class="id">ImageId</span>                                                                     <span class="id">Created</span>                 <span class="id">Size</span>
-    <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="k">seq</span> <span class="pn">[</span><span class="s">&quot;ubuntu:latest&quot;</span><span class="pn">]</span>   <span class="id">sha256</span><span class="pn">:</span><span class="id">cf0f3ca922e08045795f67138b394c7287fbc0f4842ee39244a1a1aaca8c5e1c</span>     <span class="n">10</span><span class="o">/</span><span class="n">18</span><span class="o">/</span><span class="n">2019</span> <span class="n">6</span><span class="pn">:</span><span class="n">48</span><span class="pn">:</span><span class="n">51</span> <span class="id">PM</span>   <span class="n">64192156L</span>
+    <span onmouseout="hideTip(event, 'fs17', 25)" onmouseover="showTip(event, 'fs17', 25)" class="k">seq</span> <span class="pn">[</span><span class="s">&quot;ubuntu:latest&quot;</span><span class="pn">]</span>   <span class="id">sha256</span><span class="pn">:</span><span class="id">cf0f3ca922e08045795f67138b394c7287fbc0f4842ee39244a1a1aaca8c5e1c</span>     <span class="n">10</span><span class="o">/</span><span class="n">18</span><span class="o">/</span><span class="n">2019</span> <span class="n">6</span><span class="pn">:</span><span class="n">48</span><span class="pn">:</span><span class="n">51</span> <span class="id">PM</span>   <span class="n">64192156L</span>
 </code></pre></td>
 </tr>
 </table>
@@ -113,12 +112,12 @@ container will not only be spawned, but kept running to receive your commands.</
 <span class="l">7: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">///Create a representation of your image on the F# side</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="id">ubuntuImage</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 27)" onmouseover="showTip(event, 'fs4', 27)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 29)" onmouseover="showTip(event, 'fs17', 29)" class="id">ImageId</span> <span class="s">&quot;ubuntu:latest&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">ubuntuImage</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 27)" onmouseover="showTip(event, 'fs4', 27)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 29)" onmouseover="showTip(event, 'fs20', 29)" class="id">ImageId</span> <span class="s">&quot;ubuntu:latest&quot;</span>
 
 <span class="c">///Create a container from the image and keep it running (the container context for all future commands)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="id">bcContext</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="id">initBcContextAsync</span> <span onmouseout="hideTip(event, 'fs3', 33)" onmouseover="showTip(event, 'fs3', 33)" class="id">client</span> <span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="id">ubuntuImage</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">RunSynchronously</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 30)" onmouseover="showTip(event, 'fs21', 30)" class="id">bcContext</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="id">initBcContextAsync</span> <span onmouseout="hideTip(event, 'fs3', 33)" onmouseover="showTip(event, 'fs3', 33)" class="id">client</span> <span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="id">ubuntuImage</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="id">RunSynchronously</span>
 </code></pre></td>
 </tr>
 </table>
@@ -135,13 +134,13 @@ you can bind to a name</p>
 <span class="l">8: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//just run the command and print the results</span>
-<span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="id">execAsync</span> <span onmouseout="hideTip(event, 'fs18', 39)" onmouseover="showTip(event, 'fs18', 39)" class="id">bcContext</span> <span class="pn">[</span><span class="s">&quot;echo&quot;</span><span class="pn">;</span><span class="s">&quot;hello world&quot;</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 40)" onmouseover="showTip(event, 'fs21', 40)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 41)" onmouseover="showTip(event, 'fs22', 41)" class="id">RunSynchronously</span>
+<span onmouseout="hideTip(event, 'fs22', 37)" onmouseover="showTip(event, 'fs22', 37)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="id">execAsync</span> <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="id">bcContext</span> <span class="pn">[</span><span class="s">&quot;echo&quot;</span><span class="pn">;</span><span class="s">&quot;hello world&quot;</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 40)" onmouseover="showTip(event, 'fs24', 40)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="id">RunSynchronously</span>
 
 <span class="c">///bind the results of the command to a value</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="id">returnValue</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs19', 43)" onmouseover="showTip(event, 'fs19', 43)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="id">execReturnAsync</span> <span onmouseout="hideTip(event, 'fs18', 45)" onmouseover="showTip(event, 'fs18', 45)" class="id">bcContext</span> <span class="pn">[</span><span class="s">&quot;echo&quot;</span><span class="pn">;</span><span class="s">&quot;hello world&quot;</span><span class="pn">]</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 46)" onmouseover="showTip(event, 'fs21', 46)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 47)" onmouseover="showTip(event, 'fs22', 47)" class="id">RunSynchronously</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 42)" onmouseover="showTip(event, 'fs27', 42)" class="id">returnValue</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs22', 43)" onmouseover="showTip(event, 'fs22', 43)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 44)" onmouseover="showTip(event, 'fs28', 44)" class="id">execReturnAsync</span> <span onmouseout="hideTip(event, 'fs21', 45)" onmouseover="showTip(event, 'fs21', 45)" class="id">bcContext</span> <span class="pn">[</span><span class="s">&quot;echo&quot;</span><span class="pn">;</span><span class="s">&quot;hello world&quot;</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 47)" onmouseover="showTip(event, 'fs25', 47)" class="id">RunSynchronously</span>
 </code></pre></td>
 </tr>
 </table>
@@ -151,9 +150,9 @@ prevent it from eating up ressources</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 48)" onmouseover="showTip(event, 'fs18', 48)" class="id">bcContext</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 49)" onmouseover="showTip(event, 'fs19', 49)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">disposeAsync</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 51)" onmouseover="showTip(event, 'fs21', 51)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 52)" onmouseover="showTip(event, 'fs22', 52)" class="id">RunSynchronously</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs21', 48)" onmouseover="showTip(event, 'fs21', 48)" class="id">bcContext</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="id">disposeAsync</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 51)" onmouseover="showTip(event, 'fs24', 51)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 52)" onmouseover="showTip(event, 'fs25', 52)" class="id">RunSynchronously</span>
 </code></pre></td>
 </tr>
 </table>
@@ -195,32 +194,32 @@ A way to do this from F# is in the making.</p>
 <span class="l">26: </span>
 <span class="l">27: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 53)" onmouseover="showTip(event, 'fs1', 53)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 54)" onmouseover="showTip(event, 'fs2', 54)" class="id">BioContainers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 55)" onmouseover="showTip(event, 'fs27', 55)" class="id">Blast</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 53)" onmouseover="showTip(event, 'fs1', 53)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 54)" onmouseover="showTip(event, 'fs2', 54)" class="id">BioContainers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 55)" onmouseover="showTip(event, 'fs30', 55)" class="id">Blast</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 56)" onmouseover="showTip(event, 'fs28', 56)" class="id">ImageBlast</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 58)" onmouseover="showTip(event, 'fs16', 58)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 59)" onmouseover="showTip(event, 'fs17', 59)" class="id">ImageId</span> <span class="s">&quot;blast&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 56)" onmouseover="showTip(event, 'fs31', 56)" class="id">ImageBlast</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 58)" onmouseover="showTip(event, 'fs19', 58)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="id">ImageId</span> <span class="s">&quot;blast&quot;</span>
 
 <span class="c">///this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 60)" onmouseover="showTip(event, 'fs29', 60)" class="id">blastContext</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs19', 61)" onmouseover="showTip(event, 'fs19', 61)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 62)" onmouseover="showTip(event, 'fs30', 62)" class="id">initBcContextWithMountAsync</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 60)" onmouseover="showTip(event, 'fs32', 60)" class="id">blastContext</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs22', 61)" onmouseover="showTip(event, 'fs22', 61)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 62)" onmouseover="showTip(event, 'fs33', 62)" class="id">initBcContextWithMountAsync</span> 
         <span onmouseout="hideTip(event, 'fs3', 63)" onmouseover="showTip(event, 'fs3', 63)" class="id">client</span> 
-        <span onmouseout="hideTip(event, 'fs28', 64)" onmouseover="showTip(event, 'fs28', 64)" class="id">ImageBlast</span> 
+        <span onmouseout="hideTip(event, 'fs31', 64)" onmouseover="showTip(event, 'fs31', 64)" class="id">ImageBlast</span> 
         <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data&quot;</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 65)" onmouseover="showTip(event, 'fs21', 65)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 66)" onmouseover="showTip(event, 'fs22', 66)" class="id">RunSynchronously</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 65)" onmouseover="showTip(event, 'fs24', 65)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 66)" onmouseover="showTip(event, 'fs25', 66)" class="id">RunSynchronously</span>
 
 <span class="c">///parameters for search DB creation</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 67)" onmouseover="showTip(event, 'fs31', 67)" class="id">makeDBParams</span> <span class="o">=</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 67)" onmouseover="showTip(event, 'fs34', 67)" class="id">makeDBParams</span> <span class="o">=</span>
     <span class="pn">[</span>
-        <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">DbType</span> <span onmouseout="hideTip(event, 'fs32', 68)" onmouseover="showTip(event, 'fs32', 68)" class="id">Protein</span>
+        <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">DbType</span> <span onmouseout="hideTip(event, 'fs35', 68)" onmouseover="showTip(event, 'fs35', 68)" class="id">Protein</span>
         <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">Input</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
         <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">Output</span><span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
     <span class="pn">]</span>
 
 <span class="c">///parameters for blastP</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 69)" onmouseover="showTip(event, 'fs33', 69)" class="id">blastPParams</span> <span class="o">=</span> <span class="pn">[</span>
-    <span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 71)" onmouseover="showTip(event, 'fs35', 71)" class="id">SearchDB</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
-    <span onmouseout="hideTip(event, 'fs34', 72)" onmouseover="showTip(event, 'fs34', 72)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 73)" onmouseover="showTip(event, 'fs36', 73)" class="id">Query</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA&quot;</span>
-    <span onmouseout="hideTip(event, 'fs34', 74)" onmouseover="showTip(event, 'fs34', 74)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 75)" onmouseover="showTip(event, 'fs37', 75)" class="id">Output</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt&quot;</span>
-    <span onmouseout="hideTip(event, 'fs34', 76)" onmouseover="showTip(event, 'fs34', 76)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 77)" onmouseover="showTip(event, 'fs38', 77)" class="id">OutputType</span> <span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="rt">OutputType</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 79)" onmouseover="showTip(event, 'fs40', 79)" class="id">TabularWithComments</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="id">blastPParams</span> <span class="o">=</span> <span class="pn">[</span>
+    <span onmouseout="hideTip(event, 'fs37', 70)" onmouseover="showTip(event, 'fs37', 70)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 71)" onmouseover="showTip(event, 'fs38', 71)" class="id">SearchDB</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
+    <span onmouseout="hideTip(event, 'fs37', 72)" onmouseover="showTip(event, 'fs37', 72)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 73)" onmouseover="showTip(event, 'fs39', 73)" class="id">Query</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA&quot;</span>
+    <span onmouseout="hideTip(event, 'fs37', 74)" onmouseover="showTip(event, 'fs37', 74)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="id">Output</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt&quot;</span>
+    <span onmouseout="hideTip(event, 'fs37', 76)" onmouseover="showTip(event, 'fs37', 76)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 77)" onmouseover="showTip(event, 'fs41', 77)" class="id">OutputType</span> <span onmouseout="hideTip(event, 'fs42', 78)" onmouseover="showTip(event, 'fs42', 78)" class="rt">OutputType</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 79)" onmouseover="showTip(event, 'fs43', 79)" class="id">TabularWithComments</span>
 <span class="pn">]</span>
 </code></pre></td>
 </tr>
@@ -238,101 +237,102 @@ A way to do this from F# is in the making.</p>
 <div class="tip" id="fs10">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
 <div class="tip" id="fs11">val iter : action:(&#39;T -&gt; unit) -&gt; source:seq&lt;&#39;T&gt; -&gt; unit</div>
 <div class="tip" id="fs12">val img : Docker.DotNet.Models.ImagesListResponse</div>
-<div class="tip" id="fs13"></div>
-<div class="tip" id="fs14">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;</div>
-<div class="tip" id="fs15">val ubuntuImage : Docker.DockerId<br /><em><br /><br />Create a representation of your image on the F# side</em></div>
-<div class="tip" id="fs16">type DockerId =<br />&#160;&#160;| ImageId of string<br />&#160;&#160;| ImageName of string<br />&#160;&#160;| ContainerId of string<br />&#160;&#160;| ContainerName of string<br />&#160;&#160;| Tag of string * string<br />&#160;&#160;&#160;&#160;override ToString : unit -&gt; string</div>
-<div class="tip" id="fs17">union case Docker.DockerId.ImageId: string -&gt; Docker.DockerId</div>
-<div class="tip" id="fs18">val bcContext : BioContainer.BcContext<br /><em><br /><br />Create a container from the image and keep it running (the container context for all future commands)</em></div>
-<div class="tip" id="fs19">module BioContainer<br /><br />from BioFSharp.BioContainers</div>
-<div class="tip" id="fs20">val initBcContextAsync : connection:Docker.DotNet.DockerClient -&gt; image:Docker.DockerId -&gt; Async&lt;BioContainer.BcContext&gt;</div>
-<div class="tip" id="fs21">Multiple items<br />type Async =<br />&#160;&#160;static member AsBeginEnd : computation:(&#39;Arg -&gt; Async&lt;&#39;T&gt;) -&gt; (&#39;Arg * AsyncCallback * obj -&gt; IAsyncResult) * (IAsyncResult -&gt; &#39;T) * (IAsyncResult -&gt; unit)<br />&#160;&#160;static member AwaitEvent : event:IEvent&lt;&#39;Del,&#39;T&gt; * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt; (requires delegate and &#39;Del :&gt; Delegate)<br />&#160;&#160;static member AwaitIAsyncResult : iar:IAsyncResult * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />&#160;&#160;static member AwaitTask : task:Task -&gt; Async&lt;unit&gt;<br />&#160;&#160;static member AwaitTask : task:Task&lt;&#39;T&gt; -&gt; Async&lt;&#39;T&gt;<br />&#160;&#160;static member AwaitWaitHandle : waitHandle:WaitHandle * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />&#160;&#160;static member CancelDefaultToken : unit -&gt; unit<br />&#160;&#160;static member Catch : computation:Async&lt;&#39;T&gt; -&gt; Async&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />&#160;&#160;static member Choice : computations:seq&lt;Async&lt;&#39;T option&gt;&gt; -&gt; Async&lt;&#39;T option&gt;<br />&#160;&#160;static member FromBeginEnd : beginAction:(AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />--------------------<br />type Async&lt;&#39;T&gt; =</div>
-<div class="tip" id="fs22">static member Async.RunSynchronously : computation:Async&lt;&#39;T&gt; * ?timeout:int * ?cancellationToken:System.Threading.CancellationToken -&gt; &#39;T</div>
-<div class="tip" id="fs23">val execAsync : bc:BioContainer.BcContext -&gt; cmd:seq&lt;string&gt; -&gt; Async&lt;unit&gt;</div>
-<div class="tip" id="fs24">val returnValue : string<br /><em><br /><br />bind the results of the command to a value</em></div>
-<div class="tip" id="fs25">val execReturnAsync : bc:BioContainer.BcContext -&gt; cmd:seq&lt;string&gt; -&gt; Async&lt;string&gt;</div>
-<div class="tip" id="fs26">val disposeAsync : bc:BioContainer.BcContext -&gt; Async&lt;unit&gt;</div>
-<div class="tip" id="fs27">module Blast<br /><br />from BioFSharp.BioContainers</div>
-<div class="tip" id="fs28">val ImageBlast : Docker.DockerId</div>
-<div class="tip" id="fs29">val blastContext : BioContainer.BcContext<br /><em><br /><br />this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</em></div>
-<div class="tip" id="fs30">val initBcContextWithMountAsync : connection:Docker.DotNet.DockerClient -&gt; image:Docker.DockerId -&gt; hostdirectory:string -&gt; Async&lt;BioContainer.BcContext&gt;</div>
-<div class="tip" id="fs31">val makeDBParams : obj list<br /><em><br /><br />parameters for search DB creation</em></div>
-<div class="tip" id="fs32">union case DbType.Protein: DbType</div>
-<div class="tip" id="fs33">val blastPParams : BlastParams list<br /><em><br /><br />parameters for blastP</em></div>
-<div class="tip" id="fs34">type BlastParams =<br />&#160;&#160;| SearchDB of string<br />&#160;&#160;| Query of string<br />&#160;&#160;| Output of string<br />&#160;&#160;| OutputType of OutputType<br />&#160;&#160;| OutputTypeCustom of OutputType * seq&lt;OutputCustom&gt;<br />&#160;&#160;| Num_threads of int<br />&#160;&#160;| Max_Hits of int<br />&#160;&#160;&#160;&#160;static member makeCmd : (BlastParams -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (BlastParams -&gt; string list)</div>
-<div class="tip" id="fs35">union case BlastParams.SearchDB: string -&gt; BlastParams</div>
-<div class="tip" id="fs36">union case BlastParams.Query: string -&gt; BlastParams</div>
-<div class="tip" id="fs37">union case BlastParams.Output: string -&gt; BlastParams</div>
-<div class="tip" id="fs38">union case BlastParams.OutputType: OutputType -&gt; BlastParams</div>
-<div class="tip" id="fs39">Multiple items<br />union case BlastParams.OutputType: OutputType -&gt; BlastParams<br /><br />--------------------<br />type OutputType =<br />&#160;&#160;| Pairwise<br />&#160;&#160;| Query_anchored<br />&#160;&#160;| Query_anchored_NoIdentities<br />&#160;&#160;| Query_anchored_Flat<br />&#160;&#160;| Query_anchored_Flat_NoIdentities<br />&#160;&#160;| XML<br />&#160;&#160;| Tabular<br />&#160;&#160;| TabularWithComments<br />&#160;&#160;| TextASN1<br />&#160;&#160;| BinaryASN1<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member make : (OutputType -&gt; int)</div>
-<div class="tip" id="fs40">union case OutputType.TabularWithComments: OutputType</div>
+<div class="tip" id="fs13">property Docker.DotNet.Models.ImagesListResponse.RepoTags: System.Collections.Generic.IList&lt;string&gt; with get, set</div>
+<div class="tip" id="fs14">property Docker.DotNet.Models.ImagesListResponse.ID: string with get, set</div>
+<div class="tip" id="fs15">property Docker.DotNet.Models.ImagesListResponse.Created: System.DateTime with get, set</div>
+<div class="tip" id="fs16">property Docker.DotNet.Models.ImagesListResponse.Size: int64 with get, set</div>
+<div class="tip" id="fs17">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;</div>
+<div class="tip" id="fs18">val ubuntuImage : Docker.DockerId<br /><em><br /><br />Create a representation of your image on the F# side</em></div>
+<div class="tip" id="fs19">type DockerId =<br />&#160;&#160;| ImageId of string<br />&#160;&#160;| ImageName of string<br />&#160;&#160;| ContainerId of string<br />&#160;&#160;| ContainerName of string<br />&#160;&#160;| Tag of string * string<br />&#160;&#160;&#160;&#160;override ToString : unit -&gt; string</div>
+<div class="tip" id="fs20">union case Docker.DockerId.ImageId: string -&gt; Docker.DockerId</div>
+<div class="tip" id="fs21">val bcContext : BioContainer.BcContext<br /><em><br /><br />Create a container from the image and keep it running (the container context for all future commands)</em></div>
+<div class="tip" id="fs22">module BioContainer<br /><br />from BioFSharp.BioContainers</div>
+<div class="tip" id="fs23">val initBcContextAsync : connection:Docker.DotNet.DockerClient -&gt; image:Docker.DockerId -&gt; Async&lt;BioContainer.BcContext&gt;</div>
+<div class="tip" id="fs24">Multiple items<br />type Async =<br />&#160;&#160;static member AsBeginEnd : computation:(&#39;Arg -&gt; Async&lt;&#39;T&gt;) -&gt; (&#39;Arg * AsyncCallback * obj -&gt; IAsyncResult) * (IAsyncResult -&gt; &#39;T) * (IAsyncResult -&gt; unit)<br />&#160;&#160;static member AwaitEvent : event:IEvent&lt;&#39;Del,&#39;T&gt; * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt; (requires delegate and &#39;Del :&gt; Delegate)<br />&#160;&#160;static member AwaitIAsyncResult : iar:IAsyncResult * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />&#160;&#160;static member AwaitTask : task:Task -&gt; Async&lt;unit&gt;<br />&#160;&#160;static member AwaitTask : task:Task&lt;&#39;T&gt; -&gt; Async&lt;&#39;T&gt;<br />&#160;&#160;static member AwaitWaitHandle : waitHandle:WaitHandle * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />&#160;&#160;static member CancelDefaultToken : unit -&gt; unit<br />&#160;&#160;static member Catch : computation:Async&lt;&#39;T&gt; -&gt; Async&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />&#160;&#160;static member Choice : computations:seq&lt;Async&lt;&#39;T option&gt;&gt; -&gt; Async&lt;&#39;T option&gt;<br />&#160;&#160;static member FromBeginEnd : beginAction:(AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />&#160;&#160;...<br /><br />--------------------<br />type Async&lt;&#39;T&gt; =</div>
+<div class="tip" id="fs25">static member Async.RunSynchronously : computation:Async&lt;&#39;T&gt; * ?timeout:int * ?cancellationToken:System.Threading.CancellationToken -&gt; &#39;T</div>
+<div class="tip" id="fs26">val execAsync : bc:BioContainer.BcContext -&gt; cmd:seq&lt;string&gt; -&gt; Async&lt;unit&gt;</div>
+<div class="tip" id="fs27">val returnValue : string<br /><em><br /><br />bind the results of the command to a value</em></div>
+<div class="tip" id="fs28">val execReturnAsync : bc:BioContainer.BcContext -&gt; cmd:seq&lt;string&gt; -&gt; Async&lt;string&gt;</div>
+<div class="tip" id="fs29">val disposeAsync : bc:BioContainer.BcContext -&gt; Async&lt;unit&gt;</div>
+<div class="tip" id="fs30">module Blast<br /><br />from BioFSharp.BioContainers</div>
+<div class="tip" id="fs31">val ImageBlast : Docker.DockerId</div>
+<div class="tip" id="fs32">val blastContext : BioContainer.BcContext<br /><em><br /><br />this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</em></div>
+<div class="tip" id="fs33">val initBcContextWithMountAsync : connection:Docker.DotNet.DockerClient -&gt; image:Docker.DockerId -&gt; hostdirectory:string -&gt; Async&lt;BioContainer.BcContext&gt;</div>
+<div class="tip" id="fs34">val makeDBParams : obj list<br /><em><br /><br />parameters for search DB creation</em></div>
+<div class="tip" id="fs35">union case DbType.Protein: DbType</div>
+<div class="tip" id="fs36">val blastPParams : BlastParams list<br /><em><br /><br />parameters for blastP</em></div>
+<div class="tip" id="fs37">type BlastParams =<br />&#160;&#160;| SearchDB of string<br />&#160;&#160;| Query of string<br />&#160;&#160;| Output of string<br />&#160;&#160;| OutputType of OutputType<br />&#160;&#160;| OutputTypeCustom of OutputType * seq&lt;OutputCustom&gt;<br />&#160;&#160;| Num_threads of int<br />&#160;&#160;| Max_Hits of int<br />&#160;&#160;&#160;&#160;static member makeCmd : (BlastParams -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (BlastParams -&gt; string list)</div>
+<div class="tip" id="fs38">union case BlastParams.SearchDB: string -&gt; BlastParams</div>
+<div class="tip" id="fs39">union case BlastParams.Query: string -&gt; BlastParams</div>
+<div class="tip" id="fs40">union case BlastParams.Output: string -&gt; BlastParams</div>
+<div class="tip" id="fs41">union case BlastParams.OutputType: OutputType -&gt; BlastParams</div>
+<div class="tip" id="fs42">Multiple items<br />union case BlastParams.OutputType: OutputType -&gt; BlastParams<br /><br />--------------------<br />type OutputType =<br />&#160;&#160;| Pairwise<br />&#160;&#160;| Query_anchored<br />&#160;&#160;| Query_anchored_NoIdentities<br />&#160;&#160;| Query_anchored_Flat<br />&#160;&#160;| Query_anchored_Flat_NoIdentities<br />&#160;&#160;| XML<br />&#160;&#160;| Tabular<br />&#160;&#160;| TabularWithComments<br />&#160;&#160;| TextASN1<br />&#160;&#160;| BinaryASN1<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member make : (OutputType -&gt; int)</div>
+<div class="tip" id="fs43">union case OutputType.TabularWithComments: OutputType</div>
 
 			</div>
 			<div class="span3" >
-			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
               <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                   <li class="nav-header">BioFSharp</li>
-                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
                   <li class="divider"></li>
-                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
 
-                  
                   <li class="nav-header">BioFSharp core</li>
-                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
                   <li>
-                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
                   </li>
-                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
                   <li class="nav-header">BioContainers</li>
-                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
-                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
                   <li class="nav-header">Algorithm</li>
-                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
                   <li>
-                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
                   </li>
                   <li class="nav-header">File I/O</li>
                   <li>
-                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
                   </li>
-                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
                   <li>
-                      <a href="/BioFSharp/FastA.html">FastA</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
                   </li>
-                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
                   <li>
-                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
                   </li>
-                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
                   <li>
-                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
                   </li>
                   <li>
-                      <a href="/BioFSharp/Newick.html">Newick</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
                   </li>
-                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
                   <li>
-                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
                   </li>
                   <li class="nav-header">Web I/O</li>
-                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
                   <li class="nav-header">Biostatistics</li>
-                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
                   <li class="nav-header">Biovisualization</li>
-                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
                   <li class="nav-header">GPU Computing</li>
-                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
                   <li class="nav-header">Documentation</li>
-                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
 
 
-                  
               </ul>
 			</div>
 		  </div>

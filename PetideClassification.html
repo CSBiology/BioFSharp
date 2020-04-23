@@ -5,7 +5,7 @@
     <title>PetideClassification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
-    <meta name="author" content="Timo Mühlhaus"/>
+    <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
@@ -13,9 +13,9 @@
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <meta http-equiv="X-UA-Compatible" content="IE=11" >
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/content/style.css" /> <!--/BioFSharp-->
-    <link type="text/css" rel="stylesheet" href="/BioFSharp/style/CSBstyle.css" /> <!--/BioFSharp-->
-    <script type="text/javascript" src="/BioFSharp/content/tips.js"></script> <!--/BioFSharp-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//content/style.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <link type="text/css" rel="stylesheet" href="https://CSBiology.github.io/BioFSharp//style/CSBstyle.css" /> <!--https://CSBiology.github.io/BioFSharp/-->
+    <script type="text/javascript" src="https://CSBiology.github.io/BioFSharp//content/tips.js"></script> <!--https://CSBiology.github.io/BioFSharp/-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -28,13 +28,12 @@
 			  <li><a href="http://fsharp.org">fsharp.org</a></li>
 			  <li><a href="https://github.com/CSBiology/BioFSharp">github page</a></li>
 			</ul>
-			<h3 class="muted"><a href="/BioFSharp/index.html">BioFSharp</a></h3>
+			<h3 class="muted"><a href="https://CSBiology.github.io/BioFSharp//index.html">BioFSharp</a></h3>
 		  </div>
 		  <hr />
 		  <div class="row">
 			<div class="span9" id="main">
-			  
-<table class="HeadAPI">
+			  <table class="HeadAPI">
 <td class="Head"><h1>FastA format</h1></td>
 <td class="API">
     <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-fasta.html" >&#128194;View module documentation</a>
@@ -198,13 +197,13 @@ For further information about the format please visit [NCBI - FASTA](https://bla
 <div class="tip" id="fs12">namespace System.Text.RegularExpressions</div>
 <div class="tip" id="fs13">Multiple items<br />type Regex =<br />&#160;&#160;new : pattern:string -&gt; Regex + 2 overloads<br />&#160;&#160;member GetGroupNames : unit -&gt; string[]<br />&#160;&#160;member GetGroupNumbers : unit -&gt; int[]<br />&#160;&#160;member GroupNameFromNumber : i:int -&gt; string<br />&#160;&#160;member GroupNumberFromName : name:string -&gt; int<br />&#160;&#160;member IsMatch : input:string -&gt; bool + 1 overload<br />&#160;&#160;member Match : input:string -&gt; Match + 2 overloads<br />&#160;&#160;member MatchTimeout : TimeSpan<br />&#160;&#160;member Matches : input:string -&gt; MatchCollection + 1 overload<br />&#160;&#160;member Options : RegexOptions<br />&#160;&#160;...<br /><br />--------------------<br />System.Text.RegularExpressions.Regex(pattern: string) : System.Text.RegularExpressions.Regex<br />System.Text.RegularExpressions.Regex(pattern: string, options: System.Text.RegularExpressions.RegexOptions) : System.Text.RegularExpressions.Regex<br />System.Text.RegularExpressions.Regex(pattern: string, options: System.Text.RegularExpressions.RegexOptions, matchTimeout: System.TimeSpan) : System.Text.RegularExpressions.Regex</div>
 <div class="tip" id="fs14">System.Text.RegularExpressions.Regex.Match(input: string, pattern: string) : System.Text.RegularExpressions.Match<br />System.Text.RegularExpressions.Regex.Match(input: string, pattern: string, options: System.Text.RegularExpressions.RegexOptions) : System.Text.RegularExpressions.Match<br />System.Text.RegularExpressions.Regex.Match(input: string, pattern: string, options: System.Text.RegularExpressions.RegexOptions, matchTimeout: System.TimeSpan) : System.Text.RegularExpressions.Match</div>
-<div class="tip" id="fs15">property System.Text.RegularExpressions.Group.Success: bool</div>
+<div class="tip" id="fs15">property System.Text.RegularExpressions.Group.Success: bool with get</div>
 <div class="tip" id="fs16">val tmp : string []</div>
 <div class="tip" id="fs17">val g : System.Text.RegularExpressions.Group</div>
-<div class="tip" id="fs18">property System.Text.RegularExpressions.Match.Groups: System.Text.RegularExpressions.GroupCollection</div>
-<div class="tip" id="fs19">property System.Text.RegularExpressions.Capture.Value: string</div>
-<div class="tip" id="fs20">System.String.Trim() : string<br />System.String.Trim([&lt;System.ParamArray&gt;] trimChars: char []) : string</div>
-<div class="tip" id="fs21">Multiple items<br />module List<br /><br />from FSharpAux<br /><br />--------------------<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;&#160;&#160;...</div>
+<div class="tip" id="fs18">property System.Text.RegularExpressions.Match.Groups: System.Text.RegularExpressions.GroupCollection with get</div>
+<div class="tip" id="fs19">property System.Text.RegularExpressions.Capture.Value: string with get</div>
+<div class="tip" id="fs20">System.String.Trim() : string<br />System.String.Trim([&lt;System.ParamArray&gt;] trimChars: char []) : string<br />System.String.Trim(trimChar: char) : string</div>
+<div class="tip" id="fs21">Multiple items<br />module List<br /><br />from FSharpAux<br /><br />--------------------<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetReverseIndex : rank:int * offset:int -&gt; int<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;...</div>
 <div class="tip" id="fs22">val toArray : list:&#39;T list -&gt; &#39;T []</div>
 <div class="tip" id="fs23">module PeptideClassification<br /><br />from BioFSharp</div>
 <div class="tip" id="fs24">val createProteinModelInfo : id:&#39;a -&gt; chromosomeId:&#39;b -&gt; strand:PeptideClassification.StrandDirection -&gt; geneLocus:&#39;c -&gt; spliceVariantId:int -&gt; seqEquivalents:seq&lt;PeptideClassification.ProteinModelInfo&lt;&#39;a,&#39;b,&#39;c&gt;&gt; -&gt; orthologs:seq&lt;PeptideClassification.ProteinModelInfo&lt;&#39;a,&#39;b,&#39;c&gt;&gt; -&gt; PeptideClassification.ProteinModelInfo&lt;&#39;a,&#39;b,&#39;c&gt; (requires comparison and comparison and comparison)</div>
@@ -242,7 +241,7 @@ For further information about the format please visit [NCBI - FASTA](https://bla
 <div class="tip" id="fs56">val spliceVariantCount : System.Collections.Generic.Dictionary&lt;int,int&gt;</div>
 <div class="tip" id="fs57">val createLocusSpliceVariantCount : ppRelation:BidirectionalDictionary&lt;&#39;sequence,PeptideClassification.ProteinModelInfo&lt;&#39;id,&#39;chromosomeId,&#39;geneLocus&gt;&gt; -&gt; System.Collections.Generic.Dictionary&lt;&#39;geneLocus,int&gt; (requires equality and comparison and comparison and comparison)</div>
 <div class="tip" id="fs58">val classified : (PeptideClassification.PeptideEvidenceClass * AminoAcids.AminoAcid []) []</div>
-<div class="tip" id="fs59">property BidirectionalDictionary.GetArrayOfKeys: AminoAcids.AminoAcid [] []</div>
+<div class="tip" id="fs59">property BidirectionalDictionary.GetArrayOfKeys: AminoAcids.AminoAcid [] [] with get</div>
 <div class="tip" id="fs60">Multiple items<br />module Array<br /><br />from FSharpAux<br /><br />--------------------<br />module Array<br /><br />from Microsoft.FSharp.Collections</div>
 <div class="tip" id="fs61">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
 <div class="tip" id="fs62">val peptide : AminoAcids.AminoAcid []</div>
@@ -252,70 +251,68 @@ For further information about the format please visit [NCBI - FASTA](https://bla
 
 			</div>
 			<div class="span3" >
-			  <img src="/BioFSharp/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+			  <img src="https://CSBiology.github.io/BioFSharp//img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
               <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                   <li class="nav-header">BioFSharp</li>
-                  <li><a href="/BioFSharp/index.html">Home page</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//index.html">Home page</a></li>
                   <li class="divider"></li>
-                  <li><a href="/BioFSharp/release-notes.html">Release Notes</a></li>
-                  <li><a href="/BioFSharp/Introduction.html">Getting started</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//release-notes.html">Release Notes</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Introduction.html">Getting started</a></li>
 
-                  
                   <li class="nav-header">BioFSharp core</li>
-                  <li><a href="/BioFSharp/Formula.html">Formula</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Formula.html">Formula</a></li>
                   <li>
-                      <a href="/BioFSharp/BioItem.html">BioItems</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//BioItem.html">BioItems</a>
                   </li>
-                  <li><a href="/BioFSharp/BioCollections.html">BioCollections</a></li>
-                  <li><a href="/BioFSharp/AminoProperties.html">Peptide Properties</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioCollections.html">BioCollections</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//AminoProperties.html">Peptide Properties</a></li>
                   <li class="nav-header">BioContainers</li>
-                  <li><a href="/BioFSharp/BioContainers.html">Introduction</a></li>
-                  <li><a href="/BioFSharp/BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
                   <li class="nav-header">Algorithm</li>
-                  <li><a href="/BioFSharp/Alignment.html">Alignment</a></li>
-                  <li><a href="/BioFSharp/ClustalOWrapper.html">Clustal Omega</a></li>
-                  <li><a href="/BioFSharp/MotiveSearch.html">Motive search</a></li>
-                  <li><a href="/BioFSharp/BlastWrapper.html">NCBI-Blast</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//MotiveSearch.html">Motive search</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BlastWrapper.html">NCBI-Blast</a></li>
                   <li>
-                      <a href="/BioFSharp/StringMatching.html">Pattern Queries</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//StringMatching.html">Pattern Queries</a>
                   </li>
                   <li class="nav-header">File I/O</li>
                   <li>
-                      <a href="/BioFSharp/Clustal.html">Clustal</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Clustal.html">Clustal</a>
                   </li>
-                  <li><a href="/BioFSharp/CSV.html">CSV / Tabular</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//CSV.html">CSV / Tabular</a></li>
                   <li>
-                      <a href="/BioFSharp/FastA.html">FastA</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FastA.html">FastA</a>
                   </li>
-                  <li><a href="/BioFSharp/FastQ.html">FastQ</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//FastQ.html">FastQ</a></li>
                   <li>
-                      <a href="/BioFSharp/GenBank.html">GenBank</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GenBank.html">GenBank</a>
                   </li>
-                  <li><a href="/BioFSharp/SOFT.html">GEO Metadata (SOFT)</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//SOFT.html">GEO Metadata (SOFT)</a></li>
                   <li>
-                      <a href="/BioFSharp/GFF3.html">GFF3</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//GFF3.html">GFF3</a>
                   </li>
                   <li>
-                      <a href="/BioFSharp/Newick.html">Newick</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//Newick.html">Newick</a>
                   </li>
-                  <li><a href="/BioFSharp/Obo.html">Obo ontology format</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//Obo.html">Obo ontology format</a></li>
                   <li>
-                      <a href="/BioFSharp/FSIPrinters.html">FSIPrinters</a>
+                      <a href="https://CSBiology.github.io/BioFSharp//FSIPrinters.html">FSIPrinters</a>
                   </li>
                   <li class="nav-header">Web I/O</li>
-                  <li><a href="/BioFSharp/UniProt.html">UniProt</a></li>
-                  <li><a href="/BioFSharp/BioDB.html">BioDB</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//UniProt.html">UniProt</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioDB.html">BioDB</a></li>
                   <li class="nav-header">Biostatistics</li>
-                  <li><a href="/BioFSharp/GSEA.html">Ontology enrichment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//GSEA.html">Ontology enrichment</a></li>
                   <li class="nav-header">Biovisualization</li>
-                  <li><a href="/BioFSharp/WebLogo.html">Web logo</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//WebLogo.html">Web logo</a></li>
                   <li class="nav-header">GPU Computing</li>
-                  <li><a href="/BioFSharp/ParallelAlignment.html">Sequence Alignment</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//ParallelAlignment.html">Sequence Alignment</a></li>
                   <li class="nav-header">Documentation</li>
-                  <li><a href="/BioFSharp/reference/index.html">API Reference</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//reference/index.html">API Reference</a></li>
 
 
-                  
               </ul>
 			</div>
 		  </div>
