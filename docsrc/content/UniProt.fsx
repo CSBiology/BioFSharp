@@ -8,12 +8,14 @@
 #I @"../../bin/BioFSharp.Parallel/net47/"
 #I @"../../bin/BioFSharp.Stats/net47/"
 #I @"../../bin/BioFSharp.Vis/net47/"
-#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
+#I @"../../packages/formatting/"
+#r @"FSharp.Plotly/lib/net47/FSharp.Plotly.dll"
+#r @"Newtonsoft.JSON/lib/netstandard2.0/Newtonsoft.JSON.dll"
 #r "BioFSharp.dll"
 #r "FSharpAux.dll"
 #r "BioFSharp.IO.dll"
 #r "BioFSharp.BioDB.dll"
-#r "SwaggerProvider.Runtime.dll"
+//#r "SwaggerProvider.Runtime.dll"
 
 open BioFSharp.BioDB
 open FSharp.Plotly
@@ -44,10 +46,12 @@ In this tutorial I want to show you how to access data from UniProt and give exa
 
 *)
 
-let mouse = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64446"
-let rat = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64535"
-let human = EbiAPI.UniProteinDB.getProteinSeqFeature "P35670"
-let sheep = EbiAPI.UniProteinDB.getProteinSeqFeature "Q9XT50"
+let mouse = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64446" |> Async.RunSynchronously
+let rat = EbiAPI.UniProteinDB.getProteinSeqFeature "Q64535"   |> Async.RunSynchronously
+let human = EbiAPI.UniProteinDB.getProteinSeqFeature "P35670" |> Async.RunSynchronously
+let sheep = EbiAPI.UniProteinDB.getProteinSeqFeature "Q9XT50" |> Async.RunSynchronously
+
+(***include-value:mouse***)
 
 (**
 What we want to do now is getting an measure of phylogenetic relationship. We will do this by aligning the peptide-sequences with each other. For this we prepare the data and the alignment function.
@@ -91,11 +95,12 @@ let createAlignmentMatrix (sequences : BioArray.BioArray<AminoAcidSymbols.AminoA
 Let's see what we get..
 *)
 
-(*** define-output:heatmap ***)
-createAlignmentMatrix sequences
-|> Array2D.toJaggedArray
-|> fun x -> Chart.Heatmap(data = x,RowNames = names, ColNames = names,Colorscale = StyleParam.Colorscale.Custom([0.,"#ffffff";1.,"#44546A"]),Name = "Relative pairwise alignment score")
-(*** include-it:heatmap ***)
+let heatMap =
+    createAlignmentMatrix sequences
+    |> Array2D.toJaggedArray
+    |> fun x -> Chart.Heatmap(data = x,RowNames = names, ColNames = names,Colorscale = StyleParam.Colorscale.Custom([0.,"#ffffff";1.,"#44546A"]),Name = "Relative pairwise alignment score")
+
+(*** include-value:heatMap ***)
 
 (**
 We can see that the Copper-transporting ATPase 2 of mouse and rat are the most similar to each other, while the one of the sheep is relatively different.  
@@ -156,12 +161,13 @@ let mouseLocInfo = mouse |> getLocationInfo
 (**
 Now let's see what we get. The colored areas depict the cell membrane. The line graph represents the amino acids of the protein with their given hydrophobicity.
 *)
-(*** define-output:shapes ***)
-Chart.Line ((Array.indexed hydrophobicityArr),Color = Colors.toHex false Colors.Table.Office.blue)
-|> Chart.withShapes(mouseLocInfo |> Seq.indexed |> Seq.choose createBackgroundShape)
-|> Chart.withX_AxisStyle("Sequenceindex")
-|> Chart.withY_AxisStyle("Hydrophobicity")
-(*** include-it:shapes ***)
+let shapes = 
+    Chart.Line ((Array.indexed hydrophobicityArr),Color = Colors.toHex false Colors.Table.Office.blue)
+    |> Chart.withShapes(mouseLocInfo |> Seq.indexed |> Seq.choose createBackgroundShape)
+    |> Chart.withX_AxisStyle("Sequenceindex")
+    |> Chart.withY_AxisStyle("Hydrophobicity")
+
+(*** include-value:shapes ***)
 
 (**
 As you can see the hydrophobic areas overlap with the membrane areas.
