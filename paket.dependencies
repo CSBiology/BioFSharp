@@ -31,6 +31,8 @@ group Formatting
 
     source https://www.nuget.org/api/v2
     source https://ci.appveyor.com/nuget/fsharp-formatting
-    nuget FSharp.Plotly >= 1.2.2
+    nuget FSharp.Compiler.Service 34.1.1
     nuget FSharp.Formatting prerelease
     nuget FSharp.Formatting.CommandTool prerelease
+    nuget Newtonsoft.Json >= 12.0.3
+    nuget FSharp.Plotly >= 1.2.2
