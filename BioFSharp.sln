@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175
 	ProjectSection(SolutionItems) = preProject
 		docsrc\tools\formatters.fsx = docsrc\tools\formatters.fsx
 		docsrc\tools\generate.fsx = docsrc\tools\generate.fsx
+		docsrc\tools\generateSingle.fsx = docsrc\tools\generateSingle.fsx
 		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
 	EndProjectSection
 EndProject

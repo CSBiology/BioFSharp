@@ -354,28 +354,8 @@ let publishNugetPackages =
 // --------------------------------------------------------------------------------------
 // Generate the documentation
 
-// Paths with template/source/output locations
-let bin        = __SOURCE_DIRECTORY__ @@ "bin"
-let content    = __SOURCE_DIRECTORY__ @@ "docsrc/content"
-let output     = __SOURCE_DIRECTORY__ @@ "docs"
-let files      = __SOURCE_DIRECTORY__ @@ "docsrc/files"
-let templates  = __SOURCE_DIRECTORY__ @@ "docsrc/tools/templates"
-let formatting = __SOURCE_DIRECTORY__ @@ "packages/formatting/FSharp.Formatting"
-let docTemplate = "docpage.cshtml"
-
-let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
-let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
-
-// Specify more information about your project
-let info =
-  [ "project-name", "BioFSharp"
-    "project-author", "Timo Mühlhaus"
-    "project-summary", "An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"
-    "project-github", githubLink
-    "project-nuget", "http://nuget.org/packages/BioFSharp" ]
-
 let generateDocumentation = 
-    BuildTask.create "generateDocumentation" [cleanDocs; buildAll] {
+    BuildTask.create "generateDocumentation" [cleanDocs; buildAll.IfNeeded] {
         let result =
             DotNet.exec
                 (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
@@ -385,6 +365,22 @@ let generateDocumentation =
         if not result.OK then 
             failwith "error generating docs" 
     }
+
+let generateSingleDocumentation =
+
+    BuildTask.createFn "generateSingleDocumentation" [cleanDocs; buildAll.IfNeeded] ( fun p ->
+
+        let docsPage = __SOURCE_DIRECTORY__ @@ "docsrc/content/" @@ p.Context.Arguments.[0]
+
+        let result =
+            DotNet.exec
+                (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
+                "fsi"
+                (sprintf "--define:RELEASE --define:REFERENCE --define:HELP --exec --use:generateSingle.fsx %s" docsPage)
+
+        if not result.OK then 
+            failwith "error generating docs" 
+    )
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
@@ -405,20 +401,6 @@ let releaseDocsToGhPages =
         Git.Commit.exec tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
         Git.Branches.push tempDocsDir
     }
-
-let buildLocalDocs = 
-    BuildTask.create "buildLocalDocs" [generateDocumentation] {
-        let tempDocsDir = "temp/localDocs"
-        Shell.cleanDir tempDocsDir |> ignore
-        Shell.copyRecursive "docs" tempDocsDir true  |> printfn "%A"
-        Shell.replaceInFiles 
-            (seq {
-                yield "href=\"/" + project + "/","href=\""
-                yield "src=\"/" + project + "/","src=\""}) 
-            (Directory.EnumerateFiles tempDocsDir |> Seq.filter (fun x -> x.EndsWith(".html")))
-    }
-
-
 let askForReleaseConfirmation = 
     BuildTask.create "askForReleaseConfirmation" [] {
         match promptYesNo releaseMsg with | true -> () |_ -> failwith "Release canceled"
@@ -451,6 +433,46 @@ let releaseNugetPackageOnGithub =
         Git.Branches.push tempNugetDir
         Shell.copy tempNugetDir files
    }
+
+// --------------------------------------------------------------------------------------
+// Local Docs
+let buildLocalDocs = 
+    BuildTask.create "buildLocalDocs" [generateDocumentation] {
+        let tempDocsDir = "temp/localDocs"
+        Shell.cleanDir tempDocsDir |> ignore
+        Shell.copyRecursive "docs/output" tempDocsDir true  |> printfn "%A"
+        Shell.replaceInFiles 
+            (seq {
+                yield "href=\"/" + project + "/","href=\""
+                yield "src=\"/" + project + "/","src=\""}) 
+            (Directory.EnumerateFiles tempDocsDir |> Seq.filter (fun x -> x.EndsWith(".html")))
+    }
+
+let testSingleDocumentationPage =
+
+    BuildTask.createFn "testSingleDocumentationPage" [generateSingleDocumentation] ( fun p ->
+        let docsPage = 
+            p.Context.Arguments.[0]
+                .Replace(".fsx",".html")
+        let docsPageName = Path.GetFileName docsPage
+        let tempDocsDir = "temp/localDocs"
+        Shell.cleanDir tempDocsDir |> ignore
+        Shell.copyFile ("temp/localDocs" </> docsPageName) ("docs/output" </> docsPageName)  |> printfn "%A"
+        Shell.replaceInFiles 
+            (seq {
+                yield "href=\"/" + project + "/","href=\""
+                yield "src=\"/" + project + "/","src=\""}) 
+            (Directory.EnumerateFiles tempDocsDir |> Seq.filter (fun x -> x.EndsWith(".html")))
+        let psi = new System.Diagnostics.ProcessStartInfo(FileName = (__SOURCE_DIRECTORY__ </> "temp/localDocs" </> docsPageName), UseShellExecute = true)
+        System.Diagnostics.Process.Start(psi) |> ignore
+    )
+
+let inspectLocalDocs =
+    BuildTask.create "inspectLocalDocs" [buildLocalDocs] {
+        let psi = new System.Diagnostics.ProcessStartInfo(FileName = (__SOURCE_DIRECTORY__ </> "temp/localDocs/index.html"), UseShellExecute = true)
+        System.Diagnostics.Process.Start(psi) |> ignore
+    }
+
 
 //Buildchains
 
@@ -513,6 +535,17 @@ let dotnetBuildChainCI    =
         buildDotnet
         copyBinariesDotnet
         //(buildCIPackages "AppveyorDotnet" "DotnetCore" dotnetProjectPaths)
+    ]
+
+let buildDocsChain = 
+    BuildTask.createEmpty "buildDocsChain" [
+        clean
+        assemblyInfo
+        buildAll
+        copyBinaries
+        runTestsAll
+        cleanDocs
+        generateDocumentation
     ]
 
 Target.create "PrintGraph" (fun _ ->

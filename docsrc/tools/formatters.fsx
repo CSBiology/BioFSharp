@@ -22,6 +22,7 @@ let createFsiEvaluator root output =
     match value with 
     | :? GenericChart.GenericChart as ch ->
         // Just return the inline HTML for a Plotly chart        
+        printfn "Generating Chart"
         let html = GenericChart.toChartHtmlWithSize 700 500 ch
         Some [InlineBlock (html,None)]
 
