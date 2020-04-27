@@ -5,8 +5,8 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("BioFSharp.ImgP")>]
 [<assembly: AssemblyProductAttribute("BioFSharp")>]
 [<assembly: AssemblyDescriptionAttribute("An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>")>]
-[<assembly: AssemblyVersionAttribute("1.2.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.2.0")>]
+[<assembly: AssemblyVersionAttribute("1.2.1")>]
+[<assembly: AssemblyFileVersionAttribute("1.2.1")>]
 [<assembly: AssemblyConfigurationAttribute("Release")>]
 do ()
 
@@ -14,6 +14,6 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "BioFSharp.ImgP"
     let [<Literal>] AssemblyProduct = "BioFSharp"
     let [<Literal>] AssemblyDescription = "An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"
-    let [<Literal>] AssemblyVersion = "1.2.0"
-    let [<Literal>] AssemblyFileVersion = "1.2.0"
+    let [<Literal>] AssemblyVersion = "1.2.1"
+    let [<Literal>] AssemblyFileVersion = "1.2.1"
     let [<Literal>] AssemblyConfiguration = "Release"

@@ -1,3 +1,8 @@
+#### 1.2.1 - tbd
+**Additions:**
+ * **BioFSharp.BioContainers**
+   * BLAST biocontainer : implemented full blastn, blastn-short, megablast, and dc-megablast DSLs
+
 #### 1.2.0 - Monday, March 30
 
 **Additions:**

@@ -1,5 +1,9 @@
 ﻿namespace BioFSharp.BioContainers
 
+//TODO implement all commands from the manual
+
+
+///DSLs for executing commands in BLAST biocontainers
 module Blast =
 
     open FSharpAux
@@ -103,8 +107,26 @@ module Blast =
             | TaxId tid             -> ["-taxid"        ; sprintf "%i" tid]
             | TaxIdMapFile (path)   -> ["-taxid_map"    ; MountInfo.containerPathOf m path]
             | Logfile(path)         -> ["-logfile"      ; MountInfo.containerPathOf m path]
+    
+    let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) = 
+    
+        let cmds = (opt |> List.map (MakeBlastDbParams.makeCmdWith bcContext.Mount))
+        let tp = "makeblastdb"::(cmds |> List.concat)
+    
+        printfn "Starting process makeblastdb\r\nparameters:"
+        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+    
+        async {
+                let! res = BioContainer.execAsync bcContext tp           
+                return res
+        }
+    
+    let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) =
+    
+        runMakeBlastDBAsync bcContext opt
+        |> Async.RunSynchronously
 
-
+    ///alignment view options
     type OutputType = 
         | Pairwise                        
         | Query_anchored                  
@@ -139,9 +161,10 @@ module Blast =
                 | JSON_Blast                        -> 13
                 | XML2_Blast                        -> 14
 
-    //When not provided, the default value is:
-    //'qseqid sseqid pident length mismatch gapopen qstart qend sstart send
-    //evalue bitscore', which is equivalent to the keyword 'std'
+    ///OutputType options Tabular, TabularWithComments, and CSV can be additionally configured to produce a custom format specified by space delimited format specifiers.
+    ///When not provided, the default value is:
+    ///'qseqid sseqid pident length mismatch gapopen qstart qend sstart send
+    ///evalue bitscore', which is equivalent to the keyword 'std'
     type OutputCustom = 
         | Query_SeqId               
         | Query_GI                  
@@ -239,31 +262,103 @@ module Blast =
             | Query_CoveragePerHSP      -> "qcovhsp"
 
 
+    ///DSL for command line parameters that are common to all blast applications
     type BlastParams =
-        | SearchDB of string
-        | Query    of string
-        | Output   of string
-        | OutputType of OutputType
-        | OutputTypeCustom of OutputType * seq<OutputCustom>
-        | Num_threads of int
-        | Max_Hits of int
+        ///BLAST database name.
+        | SearchDB              of string
+        //Query file name.
+        | Query                 of string
+        //Output file name
+        | Output                of string
+        | OutputType            of OutputType
+        | OutputTypeCustom      of OutputType * seq<OutputCustom>
+        // Number of threads (CPUs) to use in blast search.
+        | NumThreads            of int
+        //Number of aligned sequences to keep. Use with report formats that do not have separate definition line and alignment sections such as tabular (all outfmt > 4). Not compatible with num_descriptions or num_alignments. Ties are broken by order of sequences in the database.
+        | MaxHits               of int
+        ///Location on the query sequence (Format: start-stop)
+        |QueryLocation          of (int*int)
+        ///Expect value (E) for saving hits
+        |EValue                 of float
+        ///File with subject sequence(s) to search.
+        |Subject                of string
+        ///Location on the subject sequence (Format: start-stop).
+        |SubjectLocation        of (int*int)
+        ///Show NCBI GIs in report.
+        |ShowGIs
+        ///Show one-line descriptions for this number of database sequences.
+        |Num_Descriptions       of int
+        ///Show alignments for this number of database sequences.
+        |NumAlignments          of int
+        ///Maximum number of HSPs (alignments) to keep for any single query-subject pair. The HSPs shown will be the best as judged by expect value. This number should be an int that is one or greater. If this option is not set, BLAST shows all HSPs meeting the expect value criteria. Setting it to one will show only the best HSP for every query-subject pair
+        |MaxHSPs                of int
+        ///Produce HTML output
+        |HTML 
+        ///Restrict search of database to GI’s listed in this file. Local searches only.
+        |GIList of string
+        ///Restrict search of database to everything except the GI’s listed in this file. Local searches only.
+        |NegativeGIList of string
+        ///Restrict search with the given Entrez query. Remote searches only.
+        |EntrezQuery of string
+        ///Delete a hit that is enveloped by at least this many higher-scoring hits.
+        |CullingLimit of int
+        ///Best Hit algorithm overhang value (recommended value: 0.1)
+        |BestHitOverhang of float
+        ///Best Hit algorithm score edge value (recommended value: 0.1)
+        |BestHitScoreEdge of float
+        ///Effective size of the database
+        |DBSize  of int
+        ///Effective length of the search space
+        |SearchSpaceLength of int
+        ///Search strategy file to read.
+        |ImportSearchStrategy    of string
+        ///Record search strategy to this file.
+        |ExportSearchStrategy of string
+        ///Parse query and subject bar delimited sequence identifiers (e.g., gi|129295).
+        |ParseDeflines            
+        ///Execute search on NCBI servers?
+        |Remote                    
 
         static member makeCmd  = function
-            | SearchDB  (path)      -> ["-db"    ; path]
-            | Query     (path)      -> ["-query" ; path]
-            | Output    (path)      -> ["-out"   ; path]
-            | OutputType(format)    -> ["-outfmt"; string (format |> OutputType.make)]
-            | OutputTypeCustom(t,p) ->  let tmp = 
-                                            p 
-                                            |> Seq.map OutputCustom.make 
-                                            |> String.concat " "
-                                        match t with
-                                        | OutputType.Tabular             -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
-                                        | OutputType.TabularWithComments -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
-                                        | OutputType.CSV                 -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
-                                        | _ -> failwithf "Output format %A does not support custom columns." t                                
-            | Num_threads(i)        -> ["-num_threads"; string i]
-            | Max_Hits (i)          -> ["-max_target_seqs"; string i]
+            | SearchDB          (path)      -> ["-db"    ; path]
+            | Query             (path)      -> ["-query" ; path]
+            | Output            (path)      -> ["-out"   ; path]
+            | OutputType        (format)    -> ["-outfmt"; string (format |> OutputType.make)]
+            | OutputTypeCustom  (t,p)       -> 
+                let tmp = 
+                    p 
+                    |> Seq.map OutputCustom.make 
+                    |> String.concat " "
+                match t with
+                | OutputType.Tabular             -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                | OutputType.TabularWithComments -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                | OutputType.CSV                 -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
+                | _ -> failwithf "Output format %A does not support custom columns." t                                
+
+            | NumThreads            i       -> ["-num_threads";             string i]
+            | MaxHits               i       -> ["-max_target_seqs";         string i]
+            | QueryLocation         (s,e)   -> ["-query_loc";               sprintf "%i-%i" s e]
+            | EValue                e       -> ["-evalue";                  string e]
+            | Subject               path    -> ["-subject";                 path]
+            | SubjectLocation       (s,e)   -> ["-subject_loc";             sprintf "%i-%i" s e]
+            | ShowGIs                       -> ["-show_gis"]
+            | Num_Descriptions      p       -> ["-num_descriptions";        string p]
+            | NumAlignments         p       -> ["-num_alignments";          string p]
+            | MaxHSPs               p       -> ["-max_hsps";                string p]
+            | HTML                          -> ["-html"]
+            | GIList                path    -> ["-gilist";                  path]
+            | NegativeGIList        path    -> ["-negative_gilist";         path]
+            | EntrezQuery           p       -> ["-entrez_query";            p]
+            | CullingLimit          p       -> ["-culling_limit";           string p]
+            | BestHitOverhang       p       -> ["-best_hit_overhang";       string p]
+            | BestHitScoreEdge      p       -> ["-best_hit_score_edge";     string p]
+            | DBSize                p       -> ["-dbsize";                  string p]
+            | SearchSpaceLength     p       -> ["-searchsp";                string p]
+            | ImportSearchStrategy  path    -> ["-import_search_strategy";  path]
+            | ExportSearchStrategy  path    -> ["-export_search_strategy";  path]
+            | ParseDeflines                 -> ["-parse_deflines"]
+            | Remote                        -> ["-remote"]
+
 
         static member makeCmdWith (m: MountInfo) = function
             | SearchDB  (path)      -> ["-db"    ; (MountInfo.containerPathOf m path)]
@@ -279,27 +374,584 @@ module Blast =
                                         | OutputType.TabularWithComments -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
                                         | OutputType.CSV                 -> ["-outfmt"; sprintf "%s %s" (string (t |> OutputType.make)) tmp]
                                         | _ -> failwithf "Output format %A does not support custom columns." t                                
-            | Num_threads(i)        -> ["-num_threads"; string i]
-            | Max_Hits (i)          -> ["-max_target_seqs"; string i]
+            | NumThreads            i       -> ["-num_threads";             string i]
+            | MaxHits               i       -> ["-max_target_seqs";         string i]
+            | QueryLocation         (s,e)   -> ["-query_loc";               sprintf "%i-%i" s e]
+            | EValue                e       -> ["-evalue";                  string e]
+            | Subject               path    -> ["-subject";                 (MountInfo.containerPathOf m path)]
+            | SubjectLocation       (s,e)   -> ["-subject_loc";             sprintf "%i-%i" s e]
+            | ShowGIs                       -> ["-show_gis"]
+            | Num_Descriptions      p       -> ["-num_descriptions";        string p]
+            | NumAlignments         p       -> ["-num_alignments";          string p]
+            | MaxHSPs               p       -> ["-max_hsps";                string p]
+            | HTML                          -> ["-html"]
+            | GIList                path    -> ["-gilist";                  (MountInfo.containerPathOf m path)]
+            | NegativeGIList        path    -> ["-negative_gilist";         (MountInfo.containerPathOf m path)]
+            | EntrezQuery           p       -> ["-entrez_query";            p]
+            | CullingLimit          p       -> ["-culling_limit";           string p]
+            | BestHitOverhang       p       -> ["-best_hit_overhang";       string p]
+            | BestHitScoreEdge      p       -> ["-best_hit_score_edge";     string p]
+            | DBSize                p       -> ["-dbsize";                  string p]
+            | SearchSpaceLength     p       -> ["-searchsp";                string p]
+            | ImportSearchStrategy  path    -> ["-import_search_strategy";  (MountInfo.containerPathOf m path)]
+            | ExportSearchStrategy  path    -> ["-export_search_strategy";  (MountInfo.containerPathOf m path)]
+            | ParseDeflines                 -> ["-parse_deflines"]
+            | Remote                        -> ["-remote"]
+    
+    ///DSL for blastn programs
+    ///The blastn application searches a nucleotide query against nucleotide subject sequences or a nucleotide database. 
+    ///Four different tasks are supported: 
+    ///
+    ///1.) “megablast”, for very similar sequences (e.g, sequencing errors), 
+    ///
+    ///2.) “dc-megablast”, typically used for inter-species comparisons, 
+    ///
+    ///3.) “blastn”, the traditional program used for inter-species comparisons, 
+    ///
+    ///4.) “blastn-short”, optimized for sequences less than 30 nucleotides.
+    [<RequireQualifiedAccess>]
+    module BlastN =
+        
+        ///DSL fo the blastn 'megablast' task command line options
+        ///megablast is usually used for very similar sequences (e.g, sequencing errors)
+        type MegablastParams = 
+            ///Length of initial exact match.
+            | WordSize                  of int
+            ///Cost to open a gap. See appendix “BLASTN reward/penalty values”.
+            | GapOpen                   of int
+            ///gapextend        
+            | GapExtend                 of int
+            ///Reward for a nucleotide match.
+            | Reward                    of int
+            ///Penalty for a nucleotide mismatch.
+            | Penalty                   of int
+            ///Use MegaBLAST database index. Indices may be created with the makembindex application.
+            | UseIndex                  of bool
+            ///MegaBLAST database index name.
+            | IndexName                 of string
+            ///Use non-greedy dynamic programming extension.
+            | NoGreedy                         
+            //TODO refactor into proper type
+            ///Query strand(s) to search against database/subject. Choice of both, minus, or plus.
+            | Strand                    of string 
+            ///Filter query sequence with dust.
+            | Dust                      of string 
+            ///Mask query using the sequences in this database.
+            | FilteringDB               of string 
+            ///Enable WindowMasker filtering using a Taxonomic ID.
+            | WindowMaskerTaxId         of int    
+            ///Enable WindowMasker filtering using this file.
+            | WindowMaskerDB            of string 
+            ///Apply filtering locations as soft masks (i.e., only for finding initial matches).
+            | SoftMasking               of bool   
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking                      
+            ///Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask                of int    
+            ///Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask                of int    
+            ///Percent identity cutoff.
+            | PercIdentity              of int    
+            ///Heuristic value (in bits) for ungapped extensions.
+            | XDropUngap                of float  
+            ///Heuristic value (in bits) for preliminary gapped extensions.
+            | XDropGap                  of float  
+            /// Heuristic value (in bits) for final gapped alignment.
+            | XDropGapFinal             of float  
+            ///Minimum raw gapped score to keep an alignment in the preliminary gapped and trace-back stages. Normally set based upon expect value.
+            | MinRawGappedScore         of int    
+            ///Perform ungapped alignment.
+            | Ungapped                           
+
+            static member makeCmd = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | UseIndex               p   -> ["-use_index"            ; string p]
+                | IndexName              path-> ["-index_name"           ; path]
+                | NoGreedy                   -> ["-no_greedy"] 
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; path]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; path]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+        
+            static member makeCmdWith (m:MountInfo) = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | UseIndex               p   -> ["-use_index"            ; string p]
+                | IndexName              path-> ["-index_name"           ; (MountInfo.containerPathOf m path)]
+                | NoGreedy                   -> ["-no_greedy"] 
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; (MountInfo.containerPathOf m path)]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; (MountInfo.containerPathOf m path)]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+
+        ///DSL fo the blastn 'dc-megablast' task command line options
+        ///dc-megablast is typically used for inter-species comparison
+        type DCMegablastParams = 
+            ///Number of matching nucleotides in initial match. dc-megablast allows non-consecutive letters to match.
+            | WordSize                  of int    
+            ///Discontiguous MegaBLAST template type. Allowed values are coding, optimal and coding_and_optimal.
+            //TODO implement proper type
+            | TemplateType              of string
+            ///Discontiguous MegaBLAST template length.
+            | TemplateLength            of int    
+            ///Multiple hits window size, use 0 to specify 1-hit algorithm
+            | WindowSize                of int
+            ///Cost to open a gap. See appendix “BLASTN reward/penalty values”.
+            | GapOpen                   of int    
+            ///Cost to extend a gap. See appendix “BLASTN reward/penalty values”.
+            | GapExtend                 of int   
+            ///Reward for a nucleotide match.
+            | Reward                    of int 
+            ///Penalty for a nucleotide mismatch.
+            | Penalty                   of int 
+            //TODO refactor into proper type
+            ///Query strand(s) to search against database/subject. Choice of both, minus, or plus.
+            | Strand                    of string 
+            ///Filter query sequence with dust.
+            | Dust                      of string 
+            ///Mask query using the sequences in this database.
+            | FilteringDB               of string 
+            ///Enable WindowMasker filtering using a Taxonomic ID.
+            | WindowMaskerTaxId         of int    
+            ///Enable WindowMasker filtering using this file.
+            | WindowMaskerDB            of string 
+            ///Apply filtering locations as soft masks (i.e., only for finding initial matches).
+            | SoftMasking               of bool   
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking                      
+            ///Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask                of int    
+            ///Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask                of int    
+            ///Percent identity cutoff.
+            | PercIdentity              of int    
+            ///Heuristic value (in bits) for ungapped extensions.
+            | XDropUngap                of float  
+            ///Heuristic value (in bits) for preliminary gapped extensions.
+            | XDropGap                  of float  
+            /// Heuristic value (in bits) for final gapped alignment.
+            | XDropGapFinal             of float  
+            ///Minimum raw gapped score to keep an alignment in the preliminary gapped and trace-back stages. Normally set based upon expect value.
+            | MinRawGappedScore         of int    
+            ///Perform ungapped alignment.
+            | Ungapped                           
+
+            static member makeCmd = function
+                | WordSize               p   -> ["-window_size"          ; string p]
+                | TemplateType           p   -> ["-template_type"        ; p]
+                | TemplateLength         p   -> ["-template_length"      ; string p]
+                | WindowSize             p   -> ["-window_size"          ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]  
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; path]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; path]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+        
+            static member makeCmdWith (m:MountInfo) = function
+                | WordSize               p   -> ["-window_size"          ; string p]
+                | TemplateType           p   -> ["-template_type"        ; p]
+                | TemplateLength         p   -> ["-template_length"      ; string p]
+                | WindowSize             p   -> ["-window_size"          ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]  
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; (MountInfo.containerPathOf m path)]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; (MountInfo.containerPathOf m path)]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+
+        ///DSL fo blastn command line options
+        ///blastn is the traditional program used for inter-species comparisons
+        type BlastNParams = 
+            ///Length of initial exact match.
+            | WordSize                  of int
+            ///Cost to open a gap. See appendix “BLASTN reward/penalty values”.
+            | GapOpen                   of int
+            ///Cost to extend a gap. See appendix “BLASTN reward/penalty values”.
+            | GapExtend                 of int   
+            ///Reward for a nucleotide match.
+            | Reward                    of int    
+            ///Penalty for a nucleotide mismatch.
+            | Penalty                   of int   
+            ///Query strand(s) to search against database/subject. Choice of both, minus, or plus.
+            | Strand                    of string 
+            ///Filter query sequence with dust.
+            | Dust                      of string 
+            ///Mask query using the sequences in this database.
+            | FilteringDB               of string 
+            ///Enable WindowMasker filtering using a Taxonomic ID.
+            | WindowMaskerTaxId         of int    
+            ///Enable WindowMasker filtering using this file.
+            | WindowMaskerDB            of string 
+            ///Apply filtering locations as soft masks (i.e., only for finding initial matches).
+            | SoftMasking               of bool   
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking                      
+            ///Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask                of int    
+            ///Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask                of int    
+            ///Percent identity cutoff.
+            | PercIdentity              of int    
+            ///Heuristic value (in bits) for ungapped extensions.
+            | XDropUngap                of float  
+            ///Heuristic value (in bits) for preliminary gapped extensions.
+            | XDropGap                  of float  
+            /// Heuristic value (in bits) for final gapped alignment.
+            | XDropGapFinal             of float  
+            ///Minimum raw gapped score to keep an alignment in the preliminary gapped and trace-back stages. Normally set based upon expect value.
+            | MinRawGappedScore         of int    
+            ///Perform ungapped alignment.
+            | Ungapped                           
+
+            static member makeCmd = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; path]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; path]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+        
+            static member makeCmdWith (m:MountInfo) = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; (MountInfo.containerPathOf m path)]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; (MountInfo.containerPathOf m path)]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+
+        ///DSL fo the blastn 'blastn-short' task command line options
+        ///blastn-short is optimized for sequences less than 30 nucleotides.
+        type BlastNShortParams = 
+            ///Length of initial exact match.
+            | WordSize                  of int
+            ///Cost to open a gap. See appendix “BLASTN reward/penalty values”.
+            | GapOpen                   of int
+            ///Cost to extend a gap. See appendix “BLASTN reward/penalty values”.
+            | GapExtend                 of int   
+            ///Reward for a nucleotide match.
+            | Reward                    of int    
+            ///Penalty for a nucleotide mismatch.
+            | Penalty                   of int   
+            ///Query strand(s) to search against database/subject. Choice of both, minus, or plus.
+            | Strand                    of string 
+            ///Filter query sequence with dust.
+            | Dust                      of string 
+            ///Mask query using the sequences in this database.
+            | FilteringDB               of string 
+            ///Enable WindowMasker filtering using a Taxonomic ID.
+            | WindowMaskerTaxId         of int    
+            ///Enable WindowMasker filtering using this file.
+            | WindowMaskerDB            of string 
+            ///Apply filtering locations as soft masks (i.e., only for finding initial matches).
+            | SoftMasking               of bool   
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking                      
+            ///Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask                of int    
+            ///Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask                of int    
+            ///Percent identity cutoff.
+            | PercIdentity              of int    
+            ///Heuristic value (in bits) for ungapped extensions.
+            | XDropUngap                of float  
+            ///Heuristic value (in bits) for preliminary gapped extensions.
+            | XDropGap                  of float  
+            /// Heuristic value (in bits) for final gapped alignment.
+            | XDropGapFinal             of float  
+            ///Minimum raw gapped score to keep an alignment in the preliminary gapped and trace-back stages. Normally set based upon expect value.
+            | MinRawGappedScore         of int    
+            ///Perform ungapped alignment.
+            | Ungapped                           
+
+            static member makeCmd = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; path]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; path]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
+        
+            static member makeCmdWith (m:MountInfo) = function
+                | WordSize               p   -> ["-word_size"            ; string p]
+                | GapOpen                p   -> ["-gapopen"              ; string p]
+                | GapExtend              p   -> ["-gapextend"            ; string p]
+                | Reward                 p   -> ["-reward"               ; string p]
+                | Penalty                p   -> ["-penalty"              ; string p]
+                | Strand                 p   -> ["-strand"               ; p]
+                | Dust                   p   -> ["-dust"                 ; p]
+                | FilteringDB            path-> ["-filtering_db"         ; (MountInfo.containerPathOf m path)]
+                | WindowMaskerTaxId      p   -> ["-window_masker_taxid"  ; string p]
+                | WindowMaskerDB         path-> ["-window_masker_db"     ; (MountInfo.containerPathOf m path)]
+                | SoftMasking            p   -> ["-soft_masking"         ; string p]
+                | LowerCaseMasking           -> ["-lcase_masking"]
+                | DBSoftMask             p   -> ["-db_soft_mask"         ; string p]
+                | DBHardMask             p   -> ["-db_hard_mask"         ; string p]
+                | PercIdentity           p   -> ["-perc_identity"        ; string p]
+                | XDropUngap             p   -> ["-xdrop_ungap"          ; string p]
+                | XDropGap               p   -> ["-xdrop_gap"            ; string p]
+                | XDropGapFinal          p   -> ["-xdrop_gap_final"      ; string p]
+                | MinRawGappedScore      p   -> ["-min_raw_gapped_score" ; string p]
+                | Ungapped                   -> ["-ungapped"]
 
 
-    let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) = 
+        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     MegablastParameters.CommonOptions [...]
+        ///
+        ///     MegablastParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        [<RequireQualifiedAccess>]
+        type MegablastParameters =  
+            | CommonOptions     of BlastParams     list
+            | SpecificOptions   of MegablastParams list
 
-        let cmds = (opt |> List.map (MakeBlastDbParams.makeCmdWith bcContext.Mount))
-        let tp = "makeblastdb"::(cmds |> List.concat)
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map MegablastParams.makeCmd |> List.concat
 
-        printfn "Starting process makeblastdb\r\nparameters:"
-        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (MegablastParams.makeCmdWith m) |> List.concat
 
-        async {
-                let! res = BioContainer.execAsync bcContext tp           
-                return res
-        }
+        let runMegablastAsync (bcContext:BioContainer.BcContext) (opt:MegablastParameters list) = 
+            let cmds = (opt |> List.map (MegablastParameters.makeCmdWith bcContext.Mount))
+            let tp = "megablast"::(cmds |> List.concat)
 
-    let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) =
+            printfn "Starting process megablast\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
 
-        runMakeBlastDBAsync bcContext opt
-        |> Async.RunSynchronously
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        let runMegablast (bcContext:BioContainer.BcContext) (opt:MegablastParameters list) =
+            runMegablastAsync bcContext opt
+            |> Async.RunSynchronously
+
+        ///use this type to specify specific and generic command line parameters for the blastn dc-megablast task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     DCMegablastParameters.CommonOptions [...]
+        ///
+        ///     DCMegablastParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        [<RequireQualifiedAccess>]
+        type DCMegablastParameters =  
+            | CommonOptions     of BlastParams       list
+            | SpecificOptions   of DCMegablastParams list
+
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map DCMegablastParams.makeCmd |> List.concat
+
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (DCMegablastParams.makeCmdWith m) |> List.concat
+
+        let runDCMegablastNAsync (bcContext:BioContainer.BcContext) (opt:DCMegablastParameters list) = 
+            let cmds = (opt |> List.map (DCMegablastParameters.makeCmdWith bcContext.Mount))
+            let tp = "dc-megablast"::(cmds |> List.concat)
+
+            printfn "Starting process dc-megablast\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        let runDCMegablastN (bcContext:BioContainer.BcContext) (opt:DCMegablastParameters list) =
+            runDCMegablastNAsync bcContext opt
+            |> Async.RunSynchronously
+
+        ///use this type to specify specific and generic command line parameters for the blastn task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     BlastNParameters.CommonOptions [...]
+        ///
+        ///     BlastNParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        [<RequireQualifiedAccess>]
+        type BlastNParameters =  
+            | CommonOptions     of BlastParams  list
+            | SpecificOptions   of BlastNParams list
+
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map BlastNParams.makeCmd |> List.concat
+
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (BlastNParams.makeCmdWith m) |> List.concat
+                
+        let runBlastNAsync (bcContext:BioContainer.BcContext) (opt:BlastNParameters list) = 
+            let cmds = (opt |> List.map (BlastNParameters.makeCmdWith bcContext.Mount))
+            let tp = "blastn"::(cmds |> List.concat)
+
+            printfn "Starting process blastn\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        let runBlastN (bcContext:BioContainer.BcContext) (opt:BlastNParameters list) =
+            runBlastNAsync bcContext opt
+            |> Async.RunSynchronously
+
+        ///use this type to specify specific and generic command line parameters for the blastn-short task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     BlastNShortParameters.CommonOptions [...]
+        ///
+        ///     BlastNShortParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        [<RequireQualifiedAccess>]
+        type BlastNShortParameters =  
+            | CommonOptions     of BlastParams           list
+            | SpecificOptions   of BlastNShortParameters list
+
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map BlastNShortParameters.makeCmd |> List.concat
+
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (BlastNShortParameters.makeCmdWith m) |> List.concat
+                                                         
+        let runBlastNShortAsync (bcContext:BioContainer.BcContext) (opt:BlastNShortParameters list) = 
+            let cmds = (opt |> List.map (BlastNShortParameters.makeCmdWith bcContext.Mount))
+            let tp = "blastn-short"::(cmds |> List.concat)
+
+            printfn "Starting process blastn-short\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+ 
+            }
+
+        let runBlastNShort (bcContext:BioContainer.BcContext) (opt:BlastNShortParameters list) =
+            runBlastNShortAsync bcContext opt
+            |> Async.RunSynchronously
+    
 
     let runBlastPAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
         let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
@@ -315,21 +967,4 @@ module Blast =
 
     let runBlastP (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
         runBlastPAsync bcContext opt
-        |> Async.RunSynchronously
-
-    let runBlastNAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
-        let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
-        let tp = "blastn"::(cmds |> List.concat)
-
-        printfn "Starting process blastn\r\nparameters:"
-        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
-
-        async {
-                let! res = BioContainer.execAsync bcContext tp           
-                return res
- 
-        }
-
-    let runBlastN (bcContext:BioContainer.BcContext) (opt:BlastParams list) =
-        runBlastNAsync bcContext opt
         |> Async.RunSynchronously
