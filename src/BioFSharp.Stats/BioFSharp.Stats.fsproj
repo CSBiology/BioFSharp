@@ -26,6 +26,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="OntologyEnrichment.fs" />
     <Compile Include="SurprisalAnalysisEmpiricalPermutationTest.fs" />
+    <None Include="Playground\OntologyEnrichment.fsx" />
+    <None Include="Playground\SurprisalAnalysisEmpiricalPermutationTest.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

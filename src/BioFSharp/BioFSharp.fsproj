@@ -66,6 +66,32 @@
     <EmbeddedResource Include="Resources\PAM70.txt" />
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />
+    <None Include="Playground\Alignment.fsx" />
+    <None Include="Playground\AminoAcids.fsx" />
+    <None Include="Playground\AminoAcidSymbols.fsx" />
+    <None Include="Playground\AminoProperties.fsx" />
+    <None Include="Playground\BioArray.fsx" />
+    <None Include="Playground\BioID.fsx" />
+    <None Include="Playground\BioItemsConverter.fsx" />
+    <None Include="Playground\BioList.fsx" />
+    <None Include="Playground\BioSeq.fsx" />
+    <None Include="Playground\Digestion.fsx" />
+    <None Include="Playground\Elements.fsx" />
+    <None Include="Playground\Formula.fsx" />
+    <None Include="Playground\GlobalModificationInfo.fsx" />
+    <None Include="Playground\IBioItem.fsx" />
+    <None Include="Playground\IsoelectricPoint.fsx" />
+    <None Include="Playground\Isotopes.fsx" />
+    <None Include="Playground\IsotopicDistribution.fsx" />
+    <None Include="Playground\Mass.fsx" />
+    <None Include="Playground\ModificationInfo.fsx" />
+    <None Include="Playground\Nucleotides.fsx" />
+    <None Include="Playground\PeptideClassification.fsx" />
+    <None Include="Playground\PhylTree.fsx" />
+    <None Include="Playground\PhysicalConstants.fsx" />
+    <None Include="Playground\TaggedSequence.fsx" />
+    <None Include="Playground\WorkflowLanguage.fsx" />
+    <!-- Playground -->
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

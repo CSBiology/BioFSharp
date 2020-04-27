@@ -21,10 +21,14 @@
     <Compile Include="EbiAPI.fs" />
     <Compile Include="Entrez.fs" />
     <Compile Include="GEO.fs" />
+    <None Include="Playground\EbiAPI.fsx" />
+    <None Include="Playground\Entrez.fsx" />
+    <None Include="Playground\FaToolDb.fsx" />
+    <None Include="Playground\GEO.fsx" />
+    <EmbeddedResource Include="Resources\ebiProteinsAPIswagger.json" />
     <None Include="paket.references" />
     <None Include="paket.template" />
     <!-- Resources -->
-    <EmbeddedResource Include="Resources\ebiProteinsAPIswagger.json" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.Services" />

@@ -20,11 +20,15 @@
     <Compile Include="ViewContainer.fs" />
     <Compile Include="Venn.fs" />
     <Compile Include="Chord.fs" />
+    <None Include="Playground\Chord.fsx" />
+    <None Include="Playground\HtmlScaffold.fsx" />
+    <None Include="Playground\Venn.fsx" />
+    <None Include="Playground\ViewContainer.fsx" />
+    <EmbeddedResource Include="Resources\chart.css" />
+    <EmbeddedResource Include="Resources\chord2.js" />
     <None Include="paket.references" />
     <None Include="paket.template" />
     <!-- Resources -->
-    <EmbeddedResource Include="Resources\chart.css" />
-    <EmbeddedResource Include="Resources\chord2.js" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

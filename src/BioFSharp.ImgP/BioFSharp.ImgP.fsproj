@@ -18,6 +18,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Centroid.fs" />
     <Compile Include="Trace.fs" />
+    <None Include="Playground\Centroid.fsx" />
+    <None Include="Playground\Trace.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

@@ -26,9 +26,12 @@
     <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <!--  Base functionality -->
     <Compile Include="Docker.fs" />
     <Compile Include="BioContainerIO.fs" />
     <Compile Include="BioContainer.fs" />
+    <!--  DSLs -->
     <Compile Include="Blast.fs" />
     <Compile Include="ClustalO.fs" />
     <Compile Include="FastP.fs" />
@@ -41,7 +44,23 @@
     <Compile Include="SRAToolkit.fs" />
     <Compile Include="STAR.fs" />
     <Compile Include="Tmhmm.fs" />
+    <!-- Playground -->
     <None Include="BioFSharp.BioContainers.fsx" />
+    <None Include="Playground\BioContainer.fsx" />
+    <None Include="Playground\BioContainerIO.fsx" />
+    <None Include="Playground\Blast.fsx" />
+    <None Include="Playground\ClustalO.fsx" />
+    <None Include="Playground\Docker.fsx" />
+    <None Include="Playground\FastP.fsx" />
+    <None Include="Playground\Hera.fsx" />
+    <None Include="Playground\HMMER.fsx" />
+    <None Include="Playground\IntaRNA.fsx" />
+    <None Include="Playground\LastAlign.fsx" />
+    <None Include="Playground\MoFF.fsx" />
+    <None Include="Playground\SRAToolkit.fsx" />
+    <None Include="Playground\STAR.fsx" />
+    <None Include="Playground\TargetP.fsx" />
+    <None Include="Playground\Tmhmm.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

@@ -14,6 +14,7 @@
 #I "lib"
 
 // Reference BioFSharp.IO
+#r "BioFSharp.dll"
 #r "BioFSharp.IO.dll"
 
 open BioFSharp.IO

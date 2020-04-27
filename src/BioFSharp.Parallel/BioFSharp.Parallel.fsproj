@@ -17,6 +17,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="PairwiseAlignment.fs" />
+    <None Include="Playground\PairwiseAlignment.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

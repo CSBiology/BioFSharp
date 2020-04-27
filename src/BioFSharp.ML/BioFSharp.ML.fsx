@@ -193,9 +193,9 @@ let testFeatures =
 let device = DeviceDescriptor.CPUDevice
 
 let predictor = 
-    loadPredictorWithDevice device @"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\src\BioFSharp.ML\Resources\Chlamy5Times128.model"
+    loadModelWithDevice device @"C:\Users\Kevin\source\repos\CSBiology\BioFSharp\src\BioFSharp.ML\Resources\Chlamy5Times128.model"
 
-let inputBatch = createInputBatchWithDevice device predictor (testFeatures |> Array.map (fun x -> x.Data |> Array.map float32))
+let inputBatch = toInputBatchWithDevice device predictor (testFeatures |> Array.map (fun x -> x.Data |> Array.map float32))
 
 let res = 
     let preds = 
@@ -205,7 +205,7 @@ let res =
             createPredictionOutput data.ProtId data.Sequence (float preds) (distinctPeptides.Contains(data.Sequence))
         ) 
         testFeatures 
-        preds
+        (preds |> Array.ofSeq)
     |> Array.sortByDescending (fun (x) -> x.PredictionScore)
     |> fun x -> let max = (Array.maxBy (fun (x) -> x.PredictionScore) x).PredictionScore 
                 x |> Array.map (fun (x) -> if x.PredictionScore >= 0. then {x with PredictionScore = (x.PredictionScore/max)} else {x with PredictionScore = 0.0})
@@ -246,10 +246,10 @@ let extractPeptideFeatures peptide =
 
 let proteinsOfInterest = FastA.fromFile BioArray.ofAminoAcidSymbolString @"PATH_TO_PROTEINS\Proteins.fasta" |> Array.ofSeq
 
-let featureVectors = proteinsOfInterest |> Array.map ( fun fastaEntry -> fastaEntry.Sequence |> extractPeptideFeatures)
+//let featureVectors = proteinsOfInterest |> Array.map ( fun fastaEntry -> fastaEntry.Sequence |> extractPeptideFeatures)
 
-let predictor' = loadPredictorDefault @"PATH_TO_MODEL\Model.model"
+//let predictor' = loadPredictorDefault @"PATH_TO_MODEL\Model.model"
 
-let inputBatch' = createInputBatchDefault predictor featureVectors
+//let inputBatch' = createInputBatchDefault predictor featureVectors
 
-let predictionOutput = predictAsDefault<float32> predictor inputBatch
+//let predictionOutput = predictAsDefault<float32> predictor inputBatch
