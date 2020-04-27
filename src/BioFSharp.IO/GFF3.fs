@@ -2,7 +2,6 @@
 ///Contains functions for reading and writing GFF3 files
 module GFF3 =
 
-    open BioFSharp.IO
     open FSharpAux
     open FSharpAux.IO
     open System.Collections.Generic

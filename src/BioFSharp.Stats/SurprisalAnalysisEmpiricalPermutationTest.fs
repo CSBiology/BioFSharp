@@ -1,6 +1,5 @@
 namespace BioFSharp.Stats
 
-open BioFSharp.Stats
 open FSharp.Stats
 open OntologyEnrichment
 

@@ -3,7 +3,6 @@
 ///Wrapper and its helpers for Clustal Omega multiple alignment tools
 module ClustalOWrapper =
 
-    open BioFSharp.IO
     open BioFSharp.TaggedSequence
     open FSharpAux
 

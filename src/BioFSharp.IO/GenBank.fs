@@ -8,7 +8,6 @@ module GenBank =
     open FSharpAux.IO    
     open System.Collections.Generic
     open BioFSharp
-    open BioFSharp.IO
     
     
     ///Functions for reading a GenBank file
