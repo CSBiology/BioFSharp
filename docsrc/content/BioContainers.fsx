@@ -1,14 +1,8 @@
 (*** hide ***)
-#I @"../../bin/BioFSharp/net47/"
-#I @"../../bin/BioFSharp.BioDB/net47/"
-#I @"../../bin/BioFSharp.ImgP/net47"
-#I @"../../bin/BioFSharp.IO/net47/"
-#I @"../../bin/BioFSharp.Parallel/net47/"
-#I @"../../bin/BioFSharp.Stats/net47/"
-#I @"../../bin/BioFSharp.Vis/net47/"
-#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
-#I @"../../bin/BioFSharp.BioContainers/net47/"
 #r @"C:\Users\kevin\source\repos\CSBiology\BioFSharp\packages\Docker.DotNet\lib\netstandard2.0\Docker.DotNet.dll"
+#I @"../../bin/BioFSharp/netstandard2.0/"
+#I @"../../bin/BioFSharp.BioContainers/netstandard2.0/"
+#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
 #r "BioFSharp.dll"
 #r "BioFSharp.BioContainers.dll"
 
@@ -61,6 +55,7 @@ lets say we have Docker for Windows set up and pulled an ubuntu image (docker pu
 
 (*** do-not-eval ***)
 open BioFSharp.BioContainers
+///parameters for blastP
 
 ///npipe://./pipe/docker_engine is the named pipe for the docker engine under windows.
 let client = Docker.connect "npipe://./pipe/docker_engine"
@@ -154,31 +149,61 @@ A way to do this from F# is in the making.
 The protein fasta used here can be found [here]()
 *)
 
-(***do-not-eval***)
-open BioFSharp.BioContainers.Blast
-
-let ImageBlast = Docker.DockerId.ImageId "blast"
+open BioFSharp.BioContainers
+open Blast
 
 ///this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.
+
+(***do-not-eval***)
+let ImageBlast = Docker.DockerId.ImageId "blast:2.2.31--pl526h3066fca_3"
+
 let blastContext = 
     BioContainer.initBcContextWithMountAsync 
         client 
         ImageBlast 
-        @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data"
+        "absolute/path/to/mounted/directory"
     |> Async.RunSynchronously
 
 ///parameters for search DB creation
 let makeDBParams =
     [
-        MakeDbParams.DbType Protein
-        MakeDbParams.Input @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-        MakeDbParams.Output@"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
+        MakeBlastDbParams.DbType    Protein
+        MakeBlastDbParams.Input     "absolute/path/to/your/subject"
+        MakeBlastDbParams.Output    "absolute/path/to/your/outputfile"
     ]
 
-///parameters for blastP
-let blastPParams = [
-    BlastParams.SearchDB @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA"
-    BlastParams.Query @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA"
-    BlastParams.Output @"C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt"
-    BlastParams.OutputType OutputType.TabularWithComments
-]
+///parameters for the blastp search
+let runParams =
+    [
+        BlastP.BlastPParameters.CommonOptions [
+            Query               "absolute/path/to/your/query"
+            SearchDB            "absolute/path/to/your/subject"
+            Output              "absolute/path/to/your/outputfile"
+        ]
+        BlastP.BlastPParameters.SpecificOptions [
+            BlastP.BlastPParams.WordSize    11
+        ]
+    ]
+
+(** 
+finally, we can run the searchdb generation and the subsequent search in the container like this:
+*)
+
+(***do-not-eval***)
+
+makeDBParams
+|> Blast.runMakeBlastDB blastContext
+
+runParams
+|> Blast.BlastP.runBlastP blastContext
+
+(** 
+Don't forget, the container will be kept running, so dispose it if you do not need it anymore to
+prevent it from eating up ressources
+*)
+    
+(***do-not-eval***)
+blastContext
+|> BioContainer.disposeAsync
+|> Async.RunSynchronously
+    
