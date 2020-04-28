@@ -114,6 +114,7 @@ module Blast =
             | TaxIdMapFile (path)   -> ["-taxid_map"    ; MountInfo.containerPathOf m path]
             | Logfile(path)         -> ["-logfile"      ; MountInfo.containerPathOf m path]
     
+    ///returns an asynchronous computation that will run makeblastdb in the specified container context with the given commands
     let runMakeBlastDBAsync (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) = 
     
         let cmds = (opt |> List.map (MakeBlastDbParams.makeCmdWith bcContext.Mount))
@@ -127,6 +128,7 @@ module Blast =
                 return res
         }
     
+    ///run makeblastdb in the specified container context with the given commands
     let runMakeBlastDB (bcContext:BioContainer.BcContext) (opt:MakeBlastDbParams list) =
     
         runMakeBlastDBAsync bcContext opt
@@ -819,7 +821,8 @@ module Blast =
             static member makeCmdWith (m:MountInfo) = function
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (MegablastParams.makeCmdWith m) |> List.concat
-
+    
+        ///returns an asynchronous computation that will run `blastn -task megablast` in the specified container context with the given commands
         let runMegablastAsync (bcContext:BioContainer.BcContext) (opt:MegablastParameters list) = 
             let cmds = (opt |> List.map (MegablastParameters.makeCmdWith bcContext.Mount))
             let tp = "blastn"::"-task"::"megablast"::(cmds |> List.concat)
@@ -833,6 +836,7 @@ module Blast =
  
             }
 
+        ///run `blastn -task megablast` in the specified container context with the given commands
         let runMegablast (bcContext:BioContainer.BcContext) (opt:MegablastParameters list) =
             runMegablastAsync bcContext opt
             |> Async.RunSynchronously
@@ -859,6 +863,7 @@ module Blast =
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (DCMegablastParams.makeCmdWith m) |> List.concat
 
+        ///returns an asynchronous computation that will run `blastn -task dc-megablast` in the specified container context with the given commands
         let runDCMegablastNAsync (bcContext:BioContainer.BcContext) (opt:DCMegablastParameters list) = 
             let cmds = (opt |> List.map (DCMegablastParameters.makeCmdWith bcContext.Mount))
             let tp = "blastn"::"-task"::"dc-megablast"::(cmds |> List.concat)
@@ -871,7 +876,7 @@ module Blast =
                     return res
  
             }
-
+        ///run `blastn -task dc-megablast` in the specified container context with the given commands
         let runDCMegablastN (bcContext:BioContainer.BcContext) (opt:DCMegablastParameters list) =
             runDCMegablastNAsync bcContext opt
             |> Async.RunSynchronously
@@ -898,6 +903,7 @@ module Blast =
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (BlastNParams.makeCmdWith m) |> List.concat
                 
+        ///returns an asynchronous computation that will run `blastn -task blastn` in the specified container context with the given commands
         let runBlastNAsync (bcContext:BioContainer.BcContext) (opt:BlastNParameters list) = 
             let cmds = (opt |> List.map (BlastNParameters.makeCmdWith bcContext.Mount))
             let tp = "blastn"::"-task"::"blastn"::(cmds |> List.concat)
@@ -911,6 +917,7 @@ module Blast =
  
             }
 
+        ///run `blastn -task blastn` in the specified container context with the given commands
         let runBlastN (bcContext:BioContainer.BcContext) (opt:BlastNParameters list) =
             runBlastNAsync bcContext opt
             |> Async.RunSynchronously
@@ -937,6 +944,7 @@ module Blast =
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (BlastNShortParameters.makeCmdWith m) |> List.concat
                                                          
+        ///returns an asynchronous computation that will run `blastn -task blastn-short` in the specified container context with the given commands
         let runBlastNShortAsync (bcContext:BioContainer.BcContext) (opt:BlastNShortParameters list) = 
             let cmds = (opt |> List.map (BlastNShortParameters.makeCmdWith bcContext.Mount))
             let tp = "blastn"::"-task"::"blastn-short"::(cmds |> List.concat)
@@ -949,7 +957,7 @@ module Blast =
                     return res
  
             }
-
+        ///run `blastn -task blastn-short` in the specified container context with the given commands
         let runBlastNShort (bcContext:BioContainer.BcContext) (opt:BlastNShortParameters list) =
             runBlastNShortAsync bcContext opt
             |> Async.RunSynchronously
@@ -966,6 +974,8 @@ module Blast =
     [<RequireQualifiedAccess>]
     module BlastP =
         
+        ///DSL fo the blastp 'blastp' task command line options
+        ///blastp is used for standard protein-protein comparisons 
         type BlastPParams =
             ///Word size of initial match. Valid word sizes are 2-7.
             | WordSize          of int
@@ -1030,7 +1040,7 @@ module Blast =
                 | SoftMasking        p -> ["-soft_masking"      ; string p]
                 | WindowSize         p -> ["-window_size"       ; string p]
 
-        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///use this type to specify specific and generic command line parameters for the blastp task like this:
         ///
         ///let myParams = [
         ///
@@ -1038,8 +1048,6 @@ module Blast =
         ///
         ///     BlastPParameters.SpecificOptions [...]
         ///]
-        ///
-        ///
         type BlastPParameters =
             | CommonOptions     of BlastParams      list
             | SpecificOptions   of BlastPParams     list
@@ -1051,7 +1059,8 @@ module Blast =
             static member makeCmdWith (m:MountInfo) = function
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (BlastPParams.makeCmdWith m) |> List.concat
-
+        
+        ///returns an asynchronous computation that will run `blastp -task blastp` in the specified container context with the given commands
         let runBlastPAsync (bcContext:BioContainer.BcContext) (opt:BlastPParameters list) = 
             let cmds = (opt |> List.map (BlastPParameters.makeCmdWith bcContext.Mount))
             let tp = "blastp"::"-task"::"blastp"::(cmds |> List.concat)
@@ -1064,11 +1073,13 @@ module Blast =
                     return res
             }
 
+        ///run `blastn -task blastn-short` in the specified container context with the given commands
         let runBlastP (bcContext:BioContainer.BcContext) (opt:BlastPParameters list) = 
             runBlastPAsync bcContext opt
             |> Async.RunSynchronously
 
-
+        ///DSL fo the blastp 'blastp-short' task command line options
+        ///blastp-short is optimized for query sequences shorter than 30 residues 
         type BlastPShortParams =
             ///Word size of initial match.
             | WordSize of int 
@@ -1129,7 +1140,7 @@ module Blast =
                 | CompBasedStats     p -> ["-comp_based_stats";]
                 | WindowSize         p -> ["-window_size"     ;]
 
-        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///use this type to specify specific and generic command line parameters for the blastp blastp-short task like this:
         ///
         ///let myParams = [
         ///
@@ -1150,7 +1161,8 @@ module Blast =
             static member makeCmdWith (m:MountInfo) = function
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (BlastPShortParams.makeCmdWith m) |> List.concat
-
+        
+        ///returns an asynchronous computation that will run `blastp -task blastp-short` in the specified container context with the given commands
         let runBlastPShortAsync (bcContext:BioContainer.BcContext) (opt:BlastPShortParameters list) = 
             let cmds = (opt |> List.map (BlastPShortParameters.makeCmdWith bcContext.Mount))
             let tp = "blastp"::"-task"::"blastp-short"::(cmds |> List.concat)
@@ -1163,10 +1175,13 @@ module Blast =
                     return res
             }
 
+        ///returns an asynchronous computation that will run `blastp -task blastp-short` in the specified container context with the given commands
         let runBlastPShort (bcContext:BioContainer.BcContext) (opt:BlastPShortParameters list) = 
             runBlastPShortAsync bcContext opt
             |> Async.RunSynchronously
 
+        ///DSL fo the blastp 'blastp-fast' task command line options
+        ///blastp-fast is a faster version that uses a larger word-size
         type BlastPFastParams =
             ///Word size of initial match
             | WordSize          of int
@@ -1215,7 +1230,7 @@ module Blast =
                 | CompBasedStats     p -> ["-comp_based_stats"; string p]
                 | WindowSize         p -> ["-window_size"     ; string p]
 
-        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///use this type to specify specific and generic command line parameters for the blastp blastp-fast task like this:
         ///
         ///let myParams = [
         ///
@@ -1237,6 +1252,7 @@ module Blast =
                 | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
                 | SpecificOptions   l -> l |> List.map (BlastPFastParams.makeCmdWith m) |> List.concat
 
+        ///returns an asynchronous computation that will run `blastp -task blastp-fast` in the specified container context with the given commands
         let runBlastPFastAsync (bcContext:BioContainer.BcContext) (opt:BlastPFastParameters list) = 
             let cmds = (opt |> List.map (BlastPFastParameters.makeCmdWith bcContext.Mount))
             let tp = "blastp"::"-task"::"blastp-fast"::(cmds |> List.concat)
@@ -1249,6 +1265,7 @@ module Blast =
                     return res
             }
 
+        ///run `blastp -task blastp-short` in the specified container context with the given commands
         let runBlastPFast (bcContext:BioContainer.BcContext) (opt:BlastPFastParameters list) = 
             runBlastPFastAsync bcContext opt
             |> Async.RunSynchronously
