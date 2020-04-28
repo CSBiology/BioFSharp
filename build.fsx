@@ -59,6 +59,11 @@ module MessagePrompts =
 // --------------------------------------------------------------------------------------
 // START TODO: Provide project-specific details below
 // --------------------------------------------------------------------------------------
+
+//This is ugly i bet you can find a better way ;)
+let mutable prereleaseTag = ""
+let mutable isPrerelease = false
+
 let project         = "BioFSharp"
 let summary         = "An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"
 let solutionFile    = "BioFSharp.sln"
@@ -299,17 +304,20 @@ let buildPrereleasePackages =
     BuildTask.create "buildPrereleasePackages" [buildAll; runTestsAll] {
         printfn "Please enter pre-release package suffix"
         let suffix = System.Console.ReadLine()
+        isPrerelease <- true
+        prereleaseTag <- (sprintf "%s-%s" release.NugetVersion suffix)
         Paket.pack(fun p -> 
             { p with
                 
                 ToolType = ToolType.CreateLocalTool()
                 OutputPath = pkgDir
-                Version = sprintf "%s-%s" release.NugetVersion suffix
+                Version = prereleaseTag
                 ReleaseNotes = release.Notes |> String.toLines })
     }
 
 let BuildReleasePackages = 
     BuildTask.create "BuildReleasePackages" [buildAll; runTestsAll] {
+        isPrerelease <- false
         Paket.pack(fun p ->
             { p with
                 ToolType = ToolType.CreateLocalTool()
@@ -344,6 +352,15 @@ let buildCIPackages name config projectPaths =
 
 let publishNugetPackages = 
     BuildTask.create "publishNugetPackages" [buildAll; runTestsAll; BuildReleasePackages] {
+        Paket.push(fun p ->
+            { p with
+                WorkingDir = pkgDir
+                ToolType = ToolType.CreateLocalTool()
+                ApiKey = Environment.environVarOrDefault "NuGet-key" "" })
+    }
+
+let publishPrereleaseNugetPackages = 
+    BuildTask.create "publishPrereleaseNugetPackages" [buildAll; runTestsAll; buildPrereleasePackages] {
         Paket.push(fun p ->
             { p with
                 WorkingDir = pkgDir
@@ -422,17 +439,18 @@ let askForGitReleaseNugetConfirmation =
     }
 
 let releaseNugetPackageOnGithub =
-    BuildTask.create "releaseNugetPackageOnGithub" [askForGitReleaseNugetConfirmation; buildAll; runTestsAll;] {
+    BuildTask.create "releaseNugetPackageOnGithub" [askForGitReleaseNugetConfirmation; buildAll; runTestsAll; buildPrereleasePackages.IfNeeded; BuildReleasePackages.IfNeeded] {
         let tempNugetDir = "temp/nuget"
         Shell.cleanDir tempNugetDir |> ignore
         Git.Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "nuget" tempNugetDir
         let files = Directory.EnumerateFiles pkgDir 
         Shell.copy tempNugetDir files
         Git.Staging.stageAll tempNugetDir
-        Git.Commit.exec tempNugetDir (sprintf "Update git nuget packages for version %s" release.NugetVersion)
+        let version = if isPrerelease then prereleaseTag else release.NugetVersion
+        Git.Commit.exec tempNugetDir (sprintf "Update git nuget packages for version %s" version)
         Git.Branches.push tempNugetDir
         Shell.copy tempNugetDir files
-   }
+    }
 
 // --------------------------------------------------------------------------------------
 // Local Docs
@@ -507,6 +525,19 @@ let dotnetBuildChainLocal =
         copyBinariesDotnet
     ]
 
+//Push prerelease Package to github
+let prereleasePackagesToGithub =
+     BuildTask.createEmpty "prereleasePackagesToGithub" [
+        clean
+        assemblyInfo
+        buildAll
+        copyBinaries
+        runTestsAll
+        buildPrereleasePackages
+        releaseNugetPackageOnGithub
+     ]
+
+
 //Token Targets for CI builds
 let fullBuildChainCI    = 
     BuildTask.createEmpty "fullBuildChainCI" [
@@ -547,6 +578,7 @@ let buildDocsChain =
         cleanDocs
         generateDocumentation
     ]
+
 
 Target.create "PrintGraph" (fun _ ->
     printfn "What target?"
