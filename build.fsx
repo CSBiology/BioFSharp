@@ -351,7 +351,7 @@ let buildCIPackages name config projectPaths =
         }
 
 let publishNugetPackages = 
-    BuildTask.create "publishNugetPackages" [buildAll; runTestsAll; BuildReleasePackages] {
+    BuildTask.create "publishNugetPackages" [clean; buildAll; runTestsAll; BuildReleasePackages] {
         Paket.push(fun p ->
             { p with
                 WorkingDir = pkgDir
@@ -360,7 +360,7 @@ let publishNugetPackages =
     }
 
 let publishPrereleaseNugetPackages = 
-    BuildTask.create "publishPrereleaseNugetPackages" [buildAll; runTestsAll; buildPrereleasePackages] {
+    BuildTask.create "publishPrereleaseNugetPackages" [clean; buildAll; runTestsAll; buildPrereleasePackages] {
         Paket.push(fun p ->
             { p with
                 WorkingDir = pkgDir
