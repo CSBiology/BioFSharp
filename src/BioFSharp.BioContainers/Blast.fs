@@ -1,9 +1,15 @@
 ﻿namespace BioFSharp.BioContainers
 
+//BioContainer tag  : blast:2.2.31--pl526h3066fca_3
+//BioContainer pull : docker pull quay.io/biocontainers/blast:2.2.31--pl526h3066fca_3
+
+
 //TODO implement all commands from the manual
+//https://www.ncbi.nlm.nih.gov/books/NBK279684/
 
-
-///DSLs for executing commands in BLAST biocontainers
+///DSLs for executing commands in the BLAST biocontainer 
+///
+///Generated and tested for the tag blast:2.2.31--pl526h3066fca_3
 module Blast =
 
     open FSharpAux
@@ -402,11 +408,11 @@ module Blast =
     ///The blastn application searches a nucleotide query against nucleotide subject sequences or a nucleotide database. 
     ///Four different tasks are supported: 
     ///
-    ///1.) “megablast”, for very similar sequences (e.g, sequencing errors), 
+    ///1.) “megablast”, for very similar sequences (e.g, sequencing errors)
     ///
-    ///2.) “dc-megablast”, typically used for inter-species comparisons, 
+    ///2.) “dc-megablast”, typically used for inter-species comparisons
     ///
-    ///3.) “blastn”, the traditional program used for inter-species comparisons, 
+    ///3.) “blastn”, the traditional program used for inter-species comparisons
     ///
     ///4.) “blastn-short”, optimized for sequences less than 30 nucleotides.
     [<RequireQualifiedAccess>]
@@ -802,7 +808,6 @@ module Blast =
         ///]
         ///
         ///
-        [<RequireQualifiedAccess>]
         type MegablastParameters =  
             | CommonOptions     of BlastParams     list
             | SpecificOptions   of MegablastParams list
@@ -817,7 +822,7 @@ module Blast =
 
         let runMegablastAsync (bcContext:BioContainer.BcContext) (opt:MegablastParameters list) = 
             let cmds = (opt |> List.map (MegablastParameters.makeCmdWith bcContext.Mount))
-            let tp = "megablast"::(cmds |> List.concat)
+            let tp = "blastn"::"-task"::"megablast"::(cmds |> List.concat)
 
             printfn "Starting process megablast\r\nparameters:"
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -842,7 +847,6 @@ module Blast =
         ///]
         ///
         ///
-        [<RequireQualifiedAccess>]
         type DCMegablastParameters =  
             | CommonOptions     of BlastParams       list
             | SpecificOptions   of DCMegablastParams list
@@ -857,7 +861,7 @@ module Blast =
 
         let runDCMegablastNAsync (bcContext:BioContainer.BcContext) (opt:DCMegablastParameters list) = 
             let cmds = (opt |> List.map (DCMegablastParameters.makeCmdWith bcContext.Mount))
-            let tp = "dc-megablast"::(cmds |> List.concat)
+            let tp = "blastn"::"-task"::"dc-megablast"::(cmds |> List.concat)
 
             printfn "Starting process dc-megablast\r\nparameters:"
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -882,7 +886,6 @@ module Blast =
         ///]
         ///
         ///
-        [<RequireQualifiedAccess>]
         type BlastNParameters =  
             | CommonOptions     of BlastParams  list
             | SpecificOptions   of BlastNParams list
@@ -897,7 +900,7 @@ module Blast =
                 
         let runBlastNAsync (bcContext:BioContainer.BcContext) (opt:BlastNParameters list) = 
             let cmds = (opt |> List.map (BlastNParameters.makeCmdWith bcContext.Mount))
-            let tp = "blastn"::(cmds |> List.concat)
+            let tp = "blastn"::"-task"::"blastn"::(cmds |> List.concat)
 
             printfn "Starting process blastn\r\nparameters:"
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -922,7 +925,6 @@ module Blast =
         ///]
         ///
         ///
-        [<RequireQualifiedAccess>]
         type BlastNShortParameters =  
             | CommonOptions     of BlastParams           list
             | SpecificOptions   of BlastNShortParameters list
@@ -937,7 +939,7 @@ module Blast =
                                                          
         let runBlastNShortAsync (bcContext:BioContainer.BcContext) (opt:BlastNShortParameters list) = 
             let cmds = (opt |> List.map (BlastNShortParameters.makeCmdWith bcContext.Mount))
-            let tp = "blastn-short"::(cmds |> List.concat)
+            let tp = "blastn"::"-task"::"blastn-short"::(cmds |> List.concat)
 
             printfn "Starting process blastn-short\r\nparameters:"
             cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
@@ -952,19 +954,301 @@ module Blast =
             runBlastNShortAsync bcContext opt
             |> Async.RunSynchronously
     
+    ///DSL for blastp programs
+    ///The blastp application searches a protein sequence against protein subject sequences or a protein database. 
+    ///Three different tasks are supported: 
+    ///
+    ///1.) “blastp”, for standard protein-protein comparisons 
+    ///
+    ///2.) “blastp-short”, optimized for query sequences shorter than 30 residues 
+    ///
+    ///3.) “blastp-fast”, a faster version that uses a larger word-size
+    [<RequireQualifiedAccess>]
+    module BlastP =
+        
+        type BlastPParams =
+            ///Word size of initial match. Valid word sizes are 2-7.
+            | WordSize          of int
+            ///Cost to open a gap.
+            | GapOpen           of int
+            ///Cost to extend a gap.
+            | GapExtend         of int
+            ///Scoring matrix name.
+            | Matrix            of string
+            ///Minimum score to add a word to the BLAST lookup table.
+            | Threshold         of int
+            ///Use composition-based statistics: D or d: default (equivalent to 2) 0 or F or f: no composition-based statistics 21:902-911, 2005, conditioned on sequence properties3: Composition-based score adjustment as in Bioinformatics 21:902-911, 2005, unconditionally
+            //TODO: refactor into proper type
+            | CompBasedStats    of string
+            ///Apply filtering locations as soft masks (i.e., only for finding initial matches).
+            | SoftMasking       of bool
+            ///Multiple hits window size, use 0 to specify 1-hit algorithm.
+            | WindowSize        of int
+            ///Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable).
+            //TODO: refactor into proper type
+            | Seg               of string
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking
+            ///db_soft_mask     all    of int       none    Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask        of int
+            ///db_hard_mask     all    of int       none    Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask        of int       
+            ///xdrop_gap_final  all    of float     25    Heuristic value (in bits) for final gapped alignment/
+            | XDropGapFinal     of float
+            ///use_sw_tback     all                 N/A    Compute locally optimal Smith-Waterman alignments?
+            | UseSWTback    
+        
+            static member makeCmd = function
+                | Seg                p -> ["-seg"               ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"      ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"      ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"   ; string p]
+                | UseSWTback           -> ["-use_sw_tback"]            
+                | WordSize           p -> ["-word_size"         ; string p]
+                | GapOpen            p -> ["-gapopen"           ; string p]
+                | GapExtend          p -> ["-gapextend"         ; string p]
+                | Matrix             p -> ["-matrix"            ; string p]
+                | Threshold          p -> ["-threshold"         ; string p]
+                | CompBasedStats     p -> ["-comp_based_stats"  ; string p]
+                | SoftMasking        p -> ["-soft_masking"      ; string p]
+                | WindowSize         p -> ["-window_size"       ; string p]
 
-    let runBlastPAsync (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
-        let cmds = (opt |> List.map (BlastParams.makeCmdWith bcContext.Mount))
-        let tp = "blastp"::(cmds |> List.concat)
+            static member makeCmdWith (m:MountInfo) = function
+                | Seg                p -> ["-seg"               ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"      ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"      ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"   ; string p]
+                | UseSWTback           -> ["-use_sw_tback"]
+                | WordSize           p -> ["-word_size"         ; string p]
+                | GapOpen            p -> ["-gapopen"           ; string p]
+                | GapExtend          p -> ["-gapextend"         ; string p]
+                | Matrix             p -> ["-matrix"            ; string p]
+                | Threshold          p -> ["-threshold"         ; string p]
+                | CompBasedStats     p -> ["-comp_based_stats"  ; string p]
+                | SoftMasking        p -> ["-soft_masking"      ; string p]
+                | WindowSize         p -> ["-window_size"       ; string p]
 
-        printfn "Starting process blastp\r\nparameters:"
-        cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     BlastPParameters.CommonOptions [...]
+        ///
+        ///     BlastPParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        type BlastPParameters =
+            | CommonOptions     of BlastParams      list
+            | SpecificOptions   of BlastPParams     list
 
-        async {
-                let! res = BioContainer.execAsync bcContext tp           
-                return res
-        }
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map BlastPParams.makeCmd |> List.concat
 
-    let runBlastP (bcContext:BioContainer.BcContext) (opt:BlastParams list) = 
-        runBlastPAsync bcContext opt
-        |> Async.RunSynchronously
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (BlastPParams.makeCmdWith m) |> List.concat
+
+        let runBlastPAsync (bcContext:BioContainer.BcContext) (opt:BlastPParameters list) = 
+            let cmds = (opt |> List.map (BlastPParameters.makeCmdWith bcContext.Mount))
+            let tp = "blastp"::"-task"::"blastp"::(cmds |> List.concat)
+
+            printfn "Starting process blastp\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+            }
+
+        let runBlastP (bcContext:BioContainer.BcContext) (opt:BlastPParameters list) = 
+            runBlastPAsync bcContext opt
+            |> Async.RunSynchronously
+
+
+        type BlastPShortParams =
+            ///Word size of initial match.
+            | WordSize of int 
+            ///Cost to open a gap.
+            | GapOpen    of int 
+            ///Cost to extend a gap.
+            | GapExtend    of int  
+            ///Scoring matrix name.
+            | Matrix of string
+            ///thresholdMinimum score to add a word to the BLAST lookup table.
+            | Threshold    of int
+            ///Use composition-based statistics : D or d: default (equivalent to 2) 0 or F or f: no composition-based statistics 1: Composition-based statistics as in NAR 29:2994-3005, 2001 2 or T or t : Composition-based score adjustment as in Bioinformatics 21:902-911, 2005, conditioned on sequence properties 3: Composition-based score adjustment as in Bioinformatics 21:902-911, 2005, unconditionally
+            //TODO: refactor into proper type
+            | CompBasedStats of string
+            ///Multiple hits window size, use 0 to specify 1-hit algorithm.
+            | WindowSize    of int
+            ///Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable).
+            //TODO: refactor into proper type
+            | Seg               of string
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking
+            ///Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask        of int
+            ///Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask        of int       
+            ///Heuristic value (in bits) for final gapped alignment/
+            | XDropGapFinal     of float
+            ///Compute locally optimal Smith-Waterman alignments?
+            | UseSWTback    
+        
+            static member makeCmd = function
+                | Seg                p -> ["-seg"            ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"   ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"   ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"; string p]
+                | UseSWTback           -> ["-use_sw_tback"]            
+                | WordSize           p -> ["-word_size"]       
+                | GapOpen            p -> ["-gapopen"         ;]
+                | GapExtend          p -> ["-gapextend"       ;]
+                | Matrix             p -> ["-matrix"          ;]
+                | Threshold          p -> ["-threshold"       ;]
+                | CompBasedStats     p -> ["-comp_based_stats";]
+                | WindowSize         p -> ["-window_size"     ;]
+
+            static member makeCmdWith (m:MountInfo) = function
+                | Seg                p -> ["-seg"            ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"   ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"   ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"; string p]
+                | UseSWTback           -> ["-use_sw_tback"]
+                | WordSize           p -> ["-word_size"]       
+                | GapOpen            p -> ["-gapopen"         ;]
+                | GapExtend          p -> ["-gapextend"       ;]
+                | Matrix             p -> ["-matrix"          ;]
+                | Threshold          p -> ["-threshold"       ;]
+                | CompBasedStats     p -> ["-comp_based_stats";]
+                | WindowSize         p -> ["-window_size"     ;]
+
+        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     BlastPShortParameters.CommonOptions [...]
+        ///
+        ///     BlastPShortParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        type BlastPShortParameters =
+            | CommonOptions     of BlastParams          list
+            | SpecificOptions   of BlastPShortParams    list
+
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map BlastPShortParams.makeCmd |> List.concat
+
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (BlastPShortParams.makeCmdWith m) |> List.concat
+
+        let runBlastPShortAsync (bcContext:BioContainer.BcContext) (opt:BlastPShortParameters list) = 
+            let cmds = (opt |> List.map (BlastPShortParameters.makeCmdWith bcContext.Mount))
+            let tp = "blastp"::"-task"::"blastp-short"::(cmds |> List.concat)
+
+            printfn "Starting process blastp-short\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+            }
+
+        let runBlastPShort (bcContext:BioContainer.BcContext) (opt:BlastPShortParameters list) = 
+            runBlastPShortAsync bcContext opt
+            |> Async.RunSynchronously
+
+        type BlastPFastParams =
+            ///Word size of initial match
+            | WordSize          of int
+            ///Minimum score to add a word to the BLAST lookup table.
+            | Threshold         of int
+            ///Use composition-based statistics:D or d: default (equivalent to 2) 0 or F or f: no composition-based statistics
+            //TODO: refactor into proper type
+            |CompBasedStats     of string  
+            ///Multiple hits window size, use 0 to specify 1-hit algorithm.
+            | WindowSize        of int
+            ///Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable).
+            //TODO: refactor into proper type
+            | Seg               of string
+            ///Use lower case filtering in query and subject sequence(s).
+            | LowerCaseMasking
+            ///db_soft_mask     all    of int       none    Filtering algorithm ID to apply to the BLAST database as soft mask (i.e., only for finding initial matches).
+            | DBSoftMask        of int
+            ///db_hard_mask     all    of int       none    Filtering algorithm ID to apply to the BLAST database as hard mask (i.e., sequence is masked for all phases of search).
+            | DBHardMask        of int       
+            ///xdrop_gap_final  all    of float     25    Heuristic value (in bits) for final gapped alignment/
+            | XDropGapFinal     of float
+            ///use_sw_tback     all                 N/A    Compute locally optimal Smith-Waterman alignments?
+            | UseSWTback    
+        
+            static member makeCmd = function
+                | Seg                p -> ["-seg"            ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"   ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"   ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"; string p]
+                | UseSWTback           -> ["-use_sw_tback"]            
+                | WordSize           p -> ["-word size"       ; string p]
+                | Threshold          p -> ["-Threshold"       ; string p]
+                | CompBasedStats     p -> ["-comp_based_stats"; string p]
+                | WindowSize         p -> ["-window_size"     ; string p]
+
+            static member makeCmdWith (m:MountInfo) = function
+                | Seg                p -> ["-seg"            ; string p]
+                | LowerCaseMasking     -> ["-lcase_masking"]
+                | DBSoftMask         p -> ["-db_soft_mask"   ; string p]
+                | DBHardMask         p -> ["-db_hard_mask"   ; string p]
+                | XDropGapFinal      p -> ["-xdrop_gap_final"; string p]
+                | UseSWTback           -> ["-use_sw_tback"]
+                | WordSize           p -> ["-word size"       ; string p]
+                | Threshold          p -> ["-Threshold"       ; string p]
+                | CompBasedStats     p -> ["-comp_based_stats"; string p]
+                | WindowSize         p -> ["-window_size"     ; string p]
+
+        ///use this type to specify specific and generic command line parameters for the blastn megablast task like this:
+        ///
+        ///let myParams = [
+        ///
+        ///     BlastPFastParameters.CommonOptions [...]
+        ///
+        ///     BlastPFastParameters.SpecificOptions [...]
+        ///]
+        ///
+        ///
+        type BlastPFastParameters =
+            | CommonOptions     of BlastParams          list
+            | SpecificOptions   of BlastPFastParams    list
+
+            static member makeCmd = function
+                | CommonOptions     l -> l |> List.map BlastParams.makeCmd     |> List.concat
+                | SpecificOptions   l -> l |> List.map BlastPFastParams.makeCmd |> List.concat
+
+            static member makeCmdWith (m:MountInfo) = function
+                | CommonOptions     l -> l |> List.map (BlastParams.makeCmdWith m)     |> List.concat
+                | SpecificOptions   l -> l |> List.map (BlastPFastParams.makeCmdWith m) |> List.concat
+
+        let runBlastPFastAsync (bcContext:BioContainer.BcContext) (opt:BlastPFastParameters list) = 
+            let cmds = (opt |> List.map (BlastPFastParameters.makeCmdWith bcContext.Mount))
+            let tp = "blastp"::"-task"::"blastp-fast"::(cmds |> List.concat)
+
+            printfn "Starting process blastp\r\nparameters:"
+            cmds |> List.iter (fun op -> printfn "\t%s" (String.concat " " op))
+
+            async {
+                    let! res = BioContainer.execAsync bcContext tp           
+                    return res
+            }
+
+        let runBlastPFast (bcContext:BioContainer.BcContext) (opt:BlastPFastParameters list) = 
+            runBlastPFastAsync bcContext opt
+            |> Async.RunSynchronously
