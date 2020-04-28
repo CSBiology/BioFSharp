@@ -306,13 +306,17 @@ let buildPrereleasePackages =
         let suffix = System.Console.ReadLine()
         isPrerelease <- true
         prereleaseTag <- (sprintf "%s-%s" release.NugetVersion suffix)
-        Paket.pack(fun p -> 
-            { p with
+        if promptYesNo (sprintf "package tag will be %s OK?" prereleaseTag )
+            then 
+                Paket.pack(fun p -> 
+                    { p with
                 
-                ToolType = ToolType.CreateLocalTool()
-                OutputPath = pkgDir
-                Version = prereleaseTag
-                ReleaseNotes = release.Notes |> String.toLines })
+                        ToolType = ToolType.CreateLocalTool()
+                        OutputPath = pkgDir
+                        Version = prereleaseTag
+                        ReleaseNotes = release.Notes |> String.toLines })
+            else 
+                failwith "aborted"
     }
 
 let BuildReleasePackages = 
