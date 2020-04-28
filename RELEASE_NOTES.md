@@ -1,4 +1,4 @@
-#### 1.2.1 - tbd
+#### 2.0.0 - tbd
 **Additions:**
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
