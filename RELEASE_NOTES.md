@@ -1,9 +1,14 @@
 #### 2.0.0 - tbd
+(preview packages available on nuget)
+
 **Additions:**
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
      * full blastn, blastn-short, megablast, and dc-megablast DSLs
      * full blastp, blastp-fast, and blastp-short DSLs
+ * **BioFSharp.IO**:
+   * OBO parser: Extended term parser for spec 1.4
+
 #### 1.2.0 - Monday, March 30
 
 **Additions:**
