@@ -1,0 +1,39 @@
+[Term]
+id: TestTermDontHate:0001
+name: This Is My name
+is_anonymous: false
+alt_id: iDontExist:0000
+alt_id: iOnlyExistForTestPurposes=(:0000
+def: "Abomination of made up text for testing purposes this is all as funny as you think smh" [notImplemented:0000 "in the futre we should support dbxref parsing here", soos:0000 ""]
+comment: For some  reason only one comment is allowed
+subset: doesnt really work here as we dont have subset def tags in this file but ill add it for parsing testing anyway. this means that this obo file is invalid but idc
+synonym: "exact test" EXACT 1 [MEAT:00324, BACONBASE:03021]
+synonym: "narrow test" NARROW 2
+synonym: "broad test with complicated xrefs" BROAD 3 [No Description No Modifier, NoDescription {SomeTrailingModifier}, All "SomeDescription" {SomeTrailingModifier}]
+synonym: "related test" RELATED 4 [MEAT:00324, BACONBASE:03021]
+exact_synonym: "Deprecated but should be parsed as exact" 5 [MEAT:00324, BACONBASE:03021]
+narrow_synonym: "Deprecated but should be parsed as narrow" 6 [MEAT:00324, BACONBASE:03021]
+broad_synonym: "Deprecated but should be parsed as broad" [MEAT:00324, BACONBASE:03021]
+xref: No Description No Modifier
+xref: NoDescription {SomeTrailingModifier}
+xref: All "SomeDescription" {SomeTrailingModifier}
+xref_analog: analog(deprecated tag) "should be parsed as dbxref"
+xref_unk: unk(deprecated tag) "should be parsed as dbxref"
+is_a: TestTermDontHate:0000
+is_a: IHaveAllModifiersXDD {namespace <anyNamespaceId> derived true}
+intersection_of: GO:0051319 ! G2 phase
+intersection_of: part_of GO:0000278 ! mitotic cell cycle
+intersection_of: GO:0005737 ! cytoplasm
+intersection_of: part_of CL:0000023 ! oocyte
+union_of: SomeOntology1
+union_of: SomeOntology2 {namespace <anyNamespaceId>}
+disjoint_from: someFunnyWittyComment {namespace <idontevenknow>}
+relationship: has_part NoTrailingModifiers
+relationship: has_part AllTheModifiers {namespace <any namespace id>, inferred true, minCardinality=2, maxCardinality=4, cardinality=3} ! CDS
+is_obsolete: false
+replaced_by: notImplemented
+consider: Reflecting on your choices in life
+use_term: Should be parsed as consider
+builtin: false
+created_by: FunnyMemeBoi1337
+creation_date: 0420-04-20T00:04:20Z
