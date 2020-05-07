@@ -6,8 +6,14 @@
    * BLAST biocontainer :
      * full blastn, blastn-short, megablast, and dc-megablast DSLs
      * full blastp, blastp-fast, and blastp-short DSLs
+   * TargetP BioContainer :
+     * Add functions to run the container with a mounted directory
  * **BioFSharp.IO**:
    * OBO parser: Extended term parser for spec 1.4
+
+**Bugfixes:**
+ * **BioFSharp.IO**:
+   * OBO parser now correctly parses lists of relationships
 
 #### 1.2.0 - Monday, March 30
 

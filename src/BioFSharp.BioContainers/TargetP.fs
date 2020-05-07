@@ -102,3 +102,25 @@ module TargetP =
     let run bcContext (opt:TargetpParams) (fsaStream:Stream) = 
         runAsync bcContext opt fsaStream
         |> Async.RunSynchronously
+
+    let runWithMountAsync (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
+        let cPath = BioContainer.MountInfo.containerPathOf bcContext.Mount inputFile
+    
+        //construct targetP command line string
+        let tp = "targetp"::TargetpParams.makeCmd opt
+        async {
+            let! targepResult =
+                BioContainer.execReturnAsync bcContext (tp@[cPath])
+        
+            //read targetP output as csv and convert it into a TargetPItem
+            let skipLines             = 1
+            let skipLinesBeforeHeader = 6 //6
+            let schemaMode = SchemaReader.Csv.Fill
+            let csvReader = SchemaReader.Csv.CsvReader<TargetpItem>(SchemaMode=schemaMode)
+
+            return csvReader.ReadFromString(targepResult,'\t',true,skipLines, skipLinesBeforeHeader)
+        }
+
+    let runWithMount (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
+        runWithMountAsync bcContext opt inputFile
+        |> Async.RunSynchronously
