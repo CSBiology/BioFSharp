@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>BioContainers_TargetP</title>
+    <title>TargetP BioContainer
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="An open source bioinformatics toolbox written in F#. <https://csbiology.github.io/BioFSharp/>"/>
     <meta name="author" content="Timo M�hlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors"/>
@@ -33,12 +34,14 @@
 		  <hr />
 		  <div class="row">
 			<div class="span9" id="main">
-			  <p>TargetP 1.1 is a widely used tool to predict subcellular localization of proteins by predicting N-terminal presequences.
+			  <h1><a name="TargetP-BioContainer" class="anchor" href="#TargetP-BioContainer">TargetP BioContainer</a></h1>
+<p>TargetP 1.1 is a widely used tool to predict subcellular localization of proteins by predicting N-terminal presequences.
 We can leverage the power of targetP from F# by using it in a docker container. To get academical access to the targetP software,
 please contact the friendly people at <a href="https://services.healthtech.dtu.dk/software.php">DTU</a>.</p>
-<p>After aquiring the softare you can create a dockerfile at the packages root and run</p>
+<h2><a name="The-image" class="anchor" href="#The-image">The image</a></h2>
+<p>After aquiring the software you can create a dockerfile that abides biocontainer conventions at the packages root and run</p>
 <p><code>docker build . -t nameOfYourContainer:yourTag</code></p>
-<p>to get the image needed.</p>
+<p>to get the image needed. Here is an example of a possible dockerfile:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -95,6 +98,7 @@ ADD ./chlorop-1.1.Linux.tar /opt/
 # SignalP install
 ADD ./signalp-4.1f.Linux.tar.gz /opt/
 </code></pre></td></tr></table>
+<h2><a name="Running-targetp-from-F" class="anchor" href="#Running-targetp-from-F">Running targetp from F#</a></h2>
 <p>As always, we need to define the docker client endpoint, image, and container context to run:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -130,7 +134,7 @@ ADD ./signalp-4.1f.Linux.tar.gz /opt/
 </table>
 <p>To analyze a file with the container, we can use the <code>runWithMountedFile</code> function to work on a fasta file in the mounted directory.
 The file can be either coming from outside or upstream analysis pipelines using BioFSharp and written to disk by <code>FastA.write</code>.</p>
-<p><strong>Note: this function is available from version 2.0.0 onwards.</strong></p>
+<p><em>Note: this function is available from version 2.0.0 onwards.</em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -147,8 +151,8 @@ The file can be either coming from outside or upstream analysis pipelines using 
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">results</span> <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="id">runWithMountedFile</span>
         <span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="id">imageContext</span> 
-        <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="rt">TargetpParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="id">NonPlant</span>
-        <span class="s">@&quot;C:\Users\kevin\Desktop\TargetPdocker\targetp-1.1b.Linux\targetp-1.1\test\one.fsa&quot;</span>
+        <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="rt">TargetpParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="id">NonPlant</span> <span class="c">//Note that you can run custom commands using either NonPlantCustom or PlantCustom</span>
+        <span class="s">@&quot;path/to/your/file&quot;</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="id">item</span> <span class="n">0</span>
 
 <span class="c">//dont forget to get rid of the container after using it</span>
@@ -175,23 +179,7 @@ val it : TargetP.TargetpItem = {
 </pre>
 <p>It may not always be convenient to analyze files on the disk. To use a memory stream of a
 <code>FastAItem</code> instead, we can write it to a stream and analyze it using the <code>runWithStream</code> function</p>
-<p><strong>Note: in versions before 2.0.0, this function is named <code>run</code></strong></p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="id">IO</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 33)" onmouseover="showTip(event, 'fs1', 33)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="id">IO</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="id">testFasta</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs26', 36)" onmouseover="showTip(event, 'fs26', 36)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 37)" onmouseover="showTip(event, 'fs27', 37)" class="id">createFastaItem</span> <span class="s">&quot;Header&quot;</span> <span class="s">&quot;Sequence&quot;</span>
-</code></pre></td>
-</tr>
-</table>
-<table class="pre"><tr><td><pre><code>{ Header = "Header"
-  Sequence = "Sequence" }</code></pre></td></tr></table>
+<p><em>Note: in versions before 2.0.0, this function is named <code>run</code></em></p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -200,13 +188,33 @@ val it : TargetP.TargetpItem = {
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 38)" onmouseover="showTip(event, 'fs28', 38)" class="id">stream</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs29', 39)" onmouseover="showTip(event, 'fs29', 39)" class="d">MemoryStream</span><span class="pn">(</span><span class="pn">)</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="id">IO</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 33)" onmouseover="showTip(event, 'fs1', 33)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="id">IO</span>
 
-<span class="pn">[</span><span onmouseout="hideTip(event, 'fs25', 40)" onmouseover="showTip(event, 'fs25', 40)" class="id">testFasta</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 41)" onmouseover="showTip(event, 'fs26', 41)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 42)" onmouseover="showTip(event, 'fs30', 42)" class="id">writeToStream</span> <span onmouseout="hideTip(event, 'fs31', 43)" onmouseover="showTip(event, 'fs31', 43)" class="fn">id</span> <span onmouseout="hideTip(event, 'fs28', 44)" onmouseover="showTip(event, 'fs28', 44)" class="id">stream</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="id">testSequence</span> <span class="o">=</span> <span class="s">&quot;SEQUENCE&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs1', 36)" onmouseover="showTip(event, 'fs1', 36)" class="fn">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 37)" onmouseover="showTip(event, 'fs26', 37)" class="m">BioArray</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 38)" onmouseover="showTip(event, 'fs27', 38)" class="id">ofAminoAcidString</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 39)" onmouseover="showTip(event, 'fs28', 39)" class="id">testFasta</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs29', 40)" onmouseover="showTip(event, 'fs29', 40)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 41)" onmouseover="showTip(event, 'fs30', 41)" class="id">createFastaItem</span> <span class="s">&quot;Header&quot;</span> <span onmouseout="hideTip(event, 'fs25', 42)" onmouseover="showTip(event, 'fs25', 42)" class="id">testSequence</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td><pre><code>{ Header = "Header"
+  Sequence = [|Ser; Glu; Gln; Sel; Glu; Asn; Cys; Glu|] }</code></pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 43)" onmouseover="showTip(event, 'fs31', 43)" class="id">stream</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs32', 44)" onmouseover="showTip(event, 'fs32', 44)" class="d">MemoryStream</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="pn">[</span><span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="id">testFasta</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="m">FastA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 47)" onmouseover="showTip(event, 'fs33', 47)" class="id">writeToStream</span> <span onmouseout="hideTip(event, 'fs1', 48)" onmouseover="showTip(event, 'fs1', 48)" class="fn">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 49)" onmouseover="showTip(event, 'fs34', 49)" class="m">BioItem</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 50)" onmouseover="showTip(event, 'fs35', 50)" class="id">symbol</span> <span onmouseout="hideTip(event, 'fs31', 51)" onmouseover="showTip(event, 'fs31', 51)" class="id">stream</span>
 
 <span class="c">//reset position of the memory stream</span>
-<span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="id">stream</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="id">Position</span> <span class="k">&lt;-</span> <span class="n">0L</span>
+<span onmouseout="hideTip(event, 'fs31', 52)" onmouseover="showTip(event, 'fs31', 52)" class="id">stream</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 53)" onmouseover="showTip(event, 'fs36', 53)" class="id">Position</span> <span class="k">&lt;-</span> <span class="n">0L</span>
 </code></pre></td>
 </tr>
 </table>
@@ -214,9 +222,9 @@ val it : TargetP.TargetpItem = {
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 47)" onmouseover="showTip(event, 'fs33', 47)" class="id">streamRes</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs15', 48)" onmouseover="showTip(event, 'fs15', 48)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 49)" onmouseover="showTip(event, 'fs34', 49)" class="id">runWithStream</span> <span onmouseout="hideTip(event, 'fs9', 50)" onmouseover="showTip(event, 'fs9', 50)" class="id">imageContext</span> <span onmouseout="hideTip(event, 'fs15', 51)" onmouseover="showTip(event, 'fs15', 51)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 52)" onmouseover="showTip(event, 'fs17', 52)" class="rt">TargetpParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 53)" onmouseover="showTip(event, 'fs18', 53)" class="id">NonPlant</span> <span onmouseout="hideTip(event, 'fs28', 54)" onmouseover="showTip(event, 'fs28', 54)" class="id">stream</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 55)" onmouseover="showTip(event, 'fs35', 55)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 56)" onmouseover="showTip(event, 'fs36', 56)" class="id">ofSeq</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 54)" onmouseover="showTip(event, 'fs37', 54)" class="id">streamRes</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs15', 55)" onmouseover="showTip(event, 'fs15', 55)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 56)" onmouseover="showTip(event, 'fs38', 56)" class="id">runWithStream</span> <span onmouseout="hideTip(event, 'fs9', 57)" onmouseover="showTip(event, 'fs9', 57)" class="id">imageContext</span> <span onmouseout="hideTip(event, 'fs15', 58)" onmouseover="showTip(event, 'fs15', 58)" class="m">TargetP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 59)" onmouseover="showTip(event, 'fs17', 59)" class="rt">TargetpParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 60)" onmouseover="showTip(event, 'fs18', 60)" class="id">NonPlant</span> <span onmouseout="hideTip(event, 'fs31', 61)" onmouseover="showTip(event, 'fs31', 61)" class="id">stream</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs39', 62)" onmouseover="showTip(event, 'fs39', 62)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="id">ofSeq</span>
 </code></pre></td>
 </tr>
 </table>
@@ -258,18 +266,22 @@ val it : TargetP.TargetpItem = {
 <div class="tip" id="fs22">namespace System</div>
 <div class="tip" id="fs23">namespace System.IO</div>
 <div class="tip" id="fs24">namespace BioFSharp.IO</div>
-<div class="tip" id="fs25">val testFasta : FastA.FastaItem&lt;string&gt;</div>
-<div class="tip" id="fs26">module FastA<br /><br />from BioFSharp.IO</div>
-<div class="tip" id="fs27">val createFastaItem : header:string -&gt; sequence:&#39;a -&gt; FastA.FastaItem&lt;&#39;a&gt;</div>
-<div class="tip" id="fs28">val stream : MemoryStream</div>
-<div class="tip" id="fs29">Multiple items<br />type MemoryStream =<br />&#160;&#160;inherit Stream<br />&#160;&#160;new : unit -&gt; MemoryStream + 6 overloads<br />&#160;&#160;member CanRead : bool<br />&#160;&#160;member CanSeek : bool<br />&#160;&#160;member CanWrite : bool<br />&#160;&#160;member Capacity : int with get, set<br />&#160;&#160;member CopyTo : destination:Stream * bufferSize:int -&gt; unit<br />&#160;&#160;member CopyToAsync : destination:Stream * bufferSize:int * cancellationToken:CancellationToken -&gt; Task<br />&#160;&#160;member Flush : unit -&gt; unit<br />&#160;&#160;member FlushAsync : cancellationToken:CancellationToken -&gt; Task<br />&#160;&#160;member GetBuffer : unit -&gt; byte[]<br />&#160;&#160;...<br /><br />--------------------<br />MemoryStream() : MemoryStream<br />MemoryStream(capacity: int) : MemoryStream<br />MemoryStream(buffer: byte []) : MemoryStream<br />MemoryStream(buffer: byte [], writable: bool) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int, writable: bool) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int, writable: bool, publiclyVisible: bool) : MemoryStream</div>
-<div class="tip" id="fs30">val writeToStream : toString:(&#39;T -&gt; char) -&gt; stream:Stream -&gt; data:seq&lt;FastA.FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit</div>
-<div class="tip" id="fs31">val id : x:&#39;T -&gt; &#39;T</div>
-<div class="tip" id="fs32"></div>
-<div class="tip" id="fs33">val streamRes : TargetP.TargetpItem []</div>
-<div class="tip" id="fs34">val runWithStream : bcContext:BioContainer.BcContext -&gt; opt:TargetP.TargetpParams -&gt; fsaStream:Stream -&gt; seq&lt;TargetP.TargetpItem&gt;</div>
-<div class="tip" id="fs35">module Array<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs36">val ofSeq : source:seq&lt;&#39;T&gt; -&gt; &#39;T []</div>
+<div class="tip" id="fs25">val testSequence : BioFSharp.BioArray.BioArray&lt;BioFSharp.AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs26">module BioArray<br /><br />from BioFSharp</div>
+<div class="tip" id="fs27">val ofAminoAcidString : s:#seq&lt;char&gt; -&gt; BioFSharp.BioArray.BioArray&lt;BioFSharp.AminoAcids.AminoAcid&gt;</div>
+<div class="tip" id="fs28">val testFasta : FastA.FastaItem&lt;BioFSharp.BioArray.BioArray&lt;BioFSharp.AminoAcids.AminoAcid&gt;&gt;</div>
+<div class="tip" id="fs29">module FastA<br /><br />from BioFSharp.IO</div>
+<div class="tip" id="fs30">val createFastaItem : header:string -&gt; sequence:&#39;a -&gt; FastA.FastaItem&lt;&#39;a&gt;</div>
+<div class="tip" id="fs31">val stream : MemoryStream</div>
+<div class="tip" id="fs32">Multiple items<br />type MemoryStream =<br />&#160;&#160;inherit Stream<br />&#160;&#160;new : unit -&gt; MemoryStream + 6 overloads<br />&#160;&#160;member CanRead : bool<br />&#160;&#160;member CanSeek : bool<br />&#160;&#160;member CanWrite : bool<br />&#160;&#160;member Capacity : int with get, set<br />&#160;&#160;member CopyTo : destination:Stream * bufferSize:int -&gt; unit<br />&#160;&#160;member CopyToAsync : destination:Stream * bufferSize:int * cancellationToken:CancellationToken -&gt; Task<br />&#160;&#160;member Flush : unit -&gt; unit<br />&#160;&#160;member FlushAsync : cancellationToken:CancellationToken -&gt; Task<br />&#160;&#160;member GetBuffer : unit -&gt; byte[]<br />&#160;&#160;...<br /><br />--------------------<br />MemoryStream() : MemoryStream<br />MemoryStream(capacity: int) : MemoryStream<br />MemoryStream(buffer: byte []) : MemoryStream<br />MemoryStream(buffer: byte [], writable: bool) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int, writable: bool) : MemoryStream<br />MemoryStream(buffer: byte [], index: int, count: int, writable: bool, publiclyVisible: bool) : MemoryStream</div>
+<div class="tip" id="fs33">val writeToStream : toString:(&#39;T -&gt; char) -&gt; stream:Stream -&gt; data:seq&lt;FastA.FastaItem&lt;#seq&lt;&#39;T&gt;&gt;&gt; -&gt; unit</div>
+<div class="tip" id="fs34">module BioItem<br /><br />from BioFSharp</div>
+<div class="tip" id="fs35">val symbol : bItem:#BioFSharp.IBioItem -&gt; char</div>
+<div class="tip" id="fs36"></div>
+<div class="tip" id="fs37">val streamRes : TargetP.TargetpItem []</div>
+<div class="tip" id="fs38">val runWithStream : bcContext:BioContainer.BcContext -&gt; opt:TargetP.TargetpParams -&gt; fsaStream:Stream -&gt; seq&lt;TargetP.TargetpItem&gt;</div>
+<div class="tip" id="fs39">module Array<br /><br />from Microsoft.FSharp.Collections</div>
+<div class="tip" id="fs40">val ofSeq : source:seq&lt;&#39;T&gt; -&gt; &#39;T []</div>
 
 			</div>
 			<div class="span3" >
