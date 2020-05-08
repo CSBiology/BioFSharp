@@ -76,8 +76,7 @@ module TargetP =
             [<FieldAttribute("TPlen")>] TPlen : string
         }
 
-
-    let runAsync bcContext (opt:TargetpParams) (fsaStream:Stream) = 
+    let runWithStreamAsync bcContext (opt:TargetpParams) (fsaStream:Stream) = 
         let tp = "targetp"::TargetpParams.makeCmd opt
         let tmpFile = sprintf "/data/%A.fsa" (System.Guid.NewGuid())
         async {
@@ -85,9 +84,7 @@ module TargetP =
                 BioContainer.putStreamAsync bcContext fsaStream tmpFile
             let! targepResult =
                 BioContainer.execReturnAsync bcContext (tp@[tmpFile])
-            //do!
-            //    BioContainer.disposeAsync bcContext
- 
+
             // CsV Reader
             let skipLines             = 1
             let skipLinesBeforeHeader = 6 //6
@@ -99,11 +96,11 @@ module TargetP =
         }
         
         
-    let run bcContext (opt:TargetpParams) (fsaStream:Stream) = 
-        runAsync bcContext opt fsaStream
+    let runWithStream bcContext (opt:TargetpParams) (fsaStream:Stream) = 
+        runWithStreamAsync bcContext opt fsaStream
         |> Async.RunSynchronously
 
-    let runWithMountAsync (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
+    let runWithMountedFileAsync (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
         let cPath = BioContainer.MountInfo.containerPathOf bcContext.Mount inputFile
     
         //construct targetP command line string
@@ -121,6 +118,36 @@ module TargetP =
             return csvReader.ReadFromString(targepResult,'\t',true,skipLines, skipLinesBeforeHeader)
         }
 
-    let runWithMount (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
-        runWithMountAsync bcContext opt inputFile
+    let runWithMountedFile (bcContext:BioContainer.BcContext) (opt:TargetpParams) (inputFile:string) =
+        runWithMountedFileAsync bcContext opt inputFile
+        |> Async.RunSynchronously
+
+
+
+
+
+    
+    [<Obsolete("Use runWithStreamAsync instead")>]
+    let runAsync bcContext (opt:TargetpParams) (fsaStream:Stream) = 
+        let tp = "targetp"::TargetpParams.makeCmd opt
+        let tmpFile = sprintf "/data/%A.fsa" (System.Guid.NewGuid())
+        async {
+            do!
+                BioContainer.putStreamAsync bcContext fsaStream tmpFile
+            let! targepResult =
+                BioContainer.execReturnAsync bcContext (tp@[tmpFile])
+
+            // CsV Reader
+            let skipLines             = 1
+            let skipLinesBeforeHeader = 6 //6
+            let schemaMode = SchemaReader.Csv.Fill
+            let csvReader = SchemaReader.Csv.CsvReader<TargetpItem>(SchemaMode=schemaMode)
+                
+            return csvReader.ReadFromString(targepResult,'\t',true,skipLines, skipLinesBeforeHeader)
+ 
+        }
+            
+    [<Obsolete("Use runWithStream instead")>]
+    let run bcContext (opt:TargetpParams) (fsaStream:Stream) = 
+        runAsync bcContext opt fsaStream
         |> Async.RunSynchronously
