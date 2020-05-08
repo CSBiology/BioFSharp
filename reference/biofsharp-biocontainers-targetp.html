@@ -87,10 +87,10 @@
     <tbody>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '559', 559)" onmouseover="showTip(event, '559', 559)">
+          <code onmouseout="hideTip(event, '569', 569)" onmouseover="showTip(event, '569', 569)">
             ImageTargetP
           </code>
-          <div class="tip" id="559">
+          <div class="tip" id="569">
             <strong>Signature:</strong> DockerId<br />
                                   </div>
         </td>
@@ -104,15 +104,23 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '560', 560)" onmouseover="showTip(event, '560', 560)">
+          <code onmouseout="hideTip(event, '570', 570)" onmouseover="showTip(event, '570', 570)">
             run bcContext opt fsaStream
           </code>
-          <div class="tip" id="560">
+          <div class="tip" id="570">
             <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; fsaStream:Stream -&gt; seq&lt;TargetpItem&gt;<br />
-                                  </div>
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Use runWithStream instead&quot;)&gt;]<br />
+          </span>
+          </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L102-102" class="github-link">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Use runWithStream instead</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L151-151" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -121,15 +129,91 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '561', 561)" onmouseover="showTip(event, '561', 561)">
+          <code onmouseout="hideTip(event, '571', 571)" onmouseover="showTip(event, '571', 571)">
             runAsync bcContext opt fsaStream
           </code>
-          <div class="tip" id="561">
+          <div class="tip" id="571">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; fsaStream:Stream -&gt; Async&lt;seq&lt;TargetpItem&gt;&gt;<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Obsolete(&quot;Use runWithStreamAsync instead&quot;)&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+              <div class="alert alert-warning">
+              <strong>WARNING: </strong> This API is obsolete
+              <p>Use runWithStreamAsync instead</p>
+              </div> 
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L131-131" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '572', 572)" onmouseover="showTip(event, '572', 572)">
+            runWithMountedFile(...)
+          </code>
+          <div class="tip" id="572">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; inputFile:string -&gt; seq&lt;TargetpItem&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L121-121" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '573', 573)" onmouseover="showTip(event, '573', 573)">
+            runWithMountedFileAsync(...)
+          </code>
+          <div class="tip" id="573">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; inputFile:string -&gt; Async&lt;seq&lt;TargetpItem&gt;&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L103-103" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '574', 574)" onmouseover="showTip(event, '574', 574)">
+            runWithStream bcContext opt fsaStream
+          </code>
+          <div class="tip" id="574">
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; fsaStream:Stream -&gt; seq&lt;TargetpItem&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L99-99" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '575', 575)" onmouseover="showTip(event, '575', 575)">
+            runWithStreamAsync(...)
+          </code>
+          <div class="tip" id="575">
             <strong>Signature:</strong> bcContext:BcContext -&gt; opt:TargetpParams -&gt; fsaStream:Stream -&gt; Async&lt;seq&lt;TargetpItem&gt;&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L80-80" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/TargetP.fs#L79-79" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -159,6 +243,7 @@
                   <li class="nav-header">BioContainers</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers_TargetP.html">TargetP</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>

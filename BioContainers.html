@@ -65,8 +65,10 @@ to help out, this is a great place to do so!</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
+<span class="l">5: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">BioContainers</span>
+<span class="c">///parameters for blastP</span>
 
 <span class="c">///npipe://./pipe/docker_engine is the named pipe for the docker engine under windows.</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">client</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">connect</span> <span class="s">&quot;npipe://./pipe/docker_engine&quot;</span>
@@ -166,6 +168,18 @@ such as BLAST, TMHMM, or intaRNA. If you want to create your own, please refer t
 <p>First you have to either pull the BLAST BioContainer image either via docker cli or by building them from the docker file
 A way to do this from F# is in the making.</p>
 <p>The protein fasta used here can be found <a href="">here</a></p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 53)" onmouseover="showTip(event, 'fs1', 53)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 54)" onmouseover="showTip(event, 'fs2', 54)" class="id">BioContainers</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs30', 55)" onmouseover="showTip(event, 'fs30', 55)" class="id">Blast</span>
+
+<span class="c">///this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</span>
+</code></pre></td>
+</tr>
+</table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -193,34 +207,67 @@ A way to do this from F# is in the making.</p>
 <span class="l">25: </span>
 <span class="l">26: </span>
 <span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 53)" onmouseover="showTip(event, 'fs1', 53)" class="id">BioFSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 54)" onmouseover="showTip(event, 'fs2', 54)" class="id">BioContainers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 55)" onmouseover="showTip(event, 'fs30', 55)" class="id">Blast</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 56)" onmouseover="showTip(event, 'fs31', 56)" class="id">ImageBlast</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 58)" onmouseover="showTip(event, 'fs19', 58)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="id">ImageId</span> <span class="s">&quot;blast:2.2.31--pl526h3066fca_3&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 56)" onmouseover="showTip(event, 'fs31', 56)" class="id">ImageBlast</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 57)" onmouseover="showTip(event, 'fs4', 57)" class="m">Docker</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 58)" onmouseover="showTip(event, 'fs19', 58)" class="rt">DockerId</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="id">ImageId</span> <span class="s">&quot;blast&quot;</span>
-
-<span class="c">///this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 60)" onmouseover="showTip(event, 'fs32', 60)" class="id">blastContext</span> <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs22', 61)" onmouseover="showTip(event, 'fs22', 61)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 62)" onmouseover="showTip(event, 'fs33', 62)" class="id">initBcContextWithMountAsync</span> 
         <span onmouseout="hideTip(event, 'fs3', 63)" onmouseover="showTip(event, 'fs3', 63)" class="id">client</span> 
         <span onmouseout="hideTip(event, 'fs31', 64)" onmouseover="showTip(event, 'fs31', 64)" class="id">ImageBlast</span> 
-        <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data&quot;</span>
+        <span class="s">&quot;absolute/path/to/mounted/directory&quot;</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 65)" onmouseover="showTip(event, 'fs24', 65)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 66)" onmouseover="showTip(event, 'fs25', 66)" class="id">RunSynchronously</span>
 
 <span class="c">///parameters for search DB creation</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 67)" onmouseover="showTip(event, 'fs34', 67)" class="id">makeDBParams</span> <span class="o">=</span>
     <span class="pn">[</span>
-        <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">DbType</span> <span onmouseout="hideTip(event, 'fs35', 68)" onmouseover="showTip(event, 'fs35', 68)" class="id">Protein</span>
-        <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">Input</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
-        <span class="id">MakeDbParams</span><span class="pn">.</span><span class="id">Output</span><span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
+        <span onmouseout="hideTip(event, 'fs35', 68)" onmouseover="showTip(event, 'fs35', 68)" class="rt">MakeBlastDbParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="id">DbType</span>    <span onmouseout="hideTip(event, 'fs37', 70)" onmouseover="showTip(event, 'fs37', 70)" class="uc">Protein</span>
+        <span onmouseout="hideTip(event, 'fs35', 71)" onmouseover="showTip(event, 'fs35', 71)" class="rt">MakeBlastDbParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 72)" onmouseover="showTip(event, 'fs38', 72)" class="id">Input</span>     <span class="s">&quot;absolute/path/to/your/subject&quot;</span>
+        <span onmouseout="hideTip(event, 'fs35', 73)" onmouseover="showTip(event, 'fs35', 73)" class="rt">MakeBlastDbParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 74)" onmouseover="showTip(event, 'fs39', 74)" class="id">Output</span>    <span class="s">&quot;absolute/path/to/your/outputfile&quot;</span>
     <span class="pn">]</span>
 
-<span class="c">///parameters for blastP</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="id">blastPParams</span> <span class="o">=</span> <span class="pn">[</span>
-    <span onmouseout="hideTip(event, 'fs37', 70)" onmouseover="showTip(event, 'fs37', 70)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 71)" onmouseover="showTip(event, 'fs38', 71)" class="id">SearchDB</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Chlamy_Cp.fastA&quot;</span>
-    <span onmouseout="hideTip(event, 'fs37', 72)" onmouseover="showTip(event, 'fs37', 72)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 73)" onmouseover="showTip(event, 'fs39', 73)" class="id">Query</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\testQuery.fastA&quot;</span>
-    <span onmouseout="hideTip(event, 'fs37', 74)" onmouseover="showTip(event, 'fs37', 74)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="id">Output</span> <span class="s">@&quot;C:\Users\Kevin\source\repos\CsbScaffold\Docker\data\Output.txt&quot;</span>
-    <span onmouseout="hideTip(event, 'fs37', 76)" onmouseover="showTip(event, 'fs37', 76)" class="rt">BlastParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 77)" onmouseover="showTip(event, 'fs41', 77)" class="id">OutputType</span> <span onmouseout="hideTip(event, 'fs42', 78)" onmouseover="showTip(event, 'fs42', 78)" class="rt">OutputType</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 79)" onmouseover="showTip(event, 'fs43', 79)" class="id">TabularWithComments</span>
-<span class="pn">]</span>
+<span class="c">///parameters for the blastp search</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="id">runParams</span> <span class="o">=</span>
+    <span class="pn">[</span>
+        <span onmouseout="hideTip(event, 'fs41', 76)" onmouseover="showTip(event, 'fs41', 76)" class="m">BlastP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 77)" onmouseover="showTip(event, 'fs42', 77)" class="rt">BlastPParameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 78)" onmouseover="showTip(event, 'fs43', 78)" class="id">CommonOptions</span> <span class="pn">[</span>
+            <span onmouseout="hideTip(event, 'fs44', 79)" onmouseover="showTip(event, 'fs44', 79)" class="uc">Query</span>               <span class="s">&quot;absolute/path/to/your/query&quot;</span>
+            <span onmouseout="hideTip(event, 'fs45', 80)" onmouseover="showTip(event, 'fs45', 80)" class="uc">SearchDB</span>            <span class="s">&quot;absolute/path/to/your/subject&quot;</span>
+            <span onmouseout="hideTip(event, 'fs46', 81)" onmouseover="showTip(event, 'fs46', 81)" class="uc">Output</span>              <span class="s">&quot;absolute/path/to/your/outputfile&quot;</span>
+        <span class="pn">]</span>
+        <span onmouseout="hideTip(event, 'fs41', 82)" onmouseover="showTip(event, 'fs41', 82)" class="m">BlastP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 83)" onmouseover="showTip(event, 'fs42', 83)" class="rt">BlastPParameters</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 84)" onmouseover="showTip(event, 'fs47', 84)" class="id">SpecificOptions</span> <span class="pn">[</span>
+            <span onmouseout="hideTip(event, 'fs41', 85)" onmouseover="showTip(event, 'fs41', 85)" class="m">BlastP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs48', 86)" onmouseover="showTip(event, 'fs48', 86)" class="rt">BlastPParams</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 87)" onmouseover="showTip(event, 'fs49', 87)" class="id">WordSize</span>    <span class="n">11</span>
+        <span class="pn">]</span>
+    <span class="pn">]</span>
+</code></pre></td>
+</tr>
+</table>
+<p>finally, we can run the searchdb generation and the subsequent search in the container like this:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 88)" onmouseover="showTip(event, 'fs34', 88)" class="id">makeDBParams</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 89)" onmouseover="showTip(event, 'fs30', 89)" class="m">Blast</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 90)" onmouseover="showTip(event, 'fs50', 90)" class="id">runMakeBlastDB</span> <span onmouseout="hideTip(event, 'fs32', 91)" onmouseover="showTip(event, 'fs32', 91)" class="id">blastContext</span>
+
+<span onmouseout="hideTip(event, 'fs40', 92)" onmouseover="showTip(event, 'fs40', 92)" class="id">runParams</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 93)" onmouseover="showTip(event, 'fs30', 93)" class="m">Blast</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 94)" onmouseover="showTip(event, 'fs41', 94)" class="m">BlastP</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 95)" onmouseover="showTip(event, 'fs51', 95)" class="id">runBlastP</span> <span onmouseout="hideTip(event, 'fs32', 96)" onmouseover="showTip(event, 'fs32', 96)" class="id">blastContext</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Don't forget, the container will be kept running, so dispose it if you do not need it anymore to
+prevent it from eating up ressources</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs32', 97)" onmouseover="showTip(event, 'fs32', 97)" class="id">blastContext</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 98)" onmouseover="showTip(event, 'fs22', 98)" class="m">BioContainer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 99)" onmouseover="showTip(event, 'fs29', 99)" class="id">disposeAsync</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 100)" onmouseover="showTip(event, 'fs24', 100)" class="rt">Async</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 101)" onmouseover="showTip(event, 'fs25', 101)" class="id">RunSynchronously</span>
+    
 </code></pre></td>
 </tr>
 </table>
@@ -255,19 +302,27 @@ A way to do this from F# is in the making.</p>
 <div class="tip" id="fs28">val execReturnAsync : bc:BioContainer.BcContext -&gt; cmd:seq&lt;string&gt; -&gt; Async&lt;string&gt;</div>
 <div class="tip" id="fs29">val disposeAsync : bc:BioContainer.BcContext -&gt; Async&lt;unit&gt;</div>
 <div class="tip" id="fs30">module Blast<br /><br />from BioFSharp.BioContainers</div>
-<div class="tip" id="fs31">val ImageBlast : Docker.DockerId</div>
-<div class="tip" id="fs32">val blastContext : BioContainer.BcContext<br /><em><br /><br />this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</em></div>
+<div class="tip" id="fs31">val ImageBlast : Docker.DockerId<br /><em><br /><br />this time, we set the container up using a mount, making sure that it can access data from the file system we want to use.</em></div>
+<div class="tip" id="fs32">val blastContext : BioContainer.BcContext</div>
 <div class="tip" id="fs33">val initBcContextWithMountAsync : connection:Docker.DotNet.DockerClient -&gt; image:Docker.DockerId -&gt; hostdirectory:string -&gt; Async&lt;BioContainer.BcContext&gt;</div>
-<div class="tip" id="fs34">val makeDBParams : obj list<br /><em><br /><br />parameters for search DB creation</em></div>
-<div class="tip" id="fs35">union case DbType.Protein: DbType</div>
-<div class="tip" id="fs36">val blastPParams : BlastParams list<br /><em><br /><br />parameters for blastP</em></div>
-<div class="tip" id="fs37">type BlastParams =<br />&#160;&#160;| SearchDB of string<br />&#160;&#160;| Query of string<br />&#160;&#160;| Output of string<br />&#160;&#160;| OutputType of OutputType<br />&#160;&#160;| OutputTypeCustom of OutputType * seq&lt;OutputCustom&gt;<br />&#160;&#160;| Num_threads of int<br />&#160;&#160;| Max_Hits of int<br />&#160;&#160;&#160;&#160;static member makeCmd : (BlastParams -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (BlastParams -&gt; string list)</div>
-<div class="tip" id="fs38">union case BlastParams.SearchDB: string -&gt; BlastParams</div>
-<div class="tip" id="fs39">union case BlastParams.Query: string -&gt; BlastParams</div>
-<div class="tip" id="fs40">union case BlastParams.Output: string -&gt; BlastParams</div>
-<div class="tip" id="fs41">union case BlastParams.OutputType: OutputType -&gt; BlastParams</div>
-<div class="tip" id="fs42">Multiple items<br />union case BlastParams.OutputType: OutputType -&gt; BlastParams<br /><br />--------------------<br />type OutputType =<br />&#160;&#160;| Pairwise<br />&#160;&#160;| Query_anchored<br />&#160;&#160;| Query_anchored_NoIdentities<br />&#160;&#160;| Query_anchored_Flat<br />&#160;&#160;| Query_anchored_Flat_NoIdentities<br />&#160;&#160;| XML<br />&#160;&#160;| Tabular<br />&#160;&#160;| TabularWithComments<br />&#160;&#160;| TextASN1<br />&#160;&#160;| BinaryASN1<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member make : (OutputType -&gt; int)</div>
-<div class="tip" id="fs43">union case OutputType.TabularWithComments: OutputType</div>
+<div class="tip" id="fs34">val makeDBParams : MakeBlastDbParams list<br /><em><br /><br />parameters for search DB creation</em></div>
+<div class="tip" id="fs35">type MakeBlastDbParams =<br />&#160;&#160;| Input of string<br />&#160;&#160;| InputType of MakeBlastDBInputType<br />&#160;&#160;| DbType of DbType<br />&#160;&#160;| Title of string<br />&#160;&#160;| ParseSeqIds<br />&#160;&#160;| HashIndex<br />&#160;&#160;| MaskData of string list<br />&#160;&#160;| Output of string<br />&#160;&#160;| MaxFileSize of string<br />&#160;&#160;| TaxId of int<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member makeCmd : (MakeBlastDbParams -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (MakeBlastDbParams -&gt; string list)</div>
+<div class="tip" id="fs36">union case MakeBlastDbParams.DbType: DbType -&gt; MakeBlastDbParams</div>
+<div class="tip" id="fs37">union case DbType.Protein: DbType</div>
+<div class="tip" id="fs38">union case MakeBlastDbParams.Input: string -&gt; MakeBlastDbParams</div>
+<div class="tip" id="fs39">union case MakeBlastDbParams.Output: string -&gt; MakeBlastDbParams</div>
+<div class="tip" id="fs40">val runParams : BlastP.BlastPParameters list<br /><em><br /><br />parameters for the blastp search</em></div>
+<div class="tip" id="fs41">module BlastP<br /><br />from BioFSharp.BioContainers.Blast</div>
+<div class="tip" id="fs42">type BlastPParameters =<br />&#160;&#160;| CommonOptions of BlastParams list<br />&#160;&#160;| SpecificOptions of BlastPParams list<br />&#160;&#160;&#160;&#160;static member makeCmd : (BlastPParameters -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (BlastPParameters -&gt; string list)</div>
+<div class="tip" id="fs43">union case BlastP.BlastPParameters.CommonOptions: BlastParams list -&gt; BlastP.BlastPParameters</div>
+<div class="tip" id="fs44">union case BlastParams.Query: string -&gt; BlastParams</div>
+<div class="tip" id="fs45">union case BlastParams.SearchDB: string -&gt; BlastParams</div>
+<div class="tip" id="fs46">union case BlastParams.Output: string -&gt; BlastParams</div>
+<div class="tip" id="fs47">union case BlastP.BlastPParameters.SpecificOptions: BlastP.BlastPParams list -&gt; BlastP.BlastPParameters</div>
+<div class="tip" id="fs48">type BlastPParams =<br />&#160;&#160;| WordSize of int<br />&#160;&#160;| GapOpen of int<br />&#160;&#160;| GapExtend of int<br />&#160;&#160;| Matrix of string<br />&#160;&#160;| Threshold of int<br />&#160;&#160;| CompBasedStats of string<br />&#160;&#160;| SoftMasking of bool<br />&#160;&#160;| WindowSize of int<br />&#160;&#160;| Seg of string<br />&#160;&#160;| LowerCaseMasking<br />&#160;&#160;...<br />&#160;&#160;&#160;&#160;static member makeCmd : (BlastPParams -&gt; string list)<br />&#160;&#160;&#160;&#160;static member makeCmdWith : m:MountInfo -&gt; (BlastPParams -&gt; string list)</div>
+<div class="tip" id="fs49">union case BlastP.BlastPParams.WordSize: int -&gt; BlastP.BlastPParams</div>
+<div class="tip" id="fs50">val runMakeBlastDB : bcContext:BioContainer.BcContext -&gt; opt:MakeBlastDbParams list -&gt; unit</div>
+<div class="tip" id="fs51">val runBlastP : bcContext:BioContainer.BcContext -&gt; opt:BlastP.BlastPParameters list -&gt; unit</div>
 
 			</div>
 			<div class="span3" >
@@ -289,6 +344,7 @@ A way to do this from F# is in the making.</p>
                   <li class="nav-header">BioContainers</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers_TargetP.html">TargetP</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>

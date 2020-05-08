@@ -42,6 +42,8 @@
         <span>Parent Module: <a href="biofsharp-biocontainers-blast.html">Blast</a></span><br />
     </p>
 <div class="xmldoc">
+<p>DSL for command line parameters that are common to all blast applications</p>
+
 </div>
   <h3>Union Cases</h3>
   <table class="table table-bordered member-list">
@@ -51,49 +53,205 @@
     <tbody>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1102', 1102)" onmouseover="showTip(event, '1102', 1102)">
-            Max_Hits(int)
+          <code onmouseout="hideTip(event, '1121', 1121)" onmouseover="showTip(event, '1121', 1121)">
+            BestHitOverhang(float)
           </code>
-          <div class="tip" id="1102">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="1121">
+            <strong>Signature:</strong> float<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L249-249" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L314-314" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Best Hit algorithm overhang value (recommended value: 0.1)</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1103', 1103)" onmouseover="showTip(event, '1103', 1103)">
-            Num_threads(int)
+          <code onmouseout="hideTip(event, '1122', 1122)" onmouseover="showTip(event, '1122', 1122)">
+            BestHitScoreEdge(float)
           </code>
-          <div class="tip" id="1103">
-            <strong>Signature:</strong> int<br />
+          <div class="tip" id="1122">
+            <strong>Signature:</strong> float<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L248-248" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L316-316" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Best Hit algorithm score edge value (recommended value: 0.1)</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1104', 1104)" onmouseover="showTip(event, '1104', 1104)">
-            Output(string)
+          <code onmouseout="hideTip(event, '1123', 1123)" onmouseover="showTip(event, '1123', 1123)">
+            CullingLimit(int)
           </code>
-          <div class="tip" id="1104">
+          <div class="tip" id="1123">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L312-312" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Delete a hit that is enveloped by at least this many higher-scoring hits.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1124', 1124)" onmouseover="showTip(event, '1124', 1124)">
+            DBSize(int)
+          </code>
+          <div class="tip" id="1124">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L318-318" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Effective size of the database</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1125', 1125)" onmouseover="showTip(event, '1125', 1125)">
+            EntrezQuery(string)
+          </code>
+          <div class="tip" id="1125">
             <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L245-245" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L310-310" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Restrict search with the given Entrez query. Remote searches only.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1126', 1126)" onmouseover="showTip(event, '1126', 1126)">
+            EValue(float)
+          </code>
+          <div class="tip" id="1126">
+            <strong>Signature:</strong> float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L290-290" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Expect value (E) for saving hits</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1127', 1127)" onmouseover="showTip(event, '1127', 1127)">
+            ExportSearchStrategy(string)
+          </code>
+          <div class="tip" id="1127">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L324-324" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Record search strategy to this file.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1128', 1128)" onmouseover="showTip(event, '1128', 1128)">
+            GIList(string)
+          </code>
+          <div class="tip" id="1128">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L306-306" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Restrict search of database to GI’s listed in this file. Local searches only.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1129', 1129)" onmouseover="showTip(event, '1129', 1129)">
+            HTML
+          </code>
+          <div class="tip" id="1129">
+            <strong>Signature:</strong> <br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L304-304" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Produce HTML output</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1130', 1130)" onmouseover="showTip(event, '1130', 1130)">
+            ImportSearchStrategy(string)
+          </code>
+          <div class="tip" id="1130">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L322-322" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Search strategy file to read.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1131', 1131)" onmouseover="showTip(event, '1131', 1131)">
+            MaxHits(int)
+          </code>
+          <div class="tip" id="1131">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L286-286" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -102,15 +260,125 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1105', 1105)" onmouseover="showTip(event, '1105', 1105)">
+          <code onmouseout="hideTip(event, '1132', 1132)" onmouseover="showTip(event, '1132', 1132)">
+            MaxHSPs(int)
+          </code>
+          <div class="tip" id="1132">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L302-302" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Maximum number of HSPs (alignments) to keep for any single query-subject pair. The HSPs shown will be the best as judged by expect value. This number should be an int that is one or greater. If this option is not set, BLAST shows all HSPs meeting the expect value criteria. Setting it to one will show only the best HSP for every query-subject pair</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1133', 1133)" onmouseover="showTip(event, '1133', 1133)">
+            NegativeGIList(string)
+          </code>
+          <div class="tip" id="1133">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L308-308" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Restrict search of database to everything except the GI’s listed in this file. Local searches only.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1134', 1134)" onmouseover="showTip(event, '1134', 1134)">
+            Num_Descriptions(int)
+          </code>
+          <div class="tip" id="1134">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L298-298" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Show one-line descriptions for this number of database sequences.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1135', 1135)" onmouseover="showTip(event, '1135', 1135)">
+            NumAlignments(int)
+          </code>
+          <div class="tip" id="1135">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L300-300" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Show alignments for this number of database sequences.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1136', 1136)" onmouseover="showTip(event, '1136', 1136)">
+            NumThreads(int)
+          </code>
+          <div class="tip" id="1136">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L284-284" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1137', 1137)" onmouseover="showTip(event, '1137', 1137)">
+            Output(string)
+          </code>
+          <div class="tip" id="1137">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L280-280" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1138', 1138)" onmouseover="showTip(event, '1138', 1138)">
             OutputType(OutputType)
           </code>
-          <div class="tip" id="1105">
+          <div class="tip" id="1138">
             <strong>Signature:</strong> OutputType<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L246-246" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L281-281" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -119,15 +387,15 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1106', 1106)" onmouseover="showTip(event, '1106', 1106)">
+          <code onmouseout="hideTip(event, '1139', 1139)" onmouseover="showTip(event, '1139', 1139)">
             OutputTypeCustom(...)
           </code>
-          <div class="tip" id="1106">
+          <div class="tip" id="1139">
             <strong>Signature:</strong> OutputType * seq&lt;OutputCustom&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L247-247" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L282-282" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -136,15 +404,34 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1107', 1107)" onmouseover="showTip(event, '1107', 1107)">
+          <code onmouseout="hideTip(event, '1140', 1140)" onmouseover="showTip(event, '1140', 1140)">
+            ParseDeflines
+          </code>
+          <div class="tip" id="1140">
+            <strong>Signature:</strong> <br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L326-326" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parse query and subject bar delimited sequence identifiers (e.g., gi|129295).</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1141', 1141)" onmouseover="showTip(event, '1141', 1141)">
             Query(string)
           </code>
-          <div class="tip" id="1107">
+          <div class="tip" id="1141">
             <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L244-244" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L278-278" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -153,19 +440,135 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1108', 1108)" onmouseover="showTip(event, '1108', 1108)">
+          <code onmouseout="hideTip(event, '1142', 1142)" onmouseover="showTip(event, '1142', 1142)">
+            QueryLocation(int * int)
+          </code>
+          <div class="tip" id="1142">
+            <strong>Signature:</strong> int * int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L288-288" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Location on the query sequence (Format: start-stop)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1143', 1143)" onmouseover="showTip(event, '1143', 1143)">
+            Remote
+          </code>
+          <div class="tip" id="1143">
+            <strong>Signature:</strong> <br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L328-328" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Execute search on NCBI servers?</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1144', 1144)" onmouseover="showTip(event, '1144', 1144)">
             SearchDB(string)
           </code>
-          <div class="tip" id="1108">
+          <div class="tip" id="1144">
             <strong>Signature:</strong> string<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L243-243" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L276-276" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>BLAST database name.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1145', 1145)" onmouseover="showTip(event, '1145', 1145)">
+            SearchSpaceLength(int)
+          </code>
+          <div class="tip" id="1145">
+            <strong>Signature:</strong> int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L320-320" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Effective length of the search space</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1146', 1146)" onmouseover="showTip(event, '1146', 1146)">
+            ShowGIs
+          </code>
+          <div class="tip" id="1146">
+            <strong>Signature:</strong> <br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L296-296" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Show NCBI GIs in report.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1147', 1147)" onmouseover="showTip(event, '1147', 1147)">
+            Subject(string)
+          </code>
+          <div class="tip" id="1147">
+            <strong>Signature:</strong> string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L292-292" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>File with subject sequence(s) to search.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '1148', 1148)" onmouseover="showTip(event, '1148', 1148)">
+            SubjectLocation(int * int)
+          </code>
+          <div class="tip" id="1148">
+            <strong>Signature:</strong> int * int<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L294-294" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Location on the subject sequence (Format: start-stop).</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -178,15 +581,15 @@
     <tbody>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1109', 1109)" onmouseover="showTip(event, '1109', 1109)">
+          <code onmouseout="hideTip(event, '1149', 1149)" onmouseover="showTip(event, '1149', 1149)">
             BlastParams.makeCmd
           </code>
-          <div class="tip" id="1109">
+          <div class="tip" id="1149">
             <strong>Signature:</strong> BlastParams -&gt; string list<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L251-251" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L330-330" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -196,15 +599,15 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '1110', 1110)" onmouseover="showTip(event, '1110', 1110)">
+          <code onmouseout="hideTip(event, '1150', 1150)" onmouseover="showTip(event, '1150', 1150)">
             BlastParams.makeCmdWith(m)
           </code>
-          <div class="tip" id="1110">
+          <div class="tip" id="1150">
             <strong>Signature:</strong> m:MountInfo -&gt; BlastParams -&gt; string list<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L268-268" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L371-371" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -234,6 +637,7 @@
                   <li class="nav-header">BioContainers</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers_TargetP.html">TargetP</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>

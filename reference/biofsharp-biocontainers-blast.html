@@ -40,6 +40,9 @@
   <span>Namespace: BioFSharp.BioContainers</span><br />
   </p>
 <div class="xmldoc">
+<p>DSLs for executing commands in the BLAST biocontainer</p>
+<p>Generated and tested for the tag blast:2.2.31--pl526h3066fca_3</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -55,7 +58,9 @@
             <a href="biofsharp-biocontainers-blast-blastparams.html">BlastParams</a>
           </td>
           <td class="xmldoc">
-          
+          <p>DSL for command line parameters that are common to all blast applications</p>
+
+
           </td>
         </tr>
         <tr>
@@ -93,7 +98,12 @@
             <a href="biofsharp-biocontainers-blast-outputcustom.html">OutputCustom</a>
           </td>
           <td class="xmldoc">
-          
+          <p>OutputType options Tabular, TabularWithComments, and CSV can be additionally configured to produce a custom format specified by space delimited format specifiers.
+When not provided, the default value is:
+'qseqid sseqid pident length mismatch gapopen qstart qend sstart send
+evalue bitscore', which is equivalent to the keyword 'std'</p>
+
+
           </td>
         </tr>
         <tr>
@@ -101,7 +111,47 @@
             <a href="biofsharp-biocontainers-blast-outputtype.html">OutputType</a>
           </td>
           <td class="xmldoc">
-          
+          <p>alignment view options</p>
+
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-biocontainers-blast-blastn.html">BlastN</a>
+          </td>
+          <td class="xmldoc">
+          <p>DSL for blastn programs
+The blastn application searches a nucleotide query against nucleotide subject sequences or a nucleotide database.
+Four different tasks are supported:</p>
+<p>1.) “megablast”, for very similar sequences (e.g, sequencing errors)</p>
+<p>2.) “dc-megablast”, typically used for inter-species comparisons</p>
+<p>3.) “blastn”, the traditional program used for inter-species comparisons</p>
+<p>4.) “blastn-short”, optimized for sequences less than 30 nucleotides.</p>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="biofsharp-biocontainers-blast-blastp.html">BlastP</a>
+          </td>
+          <td class="xmldoc">
+          <p>DSL for blastp programs
+The blastp application searches a protein sequence against protein subject sequences or a protein database.
+Three different tasks are supported:</p>
+<p>1.) “blastp”, for standard protein-protein comparisons</p>
+<p>2.) “blastp-short”, optimized for query sequences shorter than 30 residues</p>
+<p>3.) “blastp-fast”, a faster version that uses a larger word-size</p>
+
+
           </td>
         </tr>
     </tbody>
@@ -118,103 +168,39 @@
       <tr>
         <td class="member-name">
           <code onmouseout="hideTip(event, '474', 474)" onmouseover="showTip(event, '474', 474)">
-            runBlastN bcContext opt
+            runMakeBlastDB bcContext opt
           </code>
           <div class="tip" id="474">
-            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:BlastParams list -&gt; unit<br />
+            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:MakeBlastDbParams list -&gt; unit<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L333-333" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L132-132" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>run makeblastdb in the specified container context with the given commands</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
           <code onmouseout="hideTip(event, '475', 475)" onmouseover="showTip(event, '475', 475)">
-            runBlastNAsync bcContext opt
-          </code>
-          <div class="tip" id="475">
-            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:BlastParams list -&gt; Async&lt;unit&gt;<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L320-320" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '476', 476)" onmouseover="showTip(event, '476', 476)">
-            runBlastP bcContext opt
-          </code>
-          <div class="tip" id="476">
-            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:BlastParams list -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L316-316" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '477', 477)" onmouseover="showTip(event, '477', 477)">
-            runBlastPAsync bcContext opt
-          </code>
-          <div class="tip" id="477">
-            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:BlastParams list -&gt; Async&lt;unit&gt;<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L304-304" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '478', 478)" onmouseover="showTip(event, '478', 478)">
-            runMakeBlastDB bcContext opt
-          </code>
-          <div class="tip" id="478">
-            <strong>Signature:</strong> bcContext:BcContext -&gt; opt:MakeBlastDbParams list -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L299-299" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '479', 479)" onmouseover="showTip(event, '479', 479)">
             runMakeBlastDBAsync bcContext opt
           </code>
-          <div class="tip" id="479">
+          <div class="tip" id="475">
             <strong>Signature:</strong> bcContext:BcContext -&gt; opt:MakeBlastDbParams list -&gt; Async&lt;unit&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L286-286" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.BioContainers/Blast.fs#L118-118" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>returns an asynchronous computation that will run makeblastdb in the specified container context with the given commands</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -240,6 +226,7 @@
                   <li class="nav-header">BioContainers</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers_TargetP.html">TargetP</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>

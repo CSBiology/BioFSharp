@@ -40,7 +40,7 @@
   <span>Namespace: BioFSharp.IO</span><br />
   </p>
 <div class="xmldoc">
-<p>Module to parse obo files to AdjacencyGraph</p>
+<p>Functions for par</p>
 
 </div>
 
@@ -52,6 +52,14 @@
       <tr><td>Type</td><td>Description</td></tr>
     </thead>
     <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-obo-dbxref.html">DBXref</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
         <tr>
           <td class="type-name">
             <a href="biofsharp-io-obo-oboterm.html">OboTerm</a>
@@ -70,6 +78,22 @@
           
           </td>
         </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-obo-termsynonym.html">TermSynonym</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="biofsharp-io-obo-termsynonymscope.html">TermSynonymScope</a>
+          </td>
+          <td class="xmldoc">
+          
+          </td>
+        </tr>
     </tbody>
   </table>
 
@@ -83,15 +107,15 @@
     <tbody>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '682', 682)" onmouseover="showTip(event, '682', 682)">
+          <code onmouseout="hideTip(event, '699', 699)" onmouseover="showTip(event, '699', 699)">
             createOboTerm(...)
           </code>
-          <div class="tip" id="682">
-            <strong>Signature:</strong> id:string -&gt; name:string -&gt; nameSpace:string -&gt; definition:string -&gt; relationship:string -&gt; related_synonym:string list -&gt; isA:string list -&gt; synonym:string list -&gt; exactSynonym:string -&gt; broadSynonym:string -&gt; narrowSynonym:string -&gt; xrefAnalog:string -&gt; comment:string -&gt; isObsolete:string -&gt; replaced_by:string -&gt; consider:string -&gt; altId:string list -&gt; disjointFrom:string list -&gt; subset:string list -&gt; intersectionOf:string list -&gt; xref:string list -&gt; propertyValue:string -&gt; OboTerm<br />
+          <div class="tip" id="699">
+            <strong>Signature:</strong> id:string -&gt; name:string -&gt; isAnonymous:bool -&gt; altIds:string list -&gt; definition:string -&gt; comment:string -&gt; subsets:string list -&gt; synonyms:TermSynonym list -&gt; xrefs:DBXref list -&gt; isA:string list -&gt; intersectionOf:string list -&gt; unionOf:string list -&gt; disjointFrom:string list -&gt; relationships:string list -&gt; isObsolete:bool -&gt; replacedby:string list -&gt; consider:string list -&gt; propertyValues:string list -&gt; builtIn:bool -&gt; createdBy:string -&gt; creationDate:string -&gt; OboTerm<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L38-38" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L274-274" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -102,15 +126,15 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '683', 683)" onmouseover="showTip(event, '683', 683)">
+          <code onmouseout="hideTip(event, '700', 700)" onmouseover="showTip(event, '700', 700)">
             createOboTermDef(...)
           </code>
-          <div class="tip" id="683">
+          <div class="tip" id="700">
             <strong>Signature:</strong> id:string -&gt; name:string -&gt; isTransitive:string -&gt; isCyclic:string -&gt; OboTermDef<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L53-53" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L309-309" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -119,21 +143,55 @@
       </tr>
       <tr>
         <td class="member-name">
-          <code onmouseout="hideTip(event, '684', 684)" onmouseover="showTip(event, '684', 684)">
+          <code onmouseout="hideTip(event, '701', 701)" onmouseover="showTip(event, '701', 701)">
+            parseDBXref(v)
+          </code>
+          <div class="tip" id="701">
+            <strong>Signature:</strong> v:string -&gt; DBXref<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L40-40" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '702', 702)" onmouseover="showTip(event, '702', 702)">
             parseOboTerms(input)
           </code>
-          <div class="tip" id="684">
+          <div class="tip" id="702">
             <strong>Signature:</strong> input:seq&lt;string&gt; -&gt; seq&lt;OboTerm&gt;<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L163-163" class="github-link">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L557-557" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Parse Obo Terms <a href="biofsharp-biodb-fatooldb-fatooldata-servicetypes-term.html" title="Term">Term</a> from seq<string></p>
 
 
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '703', 703)" onmouseover="showTip(event, '703', 703)">
+            parseSynonym(...)
+          </code>
+          <div class="tip" id="703">
+            <strong>Signature:</strong> scopeFromDeprecatedTag:TermSynonymScope option -&gt; line:int -&gt; v:string -&gt; TermSynonym<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/CSBiology/BioFSharp/tree/master//src/BioFSharp.IO/Obo.fs#L83-83" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
         </td>
       </tr>
     </tbody>
@@ -159,6 +217,7 @@
                   <li class="nav-header">BioContainers</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers.html">Introduction</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//BioContainersDesignGuide.html">Container API Design Guide</a></li>
+                  <li><a href="https://CSBiology.github.io/BioFSharp//BioContainers_TargetP.html">TargetP</a></li>
                   <li class="nav-header">Algorithm</li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//Alignment.html">Alignment</a></li>
                   <li><a href="https://CSBiology.github.io/BioFSharp//ClustalOWrapper.html">Clustal Omega</a></li>
