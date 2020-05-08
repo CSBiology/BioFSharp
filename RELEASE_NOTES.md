@@ -8,12 +8,14 @@
      * full blastp, blastp-fast, and blastp-short DSLs
    * TargetP BioContainer :
      * Add functions to run the container with a mounted directory
+     
  * **BioFSharp.IO**:
    * OBO parser: Extended term parser for spec 1.4
 
 **Bugfixes:**
  * **BioFSharp.IO**:
    * OBO parser now correctly parses lists of relationships
+   * FastA.writeToStream is now correctly typed and doe snot close the stream after writing
 
 #### 1.2.0 - Monday, March 30
 
