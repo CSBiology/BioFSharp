@@ -170,3 +170,11 @@ val it : TargetP.TargetpItem = {
 }
 </pre>
 *)
+
+(**
+## What we are doing with it
+
+Our workgroup uses this DSL to power our [iMTS-L prediction service](http://imlp.bio.uni-kl.de/). 
+For additional information about iMTS-L prediction, see the [paper](https://www.ncbi.nlm.nih.gov/pubmed/29382700) or take a look at our [step-by-step recipe](https://github.com/CSBiology/BioFSharp.Recipes/blob/master/Notebooks/iMLP.ipynb)
+
+*)
