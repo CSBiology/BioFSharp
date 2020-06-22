@@ -19,4 +19,20 @@
 #load "../BioArray.fs"
 #load "../BioList.fs"
 
-open BioFSharp.BioList
+open BioFSharp
+
+"AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+|> BioList.ofNucleotideString
+|> BioList.mapInTriplets id
+
+let a = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+    |> BioList.ofNucleotideString
+    |> BioList.translate 0
+
+let b = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+    |> BioList.ofNucleotideString
+    |> BioList.translate 0
+    
+a = b

@@ -17,4 +17,18 @@
 #load "../BioItemsConverter.fs"
 #load "../BioSeq.fs"
 
-open BioFSharp.BioSeq
+open BioFSharp
+
+"AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+|> BioSeq.ofNucleotideString
+|> BioSeq.mapInTriplets id
+
+let a = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUCTT" 
+    |> BioSeq.ofNucleotideString
+    |> BioSeq.translate 0
+
+let b = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+    |> BioSeq.ofNucleotideString
+    |> BioSeq.translate 0

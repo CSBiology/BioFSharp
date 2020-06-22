@@ -11,6 +11,7 @@
     <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BioFSharp\BioCollectionsTests.fs" />
     <Compile Include="BioFSharp\BioArrayTests.fs" />
     <Compile Include="Testing.fs" />
     <Compile Include="Generators.fs" />

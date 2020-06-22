@@ -14,7 +14,6 @@ module BioSeq =
         s
         |> Seq.choose converter
 
-
     /// Generates AminoAcid sequence of one-letter-code raw string
     let ofAminoAcidString (s:#seq<char>) : BioSeq<_> =          
         s
@@ -47,7 +46,6 @@ module BioSeq =
                             None
                     else
                         None
-                    
         else
             None
 
@@ -61,7 +59,6 @@ module BioSeq =
                 | Triplet t -> yield (f t)                                                              
                 | _         -> sourceIsEmpty := true                               
         }
-
 
     /// Create the reverse DNA or RNA strand. For example, the sequence "ATGC" is converted to "CGTA"
     let reverse (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
@@ -80,11 +77,9 @@ module BioSeq =
     let transcribeCodingStrand (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map (fun nuc -> Nucleotides.replaceTbyU nuc)
         
-    //  
     /// Transcribe a given DNA template strand (3'-----5')
     let transcribeTemplateStrand (nucs:seq<Nucleotides.Nucleotide>) : BioSeq<_> = 
         nucs |> Seq.map (fun nuc -> Nucleotides.replaceTbyU (Nucleotides.complement nuc))
-
 
     /// translates nucleotide sequence to aminoacid sequence    
     let translate (nucleotideOffset:int) (rnaSeq:seq<Nucleotides.Nucleotide>) : BioSeq<_> =         
@@ -94,23 +89,17 @@ module BioSeq =
         |> Seq.skip nucleotideOffset
         |> mapInTriplets Nucleotides.lookupBytes
 
-    
     /// Compares the elemens of two sequence
     let isEqual a b =
         Seq.compareWith 
             (fun elem1 elem2 ->
                 if elem1 = elem2 then 0    
                 else 1)  a b 
-        
-
-
 
     /// Returns string of one-letter-code
     let toString (bs:seq<#IBioItem>) =
         new string [|for c in bs  -> BioItem.symbol c|]         
 
-
-       
     /// Returns formula
     let toFormula (bs:seq<#IBioItem>) =
         bs |> Seq.fold (fun acc item -> Formula.add acc  (BioItem.formula item)) Formula.emptyFormula
@@ -125,7 +114,6 @@ module BioSeq =
     let toAverageMass (bs:seq<#IBioItem>) =
         bs |> Seq.sumBy BioItem.averageMass
 
-
     /// Returns monoisotopic mass of the given sequence and initial value (e.g. H2O) 
     let toMonoisotopicMassWith (state) (bs:seq<#IBioItem>) =
         bs |> Seq.fold (fun massAcc item -> massAcc + BioItem.monoisoMass item) state
@@ -135,7 +123,6 @@ module BioSeq =
     let toAverageMassWith (state) (bs:seq<#IBioItem>) =
         bs |> Seq.fold (fun massAcc item -> massAcc + BioItem.averageMass item) state
 
-
     /// Returns a function to calculate the monoisotopic mass of the given sequence !memoization
     let initMonoisoMass<'a when 'a :> IBioItem> : (seq<'a> -> float) =        
         let memMonoisoMass =
@@ -143,7 +130,6 @@ module BioSeq =
         (fun bs -> 
             bs 
             |> Seq.sumBy memMonoisoMass)
-
 
     /// Returns a function to calculate the average mass of the given sequence !memoization
     let initAverageMass<'a when 'a :> IBioItem> : (seq<'a> -> float) =
@@ -153,14 +139,12 @@ module BioSeq =
             bs 
             |> Seq.sumBy memAverageMass)
 
-
     /// Returns a function to calculate the monoisotopic mass of the given sequence and initial value (e.g. H2O) !memoization
     let initMonoisoMassWith<'a when 'a :> IBioItem> (state:float) : (seq<'a> -> float)  =        
         let memMonoisoMass =
             Memoization.memoizeP (BioItem.formula >> Formula.monoisoMass)
         (fun bs -> 
             bs |> Seq.fold (fun massAcc item -> massAcc + memMonoisoMass item) state)
-
 
     /// Returns a function to calculate the average mass of the given sequence and initial value (e.g. H2O) !memoization
     let initAverageMassWith<'a when 'a :> IBioItem> (state:float) : (seq<'a> -> float) =

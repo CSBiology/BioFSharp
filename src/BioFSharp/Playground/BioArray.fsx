@@ -18,4 +18,20 @@
 #load "../BioSeq.fs"
 #load "../BioArray.fs"
 
-open BioFSharp.BioArray
+open BioFSharp
+
+"AUGGUACUGACGAUUUAUCCUGACGAACUCTT" 
+|> BioArray.ofNucleotideString
+|> BioArray.mapInTriplets id
+
+let a = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+    |> BioArray.ofNucleotideString
+    |> BioArray.translate 0
+
+let b = 
+    "AUGGUACUGACGAUUUAUCCUGACGAACUC" 
+    |> BioArray.ofNucleotideString
+    |> BioArray.translate 0
+    
+a = b
