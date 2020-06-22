@@ -3,6 +3,7 @@
 ///This module contains the BioArray type and its according functions. The BioArray type is an array of objects using the IBioItem interface
 module BioArray =
     
+    open System
     open FSharpAux
     open BioItemsConverter
 
@@ -61,11 +62,14 @@ module BioArray =
 
     //  Replace T by U
     /// Transcribe a given DNA coding strand (5'-----3')
+    [<Obsolete("This function name contained a typo and will be removed in the next major release. Use transcribeCodingStrand instead.")>]
     let transcribeCodeingStrand (nucs:BioArray<Nucleotides.Nucleotide>) : BioArray<_> = 
         nucs |> Array.map (fun nuc -> Nucleotides.replaceTbyU nuc)
         
-
-
+            /// Transcribe a given DNA coding strand (5'-----3')
+    let transcribeCodingStrand (nucs:BioArray<Nucleotides.Nucleotide>) : BioArray<_> = 
+        nucs |> Array.map (fun nuc -> Nucleotides.replaceTbyU nuc)
+        
     //  
     /// Transcribe a given DNA template strand (3'-----5')
     let transcribeTemplateStrand (nucs:BioArray<Nucleotides.Nucleotide>) : BioArray<_> =

@@ -69,7 +69,12 @@ module BioList =
 
     //  Replace T by U
     /// Transcribe a given DNA coding strand (5'-----3')
+    [<Obsolete("This function name contained a typo and will be removed in the next major release. Use transcribeCodingStrand instead.")>]
     let transcribeCodeingStrand (nucs:BioList<Nucleotides.Nucleotide>) = 
+        nucs |> List.map (fun nuc -> Nucleotides.replaceTbyU nuc)    
+        
+    /// Transcribe a given DNA coding strand (5'-----3')
+    let transcribeCodingStrand (nucs:BioList<Nucleotides.Nucleotide>) = 
         nucs |> List.map (fun nuc -> Nucleotides.replaceTbyU nuc)
         
 
