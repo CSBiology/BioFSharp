@@ -44,6 +44,7 @@
     <Compile Include="BioSeq.fs" />
     <Compile Include="BioArray.fs" />
     <Compile Include="BioList.fs" />
+    <Compile Include="BioCollectionsExtensions.fs" />
     <Compile Include="AminoProperties.fs" />
     <Compile Include="IsoelectricPoint.fs" />
     <Compile Include="Digestion.fs" />
@@ -75,6 +76,7 @@
     <None Include="Playground\BioItemsConverter.fsx" />
     <None Include="Playground\BioList.fsx" />
     <None Include="Playground\BioSeq.fsx" />
+    <None Include="Playground\BioCollectionsExtensions.fsx" />
     <None Include="Playground\Digestion.fsx" />
     <None Include="Playground\Elements.fsx" />
     <None Include="Playground\Formula.fsx" />

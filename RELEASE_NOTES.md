@@ -2,6 +2,10 @@
 (preview packages available on nuget)
 
 **Additions:**
+
+ * **BioFSharp**:
+   * [Conversion extensions for BioCollections]()
+
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
      * full blastn, blastn-short, megablast, and dc-megablast DSLs
