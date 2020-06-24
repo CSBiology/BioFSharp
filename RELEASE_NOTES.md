@@ -4,12 +4,12 @@
 **Additions:**
 
  * **BioFSharp**:
-   * [Conversion extensions for BioCollections]()
+   * [Breaking] [Conversion extensions for BioCollections]()
 
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
      * full blastn, blastn-short, megablast, and dc-megablast DSLs
-     * full blastp, blastp-fast, and blastp-short DSLs
+     * [Breaking] full blastp, blastp-fast, and blastp-short DSLs
    * TargetP BioContainer :
      * Add functions to run the container with a mounted directory
      
@@ -20,7 +20,7 @@
 **Bugfixes:**
  * **BioFSharp.IO**:
    * OBO parser now correctly parses lists of relationships
-   * FastA.writeToStream is now correctly typed and does not close the stream after writing
+   * [Breaking] FastA.writeToStream is now correctly typed and does not close the stream after writing
    * SOFT parser now parses sample_label / sample_label_protocol correctly_
 
 #### 1.2.0 - Monday, March 30

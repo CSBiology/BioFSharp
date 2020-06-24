@@ -500,7 +500,6 @@ module SOFT =
                 
                     if k.Contains("!Sample_label_") then
 
-                        printfn "?: %s" k
                         let index =
                             k
                                 .Replace("!Sample_label_ch","")
