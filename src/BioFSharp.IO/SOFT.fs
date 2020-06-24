@@ -43,7 +43,11 @@ module SOFT =
             ///Indicates the end of the data table. 
             | TableEnd of string
             ///Custom Attributes Used in the SOFT file
-            |AdditionalAttribute of string*string
+            | AdditionalAttribute of string*string
+            ///Table formatted data header
+            | TableHeader of string*string
+            ///Table formatted data
+            | TableData of string
     
             type SOFTSeriesSpecifications = 
             ///Provide an identifier for this entity. This identifier is used only as an internal reference within a given file. The identifier will not appear on final GEO records. 
@@ -79,7 +83,7 @@ module SOFT =
             ///"Time of submission to GEO" 
             | SubmissionDate of string
             ///Custom Attributes Used in the SOFT file
-            |AdditionalAttribute of string*string
+            | AdditionalAttribute of string*string
     
             type SOFTSampleSpecifications = 
             ///Provide an identifier for this entity. This identifier is used only as an internal reference within a given file. The identifier will not appear on final GEO records. 
@@ -137,7 +141,11 @@ module SOFT =
             ///"Sample relation, e.g. SRA accession or BioSample id" 
             | Relation of string
             ///Custom Attributes Used in the SOFT file
-            |AdditionalAttribute of string*string
+            | AdditionalAttribute of string*string
+            ///Table formatted data header
+            | TableHeader of string*string
+            ///Table formatted data
+            | TableData of string
     
         module internal Lexing =
             
@@ -231,6 +239,7 @@ module SOFT =
                         Some(SOFTPlatformSpecifications.TableEnd v)
                     else
                         None
+
             [<RequireQualifiedAccess>]
             module Series =
                 let (|Accession|_|) ((k:string),(v:string)) =
@@ -287,6 +296,7 @@ module SOFT =
                             k
                                 .Replace("!Series_variable_description_","")
                                 .Replace("!Series_variable_description_[n]","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSeriesSpecifications.VariableDescription(index,v))
                 
@@ -313,6 +323,7 @@ module SOFT =
                             k
                                 .Replace("!Series_repeats_","")
                                 .Replace("!Series_repeats_[n]","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSeriesSpecifications.Repeats(index,v))
                 
@@ -325,6 +336,7 @@ module SOFT =
                             k
                                 .Replace("!Series_repeats_sample_list_","")
                                 .Replace("!Series_repeats_sample_list_[n]","") 
+                                .Trim()
                                 |> int
                         let keyList =
                             v.Split(',') |> Array.toList
@@ -371,6 +383,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_supplementary_file_","")
                                 .Replace("!Sample_supplementary_file_[n]","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.SupplementaryFile(index,v))
                 
@@ -388,6 +401,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_source_name_ch","")
                                 .Replace("!Sample_source_name_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.SourceName(index,v))
                 
@@ -400,6 +414,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_organism_ch","")
                                 .Replace("!Sample_organism_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.Organism(index,v))
                 
@@ -424,6 +439,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_biomaterial_provider_ch","")
                                 .Replace("!Sample_biomaterial_provider_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.BiomaterialProvider(index,v))
                 
@@ -436,6 +452,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_treatment_protocol_ch","")
                                 .Replace("!Sample_treatment_protocol_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.TreatmentProtocol(index,v))
                 
@@ -448,6 +465,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_growth_protocol_ch","")
                                 .Replace("!Sample_growth_protocol_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.GrowthProtocol(index,v))
                 
@@ -472,6 +490,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_extract_protocol_ch","")
                                 .Replace("!Sample_extract_protocol_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.ExtractProtocol(index,v))
                 
@@ -480,10 +499,13 @@ module SOFT =
                 let (|Label|_|) ((k:string),(v:string)) =
                 
                     if k.Contains("!Sample_label_") then
+
+                        printfn "?: %s" k
                         let index =
                             k
                                 .Replace("!Sample_label_ch","")
                                 .Replace("!Sample_label_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.Label(index,v))
                 
@@ -496,6 +518,7 @@ module SOFT =
                             k
                                 .Replace("!Sample_label_protocol_ch","")
                                 .Replace("!Sample_label_protocol_","") 
+                                .Trim()
                                 |> int
                         Some (SOFTSampleSpecifications.LabelProtocol(index,v))
                 
@@ -580,6 +603,11 @@ module SOFT =
             l
         else failwith failmessage
 
+    type DataTable = {
+        Headers: (string*string) []
+        Rows: string []
+    }
+
     type SampleRecord = {
         Accession               : string;
         Title                   : string;
@@ -606,6 +634,7 @@ module SOFT =
         TagCount                : (string) list;
         TagLength               : (string) list;
         Relation                : (string) list;
+        DataTable               : DataTable
         SpecificationTokens     : SOFTSampleSpecifications list
     }
     let private createSampleRecord accession (specList:SOFTSampleSpecifications list) =
@@ -827,6 +856,26 @@ module SOFT =
                         | _ -> None
                     )
 
+            DataTable = 
+                
+                let headers = 
+                    specList
+                    |> List.choose 
+                        (fun spec ->
+                            match spec with
+                            | SOFTSampleSpecifications.TableHeader(name,description) -> Some (name,description)
+                            | _ -> None
+                        )
+                let rows = 
+                    specList
+                    |> List.choose 
+                        (fun spec ->
+                            match spec with
+                            | SOFTSampleSpecifications.TableData v -> Some v
+                            | _ -> None
+                        )
+                {Headers= headers |> Array.ofList; Rows = rows |> Array.ofList}
+
             SpecificationTokens = specList
     }
 
@@ -847,6 +896,7 @@ module SOFT =
         PubmedId                : string list;
         GeoAccession            : string list;
         AdditionalAttributes    : Map<string,string>
+        DataTable               : DataTable
         SpecificationTokens     : SOFTPlatformSpecifications list
     }
     let private createPlatformRecord accession (specList: SOFTPlatformSpecifications list)=
@@ -983,6 +1033,27 @@ module SOFT =
                         | _ -> None
                     )
                 |> Map.ofList
+
+            DataTable = 
+                
+                let headers = 
+                    specList
+                    |> List.choose 
+                        (fun spec ->
+                            match spec with
+                            | SOFTPlatformSpecifications.TableHeader(name,description) -> Some (name,description)
+                            | _ -> None
+                        )
+                let rows = 
+                    specList
+                    |> List.choose 
+                        (fun spec ->
+                            match spec with
+                            | SOFTPlatformSpecifications.TableData v -> Some v
+                            | _ -> None
+                        )
+                {Headers= headers |> Array.ofList; Rows = rows |> Array.ofList}
+
             SpecificationTokens = specList
     }
   
@@ -1183,32 +1254,42 @@ module SOFT =
             SpecificationTokens = specList
     }
 
-    module internal Tokenization =
+    module Tokenization =
+
+        //Regarding to SOFT spewcifications:
+        //Symbol	Description	Line type
+        //^     caret lines entity indicator line
+        //!     bang lines  entity attribute line
+        //#     hash lines  data table header description line
+        //n/a   data lines  data table row
 
         type SOFTToken =
-        |Entity of (string * string)
-        |Attribute of (string * string)
-        |DataTable
-        |Broken of string []
+        |Entity             of (string * string)
+        |Attribute          of (string * string)
+        |TableHeader        of (string * string)
+        |TableRow           of string
 
         let tokenizeSOFTLine (line: string) =
             let token = 
                 line.Split([|'='|])
                 |> Array.map (fun s -> s.Trim())
             match token.Length with
-            | 1 ->  DataTable
             | 2 ->  if token.[0].StartsWith("^") then
                         Entity (token.[0], token.[1])
                     elif (token.[0].StartsWith("!")) then
                         Attribute (token.[0], token.[1])
+                    elif (token.[0].StartsWith("#")) then
+                        TableHeader (token.[0], token.[1])
                     else
-                        Broken token
+                        TableRow (token |> String.concat "=")
             | _ ->  if token.[0].StartsWith("^") then
                         Entity (token.[0], token.[1..(token.Length-1)] |> String.concat "=")
                     elif (token.[0].StartsWith("!")) then
                         Attribute (token.[0], token.[1..(token.Length-1)] |> String.concat "=")
+                    elif (token.[0].StartsWith("#")) then
+                        TableHeader (token.[0], token.[1..(token.Length-1)] |> String.concat "=")
                     else
-                        Broken token
+                        TableRow (token |> String.concat "=")
 
     module internal Parsing =
 
@@ -1222,7 +1303,8 @@ module SOFT =
                     let nextToken = en.Current
                     match token,nextToken with
                     //gather sample infos
-                    |Attribute (a,v),Attribute (nextA,nextV) -> 
+                    |Attribute (a,v),Attribute (nextA,nextV) 
+                        -> 
                         let lexedValue =
                             match (a,v) with 
                                 | Sample.Accession             lv  -> lv
@@ -1238,8 +1320,8 @@ module SOFT =
                                 | Sample.GrowthProtocol        lv  -> lv
                                 | Sample.Molecule              lv  -> lv
                                 | Sample.ExtractProtocol       lv  -> lv
-                                | Sample.Label                 lv  -> lv
                                 | Sample.LabelProtocol         lv  -> lv
+                                | Sample.Label                 lv  -> lv
                                 | Sample.HybProtocol           lv  -> lv
                                 | Sample.ScanProtocol          lv  -> lv
                                 | Sample.DataProcessing        lv  -> lv
@@ -1253,6 +1335,17 @@ module SOFT =
                             
                         loop nextToken (lexedValue::lexedSample)
                             
+                    | TableHeader (a,v), TableHeader (_) 
+                    | TableHeader (a,v), Attribute (_)
+                    | TableHeader (a,v), TableRow (_) ->
+
+                        loop nextToken ((SOFTSampleSpecifications.TableHeader(a,v))::lexedSample)
+
+                    | TableRow (row), TableRow (_)
+                    | TableRow (row), Attribute (_) ->
+
+                        loop nextToken ((SOFTSampleSpecifications.TableData(row))::lexedSample)
+
                     //return finished sample when new entity starts
                     |Attribute (a,v),Entity (e,ev) ->   
                         let lexedValue =
@@ -1270,8 +1363,8 @@ module SOFT =
                                 | Sample.GrowthProtocol        lv  -> lv
                                 | Sample.Molecule              lv  -> lv
                                 | Sample.ExtractProtocol       lv  -> lv
-                                | Sample.Label                 lv  -> lv
                                 | Sample.LabelProtocol         lv  -> lv
+                                | Sample.Label                 lv  -> lv
                                 | Sample.HybProtocol           lv  -> lv
                                 | Sample.ScanProtocol          lv  -> lv
                                 | Sample.DataProcessing        lv  -> lv
@@ -1296,7 +1389,9 @@ module SOFT =
                     let nextToken = en.Current
                     match token,nextToken with
                     //gather platform infos
-                    | Attribute (a,v),Attribute (nextA,nextV) ->    
+                    | Attribute (a,v),Attribute (_) 
+                    | Attribute (a,v),TableHeader (_) 
+                        ->    
                         let lexedValue =
                             match (a,v) with   
                             | Platform.Accession            lv -> lv
@@ -1316,6 +1411,19 @@ module SOFT =
                             | _                                -> SOFTPlatformSpecifications.AdditionalAttribute (a,v)
 
                         loop nextToken (lexedValue::lexedPlatform)
+
+                    
+                    | TableHeader (a,v), TableHeader (_) 
+                    | TableHeader (a,v), Attribute (_)
+                    | TableHeader (a,v), TableRow (_) ->
+
+                        loop nextToken ((SOFTPlatformSpecifications.TableHeader(a,v))::lexedPlatform)
+
+                    | TableRow (row), TableRow (_)
+                    | TableRow (row), Attribute (_) ->
+
+                        loop nextToken ((SOFTPlatformSpecifications.TableData(row))::lexedPlatform)
+
                     //return finished platform when new entity starts
                     | Attribute (a,v),Entity (e,ev) ->  
                         let lexedValue =

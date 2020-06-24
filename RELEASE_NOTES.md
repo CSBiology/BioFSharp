@@ -15,11 +15,13 @@
      
  * **BioFSharp.IO**:
    * OBO parser: Extended term parser for spec 1.4
+   * SOFT parser now parses Data tables 
 
 **Bugfixes:**
  * **BioFSharp.IO**:
    * OBO parser now correctly parses lists of relationships
-   * FastA.writeToStream is now correctly typed and doe snot close the stream after writing
+   * FastA.writeToStream is now correctly typed and does not close the stream after writing
+   * SOFT parser now parses sample_label / sample_label_protocol correctly_
 
 #### 1.2.0 - Monday, March 30
 
