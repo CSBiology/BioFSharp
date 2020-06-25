@@ -40,6 +40,92 @@ module DigestionTests =
     let testSequence = 
         Array.concat [|fstTestPeptide;sndTestPeptide;trdTestSequence|]
 
+
+    ///
+    let testMotiv = 
+        [|
+            (His, [|None; None; None; Some His; Some His; Some Ile|])
+            (His, [|None; None; Some His; Some His; Some Ile; Some Lys|])
+            (Ile, [|None; Some His; Some His; Some Ile; Some Lys; Some Glu|])
+            (Lys, [|Some His; Some His; Some Ile; Some Lys; Some Glu; Some Phe|])
+            (Glu, [|Some His; Some Ile; Some Lys; Some Glu; Some Phe; None|])
+            (Phe, [|Some Ile; Some Lys; Some Glu; Some Phe; None; None|])
+        |]
+
+    let testDigest = 
+        [|
+            {
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = 0
+                CleavageEnd = fstTestPeptide.Length-1
+                PepSequence = fstTestPeptide |> Array.toList
+            }
+            { 
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = fstTestPeptide.Length
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length-1
+                PepSequence = sndTestPeptide |> Array.toList
+            }
+            { 
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = fstTestPeptide.Length+sndTestPeptide.Length
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length+trdTestSequence.Length-1
+                PepSequence = trdTestSequence |> Array.toList
+            }
+        |]
+
+    let testMissCleavages = 
+        [|
+            // No MissCleavages
+            { 
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = fstTestPeptide.Length+sndTestPeptide.Length
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length+trdTestSequence.Length-1
+                PepSequence = trdTestSequence |> Array.toList
+            }
+            { 
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = fstTestPeptide.Length
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length-1
+                PepSequence = sndTestPeptide |> Array.toList
+            }
+            {
+                ProteinID = 1
+                MissCleavages = 0
+                CleavageStart = 0
+                CleavageEnd = fstTestPeptide.Length-1
+                PepSequence = fstTestPeptide |> Array.toList
+            }
+            // one MissCleavage
+            { 
+                ProteinID = 1
+                MissCleavages = 1
+                CleavageStart = 9
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length+trdTestSequence.Length-1
+                PepSequence = List.concat [sndTestPeptide |> Array.toList;trdTestSequence |> Array.toList]
+            }
+            { 
+                ProteinID = 1
+                MissCleavages = 1
+                CleavageStart = 0
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length-1
+                PepSequence = List.concat [fstTestPeptide |> Array.toList;sndTestPeptide |> Array.toList]
+            }
+            // two MissCleavages
+            { 
+                ProteinID = 1
+                MissCleavages = 2
+                CleavageStart = 0
+                CleavageEnd = fstTestPeptide.Length+sndTestPeptide.Length+trdTestSequence.Length-1
+                PepSequence = List.concat [fstTestPeptide |> Array.toList;sndTestPeptide |> Array.toList;trdTestSequence |> Array.toList]
+            }
+        |]
+
     [<Tests>]
     let digestionTests  =
         
@@ -49,7 +135,7 @@ module DigestionTests =
                     
                 testCase "isCuttingSite_lys" (fun () ->
                     let isCuttingSite_lys =
-                        Digestion.isCutingSite testProtease (trypsinTestCuttingSiteLys |> Array.map Some)
+                        Digestion.isCuttingSite testProtease (trypsinTestCuttingSiteLys |> Array.map Some)
 
                     Expect.isTrue isCuttingSite_lys
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
@@ -82,6 +168,34 @@ module DigestionTests =
 
                 )
                 ]
+
+            testList "BioArray" [
+                
+                testCase "motivy" (fun () ->
+                    let motiv =
+                        Digestion.BioArray.motivy 3 2 (trypsinTestCuttingSiteLys)
+
+                    Expect.sequenceEqual motiv testMotiv
+                        "Motivy 3 2 did not yield the expected result"
+
+                )
+                testCase "digest" (fun () ->
+                    let digest =
+                        Digestion.BioArray.digest testProtease 1 testSequence
+
+                    Expect.sequenceEqual digest testDigest
+                        "Digestion.BioArray.digest failed sto produce expected digested peptides."
+
+                )
+                testCase "concernMissCleavages" (fun () ->
+                    let withMissCleavages =
+                        Digestion.BioArray.concernMissCleavages 0 2 testDigest
+
+                    Expect.sequenceEqual withMissCleavages testMissCleavages
+                        "Digestion.BioArray.concernMissCleavages failed to produce the expected digested peptides."
+                )
             ]
+
+        ]
 
       
