@@ -123,7 +123,7 @@ module Digestion =
                 )
 
         /// Takes Proteinsequence as input and returns Array of resulting DigestedPeptides
-        let digest (protease: Protease) (proteinID: int) (aas: AminoAcid []) =
+        let digest (protease: Protease) proteinID (aas: AminoAcid []) =
             let aasLength = aas.Length
             if aasLength = 0 then [||]
             else
@@ -163,8 +163,7 @@ module Digestion =
                     connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) (lastPepIdx+1) currentMissCleavages
         
             minToMaxMissCleavagesL
-            |> List.map (fun x ->  (connectDigestedPeptides [] (digestedPeptidesA) 0 x x)) 
-            |> List.concat
+            |> List.collect (fun x ->  (connectDigestedPeptides [] digestedPeptidesA 0 x x)) 
             |> Array.ofList
 
     ///Contains frequently needed proteases
