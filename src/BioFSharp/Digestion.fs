@@ -3,6 +3,7 @@
 ///Contains types and functions needed to digest amino acid sequences with proteases
 module Digestion =
     
+    open System
     open AminoAcids
     open FSharpAux
 
@@ -21,15 +22,11 @@ module Digestion =
          {Name = name; Expression = f}
 
     /// Digested peptide
-    // TODO: type of ProteinID to 'a; rename "missCleavageStart" to "cleavageStart"; Same for ..End..
     type DigestedPeptide<'a> = {
-        ///Identifier of protein
         ProteinID: 'a
-        ///
         MissCleavages: int
         CleavageStart:int
         CleavageEnd: int
-        ///Sequence of peptide
         PepSequence: AminoAcid list
         }
 
@@ -43,11 +40,15 @@ module Digestion =
          }
    
     ///Returns true, if AminoAcid array resembles cutting site of given protease, else returns false
-    // TODO: rename
-    let isCutingSite (protease:Protease) (arr:AminoAcid option[]) =
+    let isCuttingSite (protease:Protease) (arr:AminoAcid option[]) =
         match arr with
         | [|p4; p3; p2; p1; p1'; p2';|] -> protease.Expression p4 p3 p2 p1 p1' p2'
         | _ -> false
+
+    ///Returns true, if AminoAcid array resembles cutting site of given protease, else returns false
+    [<Obsolete("Use isCuttingSite instead")>]
+    let isCutingSite (protease:Protease) (arr:AminoAcid option[]) =
+        isCuttingSite protease arr
 
     [<AutoOpen>]
     ///Contains functions for digesting AminoAcid sequences
@@ -96,7 +97,7 @@ module Digestion =
 
             aas
             |> motivy 3 2
-            |> groupAfter (fun (c,arr) -> isCutingSite protease arr)       
+            |> groupAfter (fun (c,arr) -> isCuttingSite protease arr)       
 
 
     [<AutoOpen>]
@@ -134,7 +135,7 @@ module Digestion =
                     | false -> groupAfter f acc lowercounter (counter+1) aasWithOption
             aas 
             |> motivy 3 2 
-            |> (groupAfter (fun (c,arr) -> isCutingSite protease arr) [] 0 0) 
+            |> (groupAfter (fun (c,arr) -> isCuttingSite protease arr) [] 0 0) 
             |> List.toArray
 
 

@@ -16,16 +16,16 @@ module DigestionTests =
                                   | _   -> false                     
                                   )   
           
-    let trypsinTestCuttingSideLys =
+    let trypsinTestCuttingSiteLys =
         [|His;His;Ile;Lys;Glu;Phe|]
     
-    let trypsinTestCuttingSideArg =
+    let trypsinTestCuttingSiteArg =
         [|His;His;Ile;Arg;Glu;Phe|]
 
-    let trypsinTestCuttingSideLys_Pro =
+    let trypsinTestCuttingSiteLys_Pro =
         [|His;His;Ile;Lys;Pro;Phe|]
         
-    let trypsinTestCuttingSideArg_Pro =
+    let trypsinTestCuttingSiteArg_Pro =
         [|His;His;Ile;Arg;Pro;Phe|]
 
     let fstTestPeptide : BioArray.BioArray<AminoAcid> = 
@@ -45,40 +45,40 @@ module DigestionTests =
         
         testList "Digestion" [
 
-            testList "isCuttingSide" [
+            testList "isCuttingSite" [
                     
-                testCase "isCuttingSide_lys" (fun () ->
-                    let isCuttingSide_lys =
-                        Digestion.isCutingSite testProtease (trypsinTestCuttingSideLys |> Array.map Some)
+                testCase "isCuttingSite_lys" (fun () ->
+                    let isCuttingSite_lys =
+                        Digestion.isCutingSite testProtease (trypsinTestCuttingSiteLys |> Array.map Some)
 
-                    Expect.isTrue isCuttingSide_lys
-                        "Digestion.isCutingSite did not identify the cuttingside correctly."
-
-                )
-                testCase "isCuttingSide_Arg" (fun () ->
-                    let isCuttingSide_Arg =
-                        Digestion.isCutingSite testProtease (trypsinTestCuttingSideArg |> Array.map Some)
-
-                    Expect.isTrue isCuttingSide_Arg
-                        "Digestion.isCutingSite did not identify the cuttingside correctly."
+                    Expect.isTrue isCuttingSite_lys
+                        "Digestion.isCuttingSite did not identify the CuttingSite correctly."
 
                 )
-                testCase "isCuttingSide_lysPro" (fun () ->
-                    let isCuttingSide_lysPro =
-                        Digestion.isCutingSite testProtease (trypsinTestCuttingSideLys_Pro |> Array.map Some)
+                testCase "isCuttingSite_Arg" (fun () ->
+                    let isCuttingSite_Arg =
+                        Digestion.isCuttingSite testProtease (trypsinTestCuttingSiteArg |> Array.map Some)
+
+                    Expect.isTrue isCuttingSite_Arg
+                        "Digestion.isCuttingSite did not identify the CuttingSite correctly."
+
+                )
+                testCase "isCuttingSite_lysPro" (fun () ->
+                    let isCuttingSite_lysPro =
+                        Digestion.isCuttingSite testProtease (trypsinTestCuttingSiteLys_Pro |> Array.map Some)
                         |> not 
 
-                    Expect.isTrue isCuttingSide_lysPro
-                        "Digestion.isCutingSite did not identify the cuttingside correctly."
+                    Expect.isTrue isCuttingSite_lysPro
+                        "Digestion.isCuttingSite did not identify the CuttingSite correctly."
 
                 )
-                testCase "isCuttingSide_argPro" (fun () ->
-                    let isCuttingSide_argPro =
-                        Digestion.isCutingSite testProtease (trypsinTestCuttingSideArg_Pro |> Array.map Some)
+                testCase "isCuttingSite_argPro" (fun () ->
+                    let isCuttingSite_argPro =
+                        Digestion.isCuttingSite testProtease (trypsinTestCuttingSiteArg_Pro |> Array.map Some)
                         |> not 
 
-                    Expect.isTrue isCuttingSide_argPro
-                        "Digestion.isCutingSite did not identify the cuttingside correctly."
+                    Expect.isTrue isCuttingSite_argPro
+                        "Digestion.isCuttingSite did not identify the CuttingSite correctly."
 
                 )
                 ]
