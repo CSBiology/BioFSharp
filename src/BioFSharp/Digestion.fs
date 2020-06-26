@@ -81,6 +81,7 @@ module Digestion =
                         yield (tmp.[prefixLength].Value,tmp)
                         }
 
+        
         ///Cuts AminoAcid sequence at each place, where the sequence fits the cutting pattern of the protease. Returns sequence of resulting AminoAcid sequences
         let digest (protease:Protease) proteinID (aas:seq<AminoAcid>) =
             let groupAfter f (input:seq<_>) =     
@@ -105,6 +106,30 @@ module Digestion =
                 ) (0,0)
             |> fst 
 
+        // Lines containing a Seq.rev (marked with *) can be removed in future releases. I chose to include it to force the same output as
+        // currently returned by BioArray.concernMissCleavages
+        /// Returns Sequence of DigestedPeptides including those resulting of one or more Misscleavage events.
+        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptides:seq<DigestedPeptide<'a>>) =
+            let proteinID = (digestedPeptides |> Seq.item 0).ProteinID           
+            seq { 
+                for nMisses = minMissCleavages to maxMisscleavages do 
+                    let digestedPeps = 
+                        if nMisses = 0 then 
+                            digestedPeptides
+                            // *
+                            |> Seq.rev
+                        else 
+                            Seq.windowed (nMisses+1) digestedPeptides
+                            |> Seq.map (fun pepsToConcat -> 
+                                    let startP      = pepsToConcat |> Seq.minBy (fun x -> x.CleavageStart)
+                                    let endP        = pepsToConcat |> Seq.maxBy (fun x -> x.CleavageStart)
+                                    let concPepSeq  = pepsToConcat |> Seq.map (fun x -> x.PepSequence) |> List.concat
+                                    createDigestedPeptide proteinID nMisses startP.CleavageStart endP.CleavageEnd concPepSeq
+                                )
+                            // *
+                            |> Seq.rev
+                    yield! digestedPeps
+            }
 
 
     [<AutoOpen>]
@@ -147,11 +172,11 @@ module Digestion =
 
 
 
-        /// Takes Array of DigestedPeptides and and returns Array of DigestedPeptides including those resulting of one or more Misscleavage events
-        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptidesA:(DigestedPeptide<'a>) []) =
-            if digestedPeptidesA = [||] then [||]
+        /// Returns Sequence of DigestedPeptides including those resulting of one or more Misscleavage events.
+        let concernMissCleavages (minMissCleavages:int) (maxMisscleavages:int) (digestedPeptides:(DigestedPeptide<'a>) []) =
+            if digestedPeptides = [||] then [||]
             else
-            let lengthOfPeptideL = digestedPeptidesA.Length
+            let lengthOfPeptideL = digestedPeptides.Length
             let minToMaxMissCleavagesL = [minMissCleavages.. maxMisscleavages]
             let rec connectDigestedPeptides acc (digestedPeptidesA: DigestedPeptide<'a> []) (fstPepIdx:int)  (lastPepIdx:int) currentMissCleavages =
                 if lengthOfPeptideL < lastPepIdx then acc
@@ -170,7 +195,7 @@ module Digestion =
                     connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) (lastPepIdx+1) currentMissCleavages
         
             minToMaxMissCleavagesL
-            |> List.collect (fun x -> (connectDigestedPeptides [] digestedPeptidesA 0 x x)) 
+            |> List.collect (fun x -> (connectDigestedPeptides [] digestedPeptides 0 x x)) 
             |> Array.ofList
 
     ///Contains frequently needed proteases
