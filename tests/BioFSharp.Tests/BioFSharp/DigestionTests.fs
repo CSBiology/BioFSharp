@@ -178,15 +178,15 @@ module DigestionTests =
                         Digestion.BioSeq.digest testProtease 1 testSequence
 
                     Expect.sequenceEqual digest testDigest
-                        "Digestion.BioArray.digest failed sto produce expected digested peptides."
+                        "Digestion.BioSeq.digest failed to produce expected digested peptides."
                 )
-                //testCase "concernMissCleavages" (fun () ->
-                //    let withMissCleavages =
-                //        Digestion.BioArray.concernMissCleavages 0 2 testDigest
+                testCase "concernMissCleavages" (fun () ->
+                    let withMissCleavages =
+                        Digestion.BioSeq.concernMissCleavages 0 2 testDigest
 
-                //    Expect.sequenceEqual withMissCleavages testMissCleavages
-                //        "Digestion.BioArray.concernMissCleavages failed to produce the expected digested peptides."
-                //)
+                    Expect.sequenceEqual withMissCleavages testMissCleavages
+                        "Digestion.BioSeq.concernMissCleavages failed to produce expected digested peptides."
+                )
             ]
             testList "BioArray" [
                 
