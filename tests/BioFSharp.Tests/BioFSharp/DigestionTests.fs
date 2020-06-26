@@ -202,15 +202,40 @@ module DigestionTests =
                         Digestion.BioArray.digest testProtease 1 testSequence
 
                     Expect.sequenceEqual digest testDigest
-                        "Digestion.BioArray.digest failed sto produce expected digested peptides."
+                        "Digestion.BioArray.digest failed to produce expected digested peptides."
                 )
                 testCase "concernMissCleavages" (fun () ->
                     let withMissCleavages =
                         Digestion.BioArray.concernMissCleavages 0 2 testDigest
 
                     Expect.sequenceEqual withMissCleavages testMissCleavages
-                        "Digestion.BioArray.concernMissCleavages failed to produce the expected digested peptides."
+                        "Digestion.BioArray.concernMissCleavages failed to produce expected digested peptides."
                 )
+            ]
+
+            testList "BioList" [
+                
+                testCase "motivy" (fun () ->
+                    let motiv =
+                        Digestion.BioList.motivy 3 2 (trypsinTestCuttingSiteLys |> List.ofArray)
+
+                    Expect.sequenceEqual motiv testMotiv
+                        "Motivy 3 2 did not yield the expected result"
+                )
+                testCase "digest" (fun () ->
+                    let digest =
+                        Digestion.BioList.digest testProtease 1 (testSequence |> List.ofArray)
+
+                    Expect.sequenceEqual digest testDigest
+                        "Digestion.BioList.digest failed to produce expected digested peptides."
+                )
+                //testCase "concernMissCleavages" (fun () ->
+                //    let withMissCleavages =
+                //        Digestion.BioList.concernMissCleavages 0 2 testDigest
+
+                //    Expect.sequenceEqual withMissCleavages testMissCleavages
+                //        "Digestion.BioList.concernMissCleavages failed to produce xpected digested peptides."
+                //)
             ]
 
         ]
