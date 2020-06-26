@@ -163,7 +163,8 @@ module DigestionTests =
                     Expect.isTrue isCuttingSite_argPro
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
                 )
-                ]
+            ]
+
             testList "BioSeq" [
     
                 testCase "motivy" (fun () ->
@@ -188,6 +189,7 @@ module DigestionTests =
                         "Digestion.BioSeq.concernMissCleavages failed to produce expected digested peptides."
                 )
             ]
+
             testList "BioArray" [
                 
                 testCase "motivy" (fun () ->
