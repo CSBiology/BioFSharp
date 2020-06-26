@@ -139,7 +139,6 @@ module DigestionTests =
 
                     Expect.isTrue isCuttingSite_lys
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
-
                 )
                 testCase "isCuttingSite_Arg" (fun () ->
                     let isCuttingSite_Arg =
@@ -147,7 +146,6 @@ module DigestionTests =
 
                     Expect.isTrue isCuttingSite_Arg
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
-
                 )
                 testCase "isCuttingSite_lysPro" (fun () ->
                     let isCuttingSite_lysPro =
@@ -156,7 +154,6 @@ module DigestionTests =
 
                     Expect.isTrue isCuttingSite_lysPro
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
-
                 )
                 testCase "isCuttingSite_argPro" (fun () ->
                     let isCuttingSite_argPro =
@@ -165,10 +162,32 @@ module DigestionTests =
 
                     Expect.isTrue isCuttingSite_argPro
                         "Digestion.isCuttingSite did not identify the CuttingSite correctly."
-
                 )
                 ]
+            testList "BioSeq" [
+    
+                testCase "motivy" (fun () ->
+                    let motiv =
+                        Digestion.BioSeq.motivy 3 2 (trypsinTestCuttingSiteLys)
 
+                    Expect.sequenceEqual motiv testMotiv
+                        "Motivy 3 2 did not yield the expected result"
+                )
+                testCase "digest" (fun () ->
+                    let digest =
+                        Digestion.BioSeq.digest testProtease 1 testSequence
+
+                    Expect.sequenceEqual digest testDigest
+                        "Digestion.BioArray.digest failed sto produce expected digested peptides."
+                )
+                //testCase "concernMissCleavages" (fun () ->
+                //    let withMissCleavages =
+                //        Digestion.BioArray.concernMissCleavages 0 2 testDigest
+
+                //    Expect.sequenceEqual withMissCleavages testMissCleavages
+                //        "Digestion.BioArray.concernMissCleavages failed to produce the expected digested peptides."
+                //)
+            ]
             testList "BioArray" [
                 
                 testCase "motivy" (fun () ->
@@ -177,7 +196,6 @@ module DigestionTests =
 
                     Expect.sequenceEqual motiv testMotiv
                         "Motivy 3 2 did not yield the expected result"
-
                 )
                 testCase "digest" (fun () ->
                     let digest =
@@ -185,7 +203,6 @@ module DigestionTests =
 
                     Expect.sequenceEqual digest testDigest
                         "Digestion.BioArray.digest failed sto produce expected digested peptides."
-
                 )
                 testCase "concernMissCleavages" (fun () ->
                     let withMissCleavages =
