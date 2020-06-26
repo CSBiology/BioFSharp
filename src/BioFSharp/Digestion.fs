@@ -82,8 +82,7 @@ module Digestion =
                         }
 
         ///Cuts AminoAcid sequence at each place, where the sequence fits the cutting pattern of the protease. Returns sequence of resulting AminoAcid sequences
-        let digest (protease:Protease) (aas:seq<AminoAcid>) =
-
+        let digest (protease:Protease) proteinID (aas:seq<AminoAcid>) =
             let groupAfter f (input:seq<_>) =     
                 let rec group (en:System.Collections.Generic.IEnumerator<_>) cont acc c  =            
                         if not(f en.Current) && en.MoveNext() then
@@ -97,7 +96,15 @@ module Digestion =
 
             aas
             |> motivy 3 2
-            |> groupAfter (fun (c,arr) -> isCuttingSite protease arr)       
+            |> groupAfter (fun (c,arr) -> isCuttingSite protease arr)
+            // operation in mapFold can probably be included into 'groupAfter' to improve performance.
+            |> Seq.mapFold (fun (cleavageStart,cleavageEnd) pepSeq -> 
+                let digestedPep = createDigestedPeptide proteinID 0 cleavageStart (cleavageStart+pepSeq.Length-1) pepSeq
+                let acc' = cleavageStart+pepSeq.Length, cleavageEnd+cleavageStart+pepSeq.Length
+                digestedPep,acc'
+                ) (0,0)
+            |> fst 
+
 
 
     [<AutoOpen>]
@@ -163,7 +170,7 @@ module Digestion =
                     connectDigestedPeptides (currentPeptide::acc) digestedPeptidesA (fstPepIdx+1) (lastPepIdx+1) currentMissCleavages
         
             minToMaxMissCleavagesL
-            |> List.collect (fun x ->  (connectDigestedPeptides [] digestedPeptidesA 0 x x)) 
+            |> List.collect (fun x -> (connectDigestedPeptides [] digestedPeptidesA 0 x x)) 
             |> Array.ofList
 
     ///Contains frequently needed proteases
