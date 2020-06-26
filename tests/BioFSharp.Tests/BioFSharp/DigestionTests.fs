@@ -229,15 +229,15 @@ module DigestionTests =
                     Expect.sequenceEqual digest testDigest
                         "Digestion.BioList.digest failed to produce expected digested peptides."
                 )
-                //testCase "concernMissCleavages" (fun () ->
-                //    let withMissCleavages =
-                //        Digestion.BioList.concernMissCleavages 0 2 testDigest
+                testCase "concernMissCleavages" (fun () ->
+                    let withMissCleavages =
+                        Digestion.BioList.concernMissCleavages 0 2 (testDigest |> List.ofArray)
 
-                //    Expect.sequenceEqual withMissCleavages testMissCleavages
-                //        "Digestion.BioList.concernMissCleavages failed to produce xpected digested peptides."
-                //)
+                    Expect.sequenceEqual withMissCleavages testMissCleavages
+                        "Digestion.BioList.concernMissCleavages failed to produce xpected digested peptides."
+                )
             ]
-
+            // TODO: add Unit tests for proteases in Digestion.Table.
         ]
 
       
