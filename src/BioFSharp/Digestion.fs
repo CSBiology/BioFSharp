@@ -198,8 +198,52 @@ module Digestion =
             |> List.collect (fun x -> (connectDigestedPeptides [] digestedPeptides 0 x x)) 
             |> Array.ofList
 
-    ///Contains frequently needed proteases
-    //TODO: switch to better list system
+
+    [<AutoOpen>]
+    ///Contains functions for digesting AminoAcid Lists
+    module BioList =
+
+        // This function can probably be reimplemented with a stronger focus on 
+        // the data structure 'list'. 
+        /// Returns current value,array tuple (current, [|prefix; current; suffix|])
+        let motivy prefixLength suffixLength (source: 'T list) =    
+            if prefixLength < 0 then invalidArg "prefixLength" "Input must be non negative"
+            if suffixLength < 0 then invalidArg "suffixLength" "Input must be non negative"
+            let windowSize = prefixLength + suffixLength + 1
+            List.init (source.Length) 
+                (fun i ->
+                    let motive =
+                        Array.init windowSize 
+                            (fun ii -> 
+                                if i+ii < prefixLength || (i+ii-prefixLength) > (source.Length-1) then
+                                    None 
+                                else
+                                    Some source.[i+ii-prefixLength])
+                    source.[i],motive
+                )
+
+        /// Returns list of resulting DigestedPeptides
+        let digest (protease: Protease) proteinID (aas: AminoAcid list) =
+            if aas.IsEmpty then []
+            else
+            let rec groupAfter acc isCuttingSite currentPeptide currentPeptideStartidx currenPeptideLength (aasWithOption: (AminoAcid*'a []) list) =
+                match aasWithOption with 
+                | [] -> 
+                    createDigestedPeptide proteinID 0 (currentPeptideStartidx) (currentPeptideStartidx+currenPeptideLength-1) ((currentPeptide) |> List.rev) 
+                    :: acc
+                    |> List.rev
+                | (aa,motiv)::t -> 
+                    if (isCuttingSite (aa,motiv)) then
+                        let peptide = createDigestedPeptide proteinID 0 (currentPeptideStartidx) (currentPeptideStartidx+currenPeptideLength) ((aa::currentPeptide) |> List.rev)
+                        groupAfter (peptide::acc) isCuttingSite [] (currentPeptideStartidx+currenPeptideLength+1) 0 t
+                    else
+                        groupAfter acc isCuttingSite (aa::currentPeptide) currentPeptideStartidx (currenPeptideLength+1) t
+            aas 
+            |> motivy 3 2 
+            |> (groupAfter [] (fun (c,arr) -> isCuttingSite protease arr) [] 0 0) 
+    
+        ///Contains frequently needed proteases
+        //TODO: switch to better list system
     module Table = 
 
         let Trypsin =
