@@ -69,6 +69,7 @@ let summary         = "An open source bioinformatics toolbox written in F#. <htt
 let solutionFile    = "BioFSharp.sln"
 let configuration   = "Release"
 
+let testProject = "tests/BioFSharp.Tests.NetCore/BioFSharp.Tests.NetCore.fsproj"
 let testAssemblies = "tests/**/bin" </> configuration </> "**" </> "*Tests.exe"
 
 let gitOwner = "CSBiology"
@@ -263,21 +264,46 @@ let copyBinariesDotnet =
 
 let runTestsAll = 
     BuildTask.create "runTestsAll" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinaries.IfNeeded; buildAll] {
-        let assemblies = !! testAssemblies
+        
+        let standardParams = Fake.DotNet.MSBuild.CliArguments.Create ()
 
-        assemblies
-        |> Seq.iter (fun f ->
-            Command.RawCommand (
-                f,
-                Arguments.OfArgs []
-            )
-            |> CreateProcess.fromCommand
-            |> CreateProcess.withFramework
-            |> CreateProcess.ensureExitCode
-            |> Proc.run
-            |> ignore
-        )
+        Fake.DotNet.DotNet.test(fun testParams ->
+            {
+                testParams with
+                    MSBuildParams = {
+                        standardParams with
+                            Properties = [
+                                "AltCover","true"
+                                "AltCoverCobertura","../../codeCov.xml"
+                                "AltCoverForce","true"
+                            ]
+                    }
+            }
+        
+        ) testProject
     }
+
+let runTestsDotnet = 
+    BuildTask.create "runTestsDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesDotnet.IfNeeded; buildDotnet] {
+        
+        let standardParams = Fake.DotNet.MSBuild.CliArguments.Create ()
+
+        Fake.DotNet.DotNet.test(fun testParams ->
+            {
+                testParams with
+                    MSBuildParams = {
+                        standardParams with
+                            Properties = [
+                                "AltCover","true"
+                                "AltCoverCobertura","../../codeCov.xml"
+                                "AltCoverForce","true"
+                            ]
+                    }
+            }
+        
+        ) testProject
+    }
+
 
 let runTestsMono = 
     BuildTask.create "runTestsMono" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesMono.IfNeeded; buildMono] {
@@ -526,6 +552,7 @@ let dotnetBuildChainLocal =
         clean
         assemblyInfo
         buildDotnet
+        runTestsDotnet
         copyBinariesDotnet
     ]
 
@@ -568,6 +595,7 @@ let dotnetBuildChainCI    =
         clean
         assemblyInfo
         buildDotnet
+        runTestsDotnet
         copyBinariesDotnet
         //(buildCIPackages "AppveyorDotnet" "DotnetCore" dotnetProjectPaths)
     ]

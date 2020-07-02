@@ -24,6 +24,7 @@ for:
   build_script:
   - chmod +x ./build.sh
   - sh: ./build.sh -t dotnetBuildChainCI
+  - sh: bash <(curl -s https://codecov.io/bash)
 
 test: off
 version: 0.0.1.{build}

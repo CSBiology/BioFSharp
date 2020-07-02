@@ -5,15 +5,16 @@
 [![Nuget](https://img.shields.io/nuget/v/BioFSharp)](https://www.nuget.org/packages/BioFSharp/)
 [![Made with F#](https://img.shields.io/badge/Made%20with-FSharp-rgb(184,69,252).svg)](https://fsharp.org/)
 
+
 BioFSharp is an open source bioinformatics and computational biology toolbox written in F#. <https://csbiology.github.io/BioFSharp/>
 
 [![Gitter](https://badges.gitter.im/CSBiology/BioFSharp.svg)](https://gitter.im/CSBiology/BioFSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 ![GitHub contributors](https://img.shields.io/github/contributors/CSBiology/BioFSharp)
 
-|Branch|Linux Mono (Xenial)|Linux .Net Core only (Bionic Beaver)|Windows|
+|Branch|Linux Mono (Xenial)|Linux .Net Core only (Bionic Beaver)| Windows | Test Coverage(.Net Core) |
 |---|---|---|---|
-| master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) |
-| developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |[![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |
+| master | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=master)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/master?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/master) | [![codecov](https://codecov.io/gh/CSBiology/BioFSharp/branch/master/graph/badge.svg)](https://codecov.io/gh/CSBiology/BioFSharp) |
+| developer | [![Build Status](https://travis-ci.com/CSBiology/BioFSharp.svg?branch=developer)](https://travis-ci.com/CSBiology/BioFSharp) | [![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) |[![Build status](https://ci.appveyor.com/api/projects/status/9a5r4aklmmbykobk/branch/developer?svg=true)](https://ci.appveyor.com/project/kMutagene/biofsharp/branch/developer) | [![codecov](https://codecov.io/gh/CSBiology/BioFSharp/branch/developer/graph/badge.svg)](https://codecov.io/gh/CSBiology/BioFSharp) |
 
 
 
