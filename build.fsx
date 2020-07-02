@@ -595,7 +595,7 @@ let dotnetBuildChainCI    =
         clean
         assemblyInfo
         buildDotnet
-        runTestsAll
+        runTestsDotnet
         copyBinariesDotnet
         //(buildCIPackages "AppveyorDotnet" "DotnetCore" dotnetProjectPaths)
     ]
