@@ -283,6 +283,28 @@ let runTestsAll =
         ) testProject
     }
 
+let runTestsDotnet = 
+    BuildTask.create "runTestsDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesDotnet.IfNeeded; buildDotnet] {
+        
+        let standardParams = Fake.DotNet.MSBuild.CliArguments.Create ()
+
+        Fake.DotNet.DotNet.test(fun testParams ->
+            {
+                testParams with
+                    MSBuildParams = {
+                        standardParams with
+                            Properties = [
+                                "AltCover","true"
+                                "AltCoverCobertura","../../codeCov.xml"
+                                "AltCoverForce","true"
+                            ]
+                    }
+            }
+        
+        ) testProject
+    }
+
+
 let runTestsMono = 
     BuildTask.create "runTestsMono" [clean.IfNeeded; assemblyInfo.IfNeeded; copyBinariesMono.IfNeeded; buildMono] {
         let assemblies = !! testAssemblies
@@ -530,7 +552,7 @@ let dotnetBuildChainLocal =
         clean
         assemblyInfo
         buildDotnet
-        runTestsAll
+        runTestsDotnet
         copyBinariesDotnet
     ]
 
