@@ -187,3 +187,4 @@ docs
 /temp
 /pkg
 .ionide
+/tests/BioFSharp.Tests.NetCore/coverage.xml
