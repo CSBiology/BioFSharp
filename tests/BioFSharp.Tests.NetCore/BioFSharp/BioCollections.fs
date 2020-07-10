@@ -127,6 +127,12 @@ let bioCollectionsTests  =
                     "BioArray.translate did not translate the transcript correctly."
             )
 
+            testCase "isEqual" (fun () ->
+                Expect.equal
+                    (testTranscript |> BioArray.isEqual testTranscript)
+                    0
+                    "BioArray.isEqual did not return correct integer when transcripts were equal."
+            )
         ]
 
         testList "BioList" [
