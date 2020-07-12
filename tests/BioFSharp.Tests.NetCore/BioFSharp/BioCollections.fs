@@ -133,6 +133,13 @@ let bioCollectionsTests  =
                     0
                     "BioArray.isEqual did not return correct integer when transcripts were equal."
             )
+
+            testCase "toString" (fun () ->
+                Expect.equal
+                    (aminoAcidSetArray |> BioArray.toString)
+                    "ACDEFGHIKLMNOPQRSTUVWYXJZB"
+                    "BioArray.toString did not return the correct string"
+            )
         ]
 
         testList "BioList" [
