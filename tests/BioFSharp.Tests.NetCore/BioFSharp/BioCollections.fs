@@ -158,6 +158,15 @@ let bioCollectionsTests  =
                     (131.19606 + 99.13106 + 113.15764)
                     "BioArray.toAverageMass did not return correct mass"
             )
+
+            testCase "toMonoisotopicMassWith" (fun () ->
+                Expect.floatClose
+                    Accuracy.high
+                    (testProt |> BioArray.toMonoisotopicMassWith 18.0) // 18 = mass of one water molecule
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.04048 + 99.06841 + 113.08406 + 18.0)
+                    "BioArray.toMonoisotopicMassWith did not return correct mass"
+            )
         ]
 
         testList "BioList" [
