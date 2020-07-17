@@ -289,7 +289,16 @@ let bioCollectionsTests  =
                 Expect.equal
                     (aminoAcidSetArray |> BioList.ofBioArray |> BioList.toString)
                     "ACDEFGHIKLMNOPQRSTUVWYXJZB-*"
-                    "BioArray.toString did not return the correct string"
+                    "BioList.toString did not return the correct string"
+            )
+
+            testCase "toMonoisotopicMass" (fun () ->
+                Expect.floatClose
+                    Accuracy.high
+                    (testProt |> BioList.ofBioArray |> BioList.toMonoisotopicMass)
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.04048 + 99.06841 + 113.08406)
+                    "BioList.toMonoisotopicMass did not return correct mass"
             )
         ]
 
