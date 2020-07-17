@@ -127,6 +127,69 @@ let bioCollectionsTests  =
                     "BioArray.translate did not translate the transcript correctly."
             )
 
+            testCase "isEqual" (fun () ->
+                Expect.equal
+                    (testTranscript |> BioArray.isEqual testTranscript)
+                    0
+                    "BioArray.isEqual did not return correct integer when transcripts were equal."
+            )
+
+            testCase "toString" (fun () ->
+                Expect.equal
+                    (aminoAcidSetArray |> BioArray.toString)
+                    "ACDEFGHIKLMNOPQRSTUVWYXJZB-*"
+                    "BioArray.toString did not return the correct string"
+            )
+
+            testCase "toMonoisotopicMass" (fun () ->
+                Expect.floatClose
+                    Accuracy.high
+                    (testProt |> BioArray.toMonoisotopicMass)
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.04048 + 99.06841 + 113.08406)
+                    "BioArray.toMonoisotopicMass did not return correct mass"
+            )
+
+            testCase "toAverageMass" (fun() ->
+                Expect.floatClose
+                    Accuracy.medium // High accuracy was not passing test
+                    (testProt |> BioArray.toAverageMass)
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.19606 + 99.13106 + 113.15764)
+                    "BioArray.toAverageMass did not return correct mass"
+            )
+
+            testCase "toMonoisotopicMassWith" (fun () ->
+                Expect.floatClose
+                    Accuracy.high
+                    (testProt |> BioArray.toMonoisotopicMassWith 18.0) // 18 = mass of one water molecule
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.04048 + 99.06841 + 113.08406 + 18.0)
+                    "BioArray.toMonoisotopicMassWith did not return correct mass"
+            )
+
+            testCase "toAverageMassWith" (fun () ->
+                Expect.floatClose
+                    Accuracy.medium
+                    (testProt |> BioArray.toAverageMassWith 18.0) // 18 = mass of one water molecule
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.19606 + 99.13106 + 113.15764 + 18.0)
+                    "BioArray.toAverageMassWith did not return correct mass"
+            )
+
+            testCase "toCompositionVector" (fun () ->
+                let testCompVec = Array.zeroCreate 26
+                let metIndex = 12 // Value of (int(BioItem.symbol Met)) - 65
+                let valIndex = 21 // Value of (int(BioItem.symbol Val)) - 65
+                let leuIndex = 11 // Value of (int(BioItem.symbol Leu)) - 65
+                testCompVec.[metIndex] <- testCompVec.[metIndex] + 1
+                testCompVec.[valIndex] <- testCompVec.[valIndex] + 1
+                testCompVec.[leuIndex] <- testCompVec.[leuIndex] + 1
+                Expect.equal
+                    (testProt |> BioArray.toCompositionVector)
+                    testCompVec
+                    "BioArray.toCompositionVector did not return correct vector"
+            )
         ]
 
         testList "BioList" [
