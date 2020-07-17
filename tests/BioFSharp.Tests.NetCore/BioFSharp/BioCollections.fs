@@ -328,6 +328,19 @@ let bioCollectionsTests  =
                     "BioList.toAverageMassWith did not return correct mass"
             )
 
+            testCase "toCompositionVector" (fun () ->
+                let testCompVec = Array.zeroCreate 26
+                let metIndex = 12 // Value of (int(BioItem.symbol Met)) - 65
+                let valIndex = 21 // Value of (int(BioItem.symbol Val)) - 65
+                let leuIndex = 11 // Value of (int(BioItem.symbol Leu)) - 65
+                testCompVec.[metIndex] <- testCompVec.[metIndex] + 1
+                testCompVec.[valIndex] <- testCompVec.[valIndex] + 1
+                testCompVec.[leuIndex] <- testCompVec.[leuIndex] + 1
+                Expect.equal
+                    (testProt |> BioList.ofBioArray |> BioList.toCompositionVector)
+                    testCompVec
+                    "BioArray.toCompositionVector did not return correct vector"
+            )
         ]
 
         testList "BioSeq" [
