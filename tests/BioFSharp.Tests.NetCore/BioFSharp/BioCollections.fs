@@ -300,6 +300,16 @@ let bioCollectionsTests  =
                     (131.04048 + 99.06841 + 113.08406)
                     "BioList.toMonoisotopicMass did not return correct mass"
             )
+
+            testCase "toAverageMass" (fun() ->
+                Expect.floatClose
+                    Accuracy.medium // High accuracy was not passing test
+                    (testProt |> BioList.ofBioArray |> BioList.toAverageMass)
+                    // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                    (131.19606 + 99.13106 + 113.15764)
+                    "BioList.toAverageMass did not return correct mass"
+            )
+
         ]
 
         testList "BioSeq" [
