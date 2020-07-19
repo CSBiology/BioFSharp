@@ -339,7 +339,7 @@ let bioCollectionsTests  =
                 Expect.equal
                     (testProt |> BioList.ofBioArray |> BioList.toCompositionVector)
                     testCompVec
-                    "BioArray.toCompositionVector did not return correct vector"
+                    "BioList.toCompositionVector did not return correct vector"
             )
         ]
 
