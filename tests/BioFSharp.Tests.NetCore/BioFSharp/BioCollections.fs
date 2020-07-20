@@ -237,57 +237,57 @@ let bioCollectionsTests  =
             
             testCase "complement" (fun () ->
                 Expect.equal 
-                    (testCodingStrand |> BioList.ofBioArray |> BioList.complement)
+                    (testCodingStrand |> List.ofArray |> BioList.complement)
                     (testTemplateStrand |> List.ofArray)
                     "BioList.complement did not build the reverse complement of the nucleotide sequence correctly."
             )
 
             testCase "reverseComplement" (fun () ->
                 Expect.equal 
-                    (testCodingStrand |> BioList.ofBioArray |> BioList.reverseComplement)
+                    (testCodingStrand |> List.ofArray |> BioList.reverseComplement)
                     (testCodingStrandRevComplement |> List.ofArray)
                     "BioList.reverseComplement did not build the reverse complement of the nucleotide sequence correctly."
             )
 
             testCase "mapInTriplets" (fun () ->
                 Expect.equal 
-                    (testTemplateStrand |> BioList.ofBioArray |> BioList.mapInTriplets id)
+                    (testTemplateStrand |> List.ofArray |> BioList.mapInTriplets id)
                     (testTriplets |> List.ofArray)
                     "BioList.reverseComplement did not build the correct base triplets."
             )
 
             testCase "transcribeCodeingStrand" (fun () ->
                 Expect.equal 
-                    (testCodingStrand |> BioList.ofBioArray |> BioList.transcribeCodingStrand)
+                    (testCodingStrand |> List.ofArray |> BioList.transcribeCodingStrand)
                     (testTranscript |> List.ofArray)
                     "BioList.transcribeCodeingStrand did not transcribe the coding strand correctly."
             )
 
             testCase "transcribeTemplateStrand" (fun () ->
                 Expect.equal 
-                    (testTemplateStrand |> BioList.ofBioArray |> BioList.transcribeTemplateStrand)
+                    (testTemplateStrand |> List.ofArray |> BioList.transcribeTemplateStrand)
                     (testTranscript |> List.ofArray)
                     "BioList.transcribeTemplateStrand did not transcribe the template strand correctly."
             )
 
             testCase "translate" (fun () ->
                 Expect.equal 
-                    (testTranscript |> BioList.ofBioArray |> BioList.translate 0)
+                    (testTranscript |> List.ofArray |> BioList.translate 0)
                     (testProt |> List.ofArray)
                     "BioList.translate did not translate the transcript correctly."
             )
 
             testCase "isEqual" (fun () ->
                 Expect.equal
-                    (testTranscript |> BioList.ofBioArray
-                    |> BioList.isEqual (testTranscript |> BioList.ofBioArray))
+                    (testTranscript |> List.ofArray
+                    |> BioList.isEqual (testTranscript |> List.ofArray))
                     0
                     "BioList.isEqual did not return correct integer when transcripts were equal."
             )
 
             testCase "toString" (fun () ->
                 Expect.equal
-                    (aminoAcidSetArray |> BioList.ofBioArray |> BioList.toString)
+                    (aminoAcidSetArray |> List.ofArray |> BioList.toString)
                     "ACDEFGHIKLMNOPQRSTUVWYXJZB-*"
                     "BioList.toString did not return the correct string"
             )
@@ -295,7 +295,7 @@ let bioCollectionsTests  =
             testCase "toMonoisotopicMass" (fun () ->
                 Expect.floatClose
                     Accuracy.high
-                    (testProt |> BioList.ofBioArray |> BioList.toMonoisotopicMass)
+                    (testProt |> List.ofArray |> BioList.toMonoisotopicMass)
                     // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
                     (131.04048 + 99.06841 + 113.08406)
                     "BioList.toMonoisotopicMass did not return correct mass"
@@ -304,7 +304,7 @@ let bioCollectionsTests  =
             testCase "toAverageMass" (fun() ->
                 Expect.floatClose
                     Accuracy.medium // High accuracy was not passing test
-                    (testProt |> BioList.ofBioArray |> BioList.toAverageMass)
+                    (testProt |> List.ofArray |> BioList.toAverageMass)
                     // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
                     (131.19606 + 99.13106 + 113.15764)
                     "BioList.toAverageMass did not return correct mass"
@@ -313,7 +313,7 @@ let bioCollectionsTests  =
             testCase "toMonoisotopicMassWith" (fun () ->
                 Expect.floatClose
                     Accuracy.high
-                    (testProt |> BioList.ofBioArray |> BioList.toMonoisotopicMassWith 18.0) // 18 = mass of one water molecule
+                    (testProt |> List.ofArray |> BioList.toMonoisotopicMassWith 18.0) // 18 = mass of one water molecule
                     // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
                     (131.04048 + 99.06841 + 113.08406 + 18.0)
                     "BioList.toMonoisotopicMassWith did not return correct mass"
@@ -322,7 +322,7 @@ let bioCollectionsTests  =
             testCase "toAverageMassWith" (fun () ->
                 Expect.floatClose
                     Accuracy.medium
-                    (testProt |> BioList.ofBioArray |> BioList.toAverageMassWith 18.0) // 18 = mass of one water molecule
+                    (testProt |> List.ofArray |> BioList.toAverageMassWith 18.0) // 18 = mass of one water molecule
                     // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
                     (131.19606 + 99.13106 + 113.15764 + 18.0)
                     "BioList.toAverageMassWith did not return correct mass"
@@ -337,7 +337,7 @@ let bioCollectionsTests  =
                 testCompVec.[valIndex] <- testCompVec.[valIndex] + 1
                 testCompVec.[leuIndex] <- testCompVec.[leuIndex] + 1
                 Expect.equal
-                    (testProt |> BioList.ofBioArray |> BioList.toCompositionVector)
+                    (testProt |> List.ofArray |> BioList.toCompositionVector)
                     testCompVec
                     "BioList.toCompositionVector did not return correct vector"
             )
