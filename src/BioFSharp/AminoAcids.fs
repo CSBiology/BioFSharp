@@ -2,69 +2,83 @@
 
 open FSharpAux
 open ModificationInfo
+open System
 ///Contains the AminoAcid type and its according functions. The AminoAcid type is a complex presentation of amino acids, allowing modifications
 module AminoAcids =
 
     /// Amino acid Codes
     [<StructuralEquality;StructuralComparison>]
     type AminoAcid =
-        /// 'A'  *Alanin
+        /// 'A' - Ala - Alanine
         | Ala        
-        /// 'C'  *Cysteine
+        /// 'C' - Cys - Cysteine
         | Cys
-        /// 'D'  *Aspartic Acid
+        /// 'D' - Asp - Aspartic Acid
         | Asp
-        /// 'E'  *Glutamic Acid
+        /// 'E' - Glu - Glutamic Acid
         | Glu 
-        /// 'F'  *Glutamic Acid
+        /// 'F' - Phe - Phenylalanine
         | Phe
-        /// 'G'  *Glycine
+        /// 'G' - Gly - Glycine
         | Gly
-        /// 'H'  *Histidine
+        /// 'H' - His - Histidine
         | His
-        /// 'I'  *Isoleucine
+        /// 'I' - Ile - Isoleucine
         | Ile
-        /// 'K'  *Lysine
+        /// 'K' - Lys - Lysine
         | Lys
-        /// 'L'  *Leucine
+        /// 'L' - Leu - Leucine
         | Leu
-        /// 'M'  *Methionine
+        /// 'M' - Met - Methionine
         | Met
-        /// 'N'  *Asparagine
+        /// 'N' - Asn - Asparagine
         | Asn
-        /// 'O'  *Pyrrolysine
+        /// 'O' - Pyl - Pyrrolysine
         | Pyl
-        /// 'P'  *Proline
+        /// 'P' - Pro - Proline
         | Pro        
-        /// 'Q'  *Glutamine
+        /// 'Q' - Gln - Glutamine
         | Gln
-        /// 'R'  *Arginine
+        /// 'R' - Arg - Arginine
         | Arg
-        /// 'S'  *Serine
+        /// 'S' - Ser - *Serine
         | Ser        
-        /// 'T'  *Threonine
+        /// 'T' - Thr - Threonine
         | Thr
-        /// 'U'  *Selenocysteine
-        | Sel
-        /// 'V'  *Valine
+        /// 'U' - Sel - Selenocysteine
+        ///
+        /// Warning: 'Sel' is not the official UPAC abbreviation. 
+        /// This case will be removed in favor of 'Sec' in the next major release
+        | [<Obsolete("This case has a typo and will be removed in the next major release. use AminoAcid.Sec instead.")>] Sel 
+        /// 'U' - Sec - Selenocysteine
+        | Sec
+        /// 'V' - Val - Valine
         | Val
-        /// 'W'  *Tryptophan
+        /// 'W' - Trp - Tryptophan
         | Trp
-        /// 'Y'  *Tyrosine
+        /// 'Y' - Tyr - Tyrosine
         | Tyr
 
-        /// 'X'  *Unspecified
+        /// 'X' - Xaa - Unspecified 
+        ///
+        /// Placeholder in a sequence for any amino acid
         | Xaa        
         /// 'J'  *Leucine/Isoleucine
+        ///
+        /// Placeholder in a sequence for either Leucine or Isoleucine
         | Xle
-        /// 'Z'  *Glutamine/glutamic acid
+        /// 'Z' - Glx - Glutamine/glutamic acid
+        ///
+        /// Placeholder in a sequence for either Glutamine or Glutamic Acid
         | Glx
-        /// 'B'  *Asparagine/aspartic acid
+        /// 'B' - Asx - Asparagine/aspartic acid
+        ///
+        /// Placeholder in a sequence for either Asparagine or Aspartic Acid
         | Asx
 
-        /// '-'  *Gap 
+        /// '-'  Gap 
         | Gap
-        /// '*'  *Termination
+        /// '*'  Termination
         | Ter
         /// Modified AminoAcid
         | Mod of AminoAcid * ModificationInfo.Modification list
@@ -94,7 +108,7 @@ module AminoAcids =
                             | AminoAcid.Arg -> 'R'
                             | AminoAcid.Ser -> 'S'
                             | AminoAcid.Thr -> 'T'
-                            | AminoAcid.Sel -> 'U'
+                            | AminoAcid.Sel | AminoAcid.Sec -> 'U'
                             | AminoAcid.Val -> 'V'
                             | AminoAcid.Trp -> 'W'
                             | AminoAcid.Tyr -> 'Y'
@@ -131,7 +145,7 @@ module AminoAcids =
                             | AminoAcid.Arg -> Formula.Table.Arg 
                             | AminoAcid.Ser -> Formula.Table.Ser 
                             | AminoAcid.Thr -> Formula.Table.Thr 
-                            | AminoAcid.Sel -> Formula.Table.Sel // Selenocysteine
+                            | AminoAcid.Sel | AminoAcid.Sec -> Formula.Table.Sel // Selenocysteine
                             | AminoAcid.Val -> Formula.Table.Val 
                             | AminoAcid.Trp -> Formula.Table.Trp 
                             | AminoAcid.Tyr -> Formula.Table.Tyr 
@@ -168,11 +182,11 @@ module AminoAcids =
                     /// Returns the name of AminoAcid
                     let rec name (aa:AminoAcid) =
                             match aa with
-                            | AminoAcid.Ala -> "Alanin"          
+                            | AminoAcid.Ala -> "Alanine"          
                             | AminoAcid.Cys -> "Cysteine"       
                             | AminoAcid.Asp -> "Aspartic Acid"  
                             | AminoAcid.Glu -> "Glutamic Acid"  
-                            | AminoAcid.Phe -> "Phenylalanin"   
+                            | AminoAcid.Phe -> "Phenylalanine"   
                             | AminoAcid.Gly -> "Glycine"        
                             | AminoAcid.His -> "Histidine"      
                             | AminoAcid.Ile -> "Isoleucine"     
@@ -181,12 +195,13 @@ module AminoAcids =
                             | AminoAcid.Met -> "Methionine"     
                             | AminoAcid.Asn -> "Asparagine"     
                             | AminoAcid.Pyl -> "Pyrrolysine"    
+
                             | AminoAcid.Pro -> "Proline"        
                             | AminoAcid.Gln -> "Glutamine"      
                             | AminoAcid.Arg -> "Arginine"       
                             | AminoAcid.Ser -> "Serine"         
                             | AminoAcid.Thr -> "Threonine"      
-                            | AminoAcid.Sel -> "Selenocysteine" 
+                            | AminoAcid.Sel | AminoAcid.Sec -> "Selenocysteine" 
                             | AminoAcid.Val -> "Valine"         
                             | AminoAcid.Trp -> "Tryptophan"     
                             | AminoAcid.Tyr -> "Tyrosine"       
@@ -289,8 +304,9 @@ module AminoAcids =
         | 'Y' ->  StandardCodes AminoAcid.Tyr
         // special amino acids
         | 'O' ->  StandardCodes AminoAcid.Pyl
-        | 'U' ->  StandardCodes AminoAcid.Sel
-        // ambiguis amino acids
+        | 'U' ->  StandardCodes AminoAcid.Sel 
+        //| 'U' ->  StandardCodes AminoAcid.Sec 
+        // ambiguous amino acids
         | 'X' ->  AmbiguityCodes AminoAcid.Xaa            
         | 'Z' ->  AmbiguityCodes AminoAcid.Glx
         | 'B' ->  AmbiguityCodes AminoAcid.Asx
@@ -323,6 +339,7 @@ module AminoAcids =
             AminoAcid.Ser
             AminoAcid.Thr
             AminoAcid.Sel
+            AminoAcid.Sec
             AminoAcid.Val
             AminoAcid.Trp
             AminoAcid.Tyr ]  

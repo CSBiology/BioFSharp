@@ -148,7 +148,10 @@ module Formula =
         ///Threonine
         let Thr = parseFormulaString "C4H7O2N"   
         ///Selenocysteine
+        [<System.Obsolete("This case has a typo and will be removed in the next major release. use Formula.Table.Sec instead.")>]
         let Sel = parseFormulaString "C3H5NOSe"  
+        ///Selenocysteine
+        let Sec = parseFormulaString "C3H5NOSe"  
         ///Valine
         let Val = parseFormulaString "C5H9ON"
         ///Tryptophane

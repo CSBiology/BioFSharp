@@ -372,7 +372,7 @@ let testIBioItem =
 
         testCase "test_name" <| fun () ->
             let res = BioItem.name AminoAcids.Ala  
-            let exp  = "Alanin"
+            let exp  = "Alanine"
             Expect.equal res exp "Incorrect name returned."
 
         testCase "test_symbol" <| fun () ->
