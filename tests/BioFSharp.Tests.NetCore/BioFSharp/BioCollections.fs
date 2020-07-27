@@ -436,5 +436,11 @@ let bioCollectionsTests  =
                         "BioSeq.isEqual did not return correct integer when transcripts were equal."
                 )
 
+                testCase "toString" (fun () ->
+                    Expect.equal
+                        (aminoAcidSetArray |> Seq.ofArray |> BioSeq.toString)
+                        "ACDEFGHIKLMNOPQRSTUVWYXJZB-*"
+                        "BioSeq.toString did not return the correct string"
+                )
         ]
     ]
