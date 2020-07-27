@@ -442,5 +442,14 @@ let bioCollectionsTests  =
                         "ACDEFGHIKLMNOPQRSTUVWYXJZB-*"
                         "BioSeq.toString did not return the correct string"
                 )
+
+                testCase "toMonoisotopicMass" (fun () ->
+                    Expect.floatClose
+                        Accuracy.high
+                        (testProt |> Seq.ofArray |> BioSeq.toMonoisotopicMass)
+                        // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                        (131.04048 + 99.06841 + 113.08406)
+                        "BioSeq.toMonoisotopicMass did not return correct mass"
+                )
         ]
     ]
