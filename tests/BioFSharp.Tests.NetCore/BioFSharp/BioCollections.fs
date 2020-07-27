@@ -428,5 +428,13 @@ let bioCollectionsTests  =
                         "BioSeq.translate did not translate the transcript correctly."
                 )
 
+                testCase "isEqual" (fun () ->
+                    Expect.equal
+                        (testTranscript |> Seq.ofArray
+                        |> BioSeq.isEqual (testTranscript |> Seq.ofArray))
+                        0
+                        "BioSeq.isEqual did not return correct integer when transcripts were equal."
+                )
+
         ]
     ]
