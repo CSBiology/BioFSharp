@@ -388,42 +388,42 @@ let bioCollectionsTests  =
             
                 testCase "complement" (fun () ->
                     Expect.sequenceEqual 
-                        (testCodingStrand |> BioSeq.ofBioArray |> BioSeq.complement)
+                        (testCodingStrand |> Seq.ofArray |> BioSeq.complement)
                         (testTemplateStrand |> Seq.ofArray)
                         "BioSeq.complement did not build the reverse complement of the nucleotide sequence correctly."
                 )
 
                 testCase "reverseComplement" (fun () ->
                     Expect.sequenceEqual 
-                        (testCodingStrand |> BioSeq.ofBioArray |> BioSeq.reverseComplement)
+                        (testCodingStrand |> Seq.ofArray |> BioSeq.reverseComplement)
                         (testCodingStrandRevComplement |> Seq.ofArray)
                         "BioSeq.reverseComplement did not build the reverse complement of the nucleotide sequence correctly."
                 )
 
                 testCase "mapInTriplets" (fun () ->
                     Expect.sequenceEqual 
-                        (testTemplateStrand |> BioSeq.ofBioArray |> BioSeq.mapInTriplets id)
+                        (testTemplateStrand |> Seq.ofArray |> BioSeq.mapInTriplets id)
                         (testTriplets |> Seq.ofArray)
                         "BioSeq.reverseComplement did not build the correct base triplets."
                 )
 
                 testCase "transcribeCodeingStrand" (fun () ->
                     Expect.sequenceEqual 
-                        (testCodingStrand |> BioSeq.ofBioArray |> BioSeq.transcribeCodingStrand)
+                        (testCodingStrand |> Seq.ofArray |> BioSeq.transcribeCodingStrand)
                         (testTranscript |> Seq.ofArray)
                         "BioSeq.transcribeCodeingStrand did not transcribe the coding strand correctly."
                 )
 
                 testCase "transcribeTemplateStrand" (fun () ->
                     Expect.sequenceEqual
-                        (testTemplateStrand |> BioSeq.ofBioArray |> BioSeq.transcribeTemplateStrand)
+                        (testTemplateStrand |> Seq.ofArray |> BioSeq.transcribeTemplateStrand)
                         (testTranscript |> Seq.ofArray)
                         "BioSeq.transcribeTemplateStrand did not transcribe the template strand correctly."
                 )
 
                 testCase "translate" (fun () ->
                     Expect.sequenceEqual 
-                        (testTranscript |> BioSeq.ofBioArray |> BioSeq.translate 0)
+                        (testTranscript |> Seq.ofArray |> BioSeq.translate 0)
                         (testProt |> Seq.ofArray)
                         "BioSeq.translate did not translate the transcript correctly."
                 )
