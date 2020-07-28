@@ -469,5 +469,14 @@ let bioCollectionsTests  =
                         (131.04048 + 99.06841 + 113.08406 + 18.0)
                         "BioSeq.toMonoisotopicMassWith did not return correct mass"
                 )
+
+                testCase "toAverageMassWith" (fun () ->
+                    Expect.floatClose
+                        Accuracy.medium
+                        (testProt |> Seq.ofArray |> BioSeq.toAverageMassWith 18.0) // 18 = mass of one water molecule
+                        // Masses obtained from University of Washington Proteomics Resource https://proteomicsresource.washington.edu/protocols06/masses.php
+                        (131.19606 + 99.13106 + 113.15764 + 18.0)
+                        "BioSeq.toAverageMassWith did not return correct mass"
+                )
         ]
     ]
