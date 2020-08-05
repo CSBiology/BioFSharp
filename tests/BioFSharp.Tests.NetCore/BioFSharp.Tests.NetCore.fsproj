@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Include="Utils.fs" />
+    <Compile Include="BioFSharp\AminoAcidTests.fs" />
     <Compile Include="BioFSharp\DigestionTests.fs" />
     <Compile Include="BioFSharp\BioCollections.fs" />
     <Compile Include="BioFSharp\BioItemTests.fs" />

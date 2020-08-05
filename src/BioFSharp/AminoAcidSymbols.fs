@@ -57,7 +57,9 @@ module AminoAcidSymbols =
         /// 'O'  *Pyrrolysine   
         static member Pyl = AminoAcidSymbol (byte 'O')
         /// 'U'  *Selenocysteine
+        [<System.Obsolete("This case has a typo and will be removed in the next major release. use AminoAcidSymbol.Sec instead.")>]
         static member Sel = AminoAcidSymbol (byte 'U')
+        static member Sec = AminoAcidSymbol (byte 'U')
                                                
         /// 'X'  *Unspecified
         static member Xaa = AminoAcidSymbol (byte 'X')
@@ -128,6 +130,7 @@ module AminoAcidSymbols =
                     | x when x = AminoAcidSymbol.Ser -> Formula.Table.Ser
                     | x when x = AminoAcidSymbol.Thr -> Formula.Table.Thr
                     | x when x = AminoAcidSymbol.Sel -> Formula.Table.Sel // Selenocysteine
+                    | x when x = AminoAcidSymbol.Sec -> Formula.Table.Sec // Selenocysteine
                     | x when x = AminoAcidSymbol.Val -> Formula.Table.Val
                     | x when x = AminoAcidSymbol.Trp -> Formula.Table.Trp
                     | x when x = AminoAcidSymbol.Tyr -> Formula.Table.Tyr
@@ -147,7 +150,7 @@ module AminoAcidSymbols =
             member this.Name =                   
                 
                 match this with
-                | Field AminoAcidSymbol.Ala -> "Alanin"          
+                | Field AminoAcidSymbol.Ala -> "Alanine"          
                 | Field AminoAcidSymbol.Cys -> "Cysteine"       
                 | Field AminoAcidSymbol.Asp -> "Aspartic Acid"  
                 | Field AminoAcidSymbol.Glu -> "Glutamic Acid"  
@@ -165,7 +168,7 @@ module AminoAcidSymbols =
                 | Field AminoAcidSymbol.Arg -> "Arginine"       
                 | Field AminoAcidSymbol.Ser -> "Serine"         
                 | Field AminoAcidSymbol.Thr -> "Threonine"      
-                | Field AminoAcidSymbol.Sel -> "Selenocysteine" 
+                | Field AminoAcidSymbol.Sel | Field AminoAcidSymbol.Sec -> "Selenocysteine" 
                 | Field AminoAcidSymbol.Val -> "Valine"         
                 | Field AminoAcidSymbol.Trp -> "Tryptophan"     
                 | Field AminoAcidSymbol.Tyr -> "Tyrosine"       
@@ -209,6 +212,7 @@ module AminoAcidSymbols =
         // special amino acids
         | 'O' ->  NcbiParsingType.StandardCodes, Some AminoAcidSymbol.Pyl
         | 'U' ->  NcbiParsingType.StandardCodes, Some AminoAcidSymbol.Sel
+        //| 'U' ->  NcbiParsingType.StandardCodes, Some AminoAcidSymbol.Sec
         // ambiguis amino acids
         | 'X' ->  NcbiParsingType.AmbiguityCodes, Some AminoAcidSymbol.Xaa            
         | 'Z' ->  NcbiParsingType.AmbiguityCodes, Some AminoAcidSymbol.Glx
@@ -243,6 +247,7 @@ module AminoAcidSymbols =
             AminoAcidSymbol.Ser
             AminoAcidSymbol.Thr
             AminoAcidSymbol.Sel
+            AminoAcidSymbol.Sec
             AminoAcidSymbol.Val
             AminoAcidSymbol.Trp
             AminoAcidSymbol.Tyr ]  

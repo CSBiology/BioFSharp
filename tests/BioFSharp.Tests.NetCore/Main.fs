@@ -13,7 +13,11 @@ let main argv =
     Tests.runTestsWithCLIArgs [] argv BioItemTests.testIBioItem         |> ignore
     Tests.runTestsWithCLIArgs [] argv BioItemTests.testTaggedSequence   |> ignore
     Tests.runTestsWithCLIArgs [] argv BioItemTests.testIsotopicDistribution     |> ignore
+
     Tests.runTestsWithCLIArgs [] argv BioCollectionsTests.bioCollectionsTests |> ignore
+
     Tests.runTestsWithCLIArgs [] argv DigestionTests.digestionTests |> ignore
     
+    Tests.runTestsWithCLIArgs [] argv AminoAcidTests.aminoAcidTests |> ignore
+
     0

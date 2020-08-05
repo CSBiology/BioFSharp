@@ -2,69 +2,131 @@
 
 open FSharpAux
 open ModificationInfo
+open System
+
+//Remarks via https://en.wikipedia.org/wiki/Proteinogenic_amino_acid
+
 ///Contains the AminoAcid type and its according functions. The AminoAcid type is a complex presentation of amino acids, allowing modifications
 module AminoAcids =
 
     /// Amino acid Codes
     [<StructuralEquality;StructuralComparison>]
     type AminoAcid =
-        /// 'A'  *Alanin
+        /// 'A' - Ala - Alanine
+        ///
+        /// Very abundant and very versatile, it is more stiff than glycine, but small enough to pose only small steric limits for the protein conformation. It behaves fairly neutrally, and can be located in both hydrophilic regions on the protein outside and the hydrophobic areas inside.
         | Ala        
-        /// 'C'  *Cysteine
+        /// 'C' - Cys - Cysteine
+        ///
+        /// The sulfur atom bonds readily to heavy metal ions. Under oxidizing conditions, two cysteines can join together in a disulfide bond to form the amino acid cystine. When cystines are part of a protein, insulin for example, the tertiary structure is stabilized, which makes the protein more resistant to denaturation; therefore, disulfide bonds are common in proteins that have to function in harsh environments including digestive enzymes (e.g., pepsin and chymotrypsin) and structural proteins (e.g., keratin). Disulfides are also found in peptides too small to hold a stable shape on their own (e.g. insulin).
         | Cys
-        /// 'D'  *Aspartic Acid
+        /// 'D' - Asp - Aspartic Acid
+        ///
+        /// Asp behaves similarly to glutamic acid, and carries a hydrophilic acidic group with strong negative charge. Usually, it is located on the outer surface of the protein, making it water-soluble. It binds to positively charged molecules and ions, and is often used in enzymes to fix the metal ion. When located inside of the protein, aspartate and glutamate are usually paired with arginine and lysine.
         | Asp
-        /// 'E'  *Glutamic Acid
+        /// 'E' - Glu - Glutamic Acid
+        ///
+        /// Glu behaves similarly to aspartic acid, and has a longer, slightly more flexible side chain.
         | Glu 
-        /// 'F'  *Glutamic Acid
+        /// 'F' - Phe - Phenylalanine
+        ///
+        /// Essential for humans, phenylalanine, tyrosine, and tryptophan contain a large, rigid aromatic group on the side chain. These are the biggest amino acids. Like isoleucine, leucine, and valine, these are hydrophobic and tend to orient towards the interior of the folded protein molecule. Phenylalanine can be converted into tyrosine.
         | Phe
-        /// 'G'  *Glycine
+        /// 'G' - Gly - Glycine
+        ///
+        /// Because of the two hydrogen atoms at the α carbon, glycine is not optically active. It is the smallest amino acid, rotates easily, and adds flexibility to the protein chain. It is able to fit into the tightest spaces, e.g., the triple helix of collagen. As too much flexibility is usually not desired, as a structural component, it is less common than alanine.
         | Gly
-        /// 'H'  *Histidine
+        /// 'H' - His - Histidine
+        ///
+        /// His is essential for humans. In even slightly acidic conditions, protonation of the nitrogen occurs, changing the properties of histidine and the polypeptide as a whole. It is used by many proteins as a regulatory mechanism, changing the conformation and behavior of the polypeptide in acidic regions such as the late endosome or lysosome, enforcing conformation change in enzymes. However, only a few histidines are needed for this, so it is comparatively scarce.
         | His
-        /// 'I'  *Isoleucine
+        /// 'I' - Ile - Isoleucine
+        ///
+        /// Ile is essential for humans. Isoleucine, leucine, and valine have large aliphatic hydrophobic side chains. Their molecules are rigid, and their mutual hydrophobic interactions are important for the correct folding of proteins, as these chains tend to be located inside of the protein molecule.
         | Ile
-        /// 'K'  *Lysine
+        /// 'K' - Lys - Lysine
+        ///
+        /// Lys is essential for humans, and behaves similarly to arginine. It contains a long, flexible side chain with a positively charged end. The flexibility of the chain makes lysine and arginine suitable for binding to molecules with many negative charges on their surfaces. E.g., DNA-binding proteins have their active regions rich with arginine and lysine. The strong charge makes these two amino acids prone to be located on the outer hydrophilic surfaces of the proteins; when they are found inside, they are usually paired with a corresponding negatively charged amino acid, e.g., aspartate or glutamate.
         | Lys
-        /// 'L'  *Leucine
+        /// 'L' - Leu - Leucine
+        ///
+        /// Leu is essential for humans, and behaves similarly to isoleucine and valine.
         | Leu
-        /// 'M'  *Methionine
+        /// 'M' - Met - Methionine
+        ///
+        /// Met is essential for humans. Always the first amino acid to be incorporated into a protein, it is sometimes removed after translation. Like cysteine, it contains sulfur, but with a methyl group instead of hydrogen. This methyl group can be activated, and is used in many reactions where a new carbon atom is being added to another molecule.
         | Met
-        /// 'N'  *Asparagine
+        /// 'N' - Asn - Asparagine
+        ///
+        /// Similar to aspartic acid, Asn contains an amide group where Asp has a carboxyl.
         | Asn
-        /// 'O'  *Pyrrolysine
+        /// 'O' - Pyl - Pyrrolysine
+        ///
+        /// Similar to lysine, but it has a pyrroline ring attached. In some methanogenic prokaryotes, the UAG codon (normally a stop codon) can also be translated to pyrrolysine.
         | Pyl
-        /// 'P'  *Proline
+        /// 'P' - Pro - Proline
+        ///
+        /// Pro contains an unusual ring to the N-end amine group, which forces the CO-NH amide sequence into a fixed conformation. It can disrupt protein folding structures like α helix or β sheet, forcing the desired kink in the protein chain. Common in collagen, it often undergoes a post-translational modification to hydroxyproline.
         | Pro        
-        /// 'Q'  *Glutamine
+        /// 'Q' - Gln - Glutamine
+        ///
+        /// Similar to glutamic acid, Gln contains an amide group where Glu has a carboxyl. Used in proteins and as a storage for ammonia, it is the most abundant amino acid in the body.
         | Gln
-        /// 'R'  *Arginine
+        /// 'R' - Arg - Arginine
+        ///
+        /// Functionally similar to lysine.
         | Arg
-        /// 'S'  *Serine
+        /// 'S' - Ser - Serine
+        ///
+        /// Serine and threonine have a short group ended with a hydroxyl group. Its hydrogen is easy to remove, so serine and threonine often act as hydrogen donors in enzymes. Both are very hydrophilic, so the outer regions of soluble proteins tend to be rich with them.
         | Ser        
-        /// 'T'  *Threonine
+        /// 'T' - Thr - Threonine
+        ///
+        /// Essential for humans, Thr behaves similarly to serine.
         | Thr
-        /// 'U'  *Selenocysteine
-        | Sel
-        /// 'V'  *Valine
+        /// 'U' - Sel - Selenocysteine
+        ///
+        /// The selenium analog of cysteine, in which selenium replaces the sulfur atom.
+        /// Warning: 'Sel' is not the official UPAC abbreviation. 
+        /// This case will be removed in favor of 'Sec' in the next major release
+        | [<Obsolete("This case has a typo and will be removed in the next major release. use AminoAcid.Sec instead.")>] Sel 
+        /// 'U' - Sec - Selenocysteine
+        ///
+        /// The selenium analog of cysteine, in which selenium replaces the sulfur atom.
+        | Sec
+        /// 'V' - Val - Valine
+        ///
+        /// Essential for humans, Val behaves similarly to isoleucine and leucine.
         | Val
-        /// 'W'  *Tryptophan
+        /// 'W' - Trp - Tryptophan
+        ///
+        /// Essential for humans, Trp behaves similarly to phenylalanine and tyrosine. It is a precursor of serotonin and is naturally fluorescent.
         | Trp
-        /// 'Y'  *Tyrosine
+        /// 'Y' - Tyr - Tyrosine
+        ///
+        /// Tyr behaves similarly to phenylalanine (precursor to tyrosine) and tryptophan, and is a precursor of melanin, epinephrine, and thyroid hormones. Naturally fluorescent, its fluorescence is usually quenched by energy transfer to tryptophans.
         | Tyr
 
-        /// 'X'  *Unspecified
+        /// 'X' - Xaa - Unspecified 
+        ///
+        /// Placeholder in a sequence for any amino acid
         | Xaa        
         /// 'J'  *Leucine/Isoleucine
+        ///
+        /// Placeholder in a sequence for either Leucine or Isoleucine
         | Xle
-        /// 'Z'  *Glutamine/glutamic acid
+        /// 'Z' - Glx - Glutamine/glutamic acid
+        ///
+        /// Placeholder in a sequence for either Glutamine or Glutamic Acid
         | Glx
-        /// 'B'  *Asparagine/aspartic acid
+        /// 'B' - Asx - Asparagine/aspartic acid
+        ///
+        /// Placeholder in a sequence for either Asparagine or Aspartic Acid
         | Asx
 
-        /// '-'  *Gap 
+        /// '-'  Gap 
         | Gap
-        /// '*'  *Termination
+        /// '*'  Termination
         | Ter
         /// Modified AminoAcid
         | Mod of AminoAcid * ModificationInfo.Modification list
@@ -94,7 +156,7 @@ module AminoAcids =
                             | AminoAcid.Arg -> 'R'
                             | AminoAcid.Ser -> 'S'
                             | AminoAcid.Thr -> 'T'
-                            | AminoAcid.Sel -> 'U'
+                            | AminoAcid.Sel | AminoAcid.Sec -> 'U'
                             | AminoAcid.Val -> 'V'
                             | AminoAcid.Trp -> 'W'
                             | AminoAcid.Tyr -> 'Y'
@@ -131,7 +193,7 @@ module AminoAcids =
                             | AminoAcid.Arg -> Formula.Table.Arg 
                             | AminoAcid.Ser -> Formula.Table.Ser 
                             | AminoAcid.Thr -> Formula.Table.Thr 
-                            | AminoAcid.Sel -> Formula.Table.Sel // Selenocysteine
+                            | AminoAcid.Sel | AminoAcid.Sec -> Formula.Table.Sel // Selenocysteine
                             | AminoAcid.Val -> Formula.Table.Val 
                             | AminoAcid.Trp -> Formula.Table.Trp 
                             | AminoAcid.Tyr -> Formula.Table.Tyr 
@@ -168,11 +230,11 @@ module AminoAcids =
                     /// Returns the name of AminoAcid
                     let rec name (aa:AminoAcid) =
                             match aa with
-                            | AminoAcid.Ala -> "Alanin"          
+                            | AminoAcid.Ala -> "Alanine"          
                             | AminoAcid.Cys -> "Cysteine"       
                             | AminoAcid.Asp -> "Aspartic Acid"  
                             | AminoAcid.Glu -> "Glutamic Acid"  
-                            | AminoAcid.Phe -> "Phenylalanin"   
+                            | AminoAcid.Phe -> "Phenylalanine"   
                             | AminoAcid.Gly -> "Glycine"        
                             | AminoAcid.His -> "Histidine"      
                             | AminoAcid.Ile -> "Isoleucine"     
@@ -181,12 +243,13 @@ module AminoAcids =
                             | AminoAcid.Met -> "Methionine"     
                             | AminoAcid.Asn -> "Asparagine"     
                             | AminoAcid.Pyl -> "Pyrrolysine"    
+
                             | AminoAcid.Pro -> "Proline"        
                             | AminoAcid.Gln -> "Glutamine"      
                             | AminoAcid.Arg -> "Arginine"       
                             | AminoAcid.Ser -> "Serine"         
                             | AminoAcid.Thr -> "Threonine"      
-                            | AminoAcid.Sel -> "Selenocysteine" 
+                            | AminoAcid.Sel | AminoAcid.Sec -> "Selenocysteine" 
                             | AminoAcid.Val -> "Valine"         
                             | AminoAcid.Trp -> "Tryptophan"     
                             | AminoAcid.Tyr -> "Tyrosine"       
@@ -289,8 +352,9 @@ module AminoAcids =
         | 'Y' ->  StandardCodes AminoAcid.Tyr
         // special amino acids
         | 'O' ->  StandardCodes AminoAcid.Pyl
-        | 'U' ->  StandardCodes AminoAcid.Sel
-        // ambiguis amino acids
+        | 'U' ->  StandardCodes AminoAcid.Sel 
+        //| 'U' ->  StandardCodes AminoAcid.Sec 
+        // ambiguous amino acids
         | 'X' ->  AmbiguityCodes AminoAcid.Xaa            
         | 'Z' ->  AmbiguityCodes AminoAcid.Glx
         | 'B' ->  AmbiguityCodes AminoAcid.Asx
@@ -302,84 +366,223 @@ module AminoAcids =
         | ch -> NoAAChar ch
 
     ///Set of the 20 standard amino acids
-    let AminoAcidSetStandard =
-        set [
-            AminoAcid.Ala
-            AminoAcid.Cys
-            AminoAcid.Asp
-            AminoAcid.Glu
-            AminoAcid.Phe
-            AminoAcid.Gly
-            AminoAcid.His
-            AminoAcid.Ile
-            AminoAcid.Lys
-            AminoAcid.Leu
-            AminoAcid.Met
-            AminoAcid.Asn
-            AminoAcid.Pyl
-            AminoAcid.Pro
-            AminoAcid.Gln
-            AminoAcid.Arg
-            AminoAcid.Ser
-            AminoAcid.Thr
-            AminoAcid.Sel
-            AminoAcid.Val
-            AminoAcid.Trp
-            AminoAcid.Tyr ]  
+    [<Obsolete("use aminoAcidSetStandard instead, or aminoAcidSetProteinogenic for all 22 AAs")>]
+    let AminoAcidSetStandard = set [
+        AminoAcid.Ala
+        AminoAcid.Cys
+        AminoAcid.Asp
+        AminoAcid.Glu
+        AminoAcid.Phe
+        AminoAcid.Gly
+        AminoAcid.His
+        AminoAcid.Ile
+        AminoAcid.Lys
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Asn
+        AminoAcid.Pyl
+        AminoAcid.Pro
+        AminoAcid.Gln
+        AminoAcid.Arg
+        AminoAcid.Ser
+        AminoAcid.Thr
+        AminoAcid.Sel
+        AminoAcid.Sec
+        AminoAcid.Val
+        AminoAcid.Trp
+        AminoAcid.Tyr 
+    ]  
+
+    ///Set of the 20 standard amino acids of the genetic code
+    let aminoAcidSetStandard = set [
+        AminoAcid.Ala
+        AminoAcid.Cys
+        AminoAcid.Asp
+        AminoAcid.Glu
+        AminoAcid.Phe
+        AminoAcid.Gly
+        AminoAcid.His
+        AminoAcid.Ile
+        AminoAcid.Lys
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Asn
+        AminoAcid.Pro
+        AminoAcid.Gln
+        AminoAcid.Arg
+        AminoAcid.Ser
+        AminoAcid.Thr
+        AminoAcid.Val
+        AminoAcid.Trp
+        AminoAcid.Tyr 
+    ]
+
+    ///Set of all 22 proteinogenic amino acids (20 standard + Selenocysteine + Pyrrolysine)
+    let aminoAcidSetProteinogenic = set [
+        AminoAcid.Ala
+        AminoAcid.Cys
+        AminoAcid.Asp
+        AminoAcid.Glu
+        AminoAcid.Phe
+        AminoAcid.Gly
+        AminoAcid.His
+        AminoAcid.Ile
+        AminoAcid.Lys
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Asn
+        AminoAcid.Pro
+        AminoAcid.Gln
+        AminoAcid.Arg
+        AminoAcid.Ser
+        AminoAcid.Thr
+        AminoAcid.Val
+        AminoAcid.Trp
+        AminoAcid.Tyr 
+        AminoAcid.Sel 
+        AminoAcid.Sec
+        AminoAcid.Pyl
+    ]
+
+    ///Set of all 21 proteinogenic amino acids in eucaryotes (20 standard + Selenocysteine)
+    let aminoAcidSetProteinogenicEucaryotes = set [
+        AminoAcid.Ala
+        AminoAcid.Cys
+        AminoAcid.Asp
+        AminoAcid.Glu
+        AminoAcid.Phe
+        AminoAcid.Gly
+        AminoAcid.His
+        AminoAcid.Ile
+        AminoAcid.Lys
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Asn
+        AminoAcid.Pro
+        AminoAcid.Gln
+        AminoAcid.Arg
+        AminoAcid.Ser
+        AminoAcid.Thr
+        AminoAcid.Val
+        AminoAcid.Trp
+        AminoAcid.Tyr 
+        AminoAcid.Sel 
+        AminoAcid.Sec
+    ]
+    
+    [<Obsolete("use aminoAcidSetAmbiguity instead")>]
+    ///Set of all ambiguous codes
+    let AminoAcidSetAmbiguity = set [
+        AminoAcid.Xaa
+        AminoAcid.Xle
+        AminoAcid.Glx
+        AminoAcid.Asx 
+    ]      
     
     ///Set of all ambiguous codes
-    let AminoAcidSetAmbiguity =
-        set [
-            AminoAcid.Xaa
-            AminoAcid.Xle
-            AminoAcid.Glx
-            AminoAcid.Asx ]  
+    let aminoAcidSetAmbiguity = set [
+        AminoAcid.Xaa
+        AminoAcid.Xle
+        AminoAcid.Glx
+        AminoAcid.Asx 
+    ]  
+    
+    [<Obsolete("use aminoAcidSetGapTer instead")>]
+    ///Set containing the Gap and the Terminator AminoAcid
+    let AminoAcidSetGapTer = set [
+        AminoAcid.Gap
+        AminoAcid.Ter 
+    ]    
     
     ///Set containing the Gap and the Terminator AminoAcid
-    let AminoAcidSetGapTer =
-        set [
-            AminoAcid.Gap
-            AminoAcid.Ter ]
+    let aminoAcidSetGapTer = set [
+        AminoAcid.Gap
+        AminoAcid.Ter 
+    ]
 
-    ///Set of all AminoAcids with basic sidechain
-    let AminoAcidSetPosCharged =
-            set [
-                AminoAcid.Arg
-                AminoAcid.Lys
-                AminoAcid.His ]
+    [<Obsolete("use aminoAcidSetPosCharged instead")>]
+    ///Set of all AminoAcids with basic (positively charged) sidechain
+    let AminoAcidSetPosCharged = set [
+        AminoAcid.Arg
+        AminoAcid.Lys
+        AminoAcid.His 
+    ]    
+    
+    ///Set of all AminoAcids with basic (positively charged) sidechain
+    let aminoAcidSetPosCharged = set [
+        AminoAcid.Arg
+        AminoAcid.Lys
+        AminoAcid.His 
+    ]
+
+    [<Obsolete("use aminoAcidSetNegCharged instead. Warning: this set also contains Cysteine and Tyrosine, which are not generally considered as neg charged under phisiological (pH 7.4) conditions. aminoAcidSetNegCharged will not contain them.")>]
+    ///Set of all AminoAcids with acidic sidechain (+ Cys/Tyr)
+    let AminoAcidSetNegCharged = set [
+        AminoAcid.Asp
+        AminoAcid.Glu
+        AminoAcid.Cys
+        AminoAcid.Tyr 
+    ]    
     
     ///Set of all AminoAcids with acidic sidechain
-    let AminoAcidSetNegCharged =
-            set [
-                AminoAcid.Asp
-                AminoAcid.Glu
-                AminoAcid.Cys
-                AminoAcid.Tyr ]
+    let aminoAcidSetNegCharged = set [
+            AminoAcid.Asp
+            AminoAcid.Glu
+    ]
 
+    [<Obsolete("use aminoAcidSetPolarUncharged instead. Warning: this set also contains Trp, His, Tyr, and Cys, which aminoAcidSetPolarUncharged will not")>]
     ///Set of all AminoAcids with polar sidechain
-    let AminoAcidSetPolar =
-            set [
-                AminoAcid.Gln
-                AminoAcid.Asn
-                AminoAcid.His
-                AminoAcid.Ser
-                AminoAcid.Thr
-                AminoAcid.Tyr
-                AminoAcid.Cys
-                AminoAcid.Trp ]
+    let AminoAcidSetPolar = set [
+        AminoAcid.Gln
+        AminoAcid.Asn
+        AminoAcid.His
+        AminoAcid.Ser
+        AminoAcid.Thr
+        AminoAcid.Tyr
+        AminoAcid.Cys
+        AminoAcid.Trp 
+    ]    
+                
+    ///Set of all AminoAcids with uncharged polar sidechain
+    let aminoAcidSetPolarUncharged = set [
+        AminoAcid.Gln
+        AminoAcid.Asn
+        AminoAcid.Ser
+        AminoAcid.Thr
+    ]
 
+    [<Obsolete("use aminoAcidSetHydrophobic instead. Warning: aminoAcidSetHydrophobic will not contain Pro/Gly, but additionally Trp/Tyr")>]
     ///Set of all AminoAcids with hydrophobic sidechain
-    let AminoAcidSetHydrophobic =
-            set [
-                AminoAcid.Ala
-                AminoAcid.Ile
-                AminoAcid.Leu
-                AminoAcid.Met
-                AminoAcid.Phe
-                AminoAcid.Val
-                AminoAcid.Pro
-                AminoAcid.Gly ]
+    let AminoAcidSetHydrophobic = set [
+        AminoAcid.Ala
+        AminoAcid.Ile
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Phe
+        AminoAcid.Val
+        AminoAcid.Gly 
+        AminoAcid.Pro
+    ]    
+    
+    ///Set of all AminoAcids with hydrophobic sidechain
+    let aminoAcidSetHydrophobic = set [
+        AminoAcid.Ala
+        AminoAcid.Ile
+        AminoAcid.Leu
+        AminoAcid.Met
+        AminoAcid.Phe
+        AminoAcid.Trp
+        AminoAcid.Tyr
+        AminoAcid.Val
+    ]
 
+    let aminoAcidSetSpecialCases = set [
+        AminoAcid.Cys
+        AminoAcid.Sel
+        AminoAcid.Sec
+        AminoAcid.Gly
+        AminoAcid.Pro
+    ]
  
     /// Returns the name of AminoAcid
     let name (aa:AminoAcid) =
@@ -429,9 +632,14 @@ module AminoAcids =
     let isNegCharged (aa:AminoAcid) =
         AminoAcidSetNegCharged.Contains aa 
 
+    [<Obsolete("use isPolarUncharged instead")>]
     /// Returns true, if the AminoAcid has a polar side chain
     let isPolar (aa:AminoAcid) = 
-        AminoAcidSetPolar.Contains aa
+        AminoAcidSetPolar.Contains aa    
+        
+    /// Returns true, if the AminoAcid has a polar, uncharged side chain
+    let isPolarUncharged (aa:AminoAcid) = 
+        aminoAcidSetPolarUncharged.Contains aa
 
     /// Returns true, if the AminoAcid has a hydrophobic side chain
     let isHydrophobic (aa:AminoAcid) = 
