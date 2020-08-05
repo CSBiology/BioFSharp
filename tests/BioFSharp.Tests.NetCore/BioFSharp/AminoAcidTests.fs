@@ -16,6 +16,16 @@ let allNames = [
     "Glutamine/glutamic acid" ; "Asparagine/aspartic acid" ; "Gap"            ; "Ter"               
 ]
 
+let allFormulas = [
+    Formula.Table.Ala ; Formula.Table.Cys ; Formula.Table.Asp    ; Formula.Table.Glu
+    Formula.Table.Phe ; Formula.Table.Gly ; Formula.Table.His    ; Formula.Table.Ile
+    Formula.Table.Lys ; Formula.Table.Leu ; Formula.Table.Met    ; Formula.Table.Asn
+    Formula.Table.Pyl ; Formula.Table.Pro ; Formula.Table.Gln    ; Formula.Table.Arg
+    Formula.Table.Ser ; Formula.Table.Thr ; Formula.Table.Sel    ; Formula.Table.Sec; Formula.Table.Val
+    Formula.Table.Trp ; Formula.Table.Tyr ; Formula.Table.Xaa    ; Formula.Table.Xle
+    Formula.Table.Glx ; Formula.Table.Asx ; Formula.emptyFormula ; Formula.emptyFormula
+]
+
 let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
 
 let allAAs = [
@@ -52,9 +62,16 @@ let aminoAcidTests =
                 "AminoAcids.name did not return the correct name for all AminoAcids"
         )
         testCase "nameModifiedAA" (fun () -> 
-                   Expect.equal 
-                       (testModifiedAA |> AminoAcids.name)
-                       "Alanine[#N15]"
-                       "AminoAcids.symbol did not return the correct symbols for a 15N modified Alanine"
-               )
+           Expect.equal 
+               (testModifiedAA |> AminoAcids.name)
+               "Alanine[#N15]"
+               "AminoAcids.symbol did not return the correct symbols for a 15N modified Alanine"
+        )
+        testCase "formula" (fun () ->
+            let testFormulas = allAAs |> List.map (fun aa -> AminoAcids.formula aa)
+            Expect.equal
+                testFormulas
+                allFormulas
+                "AminoAcids.formula did not return the correct formula for all AminoAcids"
+        )
     ]
