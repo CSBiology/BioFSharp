@@ -87,4 +87,10 @@ let aminoAcidTests =
                 res
                 "AminoAcids.isTerminator did not return true for a Terminator"
         )
+        testCase "isGap" (fun () ->
+            let res = AminoAcids.isGap AminoAcid.Gap 
+            Expect.isTrue
+                res
+                "AminoAcids.isGap did not return true for a Gap"
+        )
     ]
