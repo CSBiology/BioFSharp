@@ -107,4 +107,11 @@ let aminoAcidTests =
                 allDoubleModAAs
                 "AminoAcids.setModifications did not return the correct Modifications for all AminoAcids"
         )
+        testCase "getModifications" (fun () ->
+            let allMods = [for i in 1 .. 29 -> [ModificationInfo.Table.N15]]
+            Expect.equal
+                (allSingleModAAs |> List.map (fun aa -> AminoAcids.getModifications aa))
+                allMods
+                "AminoAcids.getModifications did not return correct Modifications for all modified AminoAcids"
+        )
     ]
