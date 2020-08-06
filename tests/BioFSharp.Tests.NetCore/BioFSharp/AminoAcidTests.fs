@@ -84,21 +84,18 @@ let aminoAcidTests =
                 "AminoAcids.formula did not return the correct formula for a 15N modified Alanine"
         )
         testCase "isTerminator" (fun () ->
-            let res = AminoAcids.isTerminator AminoAcid.Ter 
             Expect.isTrue
-                res
+                (AminoAcids.isTerminator AminoAcid.Ter) 
                 "AminoAcids.isTerminator did not return true for a Terminator"
         )
         testCase "isGap" (fun () ->
-            let res = AminoAcids.isGap AminoAcid.Gap 
             Expect.isTrue
-                res
+                (AminoAcids.isGap AminoAcid.Gap)
                 "AminoAcids.isGap did not return true for a Gap"
         )
         testCase "setModification" (fun () ->
-            let res = allAAs |> List.map (fun aa -> AminoAcids.setModification ModificationInfo.Table.N15 aa)
             Expect.equal
-                res
+                (allAAs |> List.map (fun aa -> AminoAcids.setModification ModificationInfo.Table.N15 aa))
                 allModifiedAAs
                 "AminoAcids.setModification did not correctly modify Mod AA"
         )
