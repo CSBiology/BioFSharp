@@ -38,7 +38,8 @@ let allAAs = [
     AminoAcid.Glx; AminoAcid.Asx; AminoAcid.Gap; AminoAcid.Ter
 ]
 
-let allModifiedAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15]))
+let allSingleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15]))
+let allDoubleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15; ModificationInfo.Table.H2O]))
 
 [<Tests>]
 let aminoAcidTests = 
@@ -96,7 +97,14 @@ let aminoAcidTests =
         testCase "setModification" (fun () ->
             Expect.equal
                 (allAAs |> List.map (fun aa -> AminoAcids.setModification ModificationInfo.Table.N15 aa))
-                allModifiedAAs
+                allSingleModAAs
                 "AminoAcids.setModification did not return the correct Modifications for all AminoAcids"
+        )
+        testCase "setModifications" (fun () ->
+            let modList = [ModificationInfo.Table.N15; ModificationInfo.Table.H2O]
+            Expect.equal
+                (allAAs |> List.map (fun aa -> AminoAcids.setModifications modList aa))
+                allDoubleModAAs
+                "AminoAcids.setModifications did not return the correct Modifications for all AminoAcids"
         )
     ]
