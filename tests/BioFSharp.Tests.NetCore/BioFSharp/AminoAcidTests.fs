@@ -97,6 +97,6 @@ let aminoAcidTests =
             Expect.equal
                 (allAAs |> List.map (fun aa -> AminoAcids.setModification ModificationInfo.Table.N15 aa))
                 allModifiedAAs
-                "AminoAcids.setModification did not correctly modify Mod AA"
+                "AminoAcids.setModification did not return the correct Modifications for all AminoAcids"
         )
     ]
