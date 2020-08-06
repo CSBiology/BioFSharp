@@ -38,6 +38,8 @@ let allAAs = [
     AminoAcid.Glx; AminoAcid.Asx; AminoAcid.Gap; AminoAcid.Ter
 ]
 
+let allModifiedAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15]))
+
 [<Tests>]
 let aminoAcidTests = 
     testList "AminoAcids" [
@@ -92,5 +94,12 @@ let aminoAcidTests =
             Expect.isTrue
                 res
                 "AminoAcids.isGap did not return true for a Gap"
+        )
+        testCase "setModification" (fun () ->
+            let res = allAAs |> List.map (fun aa -> AminoAcids.setModification ModificationInfo.Table.N15 aa)
+            Expect.equal
+                res
+                allModifiedAAs
+                "AminoAcids.setModification did not correctly modify Mod AA"
         )
     ]
