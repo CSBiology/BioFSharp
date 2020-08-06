@@ -75,7 +75,7 @@ let aminoAcidTests =
                 "AminoAcids.formula did not return the correct formula for all AminoAcids"
         )
         testCase "formulaModifiedAA" (fun () ->
-            let modFormula = Formula.replaceElement Formula.Table.Ala Elements.Table.N Elements.Table.Heavy.N15 1.0
+            let modFormula = Formula.replaceElement Formula.Table.Ala Elements.Table.N Elements.Table.Heavy.N15
             Expect.equal
                 (testModifiedAA |> AminoAcids.formula)
                 modFormula
