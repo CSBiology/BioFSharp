@@ -81,4 +81,10 @@ let aminoAcidTests =
                 modFormula
                 "AminoAcids.formula did not return the correct formula for a 15N modified Alanine"
         )
+        testCase "isTerminator" (fun () ->
+            let res = AminoAcids.isTerminator AminoAcid.Ter 
+            Expect.isTrue
+                res
+                "AminoAcids.isTerminator did not return true for a Terminator"
+        )
     ]
