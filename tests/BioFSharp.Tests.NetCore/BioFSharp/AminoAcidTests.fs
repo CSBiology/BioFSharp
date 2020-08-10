@@ -36,6 +36,19 @@ let allAAs = [
     AminoAcid.Glx; AminoAcid.Asx; AminoAcid.Gap; AminoAcid.Ter
 ]
 
+let allParsedAAs = [
+    StandardCodes AminoAcid.Ala; StandardCodes AminoAcid.Cys; StandardCodes AminoAcid.Asp
+    StandardCodes AminoAcid.Glu; StandardCodes AminoAcid.Phe; StandardCodes AminoAcid.Gly
+    StandardCodes AminoAcid.His; StandardCodes AminoAcid.Ile; StandardCodes AminoAcid.Lys
+    StandardCodes AminoAcid.Leu; StandardCodes AminoAcid.Met; StandardCodes AminoAcid.Asn
+    StandardCodes AminoAcid.Pyl; StandardCodes AminoAcid.Pro; StandardCodes AminoAcid.Gln
+    StandardCodes AminoAcid.Arg; StandardCodes AminoAcid.Ser; StandardCodes AminoAcid.Thr
+    StandardCodes AminoAcid.Sel; StandardCodes AminoAcid.Sel; StandardCodes AminoAcid.Val
+    StandardCodes AminoAcid.Trp; StandardCodes AminoAcid.Tyr; AmbiguityCodes AminoAcid.Xaa
+    AmbiguityCodes AminoAcid.Xle; AmbiguityCodes AminoAcid.Glx; AmbiguityCodes AminoAcid.Asx
+    GapTer AminoAcid.Gap; GapTer AminoAcid.Ter; NoAAChar '!'
+]
+
 let allModFormulas = (allFormulas |> List.map(fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15))
 
 let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
@@ -145,5 +158,12 @@ let aminoAcidTests =
                 (List.map2 (fun aa f -> AminoAcids.isotopicLabelFunc aa f) allAAs allFormulas)
                 allFormulas
                 "AminoAcids.isotopicLabelFunc did not return correct function for all unmodified AminoAcids"
+        )
+        testCase "charToParsedAminoAcidChar" (fun () -> // This function currently matches to Sel, not Sec. Will eventually need chane
+            let testParsedSymbols = List.append allSymbols ['!']
+            Expect.equal
+                (List.map (fun c -> AminoAcids.charToParsedAminoAcidChar c) testParsedSymbols)
+                allParsedAAs
+                "AminoAcids.charToParsedAminoAcidChar did not return correct AminoAcid from all AminoAcid chars"
         )
     ]
