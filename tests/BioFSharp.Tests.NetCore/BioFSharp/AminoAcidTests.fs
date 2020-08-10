@@ -114,4 +114,10 @@ let aminoAcidTests =
                 allMods
                 "AminoAcids.getModifications did not return correct Modifications for all modified AminoAcids"
         )
+        testCase "getAminoAcidWithoutMod" (fun () ->
+            Expect.equal    
+                (allSingleModAAs |> List.map (fun aa -> AminoAcids.getAminoAcidWithoutMod aa))
+                allAAs
+                "AminoAcids.getAminoAcidWithoutMod did not return correct AminoAcid for all AminoAcids"
+        )
     ]
