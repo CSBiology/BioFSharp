@@ -26,8 +26,6 @@ let allFormulas = [
     Formula.Table.Glx ; Formula.Table.Asx ; Formula.emptyFormula ; Formula.emptyFormula
 ]
 
-let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
-
 let allAAs = [
     AminoAcid.Ala; AminoAcid.Cys; AminoAcid.Asp; AminoAcid.Glu
     AminoAcid.Phe; AminoAcid.Gly; AminoAcid.His; AminoAcid.Ile
@@ -38,6 +36,9 @@ let allAAs = [
     AminoAcid.Glx; AminoAcid.Asx; AminoAcid.Gap; AminoAcid.Ter
 ]
 
+let allModFormulas = (allFormulas |> List.map(fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15))
+
+let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
 let allSingleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15]))
 let allDoubleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15; ModificationInfo.Table.H2O]))
 
@@ -131,6 +132,12 @@ let aminoAcidTests =
             Expect.equal
                 (allAAs |> List.map (fun aa -> AminoAcids.tryGetModifications aa))
                 [for i in 1 .. 29 -> None]
-                "AminoAcids.tryGetModifications did not return correct Modifications with unmodified AminoAcids"
+                "AminoAcids.tryGetModifications did not return correct Modifications for all unmodified AminoAcids"
+        )
+        testCase "isotopicLabelFunc" (fun () ->
+            Expect.equal
+                (List.map2 (fun aa f -> AminoAcids.isotopicLabelFunc aa f) allSingleModAAs allFormulas)
+                allModFormulas
+                "AminoAcids.isotopicLabelFunc did not return correct function for all Modified AminoAcids"    
         )
     ]
