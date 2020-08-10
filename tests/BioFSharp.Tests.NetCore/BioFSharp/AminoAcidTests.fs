@@ -140,4 +140,10 @@ let aminoAcidTests =
                 allModFormulas
                 "AminoAcids.isotopicLabelFunc did not return correct function for all Modified AminoAcids"    
         )
+        testCase "isotopicLabelFunc_withUnmodifiedAAs" (fun () ->
+            Expect.equal
+                (List.map2 (fun aa f -> AminoAcids.isotopicLabelFunc aa f) allAAs allFormulas)
+                allFormulas
+                "AminoAcids.isotopicLabelFunc did not return correct function for all unmodified AminoAcids"
+        )
     ]
