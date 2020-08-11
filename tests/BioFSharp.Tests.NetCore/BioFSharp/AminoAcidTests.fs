@@ -216,4 +216,11 @@ let aminoAcidTests =
                 testAASetAmbiguity
                 "AminoAcids.aminoAcidSetAmbiguity did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetGapTer" (fun () ->
+            let testAASetGapTer = set [AminoAcid.Gap; AminoAcid.Ter]
+            Expect.equal
+                AminoAcids.aminoAcidSetGapTer
+                testAASetGapTer
+                "AminoAcids.aminoAcidSetGapTer did not return the correct set of AminoAcids"
+        )
     ]
