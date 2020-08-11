@@ -239,4 +239,13 @@ let aminoAcidTests =
                 testAANegCharged
                 "AminoAcids.aminoAcidSetNegCharged did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetPolarUncharged" (fun () ->
+            let testAASetPolarUncharged = set [
+                AminoAcid.Gln; AminoAcid.Asn; AminoAcid.Ser; AminoAcid.Thr
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetPolarUncharged
+                testAASetPolarUncharged
+                "AminoAcids.aminoAcidSetPolarUncharged did not return the correct set of AminoAcids"
+        )
     ]
