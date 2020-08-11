@@ -258,4 +258,14 @@ let aminoAcidTests =
                 testAASetHydrophobic
                 "AminoAcids.aminoAcidSetHydrophobic did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetSpecialCases" (fun () ->
+            let testAASetSpecialCases = set [
+                AminoAcid.Cys; AminoAcid.Sel; AminoAcid.Sec; AminoAcid.Gly
+                AminoAcid.Pro
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetSpecialCases
+                testAASetSpecialCases
+                "AminoAcids.aminoAcidSetSpecialCases did not return the correct set of AminoAcids"
+        )
     ]
