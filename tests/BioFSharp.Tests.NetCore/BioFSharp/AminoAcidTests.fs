@@ -223,4 +223,11 @@ let aminoAcidTests =
                 testAASetGapTer
                 "AminoAcids.aminoAcidSetGapTer did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetPosCharged" (fun () ->
+            let testAAPosCharged = set [AminoAcid.Arg; AminoAcid.Lys; AminoAcid.His]
+            Expect.equal
+                AminoAcids.aminoAcidSetPosCharged
+                testAAPosCharged
+                "AminoAcids.aminoAcidSetPosCharged did not return the correct set of AminoAcids"
+        )
     ]
