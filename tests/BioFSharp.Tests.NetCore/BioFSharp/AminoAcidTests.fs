@@ -193,4 +193,18 @@ let aminoAcidTests =
                 testAASetProteinogenic
                 "AminoAcids.aminoAcidSetProteinogenic did not return correct set of AminoAcids"
         )
+        testCase "aminoAcidSetProteinogenicEucaryotes" (fun () ->
+            let testAASetProteinogenicEucaryotes = set [
+                AminoAcid.Ala; AminoAcid.Cys; AminoAcid.Asp; AminoAcid.Glu
+                AminoAcid.Phe; AminoAcid.Gly; AminoAcid.His; AminoAcid.Ile
+                AminoAcid.Lys; AminoAcid.Leu; AminoAcid.Met; AminoAcid.Asn
+                AminoAcid.Pro; AminoAcid.Gln; AminoAcid.Arg; AminoAcid.Ser
+                AminoAcid.Thr; AminoAcid.Val; AminoAcid.Trp; AminoAcid.Tyr
+                AminoAcid.Sel; AminoAcid.Sec;
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetProteinogenicEucaryotes
+                testAASetProteinogenicEucaryotes
+                "AminoAcids.aminoAcidSetProteinogenicEucaryotes did not return correct set of AminoAcids"
+        )
     ]
