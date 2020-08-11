@@ -248,4 +248,14 @@ let aminoAcidTests =
                 testAASetPolarUncharged
                 "AminoAcids.aminoAcidSetPolarUncharged did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetHydrophobic" (fun () ->
+            let testAASetHydrophobic = set [
+                AminoAcid.Ala; AminoAcid.Ile; AminoAcid.Leu; AminoAcid.Met
+                AminoAcid.Phe; AminoAcid.Trp; AminoAcid.Tyr; AminoAcid.Val
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetHydrophobic
+                testAASetHydrophobic
+                "AminoAcids.aminoAcidSetHydrophobic did not return the correct set of AminoAcids"
+        )
     ]
