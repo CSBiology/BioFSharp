@@ -230,4 +230,13 @@ let aminoAcidTests =
                 testAAPosCharged
                 "AminoAcids.aminoAcidSetPosCharged did not return the correct set of AminoAcids"
         )
+        testCase "aminoAcidSetNegCharged" (fun () ->
+            let testAANegCharged = set [
+                AminoAcid.Asp; AminoAcid.Glu
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetNegCharged
+                testAANegCharged
+                "AminoAcids.aminoAcidSetNegCharged did not return the correct set of AminoAcids"
+        )
     ]
