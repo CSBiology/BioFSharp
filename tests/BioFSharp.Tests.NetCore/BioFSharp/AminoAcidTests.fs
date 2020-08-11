@@ -166,4 +166,17 @@ let aminoAcidTests =
                 allParsedAAs
                 "AminoAcids.charToParsedAminoAcidChar did not return correct AminoAcid from all AminoAcid chars"
         )
+        testCase "aminoAcidSetStandard" (fun () ->
+            let testAASetStandard = set [
+                AminoAcid.Ala; AminoAcid.Cys; AminoAcid.Asp; AminoAcid.Glu
+                AminoAcid.Phe; AminoAcid.Gly; AminoAcid.His; AminoAcid.Ile
+                AminoAcid.Lys; AminoAcid.Leu; AminoAcid.Met; AminoAcid.Asn
+                AminoAcid.Pro; AminoAcid.Gln; AminoAcid.Arg; AminoAcid.Ser
+                AminoAcid.Thr; AminoAcid.Val; AminoAcid.Trp; AminoAcid.Tyr
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetStandard
+                testAASetStandard
+                "AminoAcids.AminoAcidSetStandard did not return correct standard set of AminoAcids"
+        )
     ]
