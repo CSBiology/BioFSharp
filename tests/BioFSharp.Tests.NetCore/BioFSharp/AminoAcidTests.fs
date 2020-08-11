@@ -207,4 +207,13 @@ let aminoAcidTests =
                 testAASetProteinogenicEucaryotes
                 "AminoAcids.aminoAcidSetProteinogenicEucaryotes did not return correct set of AminoAcids"
         )
+        testCase "aminoAcidSetAmbiguity" (fun () ->
+            let testAASetAmbiguity = set [
+                AminoAcid.Xaa; AminoAcid.Xle; AminoAcid.Glx; AminoAcid.Asx
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetAmbiguity
+                testAASetAmbiguity
+                "AminoAcids.aminoAcidSetAmbiguity did not return the correct set of AminoAcids"
+        )
     ]
