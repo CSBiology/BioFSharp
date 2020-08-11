@@ -177,6 +177,20 @@ let aminoAcidTests =
             Expect.equal
                 AminoAcids.aminoAcidSetStandard
                 testAASetStandard
-                "AminoAcids.AminoAcidSetStandard did not return correct standard set of AminoAcids"
+                "AminoAcids.aminoAcidSetStandard did not return correct standard set of AminoAcids"
+        )
+        testCase "aminoAcidSetProteinogenic" (fun () ->
+            let testAASetProteinogenic = set [
+                AminoAcid.Ala; AminoAcid.Cys; AminoAcid.Asp; AminoAcid.Glu
+                AminoAcid.Phe; AminoAcid.Gly; AminoAcid.His; AminoAcid.Ile
+                AminoAcid.Lys; AminoAcid.Leu; AminoAcid.Met; AminoAcid.Asn
+                AminoAcid.Pro; AminoAcid.Gln; AminoAcid.Arg; AminoAcid.Ser
+                AminoAcid.Thr; AminoAcid.Val; AminoAcid.Trp; AminoAcid.Tyr
+                AminoAcid.Sel; AminoAcid.Sec; AminoAcid.Pyl
+            ]
+            Expect.equal
+                AminoAcids.aminoAcidSetProteinogenic
+                testAASetProteinogenic
+                "AminoAcids.aminoAcidSetProteinogenic did not return correct set of AminoAcids"
         )
     ]
