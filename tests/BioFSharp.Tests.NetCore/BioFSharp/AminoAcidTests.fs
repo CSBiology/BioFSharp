@@ -283,4 +283,11 @@ let aminoAcidTests =
                 testIsPolarUncharged
                 "AminoAcids.isPolarUncharged did not return correct boolean for each AminoAcid"
         )
+        testCase "isModified_withUnmodAAs" (fun () ->
+            let testIsModifiedFalse = [for i in 1 .. 29 -> false]
+            Expect.equal
+                (allAAs |> List.map (fun aa -> AminoAcids.isModified aa))
+                testIsModifiedFalse
+                "AminoAcids.isModified did not return correct boolean for each unmodified AminoAcid"
+        )
     ]
