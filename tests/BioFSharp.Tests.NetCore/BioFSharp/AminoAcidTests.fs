@@ -268,4 +268,19 @@ let aminoAcidTests =
                 testAASetSpecialCases
                 "AminoAcids.aminoAcidSetSpecialCases did not return the correct set of AminoAcids"
         )
+        testCase "isPolarUncharged" (fun () ->
+            let testIsPolarUncharged = [
+                false; false; false; false
+                false; false; false; false
+                false; false; false; true
+                false; false; true;  false
+                true;  true;  false; false; false
+                false; false; false; false
+                false; false; false; false
+            ]
+            Expect.equal
+                (allAAs |> List.map (fun aa -> AminoAcids.isPolarUncharged aa))
+                testIsPolarUncharged
+                "AminoAcids.isPolarUncharged did not return correct boolean for each AminoAcid"
+        )
     ]
