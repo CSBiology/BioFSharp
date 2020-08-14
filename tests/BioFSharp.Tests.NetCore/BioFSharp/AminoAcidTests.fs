@@ -290,4 +290,11 @@ let aminoAcidTests =
                 testIsModifiedFalse
                 "AminoAcids.isModified did not return correct boolean for each unmodified AminoAcid"
         )
+        testCase "isModified_withModAAs" (fun () ->
+            let testIsModifiedTrue = [for i in 1 .. 29 -> true]
+            Expect.equal
+                (allSingleModAAs |> List.map (fun aa -> AminoAcids.isModified aa))
+                testIsModifiedTrue
+                "AminoAcids.isModified did not return correct boolean for each modified AminoAcid"
+        )
     ]
