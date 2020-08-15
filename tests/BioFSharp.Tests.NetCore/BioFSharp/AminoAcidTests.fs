@@ -128,6 +128,13 @@ let aminoAcidTests =
                 allMods
                 "AminoAcids.getModifications did not return correct Modifications for all modified AminoAcids"
         )
+        testCase "getModifications_withUnmodAAs" (fun () ->
+            let allEmptyLists = [for i in 1 .. 29 -> []]
+            Expect.equal
+                (allAAs |> List.map (fun aa -> AminoAcids.getModifications aa))
+                allEmptyLists
+                "AminoAcids.getModifications did not return correct empty list for all unmodified AminoAcids"
+        )
         testCase "getAminoAcidWithoutMod" (fun () ->
             Expect.equal    
                 (allSingleModAAs |> List.map (fun aa -> AminoAcids.getAminoAcidWithoutMod aa))
