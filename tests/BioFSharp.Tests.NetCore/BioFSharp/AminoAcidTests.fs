@@ -26,6 +26,9 @@ let allFormulas = [
     Formula.Table.Glx ; Formula.Table.Asx ; Formula.emptyFormula ; Formula.emptyFormula
 ]
 
+let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
+
+
 let allAAs = [
     AminoAcid.Ala; AminoAcid.Cys; AminoAcid.Asp; AminoAcid.Glu
     AminoAcid.Phe; AminoAcid.Gly; AminoAcid.His; AminoAcid.Ile
@@ -52,6 +55,7 @@ let allParsedAAs = [
 let allModFormulas = (allFormulas |> List.map(fun f -> Formula.replaceElement f Elements.Table.N Elements.Table.Heavy.N15))
 
 let testModifiedAA = AminoAcid.Mod (AminoAcid.Ala,[ModificationInfo.Table.N15])
+
 let allSingleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15]))
 let allDoubleModAAs = allAAs |> List.map (fun aa -> AminoAcids.Mod (aa, [ModificationInfo.Table.N15; ModificationInfo.Table.H2O]))
 
@@ -128,6 +132,7 @@ let aminoAcidTests =
                 allMods
                 "AminoAcids.getModifications did not return correct Modifications for all modified AminoAcids"
         )
+
         testCase "getModifications_withUnmodAAs" (fun () ->
             let allEmptyLists = [for i in 1 .. 29 -> []]
             Expect.equal
