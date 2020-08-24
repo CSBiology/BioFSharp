@@ -362,6 +362,12 @@ let testMass =
             let exp             = 0.1
             Expect.floatClose Accuracy.high res exp "Delta mass calculation failed."
 
+        testCase "test_rangePpm" <| fun () ->
+            let mass            = 1000.
+            let ppm             = 100.
+            let res             = rangePpm ppm mass
+            let exp             = (999.9,1000.1)
+            Expect.equal res exp "Range of ppm calculation failed"
     ]
    
       
