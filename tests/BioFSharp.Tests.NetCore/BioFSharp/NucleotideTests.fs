@@ -34,5 +34,10 @@ let nucleotideTests = [
                 allFormuals
                 "Nucleotides.formula did not return the correct formula for all Nucleotides."
         )
+        testCase "isTerminator" (fun() ->
+            Expect.isTrue
+                (Nucleotides.isTerminator Nucleotides.Ter)
+                "Nucleotides.isTerminator did not return true for a Terminator."
+        )
     ]
 ]
