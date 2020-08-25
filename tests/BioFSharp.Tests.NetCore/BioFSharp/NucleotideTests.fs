@@ -35,9 +35,14 @@ let nucleotideTests = [
                 "Nucleotides.formula did not return the correct formula for all Nucleotides."
         )
         testCase "isTerminator" (fun() ->
-            Expect.isTrue
-                (Nucleotides.isTerminator Nucleotides.Ter)
-                "Nucleotides.isTerminator did not return true for a Terminator."
+            let testBools = [
+                false; false; false; false; false; false; true; false; false
+                false; false; false; false; false; false; false; false; false
+            ]
+            Expect.equal
+                (allNucs |> List.Map(fun nuc -> Nucleotides.isTerminator nuc))
+                testBools
+                "Nucleotides.isTerminator did not return the correct boolean for all Nucleotides."
         )
     ]
 ]
