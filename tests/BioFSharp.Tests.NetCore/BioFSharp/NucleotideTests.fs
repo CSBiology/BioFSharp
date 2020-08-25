@@ -26,6 +26,15 @@ let allNames = [
     "Keto"   ; "aMino"    ; "Strong base pair"   ; "Weak base pair"
     "not A"  ; "not C"    ; "not G"  ; "not T/U" ;  "Unspecified"
 ]
+let allParsedNucChars = [
+    StandardCodes Nucleotide.A; Standard_DNAonly Nucleotide.T; StandardCodes Nucleotide.G
+    StandardCodes Nucleotide.C; Standard_RNAonly Nucleotide.U; Standard_RNAonly Nucleotide.I
+    GapTer Nucleotide.Gap; GapTer Nucleotide.Ter; AmbiguityCodes Nucleotide.R
+    AmbiguityCodes Nucleotide.Y; AmbiguityCodes Nucleotide.K; AmbiguityCodes Nucleotide.M
+    AmbiguityCodes Nucleotide.S; AmbiguityCodes Nucleotide.W; AmbiguityCodes Nucleotide.B
+    AmbiguityCodes Nucleotide.D; AmbiguityCodes Nucleotide.H; AmbiguityCodes Nucleotide.V
+    AmbiguityCodes Nucleotide.N; NoNucChar '!'
+]
 
 [<Tests>]
 let nucleotideTests =
@@ -72,5 +81,13 @@ let nucleotideTests =
                 testNames
                 allNames
                 "Nucleotides.name did not return the correct name for all nucleotides."
+        )
+        testCase "charToParsedNucleotideChar" (fun() ->
+            let testSymbols = List.append allSymbols ['!']
+            let testParsedNucChars = (testSymbols |> List.map(fun nuc -> Nucleotides.charToParsedNucleotideChar nuc))
+            Expect.equal
+                testParsedNucChars
+                allParsedNucChars
+                "Nucleotides.charToParsedNucleotideChar did not return correct ParsedNucleotideChar for all Nucleotides."
         )
     ]
