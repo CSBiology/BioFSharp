@@ -15,6 +15,10 @@ let allFormuals = [Formula.table.A; Formula.table.C; Formula.table.T; Formula.ta
                    Formula.emptyFormula; Formula.emptyFormula; Formula.emptyFormula; Formula.emptyFormula
                    Formula.emptyFormula; Formula.emptyFormula; Formula.emptyFormula; Formula.emptyFormula
                    Formula.emptyFormula; Formula.emptyFormula]
+let allNames = ["Adenine"; "Thymidine"; "Guanine"; "Cytosine"; "Uracil"
+                "Inosine"; "Gap"      ; "Ter"    ; "puRine"  ; "pYrimidine"
+                "Keto"   ; "aMino"    ; "Strong base pair"   ; "Weak base pair"
+                "not A"  ; "not C"    ; "not G"  ; "not T/U" ;  "Unspecified"]
 
 
 [<Tests>]
@@ -53,6 +57,13 @@ let nucleotideTests = [
                 (allNucs |> List.Map(fun nuc -> Nucleotides.isGap nuc))
                 testBools
                 "Nucleotides.isGap did not return the correct boolean for all Nucleotides."
+        )
+        testCase "name" (fun() ->
+            let testNames = (allNucs |> List.Map(fun nuc -> Nucleotides.name nuc))
+            Expect.equal
+                testNames
+                allNames
+                "Nucleotides.name did not return the correct name for all nucleotides."
         )
     ]
 ]
