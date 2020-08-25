@@ -44,5 +44,15 @@ let nucleotideTests = [
                 testBools
                 "Nucleotides.isTerminator did not return the correct boolean for all Nucleotides."
         )
+        testCase "isGap" (fun() ->
+            let testBools = [
+                false; false; false; false; false; false; false; true; false
+                false; false; false; false; false; false; false; false; false
+            ]
+            Expect.equal
+                (allNucs |> List.Map(fun nuc -> Nucleotides.isGap nuc))
+                testBools
+                "Nucleotides.isGap did not return the correct boolean for all Nucleotides."
+        )
     ]
 ]
