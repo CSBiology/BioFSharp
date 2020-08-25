@@ -116,4 +116,17 @@ let nucleotideTests =
                 allNucsReplaceTbyU
                 "Nucleotides.replaceTbyU did not return the correct Nucleotide for all Nucleotides."
         )
+        testCase "replaceUbyT" (fun () ->
+            let allNucsReplaceUbyT = [
+                Nucleotide.A; Nucleotide.T; Nucleotide.G; Nucleotide.C; Nucleotide.T
+                Nucleotide.I; Nucleotide.Gap; Nucleotide.Ter; Nucleotide.R
+                Nucleotide.Y; Nucleotide.K; Nucleotide.M; Nucleotide.S; Nucleotide.W
+                Nucleotide.B; Nucleotide.D; Nucleotide.H; Nucleotide.V; Nucleotide.N
+            ]
+            let testNucsReplaceUbyT = (allNucs |> List.map(fun nuc -> Nucleotides.replaceUbyT nuc))
+            Expect.equal
+                testNucsReplaceUbyT
+                allNucsReplaceUbyT
+                "Nucleotides.replaceUbyT did not return the correct Nucleotide for all Nucleotides."
+        )
     ]
