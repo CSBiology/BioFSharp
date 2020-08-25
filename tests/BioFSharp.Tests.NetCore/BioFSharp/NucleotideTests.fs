@@ -12,12 +12,6 @@ let allNucs = [
     Nucleotide.W; Nucleotide.B; Nucleotide.D; Nucleotide.H
     Nucleotide.V; Nucleotide.N
 ]
-let allComplementNucs = [
-    Nucleotide.T; Nucleotide.A; Nucleotide.C; Nucleotide.G; Nucleotide.A
-    Nucleotide.I; Nucleotide.Gap; Nucleotide.Ter; Nucleotide.Y; Nucleotide.R
-    Nucleotide.M; Nucleotide.K; Nucleotide.S; Nucleotide.W; Nucleotide.V
-    Nucleotide.H; Nucleotide.D; Nucleotide.B; Nucleotide.N
-]
 let allSymbols = ['A';'T';'G';'C';'U';'I';'-';'*';'R';'Y';'K';'M';'S';'W';'B';'D';'H';'V';'N']
 let allFormuals = [
     Formula.Table.A; Formula.Table.T; Formula.Table.G; Formula.Table.C; Formula.Table.U
@@ -97,10 +91,29 @@ let nucleotideTests =
                 "Nucleotides.charToParsedNucleotideChar did not return correct ParsedNucleotideChar for all Nucleotides."
         )
         testCase "complement" (fun () ->
+            let allComplementNucs = [
+                Nucleotide.T; Nucleotide.A; Nucleotide.C; Nucleotide.G; Nucleotide.A
+                Nucleotide.I; Nucleotide.Gap; Nucleotide.Ter; Nucleotide.Y; Nucleotide.R
+                Nucleotide.M; Nucleotide.K; Nucleotide.S; Nucleotide.W; Nucleotide.V
+                Nucleotide.H; Nucleotide.D; Nucleotide.B; Nucleotide.N
+            ]
             let testComplementNucs = (allNucs |> List.map(fun nuc -> Nucleotides.complement nuc))
             Expect.equal
                 testComplementNucs
                 allComplementNucs
-                "Nucleotides.complement did not return the correct complement for all Nucleotides."
+                "Nucleotides.complement did not return the correct complement Nucleotide for all Nucleotides."
+        )
+        testCase "replaceTbyU" (fun () ->
+            let allNucsReplaceTbyU = [
+                Nucleotide.A; Nucleotide.U; Nucleotide.G; Nucleotide.C; Nucleotide.U
+                Nucleotide.I; Nucleotide.Gap; Nucleotide.Ter; Nucleotide.R
+                Nucleotide.Y; Nucleotide.K; Nucleotide.M; Nucleotide.S; Nucleotide.W
+                Nucleotide.B; Nucleotide.D; Nucleotide.H; Nucleotide.V; Nucleotide.N
+            ]
+            let testNucsReplaceTbyU = (allNucs |> List.map(fun nuc -> Nucleotides.replaceTbyU nuc))
+            Expect.equal
+                testNucsReplaceTbyU
+                allNucsReplaceTbyU
+                "Nucleotides.replaceTbyU did not return the correct Nucleotide for all Nucleotides."
         )
     ]
