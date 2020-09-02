@@ -41,6 +41,15 @@ let testMappingFun (n: Node<'n>) =
 [<Tests>]
 let phylTreeTests =
     testList "PhylTree" [
+        testCase "map" (fun() ->
+            let testMappingFun (n: Node<'n>) =
+                match n with
+                    Branch(s, nl) -> s |> BioList.ofNucleotideString
+            Expect.equal
+                (PhylTree.map testMappingFun testPhylTree_threeGens_string)
+                testPhylTree_threeGens_BioList
+                "PhylTree.map did not return correct Node<'t>"
+        )
         testCase "countLeafs" (fun() ->
             Expect.equal
                 (testPhylTree_threeGens_string |> PhylTree.countLeafs)
