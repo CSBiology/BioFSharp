@@ -22,4 +22,6 @@ let main argv =
 
     Tests.runTestsWithCLIArgs [] argv NucleotideTests.nucleotideTests |> ignore
 
+    Tests.runTestsWithCLIArgs [] argv PhylTreeTests.phylTreeTests |> ignore
+
     0
