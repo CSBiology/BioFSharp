@@ -6,7 +6,7 @@ open BioList
 open Nucleotides
 open Expecto
 
-let testPhylTree_oneGen = Node.Branch("ACTG", [])
+let testPhylTree_oneGen = Node.Branch("1", [])
 
 let testPhylTree_threeGens_string =
     Node.Branch("ACTG",[
@@ -60,6 +60,18 @@ let phylTreeTests =
                 testList
                 ["ACTG"; "ACTT"; "ACTC"; "ACGG"; "ACCG"; "GCTG"; "TCTG"]
                 "PhylTree.iter did not return correct Node<'t>"
+        )
+        testCase "fold" (fun () ->
+            let testAcc = ""
+            let testFoldFun (acc: string) (node: Node<'n>) =
+                match node with
+                    Branch(s, nl) ->
+                        s.[0..2]
+                        (s + "; " + acc)
+            Expect.equal
+                (PhylTree.fold testAcc testFoldFun testPhylTree_threeGens_string)
+                "ACTG; GCTG; TCTG; ACGG; ACCG; ACTT; ACTC; "
+                "PhylTree.fold did not return correct accumulated value."
         )
         testCase "countLeafs" (fun() ->
             Expect.equal
