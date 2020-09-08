@@ -34,6 +34,11 @@ let testPhylTree_threeGens_BioList =
         ])
     ])
 
+let testFoldFun (acc: string) (node: Node<'n>) =
+    match node with
+        Branch(s, nl) ->
+            (s + "; " + acc)
+
 let testMappingFun (n: Node<'n>) =
     match n with
         Branch(s, nl) -> s |> BioList.ofNucleotideString
@@ -42,9 +47,6 @@ let testMappingFun (n: Node<'n>) =
 let phylTreeTests =
     testList "PhylTree" [
         testCase "map" (fun() ->
-            let testMappingFun (n: Node<'n>) =
-                match n with
-                    Branch(s, nl) -> s |> BioList.ofNucleotideString
             Expect.equal
                 (PhylTree.map testMappingFun testPhylTree_threeGens_string)
                 testPhylTree_threeGens_BioList
@@ -63,20 +65,24 @@ let phylTreeTests =
         )
         testCase "fold" (fun () ->
             let testAcc = ""
-            let testFoldFun (acc: string) (node: Node<'n>) =
-                match node with
-                    Branch(s, nl) ->
-                        s.[0..2]
-                        (s + "; " + acc)
             Expect.equal
                 (PhylTree.fold testAcc testFoldFun testPhylTree_threeGens_string)
                 "ACTG; GCTG; TCTG; ACGG; ACCG; ACTT; ACTC; "
                 "PhylTree.fold did not return correct accumulated value."
         )
-        testCase "countLeafs" (fun() ->
+        testCase "countLeafs" (fun () ->
             Expect.equal
                 (testPhylTree_threeGens_string |> PhylTree.countLeafs)
                 3
                 "PhylTree.countLeafs did not return the correct number of leaves"
+        )
+        testCase "tryGetNodeBy" (fun () ->
+            let testConditionFun (node: Node<'n>) =
+                match node with
+                    Branch(s, _) -> s = "ACTG"
+            Expect.equal
+                (PhylTree.tryGetNodeBy testConditionFun testPhylTree_threeGens_string)
+                (Some testPhylTree_threeGens_string)
+                "PhylTree.tryGetNodeBy did not return the correct Node<'n> for the given condition."
         )
     ]
