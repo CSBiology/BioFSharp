@@ -50,6 +50,17 @@ let phylTreeTests =
                 testPhylTree_threeGens_BioList
                 "PhylTree.map did not return correct Node<'t>"
         )
+        testCase "iter" (fun () ->
+            let mutable testList = []
+            let testIterFun (node: Node<'n>) =
+                match node with
+                    Branch (s, nl) -> do (testList <- testList @ [s])
+            PhylTree.iter testIterFun testPhylTree_threeGens_string
+            Expect.equal
+                testList
+                ["ACTG"; "ACTT"; "ACTC"; "ACGG"; "ACCG"; "GCTG"; "TCTG"]
+                "PhylTree.iter did not return correct Node<'t>"
+        )
         testCase "countLeafs" (fun() ->
             Expect.equal
                 (testPhylTree_threeGens_string |> PhylTree.countLeafs)
