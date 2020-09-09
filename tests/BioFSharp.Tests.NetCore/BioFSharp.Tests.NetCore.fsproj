@@ -13,6 +13,7 @@
     <Compile Include="BioFSharp\NucleotideTests.fs" />
     <Compile Include="BioFSharp\BioCollections.fs" />
     <Compile Include="BioFSharp\BioItemTests.fs" />
+    <Compile Include="BioFSharp\PhylTreeTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
