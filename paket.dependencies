@@ -2,6 +2,8 @@ source https://www.nuget.org/api/v2
 
 framework: net45, net47, netstandard2.0, netstandard2.1
 
+storage: none
+
 strategy: max
 
 nuget FSharp.Core >= 4.7.0
@@ -11,7 +13,7 @@ nuget FSharpAux.IO >= 1.0.0
 nuget FSharp.Stats >= 0.2.1-beta
 #nuget FSharp.Stats.MSF >= 0.2.1-beta
 nuget FSharp.Plotly >= 1.2.0
-nuget docker.dotnet >= 3.125.2
+nuget docker.dotnet 3.125.2
 nuget SharpZipLib >= 1.2.0
 nuget CNTK.CPUOnly >= 2.7.0
 nuget Microsoft.Xaml >= 4.0.0.1
