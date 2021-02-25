@@ -1,6 +1,0 @@
-group BioDB
-FSharp.Core
-SwaggerProvider
-YamlDotNet
-FSharp.Data.TypeProviders
-Http.fs

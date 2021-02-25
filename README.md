@@ -39,6 +39,8 @@ BioDB functionality
 
 The BioDB namespace offers API access to powerful popular databases like [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [EBI(including SwissProt/Expasy)](https://www.ebi.ac.uk/). We additionally provide an API access for [FATool](http://iomiqsweb1.bio.uni-kl.de/), a webservice by our workgroup for querying functional annotations of proteins.
 
+This project is netframework only and has a new home here: https://github.com/CSBiology/BioFSharp.BioDB
+
 BioContainers functionality
 ----------------------
 

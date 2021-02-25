@@ -102,17 +102,14 @@ let allProjectPaths =
     |>  Seq.map 
         (fun f -> (Path.getDirectory f))
 
-// projects built with the mono configuration (ik cant get bioDB to work here)
 let monoProjectPaths =
     !! "src/**/*.fsproj"
-    -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
     |>  Seq.map 
         (fun f -> (Path.getDirectory f))
 
 // netstandard2.0 projects only
 let dotnetProjectPaths =
     !! "src/**/*.fsproj"
-    -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
     -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
     -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
     -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"
@@ -234,7 +231,6 @@ let copyBinariesMono =
     BuildTask.create "copyBinariesMono" [clean.IfNeeded; assemblyInfo.IfNeeded; buildMono] {
         //only select projects with the mono configuration
         !! "src/**/*.fsproj"
-        -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
         |>  Seq.map (fun f -> (Path.getDirectory f) </> "bin" </> "Mono", "bin" </> (Path.GetFileNameWithoutExtension f))
         |>  Seq.iter 
             (fun (fromDir, toDir) ->   
@@ -247,7 +243,6 @@ let copyBinariesDotnet =
     BuildTask.create "copyBinariesDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; buildDotnet] {
         //only select projects with the dotnet configuration
         !! "src/**/*.fsproj"
-        -- "src/BioFSharp.BioDB/BioFSharp.BioDB.fsproj"
         -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
         -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
         -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"

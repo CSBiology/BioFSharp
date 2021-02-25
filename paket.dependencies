@@ -20,13 +20,6 @@ nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
 
-group BioDB
-    source https://www.nuget.org/api/v2
-    nuget SwaggerProvider >= 0.10
-    nuget YamlDotNet >= 8.1.0
-    nuget FSharp.Data.TypeProviders >= 5.0.0.6
-    nuget Http.fs >= 5.4.0
-
 group Formatting
 
     source https://www.nuget.org/api/v2
