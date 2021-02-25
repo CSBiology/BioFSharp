@@ -15,6 +15,7 @@
      
  * **BioFSharp.IO**:
    * OBO parser: Extended term parser for spec 1.4
+   * OBO parser: fix (#111)[https://github.com/CSBiology/BioFSharp/issues/111]
    * SOFT parser now parses Data tables 
 
 **Bugfixes:**

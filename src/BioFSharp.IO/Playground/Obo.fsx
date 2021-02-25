@@ -1,5 +1,5 @@
-#r "../../../packages/FSharpAux/lib/netstandard2.0/FSharpAux.dll"
-#r "../../../packages/FSharpAux.IO/lib/netstandard2.0/FSharpAux.IO.dll"
+#r "nuget: FSharpAux"
+#r "nuget: FSharpAux.IO"
 #r "../../../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
 
 #load "../Obo.fs"
@@ -8,14 +8,14 @@ open FSharpAux
 open FSharpAux.IO
 open BioFSharp.IO.Obo
 
-
-let oboPath = __SOURCE_DIRECTORY__ + @"../../../../docsrc/content/data/testTerm.obo"
+let oboPath = __SOURCE_DIRECTORY__ + @"../../../../docsrc/content/data/ms.obo"
 
 let testTerm =
     Seq.fromFile oboPath
     |> parseOboTerms
-    |> Array.ofSeq
-    |> Array.item 0
+    |> Seq.find( fun obo ->
+        obo.Id = "MS:1002062"
+    )
 
 testTerm.Synonyms
 
