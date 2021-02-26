@@ -112,7 +112,6 @@ let dotnetProjectPaths =
     !! "src/**/*.fsproj"
     -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
     -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
-    -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"
         |>  Seq.map 
         (fun f -> (Path.getDirectory f))
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -245,7 +244,6 @@ let copyBinariesDotnet =
         !! "src/**/*.fsproj"
         -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
         -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
-        -- "src/BioFSharp.Vis/BioFSharp.Vis.fsproj"
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "DotnetCore", "bin" </> (Path.GetFileNameWithoutExtension f)))
         |>  Seq.iter 
             (fun (fromDir, toDir) ->   

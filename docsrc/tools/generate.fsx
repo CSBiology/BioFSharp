@@ -53,13 +53,11 @@ let referenceBinaries =
         [ 
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
-        __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.BioDB/bin/Release/net47/BioFSharp.BioDB.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.ImgP/bin/Release/net47/BioFSharp.ImgP.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Parallel/bin/Release/net47/BioFSharp.Parallel.dll"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
-        __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Vis/bin/Release/net47/BioFSharp.Vis.dll"
       
         ]
     
@@ -67,13 +65,11 @@ let libDirs =
     [ 
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp/bin/Release/netstandard2.0/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/"
-        __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.BioDB/bin/Release/net47/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.ImgP/bin/Release/net47/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.IO/bin/Release/netstandard2.0/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.ML/bin/Release/netstandard2.0/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Parallel/bin/Release/net47/"
         __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Stats/bin/Release/netstandard2.0/"
-        __SOURCE_DIRECTORY__ + "/../../src/BioFSharp.Vis/bin/Release/net47/"
     ]
     
 // When called from 'build.fsx', use the public project URL as <root>
