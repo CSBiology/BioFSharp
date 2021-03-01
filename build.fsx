@@ -110,8 +110,6 @@ let monoProjectPaths =
 // netstandard2.0 projects only
 let dotnetProjectPaths =
     !! "src/**/*.fsproj"
-    -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
-    -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
         |>  Seq.map 
         (fun f -> (Path.getDirectory f))
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -242,8 +240,6 @@ let copyBinariesDotnet =
     BuildTask.create "copyBinariesDotnet" [clean.IfNeeded; assemblyInfo.IfNeeded; buildDotnet] {
         //only select projects with the dotnet configuration
         !! "src/**/*.fsproj"
-        -- "src/BioFSharp.Parallel/BioFSharp.Parallel.fsproj" 
-        -- "src/BioFSharp.ImgP/BioFSharp.ImgP.fsproj" 
         |>  Seq.map (fun f -> ((Path.getDirectory f) </> "bin" </> "DotnetCore", "bin" </> (Path.GetFileNameWithoutExtension f)))
         |>  Seq.iter 
             (fun (fromDir, toDir) ->   
