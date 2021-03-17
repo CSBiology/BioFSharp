@@ -61,7 +61,7 @@ module ProjectInfo =
 
     let project = "BioFSharp"
 
-    let testProject = "tests/BioFSharp.Tests.NetCore/BioFSharp.Tests.NetCore.fsproj"
+    let testProject = "tests/BioFSharp.Tests/BioFSharp.Tests.fsproj"
 
     let summary = "Open source bioinformatics and computational biology toolbox written in F#."
 
@@ -146,6 +146,8 @@ module TestTasks =
             {
                 testParams with
                     Logger = Some "console;verbosity=detailed"
+                    Configuration = DotNet.BuildConfiguration.fromString configuration
+                    NoBuild = true
             }
         ) testProject
     }
