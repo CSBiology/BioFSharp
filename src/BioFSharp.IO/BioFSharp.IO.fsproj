@@ -1,14 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
     <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <RootNamespace>BioFSharp.IO</RootNamespace>
     <AssemblyName>BioFSharp.IO</AssemblyName>
     <Name>BioFSharp.IO</Name>
@@ -20,14 +12,31 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Timo Mühlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, Benedikt Venn, F# open source contributors</Authors>
+    <Description>Read/write functions for various biological file formats</Description>
+    <Summary>
+      BioFSharp.IO contains read/write functions for a diverse set of biological
+      file formats such as Fasta, FastQ, GeneBank or GFF, as well as
+      helper function for searching on or transforming the input data.
+    </Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://csbiology.github.io/BioFSharp/</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png</PackageIconUrl>
+    <PackageTags>bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis F# FSharp</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/BioFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/CSBiology/BioFSharp/blob/developer/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/CSBiology/BioFSharp/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
   <ItemGroup>
     <None Include="BioFSharp.IO.fsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="GenerateSOFTTypes.fsx" />
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="GAF.fs" />
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />
@@ -62,12 +71,14 @@
     <None Include="Playground\OrthoMCL.fsx" />
     <None Include="Playground\SOFT.fsx" />
     <None Include="Playground\WorkflowLanguage.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
-	<ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
+    <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
-
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="FSharpAux" Version="1.0.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
 </Project>

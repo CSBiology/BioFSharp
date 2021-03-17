@@ -1,14 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
     <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <RootNamespace>BioFSharp</RootNamespace>
     <AssemblyName>BioFSharp</AssemblyName>
     <Name>BioFSharp</Name>
@@ -20,11 +12,30 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Timo Mühlhaus, Kevin Schneider, Heinrich Lukas Weil, David Zimmer, F# open source contributors</Authors>
+    <Description>Open source bioinformatics and computational biology toolbox written in F#.</Description>
+    <Summary>
+      BioFSharp aims to be a user-friendly library for Bioinformatics written in F#.
+      This is the core package that contains optimized biological datastructures
+      (For example amino acdis, nucleotides, and sequences consisting of them) and core
+      bioinformatic algorithms (such as alignments or pattern search).
+      BioFSharp has grown to a whole ecosystem of bioinformatic packages that build on this foundation.
+    </Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://csbiology.github.io/BioFSharp/</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png</PackageIconUrl>
+    <PackageTags>bioinformatics biostatistics datascience biology dataprocessing amino-acids nucleotides sequence-analysis F# FSharp</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/BioFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/CSBiology/BioFSharp/blob/developer/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/CSBiology/BioFSharp/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
   <ItemGroup>
    <!-- Core -->
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Refactor.fs" />
     <Compile Include="PhysicalConstants.fs" />
     <Compile Include="BioID.fs" />
@@ -67,6 +78,7 @@
     <EmbeddedResource Include="Resources\PAM70.txt" />
     <EmbeddedResource Include="Resources\AminoAcidProperties.txt" />
     <EmbeddedResource Include="Resources\BLOSUM62.txt" />
+    <!-- Playground -->
     <None Include="Playground\Alignment.fsx" />
     <None Include="Playground\AminoAcids.fsx" />
     <None Include="Playground\AminoAcidSymbols.fsx" />
@@ -93,10 +105,10 @@
     <None Include="Playground\PhysicalConstants.fsx" />
     <None Include="Playground\TaggedSequence.fsx" />
     <None Include="Playground\WorkflowLanguage.fsx" />
-    <!-- Playground -->
-    <None Include="paket.references" />
-    <None Include="paket.template" />
   </ItemGroup>
-
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="FSharpAux" Version="1.0.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

@@ -1,17 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
     <TargetFramework>netstandard2.0</TargetFramework>
-    <BaseOutputPath>bin</BaseOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-    <BaseOutputPath>bin</BaseOutputPath>
-  </PropertyGroup>
-  <PropertyGroup>
     <RootNamespace>BioFSharp.BioContainers</RootNamespace>
     <AssemblyName>BioFSharp.BioContainers</AssemblyName>
     <Name>BioFSharp.BioContainers</Name>
@@ -23,10 +12,28 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Timo Mühlhaus, Kevin Schneider, F# open source contributors</Authors>
+    <Description>Open source bioinformatics and computational biology toolbox written in F#.</Description>
+    <Summary>
+      BioFSharp.BioContainers gives you the possibility to leverage containerized applications without
+      leaving your F# environment. It builds on the fondation of Docker.DotNet to programmatically access
+      the the REST API on top of the docker daemon, and provides special functions to use with biocontainers -
+      a standardized way to create containerized bioinformatic software.
+    </Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://csbiology.github.io/BioFSharp/BioContainers.html</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png</PackageIconUrl>
+    <PackageTags>F# FSharp bioinformatics datascience biology docker bioinformatics-containers biocontainers</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/BioFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/CSBiology/BioFSharp/blob/developer/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/CSBiology/BioFSharp/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <!--  Base functionality -->
     <Compile Include="Docker.fs" />
     <Compile Include="BioContainerIO.fs" />
@@ -61,13 +68,17 @@
     <None Include="Playground\STAR.fsx" />
     <None Include="Playground\TargetP.fsx" />
     <None Include="Playground\Tmhmm.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="Docker.DotNet" Version="3.125.2" />
+    <PackageReference Include="FSharpAux" Version="1.0.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="SharpZipLib" Version="1.3.1" />
+  </ItemGroup>
 </Project>
 

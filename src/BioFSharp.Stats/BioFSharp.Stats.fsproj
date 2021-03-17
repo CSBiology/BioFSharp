@@ -1,14 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'DotnetCore' ">
     <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Mono' ">
-    <TargetFrameworks>netstandard2.0;net45;net47</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <RootNamespace>BioFSharp.Stats</RootNamespace>
     <AssemblyName>BioFSharp.Stats</AssemblyName>
     <Name>BioFSharp.Stats</Name>
@@ -20,17 +12,33 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <Configurations>Debug;Release;Mono;DotnetCore</Configurations>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Timo Mühlhaus, Kevin Schneider, F# open source contributors</Authors>
+    <Description>Statistical functions with a clear biological focus written in F#.</Description>
+    <Summary>
+      BioFSharp.IO contains statistical functions with a clear biological focus such as Gene Set Enrichment Analysis (GSEA).
+    </Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://csbiology.github.io/BioFSharp/</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png</PackageIconUrl>
+    <PackageTags>bioinformatics F# fsharp statistic biostatistics datascience</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/BioFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/CSBiology/BioFSharp/blob/developer/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/CSBiology/BioFSharp/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="OntologyEnrichment.fs" />
     <Compile Include="SurprisalAnalysisEmpiricalPermutationTest.fs" />
     <None Include="Playground\OntologyEnrichment.fsx" />
     <None Include="Playground\SurprisalAnalysisEmpiricalPermutationTest.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
   </ItemGroup>
-
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="FSharp.Stats" Version="0.4.0" />
+    <PackageReference Include="FSharpAux" Version="1.0.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+  </ItemGroup>
 </Project>

@@ -23,6 +23,5 @@
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
     <ProjectReference Include="..\..\src\BioFSharp\BioFSharp.fsproj" />
-    <PackageReference Update="FSharp.Core" Version="4.*" />
   </ItemGroup>
 </Project>
