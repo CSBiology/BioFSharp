@@ -1,4 +1,4 @@
-name: .NET
+name: Build and test
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ developer ]
 
 jobs:
-  build:
+  build-and-test-linux:
 
     runs-on: ubuntu-latest
 
@@ -16,7 +16,22 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 3.1.x
+    - name: Restore local tools
+      run: dotnet tool restore
+    - name: Build and test
+      run: dotnet fake build -t runTests
+
+  build-and-test-windows:
+    
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
     - name: Restore local tools
       run: dotnet tool restore
     - name: Build and test
