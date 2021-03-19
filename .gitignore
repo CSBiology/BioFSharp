@@ -182,10 +182,11 @@ paket-files
 .paket/paket.exe
 *.orig
 .fake
-docsrc/tools/FSharp.Formatting.svclog
-docs
 /temp
 /pkg
 .ionide
 /tests/BioFSharp.Tests.NetCore/coverage.xml
 codeCov.xml
+docs/.fsdocs/
+docs/tmp/watch/
+tmp/watch/
