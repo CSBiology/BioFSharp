@@ -134,7 +134,7 @@ BioFSharp comes equipped with a broad range of features and functions to map ami
 let antiG = Nucleotides.G |> Nucleotides.complement
 (***include-value:antiG***)
 
-// Returns the monoicsotopic mass of Arginine (minus H2O)
+// Returns the monoisotopic mass of Arginine (minus H2O)
 let arginineMass = AminoAcids.Arg |> AminoAcids.monoisoMass
 (***include-value:arginineMass***)
 
