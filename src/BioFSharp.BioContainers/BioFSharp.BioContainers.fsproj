@@ -38,6 +38,7 @@
     <Compile Include="Docker.fs" />
     <Compile Include="BioContainerIO.fs" />
     <Compile Include="BioContainer.fs" />
+    <Compile Include="TargetP2.fs" />
     <!--  DSLs -->
     <Compile Include="Blast.fs" />
     <Compile Include="ClustalO.fs" />

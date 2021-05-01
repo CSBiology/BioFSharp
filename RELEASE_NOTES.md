@@ -12,7 +12,8 @@
      * [Breaking] full blastp, blastp-fast, and blastp-short DSLs
    * TargetP BioContainer :
      * Add functions to run the container with a mounted directory
-     
+   * Add TargetP2 BioContainer API
+
  * **BioFSharp.IO**:
    * OBO parser: Extended term parser for spec 1.4
    * OBO parser: fix (#111)[https://github.com/CSBiology/BioFSharp/issues/111]
