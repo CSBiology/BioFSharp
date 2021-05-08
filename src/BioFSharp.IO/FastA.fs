@@ -83,7 +83,7 @@ module FastA =
                         w.Flush()
         
             loop ()
-        use sWriter = new System.IO.StreamWriter(stream,Text.Encoding.UTF8,1024,true)
+        use sWriter = new System.IO.StreamWriter(stream,Text.UTF8Encoding(false,true),1024,true)
         data
         |> Seq.iter (fun (i:FastaItem<_>) ->
                                 sWriter.WriteLine(">" + i.Header)
@@ -92,12 +92,12 @@ module FastA =
 
     /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is overwritten.
     let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
-        let file = new FileStream(filePath,FileMode.Create)
+        use file = new FileStream(filePath,FileMode.Create)
         writeToStream toString file data   
 
     /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is appended.
     let writeAndAppend (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
-        let file = new FileStream(filePath,FileMode.Append)
+        use file = new FileStream(filePath,FileMode.Append)
         writeToStream toString file data   
 
     /// Converts FastaItem to string. Converter determines type of sequence by converting type -> char

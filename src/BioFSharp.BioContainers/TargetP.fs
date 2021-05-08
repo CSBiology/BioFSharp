@@ -77,6 +77,7 @@ module TargetP =
         }
 
     let runWithStreamAsync bcContext (opt:TargetpParams) (fsaStream:Stream) = 
+        fsaStream.Seek(0L, SeekOrigin.Begin) |> ignore
         let tp = "targetp"::TargetpParams.makeCmd opt
         let tmpFile = sprintf "/data/%A.fsa" (System.Guid.NewGuid())
         async {
