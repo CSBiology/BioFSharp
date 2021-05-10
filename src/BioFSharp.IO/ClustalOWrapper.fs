@@ -3,7 +3,6 @@
 ///Wrapper and its helpers for Clustal Omega multiple alignment tools
 module ClustalOWrapper =
 
-    open BioFSharp.TaggedSequence
     open FSharpAux
 
     ///Contains modifier parameter type for Clustal Omega wrapper
@@ -248,6 +247,7 @@ module ClustalOWrapper =
     open System
     open System.Diagnostics
     open System.IO
+    open BioFSharp
     open BioFSharp.BioID
     
     let private tsToFasta (ts:TaggedSequence<string,char>) =

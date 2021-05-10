@@ -26,12 +26,112 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{352487
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8B38-4393-8E23-4E6844EA97FD}"
+	ProjectSection(SolutionItems) = preProject
+		docs\_template.html = docs\_template.html
+		docs\_template.ipynb = docs\_template.ipynb
+		docs\Alignment.fsx = docs\Alignment.fsx
+		docs\AminoProperties.fsx = docs\AminoProperties.fsx
+		docs\BioCollections.fsx = docs\BioCollections.fsx
+		docs\BioContainers.fsx = docs\BioContainers.fsx
+		docs\BioContainers_TargetP.fsx = docs\BioContainers_TargetP.fsx
+		docs\BioContainersDesignGuide.fsx = docs\BioContainersDesignGuide.fsx
+		docs\BioDB.fsx = docs\BioDB.fsx
+		docs\BioID.fsx = docs\BioID.fsx
+		docs\BioItem.fsx = docs\BioItem.fsx
+		docs\BioTools-tmhmm.fsx = docs\BioTools-tmhmm.fsx
+		docs\BlastWrapper.fsx = docs\BlastWrapper.fsx
+		docs\Clustal.fsx = docs\Clustal.fsx
+		docs\ClustalOWrapper.fsx = docs\ClustalOWrapper.fsx
+		docs\CSV.fsx = docs\CSV.fsx
+		docs\FastA.fsx = docs\FastA.fsx
+		docs\FastQ.fsx = docs\FastQ.fsx
+		docs\Formula.fsx = docs\Formula.fsx
+		docs\FSIPrinters.fsx = docs\FSIPrinters.fsx
+		docs\GenBank.fsx = docs\GenBank.fsx
+		docs\GFF3.fsx = docs\GFF3.fsx
+		docs\GSEA.fsx = docs\GSEA.fsx
+		docs\index.fsx = docs\index.fsx
+		docs\Introduction.fsx = docs\Introduction.fsx
+		docs\MAF.fsx = docs\MAF.fsx
+		docs\MoleculeFinding.fsx = docs\MoleculeFinding.fsx
+		docs\MotiveSearch.fsx = docs\MotiveSearch.fsx
+		docs\Newick.fsx = docs\Newick.fsx
+		docs\Obo.fsx = docs\Obo.fsx
+		docs\PetideClassification.fsx = docs\PetideClassification.fsx
+		docs\Readers.fsx = docs\Readers.fsx
+		docs\SOFT.fsx = docs\SOFT.fsx
+		docs\StringMatching.fsx = docs\StringMatching.fsx
+		docs\tutorial.fsx = docs\tutorial.fsx
+		docs\WebLogo.fsx = docs\WebLogo.fsx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".ci", ".ci", "{A5C98CA2-8C64-4684-BF9A-6D76033BF822}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{C28E101C-CFED-47EE-923F-63299DC60E95}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build-test.yml = .github\workflows\build-test.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{13D91212-A78F-4643-8F5C-F168D309D9E0}"
+	ProjectSection(SolutionItems) = preProject
+		docs\img\BioContainers_Overview.png = docs\img\BioContainers_Overview.png
+		docs\img\Core.png = docs\img\Core.png
+		docs\img\favicon.ico = docs\img\favicon.ico
+		docs\img\GFF3.png = docs\img\GFF3.png
+		docs\img\logo-template.pdn = docs\img\logo-template.pdn
+		docs\img\logo.png = docs\img\logo.png
+		docs\img\Logo.svg = docs\img\Logo.svg
+		docs\img\Logo_large.png = docs\img\Logo_large.png
+		docs\img\Logo_large.svg = docs\img\Logo_large.svg
+		docs\img\MakeBlastDBParams.png = docs\img\MakeBlastDBParams.png
+		docs\img\Nucleotides.png = docs\img\Nucleotides.png
+		docs\img\Nucleotides.svg = docs\img\Nucleotides.svg
+		docs\img\release-notes.md = docs\img\release-notes.md
+		docs\img\SourceCode.png = docs\img\SourceCode.png
+		docs\img\SourceCode1.png = docs\img\SourceCode1.png
+		docs\img\TG1.jpg = docs\img\TG1.jpg
+		docs\img\TG1.png = docs\img\TG1.png
+		docs\img\Tree.png = docs\img\Tree.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reference", "reference", "{86538483-B249-41CA-A1C7-21F00EA314A2}"
+	ProjectSection(SolutionItems) = preProject
+		docs\reference\_template.html = docs\reference\_template.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{4D7E91D8-E01D-40AE-9DCB-B82754E4ECA2}"
+	ProjectSection(SolutionItems) = preProject
+		docs\content\fsdocs-custom.css = docs\content\fsdocs-custom.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5E7A59A6-CB05-4496-99D2-E5C6810819B9}"
+	ProjectSection(SolutionItems) = preProject
+		docs\data\alignment.maf = docs\data\alignment.maf
+		docs\data\blastTestOutput.csv = docs\data\blastTestOutput.csv
+		docs\data\Chlamy_Cp.fastA = docs\data\Chlamy_Cp.fastA
+		docs\data\Chlamy_Cp.fastA.gz = docs\data\Chlamy_Cp.fastA.gz
+		docs\data\Chlamy_Cp.fastA.phr = docs\data\Chlamy_Cp.fastA.phr
+		docs\data\Chlamy_Cp.fastA.pin = docs\data\Chlamy_Cp.fastA.pin
+		docs\data\Chlamy_Cp.fastA.psq = docs\data\Chlamy_Cp.fastA.psq
+		docs\data\clustalExample.asn = docs\data\clustalExample.asn
+		docs\data\clustalOutputExample.asn = docs\data\clustalOutputExample.asn
+		docs\data\example.mgf = docs\data\example.mgf
+		docs\data\FastQtest.fastq = docs\data\FastQtest.fastq
+		docs\data\gff3Example.gff = docs\data\gff3Example.gff
+		docs\data\GPL15922_family.soft = docs\data\GPL15922_family.soft
+		docs\data\GSE71469_family.soft = docs\data\GSE71469_family.soft
+		docs\data\irisData.csv = docs\data\irisData.csv
+		docs\data\ms.obo = docs\data\ms.obo
+		docs\data\ms1Example.mgf = docs\data\ms1Example.mgf
+		docs\data\ms1ExampleN15.mgf = docs\data\ms1ExampleN15.mgf
+		docs\data\ms2Example.mgf = docs\data\ms2Example.mgf
+		docs\data\ms2ExampleN15.mgf = docs\data\ms2ExampleN15.mgf
+		docs\data\outputTree.txt = docs\data\outputTree.txt
+		docs\data\Psi-MS.obo = docs\data\Psi-MS.obo
+		docs\data\sequence.gb = docs\data\sequence.gb
+		docs\data\Sequence_Ontology_Terms_2_5_3.txt = docs\data\Sequence_Ontology_Terms_2_5_3.txt
+		docs\data\testTerm.obo = docs\data\testTerm.obo
+		docs\data\treeExample.txt = docs\data\treeExample.txt
 	EndProjectSection
 EndProject
 Global
@@ -123,6 +223,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F9E53B05-C5B7-4F90-A446-045079B9013D} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
 		{C28E101C-CFED-47EE-923F-63299DC60E95} = {A5C98CA2-8C64-4684-BF9A-6D76033BF822}
+		{13D91212-A78F-4643-8F5C-F168D309D9E0} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
+		{86538483-B249-41CA-A1C7-21F00EA314A2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
+		{4D7E91D8-E01D-40AE-9DCB-B82754E4ECA2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
+		{5E7A59A6-CB05-4496-99D2-E5C6810819B9} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A2ED902-6B1D-4BA1-966D-A325EE1BB479}

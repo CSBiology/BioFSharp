@@ -6,7 +6,6 @@ module FSIPrinters =
     open BioFSharp
     open BioFSharp.Alignment
     open BioFSharp.BioID
-    open BioFSharp.TaggedSequence
     open BioFSharp.IO
     open BioFSharp.IO.Clustal
     open BioFSharp.IO.GFF3
@@ -174,7 +173,7 @@ module FSIPrinters =
                 let s = sb.ToString()
                 sb.Clear() |> ignore
                 s
-            createTaggedSequence "" alignment.MetaData.ConservationInfo
+            TaggedSequence.create "" alignment.MetaData.ConservationInfo
             |> Seq.appendSingleton alignment.Sequences 
             |> Seq.map (fun x -> 
                 addEmpty x.Tag, 

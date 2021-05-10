@@ -2,21 +2,27 @@
 
 open System
 
-module TaggedSequence =
+/// Record of a sequence and its tag
+type TaggedSequence<'T,'S> =
+    {
+        Tag: 'T;
+        Sequence: seq<'S>
+    }
+        with
 
-    /// record of a sequence and its tag
-    type TaggedSequence<'a,'b> ={
-        Tag: 'a;
-        Sequence: seq<'b>}
+        /// Creates a tagged sequence
+        static member create (tag:'T) (sequence:seq<'S>) = 
+            {Tag = tag; Sequence = sequence}
 
-    /// Creates a tagged sequence
-    let createTaggedSequence tag sequence = 
-        {Tag = tag; Sequence = sequence}
+        /// Maps tag of tagged sequence
+        static member mapTag (mapping:'T->'U) (ts:TaggedSequence<'T,'S>) : TaggedSequence<'U,'S> =
+            TaggedSequence.create
+                (mapping ts.Tag)
+                ts.Sequence
 
-    /// Maps tag of tagged sequence
-    let mapTag (mapping:'a->'c) (ts:TaggedSequence<'a,'b>) =
-        {Tag = mapping ts.Tag; Sequence = ts.Sequence}
+        /// Maps sequence of tagged sequence
+        static member mapSequence (mapping:seq<'S>->seq<'M>) (ts:TaggedSequence<'T,'S>) =
+            TaggedSequence.create
+                ts.Tag
+                (mapping ts.Sequence)
 
-    /// Maps sequence of tagged sequence
-    let mapSequence (mapping:seq<'b>->seq<'c>) (ts:TaggedSequence<'a,'b>) =
-        {Tag = ts.Tag; Sequence = mapping ts.Sequence}

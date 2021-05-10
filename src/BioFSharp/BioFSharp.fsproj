@@ -107,6 +107,7 @@
     <None Include="Playground\WorkflowLanguage.fsx" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FSharp.Stats" Version="0.4.1" />
     <PackageReference Include="FSharpAux" Version="1.0.0" />
     <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />

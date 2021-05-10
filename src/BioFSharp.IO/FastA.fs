@@ -3,7 +3,7 @@
 open System
 open FSharpAux
 open FSharpAux.IO
-    
+
 module FastA =
     open System.IO
             
@@ -13,6 +13,8 @@ module FastA =
         Sequence  : 'a;       
     }
 
+    let toTaggedSequence (fsa:FastaItem<'S>) =
+        BioFSharp.TaggedSequence.create fsa.Header fsa.Sequence
             
     /// Creates with header line and sequence.
     let createFastaItem header sequence =
@@ -58,6 +60,9 @@ module FastA =
 
 
     /// Writes FastaItem to stream. Converter determines type of sequence by converting type -> char
+    /// The passed stream stays open and is not disposed after writing to it.
+    /// If you want to reuse the stream (e.g. you are not writing to a file stream but a memory stream that gets used afterwards)
+    /// you have to reset the position with `stream.Seek(0L, SeekOrigin.Begin)`
     let writeToStream (toString:'T -> char) (stream:Stream) (data:seq<FastaItem<#seq<'T>>>) =
         let toChunks (w:System.IO.StreamWriter) (length:int) (source: seq<'T>) =    
             use ie = source.GetEnumerator()
@@ -83,22 +88,25 @@ module FastA =
                         w.Flush()
         
             loop ()
-        use sWriter = new System.IO.StreamWriter(stream,Text.UTF8Encoding(false,true),1024,true)
+        use sWriter = new System.IO.StreamWriter(stream,Text.UTF8Encoding(false,true),4096,true)
         data
         |> Seq.iter (fun (i:FastaItem<_>) ->
-                                sWriter.WriteLine(">" + i.Header)
-                                toChunks sWriter 80 i.Sequence) 
+            sWriter.WriteLine(">" + i.Header)
+            toChunks sWriter 80 i.Sequence
+        ) 
 
 
     /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is overwritten.
     let write (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
-        use file = new FileStream(filePath,FileMode.Create)
-        writeToStream toString file data   
+        let file = new FileStream(filePath,FileMode.Create)
+        writeToStream toString file data
+        file.Dispose()
 
     /// Writes FastaItem to file. Converter determines type of sequence by converting type -> char. If file already exists the data is appended.
     let writeAndAppend (toString:'T -> char) (filePath:string) (data:seq<FastaItem<#seq<'T>>>) =
-        use file = new FileStream(filePath,FileMode.Append)
+        let file = new FileStream(filePath,FileMode.Append)
         writeToStream toString file data   
+        file.Dispose()
 
     /// Converts FastaItem to string. Converter determines type of sequence by converting type -> char
     let toString (toString:'T -> char) (data:seq<FastaItem<#seq<'T>>>) =

@@ -4,7 +4,6 @@ open FSharpAux
 open System.Text
 open System.IO
 open BioFSharp
-open BioFSharp.TaggedSequence
 open BioFSharp.BioID
 
 ///Contains functions for reading clustal alignment files
@@ -92,7 +91,7 @@ module Clustal =
             Sequences =    
                 [
                     for kv in sequences do
-                        yield createTaggedSequence kv.Key kv.Value
+                        yield TaggedSequence.create kv.Key kv.Value
                 ]
         }
     
@@ -133,7 +132,7 @@ module Clustal =
                 let s = sb.ToString()
                 sb.Clear() |> ignore
                 s
-            createTaggedSequence "" alignment.MetaData.ConservationInfo
+            TaggedSequence.create "" alignment.MetaData.ConservationInfo
             |> Seq.appendSingleton alignment.Sequences 
             |> Seq.map (fun x -> 
                 addEmpty x.Tag, 

@@ -467,7 +467,7 @@ let testIBioItem =
                     Expect.isFasterThan  f1 f2 ""
         ]
     ]
-open BioFSharp.TaggedSequence  
+open BioFSharp  
 [<Tests>]
 let testTaggedSequence =
 
@@ -479,17 +479,17 @@ let testTaggedSequence =
 
         yield
             testCase "create" <| fun () ->
-                let ts' = createTaggedSequence t s
+                let ts' = TaggedSequence.create t s
                 Expect.equal ts' ts "Record initialization via function differs from initialization via record expression. Check parameter order of 'create'"
         yield
             testCase "test_mapTag" <| fun () ->
                 let t'    = ts.Tag.ToLower()
-                let ts'   = mapTag (fun (t:string) -> t.ToLower() ) ts
+                let ts'   = TaggedSequence.mapTag (fun (t:string) -> t.ToLower() ) ts
                 Expect.equal ts'.Tag t' "'mapTag' does not alter the value of the field 'Tag' as expected."
         yield
             testCase "test_mapSequence" <| fun () ->
                 let t'    = ts.Sequence |> Seq.map ((*) (-1))
-                let ts'   = mapSequence (Seq.map ((*) (-1))) ts
+                let ts'   = TaggedSequence.mapSequence (Seq.map ((*) (-1))) ts
                 Expect.sequenceEqual ts'.Sequence t' "'mapSequence' does not alter the value of the field 'Sequence' as expected."
     ]
 open IsotopicDistribution

@@ -56,12 +56,12 @@ module Newick =
 
     (*    Parser    *)
     ///Parses a seq of tokens to a PhylTree
-    let private parser (converter : string -> 'Distance) (input:seq<Token>) : PhylTree.Node<string*'Distance> = 
+    let private parser (converter : string -> 'Distance) (input:seq<Token>) : PhylogeneticTree<string*'Distance> = 
         let en = input.GetEnumerator()
         let sbID,sbDist = StringBuilder(),StringBuilder()
         ///Reduces tree to a tuple of its info
-        let cutDown (tree:PhylTree.Node<string*'Distance>) = 
-            match tree with | PhylTree.Branch (x,y) -> x
+        let cutDown (tree:PhylogeneticTree<string*'Distance>) = 
+            match tree with | PhylogeneticTree.Branch (x,y) -> x
         let mutable iOpen,iClosed = 0,0
         let rec loop() =
             ///This function is called when a new branch is opened, it recursively creates a list of nodes until the corresponding ')' is reached
@@ -83,7 +83,7 @@ module Newick =
                     iOpen <- iOpen + 1
                     let children = createBranch []
                     let treeInfo,isFinished = loop()
-                    PhylTree.Branch(cutDown treeInfo, children),isFinished
+                    PhylogeneticTree.Branch(cutDown treeInfo, children),isFinished
                 //distancevalue is added to stringbuilder, iteration is continued
                 | Distance c -> 
                     sbDist.Append(c) |> ignore
@@ -97,17 +97,17 @@ module Newick =
                     iClosed <- iClosed + 1
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((id,converter dist),[]),true
+                    PhylogeneticTree.Branch((id,converter dist),[]),true
                 //name is obtained from stringbuilder, distance is obtained from stringbuilder and converted; tree is built from these info and branchclosed boolean false is returned
                 | NextNode -> 
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((id,converter dist),[]),false
+                    PhylogeneticTree.Branch((id,converter dist),[]),false
                 //name is obtained from stringbuilder, distance is obtained from stringbuilder and converted; tree is built from these infos and branchclosed boolean true is returned
                 | EndTree ->
                     let dist,id = sbDist.ToString(),sbID.ToString()
                     (sbDist.Clear(),sbID.Clear()) |> ignore
-                    PhylTree.Branch((id,converter dist),[]),true
+                    PhylogeneticTree.Branch((id,converter dist),[]),true
                 //ignored
                 | Separator -> 
                     loop()
@@ -117,7 +117,7 @@ module Newick =
         fst (loop())
 
     ///Returns a PhylTree of file. Converter is used to create a distancevalue of a string
-    let ofFile (converter : string -> 'Distance) (path: string) : PhylTree.Node<string*'Distance> =
+    let ofFile (converter : string -> 'Distance) (path: string) : PhylogeneticTree<string*'Distance> =
         path
         |> readFile
         |> tokenizer
@@ -126,14 +126,14 @@ module Newick =
      //---Writer---//
 
     ///Creates a NewickTree file of PhylTree. nodeConverter is used to split the distanceInfo and the name of a node, because they are parsed separately. First result of the tuple is name, second is distance.
-    let toFile (nodeConverter: 'T -> string * string) (path:string) (tree: PhylTree.Node<'T>) = 
+    let toFile (nodeConverter: 'T -> string * string) (path:string) (tree: PhylogeneticTree<'T>) = 
         let rec loop tree =
             seq {
                 match tree with
-                | PhylTree.Branch ((nodeInfo),[]) ->
+                | PhylogeneticTree.Branch ((nodeInfo),[]) ->
                     let name,distance = nodeConverter nodeInfo
                     yield name + ":" + (distance)
-                | PhylTree.Branch ((nodeInfo), nl) ->
+                | PhylogeneticTree.Branch ((nodeInfo), nl) ->
                     let nodeInfo = 
                         match nodeConverter nodeInfo with
                         | (name, "") -> name

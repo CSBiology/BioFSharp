@@ -1,46 +1,45 @@
 module PhylTreeTests
 
 open BioFSharp
-open PhylTree
 open BioList
 open Nucleotides
 open Expecto
 
-let testPhylTree_oneGen = Node.Branch("1", [])
+let testPhylTree_oneGen = Branch("1", [])
 
 let testPhylTree_threeGens_string =
-    Node.Branch("ACTG",[
-        Node.Branch("ACTT", [
-            Node.Branch("ACTC", [])
+    Branch("ACTG",[
+        Branch("ACTT", [
+            Branch("ACTC", [])
         ])
-        Node.Branch("ACGG", [
-            Node.Branch("ACCG", [])
+        Branch("ACGG", [
+            Branch("ACCG", [])
         ])
-        Node.Branch("GCTG", [
-            Node.Branch("TCTG", [])
+        Branch("GCTG", [
+            Branch("TCTG", [])
         ])
     ])
 
 let testPhylTree_threeGens_BioList =
-    Node.Branch(BioList.ofNucleotideString "ACTG",[
-        Node.Branch(BioList.ofNucleotideString "ACTT", [
-            Node.Branch(BioList.ofNucleotideString "ACTC", [])
+    Branch(BioList.ofNucleotideString "ACTG",[
+        Branch(BioList.ofNucleotideString "ACTT", [
+            Branch(BioList.ofNucleotideString "ACTC", [])
         ])
-        Node.Branch(BioList.ofNucleotideString "ACGG", [
-            Node.Branch(BioList.ofNucleotideString "ACCG", [])
+        Branch(BioList.ofNucleotideString "ACGG", [
+            Branch(BioList.ofNucleotideString "ACCG", [])
         ])
-        Node.Branch(BioList.ofNucleotideString "GCTG", [
-            Node.Branch(BioList.ofNucleotideString "TCTG", [])
+        Branch(BioList.ofNucleotideString "GCTG", [
+            Branch(BioList.ofNucleotideString "TCTG", [])
         ])
     ])
 
-let testFoldFun (acc: string) (node: Node<'n>) =
-    match node with
+let testFoldFun (acc: string) (tree: PhylogeneticTree<'n>) =
+    match tree with
         Branch(s, nl) ->
             (s + "; " + acc)
 
-let testMappingFun (n: Node<'n>) =
-    match n with
+let testMappingFun (tree: PhylogeneticTree<'n>) =
+    match tree with
         Branch(s, nl) -> s |> BioList.ofNucleotideString
 
 [<Tests>]
@@ -48,16 +47,16 @@ let phylTreeTests =
     testList "PhylTree" [
         testCase "map" (fun() ->
             Expect.equal
-                (PhylTree.map testMappingFun testPhylTree_threeGens_string)
+                (PhylogeneticTree.map testMappingFun testPhylTree_threeGens_string)
                 testPhylTree_threeGens_BioList
                 "PhylTree.map did not return correct Node<'t>"
         )
         testCase "iter" (fun () ->
             let mutable testList = []
-            let testIterFun (node: Node<'n>) =
+            let testIterFun (node: PhylogeneticTree<'n>) =
                 match node with
                     Branch (s, nl) -> do (testList <- testList @ [s])
-            PhylTree.iter testIterFun testPhylTree_threeGens_string
+            PhylogeneticTree.iter testIterFun testPhylTree_threeGens_string
             Expect.equal
                 testList
                 ["ACTG"; "ACTT"; "ACTC"; "ACGG"; "ACCG"; "GCTG"; "TCTG"]
@@ -66,22 +65,22 @@ let phylTreeTests =
         testCase "fold" (fun () ->
             let testAcc = ""
             Expect.equal
-                (PhylTree.fold testAcc testFoldFun testPhylTree_threeGens_string)
+                (PhylogeneticTree.fold testAcc testFoldFun testPhylTree_threeGens_string)
                 "ACTG; GCTG; TCTG; ACGG; ACCG; ACTT; ACTC; "
                 "PhylTree.fold did not return correct accumulated value."
         )
         testCase "countLeafs" (fun () ->
             Expect.equal
-                (testPhylTree_threeGens_string |> PhylTree.countLeafs)
+                (testPhylTree_threeGens_string |> PhylogeneticTree.countLeafs)
                 3
                 "PhylTree.countLeafs did not return the correct number of leaves"
         )
         testCase "tryGetNodeBy" (fun () ->
-            let testConditionFun (node: Node<'n>) =
+            let testConditionFun (node: PhylogeneticTree<'n>) =
                 match node with
                     Branch(s, _) -> s = "ACTG"
             Expect.equal
-                (PhylTree.tryGetNodeBy testConditionFun testPhylTree_threeGens_string)
+                (PhylogeneticTree.tryGetNodeBy testConditionFun testPhylTree_threeGens_string)
                 (Some testPhylTree_threeGens_string)
                 "PhylTree.tryGetNodeBy did not return the correct Node<'n> for the given condition."
         )
