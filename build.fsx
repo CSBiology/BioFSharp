@@ -268,28 +268,28 @@ module DocumentationTasks =
     let buildDocs = BuildTask.create "BuildDocs" [build; copyBinaries] {
         printfn "building docs with stable version %s" stableVersionTag
         runDotNet 
-            (sprintf "fsdocs build --eval --clean --property Configuration=Release --parameters fsdocs-package-version %s" stableVersionTag)
+            (sprintf "fsdocs build --eval --clean --properties Configuration=Release --parameters fsdocs-package-version %s" stableVersionTag)
             "./"
     }
 
     let buildDocsPrerelease = BuildTask.create "BuildDocsPrerelease" [setPrereleaseTag; build; copyBinaries] {
         printfn "building docs with prerelease version %s" prereleaseTag
         runDotNet 
-            (sprintf "fsdocs build --eval --clean --property Configuration=Release --parameters fsdocs-package-version %s" prereleaseTag)
+            (sprintf "fsdocs build --eval --clean --properties Configuration=Release --parameters fsdocs-package-version %s" prereleaseTag)
             "./"
     }
 
     let watchDocs = BuildTask.create "WatchDocs" [build; copyBinaries] {
         printfn "watching docs with stable version %s" stableVersionTag
         runDotNet 
-            (sprintf "fsdocs watch --eval --clean --property Configuration=Release --parameters fsdocs-package-version %s" stableVersionTag)
+            (sprintf "fsdocs watch --eval --clean --properties Configuration=Release --parameters fsdocs-package-version %s" stableVersionTag)
             "./"
     }
 
     let watchDocsPrerelease = BuildTask.create "WatchDocsPrerelease" [setPrereleaseTag; build; copyBinaries] {
         printfn "watching docs with prerelease version %s" prereleaseTag
         runDotNet 
-            (sprintf "fsdocs watch --eval --clean --property Configuration=Release --parameters fsdocs-package-version %s" prereleaseTag)
+            (sprintf "fsdocs watch --eval --clean --properties Configuration=Release --parameters fsdocs-package-version %s" prereleaseTag)
             "./"
     }
 
@@ -326,7 +326,7 @@ module ReleaseTasks =
         let msg = sprintf "release package with version %s?" stableVersionTag
         if promptYesNo msg then
             let source = "https://api.nuget.org/v3/index.json"
-            let apikey =  Environment.environVar "NUGET_KEY"
+            let apikey =  Environment.environVar "NUGET_KEY_CSB"
             for artifact in targets do
                 let result = DotNet.exec id "nuget" (sprintf "push -s %s -k %s %s --skip-duplicate" source apikey artifact)
                 if not result.OK then failwith "failed to push packages"
@@ -339,7 +339,7 @@ module ReleaseTasks =
         let msg = sprintf "release package with version %s?" prereleaseTag 
         if promptYesNo msg then
             let source = "https://api.nuget.org/v3/index.json"
-            let apikey =  Environment.environVar "NUGET_KEY"
+            let apikey =  Environment.environVar "NUGET_KEY_CSB"
             for artifact in targets do
                 let result = DotNet.exec id "nuget" (sprintf "push -s %s -k %s %s --skip-duplicate" source apikey artifact)
                 if not result.OK then failwith "failed to push packages"
@@ -389,6 +389,19 @@ let _preRelease =
     BuildTask.createEmpty 
         "PreRelease" 
         [setPrereleaseTag; clean; build; copyBinaries; runTests; packPrerelease; buildDocsPrerelease; createPrereleaseTag; publishNugetPrerelease; prereleaseDocs]
+
+/// Full release of nuget package for the prerelease version.
+let _releaseNoDocs = 
+    BuildTask.createEmpty 
+        "ReleaseNoDocs" 
+        [clean; build; copyBinaries; runTests; pack; createTag; publishNuget;]
+
+/// Full release of nuget package for the prerelease version.
+let _preReleaseNoDocs = 
+    BuildTask.createEmpty 
+        "PreReleaseNoDocs" 
+        [setPrereleaseTag; clean; build; copyBinaries; runTests; packPrerelease; createPrereleaseTag; publishNugetPrerelease]
+
 
 // run copyBinaries by default
 BuildTask.runOrDefault copyBinaries

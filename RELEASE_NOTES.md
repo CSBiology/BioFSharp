@@ -25,8 +25,8 @@
  * **BioFSharp.IO**:
    * OBO parser now correctly parses lists of relationships
    * [Breaking] FastA.writeToStream is now correctly typed and does not close the stream after writing
-   * SOFT parser now parses sample_label / sample_label_protocol correctly_
-   * [Fix fasta writer using UTF8BOM encoding](https://github.com/CSBiology/BioFSharp/commit/beb4158e8e8d71e7c956347db1df2f2e99f8a5e4)
+   * SOFT parser now parses sample_label / sample_label_protocol correctly
+   * [Fix fasta writer using UTF8BOM encoding](https://github.com/CSBiology/BioFSharp/commit/beb4158e8e8d71e7c956347db1df2f2e99f8a5e4) ((#116)[https://github.com/CSBiology/BioFSharp/issues/116])
 
 #### 1.2.0 - Monday, March 30
 
