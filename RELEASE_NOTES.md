@@ -5,6 +5,8 @@
 
  * **BioFSharp**:
    * [Breaking] [Conversion extensions for BioCollections]()
+   * [Breaking] [Tagged Sequence and Phylogenetic Tree have been reworked as top level types](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
+   * [Add functionality to construct phylogenetic trees from clustered data or raw sequence data](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
 
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
@@ -24,6 +26,7 @@
    * OBO parser now correctly parses lists of relationships
    * [Breaking] FastA.writeToStream is now correctly typed and does not close the stream after writing
    * SOFT parser now parses sample_label / sample_label_protocol correctly_
+   * [Fix fasta writer using UTF8BOM encoding](https://github.com/CSBiology/BioFSharp/commit/beb4158e8e8d71e7c956347db1df2f2e99f8a5e4)
 
 #### 1.2.0 - Monday, March 30
 
