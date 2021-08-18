@@ -1,4 +1,4 @@
-(*** hide ***)
+﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 #I @"../../bin/BioFSharp/net47/"
@@ -58,6 +58,25 @@ Result: 0.0161 = 1.6%
 
 If the calculated probability is small, it is very unlikely, that the observed effect is due to chance. 
 This implies, that under the given condition the heat response proteins are enriched.
+
+###Split p value threshold
+
+The discrete nature of the hypergeometric distribution prevents the significance to reach 0.05 exactly. Especially in small bin sizes there always is a range of $\alpha$-level space that must be sacrificed leading to a lower $\alpha$ than intended.
+To mitigate this loss of power you can use a mid p-value, that has the form of:
+
+  - $P(K>k) + 0.5P(K=k)$ or equivalently $0.5(P(K>k) + P(K\geq k))$
+
+The resulting p-values are not conservative any more. The actual alpha level may be higher than intended!
+
+_References_ 
+  
+  - Figure A1 in Schneider, Venn, and Mühlhaus; TMEA: A Thermodynamically Motivated Framework for Functional Characterization of Biological Responses to System Acclimation; Entropy 2020; https://doi.org/10.3390/e22091030
+  
+  - Rivals et al.; Enrichment or depletion of a GO category within a class of genes: which test?; Bioinformatics 2006; doi:10.1093/bioinformatics/btl633
+ 
+  - Rubin-Delanchy et al.; Meta-Analysis of Mid-p-Values: Some New Results based on the Convex Order.; Journal of the American Statistical Association 2018; doi:10.1080/01621459.2018.1469994
+  
+  - Agresti and Min; On Small-Sample Confidence Intervals for Parameters in Discrete Distributions; Biometrics 2001;  https://doi.org/10.1111/j.0006-341X.2001.00963.x
 
 ##Usage
 
