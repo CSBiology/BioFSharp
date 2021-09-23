@@ -246,7 +246,7 @@ module GFF3 =
     let sanityCheck filepath = sanityCheckWithSOTerm "" filepath
     
     ///Searches for a term and gives a list of all features of which the searchterm is the mainfeature (ID) or a child of it (Parent).
-    let relationshipSearch (gffList:seq<GFFLine<'a>>) searchterm = 
+    let relationshipSearch (gffList:seq<GFFLine<'a>>) (searchterm:string) = 
         let filteredGFFentries = 
             gffList 
             |> Seq.choose (fun x -> 
