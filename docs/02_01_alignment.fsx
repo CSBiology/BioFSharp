@@ -1,4 +1,13 @@
-﻿(*** hide ***)
+﻿(**
+---
+title: Alignment
+category: Algorithms
+categoryindex: 1
+index: 1
+---
+*)
+
+(*** hide ***)
 
 (*** condition: prepare ***)
 #r "nuget: Plotly.NET, 2.0.0-preview.8"
@@ -13,11 +22,11 @@
 
 (*** condition: ipynb ***)
 #if IPYNB
-#r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
 #r "nuget: FSharpAux, 1.0.0"
 #r "nuget: FSharpAux.IO, 1.0.0"
 #r "nuget: FSharp.Stats, 0.4.0"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-beta6"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
 #r "nuget: BioFSharp, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"
@@ -26,18 +35,21 @@
 #endif // IPYNB
 
 (**
-
 # Pairwise Alignment
+
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
+
+*Summary:* This example shows how to perform sequence alignments in BioFSharp
 
 In this short tutorial, the usage of the pairwise alignment implementation is demonstrated.
 For global alignments, the **NeedlemanWunsch** algorithm is used. For local alignments, the **SmithWaterman** algorithm is used.
 
 For both implementations, the gapvalues are evaluated using the **affine** gapscoremodel.
-*)
 
-(**
-Aligning aminoacid- and nucleotide-sequences
---------------------------------------------
+## Aligning aminoacid- and nucleotide-sequences
+
 For defining the scores of matching and missmatching characters, the **scoring** function is defined. In the case of amino acid or nucleotide sequence alignments, the integrated substitution-matrices can be used.
 *)
 open BioFSharp
@@ -82,24 +94,24 @@ Both the global and local alignment algorithms take the same parameters (costs,f
 let aaSeq1 = "ACDM" |> BioArray.ofAminoAcidSymbolString
 let aaSeq2 = "MAACEDM" |> BioArray.ofAminoAcidSymbolString
 
-let globalAAAlignment = NeedlemanWunsch.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
-(*** include-value:globalAAAlignment ***)
-let localAAAlignment = SmithWaterman.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
-(*** include-value:localAAAlignment ***)
+NeedlemanWunsch.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
+(***include-it***)
 
+SmithWaterman.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
+(***include-it***)
 
 //For nucleotides
 let nucSeq1 = "ATGA" |> BioArray.ofNucleotideString
 let nucSeq2 = "BATVAWG" |> BioArray.ofNucleotideString
 
-let globalNucAlignment = NeedlemanWunsch.runNucleotide nucCosts nucSeq1 nucSeq2
-(*** include-value:globalNucAlignment ***)
-let localNucAlignment = SmithWaterman.runNucleotide nucCosts nucSeq1 nucSeq2
-(*** include-value:localNucAlignment ***)
+NeedlemanWunsch.runNucleotide nucCosts nucSeq1 nucSeq2
+(***include-it***)
+
+SmithWaterman.runNucleotide nucCosts nucSeq1 nucSeq2
+(***include-it***)
 
 (**
-Aligning anything else
-----------------------
+## Aligning anything else
 
 This implementation was aimed to be as generic as possible. To achieve this, the scoring function can be designed at will, the only constraints being the need for two input variables and the type equality.  
 Also besides the alignment functions which only take BioItems as input and represent the gaps by the appropriate gaps of type BioItem. There is also a generic alignment function `runGeneric` which returns `lists of options`, where None represents gaps. Therefore any input type can be used, given it matches the cost function.  
@@ -117,10 +129,10 @@ let costs = {
     Similarity = scoring
     }
 
-let globalAlignmentNuc = NeedlemanWunsch.runGeneric costs nucSeq1 nucSeq2
-(*** include-value:globalAlignmentNuc ***)
-let localAlignmentNuc = SmithWaterman.runGeneric costs nucSeq1 nucSeq2
-(*** include-value:localAlignmentNuc ***)
+NeedlemanWunsch.runGeneric costs nucSeq1 nucSeq2
+(***include-it***)
+SmithWaterman.runGeneric costs nucSeq1 nucSeq2
+(***include-it***)
 
 (** 
 or also Integers:
@@ -129,8 +141,8 @@ or also Integers:
 let intSeq1 = [|1;2;3;4;5|]
 let intSeq2 = [|1;1;2;4;6;7;|]
 
-let globalAlignmentInt = NeedlemanWunsch.runGeneric costs intSeq1 intSeq2
-(*** include-value:globalAlignmentInt ***)
-let localAlignmentInt = SmithWaterman.runGeneric costs intSeq1 intSeq2
-(*** include-value:localAlignmentInt ***)
+NeedlemanWunsch.runGeneric costs intSeq1 intSeq2
+(***include-it***)
 
+SmithWaterman.runGeneric costs intSeq1 intSeq2
+(***include-it***)
