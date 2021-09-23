@@ -1,7 +1,7 @@
 ﻿(*** hide ***)
 
 (*** condition: prepare ***)
-#r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
 #r "nuget: FSharpAux, 1.0.0"
 #r "nuget: FSharpAux.IO, 1.0.0"
 #r "nuget: FSharp.Stats, 0.4.0"

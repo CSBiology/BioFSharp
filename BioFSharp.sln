@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{352487
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8B38-4393-8E23-4E6844EA97FD}"
 	ProjectSection(SolutionItems) = preProject
+		docs\01_01_formula.fsx = docs\01_01_formula.fsx
+		docs\01_02_bioitems.fsx = docs\01_02_bioitems.fsx
 		docs\_template.html = docs\_template.html
 		docs\_template.ipynb = docs\_template.ipynb
 		docs\Alignment.fsx = docs\Alignment.fsx
@@ -37,7 +39,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\BioContainersDesignGuide.fsx = docs\BioContainersDesignGuide.fsx
 		docs\BioDB.fsx = docs\BioDB.fsx
 		docs\BioID.fsx = docs\BioID.fsx
-		docs\BioItem.fsx = docs\BioItem.fsx
 		docs\BioTools-tmhmm.fsx = docs\BioTools-tmhmm.fsx
 		docs\BlastWrapper.fsx = docs\BlastWrapper.fsx
 		docs\Clustal.fsx = docs\Clustal.fsx
@@ -45,7 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\CSV.fsx = docs\CSV.fsx
 		docs\FastA.fsx = docs\FastA.fsx
 		docs\FastQ.fsx = docs\FastQ.fsx
-		docs\Formula.fsx = docs\Formula.fsx
 		docs\FSIPrinters.fsx = docs\FSIPrinters.fsx
 		docs\GenBank.fsx = docs\GenBank.fsx
 		docs\GFF3.fsx = docs\GFF3.fsx
@@ -141,6 +141,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".project", ".project", "{A1
 		PULL_REQUEST_TEMPLATE.md = PULL_REQUEST_TEMPLATE.md
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{C6F985BC-2F62-4B19-A6B0-11C8204C3080}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global
