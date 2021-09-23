@@ -1,19 +1,22 @@
 (*** hide ***)
 
 (*** condition: prepare ***)
-#r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
 #r "nuget: FSharpAux, 1.0.0"
 #r "nuget: FSharpAux.IO, 1.0.0"
 #r "nuget: FSharp.Stats, 0.4.0"
 #r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
 #r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainer/netstandard2.0/BioFSharp.BioContainer.dll"
+#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
 #r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
 #r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
 #r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
 #r "nuget: Plotly.NET.Interactive, 2.0.0-beta6"
 #r "nuget: BioFSharp, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
@@ -25,7 +28,9 @@
 (**
 # BioFSharp
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath=1_0_basics.fsx.ipynb)
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
 
 BioFSharp aims to be a user-friendly functional library for bioinformatics written in F#. It contains the basic data structures for common biological objects like amino acids and nucleotides based on chemical formulas and chemical elements.
 
@@ -48,74 +53,43 @@ The core datamodel implements in ascending hierarchical order:
 
 ## Installation
 
-**From Nuget.org:**
+### For applications and libraries
 
-You can get the stable versions of all BioFSharp packages from nuget:
+You can find all available package versions on [nuget](https://www.nuget.org/packages?q=BioFSharp).
 
-<pre>
-Install-Package BioFSharp
-paket add BioFSharp
-</pre>
+ - dotnet CLI
 
-All associated packages can be found [here](https://www.nuget.org/profiles/CSBiology)
+    ```shell
+    dotnet add package BioFSharp --version {{fsdocs-package-version}}
+    ```
 
-**Prerelease packages from the nuget branch:**
+ - paket CLI
 
-Unstable/Experimental packages only.
+    ```shell
+    paket add BioFSharp --version {{fsdocs-package-version}}
+    ```
 
-If you are using paket, add the following line to you `paket.dependencies` file:
+ - package manager
 
-`git https://github.com/CSBiology/BioFSharp.git nuget Packages: /`
+    ```shell
+    Install-Package BioFSharp -Version {{fsdocs-package-version}}
+    ```
 
-you can then access the individual packages:
+    Or add the package reference directly to your `.*proj` file:
 
-`nuget BioFSharp`
+    ```
+    <PackageReference Include="BioFSharp" Version="{{fsdocs-package-version}}" />
+    ```
 
-`nuget BioFSharp.BioContainers`
+### For scripting and interactive notebooks
+You can include the package via an inline package reference:
 
-`nuget BioFSharp.IO`
-
-`nuget BioFSharp.Stats`
-
-`nuget BioFSharp.ML`
-
-`nuget BioFSharp.BioDB`
-
-`nuget BioFSharp.Vis`
-
-
-**Build the binaries yourself:**
-
-**Windows**:
-
-- Install [.Net Core SDK](https://www.microsoft.com/net/download) 3.0 +
-- go to the project folder
-- `.\build.cmd`
-
-**Linux(using Mono)**:
-
-- BioDB is excluded from this build.
-
-- Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
-- go to the project folder
-- ./build.sh -t monoBuildChainLocal
-
-**Linux(Dotnet Core only)**:
-
-- this does only build projects targeting netstandard2.0 (Core, BioContainers, IO, Stats, ML)
-
-- Install [.Net Core SDK](https://www.microsoft.com/net/download/linux-package-manager/ubuntu14-04/sdk-current)
-- go to the project folder
-- ./build.sh -t dotnetBuildChainLocal
-
-</br>
+```
+#r "nuget: BioFSharp, {{fsdocs-package-version}}"
+```
 
 ---
 
-*)
-
-
-(**
 ## Example
 
 The following example shows how easy it is to start working with sequences:
@@ -130,7 +104,6 @@ let peptideSequence = "PEPTIDE" |> BioSeq.ofAminoAcidString
 // Create a nucleotide sequence 
 let nucleotideSequence = "ATGC" |> BioSeq.ofNucleotideString
 (***include-value:nucleotideSequence***)
-
 
 
 (**
@@ -164,25 +137,33 @@ let firstItem = fastaItems |> Seq.item 0
 (***include-value: firstItem***)
 
 (**
-For more detailed examples continue to explore the BioFSharp documentation.
-In the near future we will start to provide a cookbook like tutorial in the [CSBlog](https://csbiology.github.io/CSBlog/).
+BioFSharp.IO also provides pretty printers for BioSequences:
 *)
 
+fsi.AddPrinter(BioFSharp.IO.FSIPrinters.prettyPrintBioCollection)
+
+firstItem.Sequence
+
+(***hide***)
+let pretty = firstItem.Sequence |> BioFSharp.IO.FSIPrinters.prettyPrintBioCollection
+
+(***include-value: pretty***)
 
 (**
+For more detailed examples continue to explore the BioFSharp documentation.
+In the near future we will start to provide a cookbook like tutorial in the [CSBlog](https://csbiology.github.io/CSBlog/).
+
 ## Contributing and copyright
 
 The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
 the project and submit pull requests. If you're adding a new public API, please also 
-consider adding [samples][content] that can be turned into a documentation. You might
-also want to read the [library design notes][readme] to understand how it works.
+consider adding [samples][docs] that can be turned into a documentation.
 
 The library is available under the OSI-approved MIT license. For more information see the 
 [License file][license] in the GitHub repository. 
 
-  [content]: https://github.com/CSBiology/BioFSharp/tree/master/docsrc/content
+  [docs]: https://github.com/CSBiology/BioFSharp/tree/master/docs
   [gh]: https://github.com/CSBiology/BioFSharp
   [issues]: https://github.com/CSBiology/BioFSharp/issues
-  [readme]: https://github.com/CSBiology/BioFSharp/blob/master/README.md
   [license]: https://github.com/CSBiology/BioFSharp/blob/master/LICENSE
 *)
