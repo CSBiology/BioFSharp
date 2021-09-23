@@ -146,3 +146,68 @@ NeedlemanWunsch.runGeneric costs intSeq1 intSeq2
 
 SmithWaterman.runGeneric costs intSeq1 intSeq2
 (***include-it***)
+
+(**
+# Multiple sequence alignment with ClustalOmega
+
+Clustal Omega is a multiple sequence alignment (MSA) tool. This tutorial describes using it in F# via the ClustalOWrapper. For some more indepth information about which parameters to choose for your goal, also check out [the official tutorial](http://www.clustal.org/omega/README).
+
+## Aligning sequences from files
+
+The first step is to create a wrapper-object. As optional input it takes a path to the clustalo executable you want to use. You have to fill this argument if you work with a precompiled verion or on linux.
+
+you will have to [install clustal omega](http://www.clustal.org/omega/clustal-omega-1.2.2-win64.zip) yourself to use this wrapper.
+*)
+
+open BioFSharp.IO
+open ClustalOWrapper
+open BioFSharp
+
+(**
+```fsharp
+let cw = ClustalOWrapper("path/where/you/extracted/clustal-omega/clustalo.exe")
+```
+*)
+
+(***hide***)
+let cw = ClustalOWrapper()
+
+(**
+The general structure of arguments the wrapper takes was kept the same as in the command line tool. In general, you need an `inputPath`, an `outputPath` and `parameters`. As there are several inputs possible, you have to choose what it is. As we want to align a normal sequence we just pick `SequenceFile`.
+*)
+
+let inputPath = Input.SequenceFile (__SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.fastA")
+
+let outputPath = __SOURCE_DIRECTORY__ + @"\data\Chlamy_Cp.aln"
+
+(**
+As additional parameters go, we'll restrict input to FastA format and the output to Clustal format. Also we will use the `Force` parameter to force the overwrite of a possilby already existing file with the name `ChlamyCp.aln`.
+*)
+//Input has to be in FastA format
+let inputModifier = Parameters.ClustalParams.Input [Parameters.InputCustom.Format Parameters.FileFormat.FastA]
+//Output has to be in Clustal format
+let outputModifier = Parameters.ClustalParams.Output [Parameters.OutputCustom.Format Parameters.FileFormat.Clustal]
+//Forces overwriting
+let forceModifier = Parameters.ClustalParams.Miscallaneous [Parameters.MiscallaneousCustom.Force]
+
+(***do-not-eval***)
+//Perform alignment
+cw.AlignFromFile(inputPath,outputPath,[inputModifier;outputModifier;forceModifier])
+
+(** 
+## Aligning sequences directly in F# Interactive
+
+With the `AlignSequences` method, one can also directly align sequences with the clustal tool and also directly receive the alignment directly in F#.
+
+As input, it takes a collection of `TaggedSequence`s, and again a set of parameters. The default options can be used by not using any additional parameters.
+*)
+
+let sequences = [
+    TaggedSequence.create "pep1" ("AAGECGEK")
+    TaggedSequence.create "pep2" ("AAGEGEK")
+    TaggedSequence.create "pep3" ("AAAGECGEK")
+    TaggedSequence.create "pep4" ("AAGECGEL")
+]
+
+cw.AlignSequences(sequences,Seq.empty)
+(*** include-it***)

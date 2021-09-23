@@ -44,7 +44,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\BioTools-tmhmm.fsx = docs\BioTools-tmhmm.fsx
 		docs\BlastWrapper.fsx = docs\BlastWrapper.fsx
 		docs\Clustal.fsx = docs\Clustal.fsx
-		docs\ClustalOWrapper.fsx = docs\ClustalOWrapper.fsx
 		docs\CSV.fsx = docs\CSV.fsx
 		docs\Dockerfile = docs\Dockerfile
 		docs\FastA.fsx = docs\FastA.fsx
