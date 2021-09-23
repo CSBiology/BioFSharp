@@ -1,7 +1,16 @@
+(**
+---
+title: BioCollections
+category: BioFSharp Core
+categoryindex: 1
+index: 3
+---
+*)
+
 (*** hide ***)
 
 (*** condition: prepare ***)
-#r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
 #r "nuget: FSharpAux, 1.0.0"
 #r "nuget: FSharpAux.IO, 1.0.0"
 #r "nuget: FSharp.Stats, 0.4.0"
@@ -28,6 +37,12 @@
 (**
 # BioCollections
 
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
+
+*Summary:* This example shows how to use collections of biological items in BioFSharp
+
 Analogous to the build-in collections BioFSharp provides BioSeq, BioList and BioArray for individual collection specific optimized operations. 
 The easiest way to create them are the `ofBioItemString` -functions
 *)
@@ -35,42 +50,34 @@ The easiest way to create them are the `ofBioItemString` -functions
 open BioFSharp
 open BioFSharp.IO
 
-let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
-let s2 = "PEPTIDE" |> BioList.ofAminoAcidSymbolString 
-let s3 = "TAGCAT"  |> BioArray.ofNucleotideString 
+fsi.AddPrinter(FSIPrinters.prettyPrintBioCollection) // use pretty printer for bio collections
 
+let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
+let s2 = "PEPTIDE" |> BioList.ofAminoAcidString 
+let s3 = "TAGCAT"  |> BioArray.ofNucleotideString 
 
 ///Peptide represented as a Bioseq
 "PEPTIDE" |> BioSeq.ofAminoAcidString 
+(***include-it***)
 
 ///Peptide represented as a BioList
-"PEPTIDE"|> BioList.ofAminoAcidSymbolString 
+"PEPTIDE"|> BioList.ofAminoAcidString 
+(***include-it***)
 
 ///Nucleotide sequence represented as a BioArray
 "TAGCAT" |> BioArray.ofNucleotideString 
-
-(***hide***)
-let s1Prnt     = FSIPrinters.prettyPrintBioCollection s1
-let s2Prnt     = FSIPrinters.prettyPrintBioCollection s2
-let s3Prnt     = FSIPrinters.prettyPrintBioCollection s3
-
-(**Resulting BioSeq containing our peptide:*)
-(*** include-value:s1 ***)
-(**Resulting BioList containing our peptide:*)
-(*** include-value:s2 ***)
-(**Resulting BioArray containing our oligonucleotide:*)
-(*** include-value:s3 ***)
+(***include-it***)
 
 (**
 ## Nucleotides
 
 ![Nucleotides1](img/Nucleotides.svg)
 
-**Figure 1: Selection of covered nucleotide operations** (A) Bilogical principle. (B) Workflow with `BioSeq`. (C) Other covered functionalities.
+**Figure 1: Selection of covered nucleotide operations** (A) Biological principle. (B) Workflow with `BioSeq`. (C) Other covered functionalities.
 
 Let's imagine you have a given gene sequence and want to find out what the according protein might look like.
 *)
-let myGene = BioSeq.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
+let myGene = BioArray.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
 
 (***hide***)
 let myGenePrnt     = FSIPrinters.prettyPrintBioCollection myGene
@@ -80,10 +87,8 @@ let myGenePrnt     = FSIPrinters.prettyPrintBioCollection myGene
 (**
 Yikes! Unfortunately we got the 5'-3' coding strand. For proper transcription we should get the complementary strand first:
 *)
-let myProperGene = Seq.map Nucleotides.complement myGene
 
-(***hide***)
-let myProperGenePrnt = FSIPrinters.prettyPrintBioCollection myProperGene
+let myProperGene = BioArray.complement myGene
 
 (*** include-value:myProperGene ***)
 
@@ -93,12 +98,9 @@ Now let's transcribe and translate it:
 
 let myTranslatedGene = 
     myProperGene
-    |> BioSeq.transcribeTemplateStrand
-    |> BioSeq.translate 0
+    |> BioArray.transcribeTemplateStrand
+    |> BioArray.translate 0
 
-(***hide***)
-//let myTranslatedGenePrnt = FSIPrinters.prettyPrintBioCollection myTranslatedGene
- 
 (*** include-value:myTranslatedGene ***)
 
 (**
@@ -108,11 +110,8 @@ only difference between the coding strand and the mRNA is the replacement of 'T'
 
 let myTranslatedGeneFromCodingStrand = 
     myGene
-    |> BioSeq.transcribeCodingStrand
-    |> BioSeq.translate 0
-
-(***hide***)
-//let myTranslatedGeneFromCodingStrandPrnt = FSIPrinters.prettyPrintBioCollection myTranslatedGeneFromCodingStrand
+    |> BioArray.transcribeCodingStrand
+    |> BioArray.translate 0
 
 (*** include-value:myTranslatedGeneFromCodingStrand ***)
 
@@ -123,17 +122,35 @@ Other Nucleotide conversion operations are also covered:
 let mySmallGene      = BioSeq.ofNucleotideString  "ATGTTCCGAT"
 
 let smallGeneRev     = BioSeq.reverse mySmallGene 
-//Original: ATGTTCCGAT
-//Output:   TAGCCTTGTA
+
+$"""Original:
+{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
+Output
+{smallGeneRev |> FSIPrinters.prettyPrintBioCollection}
+"""
+|> printfn "%s"
+(***include-output***)
 
 let smallGeneComp    = BioSeq.complement mySmallGene
-//Original: ATGTTCCGAT
-//Output:   TACAAGGCTA
+
+$"""Original:
+{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
+Output:
+{smallGeneComp |> FSIPrinters.prettyPrintBioCollection}
+"""
+|> printfn "%s"
+(***include-output***)
 
 let smallGeneRevComp = BioSeq.reverseComplement mySmallGene
-//Original: ATGTTCCGAT
-//Reverse:  TAGCCTTGTA
-//Output:   ATCGGAACAT
+
+$"""Original:
+{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
+Reverse:
+{smallGeneRev |> FSIPrinters.prettyPrintBioCollection}
+Output:
+{smallGeneRevComp|> FSIPrinters.prettyPrintBioCollection}"""
+|> printfn "%s"
+(***include-output***)
 
 (**
 
@@ -147,15 +164,12 @@ let myPeptide = "PEPTIDE" |> BioSeq.ofAminoAcidString
 
 (***hide***)
 let myPeptidePrnt = FSIPrinters.prettyPrintBioCollection myPeptide
+
 (*** include-value:myPeptide ***)
-(**
-*)
 
 let myPeptideFormula = BioSeq.toFormula myPeptide |> Formula.toString 
 
 (*** include-value:myPeptideFormula ***)
-(**
-*)
 
 let myPeptideMass = BioSeq.toAverageMass myPeptide 
 
@@ -174,12 +188,20 @@ let RBCS =
     YWTMWKLPLFGCTDSAQVLKEVEECKKEYPNAFIRIIGFDNTRQVQCISFIAYKPPSFT""" 
     |> BioArray.ofAminoAcidString
 
+(***include-value:RBCS***)
+
 let trypsin = Digestion.Table.getProteaseBy "Trypsin"
 
 (**
 With these two things done, digesting the protein is a piece of cake. For doing this, just use the `digest` function.  
 *)
 let digestedRBCS = Digestion.BioArray.digest trypsin 0 RBCS 
+
+digestedRBCS
+|> Array.map (fun x -> x.PepSequence |> FSIPrinters.prettyPrintBioCollection)
+|> String.concat "\n"
+
+(***include-it***)
 
 (*
 In reality, proteases don't always completely cut the protein down. Instead, some sites stay intact and should be considered for in silico analysis. 
@@ -188,3 +210,8 @@ This can easily be done with the `concernMissCleavages` function. It takes the m
 
 let digestedRBCS' = Digestion.BioArray.concernMissCleavages 0 2 digestedRBCS
 
+digestedRBCS'
+|> Array.map (fun x -> x.PepSequence |> FSIPrinters.prettyPrintBioCollection)
+|> String.concat "\n"
+
+(***include-it***)
