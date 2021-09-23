@@ -22,11 +22,11 @@ index: 1
 
 (*** condition: ipynb ***)
 #if IPYNB
-#r "nuget: Plotly.NET, 2.0.0-beta6"
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
 #r "nuget: FSharpAux, 1.0.0"
 #r "nuget: FSharpAux.IO, 1.0.0"
 #r "nuget: FSharp.Stats, 0.4.0"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-beta6"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
 #r "nuget: BioFSharp, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"
