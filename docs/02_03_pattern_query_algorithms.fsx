@@ -1,32 +1,47 @@
-﻿(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
-#I @"../../bin/BioFSharp/net47/"
-#I @"../../bin/BioFSharp.BioDB/net47/"
-#I @"../../bin/BioFSharp.ImgP/net47"
-#I @"../../bin/BioFSharp.IO/net47/"
-#I @"../../bin/BioFSharp.Parallel/net47/"
-#I @"../../bin/BioFSharp.Stats/net47/"
-#I @"../../bin/BioFSharp.Vis/net47/"
-#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
-#r "BioFSharp.dll"
-#r "BioFSharp.IO.dll"
-#r "FSharpAux.IO.dll"
-open System
-open BioFSharp
-open BioFSharp.IO
-open FSharpAux.IO
-open AminoAcids
-open Nucleotides
-open AminoAcidSymbols
-open BioFSharp.Algorithm.StringMatching
+﻿(**
+---
+title: Pattern query algorithms
+category: Algorithms
+categoryindex: 1
+index: 3
+---
+*)
+
+(*** hide ***)
+
+(*** condition: prepare ***)
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
+#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
+#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
+#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
+#r "nuget: BioFSharp, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.ML, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.Stats, {{fsdocs-package-version}}"
+#endif // IPYNB
+
 (**
-<table class="HeadAPI">
-<td class="Head"><h1>String matching algorithms</h1></td>
-<td class="API">
-    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-algorithm-patternquery.html" >&#128194;View module documentation</a>
-</td>
-</table>
+# Pattern query algorithms
+
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
+
+*Summary:* This example shows how to use different pattern query algorithms in BioFSharp
 
 String matching algorithms are concerned with finding a single or multiple matches of a query pattern within a source. The sub-modules of the `BioFSharp.Algorithm.StringMatching` module are organized as following:
 
@@ -52,6 +67,7 @@ Runtimes are provided using [Bachmann-Landau notations](https://en.wikipedia.org
 The following query pattern and source will be used in all further examples demonstrating how to use the specific module. 
 
 *)
+open BioFSharp
 
 ///source containing the query pattern at positions 0,10 and 17 
 let source = "AAABBBBBBBAAABBBBAAA" |> BioArray.ofAminoAcidString
@@ -60,73 +76,69 @@ let source = "AAABBBBBBBAAABBBBAAA" |> BioArray.ofAminoAcidString
 let queryPattern = "AAA"|> BioArray.ofAminoAcidString
 
 (**
-<hr></hr>
-<br>
-The Naive Algorithm
-===================
+## The Naive Algorithm
+
 The naive approach to the string matching problem is walking through the source starting from the beginning and checking at each position if the resulting substring equals the query pattern. 
 While being inefficient, it may be beneficial to use it in cases where the speed advantage of another algorithm is neglegible or does not outhweigh the additional setup needed (for example if your source and query pattern are really short)
 
-Usage
------
+### Usage
+
 No additional setup needed. Just use query pattern and source as input parameters for the respective function
 
 *)
 
-//returns [0;10;17]
+open BioFSharp.Algorithm.StringMatching
+
 Naive.findAll queryPattern source
+(***include-it***)
 
-//returns 0
 Naive.find queryPattern source
+(***include-it***)
 
-//returns 17
 Naive.findFrom 12 queryPattern source
+(***include-it***)
 
 (**
 
-Runtime
--------
+### Runtime
 
  * Preprocessing: _None_
 
  * Matching time: _O(nm)_
 
-<hr></hr>
-<br>
-Knuth Morris Pratt
-==================
+
+## Knuth Morris Pratt
+
 The KMP algorithm makes use of previous match information to determine an amount of skips that can be made until the next position in the source gets examined as a possible match.
 To achieve that, a prefix table (or failure function) of the pattern needs to be computed, which determines the amount of skippable elements depending on the previous (partial) match.
 
+### Usage
 
-Usage
------
 *)
+
 ///prefix table computed from the query pattern
 let prefixTable = KnuthMorrisPratt.createPrefixTable queryPattern
 
-//returns [0;10;17]
 KnuthMorrisPratt.findAll prefixTable queryPattern source
+(***include-it***)
 
-//returns 0
 KnuthMorrisPratt.find prefixTable queryPattern source
+(***include-it***)
 
-//returns 17
 KnuthMorrisPratt.findFrom prefixTable queryPattern 12 source
+(***include-it***)
 
 (**
-Runtime
--------
+### Runtime
+
  * Preprocessing: _Θ(m)_
 
  * Matching time: average: _Θ(n)_
 
  * Worst case(if the prefix table results in no possible skips): _Θ(mn)_ 
 
-<hr></hr>
-<br>
-Rabin Karp
-==========
+## Rabin Karp
+
 The RK Algorithm saves time by not comparing every single element of pattern and a substring of the same length from the source. Instead, it compares hashed versions of them.
 The RabinKarp module contains two submodules:
 
@@ -135,23 +147,22 @@ The RabinKarp module contains two submodules:
  * CP: uses a cyclic polynomial hash, which is way faster than the built in hash function. Elements must be castable to `uint64` , as they get hashed as a 64 bit unsigned integer and updating the hash uses bitwise operators. 
  Using large query patterns is problematic, as the combined hash may exceed the size of an `uint64`.
 
-Usage
------
+### Usage
 
-###RKStandard
+#### RKStandard
 *)
-//returns [0;10;17]
+
 RabinKarp.RKStandard.findAll queryPattern source
+(***include-it***)
 
-//returns 0
 RabinKarp.RKStandard.find queryPattern source
+(***include-it***)
 
-//returns 17
 RabinKarp.RKStandard.findFrom 12 queryPattern source
-
+(***include-it***)
 
 (**
-###CP
+#### CP
 
 As the AminoAcid type cannot be casted to an `uint64`, a conversion to their one character code is needed *)
 
@@ -161,17 +172,17 @@ let source' = source |> Array.map (fun x -> (x :> IBioItem).Symbol)
 ///query pattern converted to char array
 let queryPattern' = queryPattern |> Array.map (fun x -> (x :> IBioItem).Symbol)
 
-//returns [0;10;17]
 RabinKarp.CP.findAll queryPattern' source'
+(***include-it***)
 
-//returns 0
 RabinKarp.CP.find queryPattern' source'
+(***include-it***)
 
-//returns 17
 RabinKarp.CP.findFrom 12 queryPattern' source'
+(***include-it***)
 
 (**
-###Using your own hash functions
+### Using your own hash functions
 The `RabinKarp` module provides generic `findAll`, `find` and `findFrom` functions that take the following additional parameters:
 
  * `blockHash`: a function that hashes an entire array (used to hash the pattern and the first substring of the source)
@@ -187,14 +198,12 @@ let inline findAll (pattern : array<'a>) (s : array<'a>) =
     RabinKarp.findAllGeneric (RabinKarp.CP.updateHash pattern.Length) (RabinKarp.CP.blockHash) pattern s 
 
 (**
-Runtime
--------
+### Runtime
+
  * Preprocessing: _Θ(m)_
  * Matching time: average _Θ(n + m)_
  * Worst case: Θ((n−m)m)
 
-<hr></hr>
-<br>
 Boyer Moore
 ===========
 coming soon...

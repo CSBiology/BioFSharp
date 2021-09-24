@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\01_04_sequence_properties.fsx = docs\01_04_sequence_properties.fsx
 		docs\02_01_alignment.fsx = docs\02_01_alignment.fsx
 		docs\02_02_blast.fsx = docs\02_02_blast.fsx
+		docs\02_03_pattern_query_algorithms.fsx = docs\02_03_pattern_query_algorithms.fsx
 		docs\_template.html = docs\_template.html
 		docs\_template.ipynb = docs\_template.ipynb
 		docs\BioContainers.fsx = docs\BioContainers.fsx
@@ -63,7 +64,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\PetideClassification.fsx = docs\PetideClassification.fsx
 		docs\Readers.fsx = docs\Readers.fsx
 		docs\SOFT.fsx = docs\SOFT.fsx
-		docs\StringMatching.fsx = docs\StringMatching.fsx
 		docs\tutorial.fsx = docs\tutorial.fsx
 		docs\WebLogo.fsx = docs\WebLogo.fsx
 	EndProjectSection
