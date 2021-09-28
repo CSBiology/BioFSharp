@@ -10,78 +10,65 @@ let testPhylTree_oneGen = Branch("1", [])
 let testPhylTree_threeGens_string =
     Branch("ACTG",[
         Branch("ACTT", [
-            Branch("ACTC", [])
+            Leaf "ACTC"
         ])
         Branch("ACGG", [
-            Branch("ACCG", [])
+            Leaf "ACCG"
         ])
         Branch("GCTG", [
-            Branch("TCTG", [])
+            Leaf "TCTG"
         ])
     ])
 
 let testPhylTree_threeGens_BioList =
     Branch(BioList.ofNucleotideString "ACTG",[
         Branch(BioList.ofNucleotideString "ACTT", [
-            Branch(BioList.ofNucleotideString "ACTC", [])
+            Leaf (BioList.ofNucleotideString "ACTC")
         ])
         Branch(BioList.ofNucleotideString "ACGG", [
-            Branch(BioList.ofNucleotideString "ACCG", [])
+            Leaf(BioList.ofNucleotideString "ACCG")
         ])
         Branch(BioList.ofNucleotideString "GCTG", [
-            Branch(BioList.ofNucleotideString "TCTG", [])
+            Leaf(BioList.ofNucleotideString "TCTG")
         ])
     ])
 
-let testFoldFun (acc: string) (tree: PhylogeneticTree<'n>) =
-    match tree with
-        Branch(s, nl) ->
-            (s + "; " + acc)
-
-let testMappingFun (tree: PhylogeneticTree<'n>) =
-    match tree with
-        Branch(s, nl) -> s |> BioList.ofNucleotideString
-
 [<Tests>]
-let phylTreeTests =
-    testList "PhylTree" [
-        testCase "map" (fun() ->
+let phylTreeTestsBase =
+    testList "PhylogeneticTree" [
+        testCase "base functions.map" (fun() ->
             Expect.equal
-                (PhylogeneticTree.map testMappingFun testPhylTree_threeGens_string)
+                (PhylogeneticTree.map BioList.ofNucleotideString BioList.ofNucleotideString testPhylTree_threeGens_string)
                 testPhylTree_threeGens_BioList
                 "PhylTree.map did not return correct Node<'t>"
         )
-        testCase "iter" (fun () ->
+        testCase "base functions.iter" (fun () ->
             let mutable testList = []
-            let testIterFun (node: PhylogeneticTree<'n>) =
-                match node with
-                    Branch (s, nl) -> do (testList <- testList @ [s])
-            PhylogeneticTree.iter testIterFun testPhylTree_threeGens_string
+            let testIterFun = (fun x -> testList <- testList @ [x])
+
+            PhylogeneticTree.iter testIterFun testIterFun testPhylTree_threeGens_string
+
             Expect.equal
                 testList
                 ["ACTG"; "ACTT"; "ACTC"; "ACGG"; "ACCG"; "GCTG"; "TCTG"]
                 "PhylTree.iter did not return correct Node<'t>"
         )
-        testCase "fold" (fun () ->
-            let testAcc = ""
+        testCase "base functions.fold" (fun () ->
             Expect.equal
-                (PhylogeneticTree.fold testAcc testFoldFun testPhylTree_threeGens_string)
-                "ACTG; GCTG; TCTG; ACGG; ACCG; ACTT; ACTC; "
+                (PhylogeneticTree.fold (fun acc elem -> if acc = "" then $"{elem}" else $"{acc}; {elem}") "" testPhylTree_threeGens_string)
+                "ACTG; ACTT; ACTC; ACGG; ACCG; GCTG; TCTG"
                 "PhylTree.fold did not return correct accumulated value."
         )
-        testCase "countLeafs" (fun () ->
+        testCase "base functions.countLeafs" (fun () ->
             Expect.equal
                 (testPhylTree_threeGens_string |> PhylogeneticTree.countLeafs)
                 3
                 "PhylTree.countLeafs did not return the correct number of leaves"
-        )
-        testCase "tryGetNodeBy" (fun () ->
-            let testConditionFun (node: PhylogeneticTree<'n>) =
-                match node with
-                    Branch(s, _) -> s = "ACTG"
+        )        
+        testCase "base functions.countBranches" (fun () ->
             Expect.equal
-                (PhylogeneticTree.tryGetNodeBy testConditionFun testPhylTree_threeGens_string)
-                (Some testPhylTree_threeGens_string)
-                "PhylTree.tryGetNodeBy did not return the correct Node<'n> for the given condition."
+                (testPhylTree_threeGens_string |> PhylogeneticTree.countBranches)
+                4
+                "PhylTree.countBranches did not return the correct number of branches"
         )
     ]
