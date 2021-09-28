@@ -2,7 +2,7 @@
 ---
 title: Pattern query algorithms
 category: Algorithms
-categoryindex: 1
+categoryindex: 2
 index: 3
 ---
 *)

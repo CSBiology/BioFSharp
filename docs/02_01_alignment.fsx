@@ -2,7 +2,7 @@
 ---
 title: Alignment
 category: Algorithms
-categoryindex: 1
+categoryindex: 2
 index: 1
 ---
 *)
