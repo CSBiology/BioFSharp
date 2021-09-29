@@ -7,6 +7,7 @@
    * [Breaking] [Conversion extensions for BioCollections]()
    * [Breaking] [Tagged Sequence and Phylogenetic Tree have been reworked as top level types](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
    * [Add functionality to construct phylogenetic trees from clustered data or raw sequence data](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
+   * Fix stack overflow on Phylogenetic tree construction based on hierarchical clusters
 
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
