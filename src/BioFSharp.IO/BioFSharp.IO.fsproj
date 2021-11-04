@@ -42,6 +42,7 @@
     <Compile Include="BlastWrapper.fs" />
     <Compile Include="BlastQueries.fs" />
     <Compile Include="Clustal.fs" />
+    <Compile Include="DSSP_Stride.fs" />
     <Compile Include="FastA.fs" />
     <Compile Include="FastQ.fs" />
     <Compile Include="GenBank.fs" />
