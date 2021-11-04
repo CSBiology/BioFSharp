@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.6.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp", "src\BioFSharp\BioFSharp.fsproj", "{BCC98073-DFD3-4819-BC98-AEE991491A31}"
 EndProject
@@ -152,7 +152,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{C6F985BC-2
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Tets.Console", "BioFSharp.Tets.Console\BioFSharp.Tets.Console.fsproj", "{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.Tets.Console", "BioFSharp.Tets.Console\BioFSharp.Tets.Console.fsproj", "{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.IO.Tests", "tests\BioFSharp.IO.Tests\BioFSharp.IO.Tests.fsproj", "{15A280E9-957C-47A5-BA0F-22EA37A81979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -248,6 +250,18 @@ Global
 		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x64.Build.0 = Release|Any CPU
 		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.ActiveCfg = Release|Any CPU
 		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.Build.0 = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|x64.Build.0 = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|x86.Build.0 = Debug|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|x64.ActiveCfg = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|x64.Build.0 = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|x86.ActiveCfg = Release|Any CPU
+		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -260,6 +274,7 @@ Global
 		{4D7E91D8-E01D-40AE-9DCB-B82754E4ECA2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{5E7A59A6-CB05-4496-99D2-E5C6810819B9} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
+		{15A280E9-957C-47A5-BA0F-22EA37A81979} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A2ED902-6B1D-4BA1-966D-A325EE1BB479}

@@ -1,4 +1,4 @@
-﻿module BioFSharp.Tests
+﻿module BioFSharp.IO.Tests
 open Expecto
 
 [<EntryPoint>]
