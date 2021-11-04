@@ -1,32 +1,52 @@
+(**
+---
+title: Formulas
+category: BioFSharp Core
+categoryindex: 1
+index: 1
+---
+*)
+
 (*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
-#I @"../../bin/BioFSharp/net47/"
-#I @"../../bin/BioFSharp.BioDB/net47/"
-#I @"../../bin/BioFSharp.ImgP/net47"
-#I @"../../bin/BioFSharp.IO/net47/"
-#I @"../../bin/BioFSharp.Parallel/net47/"
-#I @"../../bin/BioFSharp.Stats/net47/"
-#I @"../../bin/BioFSharp.Vis/net47/"
-#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
-// 
-//
-//TODO: Formula.lableElement solle input vom typ formula an letzter stelle haben
-//
-//
+
+(*** condition: prepare ***)
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
+#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
+#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
+#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
+#r "nuget: BioFSharp, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.ML, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.Stats, {{fsdocs-package-version}}"
+#endif // IPYNB
 
 (**
-<table class="HeadAPI">
-<td class="Head"><h1>Formula</h1></td>
-<td class="API">
-    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-formula.html" >&#128194;View module documentation</a>
-</td>
-</table>
+# Formula
+
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
+
+*Summary:* This example shows how to use chemical formulas in BioFSharp
+
 BioFSharp offers a great bunch of functionality for working with molecules. All elements are represented as the composition of their stable isotopes. A `Formula` is a collection of those Elements with the given count. Creating and altering formulas is quite easy. Also functions for obtaining a mass of a molecule, which becomes quite handy especially for mass spectrometry, can be used straightforwardly.  
 
 To create formulas, no direct fiddling around with the data type is necessary. You can just use the stringparser:
 *)
-#r "BioFSharp.dll"
 open BioFSharp
 
 
@@ -49,7 +69,7 @@ let monoC14 =
     |> Elements.Mono 
 
 /// exchanges all carbon in formula with monoIsotopic C14
-let lableWithC14 molecule = Formula.lableElement molecule Elements.Table.C monoC14
+let lableWithC14 molecule = Formula.replaceElement molecule Elements.Table.C monoC14
 
 let radioactiveSprudel = lableWithC14 sprudel
 

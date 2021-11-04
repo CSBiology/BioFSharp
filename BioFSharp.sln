@@ -23,29 +23,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{352487
 		build.fsx = build.fsx
 		build.fsx.lock = build.fsx.lock
 		build.sh = build.sh
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8B38-4393-8E23-4E6844EA97FD}"
 	ProjectSection(SolutionItems) = preProject
+		docs\01_01_formula.fsx = docs\01_01_formula.fsx
+		docs\01_02_bioitems.fsx = docs\01_02_bioitems.fsx
+		docs\01_03_biocollections.fsx = docs\01_03_biocollections.fsx
+		docs\01_04_sequence_properties.fsx = docs\01_04_sequence_properties.fsx
+		docs\02_01_alignment.fsx = docs\02_01_alignment.fsx
+		docs\02_02_blast.fsx = docs\02_02_blast.fsx
+		docs\02_03_pattern_query_algorithms.fsx = docs\02_03_pattern_query_algorithms.fsx
+		docs\03_01_fasta_parsing.fsx = docs\03_01_fasta_parsing.fsx
+		docs\03_02_fastq_parsing.fsx = docs\03_02_fastq_parsing.fsx
 		docs\_template.html = docs\_template.html
 		docs\_template.ipynb = docs\_template.ipynb
-		docs\Alignment.fsx = docs\Alignment.fsx
-		docs\AminoProperties.fsx = docs\AminoProperties.fsx
-		docs\BioCollections.fsx = docs\BioCollections.fsx
 		docs\BioContainers.fsx = docs\BioContainers.fsx
 		docs\BioContainers_TargetP.fsx = docs\BioContainers_TargetP.fsx
 		docs\BioContainersDesignGuide.fsx = docs\BioContainersDesignGuide.fsx
 		docs\BioDB.fsx = docs\BioDB.fsx
 		docs\BioID.fsx = docs\BioID.fsx
-		docs\BioItem.fsx = docs\BioItem.fsx
 		docs\BioTools-tmhmm.fsx = docs\BioTools-tmhmm.fsx
-		docs\BlastWrapper.fsx = docs\BlastWrapper.fsx
 		docs\Clustal.fsx = docs\Clustal.fsx
-		docs\ClustalOWrapper.fsx = docs\ClustalOWrapper.fsx
 		docs\CSV.fsx = docs\CSV.fsx
-		docs\FastA.fsx = docs\FastA.fsx
-		docs\FastQ.fsx = docs\FastQ.fsx
-		docs\Formula.fsx = docs\Formula.fsx
+		docs\Dockerfile = docs\Dockerfile
 		docs\FSIPrinters.fsx = docs\FSIPrinters.fsx
 		docs\GenBank.fsx = docs\GenBank.fsx
 		docs\GFF3.fsx = docs\GFF3.fsx
@@ -56,11 +59,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\MoleculeFinding.fsx = docs\MoleculeFinding.fsx
 		docs\MotiveSearch.fsx = docs\MotiveSearch.fsx
 		docs\Newick.fsx = docs\Newick.fsx
+		docs\NuGet.config = docs\NuGet.config
 		docs\Obo.fsx = docs\Obo.fsx
 		docs\PetideClassification.fsx = docs\PetideClassification.fsx
 		docs\Readers.fsx = docs\Readers.fsx
 		docs\SOFT.fsx = docs\SOFT.fsx
-		docs\StringMatching.fsx = docs\StringMatching.fsx
 		docs\tutorial.fsx = docs\tutorial.fsx
 		docs\WebLogo.fsx = docs\WebLogo.fsx
 	EndProjectSection
@@ -142,6 +145,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".project", ".project", "{A1
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{C6F985BC-2F62-4B19-A6B0-11C8204C3080}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Tets.Console", "BioFSharp.Tets.Console\BioFSharp.Tets.Console.fsproj", "{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -225,6 +236,18 @@ Global
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x64.Build.0 = Release|Any CPU
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x86.Build.0 = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x64.Build.0 = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x64.ActiveCfg = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x64.Build.0 = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -236,6 +259,7 @@ Global
 		{86538483-B249-41CA-A1C7-21F00EA314A2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{4D7E91D8-E01D-40AE-9DCB-B82754E4ECA2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{5E7A59A6-CB05-4496-99D2-E5C6810819B9} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
+		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A2ED902-6B1D-4BA1-966D-A325EE1BB479}

@@ -1,24 +1,49 @@
+(**
+---
+title: Blast
+category: Algorithms
+categoryindex: 2
+index: 2
+---
+*)
+
 (*** hide ***)
-#I @"../../bin/BioFSharp/net47/"
-#I @"../../bin/BioFSharp.BioDB/net47/"
-#I @"../../bin/BioFSharp.ImgP/net47"
-#I @"../../bin/BioFSharp.IO/net47/"
-#I @"../../bin/BioFSharp.Parallel/net47/"
-#I @"../../bin/BioFSharp.Stats/net47/"
-#I @"../../bin/BioFSharp.Vis/net47/"
-#r @"../../packages/formatting/FSharp.Plotly/lib/netstandard2.0/FSharp.Plotly.dll"
-#r "BioFSharp.dll"
-#r "BioFSharp.IO.dll"
+
+(*** condition: prepare ***)
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
+#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
+#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
+#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: Plotly.NET, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.0.0"
+#r "nuget: FSharpAux.IO, 1.0.0"
+#r "nuget: FSharp.Stats, 0.4.0"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
+#r "nuget: BioFSharp, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.ML, {{fsdocs-package-version}}"
+#r "nuget: BioFSharp.Stats, {{fsdocs-package-version}}"
+#endif // IPYNB
 
 (**
-<table class="HeadAPI">
-<td class="Head"><h1>Blast Wrapper</h1></td>
-<td class="API">
-    <a id="APILink" href="https://csbiology.github.io/BioFSharp/reference/biofsharp-io-blastncbi.html" >&#128194;View module documentation</a>
-</td>
-</table>
+# Blast
 
-BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
+
+*Summary:* This example shows how to perform blast with BioFSharp
+
+BioFSharp's BlastWrapper is a tool for performing different tasks in NCBI BLAST console applications (version 2.2.31+).
 It is able to create BLAST databases and perform **blastN** or **blastP** queries, while providing a way to set
 output parameter for creating a custom output format.
 Official documentation for all BLAST applications can be found [here](http://www.ncbi.nlm.nih.gov/books/NBK279690).
@@ -28,11 +53,8 @@ of Chlamydomonas reinhardtii included in BioFSharp/docs/content/data.
 
 Our query protein for the subsequent BLAST search will be the [photosystem II protein D1](http://www.ncbi.nlm.nih.gov/protein/7525013?report=fasta) from Arabidopsis thaliana chloroplast.
 
-How to use BlastWrapper
-=======================
+## Creation of a BLAST database
 
-Creation of a BLAST database
-----------------------------
 We will use the minimal amount of parameters needed to create a BLAST database from an input file. 
 The created database files will have the same name as the input file and will be located in the same folder. 
 However, there are many parameters you can use to specify your database. Please refer to the [NCBI user manual](http://www.ncbi.nlm.nih.gov/books/NBK279675/) for more information.
@@ -66,26 +88,24 @@ We now provide the wrapper our ncbi path, the input path and a sequence of param
 BlastWrapper(ncbiPath).makeblastdb inputFile ([typeOfDatabase;] |> seq<Parameters.MakeDbParams>)
 
 (**
-<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Show/Hide console output</button>
-<div id="console1" class="collapse console1">
-<pre>
-|Starting Makeblastdb...
-|
-|
-|Building a new DB, current time: 12/05/2018 09:02:20
-|New DB name:   C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
-|New DB title:  C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
-|Sequence type: Protein
-|Deleted existing Protein BLAST database named C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
-|Keep Linkouts: T
-|Keep MBits: T
-|Maximum file size: 1000000000B
-|Adding sequences from FASTA; added 74 sequences in 0.0107442 seconds.
-|Makeblastdb done.
-</pre
-<button type="button" class="btn" data-toggle="collapse" data-target="#console1">Hide again</button>  
-</div>
-<br>
+Your console output will look like this:
+
+```txt
+Starting Makeblastdb...
+
+
+Building a new DB, current time: 12/05/2018 09:02:20
+New DB name:   C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+New DB title:  C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+Sequence type: Protein
+Deleted existing Protein BLAST database named C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 74 sequences in 0.0107442 seconds.
+Makeblastdb done.
+```
+
 *)
 
 (**
@@ -94,9 +114,7 @@ This creates 3 new files in our directory:
 
 We have sucesssfully created our search database.
 
-
-Creating a .fastA file from an aminoacid string
--------------------------------------------------
+## Creating a fasta file from an aminoacid string
 
 _Note: this step is not necessary if you want to use an already existing file as query. If this is the case, skip to step 3._
 
@@ -131,18 +149,17 @@ let queryFastaItem = FastA.createFastaItem header querySequence
 To create our `.fastA` file, we need to use the `BioItem.symbol` converter, which will convert the 3 letter code of the aminoacids in our biosequence
 to the one letter symbol (eg. Met -> M)
 *)
+
 (*** do-not-eval ***)
 FastA.write BioItem.symbol queryFastaPath [queryFastaItem;] 
 
 (**
-Performing the BLAST search
----------------------------
+## Performing the BLAST search
 
 We have created our search database and the query we want to find. Before we can perform the actual search, we need to define the BLAST prameters.
 
 _Note: custom output formats can only be specified for output types `CSV`, `tabular` and `tabular with comments`. For more information, check 
 the [options for the command-line applicaions](http://www.ncbi.nlm.nih.gov/books/NBK279675/)_
-
 
 First, lets specify the overall output type. This will define the outline of our output. We want our output to be in tabular form, with added information
 in the form of comments.
@@ -202,26 +219,25 @@ let outputPath = (__SOURCE_DIRECTORY__ + "/data/Output.txt")
 (*** do-not-eval ***)
 BlastWrapper(ncbiPath).blastP inputFile queryFastaPath outputPath ([customOutputFormat;] |> seq<BlastParams>)
 
-
 (**
 As you can see in the result file, the format is tab separated and contains the fields we specified in our our `customOutputFormat`.
 
-<pre>
-|# BLASTP 2.2.31+
-|# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
-|# Database: C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
-|# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
-|# 8 hits found
-|>gi|7525013|ref|NP_051039.1|	sp|P19547|	353	353	346	20	326	338	0.0	645
-|>gi|7525013|ref|NP_051039.1|	sp|P19546|	353	353	346	20	326	338	0.0	645
-|>gi|7525013|ref|NP_051039.1|	sp|P19587|	353	353	303	199	93	162	9e-045	152
-|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	49	32	14	24	2.2	21.6
-|>gi|7525013|ref|NP_051039.1|	sp|P19592|	353	490	15	10	5	12	8.7	19.6
-|>gi|7525013|ref|NP_051039.1|	sp|P19571|	353	3121	25	13	11	15	5.4	20.4
-|>gi|7525013|ref|NP_051039.1|	sp|P19580|	353	470	30	20	10	12	6.5	20.0
-|>gi|7525013|ref|NP_051039.1|	sp|P19565|	353	627	51	26	16	23	8.6	20.0
-|# BLAST processed 1 queries
-</pre>
+```txt
+# BLASTP 2.2.31+
+# Query: >gi|7525013|ref|NP_051039.1| photosystem II protein D1 (chloroplast) [Arabidopsis thaliana]
+# Database: C:\Users\Kevin\source\repos\CSBiology\BioFSharp\docsrc\content/data/Chlamy_Cp.fastA
+# Fields: query id, subject id, query length, subject length, alignment length, mismatches, identical, positives, evalue, bit score
+# 8 hits found
+>gi|7525013|ref|NP_051039.1|    sp|P19547|    353    353    346     20      326     338     0.0     645
+>gi|7525013|ref|NP_051039.1|    sp|P19546|    353    353    346     20      326     338     0.0     645
+>gi|7525013|ref|NP_051039.1|    sp|P19587|    353    353    303     199     93      162     9e-045  152
+>gi|7525013|ref|NP_051039.1|    sp|P19592|    353    490    49      32      14      24      2.2     21.6
+>gi|7525013|ref|NP_051039.1|    sp|P19592|    353    490    15      10      5       12      8.7     19.6
+>gi|7525013|ref|NP_051039.1|    sp|P19571|    353    3121   25      13      11      15      5.4     20.4
+>gi|7525013|ref|NP_051039.1|    sp|P19580|    353    470    30      20      10      12      6.5     20.0
+>gi|7525013|ref|NP_051039.1|    sp|P19565|    353    627    51      26      16      23      8.6     20.0
+# BLAST processed 1 queries
+```
 *)
 
 

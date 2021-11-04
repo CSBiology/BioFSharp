@@ -190,3 +190,4 @@ codeCov.xml
 docs/.fsdocs/
 docs/tmp/watch/
 tmp/watch/
+.fsdocs
