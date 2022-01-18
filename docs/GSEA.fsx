@@ -98,7 +98,7 @@ open BioFSharp.Stats
 //specific group. If significantly altered proteins were identified, you can assign index '1' to 
 //all altered proteins and '0' to all other. The choice of the index is up to you, but you have 
 //to remind it for later steps.
-let item = OntologyEnrichment.createOntologyItem "Cre06.g250100" "GMM:29.6.2.3;GMM:20.2.1" 1 "HSP70"
+let item = OntologyEnrichment.createOntologyItem "Cre06.g250100" "protein.folding.chaperones and co-chaperones.HSP70s;stress.abiotic.heat" 1 "HSP70"
 
 
 //If more than one ontology term is possible, you can use this function to split the item, so that
@@ -109,7 +109,7 @@ let splitItems = OntologyEnrichment.splitMultipleAnnotationsBy ';' item
 let items = [splitItems(*...*)] |> Seq.concat
 
 //When dealing with MapMan annotations all levels of the descriptions should be considered.
-//GMM:26.6.2 -> [GMM:26.6.2;GMM:26.6;GMM:26] 
+//"stress.abiotic.heat" -> ["stress.abiotic.heat"; "stress.abiotic"; "stress"] 
 let expandedItems = OntologyEnrichment.expandOntologyTree items
 
 
@@ -132,8 +132,8 @@ let filterAndSortEnrichedModules =
 //GseaResult:
 //    OntologyTerm     : OntologyTerm(MapMan-Term/GO-Term/...)
 //    ItemsInBin       : Sequence of single items belonging to the ontology term 
-//    NumberOfDEsInBin : number of significantly altered items in 'OntologyItem' bin
-//    NumberInBin      : number of items in 'OntologyItem' bin
-//    TotalNumberOfDE  : number of significantly altered items
-//    TotalUnivers     : number of all items (expanded)
+//    NumberOfDEsInBin : Number of significantly altered items in 'OntologyTerm' bin
+//    NumberInBin      : Number of items in 'OntologyTerm' bin
+//    TotalNumberOfDE  : Number of significantly altered items
+//    TotalUniverse    : Number of all items (expanded)
 //    PValue           : p value

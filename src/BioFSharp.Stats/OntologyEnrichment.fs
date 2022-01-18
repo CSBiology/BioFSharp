@@ -21,19 +21,25 @@ module OntologyEnrichment =
 
     /// Represents a gene set enrichment result 
     type GseaResult<'a> = {
+        ///Ontology term e.g. MapMan term, GO term ...
         OntologyTerm     : string
+        ///Sequence of single items associated to the ontology term 
         ItemsInBin       : seq<OntologyItem<'a>>
+        ///Number of significantly altered items in 'OntologyTerm' bin
         NumberOfDEsInBin : int
-        NumberInBin      : int    
+        ///Number of items in 'OntologyTerm' bin
+        NumberInBin      : int
+        ///Number of significantly altered items within the total data set
         TotalNumberOfDE  : int
-        TotalUnivers     : int
+        ///Number of all items (expanded)
+        TotalUniverse    : int
         PValue           : float
         }
 
     /// Creates a gene set enrichment result 
     let createGseaResult ontologyTerm desInBin numberOfDEsInBin numberInBin totalNumberOfDE totalUnivers pValue = 
         {OntologyTerm = ontologyTerm;ItemsInBin = desInBin; NumberOfDEsInBin = numberOfDEsInBin; 
-            NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUnivers = totalUnivers; PValue = pValue}
+            NumberInBin = numberInBin; TotalNumberOfDE = totalNumberOfDE; TotalUniverse = totalUnivers; PValue = pValue}
 
     ///Splits an OntologyEntry with seperator concatenated TermIds
     let splitMultipleAnnotationsBy (separator:char) (item:OntologyItem<'A>) =
