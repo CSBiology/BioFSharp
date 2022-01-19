@@ -55,23 +55,7 @@
     <Compile Include="SOFT.fs" />
     <Compile Include="WorkflowLanguage.fs" />
     <Compile Include="FSIPrinters.fs" />
-    <None Include="Playground\AgilentRaw.fsx" />
-    <None Include="Playground\BlastQueries.fsx" />
-    <None Include="Playground\BlastWrapper.fsx" />
-    <None Include="Playground\Clustal.fsx" />
-    <None Include="Playground\ClustalOWrapper.fsx" />
-    <None Include="Playground\FastA.fsx" />
-    <None Include="Playground\FastQ.fsx" />
-    <None Include="Playground\FSIPrinters.fsx" />
-    <None Include="Playground\GAF.fsx" />
-    <None Include="Playground\GenBank.fsx" />
-    <None Include="Playground\GFF3.fsx" />
-    <None Include="Playground\Mgf.fsx" />
-    <None Include="Playground\Newick.fsx" />
-    <None Include="Playground\Obo.fsx" />
-    <None Include="Playground\OrthoMCL.fsx" />
-    <None Include="Playground\SOFT.fsx" />
-    <None Include="Playground\WorkflowLanguage.fsx" />
+    <None Include="Playground.fsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
