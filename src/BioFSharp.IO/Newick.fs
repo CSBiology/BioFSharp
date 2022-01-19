@@ -130,7 +130,7 @@ module Newick =
         let rec loop tree =
             seq {
                 match tree with
-                | PhylogeneticTree.Branch ((nodeInfo),[]) ->
+                | PhylogeneticTree.Leaf nodeInfo ->
                     let name,distance = nodeConverter nodeInfo
                     yield name + ":" + (distance)
                 | PhylogeneticTree.Branch ((nodeInfo), nl) ->
