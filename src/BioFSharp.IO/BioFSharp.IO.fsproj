@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0; net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RootNamespace>BioFSharp.IO</RootNamespace>
     <AssemblyName>BioFSharp.IO</AssemblyName>
     <Name>BioFSharp.IO</Name>
@@ -61,8 +61,8 @@
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharpAux" Version="1.0.0" />
-    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+    <PackageReference Include="FSharpAux" Version="1.1.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>

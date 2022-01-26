@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0; net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RootNamespace>BioFSharp.ML</RootNamespace>
     <AssemblyName>BioFSharp.ML</AssemblyName>
     <Name>BioFSharp.ML</Name>
@@ -51,8 +51,8 @@
     <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharpAux" Version="1.0.0" />
-    <PackageReference Include="FSharpAux.IO" Version="1.0.0" />
+    <PackageReference Include="FSharpAux" Version="1.1.0" />
+    <PackageReference Include="FSharpAux.IO" Version="1.1.0" />
     <PackageReference Include="CNTK.CPUOnly" Version="2.8.0-rc0.dev20200201" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>

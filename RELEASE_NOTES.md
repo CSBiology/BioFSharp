@@ -1,5 +1,5 @@
 #### 2.0.0 - tbd
-(preview packages available on nuget)
+All packages now target netstandard2.0 as lowest common denominator.
 
 **Additions:**
 
@@ -7,7 +7,6 @@
    * [Breaking] [Conversion extensions for BioCollections]()
    * [Breaking] [Tagged Sequence and Phylogenetic Tree have been reworked as top level types](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
    * [Add functionality to construct phylogenetic trees from clustered data or raw sequence data](https://github.com/CSBiology/BioFSharp/commit/aec8232dd7725cdbb99a038ebe0c99f26922f31a)
-   * Fix stack overflow on Phylogenetic tree construction based on hierarchical clusters
 
  * **BioFSharp.BioContainers**
    * BLAST biocontainer :
@@ -23,12 +22,15 @@
    * SOFT parser now parses Data tables 
 
 **Bugfixes:**
+ * **BioFSharp**:
+   * Fix stack overflow on Phylogenetic tree construction based on hierarchical clusters
+
  * **BioFSharp.IO**:
    * OBO parser now correctly parses lists of relationships
    * [Breaking] FastA.writeToStream is now correctly typed and does not close the stream after writing
    * SOFT parser now parses sample_label / sample_label_protocol correctly
    * [Fix fasta writer using UTF8BOM encoding](https://github.com/CSBiology/BioFSharp/commit/beb4158e8e8d71e7c956347db1df2f2e99f8a5e4) ((#116)[https://github.com/CSBiology/BioFSharp/issues/116])
-
+   * Fix newick writer missing leaf case
 #### 1.2.0 - Monday, March 30
 
 **Additions:**
