@@ -79,7 +79,7 @@
     <PackageReference Include="FSharpAux" Version="1.1.0" />
     <PackageReference Include="FSharpAux.IO" Version="1.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="SharpZipLib" Version="1.3.1" />
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
   </ItemGroup>
 </Project>
 
