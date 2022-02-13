@@ -31,7 +31,7 @@ let fileDir = __SOURCE_DIRECTORY__ + "/data/"
 
 let psiMs = 
     Seq.fromFile (fileDir + "Psi-MS.obo")
-    |> Obo.parseOboTerms
+    |> Obo.parseOboTerms true
     |> Seq.toArray
 
 
