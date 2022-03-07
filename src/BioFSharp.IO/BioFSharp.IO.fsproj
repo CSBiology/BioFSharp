@@ -53,7 +53,6 @@
     <Compile Include="OrthoMCL.fs" />
     <Compile Include="ClustalOWrapper.fs" />
     <Compile Include="SOFT.fs" />
-    <Compile Include="WorkflowLanguage.fs" />
     <Compile Include="FSIPrinters.fs" />
     <None Include="Playground.fsx" />
   </ItemGroup>
@@ -64,6 +63,5 @@
     <PackageReference Include="FSharpAux" Version="1.1.0" />
     <PackageReference Include="FSharpAux.IO" Version="1.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>

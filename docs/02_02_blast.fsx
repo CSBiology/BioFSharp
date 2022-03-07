@@ -10,10 +10,10 @@ index: 2
 (*** hide ***)
 
 (*** condition: prepare ***)
-#r "nuget: Plotly.NET, 2.0.0-preview.8"
-#r "nuget: FSharpAux, 1.0.0"
-#r "nuget: FSharpAux.IO, 1.0.0"
-#r "nuget: FSharp.Stats, 0.4.0"
+#r "nuget: FSharpAux, 1.1.0"
+#r "nuget: FSharpAux.IO, 1.1.0"
+#r "nuget: FSharp.Stats, 0.4.3"
+#r "nuget: Plotly.NET, 2.0.0-preview.18"
 #r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
 #r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
 #r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
@@ -22,11 +22,11 @@ index: 2
 
 (*** condition: ipynb ***)
 #if IPYNB
-#r "nuget: Plotly.NET, 2.0.0-preview.8"
-#r "nuget: FSharpAux, 1.0.0"
-#r "nuget: FSharpAux.IO, 1.0.0"
-#r "nuget: FSharp.Stats, 0.4.0"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.8"
+#r "nuget: FSharpAux, 1.1.0"
+#r "nuget: FSharpAux.IO, 1.1.0"
+#r "nuget: FSharp.Stats, 0.4.3"
+#r "nuget: Plotly.NET, 2.0.0-preview.18"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.18"
 #r "nuget: BioFSharp, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.IO, {{fsdocs-package-version}}"
 #r "nuget: BioFSharp.BioContainers, {{fsdocs-package-version}}"

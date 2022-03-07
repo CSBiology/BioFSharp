@@ -38,34 +38,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{236C409B-8
 		docs\02_03_pattern_query_algorithms.fsx = docs\02_03_pattern_query_algorithms.fsx
 		docs\03_01_fasta_parsing.fsx = docs\03_01_fasta_parsing.fsx
 		docs\03_02_fastq_parsing.fsx = docs\03_02_fastq_parsing.fsx
+		docs\03_03_gff3_parsing.fsx = docs\03_03_gff3_parsing.fsx
+		docs\03_04_genbank_parsing.fsx = docs\03_04_genbank_parsing.fsx
+		docs\03_05_obo.fsx = docs\03_05_obo.fsx
+		docs\03_06_newick.fsx = docs\03_06_newick.fsx
 		docs\_template.html = docs\_template.html
 		docs\_template.ipynb = docs\_template.ipynb
-		docs\BioContainers.fsx = docs\BioContainers.fsx
-		docs\BioContainers_TargetP.fsx = docs\BioContainers_TargetP.fsx
-		docs\BioContainersDesignGuide.fsx = docs\BioContainersDesignGuide.fsx
-		docs\BioDB.fsx = docs\BioDB.fsx
-		docs\BioID.fsx = docs\BioID.fsx
-		docs\BioTools-tmhmm.fsx = docs\BioTools-tmhmm.fsx
-		docs\Clustal.fsx = docs\Clustal.fsx
-		docs\CSV.fsx = docs\CSV.fsx
-		docs\Dockerfile = docs\Dockerfile
-		docs\FSIPrinters.fsx = docs\FSIPrinters.fsx
-		docs\GenBank.fsx = docs\GenBank.fsx
-		docs\GFF3.fsx = docs\GFF3.fsx
-		docs\GSEA.fsx = docs\GSEA.fsx
-		docs\index.fsx = docs\index.fsx
-		docs\Introduction.fsx = docs\Introduction.fsx
-		docs\MAF.fsx = docs\MAF.fsx
-		docs\MoleculeFinding.fsx = docs\MoleculeFinding.fsx
-		docs\MotiveSearch.fsx = docs\MotiveSearch.fsx
-		docs\Newick.fsx = docs\Newick.fsx
 		docs\NuGet.config = docs\NuGet.config
-		docs\Obo.fsx = docs\Obo.fsx
-		docs\PetideClassification.fsx = docs\PetideClassification.fsx
-		docs\Readers.fsx = docs\Readers.fsx
-		docs\SOFT.fsx = docs\SOFT.fsx
-		docs\tutorial.fsx = docs\tutorial.fsx
-		docs\WebLogo.fsx = docs\WebLogo.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".ci", ".ci", "{A5C98CA2-8C64-4684-BF9A-6D76033BF822}"
@@ -152,8 +131,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{C6F985BC-2
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.Tets.Console", "BioFSharp.Tets.Console\BioFSharp.Tets.Console.fsproj", "{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}"
-EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.IO.Tests", "tests\BioFSharp.IO.Tests\BioFSharp.IO.Tests.fsproj", "{15A280E9-957C-47A5-BA0F-22EA37A81979}"
 EndProject
 Global
@@ -238,18 +215,6 @@ Global
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x64.Build.0 = Release|Any CPU
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9E53B05-C5B7-4F90-A446-045079B9013D}.Release|x86.Build.0 = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x64.Build.0 = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Debug|x86.Build.0 = Debug|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x64.ActiveCfg = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x64.Build.0 = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.ActiveCfg = Release|Any CPU
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8}.Release|x86.Build.0 = Release|Any CPU
 		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15A280E9-957C-47A5-BA0F-22EA37A81979}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -273,7 +238,6 @@ Global
 		{86538483-B249-41CA-A1C7-21F00EA314A2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{4D7E91D8-E01D-40AE-9DCB-B82754E4ECA2} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
 		{5E7A59A6-CB05-4496-99D2-E5C6810819B9} = {236C409B-8B38-4393-8E23-4E6844EA97FD}
-		{7BCE84FF-BBBB-4B41-8421-0AA2947422E8} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
 		{15A280E9-957C-47A5-BA0F-22EA37A81979} = {653DC881-9E1C-490D-A7F2-1CFE5D78D3FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
