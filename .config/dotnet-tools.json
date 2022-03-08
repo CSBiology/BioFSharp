@@ -2,18 +2,6 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "fake-cli": {
-      "version": "5.20.4",
-      "commands": [
-        "fake"
-      ]
-    },
-    "paket": {
-      "version": "7.0.2",
-      "commands": [
-        "paket"
-      ]
-    },
     "fsdocs-tool": {
       "version": "14.0.1",
       "commands": [

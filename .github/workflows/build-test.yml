@@ -16,11 +16,11 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.x.x
-    - name: Restore local tools
-      run: dotnet tool restore
+        dotnet-version: 6.x.x
+    - name: make script executable
+      run: chmod u+x build.sh
     - name: Build and test
-      run: dotnet fake build -t runTests
+      run: build.sh runtests
 
   build-and-test-windows:
     
@@ -31,8 +31,6 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.x.x
-    - name: Restore local tools
-      run: dotnet tool restore
+        dotnet-version: 6.x.x
     - name: Build and test
-      run: dotnet fake build -t runTests
+      run: build.cmd runtests
