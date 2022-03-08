@@ -20,7 +20,8 @@ jobs:
     - name: make script executable
       run: chmod u+x build.sh
     - name: Build and test
-      run: build.sh runtests
+      working-directory: ./
+      run: ./build.sh runtests
 
   build-and-test-windows:
     
@@ -33,4 +34,5 @@ jobs:
       with:
         dotnet-version: 6.x.x
     - name: Build and test
-      run: build.cmd runtests
+      working-directory: ./
+      run: ./build.cmd runtests
