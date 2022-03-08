@@ -14,11 +14,11 @@ index: 3
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -37,7 +37,7 @@ index: 3
 (**
 # BioCollections
 
-[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
 
@@ -48,9 +48,6 @@ The easiest way to create them are the `ofBioItemString` -functions
 *)
 
 open BioFSharp
-open BioFSharp.IO
-
-fsi.AddPrinter(FSIPrinters.prettyPrintBioCollection) // use pretty printer for bio collections
 
 let s1 = "PEPTIDE" |> BioSeq.ofAminoAcidString 
 let s2 = "PEPTIDE" |> BioList.ofAminoAcidString 
@@ -79,8 +76,6 @@ Let's imagine you have a given gene sequence and want to find out what the accor
 *)
 let myGene = BioArray.ofNucleotideString "ATGGCTAGATCGATCGATCGGCTAACGTAA"
 
-(***hide***)
-let myGenePrnt     = FSIPrinters.prettyPrintBioCollection myGene
 
 (*** include-value:myGene ***)
 
@@ -119,38 +114,17 @@ let myTranslatedGeneFromCodingStrand =
 Other Nucleotide conversion operations are also covered:
 *)
 
-let mySmallGene      = BioSeq.ofNucleotideString  "ATGTTCCGAT"
+let mySmallGene = BioSeq.ofNucleotideString  "ATGTTCCGAT"
+(***include-value:mySmallGene***)
 
-let smallGeneRev     = BioSeq.reverse mySmallGene 
-
-$"""Original:
-{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
-Output
-{smallGeneRev |> FSIPrinters.prettyPrintBioCollection}
-"""
-|> printfn "%s"
-(***include-output***)
+let smallGeneRev = BioSeq.reverse mySmallGene 
+(***include-value:smallGeneRev***)
 
 let smallGeneComp    = BioSeq.complement mySmallGene
-
-$"""Original:
-{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
-Output:
-{smallGeneComp |> FSIPrinters.prettyPrintBioCollection}
-"""
-|> printfn "%s"
-(***include-output***)
+(***include-value:smallGeneComp***)
 
 let smallGeneRevComp = BioSeq.reverseComplement mySmallGene
-
-$"""Original:
-{mySmallGene |> FSIPrinters.prettyPrintBioCollection}
-Reverse:
-{smallGeneRev |> FSIPrinters.prettyPrintBioCollection}
-Output:
-{smallGeneRevComp|> FSIPrinters.prettyPrintBioCollection}"""
-|> printfn "%s"
-(***include-output***)
+(***include-value:smallGeneRevComp***)
 
 (**
 
@@ -161,18 +135,12 @@ Some functions which might be needed regularly are defined to work with nucleoti
 *)
 
 let myPeptide = "PEPTIDE" |> BioSeq.ofAminoAcidString 
-
-(***hide***)
-let myPeptidePrnt = FSIPrinters.prettyPrintBioCollection myPeptide
-
 (*** include-value:myPeptide ***)
 
 let myPeptideFormula = BioSeq.toFormula myPeptide |> Formula.toString 
-
 (*** include-value:myPeptideFormula ***)
 
 let myPeptideMass = BioSeq.toAverageMass myPeptide 
-
 (*** include-value:myPeptideMass ***)
 
 (**
@@ -198,9 +166,7 @@ With these two things done, digesting the protein is a piece of cake. For doing 
 let digestedRBCS = Digestion.BioArray.digest trypsin 0 RBCS 
 
 digestedRBCS
-|> Array.map (fun x -> x.PepSequence |> FSIPrinters.prettyPrintBioCollection)
-|> String.concat "\n"
-
+|> Seq.head
 (***include-it***)
 
 (*
@@ -210,8 +176,6 @@ This can easily be done with the `concernMissCleavages` function. It takes the m
 
 let digestedRBCS' = Digestion.BioArray.concernMissCleavages 0 2 digestedRBCS
 
-digestedRBCS'
-|> Array.map (fun x -> x.PepSequence |> FSIPrinters.prettyPrintBioCollection)
-|> String.concat "\n"
-
+digestedRBCS
+|> Seq.item 1
 (***include-it***)

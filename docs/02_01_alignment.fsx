@@ -14,11 +14,11 @@ index: 1
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -37,7 +37,7 @@ index: 1
 (**
 # Pairwise Alignment
 
-[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
 
@@ -48,7 +48,7 @@ For global alignments, the **NeedlemanWunsch** algorithm is used. For local alig
 
 For both implementations, the gapvalues are evaluated using the **affine** gapscoremodel.
 
-## Aligning aminoacid- and nucleotide-sequences
+## Aligning aminoacid and nucleotide sequences
 
 For defining the scores of matching and missmatching characters, the **scoring** function is defined. In the case of amino acid or nucleotide sequence alignments, the integrated substitution-matrices can be used.
 *)
@@ -95,20 +95,40 @@ let aaSeq1 = "ACDM" |> BioArray.ofAminoAcidSymbolString
 let aaSeq2 = "MAACEDM" |> BioArray.ofAminoAcidSymbolString
 
 NeedlemanWunsch.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = 12
+  Sequences = [[-; -; A; C; -; D; M]; [M; A; A; C; E; D; M]] }
+```
+*)
 
 SmithWaterman.runAminoAcidSymbol aaCosts aaSeq1 aaSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = 19
+  Sequences = [[A; C; -; D; M]; [A; C; E; D; M]] }
+```
+*)
 
 //For nucleotides
 let nucSeq1 = "ATGA" |> BioArray.ofNucleotideString
 let nucSeq2 = "BATVAWG" |> BioArray.ofNucleotideString
 
 NeedlemanWunsch.runNucleotide nucCosts nucSeq1 nucSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = 9
+  Sequences = [[Gap; A; T; G; A; Gap; Gap]; [B; A; T; V; A; W; G]] }
+```
+*)
 
 SmithWaterman.runNucleotide nucCosts nucSeq1 nucSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = 11
+  Sequences = [[A; T; G; A]; [A; T; V; A]] }
+```
+*)
 
 (**
 ## Aligning anything else
@@ -130,9 +150,25 @@ let costs = {
     }
 
 NeedlemanWunsch.runGeneric costs nucSeq1 nucSeq2
-(***include-it***)
+
+(**
+```text
+{ MetaData = -1
+  Sequences =
+   [[None; Some A; Some T; Some G; Some A; None; None];
+    [Some B; Some A; Some T; Some V; Some A; Some W; Some G]] }
+```
+*)
+
 SmithWaterman.runGeneric costs nucSeq1 nucSeq2
-(***include-it***)
+
+(**
+```text
+{ MetaData = 1
+  Sequences =
+   [[Some A; Some T; Some G; Some A]; [Some A; Some T; Some V; Some A]] }
+```
+*)
 
 (** 
 or also Integers:
@@ -142,10 +178,23 @@ let intSeq1 = [|1;2;3;4;5|]
 let intSeq2 = [|1;1;2;4;6;7;|]
 
 NeedlemanWunsch.runGeneric costs intSeq1 intSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = -2
+  Sequences =
+   [[Some 1; None; Some 2; Some 3; Some 4; Some 5; None];
+    [Some 1; Some 1; Some 2; None; Some 4; Some 6; Some 7]] }
+```
+*)
 
 SmithWaterman.runGeneric costs intSeq1 intSeq2
-(***include-it***)
+(**
+```text
+{ MetaData = 0
+  Sequences =
+   [[Some 1; Some 2; Some 3; Some 4]; [Some 1; Some 2; None; Some 4]] }
+```
+*)
 
 (**
 # Multiple sequence alignment with ClustalOmega
@@ -209,5 +258,20 @@ let sequences = [
     TaggedSequence.create "pep4" ("AAGECGEL")
 ]
 
+(***do-not-eval***)
 cw.AlignSequences(sequences,Seq.empty)
-(*** include-it***)
+(**
+```text
+{ MetaData = { Header = seq ['C'; 'L'; 'U'; 'S'; ...]
+ConservationInfo = seq [' '; '*'; '*'; '*'; ...] }
+    Sequences =
+     [{ Tag = "pep1"
+        Sequence = seq ['-'; 'A'; 'A'; 'G'; ...] };
+      { Tag = "pep2"
+        Sequence = seq ['-'; 'A'; 'A'; 'G'; ...] };
+      { Tag = "pep3"
+        Sequence = seq ['A'; 'A'; 'A'; 'G'; ...] };
+      { Tag = "pep4"
+        Sequence = seq ['-'; 'A'; 'A'; 'G'; ...] }] }
+```
+*)

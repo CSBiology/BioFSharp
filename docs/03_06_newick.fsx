@@ -14,11 +14,11 @@ index: 5
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -35,7 +35,7 @@ index: 5
 #endif // IPYNB
 
 (**
-# Obo parsing
+# Newick parsing
 
 [![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;

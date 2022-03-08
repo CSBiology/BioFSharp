@@ -20,8 +20,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{35248763-7104-4D4A-BB05-E6EB9967E963}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
-		build.fsx = build.fsx
-		build.fsx.lock = build.fsx.lock
 		build.sh = build.sh
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json

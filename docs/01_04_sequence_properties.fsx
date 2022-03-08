@@ -14,11 +14,11 @@ index: 4
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -35,9 +35,9 @@ index: 4
 #endif // IPYNB
 
 (**
-# Sequence properties
+# Sequence Properties
 
-[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
 
@@ -55,12 +55,20 @@ open AminoProperties
 let getHydrophobicityIndex  = initGetAminoProperty AminoProperty.HydrophobicityIndex
 
 getHydrophobicityIndex AminoAcidSymbols.AminoAcidSymbol.Ala 
-(*** include-it ***)
+(**
+```text
+0.61
+```
+*)
 
 let getHydrophobicityIndexZ  = initGetAminoPropertyZnorm AminoProperty.HydrophobicityIndex
 
 getHydrophobicityIndexZ AminoAcidSymbols.AminoAcidSymbol.Ala 
-(*** include-it ***)
+(**
+```text
+-0.4813502112
+```
+*)
 
 (**
 With this function you might easily estimate the hydrophobictiy of our peptide by calling it on every element with a map. Usually close amino acids in a peptide influence each other. To cover this you can use the `ofWindowedBioArray` function. It also takes a window size and calculates the value of the property of every amino acid in the chain with regards to the effect of the adjacent amino acids in this window.
@@ -71,26 +79,53 @@ let peptide =
     |> Array.map AminoAcidSymbols.aminoAcidSymbol
 
 let peptidehydrophobicites = peptide |> Array.map getHydrophobicityIndex
-(*** include-value:peptidehydrophobicites ***)
+(**
+```text
+[|0.6; 0.47; 1.88; 0.61; 0.61; 1.18; 2.22; 0.07; 1.18; 0.47; 1.88; 0.46;
+0.05; 1.32; 0.0; 1.15|]
+```
+*)
 
 let peptidehydrophobicites' = peptide |> AminoProperties.ofWindowedBioArray 3 getHydrophobicityIndex
-(*** include-value:peptidehydrophobicites' ***)  
+(**
+```text
+
+```
+*)
 
 (**
 In the last step you can then just sum or average over the values to get a summary value of the hydrophobicity, depending on wether you want a length dependent or independent value.
 *)   
 
 Array.sum peptidehydrophobicites
-(*** include-it ***)
+(**
+```text
+[|0.89; 0.834; 0.8916666667; 1.081428571; 1.005714286; 1.107142857;
+0.9057142857; 1.087142857; 1.065714286; 0.9042857143; 0.7757142857;
+0.7657142857; 0.7614285714; 0.81; 0.596; 0.63|]
+```
+*)
 
 Array.sum peptidehydrophobicites'
-(*** include-it ***)
+(**
+```text
+14.11166667
+```
+*)
 
 Array.average peptidehydrophobicites
-(*** include-it ***)
+(**
+```text
+14.11166667
+```
+*)
 
 Array.average peptidehydrophobicites'
-(*** include-it ***)
+(**
+```text
+0.8819791667
+```
+*)
 
 (**
 ##Isoelectric Point
@@ -123,4 +158,8 @@ let myProteinForPI =
 let acc = 0.5
 
 IsoelectricPoint.tryFind IsoelectricPoint.getpKr acc myProteinForPI
-(***include-it***)
+(**
+```text
+Some 7.0
+```
+*)

@@ -14,11 +14,11 @@ index: 2
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -37,7 +37,7 @@ index: 2
 (**
 # GFF3 parsing
 
-[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/plotly/Plotly.NET/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook]({{root}}img/badge-notebook.svg)]({{root}}{{fsdocs-source-basename}}.ipynb)
 
@@ -85,13 +85,38 @@ open BioFSharp
 open BioFSharp.IO
 
 //path of the input file
-let filepathGFF = (__SOURCE_DIRECTORY__ + "path/to/your/gff3.gff")
+let filepathGFF = (__SOURCE_DIRECTORY__ + "/data/gff3Example.gff")
 
 //reads from file to seq of GFFLines
 //If no FASTA Sequence is included you directly can use GFF3.fromFileWithoutFasta [filepathGFF].
 (***do-not-eval***)
 let features = GFF3.fromFile BioFSharp.BioArray.ofNucleotideString filepathGFF 
-
+(**
+```text
+seq
+[Directive "##gff-version 3"; Comment "# date Mon Feb  7 19:35:06 2005";
+ GFFEntryLine
+   { Seqid = "chrI"
+     Source = "SGD"
+     Feature = "gene"
+     StartPos = 335
+     EndPos = 649
+     Score = nan
+     Strand = '+'
+     Phase = -1
+     Attributes =
+      map
+        [("ID", ["YAL069W"]); ("Name", ["YAL069W"]);
+         ("Note", ["Hypothetical%20ORF"]);
+         ("Ontology_term", ["GO:0000004"; "GO:0005554"; "GO:0008372"]);
+         ("dbxref", ["SGD:S000002143"]);
+         ("orf_classification", ["Dubious"])]
+     Supplement = [|"No supplement"|] };
+ GFFEntryLine{
+     ...
+]
+```
+*)
 
 
 (**
@@ -131,6 +156,41 @@ let searchterm = "YAL069W"
 ///with this function you can search features which are related to the searchterm
 let gffExampleSearch = GFF3.relationshipSearch features searchterm
 
+(**
+```text
+seq
+[{ Seqid = "chrI"
+   Source = "SGD"
+   Feature = "gene"
+   StartPos = 335
+   EndPos = 649
+   Score = nan
+   Strand = '+'
+   Phase = -1
+   Attributes =
+    map
+      [("ID", ["YAL069W"]); ("Name", ["YAL069W"]);
+       ("Note", ["Hypothetical%20ORF"]);
+       ("Ontology_term", ["GO:0000004"; "GO:0005554"; "GO:0008372"]);
+       ("dbxref", ["SGD:S000002143"]); ("orf_classification", ["Dubious"])]
+   Supplement = [|"No supplement"|] };
+ { Seqid = "chrI"
+   Source = "SGD"
+   Feature = "CDS"
+   StartPos = 335
+   EndPos = 649
+   Score = nan
+   Strand = '+'
+   Phase = 0
+   Attributes =
+    map
+      [("Name", ["YAL069W"]); ("Note", ["Hypothetical%20ORF"]);
+       ("Ontology_term", ["GO:0000004"; "GO:0005554"; "GO:0008372"]);
+       ("Parent", ["YAL069W"]); ("dbxref", ["SGD:S000002143"]);
+       ("orf_classification", ["Dubious"])]
+   Supplement = [|"No supplement"|] }]
+```
+*)
 
 (**
 ##Writing GFF3 files
@@ -174,12 +234,8 @@ let firstCDS =
 (***do-not-eval***)
 let firstCDSSequence = GFF3.getSequence firstCDS features
 
-//Output: Nucleotides.Nucleotides [] (ATG...TAA)
-
-(**## Test?*)
-
-open Plotly.NET
-
-Chart.Point([1,2])
-|> GenericChart.toChartHTML
-(***include-it-raw***)
+(**
+```text
+seq [A; T; G; A; ...]
+```
+*)

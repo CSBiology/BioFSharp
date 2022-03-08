@@ -14,11 +14,11 @@ index: 3
 #r "nuget: FSharpAux.IO, 1.1.0"
 #r "nuget: FSharp.Stats, 0.4.3"
 #r "nuget: Plotly.NET, 2.0.0-preview.18"
-#r "../bin/BioFSharp/netstandard2.0/BioFSharp.dll"
-#r "../bin/BioFSharp.IO/netstandard2.0/BioFSharp.IO.dll"
-#r "../bin/BioFSharp.BioContainers/netstandard2.0/BioFSharp.BioContainers.dll"
-#r "../bin/BioFSharp.ML/netstandard2.0/BioFSharp.ML.dll"
-#r "../bin/BioFSharp.Stats/netstandard2.0/BioFSharp.Stats.dll"
+#r "../src/BioFSharp/bin/Release/netstandard2.0/BioFSharp.dll"
+#r "../src/BioFSharp.IO/bin/Release/netstandard2.0/BioFSharp.IO.dll"
+#r "../src/BioFSharp.BioContainers/bin/Release/netstandard2.0/BioFSharp.BioContainers.dll"
+#r "../src/BioFSharp.ML/bin/Release/netstandard2.0/BioFSharp.ML.dll"
+#r "../src/BioFSharp.Stats/bin/Release/netstandard2.0/BioFSharp.Stats.dll"
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -35,7 +35,7 @@ index: 3
 #endif // IPYNB
 
 (**
-# Genbank parsing
+# GenBank parsing
 
 [![Binder]({{root}}img/badge-binder.svg)](https://mybinder.org/v2/gh/CSBiology/BioFSharp/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
 [![Script]({{root}}img/badge-script.svg)]({{root}}{{fsdocs-source-basename}}.fsx)&emsp;
@@ -247,8 +247,23 @@ let exampleFilePath = __SOURCE_DIRECTORY__ + @"\data\sequence.gb"
 (*** do-not-eval ***)
 ///Parsed Example File 
 let parsedGBFile = GenBank.Read.fromFile exampleFilePath
-
 (**
+```text
+dict
+[("LOCUS",
+  Value
+    "SCU49845                5028 bp    DNA     linear   PLN 14-JUL-2016");
+ ("DEFINITION",
+  Value
+    "Saccharomyces cerevisiae TCP1-beta gene, partial cds; and Axl2p(AXL2) and Rev7p (REV7) genes, complete cds.");
+ ("ACCESSION", Value "U49845"); ("VERSION", Value "U49845.1");
+ ("KEYWORDS", Value ".");
+ ("SOURCE", Value "Saccharomyces cerevisiae (baker's yeast)");
+ ("ORGANISM",
+ ...
+]
+```
+
 You can also use converter functions for the origin sequence, which makes it easier to use them for other BioFSharp workflows. There are multiple prebuilt converters contained in the
 OriginConverters module for reading and writing. For example, the following code will parse the sequence as a `BioSeq` containing nucleotides
 *)
@@ -264,14 +279,29 @@ This makes it easy to perform additional tasks with the origin sequence:
 
 (*** do-not-eval ***)
 let origin = GenBank.getOrigin parsedGBFile'
+(**
+```text
+seq [G; A; T; C; ...]
+```
+*)
 
 (*** do-not-eval ***)
 ///Transcribed origin sequence
-let rnaSeq = origin |> BioSeq.transcribeCodingStrand // val it : seq<Nucleotides.Nucleotide> = seq [G; A; U; C; ...]
+let rnaSeq = origin |> BioSeq.transcribeCodingStrand 
+(**
+```text
+seq [G; A; U; C; ...]
+```
+*)
 
 (*** do-not-eval ***)
 ///Translated origin sequence
-let protein = rnaSeq |> BioSeq.translate 0 // val it : seq<AminoAcids.AminoAcid> = seq [Asp; Pro; Pro; Tyr; ...]
+let protein = rnaSeq |> BioSeq.translate 0
+(**
+```text
+seq [Asp; Pro; Pro; Tyr; ...]
+```
+*)
 
 (**
 Writing GenBank files
@@ -289,11 +319,3 @@ parsedGBFile |> GenBank.Write.toFile outputPath1
 
 (*** do-not-eval ***)
 parsedGBFile' |> GenBank.Write.toFileWithOriginConverter outputPath2 outputConverter
-
-(**## Test?*)
-
-open Plotly.NET
-
-Chart.Point([1,2])
-|> GenericChart.toChartHTML
-(***include-it-raw***)
