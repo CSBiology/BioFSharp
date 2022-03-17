@@ -133,6 +133,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "BioFSharp.IO.Tests", "tests
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj", "{49C426EB-AF0D-4F56-AAFF-7B535AF8A647}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BioFSharp.Interactive", "src\BioFSharp.Interactive\BioFSharp.Interactive.fsproj", "{BBB82B16-65E6-4AC3-954C-BD642D5EC150}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -239,6 +241,18 @@ Global
 		{49C426EB-AF0D-4F56-AAFF-7B535AF8A647}.Release|x64.Build.0 = Release|Any CPU
 		{49C426EB-AF0D-4F56-AAFF-7B535AF8A647}.Release|x86.ActiveCfg = Release|Any CPU
 		{49C426EB-AF0D-4F56-AAFF-7B535AF8A647}.Release|x86.Build.0 = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|x64.Build.0 = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Debug|x86.Build.0 = Debug|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|x64.ActiveCfg = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|x64.Build.0 = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|x86.ActiveCfg = Release|Any CPU
+		{BBB82B16-65E6-4AC3-954C-BD642D5EC150}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
