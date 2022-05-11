@@ -37,6 +37,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="GenerateSOFTTypes.fsx" />
+    <Compile Include="PDB.fs" />
     <Compile Include="GAF.fs" />
     <Compile Include="AgilentRaw.fs" />
     <Compile Include="BlastWrapper.fs" />

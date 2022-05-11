@@ -40,3 +40,35 @@ open FSharpAux.IO
 open FSharp.Stats
 
 open BioFSharp
+
+open BioFSharp
+open BioFSharp.Algorithm
+open BioFSharp.Algorithm.PairwiseAlignment
+
+let aaScoring = ScoringMatrix.getScoringMatrixAminoAcid ScoringMatrix.ScoringMatrixAminoAcid.BLOSUM62
+let nucScoring = ScoringMatrix.getScoringMatrixNucleotide  ScoringMatrix.ScoringMatrixNucleotide.EDNA
+
+//For aminoacids
+let costAA = {
+    Open = 5
+    Continuation = -1
+    Similarity = aaScoring 
+    }
+
+//For nucleotides
+let costN = {
+    Open = -5
+    Continuation = -1
+    Similarity = nucScoring 
+    }
+
+let query1AA = "NLFVAAAAQTKNGQGWVPSNYITPVNSAAA" |> BioArray.ofAminoAcidSymbolString
+let query2AA = "NLFVALYDFVASGDNTLSITKGEKLRVLGYNHNGEWCEAQTKNGQGWVPSNYITPVNS" |> BioArray.ofAminoAcidSymbolString
+
+let localAA = 
+    PairwiseAlignment.Local.SmithWaterman.align(query1AA,query2AA,costAA)
+
+let globalAA =
+    PairwiseAlignment.Global.NeedlemanWunsch.align(query1AA,query2AA,costAA)
+
+localAA.MetaData.Score
