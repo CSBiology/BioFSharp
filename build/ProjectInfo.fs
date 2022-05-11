@@ -4,10 +4,7 @@ open Fake.Core
 
 let project = "BioFSharp"
 
-let testProjects = [
-    "tests/BioFSharp.Tests/BioFSharp.Tests.fsproj"
-    "tests/BioFSharp.IO.Tests/BioFSharp.IO.Tests.fsproj"
-]
+let testProject = "tests/BioFSharp.Tests/BioFSharp.Tests.fsproj"
 
 let summary = "Open source bioinformatics and computational biology toolbox written in F#."
 

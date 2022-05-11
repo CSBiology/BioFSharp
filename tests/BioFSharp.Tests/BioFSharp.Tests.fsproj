@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Compile Include="Utils.fs" />
+    <Compile Include="BioFSharp.IO\DSSP.fs" />
+    <Compile Include="BioFSharp.IO\PDB.fs" />
+    <Compile Include="BioFSharp.IO\Stride.fs" />
     <Compile Include="BioFSharp\PairwiseAlignmentTests.fs" />
     <Compile Include="BioFSharp\AminoAcidTests.fs" />
     <Compile Include="BioFSharp\DigestionTests.fs" />
@@ -19,10 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="data\ATOMSequence.txt" />
+    <EmbeddedResource Include="data\Glucagon.txt" />
+    <EmbeddedResource Include="data\HasA.txt" />
+    <EmbeddedResource Include="data\HETATMSequence.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="altcover" Version="8.2.837" />
     <PackageReference Include="Expecto" Version="9.*" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
     <ProjectReference Include="..\..\src\BioFSharp\BioFSharp.fsproj" />
+    <ProjectReference Include="..\..\src\BioFSharp.IO\BioFSharp.IO.fsproj" />
   </ItemGroup>
 </Project>
