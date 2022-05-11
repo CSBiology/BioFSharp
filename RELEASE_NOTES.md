@@ -21,6 +21,8 @@ All packages now target netstandard2.0 as lowest common denominator.
    * OBO parser: fix (#111)[https://github.com/CSBiology/BioFSharp/issues/111]
    * SOFT parser now parses Data tables 
    * OBO Parser: add verbosity settings ([#129](https://github.com/CSBiology/BioFSharp/pull/129))
+   * [ADD DSSP and Stride parsers](https://github.com/CSBiology/BioFSharp/commit/a1bc02c81d0bfba414313155cec93ef4b6951baa)
+   * [ADD PDB Parser (only some records supported)](https://github.com/CSBiology/BioFSharp/commit/426dee64f0d24b4c9976aac9400df3635d8aef1b))
 
 **Bugfixes:**
  * **BioFSharp**:
