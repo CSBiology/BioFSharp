@@ -47,7 +47,7 @@ let expectedGlobalAA =
 
 
 
-[<Tests>]
+[<PTests>]
 let AlignmentTests =
     testList "PairwiseAlignment" [
         testList "AminoAcids" [

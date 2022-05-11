@@ -5,6 +5,22 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Authors>Kevin Schneider, F# open source contributors</Authors>
+    <Description>BioFSharp Formatting extensions for .NET Interactive.</Description>
+    <Summary>
+      BioFSharp Formatting extensions for .NET Interactive.
+    </Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://csbiology.github.io/BioFSharp</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSBiology/BioFSharp/master/docsrc/files/img/logo.png</PackageIconUrl>
+    <PackageTags>F# FSharp bioinformatics datascience biology notebook jupyter</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/BioFSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/CSBiology/BioFSharp/blob/developer/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/CSBiology/BioFSharp/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\BioFSharp.IO\BioFSharp.IO.fsproj" />
     <ProjectReference Include="..\BioFSharp\BioFSharp.fsproj" />
