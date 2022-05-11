@@ -35,4 +35,10 @@ jobs:
         dotnet-version: 6.x.x
     - name: Build and test
       working-directory: ./
-      run: ./build.cmd runtests
+      run: ./build.cmd runtestswithcodecov
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        directory: ./
+        files: ./codeCov.xml
+        verbose: true
