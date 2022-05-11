@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Helpers.fs" />
     <Compile Include="ParserTests\PDB.fs" />
     <Compile Include="ParserTests\Stride.fs" />
     <Compile Include="ParserTests\DSSP.fs" />
     <Compile Include="Main.fs" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="data\ATOMSequence.txt" />
+    <EmbeddedResource Include="data\Glucagon.txt" />
+    <EmbeddedResource Include="data\HasA.txt" />
+    <EmbeddedResource Include="data\HETATMSequence.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,4 +29,6 @@
     <ProjectReference Include="..\..\src\BioFSharp\BioFSharp.fsproj" />
     <ProjectReference Include="..\..\src\BioFSharp.IO\BioFSharp.IO.fsproj" />
   </ItemGroup>
+
+  <ItemGroup />
 </Project>
