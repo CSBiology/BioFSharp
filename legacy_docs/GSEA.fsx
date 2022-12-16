@@ -35,6 +35,13 @@ For further information visit [GSEA publication](https://academic.oup.com/bioinf
 
 
 ##Method
+
+Note: There are several methods that are summarized under enrichment analysis. The proposed method makes use of the 
+hypergeometric distribution. The results are *identical* when using a one sided Fishers' exact test.
+Another method is to rank a list of bioitems according to a pvalue or effect size and afterwards test the ranks of 
+every ontology term using e.g. a Kolmogorov-Smirnov test. The latter version is not covered in this documentation.
+
+
 Imagine an experiment, in which 1000 proteins were measured. Within these 1000 proteins there are 25 proteins 
 of a specific functional group (heat shock response).
 By treating the organism(s) 200 proteins are significantly altered. 10 of the 25 heat responsive proteins 
