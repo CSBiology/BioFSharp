@@ -268,12 +268,13 @@ module Obo =
         //Note that although this tag is defined in obof1.4, it can be used in obof1.2 harmlessly
         CreationDate : string
 
+        NameSpace : string
     }
 
     /// Creates an obo term record
     let createOboTerm id name isAnonymous altIds definition comment subsets synonyms xrefs isA         
         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider propertyValues builtIn    
-        createdBy creationDate = {  
+        createdBy creationDate nameSpace = {  
 
         Id              = id          
         Name            = name        
@@ -296,6 +297,7 @@ module Obo =
         BuiltIn         = builtIn       
         CreatedBy       = createdBy     
         CreationDate    = creationDate  
+        NameSpace       = nameSpace
         
     }
 
@@ -315,7 +317,7 @@ module Obo =
         let rec parseSingleOboTerm (en:Collections.Generic.IEnumerator<string>) lineNumber 
             id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
             intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-            propertyValues builtIn createdBy creationDate =   
+            propertyValues builtIn createdBy creationDate nameSpace =   
 
             if en.MoveNext() then                
                 let split = en.Current.Split([|": "|], System.StringSplitOptions.None)
@@ -325,48 +327,48 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         v name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate            
+                        propertyValues builtIn createdBy creationDate nameSpace
         
                 | "name"            -> 
                     let v = split.[1..] |> String.concat ": "
                     parseSingleOboTerm en (lineNumber + 1)
                         id v isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "is_anonymous"    ->
                     parseSingleOboTerm en (lineNumber + 1)
                         id name true altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "alt_id"              -> 
                     let v = split.[1..] |> String.concat ": "
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous (v::altIds) definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "def"              -> 
                     let v = split.[1..] |> String.concat ": "
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds v comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "comment"             -> 
                     let v = split.[1..] |> String.concat ": "
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition v subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "subset"              -> 
                     let v = split.[1..] |> String.concat ": "
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment (v::subsets) synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | synonymTag when synonymTag.Contains("synonym")              -> 
                     let scope =
@@ -379,49 +381,49 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets (v::synonyms) xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "xref" | "xref_analog" | "xref_unk" -> 
                     let v = (split.[1..] |> String.concat ": ") |> parseDBXref
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms (v::xrefs) isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "is_a"              -> 
                     let v = (split.[1..] |> String.concat ": ")
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs (v::isA)
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "intersection_of"              -> 
                     let v = (split.[1..] |> String.concat ": ")
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         (v::intersectionOf) unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "union_of"              -> 
                     let v = (split.[1..] |> String.concat ": ")
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf (v::unionOf) disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
                     
                 | "disjoint_from"              -> 
                     let v = (split.[1..] |> String.concat ": ")
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf (v::disjointFrom) relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
                     
                 | "relationship"              -> 
                     let v = (split.[1..] |> String.concat ": ")
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom (v::relationships) isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
                 | "is_obsolete"             -> 
                     let v = ((split.[1..] |> String.concat ": ").Trim()) 
@@ -430,7 +432,7 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships v' replacedby consider 
-                        propertyValues builtIn createdBy creationDate            
+                        propertyValues builtIn createdBy creationDate nameSpace    
 
                 | "replaced_by"             -> 
                     let v = (split.[1..] |> String.concat ": ")
@@ -438,7 +440,7 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete (v::replacedby) consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
 
                 | "consider" | "use_term"            -> 
@@ -447,7 +449,7 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby (v::consider)
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
 
 
                 | "builtin"             -> 
@@ -457,7 +459,7 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues v' createdBy creationDate
+                        propertyValues v' createdBy creationDate nameSpace
 
                 | "property_value"             -> 
                     let v = (split.[1..] |> String.concat ": ")
@@ -465,7 +467,7 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        (v::propertyValues) builtIn createdBy creationDate
+                        (v::propertyValues) builtIn createdBy creationDate nameSpace
 
                 | "created_by"             -> 
                     let v = (split.[1..] |> String.concat ": ")
@@ -473,16 +475,24 @@ module Obo =
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn v creationDate
+                        propertyValues builtIn v creationDate nameSpace
 
-
+                        
                 | "creation_date"             -> 
                     let v = (split.[1..] |> String.concat ": ")
 
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy v
+                        propertyValues builtIn createdBy v nameSpace
+
+                | "namespace" -> 
+                    let v = (split.[1..] |> String.concat ": ")
+
+                    parseSingleOboTerm en (lineNumber + 1)
+                        id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
+                        intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
+                        propertyValues builtIn createdBy creationDate v
 
                 | "" -> 
                     lineNumber,
@@ -503,13 +513,14 @@ module Obo =
                         (propertyValues |> List.rev)
                         builtIn 
                         createdBy creationDate
+                        nameSpace
 
                 | unknownTag -> 
                     if verbose then printfn "[WARNING@L %i]: Found term tag <%s> that does not fit OBO flat file specifications 1.4. Skipping it..." lineNumber unknownTag
                     parseSingleOboTerm en (lineNumber + 1)
                         id name isAnonymous altIds definition comment subsets synonyms xrefs isA 
                         intersectionOf unionOf disjointFrom relationships isObsolete replacedby consider 
-                        propertyValues builtIn createdBy creationDate
+                        propertyValues builtIn createdBy creationDate nameSpace
                                    
             else
                 // Maybe check if id is empty
@@ -530,7 +541,9 @@ module Obo =
                     (consider       |> List.rev)
                     (propertyValues |> List.rev)
                     builtIn 
-                    createdBy creationDate
+                    createdBy creationDate 
+                    nameSpace
+                    
                 //failwithf "Unexcpected end of file."
 
         //parseTermDef
@@ -558,7 +571,7 @@ module Obo =
                 match en.MoveNext() with
                 | true ->             
                     match en.Current with
-                    | "[Term]"    -> let lineNumber,parsedTerm = (parseSingleOboTerm en lineNumber "" "" false [] "" "" [] [] [] [] [] [] [] [] false [] [] [] false "" "")
+                    | "[Term]"    -> let lineNumber,parsedTerm = (parseSingleOboTerm en lineNumber "" "" false [] "" "" [] [] [] [] [] [] [] [] false [] [] [] false "" "" "")
                                      yield parsedTerm
                                      yield! loop en lineNumber
                     | _ -> yield! loop en (lineNumber+1)
